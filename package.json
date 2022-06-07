@@ -1,0 +1,32 @@
+{
+  "name": "design-token-transformer",
+  "version": "0.6.0",
+  "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
+  "main": "index.js",
+  "dependencies": {
+    "@ctrl/tinycolor": "^3.4.0",
+    "style-dictionary": "^3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3"
+  },
+  "scripts": {
+    "start": "npm run transform-tokens",
+    "transform-tokens": "node ./transformTokens.js",
+    "test": "jest tests --coverage=false",
+    "transform:android": "node ./examples/android/build.js",
+    "transform:ios": "node ./examples/ios/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukasoppermann/design-token-transformer.git"
+  },
+  "author": "Lukas Oppermann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukasoppermann/design-token-transformer/issues"
+  },
+  "homepage": "https://github.com/lukasoppermann/design-token-transformer#readme"
+}
