@@ -1,59 +1,31 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const webConfig = require('../../src/web')
+const filterWeb = require('../../src/web/filterWeb')
 const StyleDictionary = require('style-dictionary')
-const baseConfig = require('./config.json')
 
-StyleDictionary.registerTransform({
-  name: 'size/px',
-  type: 'value',
-  matcher: token => {
-    return (token.unit === 'pixel' || token.type === 'dimension') && token.value !== 0
-  },
-  transformer: token => {
-    return `${token.value}px`
+// PATHS
+const basePath = './'
+const buildPath = basePath + 'examples/build/'
+
+const StyleDictionaryExtended = StyleDictionary.extend({
+  // adding imported configs
+  ...webConfig,
+  source: [basePath + 'tokens/*.json'],
+  platforms: {
+    'web': {
+      transformGroup: [
+        'custom/css'
+      ],
+      buildPath: buildPath + 'web/',
+      files: [
+        {
+          destination: 'styles.css',
+          filter: filterWeb,
+          format: 'custom/css'
+        }
+      ]
+    }
   }
 })
-
-StyleDictionary.registerTransform({
-  name: 'size/percent',
-  type: 'value',
-  matcher: token => {
-    return token.unit === 'percent' && token.value !== 0
-  },
-  transformer: token => {
-    return `${token.value}%`
-  }
-})
-
-StyleDictionary.registerTransformGroup({
-  name: 'custom/css',
-  transforms: StyleDictionary.transformGroup['css'].concat([
-    'size/px',
-    'size/percent'
-  ])
-})
-
-StyleDictionary.registerTransformGroup({
-  name: 'custom/less',
-  transforms: StyleDictionary.transformGroup['less'].concat([
-    'size/px',
-    'size/percent'
-  ])
-})
-
-StyleDictionary.registerTransformGroup({
-  name: 'custom/scss',
-  transforms: StyleDictionary.transformGroup['less'].concat([
-    'size/px',
-    'size/percent'
-  ])
-})
-
-StyleDictionary.registerFilter({
-  name: 'validToken',
-  matcher: function(token) {
-    return ['dimension', 'string', 'number', 'color'].includes(token.type)
-  }
-})
-
-const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
 
 StyleDictionaryExtended.buildAllPlatforms()
