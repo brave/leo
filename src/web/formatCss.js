@@ -2,7 +2,11 @@ const formattedVariables = require('./formattedVariables')
 const fileHeader = require('./fileHeader')
 
 const filteredTokens = (dictionary, filterFn) => {
-  const filtered = dictionary.allTokens.filter(token => filterFn(token))
+  let filtered = dictionary.allTokens;
+  if (typeof filterFn === "function") {
+    filtered = dictionary.allTokens.filter(token => filterFn(token))
+  }
+
   return {
     ...dictionary,
     ...{
@@ -19,7 +23,7 @@ module.exports = ({ dictionary, options, file }) => {
     // if you export the prefixes use token.path[0] instead of [1]
     light: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'light-mode'),
     dark: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'dark-mode'),
-    rest: filteredTokens(dictionary, (token) => !['light', 'dark'].includes(token.path[1].toLowerCase()))
+    rest: filteredTokens(dictionary)
   }
 
   // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
