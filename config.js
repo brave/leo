@@ -1,26 +1,6 @@
 module.exports = {
   source: ["tokens/*.json"],
   platforms: {
-    scss: {
-      transformGroup: "custom/scss",
-      buildPath: "build/scss/",
-      files: [
-        {
-          destination: "_variables.scss",
-          format: "scss/variables",
-        },
-      ],
-    },
-    less: {
-      transformGroup: "custom/less",
-      buildPath: "build/less/",
-      files: [
-        {
-          destination: "_variables.less",
-          format: "less/variables",
-        },
-      ],
-    },
     css: {
       transformGroup: "custom/css",
       buildPath: "build/css/",

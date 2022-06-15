@@ -22,6 +22,7 @@ module.exports = ({ dictionary, options, file }) => {
     rest: filteredTokens(dictionary, (token) => !['light', 'dark'].includes(token.path[1].toLowerCase()))
   }
 
+  // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
   return (
     fileHeader({ file }) +
       ':root {\n' +
@@ -29,17 +30,17 @@ module.exports = ({ dictionary, options, file }) => {
       '\n}\n\n' +
       '@media (prefers-color-scheme: light) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }) +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n }\n}\n\n' +
       '@media (prefers-color-scheme: dark) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }) +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n }\n}\n\n' +
       'html[data-theme="light"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }) +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n}\n\n' +
       'html[data-theme="dark"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }) +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n}\n'
   )
 }
