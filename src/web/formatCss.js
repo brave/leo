@@ -30,7 +30,7 @@ module.exports = ({ dictionary, options, file }) => {
   return (
     fileHeader({ file }) +
       ':root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.rest, outputReferences }) +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.rest, outputReferences }).replace(/desktop-/gm, "") +
       '\n}\n\n' +
       '@media (prefers-color-scheme: light) {\n' +
       ' :root {\n' +
