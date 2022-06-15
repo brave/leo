@@ -1,5 +1,8 @@
 const StyleDictionary = require('style-dictionary')
-const baseConfig = require('./config.json')
+const baseConfig = require('./config')
+
+// Register Web transforms
+const webExtensions = require('./src/web')
 
 StyleDictionary.registerTransform({
   name: 'size/px',
