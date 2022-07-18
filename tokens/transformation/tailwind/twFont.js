@@ -8,7 +8,11 @@ module.exports = {
     return token.type === 'custom-fontStyle'
   },
   transformer: function ({ value: font }, { options }) {
-    // font: font-style font-variant font-weight font-size/line-height font-family;
-    return `${notDefault(font.fontStretch, 'normal')} ${notDefault(font.fontStyle, 'normal')} ${font.fontWeight} ${font.fontSize}/${font.lineHeight} ${fontFamily(font, options)}`.trim()
+    return {
+      fontSize: `${font.fontSize}px`,
+      lineHeight: `${font.lineHeight}px`,
+      letterSpacing: `${font.letterSpacing}px`,
+      fontWeight: font.fontWeight
+    }
   }
 }

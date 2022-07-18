@@ -24,8 +24,8 @@ StyleDictionary.registerTransform({
   ...require('./webPadding')
 })
 StyleDictionary.registerTransform({
-  name: 'web/font',
-  ...require('./webFont')
+  name: 'tw/font',
+  ...require('./twFont')
 })
 StyleDictionary.registerTransform({
   name: 'web/gradient',
@@ -43,7 +43,7 @@ StyleDictionary.registerTransformGroup({
     'web/shadow',
     'web/radius',
     'web/padding',
-    'web/font',
+    'tw/font',
     'web/gradient',
     'color/hex8ToRgbaPartial'
   ])

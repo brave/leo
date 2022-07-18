@@ -15,6 +15,8 @@ const filteredTokens = (dictionary, filterFn) => {
 
 module.exports = ({ dictionary, options, file }) => {
 	const groupedColorTokens = new Map();
+  const fontSizes = new Map();
+
 	dictionary.allTokens.forEach(({ type, name, ...t }) => {
 		if (type === "color") {
 			if (t.attributes.subitem) {
@@ -31,15 +33,21 @@ module.exports = ({ dictionary, options, file }) => {
 					`rgba(var(--${name.replace("-dark-mode", "").replace("-light-mode", "")}), <alpha-value>)`
 				);
 			}
-		}
+		} else if (type === "custom-fontStyle") {
+      const { fontSize, ...rest } = t.value;
+      const fontName = `${t.attributes.item}-${t.attributes.subitem}`.replace("heading-", "");
+      fontSizes.set(fontName, [
+        fontSize, rest
+      ])
+    }
 	});
 
 	// Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
 	return `module.exports = ${JSON.stringify(
 		{
 			colors: Object.fromEntries(groupedColorTokens),
-			primaryFont: [],
-			fontSize: {},
+			primaryFont: ["Poppins", "Helvetica", "sans-serif"],
+			fontSize: Object.fromEntries(fontSizes),
 			spacing: {},
 			width: {},
 			borderRadius: {},
