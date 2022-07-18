@@ -1,6 +1,29 @@
 module.exports = {
   source: ["tokens/*.json"],
   platforms: {
+    tailwind: {
+      transformGroup: "tailwind/css",
+      buildPath: "build/tailwind/",
+      files: [
+        {
+          destination: "_variables.css",
+          format: "tailwind/css",
+          filter: "filterWeb",
+          options: {
+            showFileHeader: false,
+          },
+        },
+        {
+          destination: "tokens.js",
+          format: "tailwind/tokens",
+          filter: "filterWeb",
+          options: {
+            showFileHeader: false,
+          },
+        },
+      ],
+      actions: ["tailwind/copy_static_files"]
+    },
     css: {
       transformGroup: "custom/css",
       buildPath: "build/css/",
