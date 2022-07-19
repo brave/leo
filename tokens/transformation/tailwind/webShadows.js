@@ -6,6 +6,9 @@ module.exports = {
     return token.type === 'custom-shadow' && token.value !== 0
   },
   transformer: function ({ value }) {
-    return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX}px ${value.offsetY}px ${value.radius}px ${value.spread}px ${new TinyColor.TinyColor(value.color).toRgbString()}`
+    return {
+      boxShadow: `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX}px ${value.offsetY}px ${value.radius}px ${value.spread}px ${new TinyColor.TinyColor(value.color).toRgbString()}`,
+      dropShadow: `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX}px ${value.offsetY}px ${value.radius}px ${new TinyColor.TinyColor(value.color).toRgbString()}`
+    }
   }
 }

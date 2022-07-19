@@ -1,10 +1,12 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { primaryFont, fontSize, colors, boxShadow } = require("./tokens");
+const { primaryFont, fontSize, colors, boxShadow, dropShadow, gradients, borderRadius } = require("./tokens");
 
 module.exports = {
 	theme: {
 		fontSize,
 		boxShadow,
+		borderRadius,
+		dropShadow,
 		colors: colors,
 		fontFamily: {
 			sans: [...primaryFont, ...defaultTheme.fontFamily.sans],
@@ -41,6 +43,9 @@ module.exports = {
 			100: "1",
 		},
 		extend: {
+			backgroundImage: {
+				...gradients
+			},
 			gridTemplateColumns: {
 				13: "repeat(13, minmax(0, 1fr))",
 				14: "repeat(14, minmax(0, 1fr))",

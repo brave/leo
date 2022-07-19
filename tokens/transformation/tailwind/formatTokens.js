@@ -15,7 +15,11 @@ const filteredTokens = (dictionary, filterFn) => {
 
 module.exports = ({ dictionary, options, file }) => {
 	const groupedColorTokens = new Map();
-  const fontSizes = new Map();
+	const fontSizes = new Map();
+	const borderRadii = new Map();
+	const gradients = new Map();
+	const boxShadows = new Map();
+	const dropShadows = new Map();
 
 	dictionary.allTokens.forEach(({ type, name, ...t }) => {
 		if (type === "color") {
@@ -34,12 +38,23 @@ module.exports = ({ dictionary, options, file }) => {
 				);
 			}
 		} else if (type === "custom-fontStyle") {
-      const { fontSize, ...rest } = t.value;
-      const fontName = `${t.attributes.item}-${t.attributes.subitem}`.replace("heading-", "");
-      fontSizes.set(fontName, [
-        fontSize, rest
-      ])
-    }
+			const { fontSize, ...rest } = t.value;
+			const fontName = `${t.attributes.item}-${t.attributes.subitem}`.replace("heading-", "");
+			fontSizes.set(fontName, [fontSize, rest]);
+		} else if (type === "custom-radius") {
+			if (t.attributes.type === "full") {
+				borderRadii.set(t.attributes.type, "9999px");
+			} else {
+				borderRadii.set(t.attributes.type, t.value);
+			}
+		} else if (type === "custom-gradient") {
+			const [, ...pathParts] = t.path;
+			gradients.set(pathParts.join("-"), t.value)
+		} else if (type === "custom-shadow") {
+			const [, ...pathParts] = t.path;
+			boxShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.boxShadow)
+			dropShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.dropShadow)
+		}
 	});
 
 	// Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
@@ -48,12 +63,10 @@ module.exports = ({ dictionary, options, file }) => {
 			colors: Object.fromEntries(groupedColorTokens),
 			primaryFont: ["Poppins", "Helvetica", "sans-serif"],
 			fontSize: Object.fromEntries(fontSizes),
-			spacing: {},
-			width: {},
-			borderRadius: {},
-			borderWidth: {},
-			fontWeight: {},
-			boxShadow: {},
+			borderRadius: Object.fromEntries(borderRadii),
+			boxShadow: Object.fromEntries(boxShadows),
+			dropShadow: Object.fromEntries(dropShadows),
+			gradients: Object.fromEntries(gradients)
 		},
 		null,
 		" ".repeat(2)

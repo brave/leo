@@ -23,7 +23,7 @@ module.exports = ({ dictionary, options, file }) => {
     // if you export the prefixes use token.path[0] instead of [1]
     light: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'light-mode'),
     dark: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'dark-mode'),
-    rest: filteredTokens(dictionary)
+    rest: filteredTokens(dictionary, (token) => token.type === "color")
   }
 
   // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
