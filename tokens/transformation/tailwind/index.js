@@ -12,8 +12,8 @@ StyleDictionary.registerTransform({
   ...require('./sizePx')
 })
 StyleDictionary.registerTransform({
-  name: 'web/shadow',
-  ...require('./webShadows')
+  name: 'tw/shadow',
+  ...require('./twShadows')
 })
 StyleDictionary.registerTransform({
   name: 'web/radius',
@@ -40,7 +40,7 @@ StyleDictionary.registerTransformGroup({
   name: 'tailwind/css',
   transforms: StyleDictionary.transformGroup.css.concat([
     'size/px',
-    'web/shadow',
+    'tw/shadow',
     'web/radius',
     'web/padding',
     'tw/font',
@@ -65,4 +65,10 @@ StyleDictionary.registerAction({
   name: 'tailwind/copy_static_files',
   do: require('./copyStaticFiles').do,
   undo: require('./copyStaticFiles').undo
+})
+
+StyleDictionary.registerAction({
+  name: 'tailwind/convert_css_to_js',
+  do: require('./convertCssToJs').do,
+  undo: require('./convertCssToJs').undo
 })

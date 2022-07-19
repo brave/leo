@@ -22,7 +22,10 @@ module.exports = {
           },
         },
       ],
-      actions: ["tailwind/copy_static_files"]
+      actions: [
+        "tailwind/copy_static_files",
+        "tailwind/convert_css_to_js"
+      ]
     },
     css: {
       transformGroup: "custom/css",

@@ -58,4 +58,7 @@ module.exports = {
 			},
 		},
 	},
+	plugins: [
+		require("./preflightPlugin")
+	],
 };

@@ -13,7 +13,7 @@ module.exports = {
             copyFileSync(source, target);
         })
     },
-    undo: async function (dictionary, config) {
+    undo: function (dictionary, config) {
         staticFiles.forEach(file => {
             const target = join(config.buildPath, file);
 
