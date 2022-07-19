@@ -62,6 +62,17 @@ module.exports = function (argv) {
                 compilerOptions: {
                   customElement: true,
                 },
+                onwarn: (warning, handler) => {
+                  const { code, frame } = warning;
+                  // Ignore unused CSS selectors,
+                  // since we have CSS selectors that assume
+                  // no shadow DOM (for storybook which does not
+                  // use the web-components version of the components, and
+                  // uses the svelte components directly).
+                  if (code === "css-unused-selector")
+                      return;
+                  handler(warning);
+                },
                 preprocess: require('svelte-preprocess')(),
                 // typescript({ sourceMap: true }),
                 // css: css => { css.write('svelte.css') },
@@ -101,8 +112,11 @@ module.exports = function (argv) {
         extensions: [".tsx", ".ts", ".js", ".svelte", ".css", ".scss"],
         mainFields: ["svelte", "browser", "module", "main"],
         alias: {
-          svelte: path.resolve('node_modules', 'svelte')
+          svelte: path.resolve('node_modules', 'svelte'),
+          react: path.resolve('node_modules', 'react'),
+          ['react-dom']: path.resolve('node_modules', 'react-dom'),
+          ['react-router']: path.resolve('node_modules', 'react-router')
         }
-    },
+    }
   }
 }

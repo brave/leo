@@ -1,3 +1,4 @@
+const path = require('path')
 const sveltePreprocess = require('svelte-preprocess');
 
 module.exports = {
@@ -5,12 +6,11 @@ module.exports = {
     builder: 'webpack5',
   },
   "stories": [
-    "../web-components/**/*.story.svelte",
-    "../web-components/**/*.story.js",
-    "../stories/**/*.stories.mdx",
-    "../stories/**/*.stories.@(js|jsx|ts|tsx|svelte)"
+    "../web-components/**/*.stories.svelte",
+    "../web-components/**/*.stories.js",
   ],
   "addons": [
+    '@storybook/addon-svelte-csf',
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
@@ -24,4 +24,22 @@ module.exports = {
   // svelteOptions: {
   //   preprocess: preprocess(), // or `preprocess: [svelteTS()]` in your case
   //  },
+  webpackFinal: async (config, { configType }) => {
+		// `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+		// You can change the configuration based on that.
+		// 'PRODUCTION' is used when building the static version of storybook.
+		config.resolve = {
+			...config.resolve,
+			alias: {
+        ...config.resolve.alias,
+				svelte: path.resolve("node_modules", "svelte"),
+			},
+      // Make sure we compile stories.svelte files
+			extensions: [...config.resolve.extensions, ".svelte"],
+			mainFields: ["svelte", ...config.resolve.mainFields],
+		};
+
+		// Return the altered config
+		return config;
+	},
 }
