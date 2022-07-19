@@ -1,6 +1,9 @@
 const sveltePreprocess = require('svelte-preprocess');
 
 module.exports = {
+  core: {
+    builder: 'webpack5',
+  },
   "stories": [
     "../web-components/**/*.story.svelte",
     "../web-components/**/*.story.js",
@@ -10,7 +13,8 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+    "@storybook/addon-interactions",
+    '@storybook/preset-scss'
   ],
   "framework": "@storybook/svelte",
   svelteOptions: {
