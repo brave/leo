@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "npm run transform-tokens",
-    "transform-tokens": "node ./transformTokens.js",
+    "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
     "transform:android": "node ./examples/android/build.js",
     "transform:ios": "node ./examples/ios/build.js"

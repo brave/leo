@@ -2,7 +2,7 @@ const StyleDictionary = require('style-dictionary')
 const baseConfig = require('./config')
 
 // Register Web transforms
-require('./src/web')
+require('./transformation/web')
 
 // Register Global transforms
 StyleDictionary.registerTransform({
