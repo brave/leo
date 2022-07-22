@@ -1,18 +1,3 @@
-const filteredTokens = (dictionary, filterFn) => {
-	let filtered = dictionary.allTokens;
-	if (typeof filterFn === "function") {
-		filtered = dictionary.allTokens.filter((token) => filterFn(token));
-	}
-
-	return {
-		...dictionary,
-		...{
-			allProperties: filtered,
-			allTokens: filtered,
-		},
-	};
-};
-
 module.exports = ({ dictionary, options, file }) => {
 	const groupedColorTokens = new Map();
 	const fontSizes = new Map();
