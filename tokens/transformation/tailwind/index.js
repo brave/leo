@@ -3,13 +3,13 @@ const StyleDictionary = require('style-dictionary')
 // Filters
 StyleDictionary.registerFilter({
   name: 'filterWeb',
-  matcher: require('./filterWeb')
+  matcher: require('../web/filterWeb')
 })
 
 // Transforms
 StyleDictionary.registerTransform({
   name: 'size/px',
-  ...require('./sizePx')
+  ...require('../web/sizePx')
 })
 StyleDictionary.registerTransform({
   name: 'tw/shadow',
@@ -17,11 +17,11 @@ StyleDictionary.registerTransform({
 })
 StyleDictionary.registerTransform({
   name: 'web/radius',
-  ...require('./webRadius')
+  ...require('../web/webRadius')
 })
 StyleDictionary.registerTransform({
   name: 'web/padding',
-  ...require('./webPadding')
+  ...require('../web/webPadding')
 })
 StyleDictionary.registerTransform({
   name: 'tw/font',
@@ -29,7 +29,7 @@ StyleDictionary.registerTransform({
 })
 StyleDictionary.registerTransform({
   name: 'web/gradient',
-  ...require('./webGradient')
+  ...require('../web/webGradient')
 })
 StyleDictionary.registerTransform({
   name: 'color/hex8ToRgbaPartial',
@@ -52,7 +52,7 @@ StyleDictionary.registerTransformGroup({
 // Formats
 StyleDictionary.registerFormat({
   name: 'tailwind/css',
-  formatter: require('./formatCss')
+  formatter: require('./formatCssColorVars')
 })
 
 StyleDictionary.registerFormat({

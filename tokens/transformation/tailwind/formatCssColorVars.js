@@ -1,5 +1,5 @@
-const formattedVariables = require('./formattedVariables')
-const fileHeader = require('./fileHeader')
+const formattedVariables = require('../web/formattedVariables')
+const fileHeader = require('../web/fileHeader')
 
 const filteredTokens = (dictionary, filterFn) => {
   let filtered = dictionary.allTokens;
