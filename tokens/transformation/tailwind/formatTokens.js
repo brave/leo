@@ -6,21 +6,21 @@ module.exports = ({ dictionary, options, file }) => {
 	const boxShadows = new Map();
 	const dropShadows = new Map();
 
+	const formatColorVar = (name) => {
+		name = name.replace("-dark-mode", "").replace("-light-mode", "");
+		return `rgba(var(--tw-${name}), <alpha-value>)`;
+	};
+
 	dictionary.allTokens.forEach(({ type, name, ...t }) => {
 		if (type === "color") {
 			if (t.attributes.subitem) {
 				const colorGroup = groupedColorTokens.get(t.attributes.type);
 				groupedColorTokens.set(t.attributes.type, {
 					...colorGroup,
-					[t.attributes.subitem]: `rgba(var(--${name
-						.replace("-dark-mode", "")
-						.replace("-light-mode", "")}), <alpha-value>)`,
+					[t.attributes.subitem]: formatColorVar(name),
 				});
 			} else {
-				groupedColorTokens.set(
-					t.attributes.type,
-					`rgba(var(--${name.replace("-dark-mode", "").replace("-light-mode", "")}), <alpha-value>)`
-				);
+				groupedColorTokens.set(t.attributes.type, formatColorVar(name));
 			}
 		} else if (type === "custom-fontStyle") {
 			const { fontSize, ...rest } = t.value;
@@ -34,11 +34,11 @@ module.exports = ({ dictionary, options, file }) => {
 			}
 		} else if (type === "custom-gradient") {
 			const [, ...pathParts] = t.path;
-			gradients.set(pathParts.join("-"), t.value)
+			gradients.set(pathParts.join("-"), t.value);
 		} else if (type === "custom-shadow") {
 			const [, ...pathParts] = t.path;
-			boxShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.boxShadow)
-			dropShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.dropShadow)
+			boxShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.boxShadow);
+			dropShadows.set(pathParts.join("-").replace(" ", "-").replace("elevation-", ""), t.value.dropShadow);
 		}
 	});
 
@@ -51,7 +51,7 @@ module.exports = ({ dictionary, options, file }) => {
 			borderRadius: Object.fromEntries(borderRadii),
 			boxShadow: Object.fromEntries(boxShadows),
 			dropShadow: Object.fromEntries(dropShadows),
-			gradients: Object.fromEntries(gradients)
+			gradients: Object.fromEntries(gradients),
 		},
 		null,
 		" ".repeat(2)

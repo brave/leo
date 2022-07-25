@@ -56,6 +56,11 @@ function createPropertyFormatter({outputReferences, dictionary, format, formatti
       indentation = '  ';
       separator = ':';
       break;
+    case 'tailwind':
+      prefix = '--tw-';
+      indentation = '  ';
+      separator = ':';
+      break;
     case 'sass':
       prefix = '$';
       commentStyle = 'short';

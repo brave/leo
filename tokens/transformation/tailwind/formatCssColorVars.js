@@ -30,21 +30,21 @@ module.exports = ({ dictionary, options, file }) => {
   return (
     fileHeader({ file }) +
       ':root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.rest, outputReferences }).replace(/desktop-/gm, "") +
+      formattedVariables({ format: 'tailwind', dictionary: groupedTokens.rest, outputReferences }).replace(/desktop-/gm, "") +
       '\n}\n\n' +
       '@media (prefers-color-scheme: light) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
+      formattedVariables({ format: 'tailwind', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n }\n}\n\n' +
       '@media (prefers-color-scheme: dark) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
+      formattedVariables({ format: 'tailwind', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n }\n}\n\n' +
       '[data-theme="light"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
+      formattedVariables({ format: 'tailwind', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n}\n\n' +
       '[data-theme="dark"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
+      formattedVariables({ format: 'tailwind', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n}\n'
   )
 }
