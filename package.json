@@ -1,5 +1,5 @@
 {
-  "name": "design-token-transformer",
+  "name": "@brave/leo",
   "version": "0.0.1",
   "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
   "main": "index.js",
@@ -38,6 +38,7 @@
     "typescript": "^4.0.0"
   },
   "scripts": {
+    "install": "npm run transform-tokens",
     "start": "npm run transform-tokens",
     "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
