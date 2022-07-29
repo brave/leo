@@ -3,7 +3,7 @@ const cssOutputData = require('./data/cssOutput.data')
 
 describe("Compare css converterd file to data set", () => {
   // read files
-  let css = fs.readFileSync('./build/css/_variables.css', 'utf8').replace(/^\s+|\s+$/g, '')
+  let css = fs.readFileSync('./build/css/variables.css', 'utf8').replace(/^\s+|\s+$/g, '')
   // remove starting comment
   const lines = css.split('\n')
   // remove comment from start
