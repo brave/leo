@@ -1,0 +1,138 @@
+{
+  "color": {
+    "legacy": {
+      "light-mode": {
+        "background1": {
+          "type": "color",
+          "value": "white"
+        },
+        "background2": {
+          "type": "color",
+          "value": "#F8F9FA"
+        },
+        "text1": {
+          "type": "color",
+          "value": "#212529"
+        },
+        "text2": {
+          "type": "color",
+          "value": "#495057"
+        },
+        "text3": {
+          "type": "color",
+          "value": "#868E96"
+        },
+        "interactive1": {
+          "type": "color",
+          "value": "#EA3A0D"
+        },
+        "interactive2": {
+          "type": "color",
+          "value": "#FB542B"
+        },
+        "interactive3": {
+          "type": "color",
+          "value": "#FF7654"
+        },
+        "interactive4": {
+          "type": "color",
+          "value": "#353DAB"
+        },
+        "interactive5": {
+          "type": "color",
+          "value": "#4C54D2"
+        },
+        "interactive6": {
+          "type": "color",
+          "value": "#737ADE"
+        },
+        "interactive7": {
+          "type": "color",
+          "value": "#212529"
+        },
+        "interactive8": {
+          "type": "color",
+          "value": "#AEB1C2"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "#DADCE8"
+        },
+        "focus-border": {
+          "type": "color",
+          "value": "#A0A5EB"
+        },
+        "divider1": {
+          "type": "color",
+          "value": "#E9E9F4"
+        }
+      },
+      "dark-mode": {
+        "background1": {
+          "type": "color",
+          "value": "#1E2029"
+        },
+        "background2": {
+          "type": "color",
+          "value": "#17171F"
+        },
+        "text1": {
+          "type": "color",
+          "value": "##F0F2FF"
+        },
+        "text2": {
+          "type": "color",
+          "value": "#C2C4CF"
+        },
+        "text3": {
+          "type": "color",
+          "value": "#84889C"
+        },
+        "interactive1": {
+          "type": "color",
+          "value": "#EA3A0D"
+        },
+        "interactive2": {
+          "type": "color",
+          "value": "#FB542B"
+        },
+        "interactive3": {
+          "type": "color",
+          "value": "#FF7654"
+        },
+        "interactive4": {
+          "type": "color",
+          "value": "#353DAB"
+        },
+        "interactive5": {
+          "type": "color",
+          "value": "#4C54D2"
+        },
+        "interactive6": {
+          "type": "color",
+          "value": "#737ADE"
+        },
+        "interactive7": {
+          "type": "color",
+          "value": "#F0F2FF"
+        },
+        "interactive8": {
+          "type": "color",
+          "value": "#5E6175"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "#343A40"
+        },
+        "focus-border": {
+          "type": "color",
+          "value": "#A0A5EB"
+        },
+        "divider1": {
+          "type": "color",
+          "value": "#3B3E4F"
+        }
+      }
+    }
+  }
+}
