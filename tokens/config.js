@@ -6,11 +6,11 @@ module.exports = {
       buildPath: "build/css/",
       files: [
         {
-          destination: "_variables.css",
+          destination: "variables.css",
           format: "custom/css",
           filter: "filterWeb",
           options: {
-            showFileHeader: false,
+            showFileHeader: true,
           },
         },
       ],

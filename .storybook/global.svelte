@@ -1,5 +1,5 @@
 <script lang="typescript">
-  import '../build/css/_variables.css'
+  import '../build/css/variables.css'
 </script>
 
 <style>
