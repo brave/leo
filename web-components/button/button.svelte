@@ -22,7 +22,7 @@
 <style lang="scss">
   // Main styles and states
   .leoButton {
-    --box-shadow-hover: var(--effect-elevation-02-1);
+    --box-shadow-hover: var(--effect-elevation-02);
     cursor: pointer;
     transition: box-shadow .12s ease-in-out, color .12s ease-in-out;
     box-shadow: none;
@@ -121,7 +121,7 @@
     --box-shadow-hover: none;
   }
   .leoButton.isCTA {
-    --bg-default: var(--gradient-gradient-04-0);
+    --bg-default: var(--gradient-gradient-04);
   }
 </style>
 

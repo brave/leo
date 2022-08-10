@@ -7,10 +7,17 @@ module.exports = {
   },
   transformer: function ({ value }) {
     value = Array.isArray(value) ? value : [value];
-    return value.map(v => formatShadow(v)).join(", ");
+    return {
+      boxShadow: value.map(v => formatBoxShadow(v)).join(", "),
+      dropShadow: value.map(v => formatDropShadow(v))
+    }
   }
 }
 
-function formatShadow (value) {
+function formatBoxShadow (value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX}px ${value.offsetY}px ${value.radius}px ${value.spread}px ${new TinyColor.TinyColor(value.color).toRgbString()}`
+}
+
+function formatDropShadow (value) {
+  return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX}px ${value.offsetY}px ${value.radius}px ${new TinyColor.TinyColor(value.color).toRgbString()}`
 }

@@ -1,6 +1,34 @@
 module.exports = {
   source: ["tokens/*.json"],
+  parsers: [require("./transformation/common/leoParser")],
   platforms: {
+    tailwind: {
+      transformGroup: "tailwind/css",
+      buildPath: "build/tailwind/",
+      files: [
+        {
+          destination: "variables.css",
+          format: "tailwind/css",
+          filter: "filterWeb",
+          options: {
+            showFileHeader: false,
+            prefix: `tw`
+          },
+        },
+        {
+          destination: "tokens.js",
+          format: "tailwind/tokens",
+          filter: "filterWeb",
+          options: {
+            showFileHeader: false,
+          },
+        },
+      ],
+      actions: [
+        "tailwind/copy_static_files",
+        "tailwind/convert_css_to_js"
+      ]
+    },
     css: {
       transformGroup: "custom/css",
       buildPath: "build/css/",

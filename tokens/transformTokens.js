@@ -3,6 +3,7 @@ const baseConfig = require('./config')
 
 // Register Web transforms
 require('./transformation/web')
+require('./transformation/tailwind')
 
 // Register Global transforms
 StyleDictionary.registerTransform({
