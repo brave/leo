@@ -4,7 +4,7 @@ const postcssJs = require("postcss-js");
 const postcss = require("postcss");
 
 const cssFiles = [
-    "_variables.css"
+    "variables.css"
 ];
 
 module.exports = {
