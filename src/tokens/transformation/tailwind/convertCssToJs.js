@@ -13,7 +13,7 @@ module.exports = {
       const cssAsJs = postcssJs.objectify(root)
 
       writeFileSync(
-        join(config.buildPath, `${file}.ts`),
+        join(config.buildPath, 'plugins', `_${file}.ts`),
         `module.exports = ${JSON.stringify(cssAsJs, null, 2)}`
       )
     })

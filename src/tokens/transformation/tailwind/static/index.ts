@@ -66,5 +66,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('./preflightPlugin')]
+  plugins: require('./plugins')
 }

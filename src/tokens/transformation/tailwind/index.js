@@ -72,3 +72,9 @@ StyleDictionary.registerAction({
   do: require('./convertCssToJs').do,
   undo: require('./convertCssToJs').undo
 })
+
+StyleDictionary.registerAction({
+  name: 'tailwind/extract_component_styles',
+  do: require('./extractComponentStyles').do,
+  undo: require('./extractComponentStyles').undo
+})
