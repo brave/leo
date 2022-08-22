@@ -1,9 +1,10 @@
 const StyleDictionary = require('style-dictionary')
 const baseConfig = require('./config')
 
-// Register Web transforms
+// Register transforms
 require('./transformation/web')
 require('./transformation/tailwind')
+require('./transformation/skia')
 
 // Register Global transforms
 StyleDictionary.registerTransform({

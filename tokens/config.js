@@ -53,6 +53,19 @@ module.exports = {
         },
       ],
     },
+    skia: {
+      transformGroup: "skia",
+      buildPath: "build/skia/",
+      files: [
+        {
+          destination: "Colors.h",
+          format: "skia/colors.h",
+          filter: {
+            type: "color",
+          }
+        }
+      ],
+    },
     ios: {
       transformGroup: "ios",
       buildPath: "build/ios/",
@@ -60,8 +73,6 @@ module.exports = {
         {
           destination: "StyleDictionaryColor.h",
           format: "ios/colors.h",
-          className: "StyleDictionaryColor",
-          type: "StyleDictionaryColorName",
           filter: {
             type: "color",
           },
