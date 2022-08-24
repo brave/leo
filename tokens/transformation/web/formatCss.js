@@ -40,10 +40,10 @@ module.exports = ({ dictionary, options, file }) => {
       ' :root {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n }\n}\n\n' +
-      'html[data-theme="light"] {\n' +
+      '[data-theme="light"] {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n}\n\n' +
-      'html[data-theme="dark"] {\n' +
+      '[data-theme="dark"] {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n}\n'
   )
