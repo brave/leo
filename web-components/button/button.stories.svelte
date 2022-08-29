@@ -24,7 +24,7 @@
   }
 </style>
 
-<Meta title="Buton" component={Button}/>
+<Meta title="Button" component={Button}/>
 
 <Template let:args>
   <Button {...args} on:click={handleClick}>
