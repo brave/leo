@@ -1,14 +1,33 @@
-
 <script>
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
-  import Button from './button.svelte';
+  import Button from './button.svelte'
+  import { buttonKinds, buttonSizes } from './props'
 
-  let count = 0;
+  let count = 0
   function handleClick() {
-    count += 1;
+    count += 1
   }
 </script>
+
+<Meta
+  title="Button"
+  component={Button}
+  argTypes={{
+    kind: { control: 'select', options: buttonKinds },
+    size: { control: 'select', options: buttonSizes },
+  }}
+/>
+
+<Template let:args>
+  <Button {...args} on:click={handleClick}>
+    You clicked: {count}
+  </Button>
+</Template>
+
+<Story name="Primary" args={{ kind: 'primary' }} />
+
+<Story name="Secondary" source args={{ kind: 'secondary' }} />
 
 <style>
   .button-group {
@@ -21,18 +40,6 @@
     font: 500 14px sans-serif;
   }
 </style>
-
-<Meta title="Button" component={Button}/>
-
-<Template let:args>
-  <Button {...args} on:click={handleClick}>
-    You clicked: {count}
-  </Button>
-</Template>
-
-<Story name="Primary" args={{kind: 'primary'}}/>
-
-<Story name="Secondary" source args={{kind: 'secondary'}}/>
 
 <Story name="All" let:args>
   <h2 class="label">Large</h2>
