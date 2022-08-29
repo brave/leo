@@ -1,6 +1,7 @@
 import * as React from 'react';
 import "../../../build/css/variables.css"
 import LeoButton from '../../../web-components/button/react'
+import Collapse from '../../../web-components/collapse/react'
 import styles from './App.module.css';
 import SvelteReactComponent, { HelloEvent } from './MySvelteComponent/react'
 
