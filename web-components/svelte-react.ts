@@ -1,8 +1,14 @@
 import React, { useRef, useEffect } from "react"
 import { SvelteComponent } from "svelte"
+import type {SvelteComponentTyped} from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
 const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
+
+/**
+ * Type Utility for inferring the prop types of a Svelte component.
+ */
+export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, any> ? Props : {};
 
 // TODO(petemill): 
 // When web-components are supported in react (currently only in experimental version), then we can 
@@ -17,7 +23,7 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
 //       ['leo-button']: CustomElement<Props>
 //     }
 //   }
-// }    
+// }
 
 /**
  * 
@@ -25,9 +31,8 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
  * @param component The imported svelte component itself. This is not used, but ensures that the component's code has been included in the bundle.
  * @returns A react component
  */
-export default function SvelteWebComponentToReact<T extends Record<string, any>> (tag: string, component: typeof SvelteComponent) {
-  console.log(component)
-  return function ReactSvelteWebComponent (props: React.PropsWithChildren<T>) {
+export default function SvelteWebComponentToReact<Component extends SvelteComponent> (tag: string, component: { new(...args: any[]): Component }) {
+  return function ReactSvelteWebComponent (props: React.PropsWithChildren<SvelteProps<Component>>) {
     const component = useRef<SvelteComponent>()
     
     const setRef = React.useCallback((ref: SvelteComponent) => {
@@ -103,6 +108,6 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       }
     }, [])
 
-    return React.createElement(tag, { ref: setRef, children: props.children })// as unknown as React.ReactElement<T>
+    return React.createElement(tag, { ref: setRef, children: props.children })
   }
 }
