@@ -4,8 +4,6 @@
 
   import Button from './button.svelte';
 
-  export let disabled = false
-
   let count = 0;
   function handleClick() {
     count += 1;
