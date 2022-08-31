@@ -8,6 +8,7 @@
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
+  export let foo: number = 7
 
   const dispatch = createEventDispatcher();
 
@@ -138,5 +139,5 @@
   disabled={isDisabled}
   on:click={onClick}
 >
-  <slot>Leo Button</slot>
+  <slot>Leo Button {foo}</slot>
 </button>

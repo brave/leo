@@ -9,7 +9,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.4.0",
     "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-svelte-types": "^1.0.3",
+    "rollup-plugin-svelte-types": "^1.0.6",
     "style-dictionary": "^3",
     "tailwindcss": "^3.1.6"
   },

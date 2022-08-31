@@ -16,16 +16,19 @@ function App() {
     alert('react svelte wc hello ' + e.detail.text)
   }
 
+  const [foo, setFoo] = React.useState('');
+
   return (
     <div className={styles['App']}>
       <header className={styles['App-header']}>
         <h1>A React App</h1>
+        <input type="text" value={foo} onChange={e => setFoo(e.target.value)}/>
         <LeoButton 
           kind='primary'
           size='large'
+          foo={8}
           onClick={() => alert('clicked')}
         >
-            I am a LEO Button
         </LeoButton>
         <SvelteReactComponent 
           button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')} 

@@ -23,7 +23,7 @@ export default {
         sourcemap: true
     },
     plugins: [
-        svelteTypes({ declarationDir: 'build/web-components' }),
+        svelteTypes(),
         svelte({
             preprocess: sveltePreprocess(),
             compilerOptions: {
