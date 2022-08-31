@@ -21,8 +21,8 @@ function App() {
       <header className={styles['App-header']}>
         <h1>A React App</h1>
         <LeoButton 
-          kind='primary' 
-          size='medium'
+          kind='primary'
+          size='large'
           onClick={() => alert('clicked')}
         >
             I am a LEO Button
