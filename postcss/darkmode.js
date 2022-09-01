@@ -18,10 +18,13 @@ module.exports = (options = { forceGlobal: true }) => {
         postcssPlugin: 'darkmode',
         AtRule: {
             darkmode: atRule => {
+                // In Svelte, we need to force the selector to be global,
+                // otherwise the compiler will remove our style!
+                let parentDarkModeSelector = '[data-theme=dark]'
+                if (options.forceGlobal) parentDarkModeSelector = `:global(${parentDarkModeSelector})`
+                
                 const queryBody = atRule.nodes.map(n => renderRule(n, s => `${s}:not([data-theme=light] ${s}):not([data-theme=light])`)).join('\n\n');
-
-                const parentDarkSelector = options.forceGlobal ? `:global([data-theme=dark])` : `[data-theme=dark]`
-                const attributeBody = atRule.nodes.map(n => renderRule(n, s => `${s}[data-theme=dark], :global([data-theme=dark]) ${s}`)).join('\n\n')
+                const attributeBody = atRule.nodes.map(n => renderRule(n, s => `${s}[data-theme=dark], ${parentDarkModeSelector} ${s}`)).join('\n\n')
 
                 atRule.replaceWith(`
 @media (prefers-color-scheme: dark) {
