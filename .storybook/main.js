@@ -18,7 +18,11 @@ module.exports = {
   ],
   "framework": "@storybook/svelte",
   svelteOptions: {
-    preprocess: sveltePreprocess(),
+    preprocess: sveltePreprocess({
+      postcss: {
+        plugins: [require('../postcss/darkmode')]
+      }
+    }),
     customElement: true,
   },
   // svelteOptions: {
