@@ -13,7 +13,7 @@ ${indent(rule.nodes.map(n => n.toString() + ';').join('\n'), 1)}
 }`
 }
 
-module.exports = (options = { forceGlobal: true }) => {
+module.exports = (options = { forceGlobal: false }) => {
     return {
         postcssPlugin: 'darkmode',
         AtRule: {
