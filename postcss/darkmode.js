@@ -13,7 +13,7 @@ ${indent(rule.nodes.map(n => n.toString() + ';').join('\n'), 1)}
 }`
 }
 
-const generateNestedDarkModeSelectors = (levels) => {
+const generateNestedDarkModeSelectors = (levels, componentSelector, forceGlobal) => {
     if (levels === 0) return '';
 
     const generateNestedDarkModeSelector = (level) => {
@@ -21,10 +21,14 @@ const generateNestedDarkModeSelectors = (levels) => {
         while (--level > 0)
             selector = '[data-theme=dark] [data-theme=light] ' + selector;
 
-        return `${selector} .component:not(${selector} [data-theme=light] .component):not([data-theme=light])`
+        // In Svelte, we need to force the selector to be global,
+        // otherwise the compiler will remove our style!
+        const maybeGlobal = (s) => forceGlobal ? `:global(${s})` : s;
+        return `${maybeGlobal(selector)} ${componentSelector}:not(${selector} [data-theme=light] ${componentSelector}):not([data-theme=light])`
     }
 
-    return Array.from(Array(levels).keys()).map(i => generateNestedDarkModeSelector(i + 1)).join(',\n')
+    return ',\n' + Array.from(Array(levels).keys()).map(i => generateNestedDarkModeSelector(i + 1))
+        .join(',\n')
 }
 
 const getNestingLevel = (params) => {
@@ -42,16 +46,8 @@ module.exports = (options = { forceGlobal: false }) => {
         AtRule: {
             darkmode: atRule => {
                 const nesting = getNestingLevel(atRule.params);
-                // In Svelte, we need to force the selector to be global,
-                // otherwise the compiler will remove our style!
-                let parentDarkModeSelectors = generateNestedDarkModeSelectors(nesting)
-                if (parentDarkModeSelectors) {
-                    if (options.forceGlobal) parentDarkModeSelectors = `:global(${parentDarkModeSelectors})`
-                    parentDarkModeSelectors = ',\n' + parentDarkModeSelectors;
-                }
-
                 const queryBody = atRule.nodes.map(n => renderRule(n, s => `${s}:not([data-theme] ${s}):not([data-theme])`)).join('\n\n');
-                const attributeBody = atRule.nodes.map(n => renderRule(n, s => `${s}[data-theme=dark]${parentDarkModeSelectors}`)).join('\n\n')
+                const attributeBody = atRule.nodes.map(n => renderRule(n, s => `${s}[data-theme=dark]${generateNestedDarkModeSelectors(nesting, s, options.forceGlobal)}`)).join('\n\n')
 
                 atRule.replaceWith(`
 @media (prefers-color-scheme: dark) {

@@ -61,3 +61,30 @@
     <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
   </div>
 </Story>
+
+<Story name="All Dark" let:args>
+  <h2 class="label">Large</h2>
+  <div data-theme=dark>
+    <div class="button-group">
+      <Button kind="primary" size="large" {...args} on:click={() => {
+        const styles = document.querySelectorAll('style');
+        const last = styles[styles.length - 1];
+        navigator.clipboard.writeText(last.innerHTML);
+      }}>Primary</Button>
+      <Button kind="secondary" size="large" {...args}>Secondary</Button>
+      <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
+    </div>
+    <h2 class="label">Medium</h2>
+    <div class="button-group">
+      <Button kind="primary" size="medium" {...args}>Primary</Button>
+      <Button kind="secondary" size="medium" {...args}>Secondary</Button>
+      <Button kind="tertiary" size="medium" {...args}>Tertiary</Button>
+    </div>
+    <h2 class="label">Small</h2>
+    <div class="button-group">
+      <Button kind="primary" size="small" {...args}>Primary</Button>
+      <Button kind="secondary" size="small" {...args}>Secondary</Button>
+      <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
+    </div>
+  </div>
+</Story>
