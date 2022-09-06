@@ -11,27 +11,30 @@ function App() {
     setTimeout(() => setActed(true), 4000)
   }, [])
 
-  function handleSvelteComponentHello (e: HelloEvent) {
+  function handleSvelteComponentHello(e: HelloEvent) {
     console.log('onhello from react', e)
     alert('react svelte wc hello ' + e.detail.text)
   }
 
-  const [foo, setFoo] = React.useState('');
+  const [buttonText, setButtonText] = React.useState('I am a LEO Button');
 
   return (
     <div className={styles['App']}>
       <header className={styles['App-header']}>
         <h1>A React App</h1>
-        <input type="text" value={foo} onChange={e => setFoo(e.target.value)}/>
-        <LeoButton 
+        <label>
+          Edit the button text:
+          <input type="text" value={buttonText} onChange={e => setButtonText(e.target.value)} />
+        </label>
+        <LeoButton
           kind='primary'
           size='large'
-          foo={8}
           onClick={() => alert('clicked')}
         >
+          {buttonText}
         </LeoButton>
-        <SvelteReactComponent 
-          button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')} 
+        <SvelteReactComponent
+          button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')}
           onHello={handleSvelteComponentHello}
         >
           Inside contents from react{acted ? ' MODIFIED' : ''}

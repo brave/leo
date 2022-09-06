@@ -9,12 +9,15 @@
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
 <<<<<<< HEAD
+<<<<<<< HEAD
   export let href: string = "";
 
   const tag = href ? "a" : "button";
 =======
   export let foo: number = 7
 >>>>>>> e20bd77 (PoC reloading)
+=======
+>>>>>>> f01b74c (Cleanup)
 
   const dispatch = createEventDispatcher();
 
