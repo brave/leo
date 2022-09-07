@@ -1,3 +1,5 @@
+const { Declaration, AtRule, Rule } = require('postcss');
+
 const getPropertyName = (selector, decl) => {
     const regex = /([^A-Za-z0-9\-_])/g
     return `--${selector}_${decl.prop}`.replace(regex, '\\$1')
@@ -7,7 +9,6 @@ const extractDarkProperties = (lightAndDark) => {
     // Selector is the same for light and for dark.
     const selector = lightAndDark.dark.selector
     const properties = {}
-    const unchangedProperties = []
 
     lightAndDark.dark.each(decl => {
         const propertyName = getPropertyName(selector, decl)
@@ -19,48 +20,31 @@ const extractDarkProperties = (lightAndDark) => {
 
     lightAndDark.light.each(decl => {
         const propertyName = getPropertyName(selector, decl)
-        if (!properties[propertyName]) {
-            unchangedProperties.push(decl)
-            return
-        }
+        if (!properties[propertyName]) return
         properties[propertyName].light = decl
     });
 
     const darkVariables = Object.entries(properties)
-        .map(([key, decl]) => `${key}: ${decl.dark.value};`)
-        .join('\n')
+        .map(([key, decl]) => new Declaration({ prop: key, value: decl.dark.value }))
 
     const lightVariables = Object.entries(properties)
-        .map(([key, decl]) => `${key}: ${decl.light.value || 'unset'};`)
-        .join('\n')
-
-    const naturalProperties = unchangedProperties
-        .map(p => `${p};`)
-        .join('\n')
-
-    const overriddenProperties = Object.entries(properties)
-        .map(([property, decls]) => `${decls.dark.prop}: var(${property});`)
-        .join('\n')
-
-    return `
-:root, [data-theme=light] {
-${lightVariables}
-}
-
-[data-theme=dark] {
-${darkVariables}
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-${darkVariables}
+        .map(([key, decl]) => new Declaration({ prop: key, value: decl.light.value || 'unset' }))
+    
+    for (const [property, decls] of Object.entries(properties)) {
+      // If there is already a light property for this, update it to use the custom property.
+      if (decls.light.prop) {
+        decls.light.value = `var(${property})`
+      } else { // If not, add a new declaration.
+        lightAndDark.light.append(new Declaration({ prop: decls.dark.prop, value: `var(${property})`}))
+      }
     }
-}
+  
+  	lightAndDark.dark.remove()
 
-${selector} {
-${naturalProperties}
-${overriddenProperties}
-}`
+    return {
+      dark: darkVariables,
+      light: lightVariables
+    }
 }
 
 module.exports = (options = { forceGlobal: false }) => {
@@ -87,17 +71,30 @@ module.exports = (options = { forceGlobal: false }) => {
             }
         },
         OnceExit: (root) => {
+          	const darkProperties = [];
+          	const lightProperties = [];
+
             findMatchingLightRules(root);
             for (const rule of Object.values(rules)) {
-                const replacementCss = extractDarkProperties(rule)
-                rule.light.replaceWith(replacementCss)
-                rule.dark.remove()
+                const { dark, light } = extractDarkProperties(rule)
+                darkProperties.push(...dark);
+              	lightProperties.push(...light);
             }
+
+            const lightRule = new Rule({ selectors: [':root', '[data-theme=light]' ], nodes: lightProperties })
+            const darkRule = new Rule({ selector: '[data-theme=dark]', nodes: darkProperties })
+            const mediaQuery = new AtRule({ name: 'media', params: '(prefers-color-scheme: dark)', nodes: [
+                new Rule({ selector: ':root', nodes: darkProperties })
+            ]});
+            
+            root.prepend(lightRule, darkRule, mediaQuery);
 
             // Remove all the @darkmode rules, we should have fully converted them.
             root.each(r => {
                 if (r.type !== 'atrule' || r.name !== 'darkmode') return
-                if (r.nodes.length) throw new Error('Expected @darkmode rule to have been converted');
+
+                // This should never happen.
+                if (r.nodes.length) throw new Error(`Expected all @darkmode rule to have been converted. Encountered ${r.toString()}`);
                 r.remove()
             })
         }
