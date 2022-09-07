@@ -1,69 +1,105 @@
-const indent = (text, level) => text.split('\n')
-    .map(line => ''.padStart(level, '\t') + line)
-    .join('\n')
+const getPropertyName = (selector, decl) => {
+    const regex = /([^A-Za-z0-9\-_])/g
+    return `--${selector}_${decl.prop}`.replace(regex, '\\$1')
+}
 
-const renderRule = (rule, transform) => {
-    if (!rule.selector) {
-        console.log(rule.toString())
-        return ''
+const extractDarkProperties = (lightAndDark) => {
+    // Selector is the same for light and for dark.
+    const selector = lightAndDark.dark.selector
+    const properties = {}
+    const unchangedProperties = []
+
+    lightAndDark.dark.each(decl => {
+        const propertyName = getPropertyName(selector, decl)
+        properties[propertyName] = {
+            dark: decl,
+            light: {} // Empty so we set the value to undefined if there's no light property
+        }
+    })
+
+    lightAndDark.light.each(decl => {
+        const propertyName = getPropertyName(selector, decl)
+        if (!properties[propertyName]) {
+            unchangedProperties.push(decl)
+            return
+        }
+        properties[propertyName].light = decl
+    });
+
+    const darkVariables = Object.entries(properties)
+        .map(([key, decl]) => `${key}: ${decl.dark.value};`)
+        .join('\n')
+
+    const lightVariables = Object.entries(properties)
+        .map(([key, decl]) => `${key}: ${decl.light.value || 'unset'};`)
+        .join('\n')
+
+    const naturalProperties = unchangedProperties
+        .map(p => `${p};`)
+        .join('\n')
+
+    const overriddenProperties = Object.entries(properties)
+        .map(([property, decls]) => `${decls.dark.prop}: var(${property});`)
+        .join('\n')
+
+    return `
+:root, [data-theme=light] {
+${lightVariables}
+}
+
+[data-theme=dark] {
+${darkVariables}
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+${darkVariables}
     }
-    const selectors = rule.selector.split(',').map(s => s.trim()).map(transform)
-    return `${selectors.join(', ')} {
-${indent(rule.nodes.map(n => n.toString() + ';').join('\n'), 1)}
+}
+
+${selector} {
+${naturalProperties}
+${overriddenProperties}
 }`
 }
 
-const generateNestedDarkModeSelectors = (levels, componentSelector, options) => {
-    if (levels === 0) return '';
+module.exports = (options = { forceGlobal: false }) => {
+    const rules = {};
+    const findMatchingLightRules = root => {
+        const selectors = new Set(Object.keys(rules));
+        root.each(rule => {
+            if (rule.type !== 'rule') return;
+            if (!selectors.has(rule.selector)) return;
 
-    const generateNestedDarkModeSelector = (level) => {
-        let selector = '[data-theme=dark]'
-        while (--level > 0)
-            selector = '[data-theme=dark] [data-theme=light] ' + selector;
-
-        // Mode can be undefined, global, or host-context. This let's us wrap
-        // the selector in different scenarios.
-        const getParentSelector = (s) => {
-            if (options.useHostContext) s = `:host-context(${s})`;
-            if (options.forceGlobal) s = `:global(${s})`;
-            return s;
-        }
-
-        // The :not needs to be wrapped in a :host-context if we should use the
-        // host context.
-        const getNotSelector = (s) => options.useHostContext ? `:host-context(${s})` : s;
-        return `${getParentSelector(selector)} ${componentSelector}:not(${getNotSelector(selector + ' [data-theme=light]')} ${componentSelector}):not([data-theme=light])`
+            rules[rule.selector].light = rule
+        })
     }
 
-    return ',\n' + Array.from(Array(levels).keys()).map(i => generateNestedDarkModeSelector(i + 1))
-        .join(',\n')
-}
-
-const getNestingLevel = (params) => {
-    const result = /\(levels: (\d+)\)/g.exec(params);
-    if (result && result[1]) {
-        const parsed = parseInt(result[1]);
-        return isNaN(parsed) ? 2 : parsed;
-    }
-    return 2;
-}
-
-module.exports = (options = { forceGlobal: false, useHostContext: false }) => {
     return {
         postcssPlugin: 'darkmode',
         AtRule: {
-            darkmode: atRule => {
-                const nesting = getNestingLevel(atRule.params);
-                const queryBody = atRule.nodes.map(n => renderRule(n, s => `${s}:not([data-theme] ${s}):not([data-theme])`)).join('\n\n');
-                const attributeBody = atRule.nodes.map(n => renderRule(n, s => `${s}[data-theme=dark]${generateNestedDarkModeSelectors(nesting, s, options)}`)).join('\n\n')
-
-                atRule.replaceWith(`
-@media (prefers-color-scheme: dark) {
-${indent(queryBody, 1)}
-}
-
-${attributeBody}`)
+            darkmode: (atRule) => {
+                atRule.each(rule => {
+                    rules[rule.selector] = {
+                        dark: rule
+                    }
+                })
             }
+        },
+        OnceExit: (root) => {
+            findMatchingLightRules(root);
+            for (const rule of Object.values(rules)) {
+                const replacementCss = extractDarkProperties(rule)
+                rule.light.replaceWith(replacementCss)
+                rule.dark.remove()
+            }
+
+            // Remove all the @darkmode rules, we should have fully converted them.
+            root.each(r => {
+                if (r.type !== 'atrule' || r.name !== 'darkmode') return
+                if (r.nodes.length) throw new Error('Expected @darkmode rule to have been converted');
+                r.remove()
+            })
         }
     }
 }
