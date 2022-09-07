@@ -25,7 +25,13 @@ export default {
     plugins: [
         svelteTypes(),
         svelte({
-            preprocess: sveltePreprocess(),
+            preprocess: sveltePreprocess({
+                postcss: {
+                    plugins: [
+                        require('./postcss/fork-css')
+                    ]
+                }
+            }),
             compilerOptions: {
                 customElement: true
             },
