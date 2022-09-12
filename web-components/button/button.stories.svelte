@@ -66,11 +66,7 @@
   <h2 class="label">Large</h2>
   <div data-theme=dark>
     <div class="button-group">
-      <Button kind="primary" size="large" {...args} on:click={() => {
-        const styles = document.querySelectorAll('style');
-        const last = styles[styles.length - 1];
-        navigator.clipboard.writeText(last.innerHTML);
-      }}>Primary</Button>
+      <Button kind="primary" size="large" {...args}>Primary</Button>
       <Button kind="secondary" size="large" {...args}>Secondary</Button>
       <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
     </div>
