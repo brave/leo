@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { InputType } from './props'
+
+  export let type: InputType = 'text'
   export let required = false
   export let label = ''
   export let placeholder = ''
@@ -23,7 +26,7 @@
   <div class="input-container">
     <slot name="icon" />
     <input
-      type="text"
+      {...{ type }}
       id={inputId}
       {disabled}
       {placeholder}

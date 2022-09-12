@@ -2,9 +2,16 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
   import Input from './input.svelte'
+  import { inputTypes } from './props'
 </script>
 
-<Meta title="Input" component={Input} argTypes={{}} />
+<Meta
+  title="Input"
+  component={Input}
+  argTypes={{
+    type: { control: 'select', options: inputTypes },
+  }}
+/>
 
 <Template let:args>
   <Input {...args} />
@@ -54,17 +61,18 @@
 <Story name="Complex Label" let:args>
   <Input {...args}>
     <div class="complex-label" slot="label">
-        <span>Start</span>
-        <span>End</span>
+      <span>Start</span>
+      <span>End</span>
     </div>
   </Input>
 </Story>
+
 <style>
-    .complex-label {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        color: darkblue;
-    }
+  .complex-label {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: darkblue;
+  }
 </style>
