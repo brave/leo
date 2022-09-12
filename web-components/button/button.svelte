@@ -80,27 +80,28 @@
 
   // Kind Variations
   .leoButton.isPrimary {
-    --bg: var(--color-secondary-light-mode-70);
-    --bg-hover: var(--color-secondary-light-mode-80);
-    --bg-active: var(--color-secondary-light-mode-90);
-    --bg-focus: var(--color-secondary-light-mode-70);
-    --bg-loading: var(--color-secondary-light-mode-50);
+    --bg: var(--color-primary-light-mode-80);
+    --bg-hover: var(--color-primary-light-mode-90);
+    --bg-active: var(--color-primary-light-mode-100);
+    --bg-focus: var(--color-primary-light-mode-80);
+    --bg-loading: var(--color-primary-light-mode-70);
     --bg-disabled: var(--color-gray-70);
     --color: white;
     @darkmode {
-      --bg: var(--color-secondary-dark-mode-50);
-      --bg-hover: var(--color-secondary-dark-mode-60);
-      --bg-active: var(--color-secondary-dark-mode-70);
-      --bg-loading: var(--color-secondary-dark-mode-60);
+      --bg: var(--color-primary-dark-mode-50);
+      --bg-hover: var(--color-primary-dark-mode-60);
+      --bg-active: var(--color-primary-dark-mode-30);
+      --bg-focus: var(--color-primary-dark-mode-50);
+      --bg-loading: var(--color-primary-dark-mode-60);
     }
   }
 
   .leoButton.isSecondary {
     // TODO(petemill): Is transparent right or should it be explicitly white (and black)?
-    --bg: white;
+    --bg: transparent;
     --bg-active: --color-gray-20;
     --color: var(--color-gray-90);
-    --color-hover: var(--color-secondary-light-mode-70);
+    --color-hover: var(--color-primary-light-mode-70);
     --color-loading: var(--color-gray-70);
     --border-width: 1px;
     --border-color: var(--color-gray-30);
@@ -108,20 +109,21 @@
       opacity: 0.5;
     }
     @darkmode {
-      --bg: black;
-      --color-hover: var(--color-secondary-dark-mode-80);
+      --bg: transparent;
+      --color-hover: var(--color-primary-dark-mode-80);
     }
   }
   .isTertiary {
     border-radius: 8px;
-    --color: var(--color-secondary-70);
-    --color-hover: var(--color-secondary-80);
-    --color-active: var(--color-secondary-90);
-    --color-loading: var(--color-secondary-50);
+    --color: var(--color-primary-70);
+    --color-hover: var(--color-primary-80);
+    --color-active: var(--color-primary-90);
+    --color-loading: var(--color-primary-50);
     --box-shadow-hover: none;
   }
   .leoButton.isCTA {
-    --bg-default: var(--gradient-gradient-04);
+    --bg: var(--gradient-gradient-cta);
+    --color: white;
   }
 </style>
 
