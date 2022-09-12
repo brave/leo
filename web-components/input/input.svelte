@@ -7,9 +7,10 @@
   export let placeholder = ''
   export let value = ''
   export let disabled = false
+  export let error = ''
 
   let inputId = Math.random().toString()
-  $: hasError = !!$$slots.error
+  $: hasError = (error || !!$$slots.error) && !disabled
 </script>
 
 <label class="leo-input" class:error={hasError} class:disabled for={inputId}>
@@ -24,7 +25,11 @@
     {/if}
   </div>
   <div class="input-container">
-    <slot name="icon" />
+    {#if $$slots.icon}
+      <div class="icon">
+        <slot name="icon" />
+      </div>
+    {/if}
     <input
       {...{ type }}
       id={inputId}
@@ -39,7 +44,11 @@
   </div>
   {#if hasError}
     <div class="error">
-      <slot name="error" />
+      {#if $$slots.error}
+        <slot name="error" />
+      {:else}
+        {error}
+      {/if}
     </div>
   {/if}
 </label>
@@ -58,6 +67,20 @@
 
       & .label {
         color: var(--color-gray-70);
+      }
+
+      & .icon {
+        color: var(--color-gray-50);
+      }
+    }
+
+    &.error {
+      & .input-container {
+        background: var(--color-red-30);
+      }
+
+      & .icon {
+        color: var(--color-red-70);
       }
     }
 
@@ -100,20 +123,18 @@
           -1px -1px 4px 2px rgba(255, 71, 36, 0.75);
       }
 
-      &.error {
-        background: var(--color-red-30);
-        & .icon {
-          color: var(--color-red-70);
-        }
-      }
-
       & input {
         all: unset;
         font: var(--font-default-regular);
+        font-family: 'Poppins';
         &::placeholder {
           color: var(--color-gray-70);
         }
       }
+    }
+
+    & .icon {
+      color: var(--color-gray-70);
     }
 
     & .error {
