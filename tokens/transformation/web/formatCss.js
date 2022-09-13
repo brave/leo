@@ -29,7 +29,7 @@ module.exports = ({ dictionary, options, file }) => {
   // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
   return (
     fileHeader({ file }) +
-      ':root, html[data-theme=light] {\n' +
+      ':root, [data-theme=light] {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.rest, outputReferences }).replace(/desktop-/gm, "") +
       formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
       '\n}\n\n' +
@@ -37,7 +37,7 @@ module.exports = ({ dictionary, options, file }) => {
       ' :root {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n }\n}\n\n' +
-      'html[data-theme="dark"] {\n' +
+      '[data-theme="dark"] {\n' +
       formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
       '\n}\n'
   )
