@@ -134,6 +134,7 @@
     }
 
     & .icon {
+      display: flex;
       color: var(--color-gray-70);
     }
 
