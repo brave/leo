@@ -22,7 +22,7 @@ it('Converts the base case', async () => {
     flex-direction: row;
   }
 
-  @darkmode {
+  @theme (dark) {
     .component {
       background: red;
       flex-direction: column;
@@ -60,7 +60,7 @@ it('Selectors can be overridden', async () => {
     flex-direction: row;
   }
 
-  @darkmode {
+  @theme (dark) {
     .component {
       background: red;
       flex-direction: column;
@@ -104,7 +104,7 @@ it('Handles no dark mode', async () => {
 
 it('Handles no light mode', async () => {
   await run(`
-  @darkmode {
+  @theme (dark) {
     .component {
       background: red;
       color: white;
@@ -137,7 +137,7 @@ it('Converts darkmode only properties', async () => {
     background: pink;
   }
 
-  @darkmode {
+  @theme (dark) {
     .component {
       background: red;
       color: white;
@@ -171,7 +171,7 @@ it('Converts nested selectors', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component .foo {
         background: red;
       }
@@ -201,7 +201,7 @@ it('Converts sibling selectors', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component + .foo {
         background: red;
       }
@@ -231,7 +231,7 @@ it('Converts child selectors', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component > .foo {
         background: red;
       }
@@ -261,7 +261,7 @@ it('Converts general sibling selectors', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component ~ .foo {
         background: red;
       }
@@ -291,7 +291,7 @@ it('Converts multi selectors (light and dark same)', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component, .foo {
         background: red;
       }
@@ -329,7 +329,7 @@ it('Converts multi selectors (light and dark same, with remainder)', async () =>
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component, .foo {
         background: red;
       }
@@ -368,7 +368,7 @@ it('Converts multi selectors (light subset of dark)', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component, .foo {
         background: red;
       }
@@ -406,7 +406,7 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
       padding: 12px;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component, .foo {
         background: red;
       }
@@ -444,7 +444,7 @@ it('Converts multi selectors (dark subset of light)', async () => {
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component {
         background: red;
       }
@@ -479,7 +479,7 @@ it('Converts multi selectors (dark subset of light, with remainder)', async () =
       background: pink;
     }
 
-    @darkmode {
+    @theme (dark) {
       .component {
         background: red;
       }
@@ -515,7 +515,7 @@ it('Converts multi selectors (dark subset of light, with unset)', async () => {
       background: pink;
     }
     
-    @darkmode {
+    @theme (dark) {
       .component {
         padding: 12px;
         background: red;
@@ -555,7 +555,7 @@ it('Converts multi selectors (weird intersection)', async () => {
       background: pink;
     }
     
-    @darkmode {
+    @theme (dark) {
       .component, .frob {
         padding: 12px;
         background: red;
