@@ -1,21 +1,9 @@
-const postcss = require('postcss')
-
-const plugin = require('../postcss/theme')
-
-async function run(input, output, opts = {}) {
-  let result = await postcss([plugin(opts)]).process(input, { from: undefined })
-  const removeWhiteSpace = /(^\s*\n)|(^(\t| )+)/gm
-  const sansWhiteSpace = text => text.replace(removeWhiteSpace, '')
-    .replace(/;/g, ''); // TODO: Remove this back once I work out why the test sometimes misses semicolons.
-
-  expect(sansWhiteSpace(result.toString())).toEqual(sansWhiteSpace(output))
-  expect(result.warnings()).toHaveLength(0)
-}
+const { run } = require('./theme.common')
 
 /* Write tests here */
 
 it('Converts the base case', async () => {
-  await run(`.component {
+    await run(`.component {
     padding: 12px;
     background: pink;
     display: flex;
@@ -53,7 +41,7 @@ it('Converts the base case', async () => {
 })
 
 it('Selectors can be overridden', async () => {
-  await run(`.component {
+    await run(`.component {
     padding: 12px;
     background: pink;
     display: flex;
@@ -91,7 +79,7 @@ it('Selectors can be overridden', async () => {
 })
 
 it('Handles no dark mode', async () => {
-  await run(`
+    await run(`
   @theme (light) {
     .component {
       background: red;
@@ -121,7 +109,7 @@ it('Handles no dark mode', async () => {
 })
 
 it('Converts lightmode only properties', async () => {
-  await run(`.component {
+    await run(`.component {
     background: pink;
   }
 
@@ -154,7 +142,7 @@ it('Converts lightmode only properties', async () => {
 })
 
 it('Converts nested selectors', async () => {
-  await run(`
+    await run(`
     .component .foo {
       background: pink;
     }
@@ -184,7 +172,7 @@ it('Converts nested selectors', async () => {
 })
 
 it('Converts sibling selectors', async () => {
-  await run(`
+    await run(`
     .component + .foo {
       background: red;
     }
@@ -214,7 +202,7 @@ it('Converts sibling selectors', async () => {
 })
 
 it('Converts child selectors', async () => {
-  await run(`
+    await run(`
     .component > .foo {
       background: red;
     }
@@ -244,7 +232,7 @@ it('Converts child selectors', async () => {
 })
 
 it('Converts general sibling selectors', async () => {
-  await run(`
+    await run(`
     .component ~ .foo {
       background: red;
     }
@@ -274,7 +262,7 @@ it('Converts general sibling selectors', async () => {
 })
 
 it('Converts multi selectors (dark and light same)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       background: red;
     }
@@ -311,7 +299,7 @@ it('Converts multi selectors (dark and light same)', async () => {
 })
 
 it('Converts multi selectors (dark and light same, with remainder)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       padding: 12px;
       background: red;
@@ -351,7 +339,7 @@ it('Converts multi selectors (dark and light same, with remainder)', async () =>
 })
 
 it('Converts multi selectors (light subset of dark)', async () => {
-  await run(`
+    await run(`
     .component {
       background: red;
     }
@@ -388,7 +376,7 @@ it('Converts multi selectors (light subset of dark)', async () => {
 })
 
 it('Converts multi selectors (light subset of dark, with remainder)', async () => {
-  await run(`
+    await run(`
     .component {
       background: red;
       padding: 12px;
@@ -427,7 +415,7 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
 })
 
 it('Converts multi selectors (light subset of dark)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       background: red;
     }
@@ -461,7 +449,7 @@ it('Converts multi selectors (light subset of dark)', async () => {
 })
 
 it('Converts multi selectors (light subset of base, with remainder)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       padding: 12px;
       background: pink;
@@ -498,7 +486,7 @@ it('Converts multi selectors (light subset of base, with remainder)', async () =
 })
 
 it('Converts multi selectors (light subset of dark, with unset)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       background: pink;
     }
@@ -537,7 +525,7 @@ it('Converts multi selectors (light subset of dark, with unset)', async () => {
 })
 
 it('Converts multi selectors (weird intersection)', async () => {
-  await run(`
+    await run(`
     .component, .foo {
       margin: 8px;
       background: pink;
