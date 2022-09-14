@@ -137,8 +137,10 @@ module.exports = (options) => {
                 if (!theme) throw new Error(`Encountered unsupported theme ${atRule.params}. Allowed themes are ${supportedThemes.join(', ')}`);
 
                 atRule.each(rule => {
-                    for (const selector of rule.selectors)
-                        rules[selector] = { [theme]: rule }
+                    for (const selector of rule.selectors) {
+                      if (!rules[selector]) rules[selector] = {}
+                      rules[selector][theme] = rule
+                    }
                 })
                 nodesToDelete.add(atRule)
             }
