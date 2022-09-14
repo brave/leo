@@ -108,16 +108,11 @@ module.exports = (options) => {
         })
 
         const darkVariables = Object.entries(properties)
-        	.filter(([,decl]) => decl.dark.value)
-            .map(([key, decl]) => new Declaration({ prop: key, value: decl.dark.value }))
+            .map(([key, decl]) => new Declaration({ prop: key, value: decl.dark.value || decl.base.value || 'unset'}))
 
         const lightVariables = Object.entries(properties)
-        	.filter(([,decl]) => decl.light.value)
-            .map(([key, decl]) => new Declaration({ prop: key, value: decl.light.value || 'unset' }))
+            .map(([key, decl]) => new Declaration({ prop: key, value: decl.light.value || decl.base.value || 'unset' }))
         
-        const baseVariables = Object.entries(properties)
-        	.map(([key, decl]) => new Declaration({ prop: key, value: decl.base.value || 'unset' }))
-
         for (const [property, decls] of Object.entries(properties)) {
             lightAndDark.base.push(new Declaration({ prop: getDeclProp(decls), value: `var(${property})` }));
         }
@@ -131,7 +126,6 @@ module.exports = (options) => {
         return {
             dark: darkVariables,
           	light: lightVariables,
-            base: baseVariables
         }
     }
 
@@ -152,31 +146,23 @@ module.exports = (options) => {
         OnceExit: (root) => {
             const darkProperties = [];
             const lightProperties = [];
-          	const baseProperties = [];
 
             findMatchingBaseRules(root);
             for (const [selector, rule] of Object.entries(rules)) {
-                const { dark, light, base } = extractDarkProperties(selector, rule)
+                const { dark, light } = extractDarkProperties(selector, rule)
                 darkProperties.push(...dark);
                 lightProperties.push(...light);
-              	baseProperties.push(...base);
             }
 
-            const baseRule = new Rule({ selectors: [':root'], nodes: baseProperties })
-          	const lightRule = new Rule({ selectors: [options.lightSelector], nodes: lightProperties })
+            const lightRule = new Rule({ selectors: [':root', options.lightSelector], nodes: lightProperties })
             const darkRule = new Rule({ selector: options.darkSelector, nodes: darkProperties })
             const darkMediaQuery = new AtRule({
                 name: 'media', params: '(prefers-color-scheme: dark)', nodes: darkProperties.length ? [
                     new Rule({ selector: ':root', nodes: darkProperties })
                 ] : []
             })
-          	const lightMediaQuery = new AtRule({
-              	name: 'media', params: '(prefers-color-scheme: light)', nodes: lightProperties.length ? [
-                  new Rule({ selector: ':root', nodes: lightProperties })
-                ] : []
-            })
 
-            root.prepend(baseRule, lightRule, darkRule, lightMediaQuery, darkMediaQuery);
+            root.prepend(lightRule, darkRule, darkMediaQuery);
 
             for (const node of nodesToDelete)
                 node.remove()
