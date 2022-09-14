@@ -32,16 +32,18 @@ module.exports = {
 			for (const [type, typeValue] of types) {
 				const items = Object.entries(typeValue);
 
-				for (const [item, itemValue] of items) {
-          // Combine items where figma splits a single-value to multiple values
-					if (["gradient", "elevation"].includes(type) && itemValue && !itemValue.type) {
-						const subitems = Object.values(itemValue);
-						contents[category][type][item] = {
-							...subitems[0],
-							extensions: itemValue.extensions,
-						};
+				/**
+				 * Focus state is not as deeply nested, and is therefore tested
+				 * at this level.
+				 */
+				if (["focus state"].includes(type) && typeValue && !typeValue.type) {
+					contents[category][type] = groupValues(type, typeValue);
+				}
 
-						contents[category][type][item].value = subitems.filter((v) => v && v.value).map((v) => v.value);
+				for (const [item, itemValue] of items) {
+          			// Combine items where figma splits a single-value to multiple values
+					if (["gradient", "elevation"].includes(type) && itemValue && !itemValue.type) {
+						contents[category][type][item] = groupValues(type, itemValue);
 					}
 				}
 			}
@@ -49,3 +51,15 @@ module.exports = {
 		return contents;
 	},
 };
+
+function groupValues(tokenType, tokenValue) {
+	const subitems = Object.values(tokenValue);
+	tokenValue = {
+		...subitems[0],
+		extensions: tokenValue.extensions,
+	};
+
+	tokenValue.value = subitems.filter((v) => v && v.value).map((v) => v.value);
+
+	return tokenValue;
+}
