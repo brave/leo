@@ -3,11 +3,14 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type * as Props from './props'
-  
+
   export let kind: Props.ButtonKind = "primary"
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
+  export let href: string = null;
+
+  const tag = href ? "a" : "button";
 
   const dispatch = createEventDispatcher();
 
@@ -21,8 +24,10 @@
 
 <style lang="scss">
   // Main styles and states
-  .leoButton {
+  .leoButton,
+  a.leoButton {
     --box-shadow-hover: var(--effect-elevation-02);
+    display: block;
     cursor: pointer;
     transition: box-shadow .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
     box-shadow: none;
@@ -30,10 +35,12 @@
     border-radius: var(--radius-full);
     background: var(--bg);
     color: var(--color);
-    &:enabled {
+    &:not(:disabled) {
       &:hover,
       [data-is-button-target]:hover :host .leoButton,
-      [data-is-button-target]:hover .leoButton {
+      [data-is-button-target]:hover .leoButton,
+      [data-is-button-target]:hover :host a.leoButton,
+      [data-is-button-target]:hover a.leoButton {
         background: var(--bg-hover, var(--bg));
         color: var(--color-hover, var(--color));
         // TODO(petemill): These elevation variables are weird
@@ -58,7 +65,9 @@
     color: var(--color-loading, var(--color));
   }
   :host[disabled] .leoButton,
-  .leoButton[disabled] {
+  .leoButton[disabled],
+  :host[disabled] a.leoButton,
+  a.leoButton[disabled] {
     background: var(--bg-disabled, var(--bg));
     opacity: .5;
   }
@@ -129,7 +138,9 @@
   }
 </style>
 
-<button 
+<svelte:element
+  this={tag}
+  {href}
   class="leoButton"
   class:isPrimary="{kind==="primary"}"
   class:isSecondary="{kind==="secondary"}"
@@ -143,4 +154,4 @@
   on:click={onClick}
 >
   <slot>Leo Button</slot>
-</button>
+</svelte:element>
