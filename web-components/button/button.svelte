@@ -64,10 +64,10 @@
     background: var(--bg-loading, var(--bg));
     color: var(--color-loading, var(--color));
   }
-  :host[disabled] .leoButton,
-  .leoButton[disabled],
-  :host[disabled] a.leoButton,
-  a.leoButton[disabled] {
+  :host[disabled=true] .leoButton,
+  .leoButton[disabled=true],
+  :host[disabled=true] a.leoButton,
+  a.leoButton[disabled=true] {
     background: var(--bg-disabled, var(--bg));
     opacity: .5;
   }
@@ -115,8 +115,7 @@
     --color-loading: var(--color-gray-70);
     --border-width: 1px;
     --border-color: var(--color-gray-30);
-    --border-color-focus: transparent;
-    &[disabled] {
+    &[disabled=true] {
       opacity: 0.5;
     }
     @theme (dark) {
