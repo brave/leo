@@ -12,9 +12,9 @@ const splitRule = (rule, selectorToExtract) => {
     // |cloneAfter|, so in an |each| loop, the new rule will be processed.
     const cloned = rule.cloneAfter();
 
-    // Remove the light selector from the cloned rule.
+    // Remove the base selector from the cloned rule.
     // Note: Directly splicing |selectors| has no effect, we have
-    // to set a varible.
+    // to set a variable.
     const index = cloned.selectors.indexOf(selectorToExtract);
     const copy = [...cloned.selectors];
     copy.splice(index, 1);
@@ -23,7 +23,7 @@ const splitRule = (rule, selectorToExtract) => {
     // If we don't set this all the formatting breaks.
     cloned.raws.before = '\n';
 
-    // Set the selectors on the light rule to be just the light selector.
+    // Set the selectors on the base rule to be just the base selector.
     rule.selector = selectorToExtract;
 }
 
@@ -48,8 +48,8 @@ module.exports = (options) => {
             for (const baseSelector of [...rule.selectors]) {
                 if (!selectors.has(baseSelector)) continue
 
-                // If the rule has multiple selectors, we need to split the the
-                // rule apart:
+                // If the rule has multiple selectors, we need to split the
+                // selector with a variant into a new rule:
                 // For example, when processing the rule .frob:
                 // .foo, .frob, .bar { background: red; }
                 // should become
@@ -125,7 +125,7 @@ module.exports = (options) => {
 
         return {
             dark: darkVariables,
-          	light: lightVariables,
+            light: lightVariables,
         }
     }
 
