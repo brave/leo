@@ -87,7 +87,7 @@
     --bg-loading: var(--color-primary-light-mode-70);
     --bg-disabled: var(--color-gray-70);
     --color: white;
-    @media (prefers-color-scheme: dark) {
+    @theme (dark) {
       --bg: var(--color-primary-dark-mode-50);
       --bg-hover: var(--color-primary-dark-mode-60);
       --bg-active: var(--color-primary-dark-mode-30);
@@ -108,7 +108,7 @@
     &[disabled] {
       opacity: 0.5;
     }
-    @media (prefers-color-scheme: dark) {
+    @theme (dark) {
       --bg: transparent;
       --color-hover: var(--color-primary-dark-mode-80);
     }
