@@ -16,17 +16,31 @@ const filteredTokens = (dictionary, filterFn) => {
   }
 }
 
+function matchColor(token, modifierPathSegment) {
+  return token.path[0]?.toLowerCase() === "color" && token.path.some(pathSegment => pathSegment === modifierPathSegment)
+
+}
+
+function matchDarkColor(token) {
+  return matchColor(token, 'dark')
+}
+
+function matchLightColor(token) {
+  return matchColor(token, 'light')
+}
+
 module.exports = ({ dictionary, options, file }) => {
   const opts = options ?? {}
   const { outputReferences } = opts
   const groupedTokens = {
     // if you export the prefixes use token.path[0] instead of [1]
-    light: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'light-mode'),
-    dark: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'dark-mode'),
+    light: filteredTokens(dictionary, (token) => matchLightColor(token)),
+    dark: filteredTokens(dictionary, (token) => matchDarkColor(token)),
     rest: filteredTokens(dictionary)
   }
 
-  // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
+  // Note: replace strips out '-light-' and '-dark-' inside media queries
+  // Remove "desktop" for typography (which only appears in the :root non-media-query section)
   return (
     fileHeader({ file }) +
       ':root {\n' +
@@ -34,17 +48,17 @@ module.exports = ({ dictionary, options, file }) => {
       '\n}\n\n' +
       '@media (prefers-color-scheme: light) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/-light-/gm, "-") +
       '\n }\n}\n\n' +
       '@media (prefers-color-scheme: dark) {\n' +
       ' :root {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/-dark-/gm, "-") +
       '\n }\n}\n\n' +
       '[data-theme="light"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/light-mode-/gm, "") +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.light, outputReferences }).replace(/-light-/gm, "-") +
       '\n}\n\n' +
       '[data-theme="dark"] {\n' +
-      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/dark-mode-/gm, "") +
+      formattedVariables({ format: 'css', dictionary: groupedTokens.dark, outputReferences }).replace(/-dark-/gm, "-") +
       '\n}\n'
   )
 }

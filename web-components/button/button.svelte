@@ -24,7 +24,7 @@
   .leoButton {
     --box-shadow-hover: var(--effect-elevation-02);
     cursor: pointer;
-    transition: box-shadow .12s ease-in-out, color .12s ease-in-out;
+    transition: box-shadow .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
     border-radius: var(--radius-full);
@@ -45,54 +45,55 @@
       }
       &:focus-visible {
         outline: none;
-        box-shadow: 0px 0px 0px 1.7px rgba(255, 255, 255, 0.75), 1px 1px 4px 2px rgba(95, 103, 215, 0.75), -1px -1px 4px 2px rgba(255, 71, 36, 0.75);
+        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #204AE3;
         background: var(--bg-focus, var(--bg));
+        border-color: var(--border-color-focus, --border-color);
       }
     }
   }
 
   .leoButton.isLoading {
+    opacity: .75;
     background: var(--bg-loading, var(--bg));
     color: var(--color-loading, var(--color));
   }
   :host[disabled] .leoButton,
   .leoButton[disabled] {
     background: var(--bg-disabled, var(--bg));
+    opacity: .5;
   }
 
   // Size Variations
   .leoButton.isSmall {
     --icon-size: 20px;
-    font: var(--font-button-small);
+    font: var(--font-components-button-small);
     padding: 8px 14px;
   }
   .leoButton.isMedium {
     --icon-size: 24px;
-    font: var(--font-button-default);
-    padding: 12px 16px;
+    font: var(--font-components-button-default);
+    padding: 10px 16px;
   }
 
   .leoButton.isLarge {
     --icon-size: 24px;
-    font: var(--font-button-large);
-    padding: 12px 16px;
+    font: var(--font-components-button-large);
+    padding: 12px 20px;
   }
 
   // Kind Variations
   .leoButton.isPrimary {
-    --bg: var(--color-primary-light-mode-80);
-    --bg-hover: var(--color-primary-light-mode-90);
-    --bg-active: var(--color-primary-light-mode-100);
-    --bg-focus: var(--color-primary-light-mode-80);
-    --bg-loading: var(--color-primary-light-mode-70);
-    --bg-disabled: var(--color-gray-70);
+    --bg: var(--color-interaction-button-primary-background);
+    --bg-hover: var(--color-light-primary-60);
+    --bg-active: var(--color-light-primary-60);
+    --bg-focus: var(--bg);
+    --bg-loading: var(--color-light-primary-70);
+    --bg-disabled: var(--color-gray-30);
     --color: white;
     @theme (dark) {
-      --bg: var(--color-primary-dark-mode-50);
-      --bg-hover: var(--color-primary-dark-mode-60);
-      --bg-active: var(--color-primary-dark-mode-30);
-      --bg-focus: var(--color-primary-dark-mode-50);
-      --bg-loading: var(--color-primary-dark-mode-60);
+      --bg-hover: var(--color-dark-primary-20);
+      --bg-active: var(--color-dark-primary-20);
+      --bg-loading: var(--color-dark-primary-60);
     }
   }
 
@@ -100,17 +101,18 @@
     // TODO(petemill): Is transparent right or should it be explicitly white (and black)?
     --bg: transparent;
     --bg-active: --color-gray-20;
-    --color: var(--color-gray-90);
-    --color-hover: var(--color-primary-light-mode-70);
+    --color: var(--color-text-primary);
+    --color-hover: var(--color-light-primary-70);
     --color-loading: var(--color-gray-70);
     --border-width: 1px;
     --border-color: var(--color-gray-30);
+    --border-color-focus: transparent;
     &[disabled] {
       opacity: 0.5;
     }
     @theme (dark) {
       --bg: transparent;
-      --color-hover: var(--color-primary-dark-mode-80);
+      --color-hover: var(--color-dark-primary-80);
     }
   }
   .isTertiary {
