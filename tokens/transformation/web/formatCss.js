@@ -18,7 +18,6 @@ const filteredTokens = (dictionary, filterFn) => {
 
 function matchColor(token, modifierPathSegment) {
   return token.path[0]?.toLowerCase() === "color" && token.path.some(pathSegment => pathSegment === modifierPathSegment)
-
 }
 
 function matchDarkColor(token) {

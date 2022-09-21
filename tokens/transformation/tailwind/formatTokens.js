@@ -7,7 +7,7 @@ module.exports = ({ dictionary, options, file }) => {
 	const dropShadows = new Map();
 
 	const formatColorVar = (name) => {
-		name = name.replace("-dark-mode", "").replace("-light-mode", "");
+		name = name.replace("-dark-", "-").replace("-light-", "-");
 		return `rgba(var(--tw-${name}), <alpha-value>)`;
 	};
 
