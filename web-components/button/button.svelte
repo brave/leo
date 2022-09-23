@@ -25,38 +25,46 @@
 <style lang="scss">
   // Main styles and states
   .leoButton {
+    // Gradients cannot have a transition, so we need to reset `transition`
+    // to only apply to `box-shadow` and `border-color` in .isCTA
+    --default-transition: box-shadow .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
-    transition: box-shadow .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
+    transition: background .12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
     border-radius: var(--radius-full);
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
+
     &:not(:disabled) {
       &:hover,
       [data-is-button-target]:hover :host .leoButton,
       [data-is-button-target]:hover .leoButton {
         background: var(--bg-hover, var(--bg));
         color: var(--color-hover, var(--color));
-        // TODO(petemill): These elevation variables are weird
         box-shadow: var(--box-shadow-hover);
+        border-color: var(--border-color-hover, var(--border-color));
       }
+
       &:active {
         background: var(--bg-active, var(--bg));
         color: var(--color-active, var(--color-hover, var(--color)));
       }
+
       &:focus-visible {
         outline: none;
+        color: var(--color-focus, var(--color));
         box-shadow: var(--effect-focus-state);
         background: var(--bg-focus, var(--bg));
-        border-color: var(--border-color-focus, --border-color);
+        border-color: var(--border-color-focus, var(--border-color));
       }
     }
   }
 
+  // State Definitions
   .leoButton.isLoading {
     opacity: .75;
     background: var(--bg-loading, var(--bg));
@@ -79,7 +87,6 @@
     font: var(--font-components-button-default);
     padding: 10px 16px;
   }
-
   .leoButton.isLarge {
     --icon-size: 24px;
     font: var(--font-components-button-large);
@@ -90,45 +97,65 @@
   .leoButton.isPrimary {
     --bg: var(--color-interaction-button-primary-background);
     --bg-hover: var(--color-light-primary-60);
-    --bg-active: var(--color-light-primary-60);
+    --bg-active: var(--bg-hover);
     --bg-focus: var(--bg);
     --bg-loading: var(--color-light-primary-70);
     --bg-disabled: var(--color-gray-30);
     --color: white;
+
     @theme (dark) {
       --bg-hover: var(--color-dark-primary-20);
       --bg-active: var(--color-dark-primary-20);
       --bg-loading: var(--color-dark-primary-60);
     }
   }
-
   .leoButton.isSecondary {
-    // TODO(petemill): Is transparent right or should it be explicitly white (and black)?
     --bg: transparent;
     --bg-active: --color-gray-20;
     --color: var(--color-text-primary);
-    --color-hover: var(--color-light-primary-70);
+    --color-hover: var(--color-text-interactive);
+    --color-focus: var(--color-text-primary);
     --color-loading: var(--color-gray-70);
     --border-width: 1px;
-    --border-color: var(--color-gray-30);
+    --border-color: var(--color-divider-strong);
+    --border-color-focus: transparent;
+
     &:disabled {
       opacity: 0.5;
     }
+
     @theme (dark) {
-      --bg: transparent;
-      --color-hover: var(--color-dark-primary-80);
+      --border-color-hover: var(--color-dark-primary-40);
     }
   }
-  .isTertiary {
+  .leoButton.isTertiary {
     border-radius: 8px;
-    --color: var(--color-primary-70);
-    --color-hover: var(--color-primary-80);
+    padding-right: 0;
+    padding-left: 0;
+    --color: var(--color-text-interactive);
+    --color-hover: var(--color-light-primary-60);
     --color-active: var(--color-primary-90);
     --color-loading: var(--color-primary-50);
     --box-shadow-hover: none;
+
+    @theme (dark) {
+      --color-hover: var(--color-dark-primary-50);
+    }
+    &:disabled {
+      --color: var(--color-light-text-secondary);
+
+      @theme (dark) {
+        --color: var(--color-dark-text-primary);
+      }
+    }
   }
   .leoButton.isCTA {
-    --bg: var(--gradient-gradient-cta);
+    transition: var(--default-transition);
+    --bg: var(--gradient-call-to-action);
+    --bg-hover: var(--color-secondary-40);
+    --bg-active: var(--bg-hover);
+    --bg-focus: var(--bg);
+    --bg-disabled: var(--color-gray-30);
     --color: white;
   }
 </style>
