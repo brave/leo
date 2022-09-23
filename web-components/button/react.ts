@@ -9,7 +9,7 @@ import type * as PropTypes from './props'
 export type Props = {
   kind: PropTypes.ButtonKind
   size: PropTypes.ButtonSize
-  isDisabled: boolean
+  disabled: boolean
   isLoading: boolean
   href: string
   onClick: () => unknown

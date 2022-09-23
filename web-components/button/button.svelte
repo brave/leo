@@ -7,7 +7,7 @@
   export let kind: Props.ButtonKind = "primary"
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
-  export let isDisabled: boolean = false
+  export let disabled: boolean = false
   export let href: string = "";
 
   const tag = href ? "a" : "button";
@@ -62,8 +62,8 @@
     background: var(--bg-loading, var(--bg));
     color: var(--color-loading, var(--color));
   }
-  :host[disabled=true] .leoButton,
-  .leoButton[disabled=true] {
+  :host:disabled .leoButton,
+  .leoButton:disabled {
     background: var(--bg-disabled, var(--bg));
     opacity: .5;
   }
@@ -111,7 +111,7 @@
     --color-loading: var(--color-gray-70);
     --border-width: 1px;
     --border-color: var(--color-gray-30);
-    &[disabled=true] {
+    &:disabled {
       opacity: 0.5;
     }
     @theme (dark) {
@@ -145,7 +145,7 @@
   class:isMedium="{size === 'medium'}"
   class:isSmall="{size === 'small'}"
   class:isLoading="{isLoading}"
-  disabled={isDisabled}
+  {disabled}
   on:click={onClick}
 >
   <slot>Leo Button</slot>
