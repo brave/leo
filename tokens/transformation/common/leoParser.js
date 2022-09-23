@@ -42,13 +42,13 @@ module.exports = {
 				 * at this level.
 				 */
 				if (["focus state"].includes(type) && typeValue && !typeValue.type) {
-					contents[category][type] = groupValues(type, typeValue);
+					contents[category][type] = groupValues(typeValue);
 				}
 
 				for (const [item, itemValue] of items) {
 					// Combine items where figma splits a single-value to multiple values
 					if (["gradient", "elevation"].includes(type) && itemValue && !itemValue.type) {
-						contents[category][type][item] = groupValues(type, itemValue);
+						contents[category][type][item] = groupValues(itemValue);
 					}
 				}
 			}
@@ -57,14 +57,19 @@ module.exports = {
 	},
 };
 
-function groupValues(tokenType, tokenValue) {
+function groupValues(tokenValue) {
 	const subitems = Object.values(tokenValue);
 	tokenValue = {
 		...subitems[0],
 		extensions: tokenValue.extensions,
 	};
 
-	tokenValue.value = subitems.filter((v) => v && v.value).map((v) => v.value);
+	// Reverses token values in order to
+	// reflect proper order from Figma
+	tokenValue.value = subitems
+		.filter((v) => v && v.value)
+		.map((v) => v.value)
+		.reverse();
 
 	return tokenValue;
 }
