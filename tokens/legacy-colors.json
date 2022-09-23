@@ -1,7 +1,7 @@
 {
   "color": {
     "legacy": {
-      "light-mode": {
+      "light": {
         "background1": {
           "type": "color",
           "value": "white"
@@ -67,7 +67,7 @@
           "value": "#E9E9F4"
         }
       },
-      "dark-mode": {
+      "dark": {
         "background1": {
           "type": "color",
           "value": "#1E2029"
