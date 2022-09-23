@@ -8,7 +8,7 @@
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
-  export let href: string = null;
+  export let href: string = "";
 
   const tag = href ? "a" : "button";
 
@@ -24,8 +24,7 @@
 
 <style lang="scss">
   // Main styles and states
-  .leoButton,
-  a.leoButton {
+  .leoButton {
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
@@ -35,12 +34,11 @@
     border-radius: var(--radius-full);
     background: var(--bg);
     color: var(--color);
+    text-decoration: none;
     &:not(:disabled) {
       &:hover,
       [data-is-button-target]:hover :host .leoButton,
-      [data-is-button-target]:hover .leoButton,
-      [data-is-button-target]:hover :host a.leoButton,
-      [data-is-button-target]:hover a.leoButton {
+      [data-is-button-target]:hover .leoButton {
         background: var(--bg-hover, var(--bg));
         color: var(--color-hover, var(--color));
         // TODO(petemill): These elevation variables are weird
@@ -65,9 +63,7 @@
     color: var(--color-loading, var(--color));
   }
   :host[disabled=true] .leoButton,
-  .leoButton[disabled=true],
-  :host[disabled=true] a.leoButton,
-  a.leoButton[disabled=true] {
+  .leoButton[disabled=true] {
     background: var(--bg-disabled, var(--bg));
     opacity: .5;
   }
