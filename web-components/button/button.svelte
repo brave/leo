@@ -7,7 +7,7 @@
   export let kind: Props.ButtonKind = "primary"
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
-  export let disabled: boolean = false
+  export let isDisabled: boolean = false
   export let href: string = "";
 
   const tag = href ? "a" : "button";
@@ -145,7 +145,7 @@
   class:isMedium="{size === 'medium'}"
   class:isSmall="{size === 'small'}"
   class:isLoading="{isLoading}"
-  {disabled}
+  disabled={isDisabled || undefined}
   on:click={onClick}
 >
   <slot>Leo Button</slot>
