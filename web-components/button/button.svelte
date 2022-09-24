@@ -45,7 +45,7 @@
       }
       &:focus-visible {
         outline: none;
-        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #204AE3;
+        box-shadow: var(--effect-focus-state);
         background: var(--bg-focus, var(--bg));
         border-color: var(--border-color-focus, --border-color);
       }
