@@ -133,14 +133,11 @@
     padding-right: 0;
     padding-left: 0;
     --color: var(--color-text-interactive);
-    --color-hover: var(--color-light-primary-60);
+    --color-hover: var(--color-primary-60);
     --color-active: var(--color-primary-90);
     --color-loading: var(--color-primary-50);
     --box-shadow-hover: none;
 
-    @theme (dark) {
-      --color-hover: var(--color-dark-primary-50);
-    }
     &:disabled {
       --color: var(--color-light-text-secondary);
 
