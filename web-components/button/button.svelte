@@ -159,7 +159,7 @@
 
 <svelte:element
   this={tag}
-  {href}
+  href={href || undefined}
   class="leoButton"
   class:isPrimary="{kind==="primary"}"
   class:isSecondary="{kind==="secondary"}"
