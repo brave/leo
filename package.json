@@ -6,9 +6,7 @@
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.0",
     "style-dictionary": "^3",
-    "tailwindcss": "^3.1.6"
-  },
-  "devDependencies": {
+    "tailwindcss": "^3.1.6",
     "@babel/core": "^7.18.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
