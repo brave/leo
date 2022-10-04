@@ -250,7 +250,7 @@
         "interactive": {
           "description": "",
           "type": "color",
-          "value": "#204ae3ff",
+          "value": "#423eeeff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -288,7 +288,7 @@
         "interactive": {
           "description": "",
           "type": "color",
-          "value": "#4165e9ff",
+          "value": "#5f5cf1ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -314,7 +314,7 @@
         "button-primary-background": {
           "description": "",
           "type": "color",
-          "value": "#204ae3ff",
+          "value": "#423eeeff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -366,7 +366,7 @@
         "interactive-background": {
           "description": "",
           "type": "color",
-          "value": "#f3f5feff",
+          "value": "#f5f4feff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -564,7 +564,7 @@
         "interactive": {
           "description": "",
           "type": "color",
-          "value": "#99adf3ff",
+          "value": "#aaa8f7ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -602,7 +602,7 @@
         "interactive": {
           "description": "",
           "type": "color",
-          "value": "#708beeff",
+          "value": "#8784f4ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -628,7 +628,7 @@
         "button-primary-background": {
           "description": "",
           "type": "color",
-          "value": "#204ae3ff",
+          "value": "#423eeeff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -656,7 +656,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#1d1f25ff",
+          "value": "#1a1c20ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -680,7 +680,7 @@
         "interactive-background": {
           "description": "",
           "type": "color",
-          "value": "#071032ff",
+          "value": "#0e0e34ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -965,7 +965,7 @@
           "10": {
             "description": "",
             "type": "color",
-            "value": "#f3f5feff",
+            "value": "#f5f4feff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -977,7 +977,7 @@
           "20": {
             "description": "",
             "type": "color",
-            "value": "#dde4fbff",
+            "value": "#e2e2fcff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -989,7 +989,7 @@
           "30": {
             "description": "",
             "type": "color",
-            "value": "#99adf3ff",
+            "value": "#aaa8f7ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1001,7 +1001,7 @@
           "40": {
             "description": "Icon colors",
             "type": "color",
-            "value": "#4165e9ff",
+            "value": "#5f5cf1ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1013,7 +1013,7 @@
           "50": {
             "description": "Button colors",
             "type": "color",
-            "value": "#204ae3ff",
+            "value": "#423eeeff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1025,7 +1025,7 @@
           "60": {
             "description": "Hover states",
             "type": "color",
-            "value": "#1838acff",
+            "value": "#322fb4ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1037,7 +1037,7 @@
           "70": {
             "description": "",
             "type": "color",
-            "value": "#0b1a4fff",
+            "value": "#171553ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1999,7 +1999,7 @@
           "10": {
             "description": "",
             "type": "color",
-            "value": "#071032ff",
+            "value": "#0e0e34ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2011,7 +2011,7 @@
           "20": {
             "description": "Pressed states",
             "type": "color",
-            "value": "#112779ff",
+            "value": "#23217fff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2023,7 +2023,7 @@
           "30": {
             "description": "Button colors",
             "type": "color",
-            "value": "#204ae3ff",
+            "value": "#423eeeff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2035,7 +2035,7 @@
           "40": {
             "description": "- Link color",
             "type": "color",
-            "value": "#708beeff",
+            "value": "#8784f4ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2047,7 +2047,7 @@
           "50": {
             "description": "",
             "type": "color",
-            "value": "#99adf3ff",
+            "value": "#aaa8f7ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2059,7 +2059,7 @@
           "60": {
             "description": "",
             "type": "color",
-            "value": "#bac7f7ff",
+            "value": "#c5c4faff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2071,7 +2071,7 @@
           "70": {
             "description": "",
             "type": "color",
-            "value": "#eceffdff",
+            "value": "#efeefeff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2985,26 +2985,26 @@
   "gradient": {
     "🎨 extended": {
       "gradient": {
-        "call-to-action": {
-          "description": "CTA bg - Active tabs and tooltips",
+        "starlet": {
+          "description": "",
           "type": "custom-gradient",
           "value": {
             "gradientType": "linear",
-            "rotation": 134.9999995731132,
+            "rotation": 138.21219643124405,
             "stops": [
               {
                 "position": 0,
-                "color": "#e51d00ff"
+                "color": "#ff5301ff"
               },
               {
-                "position": 0.78,
-                "color": "#e5007bff"
+                "position": 1,
+                "color": "#a305bcff"
               }
             ]
           },
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:97a821c6c61f74deb4fc85081940eed8f745a46b,",
+              "styleId": "S:e48af490d1df42b0e5b3cf9b570ee51e01d07bd4,",
               "exportKey": "gradient"
             }
           }
@@ -3046,11 +3046,11 @@
             "stops": [
               {
                 "position": 0,
-                "color": "#1838acff"
+                "color": "#322fb4ff"
               },
               {
                 "position": 1,
-                "color": "#204ae3ff"
+                "color": "#423eeeff"
               }
             ]
           },
@@ -4258,14 +4258,14 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default browser size for fonts",
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 17,
             "textDecoration": "none",
             "fontFamily": "SF Pro Text",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4306,14 +4306,14 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default Brave UI size",
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 15,
             "textDecoration": "none",
             "fontFamily": "SF Pro Text",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4353,13 +4353,13 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 13,
             "textDecoration": "none",
             "fontFamily": "SF Pro Text",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4399,13 +4399,13 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
             "fontFamily": "SF Pro Text",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4674,14 +4674,14 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default browser size for fonts",
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
             "fontFamily": "Roboto Flex",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4722,14 +4722,14 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default Brave UI size",
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
             "fontFamily": "Roboto Flex",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4769,13 +4769,13 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
             "fontFamily": "Roboto Flex",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -4815,13 +4815,13 @@
             }
           }
         },
-        "bold": {
+        "semibold": {
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
             "fontFamily": "Roboto Flex",
-            "fontWeight": 700,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -5033,7 +5033,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 4,
-          "color": "#204ae3ff",
+          "color": "#423eeeff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 2
@@ -7322,7 +7322,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default browser size for fonts",
           "fontSize": {
             "type": "dimension",
@@ -7338,7 +7338,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -7418,7 +7418,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default Brave UI size",
           "fontSize": {
             "type": "dimension",
@@ -7434,7 +7434,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -7513,7 +7513,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "fontSize": {
             "type": "dimension",
             "value": 13
@@ -7528,7 +7528,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -7607,7 +7607,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "fontSize": {
             "type": "dimension",
             "value": 11
@@ -7622,7 +7622,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -8170,7 +8170,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default browser size for fonts",
           "fontSize": {
             "type": "dimension",
@@ -8186,7 +8186,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -8266,7 +8266,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "description": "Default Brave UI size",
           "fontSize": {
             "type": "dimension",
@@ -8282,7 +8282,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -8361,7 +8361,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "fontSize": {
             "type": "dimension",
             "value": 12
@@ -8376,7 +8376,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -8455,7 +8455,7 @@
             "value": "none"
           }
         },
-        "bold": {
+        "semibold": {
           "fontSize": {
             "type": "dimension",
             "value": 11
@@ -8470,7 +8470,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 700
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
