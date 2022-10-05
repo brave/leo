@@ -45,6 +45,7 @@
   "scripts": {
     "install": "npm run transform-tokens",
     "start": "npm run transform-tokens",
+    "gen-types": "node ./scripts/gen-svelte-types.js",
     "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
     "transform:android": "node ./examples/android/build.js",
