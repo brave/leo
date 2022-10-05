@@ -1,7 +1,3 @@
-// import svelte2tsx from 'svelte2tsx';
-// import fs from 'fs/promises';
-// import path from 'path';
-// import glob from 'glob';
 const svelte2tsx = require('svelte2tsx');
 const fs = require('fs/promises');
 const path = require('path');
@@ -27,7 +23,7 @@ const genTypes = async (options = {}) => {
         declarationDir: tmpFolder,
         svelteShimsPath: require.resolve('svelte2tsx/svelte-shims.d.ts')
     })
-    
+
     for await (const tmpFile of walk(tmpFolder)) {
         const relativePath = path.relative(tmpFolder, tmpFile);
         if (!genDefinition(relativePath)) continue
@@ -41,7 +37,8 @@ const genTypes = async (options = {}) => {
     await fs.rm(tmpFolder, { recursive: true, force: true });
 }
 
-genTypes({ 
+// Export this, so other scripts can wait for it to complete.
+module.exports = genTypes({
     basePath: './',
     outputDir: './web-components',
     genDefinition: path => path.includes('.svelte') && !path.includes('.stories.svelte')
