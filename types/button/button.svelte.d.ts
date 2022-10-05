@@ -6,6 +6,7 @@ declare const __propDef: {
         size?: Props.ButtonSize;
         isLoading?: boolean;
         isDisabled?: boolean;
+        href?: string;
     };
     events: {
         click: CustomEvent<any>;
