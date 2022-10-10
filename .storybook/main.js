@@ -25,6 +25,10 @@ module.exports = {
     }),
     customElement: true,
   },
+  staticDirs: [{
+    from: '../icons',
+    to: '/icons'
+  }],
   // svelteOptions: {
   //   preprocess: preprocess(), // or `preprocess: [svelteTS()]` in your case
   //  },

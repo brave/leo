@@ -6,11 +6,14 @@
   "dependencies": {
     "@ctrl/tinycolor": "3.5.0",
     "@tsconfig/svelte": "3.0.0",
+    "@types/dompurify": "^2.4.0",
+    "dompurify": "^2.4.1",
+    "jsdom": "^20.0.3",
     "lodash.merge": "4.6.2",
     "style-dictionary": "3.7.2",
+    "svelte": "3.55.1",
     "svelte-check": "3.0.2",
     "svelte-preprocess": "5.0.0",
-    "svelte": "3.55.1",
     "svelte2tsx": "0.6.0",
     "tailwindcss": "3.2.4",
     "ts-jest": "29.0.5",
@@ -33,13 +36,15 @@
     "@types/jest": "29.2.6",
     "babel-loader": "9.1.2",
     "css-loader": "6.7.3",
+    "figma-api-exporter": "github:brave/figma-api-exporter#664caaa010f295bde15ec4db752abd0a2cc8d2af",
     "jest": "29.3.1",
     "postcss": "8.4.21",
     "postcss-js": "4.0.0",
     "sass": "1.57.1",
     "sass-loader": "13.2.0",
     "style-loader": "3.3.1",
-    "svelte-loader": "3.1.5"
+    "svelte-loader": "3.1.5",
+    "svgo": "^3.0.2"
   },
   "peerDependencies": {
     "typescript": "4.9.4"
@@ -50,6 +55,7 @@
     "build": "npm run transform-tokens && npm run gen-types && npm run gen-bindings",
     "gen-types": "node ./scripts/gen-svelte-types.js",
     "gen-bindings": "node ./scripts/gen-react-bindings.js",
+    "update-icons": "node ./scripts/update-icons.js",
     "check": "svelte-check --compiler-warnings \"missing-custom-element-compile-options:ignore\"",
     "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",

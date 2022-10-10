@@ -3,3 +3,4 @@ node_modules/
 build/
 web-components/**/*.svelte.d.ts
 web-components/**/react.ts
+icons-raw/
