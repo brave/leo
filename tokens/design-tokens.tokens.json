@@ -429,107 +429,99 @@
         }
       },
       "systemfeedback": {
-        "info": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#e4f0f9ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:fd0dafc5b701398a4b14a421422ab0c4f1391714,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#0f75c9ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:639edb6687f67d15cf49d4034b073dff731e9d57,",
-                "exportKey": "color"
-              }
+        "info-background": {
+          "description": "",
+          "type": "color",
+          "value": "#e4f0f9ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:fd0dafc5b701398a4b14a421422ab0c4f1391714,",
+              "exportKey": "color"
             }
           }
         },
-        "error": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#fceaedff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:d33c8b78178baea5922bf6c91c94296f88f4e20c,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#dc1d3cff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:ba2df3409b5f901395406e72c80b2ef61a8850c6,",
-                "exportKey": "color"
-              }
+        "info-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#0f75c9ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:639edb6687f67d15cf49d4034b073dff731e9d57,",
+              "exportKey": "color"
             }
           }
         },
-        "warning": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#fff4d8ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:2b43a58c99e8d2f192573a39419827ee79f71eae,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#926a00ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:45995a9952b15fd294eb88de5a112cde328966fd,",
-                "exportKey": "color"
-              }
+        "error-background": {
+          "description": "",
+          "type": "color",
+          "value": "#fceaedff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:d33c8b78178baea5922bf6c91c94296f88f4e20c,",
+              "exportKey": "color"
             }
           }
         },
-        "success": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#dbf5dfff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:e7e1887c158571c786cd35db85952f99f49b65eb,",
-                "exportKey": "color"
-              }
+        "error-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#dc1d3cff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:ba2df3409b5f901395406e72c80b2ef61a8850c6,",
+              "exportKey": "color"
             }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#31803eff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:d58dc68a6c35a23221d4b92e1b80c2f4c1bb8d1a,",
-                "exportKey": "color"
-              }
+          }
+        },
+        "warning-background": {
+          "description": "",
+          "type": "color",
+          "value": "#fff4d8ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:2b43a58c99e8d2f192573a39419827ee79f71eae,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "warning-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#e2a500ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:45995a9952b15fd294eb88de5a112cde328966fd,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "success-background": {
+          "description": "",
+          "type": "color",
+          "value": "#dbf5dfff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:e7e1887c158571c786cd35db85952f99f49b65eb,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "success-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#31803eff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:d58dc68a6c35a23221d4b92e1b80c2f4c1bb8d1a,",
+              "exportKey": "color"
             }
           }
         }
@@ -656,7 +648,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#1a1c20ff",
+          "value": "#1e2025ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -743,107 +735,99 @@
         }
       },
       "systemfeedback": {
-        "info": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#042038ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:7416389886ded3ddf8ae0d2497d39964741b33f9,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#2795efff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:f7fc8ae0267b79362c10b6727d50f16f230e31b8,",
-                "exportKey": "color"
-              }
+        "info-background": {
+          "description": "",
+          "type": "color",
+          "value": "#042038ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:7416389886ded3ddf8ae0d2497d39964741b33f9,",
+              "exportKey": "color"
             }
           }
         },
-        "error": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#410912ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:8573697c34a57b3627702029b67aea1e3f1bccd7,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#eb637aff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:05bb2231440f7633ebc85621684100f84e440fd9,",
-                "exportKey": "color"
-              }
+        "info-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#2795efff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:f7fc8ae0267b79362c10b6727d50f16f230e31b8,",
+              "exportKey": "color"
             }
           }
         },
-        "warning": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#191200ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:e49ba76eb566c02b3fe8c86bf97d663025f6cb6f,",
-                "exportKey": "color"
-              }
-            }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#bb8800ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:55b3b123f143a4d978a2d7e0f8ae44377c2c2df7,",
-                "exportKey": "color"
-              }
+        "error-background": {
+          "description": "",
+          "type": "color",
+          "value": "#410912ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:8573697c34a57b3627702029b67aea1e3f1bccd7,",
+              "exportKey": "color"
             }
           }
         },
-        "success": {
-          "background": {
-            "description": "",
-            "type": "color",
-            "value": "#0e2311ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:63e07e80a6761eab7c05d6ef41495803a93e5dff,",
-                "exportKey": "color"
-              }
+        "error-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#eb637aff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:05bb2231440f7633ebc85621684100f84e440fd9,",
+              "exportKey": "color"
             }
-          },
-          "icon": {
-            "description": "",
-            "type": "color",
-            "value": "#3fa450ff",
-            "blendMode": "normal",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "styleId": "S:fe012ad2d97acaf7e0b344b4199d41d670aa133c,",
-                "exportKey": "color"
-              }
+          }
+        },
+        "warning-background": {
+          "description": "",
+          "type": "color",
+          "value": "#191200ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:e49ba76eb566c02b3fe8c86bf97d663025f6cb6f,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "warning-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#bb8800ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:55b3b123f143a4d978a2d7e0f8ae44377c2c2df7,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "success-background": {
+          "description": "",
+          "type": "color",
+          "value": "#0e2311ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:63e07e80a6761eab7c05d6ef41495803a93e5dff,",
+              "exportKey": "color"
+            }
+          }
+        },
+        "success-icon": {
+          "description": "",
+          "type": "color",
+          "value": "#3fa450ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:fe012ad2d97acaf7e0b344b4199d41d670aa133c,",
+              "exportKey": "color"
             }
           }
         }
@@ -1701,7 +1685,7 @@
           "50": {
             "description": "- Visited link color",
             "type": "color",
-            "value": "#af1769ff",
+            "value": "#af1768ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -2985,7 +2969,7 @@
   "gradient": {
     "🎨 extended": {
       "gradient": {
-        "starlet": {
+        "hero": {
           "description": "",
           "type": "custom-gradient",
           "value": {
@@ -2994,11 +2978,11 @@
             "stops": [
               {
                 "position": 0,
-                "color": "#ff5301ff"
+                "color": "#d41c80ff"
               },
               {
                 "position": 1,
-                "color": "#a305bcff"
+                "color": "#423eeeff"
               }
             ]
           },
@@ -3528,7 +3512,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "letterSpacing": 0,
-              "lineHeight": 20,
+              "lineHeight": 24,
               "paragraphIndent": 0,
               "paragraphSpacing": 0,
               "textCase": "none"
@@ -3550,7 +3534,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "letterSpacing": 0,
-              "lineHeight": 20,
+              "lineHeight": 24,
               "paragraphIndent": 0,
               "paragraphSpacing": 0,
               "textCase": "none"
@@ -3717,7 +3701,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "letterSpacing": 0.28,
-              "lineHeight": 20,
+              "lineHeight": 24,
               "paragraphIndent": 0,
               "paragraphSpacing": 0,
               "textCase": "none"
@@ -3740,7 +3724,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "letterSpacing": 0.28,
-              "lineHeight": 20,
+              "lineHeight": 24,
               "paragraphIndent": 0,
               "paragraphSpacing": 0,
               "textCase": "none"
@@ -3879,7 +3863,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4246,7 +4230,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 22,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4269,7 +4253,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 22,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4294,7 +4278,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4317,7 +4301,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4455,7 +4439,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4710,7 +4694,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -4733,7 +4717,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -5065,7 +5049,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 1.5,
-            "color": "#4245521a",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 0.5,
             "spread": 0
@@ -5076,7 +5060,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 1,
-            "color": "#42455214",
+            "color": "#00000014",
             "offsetX": 0,
             "offsetY": 0,
             "spread": 0
@@ -5096,7 +5080,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 1.5,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 0.4000000059604645,
             "spread": 0
@@ -5107,7 +5091,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 8,
-            "color": "#42455214",
+            "color": "#00000014",
             "offsetX": 0,
             "offsetY": 2,
             "spread": -1
@@ -5127,7 +5111,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 3,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 0.25,
             "spread": 0
@@ -5138,7 +5122,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 12,
-            "color": "#42455214",
+            "color": "#00000014",
             "offsetX": 0,
             "offsetY": 4,
             "spread": -2
@@ -5158,7 +5142,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 5,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 0.5,
             "spread": 0
@@ -5169,7 +5153,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 16,
-            "color": "#42455214",
+            "color": "#00000014",
             "offsetX": 0,
             "offsetY": 4,
             "spread": -1
@@ -5189,7 +5173,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 6,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 1,
             "spread": 0
@@ -5200,7 +5184,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 22,
-            "color": "#4245521a",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 6,
             "spread": -6
@@ -5220,7 +5204,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 6,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 3,
             "spread": 0
@@ -5231,7 +5215,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 32,
-            "color": "#4245521a",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 10,
             "spread": -10
@@ -5251,7 +5235,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 9,
-            "color": "#42455205",
+            "color": "#00000005",
             "offsetX": 0,
             "offsetY": 2.75,
             "spread": 0
@@ -5262,7 +5246,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 40,
-            "color": "#4245521f",
+            "color": "#0000001f",
             "offsetX": 0,
             "offsetY": 8,
             "spread": -8
@@ -5845,7 +5829,7 @@
             },
             "lineHeight": {
               "type": "dimension",
-              "value": 20
+              "value": 24
             },
             "paragraphIndent": {
               "type": "dimension",
@@ -5891,7 +5875,7 @@
             },
             "lineHeight": {
               "type": "dimension",
-              "value": 20
+              "value": 24
             },
             "paragraphIndent": {
               "type": "dimension",
@@ -6226,7 +6210,7 @@
             },
             "lineHeight": {
               "type": "dimension",
-              "value": 20
+              "value": 24
             },
             "paragraphIndent": {
               "type": "dimension",
@@ -6273,7 +6257,7 @@
             },
             "lineHeight": {
               "type": "dimension",
-              "value": 20
+              "value": 24
             },
             "paragraphIndent": {
               "type": "dimension",
@@ -6556,7 +6540,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -7307,7 +7291,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 22
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -7354,7 +7338,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 22
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -7403,7 +7387,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -7450,7 +7434,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -7732,7 +7716,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -8251,7 +8235,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -8298,7 +8282,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
