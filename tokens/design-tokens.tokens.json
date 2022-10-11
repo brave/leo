@@ -3836,7 +3836,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "IBM Plex Mono",
+            "fontFamily": "DM Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -3858,7 +3858,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "IBM Plex Mono",
+            "fontFamily": "DM Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -3880,7 +3880,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "IBM Plex Mono",
+            "fontFamily": "DM Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -6474,7 +6474,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "IBM Plex Mono"
+            "value": "DM Mono"
           },
           "fontWeight": {
             "type": "number",
@@ -6520,7 +6520,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "IBM Plex Mono"
+            "value": "DM Mono"
           },
           "fontWeight": {
             "type": "number",
@@ -6566,7 +6566,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "IBM Plex Mono"
+            "value": "DM Mono"
           },
           "fontWeight": {
             "type": "number",
