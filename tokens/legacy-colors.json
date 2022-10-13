@@ -78,7 +78,7 @@
         },
         "text1": {
           "type": "color",
-          "value": "##F0F2FF"
+          "value": "#F0F2FF"
         },
         "text2": {
           "type": "color",
