@@ -23,7 +23,21 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
 	tokens.forEach(({ type, name, ...t }) => {
 		if (type === "color") {
 			let colorGroup = colorTokens[t.attributes.type] ?? {};
-			if (t.attributes.subitem) {
+			if (t.attributes.state) {
+				console.log(t.attributes)
+				if (!staticTheme) {
+					colorTokens[t.attributes.item] = colorTokens[t.attributes.item] || {};
+					const tokenGroup = colorTokens[t.attributes.item][t.attributes.subitem] ?? {};
+					colorTokens[t.attributes.item][t.attributes.subitem] = merge(tokenGroup, {
+						[t.attributes.state]: formatColorVar(name, staticTheme),
+					});
+				} else {
+					const tokenGroup = colorGroup[t.attributes.item];
+					colorGroup[t.attributes.item] = merge(tokenGroup, {
+						[t.attributes.subitem]: formatColorVar(name, staticTheme),
+					});
+				}
+			} else if (t.attributes.subitem) {
 				if (themes.includes(t.attributes.type) && !staticTheme) {
 					const tokenGroup = colorTokens[t.attributes.item] ?? {};
 					colorTokens[t.attributes.item] = merge(tokenGroup, {
