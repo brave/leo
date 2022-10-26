@@ -22,43 +22,79 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
 	const colorTokens = {};
 	tokens.forEach(({ type, name, ...t }) => {
 		if (type === "color") {
+
+			/**
+			 * The following conditions are in order to properly group
+			 * color tokens and format into a nested object structure
+			 * for use in Tailwind. This results in three ways of accessing
+			 * a color using dot notation:
+			 * Dark: colors.dark.systemfeedback.success.icon
+			 * Light: colors.light.systemfeedback.success.icon
+			 * Dynamic: colors.systemfeedback.success.icon
+			 */
 			let colorGroup = colorTokens[t.attributes.type] ?? {};
+
+			/**
+			 * `state` is for the deepest level on a token.
+			 * E.g. `icon` in colors.systemfeedback.success.icon
+			 */
 			if (t.attributes.state) {
-				console.log(t.attributes)
 				if (!staticTheme) {
+					// If not on a static theme, do not place within `dark` or `light` groups
 					colorTokens[t.attributes.item] = colorTokens[t.attributes.item] || {};
 					const tokenGroup = colorTokens[t.attributes.item][t.attributes.subitem] ?? {};
 					colorTokens[t.attributes.item][t.attributes.subitem] = merge(tokenGroup, {
 						[t.attributes.state]: formatColorVar(name, staticTheme),
 					});
 				} else {
+					// If on a static theme, place within `dark` or `light` groups
 					const tokenGroup = colorGroup[t.attributes.item];
 					colorGroup[t.attributes.item] = merge(tokenGroup, {
 						[t.attributes.subitem]: formatColorVar(name, staticTheme),
 					});
 				}
 			} else if (t.attributes.subitem) {
+				/**
+				 * If not on a static theme AND theme is determined by `type`
+				 * property do not place within `dark` or `light` groups
+				 */
 				if (themes.includes(t.attributes.type) && !staticTheme) {
 					const tokenGroup = colorTokens[t.attributes.item] ?? {};
 					colorTokens[t.attributes.item] = merge(tokenGroup, {
 						[t.attributes.subitem]: formatColorVar(name, staticTheme),
 					});
+
+				/**
+				 * If not on a static theme AND theme is determined by `item`
+				 * property (e.g. legacy tokens) do not place within `dark`
+				 * or `light` groups
+				 */
 				} else if (themes.includes(t.attributes.item) && !staticTheme) {
 					const tokenGroup = colorTokens[t.attributes.type] ?? {};
 					colorTokens[t.attributes.type] = merge(tokenGroup, {
 						[t.attributes.subitem]: formatColorVar(name, staticTheme),
 					});
 				} else {
+					// If on a static theme, place within `dark` or `light` groups
 					const tokenGroup = colorGroup[t.attributes.item];
 					colorGroup[t.attributes.item] = merge(tokenGroup, {
 						[t.attributes.subitem]: formatColorVar(name, staticTheme),
 					});
 				}
+
+			/**
+			 * If `item` property is the token name, don't nest inside object
+			 */
 			} else if (t.attributes.item) {
 				colorGroup[t.attributes.item] = formatColorVar(name, staticTheme);
+
+			/**
+			 * If `item` property is the token name, set directly on colorGroup
+			 */
 			} else if (t.attributes.type) {
 				colorGroup = formatColorVar(name, staticTheme);
 			}
+
 			colorTokens[t.attributes.type] = colorGroup;
 		}
 	});
@@ -88,7 +124,34 @@ module.exports = ({ dictionary }) => {
 	dictionary.allTokens.forEach(({ type, name, ...t }) => {
 		if (type === "custom-fontStyle") {
 			const { fontSize, ...rest } = t.value;
-			const fontName = `${t.attributes.item}-${t.attributes.subitem}`.replace("heading-", "");
+
+			// E.g.
+			let fontName = `${t.attributes.item}`;
+
+			if (t.attributes.subitem) {
+				fontName += `-${t.attributes.subitem}`;
+			}
+
+			// Ensure we don't lose modifiers like "default", "regular", "semibold", etc.
+			if (t.attributes.state) {
+				fontName += `-${t.attributes.state}`;
+			}
+
+			/*
+			 * Prefer "components" over "desktop" if present
+			 * (e.g. `components-button-small` instead of `desktop-button-small`)
+			 */
+			if (t.attributes.type.includes("components")) {
+				fontName = fontName.replace(t.attributes.item, t.attributes.type.replace(/[^a-zA-Z]/g, ""));
+			}
+
+			/**
+			 * Remove extraneous sections. E.g.
+			 * `text-h1` rather than `text-heading-h1`
+			 * `text-default-small-regular` rather than text-text-default-small-regular`
+			 */
+			fontName = fontName.replace(/^heading-/, "").replace(/^text-/, "")
+
 			fontSizes.set(fontName, [fontSize, rest]);
 		} else if (type === "custom-radius") {
 			if (t.attributes.type === "full") {
