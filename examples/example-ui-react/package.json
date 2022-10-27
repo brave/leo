@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --hot",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check": "tsc --noEmit --project ./tsconfig.json"
   },
   "eslintConfig": {
     "extends": [
@@ -35,7 +36,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.41",
     "@types/react-dom": "^18.0.5",
-    "@types/react": "^18.0.14",
+    "@types/react": "^18.0.15",
     "css-loader": "^6.7.1",
     "mini-css-extract-plugin": "^2.6.1",
     "react-dom": "^18.0.5",
