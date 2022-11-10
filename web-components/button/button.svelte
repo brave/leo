@@ -104,8 +104,8 @@
     --color: white;
 
     @theme (dark) {
-      --bg-hover: var(--color-dark-primary-20);
-      --bg-active: var(--color-dark-primary-20);
+      --bg-hover: var(--color-dark-primary-40);
+      --bg-active: var(--color-dark-primary-40);
       --bg-loading: var(--color-dark-primary-60);
     }
   }
