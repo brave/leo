@@ -8,6 +8,10 @@ const getPropertyName = (selector, decl) => {
         .replace(regex, '\\$1')
 }
 
+const wrapInGlobalSelector = (selector) => {
+    return `:global(${selector})`;
+}
+
 const splitRule = (rule, selectorToExtract) => {
     // |cloneAfter|, so in an |each| loop, the new rule will be processed.
     const cloned = rule.cloneAfter();
@@ -38,7 +42,7 @@ const defaultOptions = {
 module.exports = (options) => {
     options = { ...defaultOptions, ...options };
 
-    const rules = {};
+    let rules = {};
     const nodesToDelete = new Set();
     const findMatchingBaseRules = root => {
         const selectors = new Set(Object.keys(rules));
@@ -65,10 +69,10 @@ module.exports = (options) => {
 
     const extractDarkProperties = (selector, lightAndDark) => {
       	const variants = ['base', 'dark', 'light'];
-      
+
       	// At least one variant should have a value. Take it, and get the root node.
       	const root = variants.map(v => lightAndDark[v]).filter(v => v)[0].root();
-      
+
         // Selector is the same for light and for dark.
         const properties = {}
         const getPropertyVariants = (property) => {
@@ -76,7 +80,7 @@ module.exports = (options) => {
           return properties[property]
         }
         const getDeclProp = (decl) => decl.light.prop || decl.dark.prop
-        
+
 
         if (!lightAndDark.base) {
             lightAndDark.base = new Rule({ selector: selector })
@@ -100,7 +104,7 @@ module.exports = (options) => {
               getPropertyVariants([propertyName]).light = decl
           });
         }
-      
+
       	lightAndDark.base.each(decl => {
           const propertyName = getPropertyName(selector, decl)
           if (!properties[propertyName]) return
@@ -112,7 +116,7 @@ module.exports = (options) => {
 
         const lightVariables = Object.entries(properties)
             .map(([key, decl]) => new Declaration({ prop: key, value: decl.light.value || decl.base.value || 'unset' }))
-        
+
         for (const [property, decls] of Object.entries(properties)) {
             lightAndDark.base.push(new Declaration({ prop: getDeclProp(decls), value: `var(${property})` }));
         }
@@ -156,8 +160,16 @@ module.exports = (options) => {
                 lightProperties.push(...light);
             }
 
-            const lightRule = new Rule({ selectors: [':root', options.lightSelector], nodes: lightProperties })
-            const darkRule = new Rule({ selector: options.darkSelector, nodes: darkProperties })
+            let lightSelectors = [':root', `:root${options.lightSelector}`, options.lightSelector];
+            let darkSelectors = [`:root${options.darkSelector}`, options.darkSelector];
+
+            if (options.useGlobal) {
+                lightSelectors = lightSelectors.map(wrapInGlobalSelector)
+                darkSelectors = darkSelectors.map(wrapInGlobalSelector)
+            }
+
+            const lightRule = new Rule({ selectors: lightSelectors, nodes: lightProperties })
+            const darkRule = new Rule({ selectors: darkSelectors, nodes: darkProperties })
             const darkMediaQuery = new AtRule({
                 name: 'media', params: '(prefers-color-scheme: dark)', nodes: darkProperties.length ? [
                     new Rule({ selector: ':root', nodes: darkProperties })
@@ -166,13 +178,18 @@ module.exports = (options) => {
 
             root.prepend(lightRule, darkRule, darkMediaQuery);
 
-            for (const node of nodesToDelete)
+            for (const node of nodesToDelete) {
                 node.remove()
+            }
 
             // Remove all empty nodes
             root.each(node => {
-                if (node.nodes.length === 0) node.remove();
+                if (!node.nodes || node.nodes.length === 0) node.remove();
             })
+
+            // Reset global vars
+            rules = {};
+            nodesToDelete.clear();
         }
     }
 }

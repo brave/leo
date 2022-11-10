@@ -17,12 +17,12 @@ it('Can mix theme overrides', () =>
     .component {
         background: black;
     }
-  }`, `:root, [data-theme=light] {
+  }`, `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: white;
     --\\.component_color: black;
   }
 
-  [data-theme=dark] {
+  :root[data-theme=dark], [data-theme=dark] {
     --\\.component_background: black;
     --\\.component_color: white;
   }
@@ -62,7 +62,7 @@ it('Light & Dark mode can be specified for a property', () =>
       override-dark: dark;
       new-dark: dark;
     }
-    }`, `:root, [data-theme=light] {
+    }`, `:root, :root[data-theme=light], [data-theme=light] {
       --\\.component_override-both: light;
       --\\.component_override-dark: light;
       --\\.component_new-dark: unset;
@@ -70,7 +70,7 @@ it('Light & Dark mode can be specified for a property', () =>
       --\\.component_new-light: light;
     }
 
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_override-both: dark;
       --\\.component_override-dark: dark;
       --\\.component_new-dark: dark;
@@ -115,7 +115,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
       color: white;
       dark: dark;
     }
-    }`, `:root, [data-theme=light] {
+    }`, `:root, :root[data-theme=light], [data-theme=light] {
       --\\.component_color: black;
       --\\.component_dark: unset;
       --\\.component_light: light;
@@ -128,7 +128,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
       --\\.dark_dark: unset;
     }
 
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_color: white;
       --\\.component_dark: dark;
       --\\.component_light: unset;
@@ -184,3 +184,43 @@ it('Light & Dark mode work with weird class overlaps', () =>
       padding: 12px;
       color: red;
     }`, {}))
+
+it('Handles useGlobal', () =>
+    run(`.component {
+          padding: 12px;
+          color: white;
+          background: white;
+    }
+  
+    @theme (light) {
+      .component {
+        color: black;
+      }
+    }
+    
+    @theme (dark) {
+      .component {
+          background: black;
+      }
+    }`, `:global(:root), :global(:root[data-theme=light]), :global([data-theme=light]) {
+      --\\.component_background: white;
+      --\\.component_color: black;
+    }
+  
+    :global(:root[data-theme=dark]), :global([data-theme=dark]) {
+      --\\.component_background: black;
+      --\\.component_color: white;
+    }
+  
+    @media (prefers-color-scheme: dark) {
+      :root {
+          --\\.component_background: black;
+          --\\.component_color: white;
+      }
+    }
+  
+    .component {
+      padding: 12px;
+      background: var(--\\.component_background);
+      color: var(--\\.component_color);
+    }`, { useGlobal: true }))
