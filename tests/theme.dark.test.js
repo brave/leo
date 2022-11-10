@@ -15,12 +15,12 @@ it('Converts the base case', async () => {
       background: red;
       flex-direction: column;
     }
-  }`, `:root, [data-theme=light] {
+  }`, `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: pink;
     --\\.component_flex-direction: row;
   }
 
-  [data-theme=dark] {
+  :root[data-theme=dark], [data-theme=dark] {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
   }
@@ -53,12 +53,12 @@ it('Selectors can be overridden', async () => {
       background: red;
       flex-direction: column;
     }
-  }`, `:root, .light {
+  }`, `:root, :root.light, .light {
     --\\.component_background: pink;
     --\\.component_flex-direction: row;
   }
 
-  .dark {
+  :root.dark, .dark {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
   }
@@ -97,12 +97,12 @@ it('Handles no light mode', async () => {
       background: red;
       color: white;
     }
-  }`, `:root, [data-theme=light] {
+  }`, `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: unset;
     --\\.component_color: unset;
   }
 
-  [data-theme=dark] {
+  :root[data-theme=dark], [data-theme=dark] {
     --\\.component_background: red;
     --\\.component_color: white;
   }
@@ -130,12 +130,12 @@ it('Converts darkmode only properties', async () => {
       background: red;
       color: white;
     }
-  }`, `:root, [data-theme=light] {
+  }`, `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: pink;
     --\\.component_color: unset;
   }
 
-  [data-theme=dark] {
+  :root[data-theme=dark], [data-theme=dark] {
     --\\.component_background: red;
     --\\.component_color: white;
   }
@@ -164,11 +164,11 @@ it('Converts nested selectors', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_\\.foo_background: red;
     }
     
@@ -194,11 +194,11 @@ it('Converts sibling selectors', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\+_\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_\\+_\\.foo_background: red;
     }
     
@@ -224,11 +224,11 @@ it('Converts child selectors', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\>_\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_\\>_\\.foo_background: red;
     }
     
@@ -254,11 +254,11 @@ it('Converts general sibling selectors', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\~_\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_\\~_\\.foo_background: red;
     }
     
@@ -284,12 +284,12 @@ it('Converts multi selectors (light and dark same)', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
       --\\.foo_background: red;
     }
@@ -322,12 +322,12 @@ it('Converts multi selectors (light and dark same, with remainder)', async () =>
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
       --\\.foo_background: red;
     }
@@ -361,12 +361,12 @@ it('Converts multi selectors (light subset of dark)', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: unset;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
       --\\.foo_background: red;
     }
@@ -399,12 +399,12 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: unset;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
       --\\.foo_background: red;
     }
@@ -437,11 +437,11 @@ it('Converts multi selectors (dark subset of light)', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
     }
     
@@ -472,11 +472,11 @@ it('Converts multi selectors (dark subset of light, with remainder)', async () =
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_background: red;
     }
     
@@ -509,12 +509,12 @@ it('Converts multi selectors (dark subset of light, with unset)', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_padding: unset;
       --\\.component_background: pink;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_padding: 12px;
       --\\.component_background: red;
     }
@@ -549,14 +549,14 @@ it('Converts multi selectors (weird intersection)', async () => {
         background: red;
       }
     }`, `
-    :root, [data-theme=light] {
+    :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_padding: unset;
       --\\.component_background: pink;
       --\\.frob_padding: unset;
       --\\.frob_background: unset;
     }
     
-    [data-theme=dark] {
+    :root[data-theme=dark], [data-theme=dark] {
       --\\.component_padding: 12px;
       --\\.component_background: red;
       --\\.frob_padding: 12px;
