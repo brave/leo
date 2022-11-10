@@ -140,8 +140,6 @@ module.exports = (options) => {
                 const theme = supportedThemes.find(t => atRule.params.includes(t));
                 if (!theme) throw new Error(`Encountered unsupported theme ${atRule.params}. Allowed themes are ${supportedThemes.join(', ')}`);
 
-                atRule.parent.hasThemeAtRule = true;
-
                 atRule.each(rule => {
                     for (const selector of rule.selectors) {
                       if (!rules[selector]) rules[selector] = {}
@@ -152,8 +150,6 @@ module.exports = (options) => {
             }
         },
         OnceExit: (root) => {
-            if (!root.hasThemeAtRule) return;
-
             const darkProperties = [];
             const lightProperties = [];
 
