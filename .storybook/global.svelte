@@ -5,8 +5,9 @@
 <style>
   .layout { 
     padding: 30px;
-    background: var(--color-page-background);
+    background: var(--color-container-background);
     color: var(--color-text-primary);
+    font: var(--font-text-default-regular);
   }
 
   h2 {
