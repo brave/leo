@@ -45,9 +45,11 @@
     "typescript": "~4.8.4"
   },
   "scripts": {
-    "install": "npm run transform-tokens",
-    "start": "npm run transform-tokens",
+    "install": "npm run build",
+    "start": "npm run build",
+    "build": "npm run transform-tokens && npm run gen-types && npm run gen-bindings",
     "gen-types": "node ./scripts/gen-svelte-types.js",
+    "gen-bindings": "node ./scripts/gen-react-bindings.js",
     "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
     "transform:android": "node ./examples/android/build.js",
