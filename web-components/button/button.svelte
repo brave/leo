@@ -4,6 +4,19 @@
   import { createEventDispatcher } from 'svelte';
   import type * as Props from './props'
 
+  // This black magic comes from this thread:
+  // https://github.com/sveltejs/language-tools/issues/442#issuecomment-1278618531
+  //
+  // To quote that thread - This is "absolute bonkers!"
+  //
+  // It's interesting, minor variations which I would expect to work on don't,
+  // and this is the only combination which seems to do what we want and I'm not
+  // clear on why. You're welcome to try other approaches here.
+  //
+  // Tips, for if things aren't working right:
+  // 1) npm run gen-types
+  // 2) Reload your VSCode Window (sometimes the Svelte Type Checker struggles).
+  // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
   type Href = $$Generic<string | undefined>;
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>;
   type ExcludedProps = 'size' | 'href' | 'hreflang';
