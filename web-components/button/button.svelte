@@ -4,11 +4,45 @@
   import { createEventDispatcher } from 'svelte';
   import type * as Props from './props'
 
+  // This black magic comes from this thread:
+  // https://github.com/sveltejs/language-tools/issues/442#issuecomment-1278618531
+  //
+  // To quote that thread - This is "absolute bonkers!"
+  //
+  // It's interesting, minor variations which I would expect to work on don't,
+  // and this is the only combination which seems to do what we want and I'm not
+  // clear on why. You're welcome to try other approaches here.
+  //
+  // Tips, for if things aren't working right:
+  // 1) npm run gen-types
+  // 2) Reload your VSCode Window (sometimes the Svelte Type Checker struggles).
+  // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
+  type Href = $$Generic<string | undefined>;
+  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>;
+  type ExcludedProps = 'size' | 'href' | 'hreflang';
+
+  interface CommonProps {
+    kind?: Props.ButtonKind;
+    size?: Props.ButtonSize;
+    isLoading?: boolean;
+  }
+
+  type ButtonProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['button']>>, ExcludedProps> & {
+    isDisabled?: Disabled;
+    href?: never;
+  }
+
+  type LinkProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['a']>>, ExcludedProps> & {
+    href: Href;
+  }
+
+  type $$Props = (LinkProps | ButtonProps)
+
   export let kind: Props.ButtonKind = "primary"
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
-  export let isDisabled: boolean = false
-  export let href: string = "";
+  export let isDisabled: Disabled = undefined;
+  export let href: Href = undefined;
 
   const tag = href ? "a" : "button";
 
@@ -27,11 +61,11 @@
   .leoButton {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isCTA
-    --default-transition: box-shadow .12s ease-in-out, color .12s ease-in-out, border-color .12s ease-in-out;
+    --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out, border-color 0.12s ease-in-out;
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
-    transition: background .12s ease-in-out, var(--default-transition);
+    transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
     border-radius: var(--radius-full);
@@ -66,14 +100,14 @@
 
   // State Definitions
   .leoButton.isLoading {
-    opacity: .75;
+    opacity: 0.75;
     background: var(--bg-loading, var(--bg));
     color: var(--color-loading, var(--color));
   }
   :host:disabled .leoButton,
   .leoButton:disabled {
     background: var(--bg-disabled, var(--bg));
-    opacity: .5;
+    opacity: 0.5;
   }
 
   // Size Variations
@@ -161,16 +195,17 @@
   this={tag}
   href={href || undefined}
   class="leoButton"
-  class:isPrimary="{kind==="primary"}"
-  class:isSecondary="{kind==="secondary"}"
-  class:isTertiary="{kind==="tertiary"}"
-  class:isCTA="{kind==="CTA"}"
-  class:isLarge="{size === 'large'}"
-  class:isMedium="{size === 'medium'}"
-  class:isSmall="{size === 'small'}"
-  class:isLoading="{isLoading}"
+  class:isPrimary={kind === 'primary'}
+  class:isSecondary={kind === 'secondary'}
+  class:isTertiary={kind === 'tertiary'}
+  class:isCTA={kind === 'CTA'}
+  class:isLarge={size === 'large'}
+  class:isMedium={size === 'medium'}
+  class:isSmall={size === 'small'}
+  class:isLoading
   disabled={isDisabled || undefined}
   on:click={onClick}
+  {...$$restProps}
 >
   <slot>Leo Button</slot>
 </svelte:element>
