@@ -5,8 +5,8 @@
   import type * as Props from './props'
 
   type Href = $$Generic<string | undefined>;
-  type Disabled = $$Generic<Href extends string ? boolean : undefined>;
-    type ExcludedProps = 'size' | 'href' | 'hreflang';
+  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>;
+  type ExcludedProps = 'size' | 'href' | 'hreflang';
 
   interface CommonProps {
     kind?: Props.ButtonKind;
@@ -16,6 +16,7 @@
 
   type ButtonProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['button']>>, ExcludedProps> & {
     isDisabled?: Disabled;
+    href?: never;
   }
 
   type LinkProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['a']>>, ExcludedProps> & {
@@ -27,8 +28,8 @@
   export let kind: Props.ButtonKind = "primary"
   export let size: Props.ButtonSize = "medium"
   export let isLoading: boolean = false
-  export let isDisabled: Disabled = undefined as Disabled;
-  export let href: Href = undefined as Href;
+  export let isDisabled: Disabled = undefined;
+  export let href: Href = undefined;
 
   const tag = href ? "a" : "button";
 
