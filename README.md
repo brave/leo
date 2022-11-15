@@ -1,81 +1,67 @@
-# Design Token Transformer
+# Leo - Brave's Design System
 
-This package is supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
+## Tokens
+The tokens part of this package is supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
 It transforms the exported design tokens using [Amazon style dictionary](https://amzn.github.io/style-dictionary/#/).
+Destination formats for these tokens include CSS variables, Tailwind configuration, C++ (skia variables), Java and Swift.
+The output files will be created at `/build` by running `npm run transform-tokens` which will also run upon install - regularly or when this package is used as a dependency.
 
-## Installation
-### 1. Download or clone the repo to your computer
-You can [download this package](https://github.com/lukasoppermann/design-token-transformer/archive/master.zip) or clone it via the terminal.
+## Web Components
+This package contains a set of UI components at `/web-components` that can be used in any browser rendering environment. They are aimed to be compatible with the majority of modern rendering engines, not only those used within Brave Browser.
 
-``` Bash
-git clone https://github.com/lukasoppermann/design-token-transformer.git
+Whilst they are developed using Svelte, they are intended to be used as Web Components, usable in many different frameworks or from vanilla HTML and Javascript.
+
+The Web Components require compliation - they are not precompiled in this repo:
+
+- Run vite / sveltekit / rollup or webpack with a svelte plugin
+- Ensure that this repo's postcss plugin at `postcss/theme.js` is added to your configuration for svelte's preprocess. See example in .storybook/main.js and `svelteOptions`.
+
+## Platform specifics
+## CSS
+
+To get started with the CSS variables exported, you must have the contents of `build/css/variables.css` included in your html page. Perhaps directly through a `<link rel="stylesheet">` element, or indirectly through webpack's css-loader and `import '@brave/leo/build/css/variables.css'`.
+
+### Typography
+Individual typography variables are available but so are convenient combined font declarations:
+```css
+--typography-text-default-regular-font-size: 14px;
+--typography-text-default-regular-letter-spacing: 0;
+--typography-text-default-regular-line-height: 20px;
+--typography-text-default-regular-paragraph-indent: 0;
+--typography-text-default-regular-paragraph-spacing: 0;
+
+--font-text-default-regular: 400 14px/20px Poppins;
 ```
-### 2. Install dependencies
-1. From within the terminal `cd` (navigate) this folder.
-2. Run `npm i` to install the dependencies.
 
-## Usage
-### Option 1: Local transformation
-To use an exported json file and transform it locally on your machine, follow the 3 steps below:
+### Colors
+Any color in Brave's standard or extended palettes is available in a dark and light versions:
 
-1. Save the `.json` file you exported using the [Design Token](https://github.com/lukasoppermann/design-tokens) plugin to the [`tokens` folder](./tokens/) (and remove the example files).
-2. In the terminal `cd` (navigate) to this folder.
-3. Run `npm run transform-tokens`.
-4. 🎉 Your converted tokens should be in the build folder.
+```css
+--color-light-text-primary: rgb(29, 31, 37);
+--color-dark-text-primary: rgb(236, 239, 242);
+```
 
-### Option 2: Transformation in github repository (or on server)
-##### 1. Fork this repository.  
-It is recommended to create a [fork](../../fork) of this repository and adapt it to your needs.   
-Should you decide to instead create a new repo, make sure to set up a [.github/workflows](.github/workflows) file that handles the data.
+However, there are color variables which will select the light or dark version automatically:
+```css
+/* sometimes this */
+--color-text-primary: rgb(29, 31, 37);
 
-##### 2. Enable github actions in the [actions tab](../../actions) 
-Go to the [actions tab](../../actions) in **your fork** of this repository and enable the github actions by clicking the `enable actions` button.
+/* or this */
+--color-text-primary: rgb(236, 239, 242);
+```
 
-##### 3. Create a [personal access token](#personal-access-token).
+The relevant light or dark version is selected by:
+- The current global `@media (prefers-color-scheme: [value])` value
+- The closest HTML ancestor with a `data-theme` attribute, e.g.
 
-##### 4. Add repo url & access token to plugin settings
-In the plugin settings you need to add two items:
-1. Add the url to your repository in the format `https://api.github.com/repos/:username/:repo/dispatches` to the `server-url` field (See [server-url](https://github.com/lukasoppermann/design-tokens/#server-url) for details)
-2. Add the [personal access token](#personal-access-token) to the [access token](https://github.com/lukasoppermann/design-tokens/#access-token) field.
+```html
+<div class="footer" data-theme="dark">
+  <p style="color: var(--color-text-primary);">I am always in dark mode</p>
+</div>
+```
 
-##### 5. Run the `Send Design Tokens to Url` command from the plugin.
+All Web Components and css variables aim to use the color theme according to the nearest ancestor which defines an override using a `data-theme="[dark|ligh]" attribute
 
-##### 6. 🎉 You are done.
-You should be able to see the action running in your GitHub repo and have all the converted files in the [build folder](./build) once it is done.
+## Tailwind
 
-##### 7. Optional: Adapt the `transform-tokens` script in the [package.json](./package.json).
-If you want to you can do something else when the tokens are pushed to the server you can change the `transform-tokens` script in the [package.json](./package.json). However note that the name of the script `transform-tokens` should not be changed.
-
-##### 8. Optional: Adapt the [github workflow](.github/workflows/transform-tokens.yml)
-You can adapt the workflow file if you need to. Just make sure the keep the current setup working.
-
-#### Personal access token
-The access token should be specifically for this plugin and only have the minimal permissions needed:
-- only `public_repo` is needed for a public repository.
-
-The token is not stored with the Figma file but only locally on your machine.
-
-Here you can find more information about [creating personal access tokens in the docs](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
-
-### Custom dev server 
-If you want to set up a custom server that responds to a push from this plugin, check out the setup for GitHub and adapt it to your needs.
-If you run into problems, please create an issues in the main [Design Tokens plugin for Figma repository](https://github.com/lukasoppermann/design-tokens/issues/new).
-
-## Customization
-To customize the output please view the [Amazon style dictionary documentation](https://amzn.github.io/style-dictionary/#/config).
-
-## FAQ
-### Sending tokens to the server
-#### I don't see the tokens in the github repositiory
-1. Make sure you have a [.github/workflows](.github/workflows)
-2. Make sure you enabled github actions in the [actions tab](../../actions) of **your** repositiory.
-3. Verify that you specified the correct server url in the plugin settings: `https://api.github.com/repos/{username}/{reponame}/dispatches` (replace `{username}` with your username e.g. `lukasoppermann` and `{reponame}` with the name of your repo e.g. `design-token-transformer`)
-3. Verify that the action runs without any error
-
-#### I can't enable github actions
-If you only see the `Get started with GitHub Actions` page without an option to `enable actions` you either deleted the [.github/workflows](.github/workflows) file from your forked repository, or you created a new repositiory without adding a [.github/workflows](.github/workflows) file. See [step 1](#1-fork-this-repository).
-
-## Bugs, issues & feature requests
-If you have issues concerning the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens) please [create an issue in the plugin repo](https://github.com/lukasoppermann/design-tokens/issues/new). 
-
-Only create an issue in this repository if you have an issue with this transformation package.
+A tailwind config, complete with plugin, is available at `@brave/leo/build/tailwind/index.js`. Once you configure this, all variables should be available using the `theme()` function.
