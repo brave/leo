@@ -30,7 +30,7 @@
     "@storybook/svelte": "^6.5.9",
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^27.0.3",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.0.0",
     "css-loader": "^6.7.1",
     "jest": "^27.0.6",
     "postcss": "^8.4.14",
