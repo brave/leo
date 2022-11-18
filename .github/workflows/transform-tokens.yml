@@ -22,7 +22,7 @@ jobs:
       # this creates a json file from the stringified json from the request body
       - name: create json from request body
         id: create-json
-        uses: jsdaniell/create-json@1.1.2
+        uses: jsdaniell/create-json@v1.2.1
         with:
           # it uses the name from your settings that was send as then tokenFileName parameter
           name: 'design-tokens-example.json'
