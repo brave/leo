@@ -57,36 +57,36 @@
 
 <style lang="scss">
   .leoCollapse {
-    --background-color: var(--color-white);
+    --background-color: var(--color-container-background);
     --leo-icon-size: var(--icon-size, 24px);
     --animation-duration: 0.12s;
+    --border-color: var(--color-divider-subtle);
 
-    @theme (dark) {
-      --background-color: var(--color-gray-10);
+    @media (prefers-reduced-motion) {
+      --animation-duration: 0s;
     }
 
     background-color: var(--background-color);
     box-shadow: var(--effect-elevation-01);
-    border-radius: var(--radius-8);
+    border-radius: var(--radius-16);
+    border: 1px solid var(--border-color);
     transition: box-shadow var(--animation-duration) ease-in-out,
       background-color var(--animation-duration) ease-in-out;
+
+    &:has(summary:hover) {
+      --border-color: var(--color-primary-20);
+    }
 
     &:hover {
       box-shadow: var(--effect-elevation-02);
 
       &:not([open]) {
-        --background-color: var(--color-primary-10);
+        --background-color: var(--color-container-interactive-background);
       }
     }
 
-    &:hover .title {
-      color: var(--color-primary-80);
-    }
-
     &:focus-within:has(summary:focus-visible) {
-      box-shadow: 0px 0px 0px 1.7px rgba(255, 255, 255, 0.5),
-        1px 1px 4px 2px rgba(33, 75, 230, 0.75),
-        -1px -1px 4px 2px rgba(255, 71, 36, 0.75);
+      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #423EEE;
     }
   }
 
@@ -100,6 +100,13 @@
 
     list-style: none;
     cursor: pointer;
+
+    color: var(--color-gray-120);
+    transition: color --var(--animation-duration) ease-in-out;
+
+    &:hover {
+      color: var(--color-text-interactive);
+    }
   }
 
   .icon {
@@ -111,8 +118,6 @@
     flex-grow: 1;
     font: var(--font-heading-h5);
     font-weight: 500;
-    color: var(--color-gray-120);
-    transition: color --var(--animation-duration) ease-in-out;
   }
 
   .content {
@@ -121,7 +126,7 @@
 
   .arrow {
     transition: transform var(--animation-duration) ease-in-out;
-    transform: rotate(180deg);
+    transform: rotate(360deg);
   }
 
   summary {
@@ -129,6 +134,6 @@
   }
 
   details[open] .arrow {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
   }
 </style>
