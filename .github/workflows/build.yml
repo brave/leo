@@ -45,6 +45,11 @@ jobs:
           # Please check with Brave's security team prior to adding any packages to this list.
           npm rebuild style-dictionary-create-react-app
 
+      - name: Format
+        id: format
+        run: |
+          npm run format-diff
+
       - name: Build Leo
         id: build-leo
         run: |
