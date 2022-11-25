@@ -9,23 +9,36 @@ StyleDictionary.registerTransformGroup({
   ])
 })
 
+// convert to chromium's pascalCase convention
+const transformName = (token) => `k${token.name.split(/,|\-/).
+  map(s => s.charAt(0).toUpperCase() + s.substring(1))
+  .join('')
+  .replace('Light', '')
+  .replace('Dark', '')}`
+
+const transformValue = (token) => {
+  if (token.type === 'color') {
+    // convert to hex
+    return token.value.split(',')
+      .map(s => '0x' + Number(s).toString(16).padStart(2, '0').toUpperCase())
+  }
+
+  if (token.type === 'custom-spacing') {
+    // We just store the number, rather than creating a gfx::Insets to make it
+    // easier to combine the various spacings.
+    return token.value.top;
+  }
+
+  throw new Error(`Unsupported token type ${token.type}`);
+}
+
 const filteredTokens = (dictionary, filterFn) => {
   let filtered = dictionary.allTokens;
   if (typeof filterFn === "function") {
     filtered = dictionary.allTokens.filter(token => filterFn(token))
   }
 
-  filtered = filtered.map(tokens => {
-    // convert to hex
-    const value = tokens.value.split(',')
-    .map(s => '0x' + Number(s).toString(16).padStart(2, '0').toUpperCase())
-    // convert to chromium's pascalCase convention
-    const name = 'k' + tokens.name.split('-')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join('')
-      .replace('Light', '')
-      .replace('Dark', '')
-    return { ...tokens, name, value }
-  })
+  filtered = filtered.map(token => ({ ...token, name: transformName(token), value: transformValue(token) }))
 
   return {
     ...dictionary,
@@ -38,11 +51,11 @@ const filteredTokens = (dictionary, filterFn) => {
 
 StyleDictionary.registerFormat({
   name: 'skia/colors.h',
-  formatter: ({dictionary, options, file}) => {
+  formatter: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(__dirname + '/templates/colors.h.template')
     );
-    
+
     const groupedTokens = {
       // Note: Here we check includes because the light/dark part of the token
       // could be 2nd (for normal colors) or 3rd (for legacy colors).
@@ -52,5 +65,17 @@ StyleDictionary.registerFormat({
     }
 
     return template({ groupedTokens, options, file });
-  }  
+  }
+})
+
+StyleDictionary.registerFormat({
+  name: 'skia/spacing.h',
+  formatter: ({ dictionary, options, file }) => {
+    const template = _template(fs.readFileSync(__dirname + '/templates/spacing.h.template'));
+
+    const tokens = filteredTokens(dictionary, token => {
+      return token.path.includes('spacing')
+    })
+    return template({ tokens, options, file })
+  }
 })
