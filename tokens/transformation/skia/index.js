@@ -29,6 +29,12 @@ const transformValue = (token) => {
     return token.value.top;
   }
 
+  if (token.type === 'custom-radius') {
+    // We only support a consistent radius on all corners.
+    return token.value.topLeft;
+  }
+
+  console.error(token);
   throw new Error(`Unsupported token type ${token.type}`);
 }
 
@@ -72,10 +78,14 @@ StyleDictionary.registerFormat({
   name: 'skia/spacing.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(fs.readFileSync(__dirname + '/templates/spacing.h.template'));
+    return template({ tokens: filteredTokens(dictionary), options, file })
+  }
+})
 
-    const tokens = filteredTokens(dictionary, token => {
-      return token.path.includes('spacing')
-    })
-    return template({ tokens, options, file })
+StyleDictionary.registerFormat({
+  name: 'skia/radius.h',
+  formatter: ({ dictionary, options, file }) => {
+    const template = _template(fs.readFileSync(__dirname + '/templates/radius.h.template'));
+    return template({ tokens: filteredTokens(dictionary), options, file })
   }
 })
