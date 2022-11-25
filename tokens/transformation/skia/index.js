@@ -22,8 +22,8 @@ const filteredTokens = (dictionary, filterFn) => {
     // convert to chromium's pascalCase convention
     const name = 'k' + tokens.name.split('-')
       .map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join('')
-      .replace('LightMode', '')
-      .replace('DarkMode', '')
+      .replace('Light', '')
+      .replace('Dark', '')
     return { ...tokens, name, value }
   })
 
@@ -44,9 +44,10 @@ StyleDictionary.registerFormat({
     );
     
     const groupedTokens = {
-      // if you export the prefixes use token.path[0] instead of [1]
-      light: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'light-mode'),
-      dark: filteredTokens(dictionary, (token) => token.path[2]?.toLowerCase() === 'dark-mode'),
+      // Note: Here we check includes because the light/dark part of the token
+      // could be 2nd (for normal colors) or 3rd (for legacy colors).
+      light: filteredTokens(dictionary, (token) => token.path.includes('light')),
+      dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
       rest: filteredTokens(dictionary)
     }
 

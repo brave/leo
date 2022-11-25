@@ -6,13 +6,13 @@
 #include "third_party/skia/include/core/SkColor.h"
 
 namespace leo::light {
-  <%= groupedTokens.light.allTokens.map(prop => {
-    return `constexpr SkColor ${prop.name} = SkColorSetRGB(${prop.value})`;
-  }).join(';\n') %>
-} // namespace leo
+<%= groupedTokens.light.allTokens.map(prop => {
+  return `constexpr SkColor ${prop.name} = SkColorSetRGB(${prop.value})`;
+}).map(s => `${s};`).join('\n') %>
+} // namespace leo::light
 
 namespace leo::dark {
-  <%= groupedTokens.dark.allTokens.map(prop => {
-    return `constexpr SkColor ${prop.name} = SkColorSetRGB(${prop.value})`;
-  }).join(';\n') %>
-} // namespace leo
+<%= groupedTokens.dark.allTokens.map(prop => {
+  return `constexpr SkColor ${prop.name} = SkColorSetRGB(${prop.value})`;
+}).map(s => `${s};`).join('\n') %>
+} // namespace leo::dark
