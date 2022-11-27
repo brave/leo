@@ -13,12 +13,16 @@
   component={NavDots}
   argTypes={{
     dots: { control: 'number', defaultValue: 10 },
-    dotSize: { control: 'number', defaultValue: 8 }
+    dotSize: { control: 'number', defaultValue: 8 },
+    activeColor: { control: 'color' },
+    defaultColor: { control: 'color' },
   }}
 />
 
 <Template let:args>
-  <NavDots dotCount={args.dots} activeDot={activeDot} on:change={handleChange}/>
+  <div style={`--color-interaction-button-primary-background: ${args.activeColor || 'unset'}; --color-primary-20: ${args.defaultColor || 'unset'}`}>
+    <NavDots dotCount={args.dots} {activeDot} on:change={handleChange} />
+  </div>
 </Template>
 
 <Story name="Default" />
