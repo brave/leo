@@ -49,43 +49,44 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-  }
 
-  .dot-container {
-    display: flex;
-    flex-direction: row;
-    gap: var(--dot-spacing);
-    position: relative;
-    padding: 0 calc(var(--dot-spacing) / 2);
-  }
-
-  .dot {
-    all: unset;
-    width: var(--dot-size);
-    height: var(--dot-size);
-    border-radius: var(--dot-size);
-    background: var(--color-primary-20);
-    transition: background-color var(--transition-duration) var(--transition-easing);
-
-    &:hover {
-      /* TODO(fallaciousreasoning): Work out better hover state with designers */
-      background-color: var(--color-interaction-button-primary-background);
+    .dot-container {
+      display: flex;
+      flex-direction: row;
+      gap: var(--dot-spacing);
+      position: relative;
+      padding: 0 calc(var(--dot-spacing) / 2);
     }
-  }
 
-  .active-dot {
-    position: absolute;
-    transition: transform var(--transition-duration) var(--transition-easing);
-    transform: translate(
-      calc(
-        (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
-          var(--dot-spacing) / 2
-      ),
-      0
-    );
-    width: calc(var(--dot-size) + var(--dot-spacing));
-    height: var(--dot-size);
-    border-radius: var(--dot-size);
-    background: var(--color-interaction-button-primary-background);
+    .dot {
+      all: unset;
+      width: var(--dot-size);
+      height: var(--dot-size);
+      border-radius: var(--dot-size);
+      background: var(--color-primary-20);
+      transition: background-color var(--transition-duration)
+        var(--transition-easing);
+
+      &:hover {
+        /* TODO(fallaciousreasoning): Work out better hover state with designers */
+        background-color: var(--color-interaction-button-primary-background);
+      }
+    }
+
+    .active-dot {
+      position: absolute;
+      transition: transform var(--transition-duration) var(--transition-easing);
+      transform: translate(
+        calc(
+          (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
+            var(--dot-spacing) / 2
+        ),
+        0
+      );
+      width: calc(var(--dot-size) + var(--dot-spacing));
+      height: var(--dot-size);
+      border-radius: var(--dot-size);
+      background: var(--color-interaction-button-primary-background);
+    }
   }
 </style>

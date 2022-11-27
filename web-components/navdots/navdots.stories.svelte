@@ -12,7 +12,8 @@
   title="Nav Dots"
   component={NavDots}
   argTypes={{
-    dots: { control: 'number' },
+    dots: { control: 'number', defaultValue: 10 },
+    dotSize: { control: 'number', defaultValue: 8 }
   }}
 />
 
