@@ -1,14 +1,12 @@
+<svelte:options tag="leo-navdots" />
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-
-  class ChangeEvent extends Event {
-    activeDot: number
-  }
 
   export let dotCount: number
   export let activeDot: number
 
-  let container: HTMLDivElement
+  let container: HTMLElement
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
   $: dots = Array.from(Array(dotCount), (_, i) => i)
 
@@ -21,15 +19,24 @@
   }
 </script>
 
-<div class="leo-navdots">
-  <div class="dot-container" part="dot-container" bind:this={container}>
+<nav class="leo-navdots">
+  <ol class="dot-container" part="dot-container" bind:this={container}>
     {#each dots as dot}
-      <button class="dot" part="dot" on:click={() => setActive(dot)} />
+      <li>
+        <button
+          class="dot"
+          class:active={dot == activeDot}
+          part="dot"
+          aria-current={dot === activeDot}
+          tabindex={dot === activeDot ? -1 : undefined}
+          on:click={() => setActive(dot)}
+        />
+      </li>
     {/each}
 
-    <div class="active-dot" part="active-dot" />
-  </div>
-</div>
+    <div aria-hidden="true" class="active-dot" part="active-dot" />
+  </ol>
+</nav>
 
 <style lang="scss">
   :root {
@@ -56,6 +63,7 @@
       gap: var(--dot-spacing);
       position: relative;
       padding: 0 calc(var(--dot-spacing) / 2);
+      list-style: none;
     }
 
     .dot {
@@ -65,11 +73,17 @@
       border-radius: var(--dot-size);
       background: var(--color-primary-20);
       transition: background-color var(--transition-duration)
-        var(--transition-easing);
+          var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing);
 
       &:hover {
         /* TODO(fallaciousreasoning): Work out better hover state with designers */
         background-color: var(--color-interaction-button-primary-background);
+      }
+
+      &:focus-visible:not(.active) {
+        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+          0px 0px 4px 2px #423eee;
       }
     }
 
