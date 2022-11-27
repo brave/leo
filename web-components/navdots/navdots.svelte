@@ -5,6 +5,8 @@
 
   export let dotCount: number
   export let activeDot: number
+  export let getDotLabel: (dot: number, isCurrent: boolean) => string = dot => `Page ${dot + 1}`
+  export let label: string = 'Pagination'
 
   let container: HTMLElement
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
@@ -19,7 +21,7 @@
   }
 </script>
 
-<nav class="leo-navdots">
+<nav class="leo-navdots" aria-label={label}>
   <ol class="dot-container" part="dot-container" bind:this={container}>
     {#each dots as dot}
       <li>
@@ -28,6 +30,7 @@
           class:active={dot == activeDot}
           part="dot"
           aria-current={dot === activeDot}
+          aria-label={getDotLabel(dot, dot === activeDot)}
           tabindex={dot === activeDot ? -1 : undefined}
           on:click={() => setActive(dot)}
         />
