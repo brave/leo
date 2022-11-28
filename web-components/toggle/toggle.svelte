@@ -1,8 +1,12 @@
 <svelte:options tag="leo-toggle" />
 
+<script context="module" lang="ts">
+  export const sizes = ['small', 'medium'] as const
+  export type Sizes = typeof sizes[number]
+</script>
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-    import type { Sizes } from './props'
 
   export let on: boolean = false
   export let disabled: boolean = false
@@ -16,7 +20,13 @@
 </script>
 
 <label class={`leo-toggle size-${size}`}>
-  <button disabled={disabled} role="switch" aria-checked={on} part="track" on:click={toggle}>
+  <button
+    {disabled}
+    role="switch"
+    aria-checked={on}
+    part="track"
+    on:click={toggle}
+  >
     <div class="thumb" part="thumb" aria-hidden="true">
       <slot name="on-icon" />
     </div>
@@ -48,8 +58,8 @@
     cursor: pointer;
 
     &.size-small {
-        --leo-toggle-width: 40px;
-        --leo-toggle-height: 24px;
+      --leo-toggle-width: 40px;
+      --leo-toggle-height: 24px;
     }
 
     & button {
@@ -67,7 +77,8 @@
       }
 
       &:focus-visible:not(:disabled) {
-        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #423EEE;
+        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+          0px 0px 4px 2px #423eee;
       }
 
       &:hover:not(:disabled) {
