@@ -59,7 +59,7 @@
         opacity: 0.5;
       }
 
-      &:focus-within:not(:disabled) {
+      &:focus-visible:not(:disabled) {
         box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #423EEE;
       }
 
