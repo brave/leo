@@ -85,8 +85,7 @@
         box-shadow var(--transition-duration) var(--transition-easing);
 
       &:hover {
-        /* TODO(fallaciousreasoning): Work out better hover state with designers */
-        background-color: var(--color-interaction-button-primary-background);
+        background-color: var(--color-primary-30);
       }
 
       &:focus-visible:not(.active) {
@@ -109,6 +108,10 @@
       height: calc(var(--dot-size) + var(--dot-vertical-margin) * 2);
       border-radius: var(--dot-size);
       background: var(--color-interaction-button-primary-background);
+
+      &:hover {
+        background: var(--color-icon-interactive);
+      }
     }
   }
 </style>
