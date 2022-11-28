@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+    import { sizes } from './props'
   import Toggle from './toggle.svelte'
 </script>
 
@@ -10,6 +11,7 @@
     togglePadding: { control: 'range', min: 0, max: 24, defaultValue: 2 },
     toggleWidth: { control: 'range', min: 10, max: 200, defaultValue: 56 },
     toggleHeight: { control: 'range', min: 10, max: 100, defaultValue: 32 },
+    size: { control: 'select', options: sizes, defaultValue: 'medium' }
   }}
 />
 
