@@ -17,8 +17,6 @@
 <Template let:args>
   <div
     style={`
-        --leo-toggle-on-color: ${args.toggleOnColor || 'unset'};
-        --leo-toggle-off-color: ${args.toggleOffColor || 'unset'};
         --leo-toggle-thumb-color: ${args.toggleThumbColor || 'unset'};
         --leo-toggle-padding: ${args.togglePadding}px;
         --leo-toggle-width: ${args.toggleWidth}px;
