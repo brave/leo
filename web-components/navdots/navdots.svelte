@@ -5,7 +5,8 @@
 
   export let dotCount: number
   export let activeDot: number
-  export let getDotLabel: (dot: number, isCurrent: boolean) => string = dot => `Page ${dot + 1}`
+  export let getDotLabel: (dot: number, isCurrent: boolean) => string = (dot) =>
+    `Page ${dot + 1}`
   export let label: string = 'Pagination'
 
   let container: HTMLElement
@@ -31,7 +32,6 @@
           part="dot"
           aria-current={dot === activeDot}
           aria-label={getDotLabel(dot, dot === activeDot)}
-          tabindex={dot === activeDot ? -1 : undefined}
           on:click={() => setActive(dot)}
         />
       </li>
@@ -70,7 +70,14 @@
       margin: 0;
       list-style: none;
 
-      > li { display: flex;}
+      > li {
+        display: flex;
+      }
+
+      &:has(.dot.active:focus-visible) .active-dot {
+        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+          0px 0px 4px 2px #423eee;
+      }
     }
 
     .dot {
@@ -96,8 +103,10 @@
     }
 
     .active-dot {
+      cursor: pointer;
       position: absolute;
-      transition: transform var(--transition-duration) var(--transition-easing);
+      transition: transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing);
       transform: translate(
         calc(
           (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
