@@ -15,11 +15,11 @@
 <label class="leo-toggle">
   <button role="switch" aria-checked={on} part="track" on:click={toggle}>
     <div class="thumb" part="thumb" aria-hidden="true">
-        <slot name="off-icon"/>
-        <slot name="on-icon"/>
+      <slot name="off-icon" />
+      <slot name="on-icon" />
     </div>
   </button>
-  <slot name="label"></slot>
+  <slot name="label" />
 </label>
 
 <style lang="scss">
@@ -28,8 +28,14 @@
     --leo-toggle-width: 56px;
     --leo-toggle-padding: 2px;
     --leo-toggle-on-color: var(--color-interaction-button-primary-background);
+    --leo-toggle-on-color-hover: var(--color-primary-60);
     --leo-toggle-off-color: var(--color-gray-30);
+    --leo-toggle-off-color-hover: var(--color-gray-40);
     --leo-toggle-thumb-color: var(--color-white);
+
+    @theme (dark) {
+      --leo-toggle-on-color-hover: var(--color-dark-primary-40);
+    }
   }
 
   .leo-toggle {
@@ -48,6 +54,14 @@
       transition: background-color 0.2s ease-in-out;
       flex-shrink: 0;
 
+      &:hover {
+        background-color: var(--leo-toggle-off-color-hover);
+
+        &[aria-checked='true'] {
+          background-color: var(--leo-toggle-on-color-hover);
+        }
+      }
+
       .thumb {
         height: 100%;
         aspect-ratio: 1/1;
@@ -59,12 +73,14 @@
         align-items: center;
         justify-content: center;
 
-        :global([slot$=-icon]) {
-            transition: opacity 0.2s ease-in-out;
+        box-shadow: var(--effect-elevation-02);
+
+        :global([slot$='-icon']) {
+          transition: opacity 0.2s ease-in-out;
         }
 
-        :global([slot=on-icon]) {
-            opacity: 0;
+        :global([slot='on-icon']) {
+          opacity: 0;
         }
       }
 
@@ -79,8 +95,8 @@
           color: var(--leo-toggle-on-color);
         }
 
-        :global([slot=on-icon]) {
-            opacity: 1;
+        :global([slot='on-icon']) {
+          opacity: 1;
         }
       }
     }
