@@ -45,6 +45,7 @@
   :root {
     --dot-size: 8px;
     --dot-spacing: 10px;
+    --dot-vertical-margin: 1px;
     --current-dot: 0;
     --transition-duration: 0.2s;
     --transition-easing: ease-in-out;
@@ -65,7 +66,7 @@
       flex-direction: row;
       gap: var(--dot-spacing);
       position: relative;
-      padding: 0 calc(var(--dot-spacing) / 2);
+      padding: 1px calc(var(--dot-spacing) / 2);
       list-style: none;
 
       > li { display: flex;}
@@ -74,6 +75,7 @@
     .dot {
       all: unset;
       cursor: pointer;
+      margin: var(--dot-vertical-margin) 0;
       width: var(--dot-size);
       height: var(--dot-size);
       border-radius: var(--dot-size);
@@ -104,7 +106,7 @@
         0
       );
       width: calc(var(--dot-size) + var(--dot-spacing));
-      height: var(--dot-size);
+      height: calc(var(--dot-size) + var(--dot-vertical-margin) * 2);
       border-radius: var(--dot-size);
       background: var(--color-interaction-button-primary-background);
     }
