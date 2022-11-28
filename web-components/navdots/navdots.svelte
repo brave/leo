@@ -71,6 +71,7 @@
 
     .dot {
       all: unset;
+      cursor: pointer;
       width: var(--dot-size);
       height: var(--dot-size);
       border-radius: var(--dot-size);
