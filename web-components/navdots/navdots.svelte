@@ -37,13 +37,13 @@
       </li>
     {/each}
 
-    <div aria-hidden="true" class="active-dot" part="active-dot" />
+    <li aria-hidden="true" class="active-dot" part="active-dot" />
   </ol>
 </nav>
 
 <style lang="scss">
   :root {
-    --dot-size: 16px;
+    --dot-size: 8px;
     --dot-spacing: 10px;
     --current-dot: 0;
     --transition-duration: 0.2s;
@@ -67,6 +67,8 @@
       position: relative;
       padding: 0 calc(var(--dot-spacing) / 2);
       list-style: none;
+
+      > li { display: flex;}
     }
 
     .dot {
