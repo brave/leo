@@ -3,7 +3,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  export let on: boolean
+  export let on: boolean = false
+  export let disabled: boolean = false
 
   const dispatch = createEventDispatcher()
   const toggle = () => {
@@ -13,9 +14,8 @@
 </script>
 
 <label class="leo-toggle">
-  <button role="switch" aria-checked={on} part="track" on:click={toggle}>
+  <button disabled={disabled} role="switch" aria-checked={on} part="track" on:click={toggle}>
     <div class="thumb" part="thumb" aria-hidden="true">
-      <slot name="off-icon" />
       <slot name="on-icon" />
     </div>
   </button>
@@ -43,6 +43,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 
     & button {
       all: unset;
@@ -54,7 +55,15 @@
       transition: background-color 0.2s ease-in-out;
       flex-shrink: 0;
 
-      &:hover {
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      &:focus-within:not(:disabled) {
+        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #423EEE;
+      }
+
+      &:hover:not(:disabled) {
         background-color: var(--leo-toggle-off-color-hover);
 
         &[aria-checked='true'] {
