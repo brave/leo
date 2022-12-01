@@ -27,27 +27,25 @@
   }
 </script>
 
-<label class={`leo-toggle size-${size}`}>
-  <button
-    on:mousedown={(e) => (dragStartX = e.clientX)}
-    {disabled}
-    role="switch"
-    aria-checked={on}
-    part="track"
+<button
+  class={`leo-toggle size-${size}`}
+  on:mousedown={(e) => (dragStartX = e.clientX)}
+  {disabled}
+  role="switch"
+  aria-checked={on}
+  part="track"
+>
+  <div
+    bind:this={thumb}
+    class="thumb"
+    class:dragging={!!dragOffsetX}
+    part="thumb"
+    aria-hidden="true"
+    style="--drag-offset: {dragOffsetX}px"
   >
-    <div
-      bind:this={thumb}
-      class="thumb"
-      class:dragging={!!dragOffsetX}
-      part="thumb"
-      aria-hidden="true"
-      style="--drag-offset: {dragOffsetX}px"
-    >
-      <slot name="on-icon" />
-    </div>
-  </button>
-  <slot name="label" />
-</label>
+    <slot name="on-icon" />
+  </div>
+</button>
 
 <svelte:window
   on:mouseup={() => {
@@ -89,97 +87,88 @@
   }
 
   .leo-toggle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+    all: unset;
+    background: var(--leo-toggle-off-color);
+    width: var(--leo-toggle-width);
+    height: var(--leo-toggle-height);
+    border-radius: var(--radius-full);
+    padding: var(--leo-toggle-padding);
+    transition: background-color 0.2s ease-in-out;
+    flex-shrink: 0;
 
-    &.size-small {
-      --leo-toggle-width: 40px;
-      --leo-toggle-height: 24px;
+    &:disabled {
+      opacity: 0.5;
     }
 
-    & button {
-      all: unset;
-      background: var(--leo-toggle-off-color);
-      width: var(--leo-toggle-width);
-      height: var(--leo-toggle-height);
-      border-radius: var(--radius-full);
-      padding: var(--leo-toggle-padding);
-      transition: background-color 0.2s ease-in-out;
-      flex-shrink: 0;
+    &:focus-visible:not(:disabled) {
+      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+        0px 0px 4px 2px #423eee;
+    }
 
-      &:disabled {
-        opacity: 0.5;
-      }
-
-      &:focus-visible:not(:disabled) {
-        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
-          0px 0px 4px 2px #423eee;
-      }
-
-      &:hover:not(:disabled) {
-        background-color: var(--leo-toggle-off-color-hover);
-
-        &[aria-checked='true'] {
-          background-color: var(--leo-toggle-on-color-hover);
-        }
-      }
-
-      .thumb {
-        height: 100%;
-        aspect-ratio: 1/1;
-        background: white;
-        border-radius: var(--radius-full);
-        transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-        --off-thumb-offset: 0px;
-        --on-thumb-offset: calc(
-          var(--leo-toggle-width) - var(--leo-toggle-height) + 0.25px
-        );
-        --thumb-offset: var(--off-thumb-offset);
-        --drag-offset: 0;
-        --thumb-position: max(
-          min(
-            var(--on-thumb-offset),
-            calc(var(--thumb-offset) + var(--drag-offset))
-          ),
-          var(--off-thumb-offset)
-        );
-
-        transform: translate(var(--thumb-position), 0);
-
-        &.dragging {
-          transition: transform 0s ease-in-out, color 0.2s ease-in-out;
-        }
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        box-shadow: var(--effect-elevation-02);
-
-        :global([slot$='-icon']) {
-          transition: opacity 0.2s ease-in-out;
-        }
-
-        :global([slot='on-icon']) {
-          opacity: 0;
-        }
-      }
+    &:hover:not(:disabled) {
+      background-color: var(--leo-toggle-off-color-hover);
 
       &[aria-checked='true'] {
-        background: var(--leo-toggle-on-color);
+        background-color: var(--leo-toggle-on-color-hover);
+      }
+    }
 
-        .thumb {
-          --thumb-offset: var(--on-thumb-offset);
-          color: var(--leo-toggle-on-color);
-        }
+    & .thumb {
+      height: 100%;
+      aspect-ratio: 1/1;
+      background: white;
+      border-radius: var(--radius-full);
+      transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+      --off-thumb-offset: 0px;
+      --on-thumb-offset: calc(
+        var(--leo-toggle-width) - var(--leo-toggle-height) + 0.25px
+      );
+      --thumb-offset: var(--off-thumb-offset);
+      --drag-offset: 0;
+      --thumb-position: max(
+        min(
+          var(--on-thumb-offset),
+          calc(var(--thumb-offset) + var(--drag-offset))
+        ),
+        var(--off-thumb-offset)
+      );
+
+      transform: translate(var(--thumb-position), 0);
+
+      &.dragging {
+        transition: transform 0s ease-in-out, color 0.2s ease-in-out;
+      }
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow: var(--effect-elevation-02);
+
+      :global([slot$='-icon']) {
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      :global([slot='on-icon']) {
+        opacity: 0;
+      }
+    }
+
+    &[aria-checked='true'] {
+      background: var(--leo-toggle-on-color);
+
+      .thumb {
+        --thumb-offset: var(--on-thumb-offset);
+        color: var(--leo-toggle-on-color);
 
         :global([slot='on-icon']) {
           opacity: 1;
         }
       }
+    }
+    &.size-small {
+      --leo-toggle-width: 40px;
+      --leo-toggle-height: 24px;
     }
   }
 </style>
