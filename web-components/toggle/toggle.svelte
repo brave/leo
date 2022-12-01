@@ -16,6 +16,7 @@
 
   let thumb: HTMLElement
 
+  let handledClick = false
   let dragStartX: number | undefined
   let dragOffsetX: number = 0
 
@@ -32,7 +33,16 @@
   on:mousedown={(e) => {
     if (disabled) return
 
+    handledClick = true
     dragStartX = e.clientX
+  }}
+  on:click={(e) => {
+    if (handledClick || disabled) {
+      handledClick = false
+      return
+    }
+
+    toggle()
   }}
   {disabled}
   role="switch"
@@ -47,7 +57,22 @@
     aria-hidden="true"
     style="--drag-offset: {dragOffsetX}px"
   >
-    <slot name="on-icon" />
+    <div class="on-icon">
+      <slot name="on-icon">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14.6461 4.00015C14.2516 3.69959 13.6882 3.77573 13.3876 4.17021L7.47971 11.9243L4.53279 8.9774C4.18211 8.62672 3.61356 8.62672 3.26288 8.9774C2.91221 9.32807 2.91221 9.89663 3.26288 10.2473L6.93634 13.9208C7.11956 14.104 7.37301 14.1991 7.63155 14.1817C7.89009 14.1643 8.12851 14.0361 8.28555 13.83L14.8161 5.25861C15.1167 4.86413 15.0406 4.3007 14.6461 4.00015Z"
+            fill="currentColor"
+          />
+        </svg>
+      </slot>
+    </div>
   </div>
 </button>
 
@@ -156,11 +181,9 @@
 
       box-shadow: var(--effect-elevation-02);
 
-      :global([slot$='-icon']) {
+      .on-icon {
         transition: opacity 0.2s ease-in-out;
-      }
-
-      :global([slot='on-icon']) {
+        display: flex;
         opacity: 0;
       }
     }
@@ -172,7 +195,7 @@
         --thumb-offset: var(--on-thumb-offset);
         color: var(--on-color);
 
-        :global([slot='on-icon']) {
+        .on-icon {
           opacity: 1;
         }
       }

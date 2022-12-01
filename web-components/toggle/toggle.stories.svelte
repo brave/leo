@@ -45,3 +45,10 @@
 <Story name="Default" />
 <Story name="Disabled - Off" args={{ on: false, disabled: true }} />
 <Story name="Disabled - On" args={{ on: true, disabled: true }} />
+<Story name="Labels" let:args>
+    <!-- svelte-ignore a11y-label-has-associated-control -->
+    <label>
+        <Toggle {...args}></Toggle>
+        Foo
+    </label>
+</Story>
