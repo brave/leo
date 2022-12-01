@@ -30,7 +30,7 @@
 
 <button
   class={`leo-toggle size-${size}`}
-  on:mousedown={(e) => {
+  on:pointerdown={(e) => {
     if (disabled) return
 
     handledClick = true
@@ -47,13 +47,11 @@
   {disabled}
   role="switch"
   aria-checked={on}
-  part="track"
 >
   <div
     bind:this={thumb}
     class="thumb"
     class:dragging={!!dragOffsetX}
-    part="thumb"
     aria-hidden="true"
     style="--drag-offset: {dragOffsetX}px"
   >
@@ -77,7 +75,7 @@
 </button>
 
 <svelte:window
-  on:mouseup={() => {
+  on:pointerup={() => {
     // If we didn't receive a mouse down, there's nothing to do.
     if (dragStartX === undefined) return
 
@@ -93,7 +91,7 @@
     dragStartX = undefined
     dragOffsetX = 0
   }}
-  on:mousemove={(e) => {
+  on:pointermove={(e) => {
     if (dragStartX === undefined) return
     dragOffsetX = e.clientX - dragStartX
   }}
