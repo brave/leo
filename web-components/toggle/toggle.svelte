@@ -29,7 +29,11 @@
 
 <button
   class={`leo-toggle size-${size}`}
-  on:mousedown={(e) => (dragStartX = e.clientX)}
+  on:mousedown={(e) => {
+    if (disabled) return
+
+    dragStartX = e.clientX
+  }}
   {disabled}
   role="switch"
   aria-checked={on}
@@ -83,6 +87,11 @@
     --off-color: var(--leo-toggle-off-color, var(--color-gray-30));
     --off-color-hover: var(--leo-toggle-off-color-hover, var(--color-gray-40));
     --thumb-color: var(--leo-toggle-thumb-color, var(--color-white));
+
+    &.size-small {
+      --width: 40px;
+      --height: 24px;
+    }
 
     @theme (dark) {
       --on-color-hover: var(
@@ -167,10 +176,6 @@
           opacity: 1;
         }
       }
-    }
-    &.size-small {
-      --width: 40px;
-      --height: 24px;
     }
   }
 </style>
