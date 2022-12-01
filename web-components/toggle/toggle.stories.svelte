@@ -23,22 +23,7 @@
         --leo-toggle-height: ${args.toggleHeight}px;
     `}
   >
-    <Toggle {...args}>
-      <span slot="label">Toggle Me!</span>
-      <svg
-        slot="on-icon"
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M14.6461 4.00015C14.2516 3.69959 13.6882 3.77573 13.3876 4.17021L7.47971 11.9243L4.53279 8.9774C4.18211 8.62672 3.61356 8.62672 3.26288 8.9774C2.91221 9.32807 2.91221 9.89663 3.26288 10.2473L6.93634 13.9208C7.11956 14.104 7.37301 14.1991 7.63155 14.1817C7.89009 14.1643 8.12851 14.0361 8.28555 13.83L14.8161 5.25861C15.1167 4.86413 15.0406 4.3007 14.6461 4.00015Z"
-          fill="currentColor"
-        />
-      </svg>
-    </Toggle>
+    <Toggle {...args} />
   </div>
 </Template>
 
@@ -46,9 +31,28 @@
 <Story name="Disabled - Off" args={{ on: false, disabled: true }} />
 <Story name="Disabled - On" args={{ on: true, disabled: true }} />
 <Story name="Labels" let:args>
-    <!-- svelte-ignore a11y-label-has-associated-control -->
-    <label>
-        <Toggle {...args}></Toggle>
-        Foo
-    </label>
+  <!-- svelte-ignore a11y-label-has-associated-control -->
+  <label>
+    <Toggle {...args} />
+    Foo
+  </label>
+</Story>
+<Story name="Custom Icon" let:args>
+  <Toggle {...args}>
+    <svg
+      slot="on-icon"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M20.3333 21.3333H3.66667C2.7475 21.3333 2 20.5858 2 19.6667V4.66667C2 3.74833 2.7475 3 3.66667 3H20.3333C21.2525 3 22 3.74833 22 4.66667V19.6667C22 20.5858 21.2525 21.3333 20.3333 21.3333ZM3.66667 19.6667H20.3308L20.3325 8H3.66667V19.6667ZM3.66667 4.66667V6.33333H20.3333V4.66667H3.66667ZM15.3333 18H8.66667C8.20667 18 7.83333 17.6275 7.83333 17.1667V13C7.83333 12.5392 8.20667 12.1667 8.66667 12.1667H9.5V12.115C9.5 10.7775 10.6217 9.69084 12 9.69084C13.3783 9.69084 14.5 10.7775 14.5 12.115V12.1667H15.3333C15.7933 12.1667 16.1667 12.5392 16.1667 13V17.1667C16.1667 17.6275 15.7933 18 15.3333 18ZM12.8333 12.115C12.8333 11.6967 12.4592 11.3567 12 11.3567C11.5408 11.3567 11.1667 11.6967 11.1667 12.115V12.1667H12.8333V12.115ZM14.5 13.8333H10.45C10.4108 13.8392 10.375 13.8567 10.3333 13.8567C10.2917 13.8567 10.2567 13.8392 10.2167 13.8333H9.5V16.3333H14.5V13.8333Z"
+        fill="currentColor"
+      />
+    </svg>
+  </Toggle>
 </Story>
