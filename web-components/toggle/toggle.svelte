@@ -71,28 +71,32 @@
 />
 
 <style lang="scss">
-  :root {
-    --leo-toggle-height: 32px;
-    --leo-toggle-width: 56px;
-    --leo-toggle-padding: 2px;
-    --leo-toggle-on-color: var(--color-interaction-button-primary-background);
-    --leo-toggle-on-color-hover: var(--color-primary-60);
-    --leo-toggle-off-color: var(--color-gray-30);
-    --leo-toggle-off-color-hover: var(--color-gray-40);
-    --leo-toggle-thumb-color: var(--color-white);
+  .leo-toggle {
+    --width: var(--leo-toggle-width, 56px);
+    --height: var(--leo-toggle-height, 32px);
+    --padding: var(--leo-toggle-padding, 2px);
+    --on-color: var(
+      --leo-toggle-on-color,
+      var(--color-interaction-button-primary-background)
+    );
+    --on-color-hover: var(--leo-toggle-on-color-hover, var(--color-primary-60));
+    --off-color: var(--leo-toggle-off-color, var(--color-gray-30));
+    --off-color-hover: var(--leo-toggle-off-color-hover, var(--color-gray-40));
+    --thumb-color: var(--leo-toggle-thumb-color, var(--color-white));
 
     @theme (dark) {
-      --leo-toggle-on-color-hover: var(--color-dark-primary-40);
+      --on-color-hover: var(
+        --leo-toggle-on-color-hover,
+        var(--color-primary-40)
+      );
     }
-  }
 
-  .leo-toggle {
     all: unset;
-    background: var(--leo-toggle-off-color);
-    width: var(--leo-toggle-width);
-    height: var(--leo-toggle-height);
+    background: var(--off-color);
+    width: var(--width);
+    height: var(--height);
     border-radius: var(--radius-full);
-    padding: var(--leo-toggle-padding);
+    padding: var(--padding);
     transition: background-color 0.2s ease-in-out;
     flex-shrink: 0;
 
@@ -106,10 +110,10 @@
     }
 
     &:hover:not(:disabled) {
-      background-color: var(--leo-toggle-off-color-hover);
+      background-color: var(--off-color-hover);
 
       &[aria-checked='true'] {
-        background-color: var(--leo-toggle-on-color-hover);
+        background-color: var(--on-color-hover);
       }
     }
 
@@ -120,9 +124,7 @@
       border-radius: var(--radius-full);
       transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
       --off-thumb-offset: 0px;
-      --on-thumb-offset: calc(
-        var(--leo-toggle-width) - var(--leo-toggle-height) + 0.25px
-      );
+      --on-thumb-offset: calc(var(--width) - var(--height) + 0.25px);
       --thumb-offset: var(--off-thumb-offset);
       --drag-offset: 0;
       --thumb-position: max(
@@ -155,11 +157,11 @@
     }
 
     &[aria-checked='true'] {
-      background: var(--leo-toggle-on-color);
+      background: var(--on-color);
 
       .thumb {
         --thumb-offset: var(--on-thumb-offset);
-        color: var(--leo-toggle-on-color);
+        color: var(--on-color);
 
         :global([slot='on-icon']) {
           opacity: 1;
@@ -167,8 +169,8 @@
       }
     }
     &.size-small {
-      --leo-toggle-width: 40px;
-      --leo-toggle-height: 24px;
+      --width: 40px;
+      --height: 24px;
     }
   }
 </style>
