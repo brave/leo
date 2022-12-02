@@ -11,6 +11,8 @@
     toggleWidth: { control: 'range', min: 10, max: 200, defaultValue: 56 },
     toggleHeight: { control: 'range', min: 10, max: 100, defaultValue: 32 },
     size: { control: 'select', options: sizes, defaultValue: 'medium' },
+    labelDirection: { control: 'select', options: ['row', 'row-reverse'], defaultValue: 'row' },
+    label: { control: 'text', defaultValue: 'Label' }
   }}
 />
 
@@ -23,20 +25,11 @@
         --leo-toggle-height: ${args.toggleHeight}px;
     `}
   >
-    <Toggle {...args} />
+    <Toggle {...args}>{args.label}</Toggle>
   </div>
 </Template>
 
 <Story name="Default" />
-<Story name="Disabled - Off" args={{ on: false, disabled: true }} />
-<Story name="Disabled - On" args={{ on: true, disabled: true }} />
-<Story name="Labels" let:args>
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>
-    <Toggle {...args} />
-    Foo
-  </label>
-</Story>
 <Story name="Custom Icon" let:args>
   <Toggle {...args}>
     <svg
@@ -54,5 +47,6 @@
         fill="currentColor"
       />
     </svg>
+    {args.label}
   </Toggle>
 </Story>
