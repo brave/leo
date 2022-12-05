@@ -3,10 +3,5 @@
   "extends": [
     "config:base"
   ],
-  "rangeStrategy": "pin",
-  "packageRules": [
-    {
-      "matchPaths": ["package.json"]
-    }
-  ]
+  "rangeStrategy": "pin"
 }
