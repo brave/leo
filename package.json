@@ -8,7 +8,7 @@
     "@tsconfig/svelte": "3.0.0",
     "lodash.merge": "4.6.2",
     "style-dictionary": "3.7.1",
-    "svelte-check": "2.10.0",
+    "svelte-check": "2.10.1",
     "svelte-preprocess": "4.10.7",
     "svelte": "3.53.1",
     "svelte2tsx": "0.5.21",
