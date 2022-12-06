@@ -49,12 +49,14 @@ jobs:
           aws-region: us-west-2
 
       - name: Deploy
+        if: ${{ github.event_name == 'pull_request' }}
         id: build-site
         env:
           NODE_OPTIONS: "--max_old_space_size=6144"
           AWS_REGION: us-west-2
         run: |
           set -eux
+          HEAD_SHA=${{ github.event.pull_request.head.sha }}
           [ -z "$AWS_ACCESS_KEY_ID" ] && exit 1
           BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || :)
           # [ -z "$BUCKET_PATH" ] || { export HUGO_BASEURL="https://${BUCKET_PATH}.pr.leo.bravesoftware.com/"; }
@@ -63,10 +65,12 @@ jobs:
           cd ./storybook-static
           aws configure set default.s3.max_concurrent_requests 100
           aws configure set default.s3.max_queue_size 10000
-          aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/${BUCKET_PATH:+pr-$BUCKET_PATH/}" --delete --exclude 'pr-*/*'
+          aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/${BUCKET_PATH:+pr-$BUCKET_PATH/}${HEAD_SHA}" --delete --exclude 'pr-*/*'
           echo "::endgroup::"
       - uses: actions/github-script@v6
-        # if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
             const { data: comments } = await github.rest.issues.listComments({
@@ -81,9 +85,10 @@ jobs:
                 return; // Already commented with PR preview url
               }
             }
+            console.log(context)
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://${context.issue.number}.pr.bravesoftware.com/\n\nThe username and password (if not on VPN) can be found in the 1P Team vault under \`Brave.com Staging/Previews\`.`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://leo.bravesoftware.com/pr-${context.issue.number}/\n\nThe username and password (if not on VPN) can be found in the 1P Team vault under \`Brave.com Staging/Previews\`.`
             })
