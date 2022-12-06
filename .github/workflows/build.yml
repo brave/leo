@@ -78,5 +78,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://leo.bravesoftware.com/pr-${context.issue.number}/\n\nThe username and password (if not on VPN) can be found in the 1P Team vault under \`Brave.com Staging/Previews\`.`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://leo.bravesoftware.com/pr-${context.issue.number}/${context.payload.after}\n\nThe username and password (if not on VPN) can be found in the 1P Team vault under \`Brave.com Staging/Previews\`.`
             })
