@@ -28,6 +28,29 @@
   }
 </script>
 
+<svelte:window
+  on:mouseup={() => {
+    // If we didn't receive a mouse down, there's nothing to do.
+    if (dragStartX === undefined) return
+
+    // If we didn't drag just toggle the state.
+    if (dragOffsetX === 0) {
+      toggle()
+    } else {
+      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !on) toggle(true)
+      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && on) toggle(false)
+    }
+
+    // Reset the dragging attributes.
+    dragStartX = undefined
+    dragOffsetX = 0
+  }}
+  on:mousemove={(e) => {
+    if (dragStartX === undefined) return
+    dragOffsetX = e.clientX - dragStartX
+  }}
+/>
+
 <label class={`leo-toggle size-${size}`}>
   <button
     on:mousedown={(e) => {
@@ -53,7 +76,7 @@
       class="thumb"
       class:dragging={!!dragOffsetX}
       aria-hidden="true"
-      style="--drag-offset: {dragOffsetX}px"
+      style:--drag-offset="{dragOffsetX}px"
     >
       <div class="on-icon">
         <slot name="on-icon">
@@ -75,28 +98,6 @@
   </button>
   <slot></slot>
 </label>
-<svelte:window
-  on:mouseup={() => {
-    // If we didn't receive a mouse down, there's nothing to do.
-    if (dragStartX === undefined) return
-
-    // If we didn't drag just toggle the state.
-    if (dragOffsetX === 0) {
-      toggle()
-    } else {
-      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !on) toggle(true)
-      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && on) toggle(false)
-    }
-
-    // Reset the dragging attributes.
-    dragStartX = undefined
-    dragOffsetX = 0
-  }}
-  on:mousemove={(e) => {
-    if (dragStartX === undefined) return
-    dragOffsetX = e.clientX - dragStartX
-  }}
-/>
 
 <style lang="scss">
   .leo-toggle {
@@ -160,11 +161,6 @@
     }
 
     & .thumb {
-      height: 100%;
-      aspect-ratio: 1/1;
-      background: white;
-      border-radius: var(--radius-full);
-      transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
       --off-thumb-offset: 0px;
       --on-thumb-offset: calc(var(--width) - var(--height) + 0.25px);
       --thumb-offset: var(--off-thumb-offset);
@@ -176,6 +172,12 @@
         ),
         var(--off-thumb-offset)
       );
+
+      height: 100%;
+      aspect-ratio: 1/1;
+      background: white;
+      border-radius: var(--radius-full);
+      transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
 
