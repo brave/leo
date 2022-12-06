@@ -8,6 +8,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    permissions:
+      id-token: write
+      contents: read # This is required for actions/checkout
+      pull-requests: write # For actions/github-script
+    environment:
+      name: staging
+    env:
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
     steps:
       - uses: actions/checkout@v3
@@ -31,3 +40,50 @@ jobs:
         id: build-leo
         run: |
           npm run transform-tokens
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: github-actions-pr-leo-${{ github.triggering_actor }}-${{ github.run_id }}
+          aws-region: us-west-2
+
+      - name: Deploy
+        id: build-site
+        env:
+          NODE_OPTIONS: "--max_old_space_size=6144"
+          AWS_REGION: us-west-2
+        run: |
+          set -eux
+          [ -z "$AWS_ACCESS_KEY_ID" ] && exit 1
+          BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || :)
+          # [ -z "$BUCKET_PATH" ] || { export HUGO_BASEURL="https://${BUCKET_PATH}.pr.leo.bravesoftware.com/"; }
+          npm run build-storybook
+          echo "::group::Upload to AWS S3"
+          cd ./storybook-static
+          aws configure set default.s3.max_concurrent_requests 100
+          aws configure set default.s3.max_queue_size 10000
+          aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/${BUCKET_PATH:+pr-$BUCKET_PATH/}" --delete --exclude 'pr-*/*'
+          echo "::endgroup::"
+      - uses: actions/github-script@v6
+        # if: ${{ github.event_name == 'pull_request' }}
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            console.log(comments);
+            for (const comment of comments) {
+              if (comment.body.includes("Thanks for Submitting!")) {
+                return; // Already commented with PR preview url
+              }
+            }
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://${context.issue.number}.pr.bravesoftware.com/\n\nThe username and password (if not on VPN) can be found in the 1P Team vault under \`Brave.com Staging/Previews\`.`
+            })
