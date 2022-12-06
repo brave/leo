@@ -114,6 +114,7 @@
     --thumb-color: var(--leo-toggle-thumb-color, var(--color-white));
     --label-gap: var(--leo-toggle-label-gap, var(--spacing-4));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
+    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
 
     &.size-small {
       --width: 40px;
@@ -125,6 +126,7 @@
         --leo-toggle-on-color-hover,
         var(--color-primary-40)
       );
+      --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, black);
     }
 
     display: flex;
@@ -145,6 +147,10 @@
 
     &:disabled {
       opacity: 0.5;
+
+      > .thumb {
+        background: var(--thumb-disabled-color);
+      }
     }
 
     &:focus-visible:not(:disabled) {
