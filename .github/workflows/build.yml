@@ -81,5 +81,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.after}/`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.after}/`
             })
