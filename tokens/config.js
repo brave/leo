@@ -63,6 +63,20 @@ module.exports = {
           filter: {
             type: "color",
           }
+        },
+        {
+          destination: 'spacing.h',
+          format: "skia/spacing.h",
+          filter: {
+            type: "custom-spacing"
+          }
+        },
+        {
+          destination: 'radius.h',
+          format: "skia/radius.h",
+          filter: {
+            type: "custom-radius"
+          }
         }
       ],
     },
