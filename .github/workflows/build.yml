@@ -66,8 +66,8 @@ jobs:
           if [[ -z ${BUCKET_PATH} ]]; then # non PR
             aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*'
           else
-            aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/${HEAD_SHA}/" --delete --exclude 'pr-*/*'
-            aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'pr-*/*'
+            aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/commit-${HEAD_SHA}/" --delete
+            aws s3 sync --size-only . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
           fi
           echo "::endgroup::"
       - uses: actions/github-script@v6
@@ -81,5 +81,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://${context.issue.number}.pr.leo.bravesoftware.com/${context.payload.after}/`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ Preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.after}/`
             })
