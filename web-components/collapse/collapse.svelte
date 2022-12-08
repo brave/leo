@@ -136,7 +136,7 @@
     cursor: pointer;
 
     color: var(--summary-color);
-    transition: color --var(--transition-duration) ease-in-out;
+    transition: color var(--transition-duration) ease-in-out;
 
     &:hover {
       color: var(--summary-color-hover);
@@ -149,6 +149,7 @@
   }
 
   .icon {
+    transition: color var(--transition-duration) ease-in-out;
     color: var(--icon-color);
     width: var(--icon-size);
     height: var(--icon-size);
@@ -167,7 +168,8 @@
 
   .arrow {
     color: var(--icon-color);
-    transition: transform var(--transition-duration) ease-in-out;
+    transition: transform var(--transition-duration) ease-in-out,
+      color var(--transition-duration) ease-in-out;
     transform: rotate(360deg);
   }
 
