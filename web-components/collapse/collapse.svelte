@@ -80,19 +80,21 @@
       --leo-collapse-shadow-hover,
       var(--effect-elevation-02)
     );
-    --shadow-focus: var(
-      --leo-collapse-shadow-focus,
-      0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
-      0px 0px 4px 2px #423eee
-    );
+    --shadow-focus: var(--leo-collapse-shadow-focus, var(--effect-focus-state));
     --radius: var(--leo-collapse-radius, var(--radius-16));
-    --summary-color: var(--leo-collapse-summary-color, var(--color-text-primary));
+    --summary-color: var(
+      --leo-collapse-summary-color,
+      var(--color-text-primary)
+    );
     --summary-color-hover: var(
       --leo-collapse-summary-color,
       var(--color-text-interactive)
     );
     --icon-color: var(--leo-collapse-icon-color, var(--color-icon-default));
-    --icon-color-hover: var(--leo-collapse-icon-color-hover, var(--summary-color-hover));
+    --icon-color-hover: var(
+      --leo-collapse-icon-color-hover,
+      var(--summary-color-hover)
+    );
 
     @media (prefers-reduced-motion) {
       --transition-duration: 0s;
@@ -139,7 +141,8 @@
     &:hover {
       color: var(--summary-color-hover);
 
-      & .icon, .arrow {
+      & .icon,
+      .arrow {
         color: var(--icon-color-hover);
       }
     }
