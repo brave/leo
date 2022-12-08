@@ -57,36 +57,68 @@
 
 <style lang="scss">
   .leoCollapse {
-    --background-color: var(--color-container-background);
-    --leo-icon-size: var(--icon-size, 24px);
-    --animation-duration: 0.12s;
-    --border-color: var(--color-divider-subtle);
+    --background-color: var(
+      --leo-collapse-background-color,
+      var(--color-container-background)
+    );
+    --background-color-hover: var(
+      --leo-collapse-background-color-hover,
+      var(--color-container-interactive-background)
+    );
+    --icon-size: var(--leo-collapse-icon-size, 24px);
+    --transition-duration: var(--leo-collapse-transition-duration, 0.12s);
+    --border-color: var(
+      --leo-collapse-border-color,
+      var(--color-divider-subtle)
+    );
+    --border-color-hover: var(
+      --leo-collapse-border-color-hover,
+      var(--color-primary-20)
+    );
+    --shadow: var(--leo-collapse-shadow, var(--effect-elevation-01));
+    --shadow-hover: var(
+      --leo-collapse-shadow-hover,
+      var(--effect-elevation-02)
+    );
+    --shadow-focus: var(
+      --leo-collapse-shadow-focus,
+      0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      0px 0px 4px 2px #423eee
+    );
+    --radius: var(--leo-collapse-radius, var(--radius-16));
+    --summary-color: var(--leo-collapse-summary-color, var(--color-text-primary));
+    --summary-color-hover: var(
+      --leo-collapse-summary-color,
+      var(--color-text-interactive)
+    );
+    --icon-color: var(--leo-collapse-icon-color, var(--color-icon-default));
+    --icon-color-hover: var(--leo-collapse-icon-color-hover, var(--summary-color-hover));
 
     @media (prefers-reduced-motion) {
-      --animation-duration: 0s;
+      --transition-duration: 0s;
     }
 
     background-color: var(--background-color);
-    box-shadow: var(--effect-elevation-01);
-    border-radius: var(--radius-16);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
     border: 1px solid var(--border-color);
-    transition: box-shadow var(--animation-duration) ease-in-out,
-      background-color var(--animation-duration) ease-in-out;
+    transition: box-shadow var(--transition-duration) ease-in-out,
+      background-color var(--transition-duration) ease-in-out;
 
     &:has(summary:hover) {
-      --border-color: var(--color-primary-20);
+      border-color: var(--border-color-hover);
     }
 
     &:hover {
-      box-shadow: var(--effect-elevation-02);
+      box-shadow: var(--shadow-hover);
 
       &:not([open]) {
-        --background-color: var(--color-container-interactive-background);
+        --background-color: var(--background-color-hover);
       }
     }
 
     &:focus-within:has(summary:focus-visible) {
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5), 0px 0px 4px 2px #423EEE;
+      box-shadow: var(--shadow-focus);
     }
   }
 
@@ -96,36 +128,43 @@
     align-items: center;
     gap: var(--spacing-8);
 
-    padding: 16px 18px;
+    padding: var(--spacing-16) 18px;
 
     list-style: none;
     cursor: pointer;
 
-    color: var(--color-gray-120);
-    transition: color --var(--animation-duration) ease-in-out;
+    color: var(--summary-color);
+    transition: color --var(--transition-duration) ease-in-out;
 
     &:hover {
-      color: var(--color-text-interactive);
+      color: var(--summary-color-hover);
+
+      & .icon, .arrow {
+        color: var(--icon-color-hover);
+      }
     }
   }
 
   .icon {
-    width: var(--leo-icon-size);
-    height: var(--leo-icon-size);
+    color: var(--icon-color);
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 
   .title {
     flex-grow: 1;
     font: var(--font-heading-h5);
-    font-weight: 500;
   }
 
   .content {
-    padding: 8px 24px 24px 24px;
+    padding: var(--spacing-8) var(--spacing-24) var(--spacing-24)
+      var(--spacing-24);
+    font: var(--font-text-default-regular);
   }
 
   .arrow {
-    transition: transform var(--animation-duration) ease-in-out;
+    color: var(--icon-color);
+    transition: transform var(--transition-duration) ease-in-out;
     transform: rotate(360deg);
   }
 
