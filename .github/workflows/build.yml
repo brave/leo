@@ -7,7 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read # This is required for actions/checkout
+      pull-requests: write # For actions/github-script
+    environment:
+      name: staging
+    env:
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
     steps:
       - uses: actions/checkout@v3
@@ -31,3 +40,48 @@ jobs:
         id: build-leo
         run: |
           npm run transform-tokens
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: github-actions-pr-leo-${{ github.triggering_actor }}-${{ github.run_id }}
+          aws-region: us-west-2
+
+      - name: Deploy
+        id: build-site
+        env:
+          AWS_REGION: us-west-2
+          NODE_OPTIONS: "--max_old_space_size=6144"
+        run: |
+          shopt -s inherit_errexit
+          set -xeEo pipefail
+          HEAD_SHA=${{ github.event.pull_request.head.sha }}
+          [ -z "$AWS_ACCESS_KEY_ID" ] && exit 1
+          BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || true)
+          npm run build-storybook
+          echo "::group::Upload to AWS S3"
+          cd ./storybook-static
+          aws configure set default.s3.max_concurrent_requests 100
+          aws configure set default.s3.max_queue_size 10000
+          if [[ -z ${BUCKET_PATH} ]]; then # non PR
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*'
+          else
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/commit-${HEAD_SHA}/" --delete
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
+          fi
+          echo "::endgroup::"
+
+      - name: Post GitHub comment
+        uses: actions/github-script@v6
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.after}/`
+            })
