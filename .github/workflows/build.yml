@@ -41,7 +41,7 @@ jobs:
         run: |
           npm run transform-tokens
 
-      - name: Configure aws credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
@@ -51,13 +51,14 @@ jobs:
       - name: Deploy
         id: build-site
         env:
-          NODE_OPTIONS: "--max_old_space_size=6144"
           AWS_REGION: us-west-2
+          NODE_OPTIONS: "--max_old_space_size=6144"
         run: |
-          set -eux
+          shopt -s inherit_errexit
+          set -xeEo pipefail
           HEAD_SHA=${{ github.event.pull_request.head.sha }}
           [ -z "$AWS_ACCESS_KEY_ID" ] && exit 1
-          BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || :)
+          BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || true)
           npm run build-storybook
           echo "::group::Upload to AWS S3"
           cd ./storybook-static
@@ -70,7 +71,8 @@ jobs:
             aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
           fi
           echo "::endgroup::"
-      - uses: actions/github-script@v6
+      - name: Post Github comment
+        uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
