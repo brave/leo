@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read # This is required for actions/checkout
@@ -71,6 +71,7 @@ jobs:
             aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
           fi
           echo "::endgroup::"
+
       - name: Post Github comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
