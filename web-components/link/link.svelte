@@ -1,33 +1,26 @@
-<svelte:options tag="leo-button" />
+<svelte:options tag="leo-link" />
 
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
-  import type * as Props from './props'
+  import type * as Props from '../button/props'
 
   interface CommonProps {
     kind?: Props.ButtonKind
-    size?: Props.ButtonSize
     isLoading?: boolean
+    href: string
+    size: Props.ButtonSize
   }
 
-  type $$Props = CommonProps & SvelteHTMLElements['button']
+  type $$Props = CommonProps & SvelteHTMLElements['a']
 
-  export let kind: Props.ButtonKind = 'primary'
+  export let kind: Props.ButtonKind = 'tertiary'
   export let size: Props.ButtonSize = 'medium'
   export let isLoading: boolean = false
-
-  const dispatch = createEventDispatcher()
-
-  /**
-   * Optional click handler
-   */
-  function onClick(event) {
-    dispatch('click', event)
-  }
+  export let href: string
 </script>
 
-<button
+<a
+  {href}
   class="leoButton"
   class:isPrimary={kind === 'primary'}
   class:isSecondary={kind === 'secondary'}
@@ -37,10 +30,14 @@
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
   class:isLoading
-  on:click={onClick}
   {...$$restProps}
 >
-  <slot>Leo Button</slot>
-</button>
+  <slot>Leo Link</slot>
+</a>
 
-<style src="./styles.scss"></style>
+<style lang="scss">
+  @import '../button/styles.scss';
+  .leoButton {
+    display: inline-block;
+  }
+</style>
