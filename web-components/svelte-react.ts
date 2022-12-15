@@ -87,7 +87,7 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
           watchers.forEach(([name, callback]) => {
             if (component.current) {
               const index = component.current.$$.props[name]
-              callback(component.current.$$.ctx[index])
+              callback((component.current.$$.ctx as any)[index])
             }
           })
           update.apply(null, updateArgs)

@@ -6,7 +6,31 @@ const COMPONENT_PREFIX = 'leo';
 const SVELTE_REACT_WRAPPER_PATH = path.resolve(__dirname, '../web-components/svelte-react');
 const REACT_FILE_NAME = 'react.ts';
 
-const getReactFileContents = (svelteFilePath) => {
+const getComponentGenerics = async (svelteFilePath, componentName) => {
+    const typingsPath = svelteFilePath += '.d.ts'
+    const typingsContents = await fs.readFile(typingsPath);
+    const genericsMatcher = new RegExp(`${componentName}<(.*)> extends SvelteComponentTyped`, 'gm')
+
+    const result = genericsMatcher.exec(typingsContents)
+    if (!result) return []
+
+    return result[1]
+        // Note: This will break if we have multiple, nested generic type arguments.
+        .split(',')
+        .map(param => {
+            const constraintStart = ' extends '
+            const constraintIndex = param.indexOf(constraintStart)
+            if (constraintIndex === -1) return { name: param }
+
+            const name = param.substring(0, constraintIndex).trim()
+            const constraint = param.substring(constraintIndex + constraintStart.length).trim()
+            return { name, constraint }
+        })
+
+
+}
+
+const getReactFileContents = async (svelteFilePath) => {
     const fileDir = path.dirname(svelteFilePath);
     const svelteReactWrapperRelativePath = path.relative(fileDir, SVELTE_REACT_WRAPPER_PATH);
 
@@ -14,19 +38,31 @@ const getReactFileContents = (svelteFilePath) => {
     const extension = path.extname(fileName);
     const fileNameWithoutExtension = fileName.substring(0, fileName.length - extension.length);
     const componentName = fileNameWithoutExtension[0].toUpperCase() + fileNameWithoutExtension.substring(1);
+    const generics = await getComponentGenerics(svelteFilePath, componentName)
+    const hasGenerics = !!generics.length
+    const funcConstraints = hasGenerics
+        ? `<${generics.map(g => `${g.name} extends ${g.constraint}`).join(', ')}>`
+        : ''
+    const propParams = hasGenerics
+        ? `<${generics.map(g => g.name).join(', ')}>`
+        : ''
+
     const fileContents = `
+import type * as React from 'react';
 import SvelteToReact, { type ReactProps } from '${svelteReactWrapperRelativePath}';
 import ${componentName} from './${fileName}';
 import type { ${componentName}Events, ${componentName}Props } from './${fileName}';
-
-export default SvelteToReact<ReactProps<${componentName}Props, ${componentName}Events>>('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
+const Untyped = SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
+export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<ReactProps<${componentName}Props${propParams}, ${componentName}Events${propParams}>>) {
+    return Untyped(props)
+}
     `.trim();
 
     return fileContents
 }
 
 const createReactBinding = async (svelteFilePath) => {
-    const contents = getReactFileContents(svelteFilePath);
+    const contents = await getReactFileContents(svelteFilePath);
     const reactFilePath = path.join(path.dirname(svelteFilePath), REACT_FILE_NAME);
 
     await fs.writeFile(reactFilePath, contents);
