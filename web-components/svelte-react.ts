@@ -22,7 +22,7 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
 export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, any> ? Props : {}
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
-  [P in keyof Events as `on${Capitalize<P & string>}`]: (e: Events[P]) => void
+  [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
 } 
 
 /**

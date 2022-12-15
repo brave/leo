@@ -37,7 +37,7 @@ function App() {
         >
           {buttonText}
         </LeoButton>
-        <LeoButton href='#foo' onClick={() => {}}>Link button!</LeoButton>
+        <LeoButton href='#foo'>Link button!</LeoButton>
         <SvelteReactComponent
           button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')}
           onHello={handleSvelteComponentHello}
