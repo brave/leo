@@ -45,7 +45,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: github-actions-pr-leo-${{ github.event.pull_request.head.sha }}-${{ github.run_id }}
+          role-session-name: github-actions-pr-leo-${{ github.run_id }}
           aws-region: us-west-2
 
       - name: Deploy
