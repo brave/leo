@@ -30,10 +30,14 @@ function App() {
         <LeoButton
           kind='primary'
           size='large'
-          onClick={() => alert('clicked')}
+          onClick={() => {
+            location.hash = ''
+            alert('clicked!')
+          }}
         >
           {buttonText}
         </LeoButton>
+        <LeoButton href='#foo' onClick={() => {}}>Link button!</LeoButton>
         <SvelteReactComponent
           button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')}
           onHello={handleSvelteComponentHello}

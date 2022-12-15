@@ -47,7 +47,7 @@
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
 
-  const tag = href ? 'a' : 'button'
+  $: tag = href ? 'a' : 'button'
 
   const dispatch = createEventDispatcher()
 
