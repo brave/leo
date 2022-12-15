@@ -15,7 +15,7 @@ const getReactFileContents = (svelteFilePath) => {
     const fileNameWithoutExtension = fileName.substring(0, fileName.length - extension.length);
     const componentName = fileNameWithoutExtension[0].toUpperCase() + fileNameWithoutExtension.substring(1);
     const fileContents = `
-import SvelteToReact, { ReactProps } from '${svelteReactWrapperRelativePath}';
+import SvelteToReact, { type ReactProps } from '${svelteReactWrapperRelativePath}';
 import ${componentName} from './${fileName}';
 import type { ${componentName}Events, ${componentName}Props } from './${fileName}';
 
