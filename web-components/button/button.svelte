@@ -1,7 +1,8 @@
 <svelte:options tag="leo-button" />
 
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
+  import type { SvelteHTMLElements } from 'svelte/elements'
   import type * as Props from './props'
 
   // This black magic comes from this thread:
@@ -17,51 +18,73 @@
   // 1) npm run gen-types
   // 2) Reload your VSCode Window (sometimes the Svelte Type Checker struggles).
   // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
-  type Href = $$Generic<string | undefined>;
-  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>;
-  type ExcludedProps = 'size' | 'href' | 'hreflang';
+  type Href = $$Generic<string | undefined>
+  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
+  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   interface CommonProps {
-    kind?: Props.ButtonKind;
-    size?: Props.ButtonSize;
-    isLoading?: boolean;
+    kind?: Props.ButtonKind
+    size?: Props.ButtonSize
+    isLoading?: boolean
   }
 
-  type ButtonProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['button']>>, ExcludedProps> & {
-    isDisabled?: Disabled;
-    href?: never;
-  }
+  type ButtonProps = CommonProps &
+    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
+      isDisabled?: Disabled
+      href?: never
+    }
 
-  type LinkProps = CommonProps & Omit<Partial<svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['a']>>, ExcludedProps> & {
-    href: Href;
-  }
+  type LinkProps = CommonProps &
+    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
+      href: Href
+    }
 
-  type $$Props = (LinkProps | ButtonProps)
+  type $$Props = LinkProps | ButtonProps
 
-  export let kind: Props.ButtonKind = "primary"
-  export let size: Props.ButtonSize = "medium"
+  export let kind: Props.ButtonKind = 'primary'
+  export let size: Props.ButtonSize = 'medium'
   export let isLoading: boolean = false
-  export let isDisabled: Disabled = undefined;
-  export let href: Href = undefined;
+  export let isDisabled: Disabled = undefined
+  export let href: Href = undefined
 
-  const tag = href ? "a" : "button";
+  $: tag = href ? 'a' : 'button'
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   /**
    * Optional click handler
    */
   function onClick(event) {
-    dispatch('click', event);
+    dispatch('click', event)
   }
 </script>
+
+<svelte:element
+  this={tag}
+  href={href || undefined}
+  class="leoButton"
+  class:isPrimary={kind === 'primary'}
+  class:isSecondary={kind === 'secondary'}
+  class:isTertiary={kind === 'tertiary'}
+  class:isCTA={kind === 'CTA'}
+  class:isLarge={size === 'large'}
+  class:isMedium={size === 'medium'}
+  class:isSmall={size === 'small'}
+  class:isLoading
+  disabled={isDisabled || undefined}
+  on:click={onClick}
+  {...$$restProps}
+>
+  <slot>Leo Button</slot>
+</svelte:element>
 
 <style lang="scss">
   // Main styles and states
   .leoButton {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isCTA
-    --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out, border-color 0.12s ease-in-out;
+    --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
+      border-color 0.12s ease-in-out;
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
@@ -190,22 +213,3 @@
     --color: white;
   }
 </style>
-
-<svelte:element
-  this={tag}
-  href={href || undefined}
-  class="leoButton"
-  class:isPrimary={kind === 'primary'}
-  class:isSecondary={kind === 'secondary'}
-  class:isTertiary={kind === 'tertiary'}
-  class:isCTA={kind === 'CTA'}
-  class:isLarge={size === 'large'}
-  class:isMedium={size === 'medium'}
-  class:isSmall={size === 'small'}
-  class:isLoading
-  disabled={isDisabled || undefined}
-  on:click={onClick}
-  {...$$restProps}
->
-  <slot>Leo Button</slot>
-</svelte:element>
