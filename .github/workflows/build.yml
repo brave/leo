@@ -78,8 +78,6 @@ jobs:
       - name: Post GitHub comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
-        env:
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
             await github.rest.issues.createComment({
