@@ -50,6 +50,7 @@ jobs:
 
       - name: Deploy
         id: build-site
+        if: false
         env:
           AWS_REGION: us-west-2
           NODE_OPTIONS: "--max_old_space_size=6144"
@@ -74,11 +75,12 @@ jobs:
 
       - name: Post GitHub comment
         uses: actions/github-script@v6
-        if: ${{ github.event_name == 'pull_request' }}
+        # if: ${{ github.event_name == 'pull_request' }}
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
+            console.log(context.payload)
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
