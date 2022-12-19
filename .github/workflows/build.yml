@@ -37,11 +37,12 @@ jobs:
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm ci
+        run: exit 0; npm ci
 
       - name: Build Leo
         id: build-leo
         run: |
+          exit 0
           npm run transform-tokens
 
       - name: Configure AWS credentials
@@ -57,6 +58,7 @@ jobs:
           AWS_REGION: us-west-2
           NODE_OPTIONS: "--max_old_space_size=6144"
         run: |
+          exit 0
           shopt -s inherit_errexit
           set -xeEo pipefail
           HEAD_SHA=${{ github.event.pull_request.head.sha }}
