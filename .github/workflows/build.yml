@@ -79,7 +79,6 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
-            console.log(context.payload)
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
