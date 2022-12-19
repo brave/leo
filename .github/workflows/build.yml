@@ -50,7 +50,7 @@ jobs:
 
       - name: Deploy
         id: build-site
-        if: false
+        if: false  # FOO
         env:
           AWS_REGION: us-west-2
           NODE_OPTIONS: "--max_old_space_size=6144"
