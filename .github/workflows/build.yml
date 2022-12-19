@@ -5,6 +5,9 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -75,13 +78,11 @@ jobs:
       - name: Post GitHub comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
-        env:
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.after}/`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/`
             })
