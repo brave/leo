@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react"
+import * as React from "react"
+import { useRef, useEffect, forwardRef, ForwardedRef } from 'react'
 import { SvelteComponent, SvelteComponentTyped } from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
@@ -19,15 +20,11 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
 //   }
 // }
 
-type RefProp<T> = {
-  ref?: React.MutableRef<Element> | ((ref: Element) => void);
-}
-
 export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, any> ? Props : {}
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
-} & RefProp<SvelteComponent & Props>
+}
 
 /**
  * 
@@ -35,10 +32,10 @@ export type ReactProps<Props, Events> = Props & {
  * @param component The imported svelte component itself. This is not used, but ensures that the component's code has been included in the bundle.
  * @returns A react component
  */
-export default function SvelteWebComponentToReact<T extends Record<string, any>> (tag: string, component: typeof SvelteComponent) {
-  return function ReactSvelteWebComponent (props: React.PropsWithChildren<T> & RefProp<T>) {
+export default function SvelteWebComponentToReact<T extends Record<string, any>>(tag: string, component: typeof SvelteComponent) {
+  return forwardRef((props: React.PropsWithChildren<T>, forwardedRef: ForwardedRef<SvelteComponent>) => {
     const component = useRef<SvelteComponent>()
-    
+
     const setRef = React.useCallback((ref: SvelteComponent) => {
       if (!ref) {
         console.error('No component for tag', tag)
@@ -55,11 +52,11 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
         return
       }
       component.current = ref
-      if (props.ref) {
-        if (typeof props.ref === 'function') props.ref(ref)
-        else props.ref.current = ref
+      if (forwardedRef) {
+        if (typeof forwardedRef === 'function') forwardedRef(ref)
+        else forwardedRef.current = ref
       }
-      
+
       // Events fire callbacks when the event is dispatched
       // from the svelte component.
       // Watchers fire callbacks when the variable (aka property or attribute)
@@ -127,5 +124,5 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
     }, [])
 
     return React.createElement(tag, { ref: setRef, children: props.children })// as unknown as React.ReactElement<T>
-  }
+  })
 }
