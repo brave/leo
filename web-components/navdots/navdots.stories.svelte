@@ -20,7 +20,7 @@
 />
 
 <Template let:args>
-  <div style={`--color-interaction-button-primary-background: ${args.activeColor || 'unset'}; --color-primary-20: ${args.defaultColor || 'unset'}`}>
+  <div style={`--leo-navdots-active-color: ${args.activeColor || 'unset'}; --leo-navdots-color: ${args.defaultColor || 'unset'}`}>
     <NavDots dotCount={args.dots} {activeDot} on:change={handleChange} />
   </div>
 </Template>
