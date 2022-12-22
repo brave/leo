@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react"
-import type { SvelteComponent, SvelteComponentTyped } from "svelte"
+import { SvelteComponent, SvelteComponentTyped } from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
 const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
@@ -19,11 +19,15 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
 //   }
 // }
 
+type RefProp<T> = {
+  ref?: React.MutableRef<Element> | ((ref: Element) => void);
+}
+
 export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, any> ? Props : {}
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
-} 
+} & RefProp<SvelteComponent & Props>
 
 /**
  * 
@@ -32,7 +36,7 @@ export type ReactProps<Props, Events> = Props & {
  * @returns A react component
  */
 export default function SvelteWebComponentToReact<T extends Record<string, any>> (tag: string, component: typeof SvelteComponent) {
-  return function ReactSvelteWebComponent (props: React.PropsWithChildren<T>) {
+  return function ReactSvelteWebComponent (props: React.PropsWithChildren<T> & RefProp<T>) {
     const component = useRef<SvelteComponent>()
     
     const setRef = React.useCallback((ref: SvelteComponent) => {
@@ -51,6 +55,10 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
         return
       }
       component.current = ref
+      if (props.ref) {
+        if (typeof props.ref === 'function') props.ref(ref)
+        else props.ref.current = ref
+      }
       
       // Events fire callbacks when the event is dispatched
       // from the svelte component.
