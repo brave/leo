@@ -32,7 +32,6 @@ export type ReactProps<Props, Events> = Props & {
  * @returns A react component
  */
 export default function SvelteWebComponentToReact<T extends Record<string, any>> (tag: string, component: typeof SvelteComponent) {
-  console.log(component)
   return function ReactSvelteWebComponent (props: React.PropsWithChildren<T>) {
     const component = useRef<SvelteComponent>()
     
@@ -96,8 +95,18 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
     }, [])
 
     useEffect(() => {
+      // Create a dictionary of all our properties without events. If we pass an
+      // onClick prop through to Svelte, we could inadvertently set it on the
+      // HTMLElement if we use <el {...$restProps}/>, which causes a Svelte to
+      // setAttribute('onClick', props['onClick']). This can lead to unexpected
+      // behavior, and triggers a TrustedTypes error.
+      const propsSansEvents = { ...props }
+      for (const event of Object.keys(props).filter(name => eventRegex.test(name))) {
+        delete propsSansEvents[event]
+      }
+
       if (component.current) {
-        component.current.$set(props)
+        component.current.$set(propsSansEvents)
       }
     }, [props])
 
