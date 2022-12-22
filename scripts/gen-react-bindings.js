@@ -51,9 +51,12 @@ const getReactFileContents = async (svelteFilePath) => {
 import type * as React from 'react';
 import SvelteToReact, { type ReactProps } from '${svelteReactWrapperRelativePath}';
 import ${componentName} from './${fileName}';
-import type { ${componentName}Events, ${componentName}Props } from './${fileName}';
+import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from './${fileName}';
+
+export type ${componentName}Props = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
+export type ${componentName}Ref = HTMLElement & ${componentName}Props;
 const Untyped = SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
-export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<ReactProps<${componentName}Props${propParams}, ${componentName}Events${propParams}>>) {
+export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props>) {
     return Untyped(props)
 }
     `.trim();
