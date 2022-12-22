@@ -4,7 +4,7 @@
   import { createEventDispatcher } from 'svelte'
 
   export let dotCount: number
-  export let activeDot: number
+  export let activeDot: number = 0
   export let getDotLabel: (dot: number, isCurrent: boolean) => string = (dot) =>
     `Page ${dot + 1}`
   export let label: string = 'Pagination'
