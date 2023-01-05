@@ -23,13 +23,12 @@
 </script>
 
 <nav class="leo-navdots" aria-label={label}>
-  <ol class="dot-container" part="dot-container" bind:this={container}>
+  <ol class="dot-container" bind:this={container}>
     {#each dots as dot}
       <li>
         <button
           class="dot"
           class:active={dot == activeDot}
-          part="dot"
           aria-current={dot === activeDot}
           aria-label={getDotLabel(dot, dot === activeDot)}
           on:click={() => setActive(dot)}
@@ -37,7 +36,7 @@
       </li>
     {/each}
 
-    <li aria-hidden="true" class="active-dot" part="active-dot" />
+    <li aria-hidden="true" class="active-dot" />
   </ol>
 </nav>
 
