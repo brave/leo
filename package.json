@@ -50,6 +50,7 @@
     "build": "npm run transform-tokens && npm run gen-types && npm run gen-bindings",
     "gen-types": "node ./scripts/gen-svelte-types.js",
     "gen-bindings": "node ./scripts/gen-react-bindings.js",
+    "check": "svelte-check --compiler-warnings \"missing-custom-element-compile-options:ignore\"",
     "transform-tokens": "node ./tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
     "transform:android": "node ./examples/android/build.js",

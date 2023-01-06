@@ -47,7 +47,7 @@
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
 
-  $: tag = href ? 'a' : 'button'
+  $: tag = href ? 'a' : 'button' as 'a' | 'button'
 
   const dispatch = createEventDispatcher()
 
@@ -62,6 +62,7 @@
 <svelte:element
   this={tag}
   href={href || undefined}
+  disabled={isDisabled || undefined}
   class="leoButton"
   class:isPrimary={kind === 'primary'}
   class:isSecondary={kind === 'secondary'}
@@ -71,7 +72,6 @@
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
   class:isLoading
-  disabled={isDisabled || undefined}
   on:click={onClick}
   {...$$restProps}
 >

@@ -44,6 +44,11 @@ jobs:
         run: |
           npm run transform-tokens
 
+      - name: Check Types
+        id: check-types
+        run: |
+          npm run check
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
