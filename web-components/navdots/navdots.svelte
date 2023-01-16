@@ -3,6 +3,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
+  export let animateSlide: boolean = true
   export let dotCount: number
   export let activeDot: number = 0
   export let getDotLabel: (dot: number, isCurrent: boolean) => string = (dot) =>
@@ -13,9 +14,10 @@
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
   $: dots = Array.from(Array(dotCount), (_, i) => i)
 
-  let dispatch = createEventDispatcher<{
-    change: { activeDot: number }
-  }>()
+  let dispatch =
+    createEventDispatcher<{
+      change: { activeDot: number }
+    }>()
 
   function setActive(dot: number) {
     dispatch('change', { activeDot: dot })
@@ -36,7 +38,11 @@
       </li>
     {/each}
 
-    <li aria-hidden="true" class="active-dot" />
+    <li
+      aria-hidden="true"
+      class="active-dot"
+      class:no-animate={!animateSlide}
+    />
   </ol>
 </nav>
 
@@ -44,18 +50,27 @@
   .leo-navdots {
     --dot-size: var(--leo-navdots-size, 8px);
     // Expanded dot grows to fill half spacing in each direction.
-    --expanded-dot-size: var(--leo-navdots-expanded-size, calc(var(--dot-size) + var(--dot-spacing)));
+    --expanded-dot-size: var(
+      --leo-navdots-expanded-size,
+      calc(var(--dot-size) + var(--dot-spacing))
+    );
 
     --dot-spacing: var(--leo-navdots-spacing, 10px);
     --dot-vertical-margin: var(--leo-navdots-vertical-margin, 1px);
     --transition-duration: var(--leo-navdots-transition-duration, 0.2s);
     --transition-easing: var(--leo-navdots-easing, ease-in-out);
-    
-    --active-dot-color: var(--leo-navdots-active-color, var(--color-interaction-button-primary-background));
-    --active-dot-color-hover: var(--leo-navdots-active-color-hover, var(--color-icon-interactive));
+
+    --active-dot-color: var(
+      --leo-navdots-active-color,
+      var(--color-interaction-button-primary-background)
+    );
+    --active-dot-color-hover: var(
+      --leo-navdots-active-color-hover,
+      var(--color-icon-interactive)
+    );
     --dot-color: var(--leo-navdots-color, var(--color-primary-20));
     --dot-color-hover: var(--leo-navdots-color-hover, var(--color-primary-30));
-    
+
     --current-dot: 0;
 
     display: flex;
@@ -101,6 +116,10 @@
         box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
+    }
+
+    .no-animate {
+      --transition-duration: 0;
     }
 
     .active-dot {
