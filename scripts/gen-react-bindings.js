@@ -53,12 +53,9 @@ import SvelteToReact, { type ReactProps } from '${svelteReactWrapperRelativePath
 import ${componentName} from './${fileName}';
 import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from './${fileName}';
 
-export type ${componentName}Props = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
-export type ${componentName}Ref = HTMLElement & ${componentName}Props;
-const Untyped = SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
-export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props>) {
-    return Untyped(props)
-}
+export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
+const ${componentName}React = SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName}) as unknown as ${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>) => JSX.Element;
+export default ${componentName}React;
     `.trim();
 
     return fileContents

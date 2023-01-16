@@ -1,6 +1,5 @@
-import * as React from "react"
-import { useRef, useEffect, forwardRef, ForwardedRef } from 'react'
-import { SvelteComponent, SvelteComponentTyped } from "svelte"
+import { createElement, useRef, useEffect, forwardRef, useCallback, type ForwardedRef, type PropsWithChildren } from "react"
+import type { SvelteComponent, SvelteComponentTyped } from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
 const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
@@ -24,6 +23,8 @@ export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, an
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
+} & {
+  ref?: ForwardedRef<Props>
 }
 
 /**
@@ -33,10 +34,10 @@ export type ReactProps<Props, Events> = Props & {
  * @returns A react component
  */
 export default function SvelteWebComponentToReact<T extends Record<string, any>>(tag: string, component: typeof SvelteComponent) {
-  return forwardRef((props: React.PropsWithChildren<T>, forwardedRef: ForwardedRef<SvelteComponent>) => {
+  return forwardRef((props: PropsWithChildren<T>, forwardedRef: ForwardedRef<SvelteComponent>) => {
     const component = useRef<SvelteComponent>()
 
-    const setRef = React.useCallback((ref: SvelteComponent) => {
+    const setRef = useCallback((ref: SvelteComponent) => {
       if (!ref) {
         console.error('No component for tag', tag)
         return
@@ -123,6 +124,6 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       }
     }, [])
 
-    return React.createElement(tag, { ref: setRef, children: props.children })// as unknown as React.ReactElement<T>
+    return createElement(tag, { ref: setRef, children: props.children })
   })
 }
