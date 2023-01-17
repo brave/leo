@@ -22,7 +22,7 @@
     "@storybook/addon-essentials": "6.5.15",
     "@storybook/addon-interactions": "6.5.15",
     "@storybook/addon-links": "6.5.15",
-    "@storybook/addon-svelte-csf": "2.0.10",
+    "@storybook/addon-svelte-csf": "2.0.11",
     "@storybook/builder-webpack4": "6.5.15",
     "@storybook/builder-webpack5": "6.5.15",
     "@storybook/manager-webpack4": "6.5.15",
