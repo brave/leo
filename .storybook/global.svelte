@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '../build/css/variables.css'
+  import '../tokens/css/variables.css'
 </script>
 
 <style>

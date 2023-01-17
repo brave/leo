@@ -6,8 +6,8 @@ module.exports = {
     builder: 'webpack5',
   },
   "stories": [
-    "../web-components/**/*.stories.svelte",
-    "../web-components/**/*.stories.js",
+    "../src/components/**/*.stories.svelte",
+    "../src/components/**/*.stories.js",
   ],
   "addons": [
     '@storybook/addon-svelte-csf',
@@ -20,7 +20,7 @@ module.exports = {
   svelteOptions: {
     preprocess: sveltePreprocess({
       postcss: {
-        plugins: [require('../postcss/theme')({ useGlobal: true })]
+        plugins: [require('../src/postcss/theme')({ useGlobal: true })]
       }
     }),
     customElement: true,
@@ -42,6 +42,13 @@ module.exports = {
       extensions: [...config.resolve.extensions, ".svelte"],
       mainFields: ["svelte", ...config.resolve.mainFields],
     };
+
+    config.module.rules.push({
+      resolve: {
+        fullySpecified: false,
+        extensions: ['.js', '.ts'],
+      },
+    });
 
     // Return the altered config
     return config;

@@ -1,5 +1,5 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["web-components/**/*"],
+  "include": ["src/components/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }

@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "@ctrl/tinycolor": "3.5.0",
     "@tsconfig/svelte": "3.0.0",
     "lodash.camelcase": "4.3.0",
     "lodash.merge": "4.6.2",
     "style-dictionary": "3.7.2",
-    "svelte": "3.55.1",
+    "svelte": "github:brave/svelte",
     "svelte-check": "3.0.3",
     "svelte-preprocess": "5.0.1",
     "svelte2tsx": "0.6.0",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@storybook/addon-actions": "6.5.15",
     "@storybook/addon-essentials": "6.5.15",
     "@storybook/addon-interactions": "6.5.15",
@@ -34,25 +37,35 @@
     "@types/jest": "29.2.6",
     "babel-loader": "9.1.2",
     "css-loader": "6.7.3",
-    "jest": "29.4.0",
+    "css-tree": "2.3.1",
+    "jest": "29.3.1",
     "postcss": "8.4.21",
     "postcss-js": "4.0.0",
+    "rollup": "^3.10.0",
+    "rollup-plugin-svelte": "^7.1.0",
     "sass": "1.57.1",
     "sass-loader": "13.2.0",
     "style-loader": "3.3.1",
     "svelte-loader": "3.1.5"
   },
   "peerDependencies": {
-    "typescript": "^4.0.0"
+    "react": ">= 16.0.0",
+    "typescript": ">= 4.7.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   },
   "scripts": {
-    "install": "npm run build",
-    "start": "npm run build",
-    "build": "npm run transform-tokens && npm run gen-types && npm run gen-bindings",
-    "gen-types": "node ./scripts/gen-svelte-types.js",
-    "gen-bindings": "node ./scripts/gen-react-bindings.js",
+    "prepare": "npm run build",
+    "build": "npm run transform-tokens && rollup -c rollup.config.js",
+    "dev": "rollup -c rollup.config.js --watch",
     "check": "svelte-check --compiler-warnings \"missing-custom-element-compile-options:ignore\"",
-    "transform-tokens": "node ./tokens/transformTokens.js",
+    "transform-tokens": "node ./src/tokens/transformTokens.js",
     "test": "jest tests --coverage=false",
     "transform:android": "node ./examples/android/build.js",
     "transform:ios": "node ./examples/ios/build.js",

@@ -2,12 +2,15 @@ const fs = require('fs/promises');
 const path = require('path');
 const { getSvelteFiles } = require('./common');
 
+const REACT_BINDINGS_DIRECTORY = 'react/'
+fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
+
 const COMPONENT_PREFIX = 'leo';
-const SVELTE_REACT_WRAPPER_PATH = path.resolve(__dirname, '../web-components/svelte-react');
-const REACT_FILE_NAME = 'react.ts';
+const SVELTE_REACT_WRAPPER_PATH = '../svelte/svelte-react.js';
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
-    const typingsPath = svelteFilePath += '.d.ts'
+    const relativePath = path.relative('./src/components', svelteFilePath)
+    const typingsPath = path.join('svelte', relativePath) + '.d.ts'
     const typingsContents = await fs.readFile(typingsPath);
     const genericsMatcher = new RegExp(`${componentName}<(.*)> extends SvelteComponentTyped`, 'gm')
 
@@ -31,9 +34,6 @@ const getComponentGenerics = async (svelteFilePath, componentName) => {
 }
 
 const getReactFileContents = async (svelteFilePath) => {
-    const fileDir = path.dirname(svelteFilePath);
-    const svelteReactWrapperRelativePath = path.relative(fileDir, SVELTE_REACT_WRAPPER_PATH);
-
     const fileName = path.basename(svelteFilePath);
     const extension = path.extname(fileName);
     const fileNameWithoutExtension = fileName.substring(0, fileName.length - extension.length);
@@ -47,25 +47,30 @@ const getReactFileContents = async (svelteFilePath) => {
         ? `<${generics.map(g => g.name).join(', ')}>`
         : ''
 
-    const fileContents = `
-import type * as React from 'react';
-import SvelteToReact, { type ReactProps } from '${svelteReactWrapperRelativePath}';
-import ${componentName} from './${fileName}';
-import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from './${fileName}';
+    const binding = `
+import SvelteToReact from '${SVELTE_REACT_WRAPPER_PATH}'
+import ${componentName} from '../web-components/${fileNameWithoutExtension}.js'
+export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
+    `.trim()
+
+    const typeDef = `
+import type * as React from 'react'
+import type { ReactProps } from '../src/components/svelte-react'
+import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../svelte/${fileNameWithoutExtension}/${fileName}';
 
 export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
-const ${componentName}React = SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName}) as unknown as ${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>) => JSX.Element;
-export default ${componentName}React;
-    `.trim();
+export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
+    `.trim()
 
-    return fileContents
+    return [binding, typeDef]
 }
 
 const createReactBinding = async (svelteFilePath) => {
-    const contents = await getReactFileContents(svelteFilePath);
-    const reactFilePath = path.join(path.dirname(svelteFilePath), REACT_FILE_NAME);
+    const filename = path.basename(svelteFilePath, '.svelte')
 
-    await fs.writeFile(reactFilePath, contents);
+    const [binding, typeDef] = await getReactFileContents(svelteFilePath);
+    await fs.writeFile(path.join(REACT_BINDINGS_DIRECTORY, `${filename}.js`), binding);
+    await fs.writeFile(path.join(REACT_BINDINGS_DIRECTORY, `${filename}.d.ts`), typeDef);
 }
 
 const createReactBindings = async (rootDir) => {
@@ -75,4 +80,9 @@ const createReactBindings = async (rootDir) => {
     }
 }
 
-createReactBindings('./web-components')
+module.exports = createReactBindings
+
+if (require.main == module) {
+    createReactBindings('./src/components')
+}
+

@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 const path = require('path');
 const { getSvelteFiles } = require('./common');
 
-const tmpFolder = `build/tmp/web-component-types`;
+const tmpFolder = `.tmp`;
 
 const genTypes = async (options = {}) => {
     const { basePath = './', outputDir = './' } = options;
@@ -22,6 +22,7 @@ const genTypes = async (options = {}) => {
 
         const destination = path.join(outputDir, relativePath);
         const destinationDir = path.dirname(destination);
+
         await fs.mkdir(destinationDir, { recursive: true });
         await fs.copyFile(tmpFile, destination);
     }
@@ -29,7 +30,11 @@ const genTypes = async (options = {}) => {
     await fs.rm(tmpFolder, { recursive: true, force: true });
 }
 
-genTypes({
-    basePath: './',
-    outputDir: './web-components',
-}).then(() => console.log('Done'));
+module.exports = genTypes
+
+if (require.main == module) {
+    genTypes({
+        basePath: './',
+        outputDir: './web-components',
+    }).then(() => console.log('Done'));
+}

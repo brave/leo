@@ -1,5 +1,9 @@
 node_modules/
 .DS_Store
 build/
-web-components/**/*.svelte.d.ts
-web-components/**/react.ts
+web-components/
+react/
+shared/
+svelte/
+tokens/
+icons-raw/

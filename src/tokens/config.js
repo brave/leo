@@ -1,10 +1,10 @@
 module.exports = {
-  source: ["tokens/*.json"],
+  source: ["src/tokens/*.json"],
   parsers: [require("./transformation/common/leoParser")],
   platforms: {
     tailwind: {
       transformGroup: "tailwind/css",
-      buildPath: "build/tailwind/",
+      buildPath: "tokens/tailwind/",
       files: [
         {
           destination: "variables.css",
@@ -31,7 +31,7 @@ module.exports = {
     },
     css: {
       transformGroup: "custom/css",
-      buildPath: "build/css/",
+      buildPath: "tokens/css/",
       files: [
         {
           destination: "variables.css",
@@ -45,7 +45,7 @@ module.exports = {
     },
     "json-flat": {
       transformGroup: "js",
-      buildPath: "build/json/",
+      buildPath: "tokens/json/",
       files: [
         {
           destination: "styles.json",
@@ -55,7 +55,7 @@ module.exports = {
     },
     styledComponents: {
       transformGroup: "custom/css",
-      buildPath: "build/styledComponents/",
+      buildPath: "tokens/styledComponents/",
       files: [
         {
           destination: 'theme.ts',
@@ -66,7 +66,7 @@ module.exports = {
     },
     skia: {
       transformGroup: "skia",
-      buildPath: "build/skia/",
+      buildPath: "tokens/skia/",
       files: [
         {
           destination: "Colors.h",
@@ -93,7 +93,7 @@ module.exports = {
     },
     ios: {
       transformGroup: "ios",
-      buildPath: "build/ios/",
+      buildPath: "tokens/ios/",
       files: [
         {
           destination: "StyleDictionaryColor.h",
@@ -133,7 +133,7 @@ module.exports = {
     },
     "ios-swift": {
       transformGroup: "ios-swift",
-      buildPath: "build/ios-swift/",
+      buildPath: "tokens/ios-swift/",
       files: [
         {
           destination: "StyleDictionary.swift",
@@ -145,7 +145,7 @@ module.exports = {
     },
     "ios-swift-separate-enums": {
       transformGroup: "ios-swift-separate",
-      buildPath: "build/ios-swift/",
+      buildPath: "tokens/ios-swift/",
       files: [
         {
           destination: "StyleDictionaryColor.swift",
