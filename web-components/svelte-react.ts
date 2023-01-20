@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react"
+import { createElement, useRef, useEffect, forwardRef, useCallback, type ForwardedRef, type PropsWithChildren } from "react"
 import type { SvelteComponent, SvelteComponentTyped } from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
@@ -23,7 +23,9 @@ export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, an
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
-} 
+} & {
+  ref?: ForwardedRef<Props>
+}
 
 /**
  * 
@@ -31,12 +33,11 @@ export type ReactProps<Props, Events> = Props & {
  * @param component The imported svelte component itself. This is not used, but ensures that the component's code has been included in the bundle.
  * @returns A react component
  */
-export default function SvelteWebComponentToReact<T extends Record<string, any>> (tag: string, component: typeof SvelteComponent) {
-  console.log(component)
-  return function ReactSvelteWebComponent (props: React.PropsWithChildren<T>) {
+export default function SvelteWebComponentToReact<T extends Record<string, any>>(tag: string, component: typeof SvelteComponent) {
+  return forwardRef((props: PropsWithChildren<T>, forwardedRef: ForwardedRef<SvelteComponent>) => {
     const component = useRef<SvelteComponent>()
-    
-    const setRef = React.useCallback((ref: SvelteComponent) => {
+
+    const setRef = useCallback((ref: SvelteComponent) => {
       if (!ref) {
         console.error('No component for tag', tag)
         return
@@ -52,7 +53,11 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
         return
       }
       component.current = ref
-      
+      if (forwardedRef) {
+        if (typeof forwardedRef === 'function') forwardedRef(ref)
+        else forwardedRef.current = ref
+      }
+
       // Events fire callbacks when the event is dispatched
       // from the svelte component.
       // Watchers fire callbacks when the variable (aka property or attribute)
@@ -96,8 +101,18 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
     }, [])
 
     useEffect(() => {
+      // Create a dictionary of all our properties without events. If we pass an
+      // onClick prop through to Svelte, we could inadvertently set it on the
+      // HTMLElement if we use <el {...$restProps}/>, which causes a Svelte to
+      // setAttribute('onClick', props['onClick']). This can lead to unexpected
+      // behavior, and triggers a TrustedTypes error.
+      const propsSansEvents = { ...props }
+      for (const event of Object.keys(props).filter(name => eventRegex.test(name))) {
+        delete propsSansEvents[event]
+      }
+
       if (component.current) {
-        component.current.$set(props)
+        component.current.$set(propsSansEvents)
       }
     }, [props])
 
@@ -109,6 +124,6 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       }
     }, [])
 
-    return React.createElement(tag, { ref: setRef, children: props.children })// as unknown as React.ReactElement<T>
-  }
+    return createElement(tag, { ref: setRef, children: props.children })
+  })
 }
