@@ -53,6 +53,17 @@ module.exports = {
         },
       ],
     },
+    styledComponents: {
+      transformGroup: "custom/css",
+      buildPath: "build/styledComponents/",
+      files: [
+        {
+          destination: 'theme.ts',
+          format: "custom/styledComponentsTheme",
+          filter: "filterWeb"
+        }
+      ]
+    },
     skia: {
       transformGroup: "skia",
       buildPath: "build/skia/",
