@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-All versions including and above the current stable release version number (the version downloadable on https://brave.com/download).
+Any version of adblock-rust used in the current stable release version or above of Brave Browser, or in any other repo under https://github.com/brave. This includes [brave-core](https://github.com/brave/brave-core) and [brave-ios](https://github.com/brave/brave-ios).
 
 ## Reporting a Vulnerability
 
