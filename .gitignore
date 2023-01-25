@@ -1,9 +1,9 @@
 node_modules/
 .DS_Store
-build/
-web-components/
-react/
-shared/
-svelte/
-tokens/
-icons-raw/
+/build/
+/web-components/
+/react/
+/shared/
+/svelte/
+/tokens/
+/icons-raw/
