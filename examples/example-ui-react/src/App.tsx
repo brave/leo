@@ -1,9 +1,7 @@
 import * as React from 'react';
-import "../../../build/css/variables.css"
-import LeoButton from '../../../web-components/button/react'
-import Collapse from '../../../web-components/collapse/react'
+import "../../../tokens/css/variables.css"
+import LeoButton from '../../../react/button'
 import styles from './App.module.css';
-import SvelteReactComponent, { HelloEvent } from './MySvelteComponent/react'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -11,11 +9,6 @@ function App() {
   React.useEffect(() => {
     setTimeout(() => setActed(true), 4000)
   }, [])
-
-  function handleSvelteComponentHello(e: HelloEvent) {
-    console.log('onhello from react', e)
-    alert('react svelte wc hello ' + e.detail.text)
-  }
 
   const [buttonText, setButtonText] = React.useState('I am a LEO Button');
 
@@ -38,12 +31,6 @@ function App() {
           {buttonText}
         </LeoButton>
         <LeoButton href='#foo'>Link button!</LeoButton>
-        <SvelteReactComponent
-          button_text={'ATTRIBUTE TEXT FROM REACT' + (acted ? ':MODIFIED' : '')}
-          onHello={handleSvelteComponentHello}
-        >
-          Inside contents from react{acted ? ' MODIFIED' : ''}
-        </SvelteReactComponent>
       </header>
     </div>
   );

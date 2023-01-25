@@ -24,7 +24,7 @@ export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, 
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
 } & {
-  ref?: ForwardedRef<Props>
+  ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
 }
 
 /**

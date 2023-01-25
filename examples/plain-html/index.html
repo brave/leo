@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+        name="description"
+        content="Web site created using HTML & Web Components" />
+    <link href="./css/variables.css" rel="stylesheet">
+    <title>Web Components</title>
+    <style>
+        .component-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="module">
+        import './leo/button.js'
+        import './leo/collapse.js'
+        import './leo/toggle.js'
+
+        let count = 0;
+        const clickable = document.getElementById('clickable')
+        clickable.addEventListener('click', () => {
+            count += 1
+            clickable.innerText = `Clicks: ${count}`
+        })
+    </script>
+    <div class="component-container">
+        <leo-button id="clickable">Click Me</leo-button>
+        <leo-collapse title="Handy dandy title">
+            Some content which is hidden by default
+        </leo-collapse>
+        <leo-toggle>Togglable!</leo-toggle>
+    </div>
+</body>
+
+</html>

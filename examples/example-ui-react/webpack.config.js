@@ -55,32 +55,6 @@ module.exports = function (argv) {
               ],
           },
           {
-            test: /\.svelte$/,
-            use: {
-              loader: 'svelte-loader',
-              options: {
-                compilerOptions: {
-                  customElement: true,
-                },
-                onwarn: (warning, handler) => {
-                  const { code, frame } = warning;
-                  // Ignore unused CSS selectors,
-                  // since we have CSS selectors that assume
-                  // no shadow DOM (for storybook which does not
-                  // use the web-components version of the components, and
-                  // uses the svelte components directly).
-                  if (code === "css-unused-selector")
-                      return;
-                  handler(warning);
-                },
-                preprocess: require('svelte-preprocess')(),
-                // typescript({ sourceMap: true }),
-                // css: css => { css.write('svelte.css') },
-                // emitCss: true,
-              }
-            }
-          },
-          {
             // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
             test: /node_modules\/svelte\/.*\.mjs$/,
             resolve: {
