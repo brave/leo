@@ -7,5 +7,11 @@
     "renovate"
   ],
   "prConcurrentLimit": 4,
-  "rangeStrategy": "pin"
+  "rangeStrategy": "pin",
+  "packageRules": [
+    {
+      "depTypeList": ["peerDependencies"],
+      "enabled": false
+    }
+  ]
 }
