@@ -21,9 +21,12 @@
 
 <style lang="scss">
     .leo-label {
+        --font-text: var(--leo-label-font-text, var(--font-text-x-small-semibold));
         display: inline;
         border-radius: var(--radius-4);
         padding: var(--spacing-4);
+
+        font: var(--font-text);
     }
 </style>
 
