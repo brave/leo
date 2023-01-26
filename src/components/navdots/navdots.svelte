@@ -109,7 +109,7 @@
         box-shadow var(--transition-duration) var(--transition-easing);
 
       &:hover {
-        background-color: var(--leo-navdots-color-hover);
+        background-color: var(--dot-color-hover);
       }
 
       &:focus-visible:not(.active) {

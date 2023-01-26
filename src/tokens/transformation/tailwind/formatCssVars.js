@@ -1,41 +1,14 @@
 const formattedVariables = require('../web/formattedVariables')
 const fileHeader = require('../web/fileHeader')
-
-const filteredTokens = (dictionary, filterFn) => {
-  let filtered = dictionary.allTokens;
-  if (typeof filterFn === "function") {
-    filtered = dictionary.allTokens.filter(token => filterFn(token))
-  }
-
-  return {
-    ...dictionary,
-    ...{
-      allProperties: filtered,
-      allTokens: filtered
-    }
-  }
-}
-// TODO(petemill): Don't duplicate these functions (and this whole module) 
-// between web/formatCss and tailwind/formatCssColorVars
-function matchColor(token, modifierPathSegment) {
-  return token.path[0]?.toLowerCase() === "color" && token.path.some(pathSegment => pathSegment === modifierPathSegment)
-}
-
-function matchDarkColor(token) {
-  return matchColor(token, 'dark')
-}
-
-function matchLightColor(token) {
-  return matchColor(token, 'light')
-}
+const { filteredTokens, matchDarkThemeToken, matchLightThemeToken } = require('../common/tokenFilters');
 
 module.exports = ({ dictionary, options, file }) => {
   const opts = options ?? {}
   const { outputReferences } = opts
   const groupedTokens = {
     // if you export the prefixes use token.path[0] instead of [1]
-    light: filteredTokens(dictionary, (token) => matchLightColor(token)),
-    dark: filteredTokens(dictionary, (token) => matchDarkColor(token)),
+    light: filteredTokens(dictionary, (token) => matchLightThemeToken(token)),
+    dark: filteredTokens(dictionary, (token) => matchDarkThemeToken(token)),
     rest: filteredTokens(dictionary, (token) => token.type === "color")
   }
 

@@ -1,7 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
 
-const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy']
+const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
 
 function isToken (tokenOrTokenCategory) {
   return !!tokenOrTokenCategory.type

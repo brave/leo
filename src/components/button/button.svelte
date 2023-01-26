@@ -67,7 +67,7 @@
   class:isPrimary={kind === 'primary'}
   class:isSecondary={kind === 'secondary'}
   class:isTertiary={kind === 'tertiary'}
-  class:isCTA={kind === 'CTA'}
+  class:isHero={kind === 'hero'}
   class:isLarge={size === 'large'}
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
@@ -82,9 +82,9 @@
   // Main styles and states
   .leoButton {
     // Gradients cannot have a transition, so we need to reset `transition`
-    // to only apply to `box-shadow` and `border-color` in .isCTA
+    // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
-      border-color 0.12s ease-in-out;
+      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
@@ -203,13 +203,44 @@
       }
     }
   }
-  .leoButton.isCTA {
+  .leoButton.isHero {
     transition: var(--default-transition);
-    --bg: var(--gradient-call-to-action);
-    --bg-hover: var(--color-secondary-40);
-    --bg-active: var(--bg-hover);
+    --bg: transparent;
     --bg-focus: var(--bg);
     --bg-disabled: var(--color-gray-30);
     --color: white;
+    --default-bg-opacity: 1;
+
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+
+    &::before,
+    &::after {
+      content: "";
+      pointer-events: none;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    &::before {
+      transition: var(--default-transition);
+      z-index: -1;
+      background: var(--gradient-hero);
+      opacity: var(--default-bg-opacity);
+    }
+
+    &::after {
+      z-index: -2;
+      background: linear-gradient(101.5deg, #770EAA 21.56%, #B72070 74.97%, #E6461E 104.58%);
+    }
+
+    &:hover {
+      --default-bg-opacity: 0;
+    }
   }
 </style>
