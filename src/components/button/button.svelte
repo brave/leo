@@ -84,7 +84,7 @@
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
-      border-color 0.12s ease-in-out;
+      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--effect-elevation-02);
     display: block;
     cursor: pointer;
@@ -228,7 +228,7 @@
     }
 
     &::before {
-      transition: opacity 0.24s ease-in-out;
+      transition: var(--default-transition);
       z-index: -1;
       background: var(--gradient-hero);
       opacity: var(--default-bg-opacity);
