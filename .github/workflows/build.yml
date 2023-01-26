@@ -40,7 +40,9 @@ jobs:
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci --ignore-scripts
+          npm rebuild style-dictionary-create-react-app
 
       - name: Build Leo
         id: build-leo
