@@ -25,7 +25,7 @@
   </Button>
 </Template>
 
-<Story name="CTA" args={{ kind: 'CTA' }} />
+<Story name="Hero" args={{ kind: 'hero' }} />
 
 <Story name="Primary" args={{ kind: 'primary' }} />
 
@@ -48,21 +48,21 @@
 <Story name="All" let:args>
   <h2 class="label">Large</h2>
   <div class="button-group">
-    <Button kind="CTA" size="large" {...args}>CTA</Button>
+    <Button kind="hero" size="large" {...args}>Hero</Button>
     <Button kind="primary" size="large" {...args}>Primary</Button>
     <Button kind="secondary" size="large" {...args}>Secondary</Button>
     <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
   </div>
   <h2 class="label">Medium</h2>
   <div class="button-group">
-    <Button kind="CTA" size="medium" {...args}>CTA</Button>
+    <Button kind="hero" size="medium" {...args}>Hero</Button>
     <Button kind="primary" size="medium" {...args}>Primary</Button>
     <Button kind="secondary" size="medium" {...args}>Secondary</Button>
     <Button kind="tertiary" size="medium" {...args}>Tertiary</Button>
   </div>
   <h2 class="label">Small</h2>
   <div class="button-group">
-    <Button kind="CTA" size="small" {...args}>CTA</Button>
+    <Button kind="hero" size="small" {...args}>Hero</Button>
     <Button kind="primary" size="small" {...args}>Primary</Button>
     <Button kind="secondary" size="small" {...args}>Secondary</Button>
     <Button kind="tertiary" size="small" {...args}>Tertiary</Button>

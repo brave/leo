@@ -47,7 +47,8 @@ module.exports = {
 
 				for (const [item, itemValue] of items) {
 					// Combine items where figma splits a single-value to multiple values
-					if (["gradient", "elevation"].includes(type) && itemValue && !itemValue.type) {
+					// NOTE: ideal scenario here would be to programmatically determine if values should be grouped or not, instead of manually managing a list.
+					if (["gradient"].includes(type) && itemValue && !itemValue.type) {
 						contents[category][type][item] = groupValues(itemValue);
 					}
 				}
