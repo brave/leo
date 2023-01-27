@@ -212,7 +212,6 @@
     --default-bg-opacity: 1;
 
     position: relative;
-    overflow: hidden;
     z-index: 0;
 
     &::before,
@@ -225,6 +224,7 @@
       right: 0;
       bottom: 0;
       left: 0;
+      border-radius: var(--radius-full);
     }
 
     &::before {
