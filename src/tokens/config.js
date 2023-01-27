@@ -37,6 +37,11 @@ module.exports = {
           options: {
             showFileHeader: true
           }
+        },
+        {
+          destination: 'index.js',
+          format: 'custom/cssJS',
+          filter: 'filterWeb'
         }
       ]
     },
@@ -47,17 +52,6 @@ module.exports = {
         {
           destination: 'styles.json',
           format: 'json/flat'
-        }
-      ]
-    },
-    styledComponents: {
-      transformGroup: 'custom/css',
-      buildPath: 'tokens/styledComponents/',
-      files: [
-        {
-          destination: 'theme.ts',
-          format: 'custom/styledComponentsTheme',
-          filter: 'filterWeb'
         }
       ]
     },

@@ -59,9 +59,6 @@ function formattedVariables(properties) {
 
 module.exports = ({ dictionary, file }) => {
   const themeObject = formattedVariables(dictionary.properties)
-  return (
-    fileHeader({ file }) +
-    'export default ' +
-    JSON.stringify(themeObject, null, 2)
-  )
+  return fileHeader({ file }) + `
+export default ` + JSON.stringify(themeObject, null, 2)
 }
