@@ -13,5 +13,6 @@
       "depTypeList": ["peerDependencies"],
       "enabled": false
     }
-  ]
+  ],
+  "schedule": "at 10:00 am on Sunday"
 }
