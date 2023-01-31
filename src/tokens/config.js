@@ -16,7 +16,7 @@ module.exports = {
           }
         },
         {
-          destination: 'tokens.js',
+          destination: 'tokens.ts',
           format: 'tailwind/tokens',
           filter: 'filterWeb',
           options: {
@@ -39,7 +39,7 @@ module.exports = {
           }
         },
         {
-          destination: 'index.js',
+          destination: 'index.ts',
           format: 'custom/cssJS',
           filter: 'filterWeb'
         }

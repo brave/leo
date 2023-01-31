@@ -28,7 +28,14 @@ function removeSegmentFromNameInAllTokens(tokenCategory, nameSegment) {
 }
 
 function formattedVariables(properties) {
-  const result = {}
+  const result = {
+    // The nonsensical 'toString' property exists to force the category
+    // objects to not be interpreted by styled-components as a CSSObject
+    // (which only allows string values, so we use an array here)
+    // in the event a developer forgets to choose a low-level token property
+    // with a string value. It's named toString to attempt to avoid any confusion.
+    toString: ['']
+  }
   for (const key in properties) {
     let value = properties[key]
     if (!isToken(value)) {
