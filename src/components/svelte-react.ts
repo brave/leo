@@ -1,4 +1,4 @@
-import { createElement, useRef, useEffect, forwardRef, useCallback, type ForwardedRef, type PropsWithChildren } from "react"
+import { createElement, useRef, useEffect, forwardRef, useCallback, useMemo, type ForwardedRef, type PropsWithChildren } from "react"
 import type { SvelteComponent, SvelteComponentTyped } from "svelte"
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
@@ -19,13 +19,25 @@ const watchRegex = /watch([A-Z]{1,}[a-zA-Z]*)/
 //   }
 // }
 
+// Other props we could include here are:
+// dir, lang, translate, autocapitalize, contenteditable, contextmenu, data-*, draggable, itemprop, spellcheck, title
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
+export const intrinsicProps = ['className', 'id', 'hidden', 'role', 'style', 'tabIndex'] as const;
+export const intrinsicPropsSet = new Set<string>(intrinsicProps)
+export type IntrinsicProps = typeof intrinsicProps[number]
+
 export type SvelteProps<T> = T extends SvelteComponentTyped<infer Props, any, any> ? Props : {}
 export type SvelteEvents<T> = T extends SvelteComponentTyped<any, infer Events, any> ? Events : {}
 export type ReactProps<Props, Events> = Props & {
   [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
 } & {
   ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
-}
+} & {
+    // Note: The div here isn't important because all props in intrinsicProps are
+    // available on all elements. We just want to make sure we have the correct
+    // React name/value for them.
+    [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
+  }
 
 /**
  * 
@@ -106,13 +118,15 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       // HTMLElement if we use <el {...$restProps}/>, which causes a Svelte to
       // setAttribute('onClick', props['onClick']). This can lead to unexpected
       // behavior, and triggers a TrustedTypes error.
-      const propsSansEvents = { ...props }
-      for (const event of Object.keys(props).filter(name => eventRegex.test(name))) {
-        delete propsSansEvents[event]
+      const componentProps = { ...props }
+      for (const event of Object.keys(props)
+        // Filter out events - these are handled specially
+        .filter(name => eventRegex.test(name) || intrinsicPropsSet.has(name))) {
+        delete componentProps[event]
       }
 
       if (component.current) {
-        component.current.$set(propsSansEvents)
+        component.current.$set(componentProps)
       }
     }, [props])
 
@@ -124,6 +138,20 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       }
     }, [])
 
-    return createElement(tag, { ref: setRef, children: props.children })
+    // All intrinsic props are passed directly to the web component, rather than
+    // being set on the underlying Svelte component.
+    const wcProps = useMemo(() => {
+      const result = {}
+      for (const key of intrinsicProps) {
+        if (!(key in props)) continue
+        // Note: React doesn't handle properties called |class| properly.
+        // Special casing this in Leo is fine because it makes things more
+        // consistent with the rest of the React ecosystem.
+        result[key === 'className' ? 'class' : key] = props[key]
+      }
+      return result
+    }, [props])
+
+    return createElement(tag, { ...wcProps, ref: setRef, children: props.children })
   })
 }
