@@ -5,12 +5,8 @@ import styles from './App.module.css';
 
 function App() {
   // Verify that we can change props and children (slots)
-  const [acted, setActed] = React.useState(false)
-  React.useEffect(() => {
-    setTimeout(() => setActed(true), 4000)
-  }, [])
-
   const [buttonText, setButtonText] = React.useState('I am a LEO Button');
+  const [spinning, setSpinning] = React.useState(false);
 
   return (
     <div className={styles['App']}>
@@ -21,10 +17,12 @@ function App() {
           <input type="text" value={buttonText} onChange={e => setButtonText(e.target.value)} />
         </label>
         <LeoButton
+          className={spinning ? 'spin' : ''}
           kind='primary'
           size='large'
           onClick={() => {
             location.hash = ''
+            setSpinning(s => !s)
             alert('clicked!')
           }}
         >
