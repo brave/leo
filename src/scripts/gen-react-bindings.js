@@ -65,7 +65,7 @@ const getReactFileContents = async (svelteFilePath) => {
   const binding = `
 import SvelteToReact from '${SVELTE_REACT_WRAPPER_PATH}'
 import ${componentName} from '../web-components/${fileNameWithoutExtension}.js'
-export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', ${componentName});
+export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}', ${componentName});
     `.trim()
 
   const typeDef = `
