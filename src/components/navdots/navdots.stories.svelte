@@ -15,12 +15,16 @@
     dotCount: { control: 'number', defaultValue: 10 },
     dotSize: { control: 'number', defaultValue: 8 },
     activeColor: { control: 'color' },
-    defaultColor: { control: 'color' },
+    defaultColor: { control: 'color' }
   }}
 />
 
 <Template let:args>
-  <div style={`--leo-navdots-active-color: ${args.activeColor || 'unset'}; --leo-navdots-color: ${args.defaultColor || 'unset'}`}>
+  <div
+    style={`--leo-navdots-active-color: ${
+      args.activeColor || 'unset'
+    }; --leo-navdots-color: ${args.defaultColor || 'unset'}`}
+  >
     <NavDots {activeDot} on:change={handleChange} {...args} />
   </div>
 </Template>

@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       # CodeQL analyzed languages
       matrix:
-        language: [ 'generic', 'javascript' ]
+        language: ['generic', 'javascript']
     steps:
       - uses: actions/checkout@v3
         with:

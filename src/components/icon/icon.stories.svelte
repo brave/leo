@@ -12,7 +12,7 @@
       control: 'text',
       description: 'The name of the icon to use',
       type: 'string',
-      defaultValue: 'shield-alert-filled',
+      defaultValue: 'shield-alert-filled'
     },
     color: {
       control: 'color',
@@ -24,15 +24,13 @@
       control: 'number',
       description: 'The size of the icon (defaults to 24px if not set)',
       type: 'number',
-      defaultValue: 24,
-    },
+      defaultValue: 24
+    }
   }}
 />
 
 <Template let:args>
-  <div
-    style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}
-  >
+  <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
     <Icon {...args} />
   </div>
 </Template>
@@ -40,9 +38,7 @@
 <Story name="Default" />
 
 <Story name="Custom Icon" let:args>
-  <div
-    style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}
-  >
+  <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
     This icon isn't rendered from our libray - instead an SVG is passed in via a
     slot. This allows consumers of the libary to import their own SVGs and use
     them directly inside an icon.

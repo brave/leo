@@ -96,7 +96,7 @@
       </div>
     </div>
   </button>
-  <slot></slot>
+  <slot />
 </label>
 
 <style lang="scss">

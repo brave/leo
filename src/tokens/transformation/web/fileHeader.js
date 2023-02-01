@@ -45,7 +45,7 @@ const defaultFormatting = {
  * });
  * ```
  */
-function fileHeader ({ file = {}, commentStyle, formatting = {} }) {
+function fileHeader({ file = {}, commentStyle, formatting = {} }) {
   // showFileHeader is true by default
   let showFileHeader = true
   if (file.options && typeof file.options.showFileHeader !== 'undefined') {
@@ -66,7 +66,11 @@ function fileHeader ({ file = {}, commentStyle, formatting = {} }) {
     `Generated on ${new Date().toString()}`
   ]
 
-  let { prefix, lineSeparator, header, footer } = Object.assign({}, defaultFormatting, formatting)
+  let { prefix, lineSeparator, header, footer } = Object.assign(
+    {},
+    defaultFormatting,
+    formatting
+  )
 
   if (commentStyle === 'short') {
     prefix = '// '
@@ -79,7 +83,7 @@ function fileHeader ({ file = {}, commentStyle, formatting = {} }) {
   }
 
   return `${header}${fn(defaultHeader)
-    .map(line => `${prefix}${line}`)
+    .map((line) => `${prefix}${line}`)
     .join(lineSeparator)}${footer}`
 }
 

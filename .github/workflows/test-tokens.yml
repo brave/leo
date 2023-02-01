@@ -4,9 +4,9 @@ name: Testing
 
 on:
   workflow_run:
-    workflows: ["Transform tokens send from figma"]
+    workflows: ['Transform tokens send from figma']
     types: [completed]
-    
+
 jobs:
   test:
     runs-on: ubuntu-latest

@@ -11,10 +11,10 @@ require('./transformation/skia')
 StyleDictionary.registerTransform({
   name: 'size/percent',
   type: 'value',
-  matcher: token => {
+  matcher: (token) => {
     return token.unit === 'percent' && token.value !== 0
   },
-  transformer: token => {
+  transformer: (token) => {
     return `${token.value}%`
   }
 })

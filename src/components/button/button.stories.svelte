@@ -15,7 +15,7 @@
   component={Button}
   argTypes={{
     kind: { control: 'select', options: buttonKinds },
-    size: { control: 'select', options: buttonSizes },
+    size: { control: 'select', options: buttonSizes }
   }}
 />
 
@@ -32,18 +32,6 @@
 <Story name="Secondary" source args={{ kind: 'secondary' }} />
 
 <Story name="Tertiary" source args={{ kind: 'tertiary' }} />
-
-<style>
-  .button-group {
-    margin-bottom: 24px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
-  .label {
-    font: 500 14px sans-serif;
-  }
-</style>
 
 <Story name="All" let:args>
   <h2 class="label">Large</h2>
@@ -68,3 +56,15 @@
     <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
   </div>
 </Story>
+
+<style>
+  .button-group {
+    margin-bottom: 24px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .label {
+    font: 500 14px sans-serif;
+  }
+</style>

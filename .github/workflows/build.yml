@@ -4,7 +4,7 @@ on:
     branches:
       - main
   push:
-    branches:    
+    branches:
       - main
   workflow_dispatch:
 
@@ -55,6 +55,11 @@ jobs:
         run: |
           npm run transform-tokens
 
+      - name: Format
+        id: format
+        run: |
+          npm run format-diff
+
       - name: Check Types
         id: check-types
         run: |
@@ -71,7 +76,7 @@ jobs:
         id: build-site
         env:
           AWS_REGION: us-west-2
-          NODE_OPTIONS: "--max_old_space_size=6144"
+          NODE_OPTIONS: '--max_old_space_size=6144'
         run: |
           shopt -s inherit_errexit
           set -xeEo pipefail

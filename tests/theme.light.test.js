@@ -3,7 +3,8 @@ const { run } = require('./theme.common')
 /* Write tests here */
 
 it('Converts the base case', async () => {
-    await run(`.component {
+  await run(
+    `.component {
     padding: 12px;
     background: pink;
     display: flex;
@@ -15,7 +16,8 @@ it('Converts the base case', async () => {
       background: red;
       flex-direction: column;
     }
-  }`, `:root, :root[data-theme=light], [data-theme=light] {
+  }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
   }
@@ -37,11 +39,14 @@ it('Converts the base case', async () => {
     display: flex;
     background: var(--\\.component_background);
     flex-direction: var(--\\.component_flex-direction);
-  }`, {})
+  }`,
+    {}
+  )
 })
 
 it('Selectors can be overridden', async () => {
-    await run(`.component {
+  await run(
+    `.component {
     padding: 12px;
     background: pink;
     display: flex;
@@ -53,7 +58,8 @@ it('Selectors can be overridden', async () => {
       background: red;
       flex-direction: column;
     }
-  }`, `:root, :root.light, .light {
+  }`,
+    `:root, :root.light, .light {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
   }
@@ -75,17 +81,21 @@ it('Selectors can be overridden', async () => {
     display: flex;
     background: var(--\\.component_background);
     flex-direction: var(--\\.component_flex-direction);
-  }`, { lightSelector: '.light', darkSelector: '.dark' })
+  }`,
+    { lightSelector: '.light', darkSelector: '.dark' }
+  )
 })
 
 it('Handles no dark mode', async () => {
-    await run(`
+  await run(
+    `
   @theme (light) {
     .component {
       background: red;
       color: white;
     }
-  }`, `:root, :root[data-theme=light], [data-theme=light] {
+  }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: red;
     --\\.component_color: white;
   }
@@ -105,11 +115,14 @@ it('Handles no dark mode', async () => {
   .component {
       background: var(--\\.component_background);
       color: var(--\\.component_color);
-  }`, {})
+  }`,
+    {}
+  )
 })
 
 it('Converts lightmode only properties', async () => {
-    await run(`.component {
+  await run(
+    `.component {
     background: pink;
   }
 
@@ -118,7 +131,8 @@ it('Converts lightmode only properties', async () => {
       background: red;
       color: white;
     }
-  }`, `:root, :root[data-theme=light], [data-theme=light] {
+  }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: red;
     --\\.component_color: white;
   }
@@ -138,11 +152,14 @@ it('Converts lightmode only properties', async () => {
   .component {
       background: var(--\\.component_background);
       color: var(--\\.component_color);
-  }`, {})
+  }`,
+    {}
+  )
 })
 
 it('Converts nested selectors', async () => {
-    await run(`
+  await run(
+    `
     .component .foo {
       background: pink;
     }
@@ -151,7 +168,8 @@ it('Converts nested selectors', async () => {
       .component .foo {
         background: red;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\.foo_background: red;
     }
@@ -168,11 +186,13 @@ it('Converts nested selectors', async () => {
 
     .component .foo {
       background: var(--\\.component_\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts sibling selectors', async () => {
-    await run(`
+  await run(
+    `
     .component + .foo {
       background: red;
     }
@@ -181,7 +201,8 @@ it('Converts sibling selectors', async () => {
       .component + .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\+_\\.foo_background: pink;
     }
@@ -198,11 +219,13 @@ it('Converts sibling selectors', async () => {
 
     .component + .foo {
       background: var(--\\.component_\\+_\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts child selectors', async () => {
-    await run(`
+  await run(
+    `
     .component > .foo {
       background: red;
     }
@@ -211,7 +234,8 @@ it('Converts child selectors', async () => {
       .component > .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\>_\\.foo_background: pink;
     }
@@ -228,11 +252,13 @@ it('Converts child selectors', async () => {
 
     .component > .foo {
       background: var(--\\.component_\\>_\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts general sibling selectors', async () => {
-    await run(`
+  await run(
+    `
     .component ~ .foo {
       background: red;
     }
@@ -241,7 +267,8 @@ it('Converts general sibling selectors', async () => {
       .component ~ .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_\\~_\\.foo_background: pink;
     }
@@ -258,11 +285,13 @@ it('Converts general sibling selectors', async () => {
 
     .component ~ .foo {
       background: var(--\\.component_\\~_\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (dark and light same)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       background: red;
     }
@@ -271,7 +300,8 @@ it('Converts multi selectors (dark and light same)', async () => {
       .component, .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
@@ -295,11 +325,13 @@ it('Converts multi selectors (dark and light same)', async () => {
     
     .foo {
       background: var(--\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (dark and light same, with remainder)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       padding: 12px;
       background: red;
@@ -309,7 +341,8 @@ it('Converts multi selectors (dark and light same, with remainder)', async () =>
       .component, .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
@@ -335,11 +368,13 @@ it('Converts multi selectors (dark and light same, with remainder)', async () =>
     .foo {
       padding: 12px;
       background: var(--\\.foo_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (light subset of dark)', async () => {
-    await run(`
+  await run(
+    `
     .component {
       background: red;
     }
@@ -348,7 +383,8 @@ it('Converts multi selectors (light subset of dark)', async () => {
       .component, .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
@@ -372,11 +408,13 @@ it('Converts multi selectors (light subset of dark)', async () => {
 
     .component {
       background: var(--\\.component_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (light subset of dark, with remainder)', async () => {
-    await run(`
+  await run(
+    `
     .component {
       background: red;
       padding: 12px;
@@ -386,7 +424,8 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
       .component, .foo {
         background: pink;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: pink;
       --\\.foo_background: pink;
@@ -411,11 +450,13 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
     .component {
       padding: 12px;
       background: var(--\\.component_background);
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (light subset of dark)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       background: red;
     }
@@ -424,7 +465,8 @@ it('Converts multi selectors (light subset of dark)', async () => {
       .component {
         background: white;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: white;
     }
@@ -445,11 +487,13 @@ it('Converts multi selectors (light subset of dark)', async () => {
     
     .foo {
       background: red;
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (light subset of base, with remainder)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       padding: 12px;
       background: pink;
@@ -459,7 +503,8 @@ it('Converts multi selectors (light subset of base, with remainder)', async () =
       .component {
         background: red;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_background: red;
     }
@@ -482,11 +527,13 @@ it('Converts multi selectors (light subset of base, with remainder)', async () =
     .foo {
       padding: 12px;
       background: pink;
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (light subset of dark, with unset)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       background: pink;
     }
@@ -496,7 +543,8 @@ it('Converts multi selectors (light subset of dark, with unset)', async () => {
         padding: 12px;
         background: red;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_padding: 12px;
       --\\.component_background: red;
@@ -521,11 +569,13 @@ it('Converts multi selectors (light subset of dark, with unset)', async () => {
     
     .foo {
       background: pink;
-    }`)
+    }`
+  )
 })
 
 it('Converts multi selectors (weird intersection)', async () => {
-    await run(`
+  await run(
+    `
     .component, .foo {
       margin: 8px;
       background: pink;
@@ -536,7 +586,8 @@ it('Converts multi selectors (weird intersection)', async () => {
         padding: 12px;
         background: red;
       }
-    }`, `
+    }`,
+    `
     :root, :root[data-theme=light], [data-theme=light] {
       --\\.component_padding: 12px;
       --\\.component_background: red;
@@ -574,5 +625,6 @@ it('Converts multi selectors (weird intersection)', async () => {
     .foo {
       margin: 8px;
       background: pink;
-    }`)
+    }`
+  )
 })

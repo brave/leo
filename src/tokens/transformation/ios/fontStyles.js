@@ -3,7 +3,9 @@ const camelCase = require('../common/camelCaseHelper')
 const fontStyleTemplate = require('./fontStyleTemplate')
 
 const fontFile = ({ fontFamily, fontWeight }, fontOpts) => {
-  return fontOpts && fontOpts[`${fontFamily}.${fontWeight}`] ? fontOpts[`${fontFamily}.${fontWeight}`] : fontFamily
+  return fontOpts && fontOpts[`${fontFamily}.${fontWeight}`]
+    ? fontOpts[`${fontFamily}.${fontWeight}`]
+    : fontFamily
 }
 
 /**
@@ -27,22 +29,39 @@ module.exports = {
     // cycle through all tokens
     dictionary.allTokens
       // filter out custom styles
-      .filter(token => token.type === 'custom-fontStyle')
+      .filter((token) => token.type === 'custom-fontStyle')
       // remove all underline styles (they can not be used like this in iOS)
-      .filter(token => token.original.value.textDecoration !== 'underline')
+      .filter((token) => token.original.value.textDecoration !== 'underline')
       // split int 2 parts: font & fontSize, lineheight, leading
       .forEach(({ original: { value }, path }) => {
         // chaning name & removeing "font" from name for better DX
         const name = camelCase(path.slice(1).join(' '))
         // lineheight
-        fontStyles.lineheight.push(`public static let ${name} = ${(value.lineHeight / value.fontSize).toFixed(2)}`)
+        fontStyles.lineheight.push(
+          `public static let ${name} = ${(
+            value.lineHeight / value.fontSize
+          ).toFixed(2)}`
+        )
         // leading
-        fontStyles.leading.push(`public static let ${name} = ${(1 + value.letterSpacing / value.fontSize).toFixed(2)}`)
+        fontStyles.leading.push(
+          `public static let ${name} = ${(
+            1 +
+            value.letterSpacing / value.fontSize
+          ).toFixed(2)}`
+        )
         // font style
-        fontStyles.font.push(`public static let ${name} = UIFontMetrics.default.scaledFont(for: UIFont(name: "${fontFile(value, platform.options.fontFamilies)}", size: ${value.fontSize})!)`)
+        fontStyles.font.push(
+          `public static let ${name} = UIFontMetrics.default.scaledFont(for: UIFont(name: "${fontFile(
+            value,
+            platform.options.fontFamilies
+          )}", size: ${value.fontSize})!)`
+        )
       })
     // write .swift file with definitions for defaults
-    fs.writeFileSync(`${assetPath}/${fontStyles.filename}`, fontStyleTemplate(fontStyles))
+    fs.writeFileSync(
+      `${assetPath}/${fontStyles.filename}`,
+      fontStyleTemplate(fontStyles)
+    )
   },
   undo: function (dictionary, platform) {
     // no undo

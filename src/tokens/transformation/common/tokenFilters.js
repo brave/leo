@@ -1,7 +1,7 @@
 const filteredTokens = (dictionary, filterFn) => {
-  let filtered = dictionary.allTokens;
-  if (typeof filterFn === "function") {
-    filtered = dictionary.allTokens.filter(token => filterFn(token))
+  let filtered = dictionary.allTokens
+  if (typeof filterFn === 'function') {
+    filtered = dictionary.allTokens.filter((token) => filterFn(token))
   }
 
   return {
@@ -14,7 +14,11 @@ const filteredTokens = (dictionary, filterFn) => {
 }
 
 function matchThemableToken(token, modifierPathSegment) {
-  return (token.path[0]?.toLowerCase() === "color" || token.path.includes("elevation")) && token.path.includes(modifierPathSegment)
+  return (
+    (token.path[0]?.toLowerCase() === 'color' ||
+      token.path.includes('elevation')) &&
+    token.path.includes(modifierPathSegment)
+  )
 }
 
 function matchDarkThemeToken(token) {

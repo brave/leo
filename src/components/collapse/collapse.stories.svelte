@@ -8,7 +8,7 @@
   title="Collapse"
   component={Collapse}
   argTypes={{
-    open: { control: 'select', options: [undefined, true, false] },
+    open: { control: 'select', options: [undefined, true, false] }
   }}
 />
 

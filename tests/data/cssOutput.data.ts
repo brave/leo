@@ -1,5 +1,4 @@
-module.exports = 
-`:root {
+module.exports = `:root {
   --sizes-32: 32.72px;
   --sizes-40: 40px;
   --sizes-60: 60px;

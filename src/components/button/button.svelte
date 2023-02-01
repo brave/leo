@@ -47,7 +47,7 @@
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
 
-  $: tag = href ? 'a' : 'button' as 'a' | 'button'
+  $: tag = href ? 'a' : ('button' as 'a' | 'button')
 
   const dispatch = createEventDispatcher()
 
@@ -216,7 +216,7 @@
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       pointer-events: none;
       display: block;
       position: absolute;
@@ -236,7 +236,12 @@
 
     &::after {
       z-index: -2;
-      background: linear-gradient(101.5deg, #770EAA 21.56%, #B72070 74.97%, #E6461E 104.58%);
+      background: linear-gradient(
+        101.5deg,
+        #770eaa 21.56%,
+        #b72070 74.97%,
+        #e6461e 104.58%
+      );
     }
 
     &:hover {

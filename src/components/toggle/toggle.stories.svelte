@@ -11,7 +11,11 @@
     toggleWidth: { control: 'range', min: 10, max: 200, defaultValue: 56 },
     toggleHeight: { control: 'range', min: 10, max: 100, defaultValue: 32 },
     size: { control: 'select', options: sizes, defaultValue: 'medium' },
-    labelDirection: { control: 'select', options: ['row', 'row-reverse'], defaultValue: 'row' },
+    labelDirection: {
+      control: 'select',
+      options: ['row', 'row-reverse'],
+      defaultValue: 'row'
+    },
     label: { control: 'text', defaultValue: 'Label' }
   }}
 />
