@@ -1,7 +1,8 @@
 const { run } = require('./theme.common')
 
 it('Can mix theme overrides', () =>
-  run(`.component {
+  run(
+    `.component {
         padding: 12px;
         color: white;
         background: white;
@@ -17,7 +18,8 @@ it('Can mix theme overrides', () =>
     .component {
         background: black;
     }
-  }`, `:root, :root[data-theme=light], [data-theme=light] {
+  }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
     --\\.component_background: white;
     --\\.component_color: black;
   }
@@ -38,10 +40,13 @@ it('Can mix theme overrides', () =>
     padding: 12px;
     background: var(--\\.component_background);
     color: var(--\\.component_color);
-  }`, {}))
+  }`,
+    {}
+  ))
 
 it('Light & Dark mode can be specified for a property', () =>
-  run(`.component {
+  run(
+    `.component {
       no-override: none;
       override-both: both;
       override-light: dark;
@@ -62,7 +67,8 @@ it('Light & Dark mode can be specified for a property', () =>
       override-dark: dark;
       new-dark: dark;
     }
-    }`, `:root, :root[data-theme=light], [data-theme=light] {
+    }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
       --\\.component_override-both: light;
       --\\.component_override-dark: light;
       --\\.component_new-dark: unset;
@@ -95,10 +101,13 @@ it('Light & Dark mode can be specified for a property', () =>
       new-dark: var(--\\.component_new-dark);
       override-light: var(--\\.component_override-light);
       new-light: var(--\\.component_new-light);
-    }`, {}))
+    }`,
+    {}
+  ))
 
 it('Light & Dark mode work with weird class overlaps', () =>
-  run(`.component, .other, .no-override {
+  run(
+    `.component, .other, .no-override {
       padding: 12px;
       color: red;
     }
@@ -115,7 +124,8 @@ it('Light & Dark mode work with weird class overlaps', () =>
       color: white;
       dark: dark;
     }
-    }`, `:root, :root[data-theme=light], [data-theme=light] {
+    }`,
+    `:root, :root[data-theme=light], [data-theme=light] {
       --\\.component_color: black;
       --\\.component_dark: unset;
       --\\.component_light: light;
@@ -183,10 +193,13 @@ it('Light & Dark mode work with weird class overlaps', () =>
     .no-override {
       padding: 12px;
       color: red;
-    }`, {}))
+    }`,
+    {}
+  ))
 
 it('Handles useGlobal', () =>
-    run(`.component {
+  run(
+    `.component {
           padding: 12px;
           color: white;
           background: white;
@@ -202,7 +215,8 @@ it('Handles useGlobal', () =>
       .component {
           background: black;
       }
-    }`, `:global(:root), :global(:root[data-theme=light]), :global([data-theme=light]) {
+    }`,
+    `:global(:root), :global(:root[data-theme=light]), :global([data-theme=light]) {
       --\\.component_background: white;
       --\\.component_color: black;
     }
@@ -223,4 +237,6 @@ it('Handles useGlobal', () =>
       padding: 12px;
       background: var(--\\.component_background);
       color: var(--\\.component_color);
-    }`, { useGlobal: true }))
+    }`,
+    { useGlobal: true }
+  ))

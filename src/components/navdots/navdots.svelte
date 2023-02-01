@@ -14,10 +14,9 @@
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
   $: dots = Array.from(Array(dotCount), (_, i) => i)
 
-  let dispatch =
-    createEventDispatcher<{
-      change: { activeDot: number }
-    }>()
+  let dispatch = createEventDispatcher<{
+    change: { activeDot: number }
+  }>()
 
   function setActive(dot: number) {
     dispatch('change', { activeDot: dot })

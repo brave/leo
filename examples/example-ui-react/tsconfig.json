@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
     "plugins": [
-      { "name": "typescript-plugin-css-modules" }, 
+      { "name": "typescript-plugin-css-modules" },
       { "name": "typescript-svelte-plugin" }
     ],
     "target": "ES2018",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -23,7 +19,5 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
