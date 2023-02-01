@@ -39,6 +39,11 @@ const getComponentGenerics = async (svelteFilePath, componentName) => {
 }
 
 const getReactFileContents = async (svelteFilePath) => {
+  // for example:
+  // ./src/components/button/button.svelte ==> button
+  // ./src/components/button/big-button/big.svelte ==> button/big-button
+  const containingFolder = path.relative('./src/components', path.resolve(svelteFilePath, '../'))
+
   const fileName = path.basename(svelteFilePath)
   const extension = path.extname(fileName)
   const fileNameWithoutExtension = fileName.substring(
@@ -66,7 +71,7 @@ export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension}', 
   const typeDef = `
 import type * as React from 'react'
 import type { ReactProps } from '../src/components/svelte-react'
-import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../svelte/${fileNameWithoutExtension}/${fileName}';
+import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../svelte/${containingFolder}/${fileName}';
 
 export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
 export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
