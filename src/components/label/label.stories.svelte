@@ -24,14 +24,14 @@
       control: 'text',
       description: 'Icon to the left',
       type: 'text',
-      defaultValue: 'check-circle-outline',
+      defaultValue: 'check-circle-outline'
     },
     rightIcon: {
       control: 'text',
       description: 'Icon to the right',
       type: 'text',
-      defaultValue: 'check-circle-outline',
-    },
+      defaultValue: 'check-circle-outline'
+    }
   }}
 />
 

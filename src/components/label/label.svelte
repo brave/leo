@@ -10,7 +10,7 @@
     'purple',
     'pink',
     'teal',
-    'hero',
+    'hero'
   ] as const
   export type Color = typeof colors[number]
 
