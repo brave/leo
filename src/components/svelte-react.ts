@@ -119,10 +119,10 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
       // setAttribute('onClick', props['onClick']). This can lead to unexpected
       // behavior, and triggers a TrustedTypes error.
       const componentProps = { ...props }
-      for (const event of Object.keys(props)
-        // Filter out events - these are handled specially
+      for (const reserved of Object.keys(props)
+        // Filter out events & intrinsicProps - these are handled specially
         .filter(name => eventRegex.test(name) || intrinsicPropsSet.has(name))) {
-        delete componentProps[event]
+        delete componentProps[reserved]
       }
 
       if (component.current) {
@@ -141,7 +141,7 @@ export default function SvelteWebComponentToReact<T extends Record<string, any>>
     // All intrinsic props are passed directly to the web component, rather than
     // being set on the underlying Svelte component.
     const wcProps = useMemo(() => {
-      const result = {}
+      const result: any = {}
       for (const key of intrinsicProps) {
         if (!(key in props)) continue
         // Note: React doesn't handle properties called |class| properly.
