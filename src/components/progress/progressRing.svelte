@@ -4,13 +4,20 @@
   export let progress = 0
   export let radius = 24
   export let strokeWidth = 4
+  export let mode: 'determinate' | 'indeterminate' = 'indeterminate'
+
+  $: progress = mode === 'determinate' ? progress : 0.25
 
   $: normalizedRadius = radius - strokeWidth
   $: circumference = normalizedRadius * 2 * Math.PI
 </script>
 
-<div class="leo-progressring" style="width: {radius*2}px; height: {radius*2}px">
-  <slot></slot>
+<div
+  class="leo-progressring"
+  class:spin={mode === 'indeterminate'}
+  style="width: {radius * 2}px; height: {radius * 2}px"
+>
+  <slot />
   <svg width={radius * 2} height={radius * 2}>
     <circle
       r={normalizedRadius}
@@ -24,7 +31,7 @@
       stroke="var(--stroke-color)"
       stroke-dasharray="{circumference} {circumference}"
       stroke-width={strokeWidth}
-      stroke-dashoffset={circumference*(1-progress)}
+      stroke-dashoffset={circumference * (1 - progress)}
       fill="transparent"
       r={normalizedRadius}
       cx={radius}
