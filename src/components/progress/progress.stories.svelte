@@ -5,28 +5,20 @@
   import Icon from '../icon/icon.svelte'
 </script>
 
-<Meta
-  title="Progress Components"
-  component={Ring}
-  argTypes={{
-    color: { control: 'color', defaultValue: 'var(--color-icon-default)' }
-  }}
-/>
+<Meta title="Progress Components" component={Ring} argTypes={{}} />
 
 <Story name="Ring" let:args>
   <Ring {...args} />
 </Story>
 
 <Story name="Ring Icon" let:args>
-  <div style="color: {args.color}">
-    <Ring {...args}>
+  <Ring {...args}>
+    <div style="color: var(--color-icon-default)">
       <Icon name="notification" />
-    </Ring>
-  </div>
+    </div>
+  </Ring>
 </Story>
 
 <Story name="Bar" let:args>
-  <div style="color: {args.color}">
-    <Bar {...args} />
-  </div>
+  <Bar {...args} />
 </Story>

@@ -9,7 +9,7 @@
   $: circumference = normalizedRadius * 2 * Math.PI
 </script>
 
-<div class="leo-progressring">
+<div class="leo-progressring" style="width: {radius*2}px; height: {radius*2}px">
   <slot></slot>
   <svg width={radius * 2} height={radius * 2}>
     <circle
@@ -51,8 +51,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
 
     svg {
       position: absolute;
