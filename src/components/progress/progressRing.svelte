@@ -6,7 +6,7 @@
   export let strokeWidth = 4
   export let mode: 'determinate' | 'indeterminate' = 'indeterminate'
 
-  $: progress = mode === 'determinate' ? progress : 0.25
+  $: progress = mode === 'indeterminate' ? 0.25 : progress
 
   $: normalizedRadius = radius - strokeWidth
   $: circumference = normalizedRadius * 2 * Math.PI
@@ -41,7 +41,16 @@
 </div>
 
 <style lang="scss">
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   .leo-progressring {
+    --spin-rate: var(--leo-progressring-spin-rate, 1s);
     --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
     --stroke-color: var(
       --leo-progress-stroke-color,
@@ -65,6 +74,13 @@
       top: 0;
       right: 0;
       bottom: 0;
+    }
+
+    &.spin svg {
+      animation-duration: var(--spin-rate);
+      animation-name: spin;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
     }
 
     circle {
