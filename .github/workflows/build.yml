@@ -55,11 +55,6 @@ jobs:
         run: |
           npm run transform-tokens
 
-      - name: Format
-        id: format
-        run: |
-          npm run format-diff
-
       - name: Check Types
         id: check-types
         run: |
