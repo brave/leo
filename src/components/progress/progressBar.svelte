@@ -25,7 +25,6 @@
         var(--color-interaction-button-primary-background)
       );
       border-radius: var(--radius);
-
     }
   }
 </style>

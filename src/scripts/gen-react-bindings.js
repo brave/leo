@@ -42,7 +42,10 @@ const getReactFileContents = async (svelteFilePath) => {
   // for example:
   // ./src/components/button/button.svelte ==> button
   // ./src/components/button/big-button/big.svelte ==> button/big-button
-  const containingFolder = path.relative('./src/components', path.resolve(svelteFilePath, '../'))
+  const containingFolder = path.relative(
+    './src/components',
+    path.resolve(svelteFilePath, '../')
+  )
 
   const fileName = path.basename(svelteFilePath)
   const extension = path.extname(fileName)
