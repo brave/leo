@@ -15,8 +15,10 @@ import { getSvelteFiles } from './src/scripts/common.js'
 const COMPONENTS_FOLDER = path.resolve('./', 'src', 'components')
 const inputs = []
 
-for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false))
+for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
   inputs.push(file)
+}
+
 inputs.push('./src/components/svelte-react.ts')
 
 export default {
