@@ -24,12 +24,22 @@
       import './leo/button.js'
       import './leo/collapse.js'
       import './leo/toggle.js'
+      import './leo/progressRing.js'
+      import './leo/progressBar.js'
 
-      let count = 0
+      let count = 10
       const clickable = document.getElementById('clickable')
+      const ring = document.querySelector('leo-progressring')
+      const bar = document.querySelector('leo-progressbar')
+
       clickable.addEventListener('click', () => {
-        count += 1
-        clickable.innerText = `Clicks: ${count}`
+        count += 10
+        if (count > 100) count = 0
+
+        const progress = count/100
+        clickable.innerText = `Progress: ${progress}`
+        ring.progress = progress
+        bar.progress = progress
       })
     </script>
     <div class="component-container">
@@ -38,6 +48,8 @@
         Some content which is hidden by default
       </leo-collapse>
       <leo-toggle>Togglable!</leo-toggle>
+      <leo-progressring progress="0.25"></leo-progressring>
+      <leo-progressbar progress="0.25"></leo-progressbar>
     </div>
   </body>
 </html>
