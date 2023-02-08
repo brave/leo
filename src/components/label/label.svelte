@@ -45,7 +45,7 @@
 <style lang="scss">
   .leo-label {
     --icon-size: var(--leo-label-icon-size, 13px);
-    --font-text: var(--leo-label-font-text, var(--font-text-x-small-semibold));
+    --font-text: var(--leo-label-font-text, var(--font-components-label));
     --padding: var(--leo-label-padding, var(--spacing-4));
     --radius: var(--leo-label-radius, var(--radius-4));
 
