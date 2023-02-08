@@ -1,0 +1,16 @@
+name: cleanup
+
+on:
+  schedule:
+    - cron: '30 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    uses: brave/devops-github-workflows/.github/workflows/cleanup_buckets.yml@main
+    with:
+      environment: staging
+    secrets:
+      AWS_REGION: us-west-2
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
