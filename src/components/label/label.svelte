@@ -10,28 +10,28 @@
     'purple',
     'pink',
     'teal',
-    'hero'
+    'CTA'
   ] as const
   export type Color = typeof colors[number]
 
-  export const modes = ['faint', 'heavy'] as const
+  export const modes = ['default', 'loud'] as const
   export type Mode = typeof modes[number]
 </script>
 
 <script lang="ts">
-  export let mode: Mode = 'faint'
+  export let mode: Mode = 'default'
   export let color: Color = 'gray'
 
   $: background =
-    color === 'hero'
+    color === 'CTA'
       ? `var(--gradient-hero)`
-      : mode === 'heavy'
+      : mode === 'loud'
       ? `var(--color-${color}-40)`
       : `var(--color-${color}-10)`
   $: text =
-    color === 'hero'
+    color === 'CTA'
       ? `var(--color-white)`
-      : mode === 'heavy'
+      : mode === 'loud'
       ? `var(--color-${color}-10)`
       : `var(--color-${color}-50)`
 </script>
