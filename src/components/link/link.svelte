@@ -26,7 +26,7 @@
 </a>
 
 <style lang="scss">
-  .leo-link {
+  a {
     all: unset;
 
     --color: var(--leo-link-color, var(--color-text-interactive));
