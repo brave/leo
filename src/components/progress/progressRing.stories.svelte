@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+  import { Meta, Story } from '@storybook/addon-svelte-csf'
   import Ring from './progressRing.svelte'
-  import Bar from './progressBar.svelte'
   import Icon from '../icon/icon.svelte'
 </script>
 
 <Meta
-  title="Progress Components"
+  title="Progress Ring"
   component={Ring}
   argTypes={{
     strokeColor: {
@@ -41,14 +40,5 @@
         <Icon name="notification" />
       </div>
     </Ring>
-  </div>
-</Story>
-
-<Story name="Bar" let:args>
-  <div
-    style:--leo-progress-color={args.strokeColor || 'unset'}
-    style:--leo-progress-background-color={args.backgroundColor || 'unset'}
-  >
-    <Bar {...args} />
   </div>
 </Story>

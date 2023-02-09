@@ -21,7 +21,7 @@
       width: 100%;
       transition: width var(--transition-duration) ease-in-out;
       background: var(
-        --leo-progress-color,
+        --leo-progressbar-color,
         var(--color-interaction-button-primary-background)
       );
       border-radius: var(--radius);
