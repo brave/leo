@@ -7,7 +7,11 @@
   $: progress = mode === 'indeterminate' ? 0.25 : progress
 </script>
 
-<div class="leo-progressring" class:spin={mode === 'indeterminate'} style:--progress={progress}>
+<div
+  class="leo-progressring"
+  class:spin={mode === 'indeterminate'}
+  style:--progress={progress}
+>
   <slot />
   <svg viewBox="0 0 48 48">
     <circle
@@ -25,7 +29,7 @@
       style:stroke-width="var(--stroke-width)"
       stroke="var(--stroke-color)"
       style:stroke-dasharray="var(--circumference) var(--circumference)"
-      style:stroke-dashoffset="calc(var(--circumference) * (1 - var(--progress)))"
+      style:stroke-dashoffset={'calc(var(--circumference) * (1 - var(--progress)))'}
       fill="transparent"
     />
   </svg>
