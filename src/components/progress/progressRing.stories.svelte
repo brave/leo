@@ -23,6 +23,10 @@
       control: 'color',
       description: 'The color of the progress ring'
     },
+    '--leo-progressring-size': {
+      type: 'string',
+      description: 'The size of the progress ring'
+    },
     mode: {
       type: 'string',
       description: 'The mode of the progress indicator',
