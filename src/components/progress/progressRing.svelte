@@ -53,12 +53,12 @@
     --spin-rate: var(--leo-progressring-spin-rate, 1s);
     --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
     --stroke-color: var(
-      --leo-progress-color,
+      --leo-progressring-color,
       var(--color-interaction-button-primary-background)
     );
 
     --background-color: var(
-      --leo-progress-background-color,
+      --leo-progressring-background-color,
       var(--color-primary-20)
     );
 

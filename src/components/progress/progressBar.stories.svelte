@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Meta, Story, } from '@storybook/addon-svelte-csf'
     import Bar from './progressBar.svelte'
+    import { getStyleFromArgs } from '../../../.storybook/argHelper';
   </script>
   
   <Meta
@@ -8,8 +9,12 @@
     component={Bar}
     argTypes={{
       '--leo-progressbar-radius': {
-        type: 'number',
+        type: 'string',
         description: 'The border radius of the progress bar',
+      },
+      '--leo-progressbar-height': {
+        type: 'string',
+        description: 'The height of the progress bar'
       },
       '--leo-progressbar-background-color': {
         type: 'string',
@@ -25,10 +30,7 @@
   />
   
   <Story name="Bar" let:args>
-    <div
-      style:--leo-progress-color={args.strokeColor || 'unset'}
-      style:--leo-progress-background-color={args.backgroundColor || 'unset'}
-    >
+    <div style={getStyleFromArgs(args)}>
       <Bar {...args} />
     </div>
   </Story>
