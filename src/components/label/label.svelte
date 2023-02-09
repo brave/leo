@@ -1,3 +1,5 @@
+<svelte:options tag="leo-label" />
+
 <script context="module" lang="ts">
   export const colors = [
     'gray',
