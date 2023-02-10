@@ -2,40 +2,35 @@
 
 <script lang="ts">
   export let progress = 0
-  export let radius = 24
-  export let strokeWidth = 4
   export let mode: 'determinate' | 'indeterminate' = 'indeterminate'
 
   $: progress = mode === 'indeterminate' ? 0.25 : progress
-
-  $: normalizedRadius = radius - strokeWidth
-  $: circumference = normalizedRadius * 2 * Math.PI
 </script>
 
 <div
   class="leo-progressring"
   class:spin={mode === 'indeterminate'}
-  style="width: {radius * 2}px; height: {radius * 2}px"
+  style:--progress={progress}
 >
   <slot />
-  <svg width={radius * 2} height={radius * 2}>
+  <svg viewBox="0 0 48 48">
     <circle
-      r={normalizedRadius}
-      cx={radius}
-      cy={radius}
+      style:r="var(--normalized-radius)"
+      style:cx="var(--radius)"
+      style:cy="var(--radius)"
+      style:stroke-width="var(--stroke-width)"
       stroke="var(--background-color)"
-      stroke-width={strokeWidth}
       fill="transparent"
     />
     <circle
+      style:r="var(--normalized-radius)"
+      style:cx="var(--radius)"
+      style:cy="var(--radius)"
+      style:stroke-width="var(--stroke-width)"
       stroke="var(--stroke-color)"
-      stroke-dasharray="{circumference} {circumference}"
-      stroke-width={strokeWidth}
-      stroke-dashoffset={circumference * (1 - progress)}
+      style:stroke-dasharray="var(--circumference) var(--circumference)"
+      style:stroke-dashoffset={'calc(var(--circumference) * (1 - var(--progress)))'}
       fill="transparent"
-      r={normalizedRadius}
-      cx={radius}
-      cy={radius}
     />
   </svg>
 </div>
@@ -50,18 +45,25 @@
     }
   }
   .leo-progressring {
+    --size: var(--leo-progressring-size, 48px);
     --spin-rate: var(--leo-progressring-spin-rate, 1s);
     --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
     --stroke-color: var(
-      --leo-progress-color,
+      --leo-progressring-color,
       var(--color-interaction-button-primary-background)
     );
+    --stroke-width: var(--leo-progressring-stroke-width, 4px);
+    --radius: 24px;
+    --normalized-radius: calc(var(--radius) - var(--stroke-width));
+    --circumference: calc(var(--normalized-radius) * 2 * 3.141592);
 
     --background-color: var(
-      --leo-progress-background-color,
+      --leo-progressring-background-color,
       var(--color-primary-20)
     );
 
+    width: var(--size);
+    height: var(--size);
     position: relative;
     display: flex;
     flex-direction: column;

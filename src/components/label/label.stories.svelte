@@ -1,23 +1,9 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import Icon from '../icon/icon.svelte'
+  import { getStyleFromArgs } from '../../../.storybook/argHelper'
 
   import Label, { colors, modes } from './label.svelte'
-
-  const variables = {
-    '--leo-label-icon-size': 'number',
-    '--leo-label-font-text': 'string',
-    '--leo-label-padding': 'number',
-    '--leo-label-radius': 'number'
-  }
-
-  const getStyle = (args) =>
-    Object.entries(args)
-      .filter(([key]) => key.startsWith('--leo-'))
-      .reduce(
-        (prev, [key, value]) => prev + `${key}: ${value || 'unset'}; `,
-        ''
-      )
 </script>
 
 <Meta
@@ -67,7 +53,7 @@
 />
 
 <Template let:args>
-  <div style={getStyle(args)}>
+  <div style={getStyleFromArgs(args)}>
     <Label {...args}>
       {#if args.leftIcon}
         <Icon name={args.leftIcon} />
@@ -81,7 +67,7 @@
 </Template>
 
 <Story name="All" let:args>
-  <div class="column" style={getStyle(args)}>
+  <div class="column" style={getStyleFromArgs(args)}>
     {#each colors as color}
       {#each modes as mode}
         <Label {color} {mode}>
