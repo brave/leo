@@ -1,3 +1,5 @@
+<svelte:options tag="leo-link" />
+
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
 
