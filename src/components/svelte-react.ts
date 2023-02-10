@@ -40,7 +40,7 @@ export const intrinsicProps = [
   'tabIndex'
 ] as const
 export const intrinsicPropsSet = new Set<string>(intrinsicProps)
-export type IntrinsicProps = typeof intrinsicProps[number]
+export type IntrinsicProps = (typeof intrinsicProps)[number]
 
 export type SvelteProps<T> = T extends SvelteComponentTyped<
   infer Props,

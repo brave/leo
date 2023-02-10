@@ -14,10 +14,10 @@
     'teal',
     'CTA'
   ] as const
-  export type Color = typeof colors[number]
+  export type Color = (typeof colors)[number]
 
   export const modes = ['default', 'loud'] as const
-  export type Mode = typeof modes[number]
+  export type Mode = (typeof modes)[number]
 </script>
 
 <script lang="ts">
