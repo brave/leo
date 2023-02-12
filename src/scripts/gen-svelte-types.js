@@ -18,7 +18,10 @@ const genTypes = async (options = {}) => {
     svelteShimsPath: require.resolve('svelte2tsx/svelte-shims.d.ts')
   })
   for await (const tmpFile of getSvelteFiles(tmpFolder)) {
-    const relativePath = path.relative(path.join(tmpFolder, componentsFolder), tmpFile)
+    const relativePath = path.relative(
+      path.join(tmpFolder, componentsFolder),
+      tmpFile
+    )
     console.log(`Generating Svelte types for ${relativePath}`)
 
     const destination = path.join(outputDir, relativePath)
