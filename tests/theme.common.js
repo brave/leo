@@ -1,5 +1,5 @@
 const postcss = require('postcss')
-const plugin = require('../postcss/theme')
+const plugin = require('../src/postcss/theme')
 
 module.exports = {
   run: async function (input, output, opts = {}) {

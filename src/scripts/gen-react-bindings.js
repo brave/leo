@@ -10,7 +10,7 @@ const SVELTE_REACT_WRAPPER_PATH = '../svelte/svelte-react.js'
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)
-  const typingsPath = path.join('svelte', relativePath) + '.d.ts'
+  const typingsPath = path.join('./svelte', relativePath) + '.d.ts'
   const typingsContents = await fs.readFile(typingsPath)
   const genericsMatcher = new RegExp(
     `${componentName}<(.*)> extends SvelteComponentTyped`,
