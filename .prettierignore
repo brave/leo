@@ -1,0 +1,9 @@
+/tokens
+/web-components/
+/react
+/shared
+/svelte
+/examples/plain-html/
+
+# The .tokens.json files should be ignored as they're generated from Figma.
+/src/tokens/*.tokens.json

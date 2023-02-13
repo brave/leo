@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "labels": [
-    "dependencies",
-    "renovate"
-  ],
+  "extends": ["config:base"],
+  "labels": ["dependencies", "renovate"],
   "prConcurrentLimit": 4,
   "rangeStrategy": "pin",
   "packageRules": [
@@ -13,5 +8,6 @@
       "depTypeList": ["peerDependencies"],
       "enabled": false
     }
-  ]
+  ],
+  "schedule": "at 10:00 am on Sunday"
 }

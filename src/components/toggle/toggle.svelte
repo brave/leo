@@ -2,7 +2,7 @@
 
 <script context="module" lang="ts">
   export const sizes = ['small', 'medium'] as const
-  export type Sizes = typeof sizes[number]
+  export type Sizes = (typeof sizes)[number]
 
   const DRAG_AMOUNT_TO_CHANGE = 10
 </script>
@@ -96,7 +96,7 @@
       </div>
     </div>
   </button>
-  <slot></slot>
+  <slot />
 </label>
 
 <style lang="scss">

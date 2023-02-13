@@ -52,7 +52,7 @@ StyleDictionary.registerTransformGroup({
 // Formats
 StyleDictionary.registerFormat({
   name: 'tailwind/css',
-  formatter: require('./formatCssColorVars')
+  formatter: require('./formatCssVars')
 })
 
 StyleDictionary.registerFormat({

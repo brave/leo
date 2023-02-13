@@ -41,14 +41,17 @@ const StyleDictionaryExtended = StyleDictionary.extend({
           destination: 'values/dimens.xml',
           format: 'android/resources',
           resourceType: 'dimen',
-          filter: (token) => token.type === 'dimension' || token.type === 'custom-fontStyle'
+          filter: (token) =>
+            token.type === 'dimension' || token.type === 'custom-fontStyle'
         },
         {
           destination: 'values/colors.xml',
           format: 'android/resourcesSorted',
           resourceType: 'color',
           filter: (token) => {
-            return token.type === 'color' && token.path[0].toLowerCase() === 'light'
+            return (
+              token.type === 'color' && token.path[0].toLowerCase() === 'light'
+            )
           }
         },
         {
@@ -56,7 +59,9 @@ const StyleDictionaryExtended = StyleDictionary.extend({
           format: 'android/resourcesSorted',
           resourceType: 'color',
           filter: (token) => {
-            return token.type === 'color' && token.path[0].toLowerCase() === 'dark'
+            return (
+              token.type === 'color' && token.path[0].toLowerCase() === 'dark'
+            )
           }
         }
       ],

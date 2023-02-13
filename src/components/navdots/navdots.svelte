@@ -14,10 +14,9 @@
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
   $: dots = Array.from(Array(dotCount), (_, i) => i)
 
-  let dispatch =
-    createEventDispatcher<{
-      change: { activeDot: number }
-    }>()
+  let dispatch = createEventDispatcher<{
+    change: { activeDot: number }
+  }>()
 
   function setActive(dot: number) {
     dispatch('change', { activeDot: dot })
@@ -109,7 +108,7 @@
         box-shadow var(--transition-duration) var(--transition-easing);
 
       &:hover {
-        background-color: var(--leo-navdots-color-hover);
+        background-color: var(--dot-color-hover);
       }
 
       &:focus-visible:not(.active) {

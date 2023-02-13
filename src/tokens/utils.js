@@ -6,7 +6,7 @@ const merge = require('lodash.merge')
  * Note: This cannot merge keys where a child has the same key as the parent,
  * e.g. we cannot remove the duplication of the path gradient|gradient|xyz.
  */
-function removeKeyFromObject(contents, keyToRemove, recurse=true) {
+function removeKeyFromObject(contents, keyToRemove, recurse = true) {
   // Don't need to work on types without keys
   if (typeof contents !== 'object') {
     return contents
@@ -30,5 +30,5 @@ function removeKeyFromObject(contents, keyToRemove, recurse=true) {
 }
 
 module.exports = {
-    removeKeyFromObject
+  removeKeyFromObject
 }

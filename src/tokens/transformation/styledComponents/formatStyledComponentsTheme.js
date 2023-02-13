@@ -1,13 +1,13 @@
 const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
 
-const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy']
+const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
 
-function isToken (tokenOrTokenCategory) {
+function isToken(tokenOrTokenCategory) {
   return !!tokenOrTokenCategory.type
 }
 
-function cleanKey (key) {
+function cleanKey(key) {
   return camelCase(key.trim())
 }
 
@@ -27,7 +27,7 @@ function removeSegmentFromNameInAllTokens(tokenCategory, nameSegment) {
   return result
 }
 
-function formattedVariables (properties) {
+function formattedVariables(properties) {
   const result = {}
   for (const key in properties) {
     let value = properties[key]
@@ -39,7 +39,10 @@ function formattedVariables (properties) {
       // TODO(petemill): This is ugly, there's got to be a cleaner way, or at least centralize this between
       // web, tailwind and styled-components.
       const hasDarkAndLightChildGroups = !!value.dark && !!value.light
-      if (THEMED_COLOR_GROUP_PARENT_KEYS.includes(key) && hasDarkAndLightChildGroups) {
+      if (
+        THEMED_COLOR_GROUP_PARENT_KEYS.includes(key) &&
+        hasDarkAndLightChildGroups
+      ) {
         value = {
           ...value,
           ...removeSegmentFromNameInAllTokens(value['light'], 'light')
@@ -56,6 +59,9 @@ function formattedVariables (properties) {
 
 module.exports = ({ dictionary, file }) => {
   const themeObject = formattedVariables(dictionary.properties)
-  return fileHeader({ file }) +
-    'export default ' + JSON.stringify(themeObject, null, 2)
+  return (
+    fileHeader({ file }) +
+    'export default ' +
+    JSON.stringify(themeObject, null, 2)
+  )
 }

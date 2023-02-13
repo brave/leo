@@ -12,9 +12,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
   source: [basePath + 'tokens/*.json'],
   platforms: {
     'ios-swift': {
-      transforms: [
-        'name/cti/camel'
-      ],
+      transforms: ['name/cti/camel'],
       buildPath: buildPath + 'ios/',
       options: {
         fontFamilies: {
@@ -30,10 +28,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
           format: 'ios-swift/class.swift'
         }
       ],
-      actions: [
-        'ios/colorSets',
-        'ios/fontStyles'
-      ]
+      actions: ['ios/colorSets', 'ios/fontStyles']
     }
   }
 })

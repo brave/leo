@@ -1,20 +1,24 @@
 // rollup.config.js
-import svelte from 'rollup-plugin-svelte';
-import resolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import sveltePreprocess from 'svelte-preprocess';
-import themePlugin from './src/postcss/theme.js';
-import fs from 'fs';
-import path from 'path';
-import genTypes from './src/scripts/gen-svelte-types.js';
-import genBindings from './src/scripts/gen-react-bindings.js';
+import svelte from 'rollup-plugin-svelte'
+import resolve from '@rollup/plugin-node-resolve'
+import typescript from '@rollup/plugin-typescript'
+import sveltePreprocess from 'svelte-preprocess'
+import themePlugin from './src/postcss/theme.js'
+import fs from 'fs'
+import path from 'path'
+import genTypes from './src/scripts/gen-svelte-types.js'
+import genBindings from './src/scripts/gen-react-bindings.js'
+import { getSvelteFiles } from './src/scripts/common.js'
 
 // Entry points are all our Svelte components + the react bindings for those
 // components.
 const COMPONENTS_FOLDER = path.resolve('./', 'src', 'components')
-const inputs = fs.readdirSync(COMPONENTS_FOLDER, { withFileTypes: true })
-  .filter(f => f.isDirectory())
-  .map(f => path.join(COMPONENTS_FOLDER, `${f.name}/${f.name}.svelte`))
+const inputs = []
+
+for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
+  inputs.push(file)
+}
+
 inputs.push('./src/components/svelte-react.ts')
 
 export default {
@@ -26,10 +30,8 @@ export default {
     dir: './',
     chunkFileNames: 'shared/[hash].js',
     entryFileNames: ({ facadeModuleId, name }) => {
-      const dirname = path.basename(path.dirname(facadeModuleId))
-
       // Web component
-      if (dirname === name) {
+      if (facadeModuleId.endsWith('.svelte')) {
         return `web-components/${name}.js`
       }
 
