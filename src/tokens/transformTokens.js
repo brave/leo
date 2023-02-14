@@ -4,7 +4,6 @@ const baseConfig = require('./config')
 // Register transforms
 require('./transformation/web')
 require('./transformation/tailwind')
-require('./transformation/styledComponents')
 require('./transformation/skia')
 
 // Register Global transforms

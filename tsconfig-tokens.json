@@ -1,0 +1,7 @@
+{
+  "include": ["tokens/**/*"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node16"
+  }
+}

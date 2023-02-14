@@ -54,3 +54,8 @@ StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: require('./formatCss')
 })
+
+StyleDictionary.registerFormat({
+  name: 'custom/cssJS',
+  formatter: require('./formatCssAsJs')
+})
