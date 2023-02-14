@@ -9,7 +9,7 @@ module.exports = {
   parse: ({ filePath, contents }) => {
     // Replace emojies, e.g. '🌚 dark' :-)
     contents = contents.replace(
-      /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])\s?/gm,
+      /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
       ''
     )
     contents = JSON.parse(contents)
