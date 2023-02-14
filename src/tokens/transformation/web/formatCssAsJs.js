@@ -75,7 +75,8 @@ module.exports = ({ dictionary, file }) => {
     if (property === FAKE_PROPERTY_NAME) {
       continue
     }
-    fileContents += `export const ${property} = ` +
+    fileContents +=
+      `export const ${property} = ` +
       JSON.stringify(themeObject[property], null, 2) +
       ' as const \n'
   }
