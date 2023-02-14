@@ -1,7 +1,7 @@
 {
   "include": ["tokens/**/*"],
   "compilerOptions": {
-    // Generate d.ts files
-    "declaration": true,
+    "module": "ESNext",
+    "moduleResolution": "node16",
   }
 }
