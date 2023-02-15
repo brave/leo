@@ -116,8 +116,6 @@ function createPropertyFormatter({
   return function (prop) {
     const name = formatName(prop)
     let to_ret_prop = `${indentation}${name}${separator} `
-      .replace('--dark-', '--')
-      .replace('--light-', '--')
     let value = prop.value
 
     /**
