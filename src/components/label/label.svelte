@@ -26,16 +26,16 @@
 
   $: background =
     color === 'CTA'
-      ? `var(--gradient-hero)`
+      ? `var(--leo-gradient-hero)`
       : mode === 'loud'
-      ? `var(--color-${color}-40)`
-      : `var(--color-${color}-10)`
+      ? `var(--leo-color-${color}-40)`
+      : `var(--leo-color-${color}-10)`
   $: text =
     color === 'CTA'
-      ? `var(--color-white)`
+      ? `var(--leo-color-white)`
       : mode === 'loud'
-      ? `var(--color-${color}-10)`
-      : `var(--color-${color}-50)`
+      ? `var(--leo-color-${color}-10)`
+      : `var(--leo-color-${color}-50)`
 </script>
 
 <div class="leo-label" style:background style:color={text}>
@@ -47,9 +47,9 @@
 <style lang="scss">
   .leo-label {
     --icon-size: var(--leo-label-icon-size, 13px);
-    --font-text: var(--leo-label-font-text, var(--font-components-label));
-    --padding: var(--leo-label-padding, var(--spacing-4));
-    --radius: var(--leo-label-radius, var(--radius-4));
+    --font-text: var(--leo-label-font-text, var(--leo-font-components-label));
+    --padding: var(--leo-label-padding, var(--leo-spacing-4));
+    --radius: var(--leo-label-radius, var(--leo-radius-4));
 
     --leo-icon-size: var(--icon-size);
 

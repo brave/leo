@@ -50,7 +50,7 @@
     --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
     --stroke-color: var(
       --leo-progressring-color,
-      var(--color-interaction-button-primary-background)
+      var(--leo-color-interaction-button-primary-background)
     );
     --stroke-width: var(--leo-progressring-stroke-width, 4px);
     --radius: 24px;
@@ -59,7 +59,7 @@
 
     --background-color: var(
       --leo-progressring-background-color,
-      var(--color-primary-20)
+      var(--leo-color-primary-20)
     );
 
     width: var(--size);

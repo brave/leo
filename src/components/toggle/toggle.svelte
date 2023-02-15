@@ -106,13 +106,19 @@
     --padding: var(--leo-toggle-padding, 2px);
     --on-color: var(
       --leo-toggle-on-color,
-      var(--color-interaction-button-primary-background)
+      var(--leo-color-interaction-button-primary-background)
     );
-    --on-color-hover: var(--leo-toggle-on-color-hover, var(--color-primary-60));
-    --off-color: var(--leo-toggle-off-color, var(--color-gray-30));
-    --off-color-hover: var(--leo-toggle-off-color-hover, var(--color-gray-40));
-    --thumb-color: var(--leo-toggle-thumb-color, var(--color-white));
-    --label-gap: var(--leo-toggle-label-gap, var(--spacing-4));
+    --on-color-hover: var(
+      --leo-toggle-on-color-hover,
+      var(--leo-color-primary-60)
+    );
+    --off-color: var(--leo-toggle-off-color, var(--leo-color-gray-30));
+    --off-color-hover: var(
+      --leo-toggle-off-color-hover,
+      var(--leo-color-gray-40)
+    );
+    --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
+    --label-gap: var(--leo-toggle-label-gap, var(--leo-spacing-4));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
     --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
 
@@ -124,7 +130,7 @@
     @theme (dark) {
       --on-color-hover: var(
         --leo-toggle-on-color-hover,
-        var(--color-primary-40)
+        var(--leo-color-primary-40)
       );
       --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, black);
     }
@@ -140,7 +146,7 @@
     background: var(--off-color);
     width: var(--width);
     height: var(--height);
-    border-radius: var(--radius-full);
+    border-radius: var(--leo-radius-full);
     padding: var(--padding);
     transition: background-color 0.2s ease-in-out;
     flex-shrink: 0;
@@ -182,7 +188,7 @@
       height: 100%;
       aspect-ratio: 1/1;
       background: white;
-      border-radius: var(--radius-full);
+      border-radius: var(--leo-radius-full);
       transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
@@ -195,7 +201,7 @@
       align-items: center;
       justify-content: center;
 
-      box-shadow: var(--effect-elevation-02);
+      box-shadow: var(--leo-effect-elevation-02);
 
       .on-icon {
         transition: opacity 0.2s ease-in-out;

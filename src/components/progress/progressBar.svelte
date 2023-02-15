@@ -14,7 +14,7 @@
     --transition-duration: var(--leo-progressbar-transition-duration, 0.2s);
     background: var(
       --leo-progressbar-background-color,
-      var(--color-primary-20)
+      var(--leo-color-primary-20)
     );
     height: var(--leo-progressbar-height, 4px);
     border-radius: var(--radius);
@@ -25,7 +25,7 @@
       transition: width var(--transition-duration) ease-in-out;
       background: var(
         --leo-progressbar-color,
-        var(--color-interaction-button-primary-background)
+        var(--leo-color-interaction-button-primary-background)
       );
       border-radius: var(--radius);
     }

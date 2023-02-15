@@ -61,14 +61,17 @@
 
     --active-dot-color: var(
       --leo-navdots-active-color,
-      var(--color-interaction-button-primary-background)
+      var(--leo-color-interaction-button-primary-background)
     );
     --active-dot-color-hover: var(
       --leo-navdots-active-color-hover,
-      var(--color-icon-interactive)
+      var(--leo-color-icon-interactive)
     );
-    --dot-color: var(--leo-navdots-color, var(--color-primary-20));
-    --dot-color-hover: var(--leo-navdots-color-hover, var(--color-primary-30));
+    --dot-color: var(--leo-navdots-color, var(--leo-color-primary-20));
+    --dot-color-hover: var(
+      --leo-navdots-color-hover,
+      var(--leo-color-primary-30)
+    );
 
     --current-dot: 0;
 

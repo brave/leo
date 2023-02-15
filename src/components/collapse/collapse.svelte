@@ -59,38 +59,41 @@
   .leoCollapse {
     --background-color: var(
       --leo-collapse-background-color,
-      var(--color-container-background)
+      var(--leo-color-container-background)
     );
     --background-color-hover: var(
       --leo-collapse-background-color-hover,
-      var(--color-container-interactive-background)
+      var(--leo-color-container-interactive-background)
     );
     --icon-size: var(--leo-collapse-icon-size, 24px);
     --transition-duration: var(--leo-collapse-transition-duration, 0.12s);
     --border-color: var(
       --leo-collapse-border-color,
-      var(--color-divider-subtle)
+      var(--leo-color-divider-subtle)
     );
     --border-color-hover: var(
       --leo-collapse-border-color-hover,
-      var(--color-primary-20)
+      var(--leo-color-primary-20)
     );
-    --shadow: var(--leo-collapse-shadow, var(--effect-elevation-01));
+    --shadow: var(--leo-collapse-shadow, var(--leo-effect-elevation-01));
     --shadow-hover: var(
       --leo-collapse-shadow-hover,
-      var(--effect-elevation-02)
+      var(--leo-effect-elevation-02)
     );
-    --shadow-focus: var(--leo-collapse-shadow-focus, var(--effect-focus-state));
-    --radius: var(--leo-collapse-radius, var(--radius-16));
+    --shadow-focus: var(
+      --leo-collapse-shadow-focus,
+      var(--leo-effect-focus-state)
+    );
+    --radius: var(--leo-collapse-radius, var(--leo-radius-16));
     --summary-color: var(
       --leo-collapse-summary-color,
-      var(--color-text-primary)
+      var(--leo-color-text-primary)
     );
     --summary-color-hover: var(
       --leo-collapse-summary-color,
-      var(--color-text-interactive)
+      var(--leo-color-text-interactive)
     );
-    --icon-color: var(--leo-collapse-icon-color, var(--color-icon-default));
+    --icon-color: var(--leo-collapse-icon-color, var(--leo-color-icon-default));
     --icon-color-hover: var(
       --leo-collapse-icon-color-hover,
       var(--summary-color-hover)
@@ -128,9 +131,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--spacing-8);
+    gap: var(--leo-spacing-8);
 
-    padding: var(--spacing-16) 18px;
+    padding: var(--leo-spacing-16) 18px;
 
     list-style: none;
     cursor: pointer;
@@ -157,13 +160,13 @@
 
   .title {
     flex-grow: 1;
-    font: var(--font-heading-h5);
+    font: var(--leo-font-heading-h5);
   }
 
   .content {
-    padding: var(--spacing-8) var(--spacing-24) var(--spacing-24)
-      var(--spacing-24);
-    font: var(--font-text-default-regular);
+    padding: var(--leo-spacing-8) var(--leo-spacing-24) var(--leo-spacing-24)
+      var(--leo-spacing-24);
+    font: var(--leo-font-text-default-regular);
   }
 
   .arrow {

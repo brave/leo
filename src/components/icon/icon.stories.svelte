@@ -18,7 +18,7 @@
       control: 'color',
       description: 'The color to use for the icon',
       type: 'string',
-      defaultValue: 'var(--color-icon-default)'
+      defaultValue: 'var(--leo-color-icon-default)'
     },
     size: {
       control: 'number',
