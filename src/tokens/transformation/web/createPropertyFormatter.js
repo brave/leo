@@ -19,40 +19,7 @@ const defaultFormatting = {
   suffix: ';'
 }
 
-/**
- * Creates a function that can be used to format a property. This can be useful
- * to use as the function on `dictionary.allTokens.map`. The formatting
- * is configurable either by supplying a `format` option or a `formatting` object
- * which uses: prefix, indentation, separator, suffix, and commentStyle.
- * @memberof module:formatHelpers
- * @example
- * ```javascript
- * StyleDictionary.registerFormat({
- *   name: 'myCustomFormat',
- *   formatter: function({ dictionary, options }) {
- *     const { outputReferences } = options;
- *     const formatProperty = createPropertyFormatter({
- *       outputReferences,
- *       dictionary,
- *       format: 'css'
- *     });
- *     return dictionary.allTokens.map(formatProperty).join('\n');
- *   }
- * });
- * ```
- * @param {Object} options
- * @param {Boolean} options.outputReferences - Whether or not to output references. You will want to pass this from the `options` object sent to the formatter function.
- * @param {Dictionary} options.dictionary - The dictionary object sent to the formatter function
- * @param {String} options.format - Available formats are: 'css', 'sass', 'less', and 'stylus'. If you want to customize the format and can't use one of those predefined formats, use the `formatting` option
- * @param {Object} options.formatting - Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: `${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}`
- * @returns {Function}
- */
-function createPropertyFormatter({
-  outputReferences,
-  dictionary,
-  format,
-  formatting = {}
-}) {
+function createPropertyNameFormatter(format, formatting = {}) {
   let { prefix, commentStyle, indentation, separator, suffix } = Object.assign(
     {},
     defaultFormatting,
@@ -90,8 +57,65 @@ function createPropertyFormatter({
       break
   }
 
+  return {
+    prefix,
+    commentStyle,
+    indentation,
+    separator,
+    suffix,
+    formatName (prop) {
+      return `${prefix}${prop.name}`
+    }
+  }
+}
+
+/**
+ * Creates a function that can be used to format a property. This can be useful
+ * to use as the function on `dictionary.allTokens.map`. The formatting
+ * is configurable either by supplying a `format` option or a `formatting` object
+ * which uses: prefix, indentation, separator, suffix, and commentStyle.
+ * @memberof module:formatHelpers
+ * @example
+ * ```javascript
+ * StyleDictionary.registerFormat({
+ *   name: 'myCustomFormat',
+ *   formatter: function({ dictionary, options }) {
+ *     const { outputReferences } = options;
+ *     const formatProperty = createPropertyFormatter({
+ *       outputReferences,
+ *       dictionary,
+ *       format: 'css'
+ *     });
+ *     return dictionary.allTokens.map(formatProperty).join('\n');
+ *   }
+ * });
+ * ```
+ * @param {Object} options
+ * @param {Boolean} options.outputReferences - Whether or not to output references. You will want to pass this from the `options` object sent to the formatter function.
+ * @param {Dictionary} options.dictionary - The dictionary object sent to the formatter function
+ * @param {String} options.format - Available formats are: 'css', 'sass', 'less', and 'stylus'. If you want to customize the format and can't use one of those predefined formats, use the `formatting` option
+ * @param {Object} options.formatting - Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: `${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}`
+ * @returns {Function}
+ */
+function createPropertyFormatter({
+  outputReferences,
+  dictionary,
+  format,
+  formatting = {}
+}) {
+
+  const {
+    prefix,
+    commentStyle,
+    indentation,
+    separator,
+    suffix,
+    formatName
+  } = createPropertyNameFormatter(format, formatting)
+
   return function (prop) {
-    let to_ret_prop = `${indentation}${prefix}${prop.name}${separator} `
+    const name = formatName(prop)
+    let to_ret_prop = `${indentation}${name}${separator} `
       .replace('--dark-', '--')
       .replace('--light-', '--')
     let value = prop.value
@@ -152,3 +176,4 @@ function createPropertyFormatter({
 }
 
 module.exports = createPropertyFormatter
+module.exports.createPropertyNameFormatter = createPropertyNameFormatter

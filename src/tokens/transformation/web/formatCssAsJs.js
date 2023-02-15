@@ -1,5 +1,8 @@
 const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
+const { createPropertyNameFormatter } = require('./createPropertyFormatter')
+
+const { formatName } = createPropertyNameFormatter('css', {indentation: ''})
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
 const FAKE_PROPERTY_NAME = 'toString'
@@ -60,8 +63,8 @@ function formattedVariables(properties) {
       result[cleanKey(key)] = formattedVariables(value)
       continue
     }
-    let name = value.name
-    result[cleanKey(key)] = 'var(--' + name + ')'
+    const name = formatName(value)
+    result[cleanKey(key)] = `var(${name})`
   }
   return result
 }
