@@ -63,7 +63,7 @@ function createPropertyNameFormatter(format, formatting = {}) {
     indentation,
     separator,
     suffix,
-    formatName (prop) {
+    formatName(prop) {
       return `${prefix}${prop.name}`
     }
   }
@@ -103,15 +103,8 @@ function createPropertyFormatter({
   format,
   formatting = {}
 }) {
-
-  const {
-    prefix,
-    commentStyle,
-    indentation,
-    separator,
-    suffix,
-    formatName
-  } = createPropertyNameFormatter(format, formatting)
+  const { prefix, commentStyle, indentation, separator, suffix, formatName } =
+    createPropertyNameFormatter(format, formatting)
 
   return function (prop) {
     const name = formatName(prop)

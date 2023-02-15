@@ -2,7 +2,7 @@ const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
 const { createPropertyNameFormatter } = require('./createPropertyFormatter')
 
-const { formatName } = createPropertyNameFormatter('css', {indentation: ''})
+const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
 const FAKE_PROPERTY_NAME = 'toString'
