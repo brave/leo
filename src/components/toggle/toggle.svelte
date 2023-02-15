@@ -112,9 +112,9 @@
     --off-color: var(--leo-toggle-off-color, var(--color-gray-30));
     --off-color-hover: var(--leo-toggle-off-color-hover, var(--color-gray-40));
     --thumb-color: var(--leo-toggle-thumb-color, var(--color-white));
+    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
     --label-gap: var(--leo-toggle-label-gap, var(--spacing-4));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
-    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
 
     &.size-small {
       --width: 40px;
