@@ -1,6 +1,6 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+  import meta from '../../../icons/meta'
   import Icon from './icon.svelte'
 </script>
 
@@ -9,7 +9,8 @@
   component={Icon}
   argTypes={{
     name: {
-      control: 'text',
+      control: 'select',
+      options: Object.values(meta.icons),
       description: 'The name of the icon to use',
       type: 'string',
       defaultValue: 'shield-alert-filled'
