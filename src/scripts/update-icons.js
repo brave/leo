@@ -116,6 +116,22 @@ const mutateIcons = () => {
   }
 }
 
+const generateMeta = () => {
+  const icons = fs
+    .readdirSync(FINAL_FOLDER)
+    .filter((f) => f.endsWith('.svg'))
+    .map((f) => path.basename(f, '.svg'))
+    .reduce((prev, next) => ({ ...prev, [next]: next }), {})
+  const meta = {
+    updatedAt: Date.now(),
+    icons
+  }
+  fs.writeFileSync(
+    path.join(FINAL_FOLDER, 'meta.js'),
+    `export default ${JSON.stringify(meta, null, 2)}`
+  )
+}
+
 const exporter = figmaApiExporter(process.env.FIGMA_API_TOKEN)
 
 exporter
@@ -131,3 +147,4 @@ exporter
     })
   })
   .then(mutateIcons)
+  .then(generateMeta)
