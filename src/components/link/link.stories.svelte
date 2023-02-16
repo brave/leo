@@ -1,5 +1,9 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+  import {
+    getNonStyleArgs,
+    getStyleFromArgs
+  } from '../../../.storybook/argHelper'
 
   import Link from './link.svelte'
 </script>
@@ -25,13 +29,44 @@
       description: 'The text content of the link',
       type: 'string',
       defaultValue: 'Download Brave'
+    },
+    '--leo-link-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The color of the link'
+    },
+    '--leo-link-hover-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The hover color of the link'
+    },
+    '--leo-link-visited-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The visited color of the link'
+    },
+    '--leo-link-disabled-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The disabled color of the link'
+    },
+    '--leo-link-focus-color': {
+      type: 'string',
+      control: 'color',
+      description:
+        'The focused color of the link. Defaults to the link color, if not set'
+    },
+    '--leo-link-focus-shadow': {
+      type: 'text',
+      control: 'string',
+      description: 'The focused shadow for the link'
     }
   }}
 />
 
 <Template let:args>
-  <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
-    <Link href="#foo" {...args} />
+  <div style={getStyleFromArgs(args)}>
+    <Link href="#foo" {...getNonStyleArgs(args)} />
   </div>
 </Template>
 
