@@ -69,6 +69,10 @@ const getReactFileContents = async (svelteFilePath) => {
 import SvelteToReact from '${SVELTE_REACT_WRAPPER_PATH}'
 import ${componentName} from '../web-components/${fileNameWithoutExtension}.js'
 export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}', ${componentName});
+
+// Reexport everything from our component, so React consumers can do anything
+// the base component can do.
+export * from '../web-components/${fileNameWithoutExtension.toLowerCase()}.js'
     `.trim()
 
   const typeDef = `
@@ -78,6 +82,10 @@ import type { ${componentName}Events as SvelteEvents, ${componentName}Props as S
 
 export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
 export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
+
+// As we don't currently have type definitions for the web components, export
+// the Type Definitions from the Svelte component.
+export * from '../svelte/${containingFolder}/${fileName}'
     `.trim()
 
   return [binding, typeDef]
