@@ -31,18 +31,18 @@
   a {
     all: unset;
 
-    --color: var(--leo-link-color, var(--color-text-interactive));
-    --hover-color: var(--leo-link-hover-color, var(--color-primary-60));
-    --visited-color: var(--leo-link-visited-color, var(--color-pink-50));
+    --color: var(--leo-link-color, var(--leo-color-text-interactive));
+    --hover-color: var(--leo-link-hover-color, var(--leo-color-primary-60));
+    --visited-color: var(--leo-link-visited-color, var(--leo-color-pink-50));
     --disabled-color: var(
       --leo-link-disabled-color,
-      var(--color-text-disabled)
+      var(--leo-color-text-disabled)
     );
     --focus-color: var(--leo-link-focus-color, var(--color));
-    --focus-shadow: var(--leo-link-focus-shadow, var(--effect-focus-state));
+    --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
 
     color: var(--color);
-    font: var(--font-text-default-semibold);
+    font: var(--leo-font-text-default-semibold);
     cursor: pointer;
     text-decoration: underline;
 

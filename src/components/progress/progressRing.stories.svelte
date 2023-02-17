@@ -46,7 +46,7 @@
 <Story name="Ring Icon" let:args>
   <div style={getStyleFromArgs(args)}>
     <Ring {...args}>
-      <div style="color: var(--color-icon-default)">
+      <div style="color: var(--leo-color-icon-default)">
         <Icon name="notification" />
       </div>
     </Ring>

@@ -92,7 +92,7 @@
   .column {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4);
+    gap: var(--leo-spacing-4);
     align-items: flex-start;
   }
 </style>

@@ -85,13 +85,13 @@
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
-    --box-shadow-hover: var(--effect-elevation-02);
+    --box-shadow-hover: var(--leo-effect-elevation-02);
     display: block;
     cursor: pointer;
     transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
-    border-radius: var(--radius-full);
+    border-radius: var(--leo-radius-full);
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
@@ -114,7 +114,7 @@
       &:focus-visible {
         outline: none;
         color: var(--color-focus, var(--color));
-        box-shadow: var(--effect-focus-state);
+        box-shadow: var(--leo-effect-focus-state);
         background: var(--bg-focus, var(--bg));
         border-color: var(--border-color-focus, var(--border-color));
       }
@@ -136,45 +136,45 @@
   // Size Variations
   .leoButton.isSmall {
     --icon-size: 20px;
-    font: var(--font-components-button-small);
+    font: var(--leo-font-components-button-small);
     padding: 8px 14px;
   }
   .leoButton.isMedium {
     --icon-size: 24px;
-    font: var(--font-components-button-default);
+    font: var(--leo-font-components-button-default);
     padding: 10px 16px;
   }
   .leoButton.isLarge {
     --icon-size: 24px;
-    font: var(--font-components-button-large);
+    font: var(--leo-font-components-button-large);
     padding: 12px 20px;
   }
 
   // Kind Variations
   .leoButton.isPrimary {
-    --bg: var(--color-interaction-button-primary-background);
-    --bg-hover: var(--color-light-primary-60);
+    --bg: var(--leo-color-interaction-button-primary-background);
+    --bg-hover: var(--leo-color-light-primary-60);
     --bg-active: var(--bg-hover);
     --bg-focus: var(--bg);
-    --bg-loading: var(--color-light-primary-70);
-    --bg-disabled: var(--color-gray-30);
+    --bg-loading: var(--leo-color-light-primary-70);
+    --bg-disabled: var(--leo-color-gray-30);
     --color: white;
 
     @theme (dark) {
-      --bg-hover: var(--color-dark-primary-40);
-      --bg-active: var(--color-dark-primary-40);
-      --bg-loading: var(--color-dark-primary-60);
+      --bg-hover: var(--leo-color-dark-primary-40);
+      --bg-active: var(--leo-color-dark-primary-40);
+      --bg-loading: var(--leo-color-dark-primary-60);
     }
   }
   .leoButton.isSecondary {
     --bg: transparent;
-    --bg-active: --color-gray-20;
-    --color: var(--color-text-primary);
-    --color-hover: var(--color-text-interactive);
-    --color-focus: var(--color-text-primary);
-    --color-loading: var(--color-gray-70);
+    --bg-active: --leo-color-gray-20;
+    --color: var(--leo-color-text-primary);
+    --color-hover: var(--leo-color-text-interactive);
+    --color-focus: var(--leo-color-text-primary);
+    --color-loading: var(--leo-color-gray-70);
     --border-width: 1px;
-    --border-color: var(--color-divider-strong);
+    --border-color: var(--leo-color-divider-strong);
     --border-color-focus: transparent;
 
     &:disabled {
@@ -182,24 +182,24 @@
     }
 
     @theme (dark) {
-      --border-color-hover: var(--color-dark-primary-40);
+      --border-color-hover: var(--leo-color-dark-primary-40);
     }
   }
   .leoButton.isTertiary {
     border-radius: 8px;
     padding-right: 0;
     padding-left: 0;
-    --color: var(--color-text-interactive);
-    --color-hover: var(--color-primary-60);
-    --color-active: var(--color-primary-90);
-    --color-loading: var(--color-primary-50);
+    --color: var(--leo-color-text-interactive);
+    --color-hover: var(--leo-color-primary-60);
+    --color-active: var(--leo-color-primary-90);
+    --color-loading: var(--leo-color-primary-50);
     --box-shadow-hover: none;
 
     &:disabled {
-      --color: var(--color-light-text-secondary);
+      --color: var(--leo-color-light-text-secondary);
 
       @theme (dark) {
-        --color: var(--color-dark-text-primary);
+        --color: var(--leo-color-dark-text-primary);
       }
     }
   }
@@ -207,7 +207,7 @@
     transition: var(--default-transition);
     --bg: transparent;
     --bg-focus: var(--bg);
-    --bg-disabled: var(--color-gray-30);
+    --bg-disabled: var(--leo-color-gray-30);
     --color: white;
     --default-bg-opacity: 1;
 
@@ -224,13 +224,13 @@
       right: 0;
       bottom: 0;
       left: 0;
-      border-radius: var(--radius-full);
+      border-radius: var(--leo-radius-full);
     }
 
     &::before {
       transition: var(--default-transition);
       z-index: -1;
-      background: var(--gradient-hero);
+      background: var(--leo-gradient-hero);
       opacity: var(--default-bg-opacity);
     }
 

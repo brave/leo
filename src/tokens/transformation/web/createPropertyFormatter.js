@@ -19,6 +19,56 @@ const defaultFormatting = {
   suffix: ';'
 }
 
+function createPropertyNameFormatter(format, formatting = {}) {
+  let { prefix, commentStyle, indentation, separator, suffix } = Object.assign(
+    {},
+    defaultFormatting,
+    formatting
+  )
+
+  switch (format) {
+    case 'css':
+      prefix = '--leo-'
+      indentation = '  '
+      separator = ':'
+      break
+    case 'tailwind':
+      prefix = '--tw-'
+      indentation = '  '
+      separator = ':'
+      break
+    case 'sass':
+      prefix = '$'
+      commentStyle = 'short'
+      indentation = ''
+      separator = ':'
+      break
+    case 'less':
+      prefix = '@'
+      commentStyle = 'short'
+      indentation = ''
+      separator = ':'
+      break
+    case 'stylus':
+      prefix = '$'
+      commentStyle = 'short'
+      indentation = ''
+      separator = '='
+      break
+  }
+
+  return {
+    prefix,
+    commentStyle,
+    indentation,
+    separator,
+    suffix,
+    formatName(prop) {
+      return `${prefix}${prop.name}`
+    }
+  }
+}
+
 /**
  * Creates a function that can be used to format a property. This can be useful
  * to use as the function on `dictionary.allTokens.map`. The formatting
@@ -53,47 +103,12 @@ function createPropertyFormatter({
   format,
   formatting = {}
 }) {
-  let { prefix, commentStyle, indentation, separator, suffix } = Object.assign(
-    {},
-    defaultFormatting,
-    formatting
-  )
-
-  switch (format) {
-    case 'css':
-      prefix = '--'
-      indentation = '  '
-      separator = ':'
-      break
-    case 'tailwind':
-      prefix = '--tw-'
-      indentation = '  '
-      separator = ':'
-      break
-    case 'sass':
-      prefix = '$'
-      commentStyle = 'short'
-      indentation = ''
-      separator = ':'
-      break
-    case 'less':
-      prefix = '@'
-      commentStyle = 'short'
-      indentation = ''
-      separator = ':'
-      break
-    case 'stylus':
-      prefix = '$'
-      commentStyle = 'short'
-      indentation = ''
-      separator = '='
-      break
-  }
+  const { prefix, commentStyle, indentation, separator, suffix, formatName } =
+    createPropertyNameFormatter(format, formatting)
 
   return function (prop) {
-    let to_ret_prop = `${indentation}${prefix}${prop.name}${separator} `
-      .replace('--dark-', '--')
-      .replace('--light-', '--')
+    const name = formatName(prop)
+    let to_ret_prop = `${indentation}${name}${separator} `
     let value = prop.value
 
     /**
@@ -152,3 +167,4 @@ function createPropertyFormatter({
 }
 
 module.exports = createPropertyFormatter
+module.exports.createPropertyNameFormatter = createPropertyNameFormatter

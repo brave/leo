@@ -20,8 +20,8 @@
 <style>
   .layout {
     padding: 30px;
-    background: var(--color-page-background);
-    color: var(--color-text-primary);
+    background: var(--leo-color-page-background);
+    color: var(--leo-color-text-primary);
   }
 
   h2 {
