@@ -22,15 +22,17 @@
       description: 'The mode of the label',
       defaultValue: 'loud'
     },
-    leftIcon: {
+    storyLeftIcon: {
       control: 'text',
-      description: 'Icon to the left',
+      description:
+        'Icon to the left of the label. This is only used for demonstration purposes',
       type: 'text',
       defaultValue: 'check-circle-outline'
     },
-    rightIcon: {
+    storyRightIcon: {
       control: 'text',
-      description: 'Icon to the right',
+      description:
+        'Icon to the right of the label. This is only used for demonstration purposes',
       type: 'text',
       defaultValue: 'check-circle-outline'
     },
@@ -55,12 +57,12 @@
 <Template let:args>
   <div style={getStyleFromArgs(args)}>
     <Label {...args}>
-      {#if args.leftIcon}
-        <Icon name={args.leftIcon} />
+      {#if args.storyLeftIcon}
+        <Icon name={args.storyLeftIcon} />
       {/if}
       Label
-      {#if args.rightIcon}
-        <Icon name={args.rightIcon} />
+      {#if args.storyRightIcon}
+        <Icon name={args.storyRightIcon} />
       {/if}
     </Label>
   </div>
@@ -71,13 +73,13 @@
     {#each colors as color}
       {#each modes as mode}
         <Label {color} {mode}>
-          {#if args.leftIcon}
-            <Icon name={args.leftIcon} />
+          {#if args.storyLeftIcon}
+            <Icon name={args.storyLeftIcon} />
           {/if}
           {mode}
           {color}
-          {#if args.rightIcon}
-            <Icon name={args.rightIcon} />
+          {#if args.storyRightIcon}
+            <Icon name={args.storyRightIcon} />
           {/if}
         </Label>
       {/each}

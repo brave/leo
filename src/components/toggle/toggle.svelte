@@ -118,9 +118,9 @@
       var(--leo-color-gray-40)
     );
     --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
+    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
     --label-gap: var(--leo-toggle-label-gap, var(--leo-spacing-4));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
-    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
 
     &.size-small {
       --width: 40px;

@@ -1,7 +1,12 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+  import meta from '../../../icons/meta'
   import Icon from './icon.svelte'
+
+  let filter = ''
+  $: filteredIcons = Object.values(meta.icons).filter((i) =>
+    i.toLowerCase().includes(filter.toLowerCase())
+  )
 </script>
 
 <Meta
@@ -9,7 +14,8 @@
   component={Icon}
   argTypes={{
     name: {
-      control: 'text',
+      control: 'select',
+      options: Object.values(meta.icons),
       description: 'The name of the icon to use',
       type: 'string',
       defaultValue: 'shield-alert-filled'
@@ -55,3 +61,46 @@
     </Icon>
   </div>
 </Story>
+
+<Story name="All Icons" let:args>
+  <input
+    class="filter"
+    type="text"
+    placeholder="Filter icons"
+    bind:value={filter}
+  />
+  <div
+    class="all"
+    style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}
+  >
+    {#each filteredIcons as icon}
+      <div class="icon">
+        <Icon name={icon} />
+        <div class="name">
+          {icon}
+        </div>
+      </div>
+    {/each}
+  </div>
+</Story>
+
+<style>
+  .filter {
+    padding: 10px;
+    margin: 10px;
+  }
+  .all {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+  }
+</style>
