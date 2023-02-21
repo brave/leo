@@ -17,13 +17,13 @@ if (!process.env.FIGMA_API_TOKEN) {
 }
 
 const getFlag = (iconName) => {
-  const regionRegex = /Country=Region - (\w+).svg/
+  const regionRegex = /Country=Region - ((\w|\s)+).svg/
   let match = regionRegex.exec(iconName)
   if (match) {
     return `${match[1]}`
   }
 
-  const countryRegex = /Country=(\w\w).*\.svg/
+  const countryRegex = /Country=(\w\w\w?).*\.svg/
   match = countryRegex.exec(iconName)
   if (!match) return false
 
