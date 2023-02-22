@@ -12,7 +12,7 @@
  */
 
 const { JSDOM } = require('jsdom')
-const parseColor = require('parse-color')
+const { TinyColor } = require('@ctrl/tinycolor')
 
 module.exports = function (svg, options = { translateX: 0, translateY: 0, scaleX: 1, scaleY: 1, outputEnd: false, outputColor: false }) {
     const dom = new JSDOM(svg)
@@ -126,14 +126,14 @@ function HandleNode(svgNode, scaleX, scaleY, translateX, translateY, outputColor
         if (!outputColor)
             return ''
 
-        let colorInfo = parseColor(elem.getAttribute('stroke'))
-        if (!colorInfo.hex) {
-            colorInfo = parseColor(elem.getAttribute('fill'))
+        let colorInfo = new TinyColor(elem.getAttribute('stroke'))
+        if (!colorInfo.isValid) {
+            colorInfo = new TinyColor(elem.getAttribute('fill'))
         }
-        if (!colorInfo.hex)
+        if (!colorInfo.isValid)
             return ''
 
-        const upper = colorInfo.hex.toUpperCase()
+        const upper = colorInfo.toHex().toUpperCase()
         const r = upper.substr(1, 2)
         const g = upper.substr(3, 2)
         const b = upper.substr(5, 2)
