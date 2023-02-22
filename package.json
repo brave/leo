@@ -74,8 +74,6 @@
     "check": "svelte-check --compiler-warnings \"missing-custom-element-compile-options:ignore\"",
     "transform-tokens": "node ./src/tokens/transformTokens.js && tsc -p ./tsconfig-tokens.json",
     "test": "jest tests --coverage=false",
-    "transform:android": "node ./examples/android/build.js",
-    "transform:ios": "node ./examples/ios/build.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
