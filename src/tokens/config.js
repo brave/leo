@@ -60,7 +60,7 @@ module.exports = {
       buildPath: 'tokens/skia/',
       files: [
         {
-          destination: 'Colors.h',
+          destination: 'colors.h',
           format: 'skia/colors.h',
           filter: {
             type: 'color'
