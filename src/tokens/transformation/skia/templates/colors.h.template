@@ -16,3 +16,27 @@ namespace leo::dark {
   return `constexpr SkColor ${prop.name} = SkColorSetRGB(${prop.value})`;
 }).map(s => `${s};`).join('\n') %>
 } // namespace leo::dark
+
+namespace leo {
+
+enum Theme {
+  kLight,
+  kDark
+};
+
+enum Color {
+<%= groupedTokens.light.allTokens.map(prop => `  ${prop.name}`).join(',\n') %>
+};
+
+SkColor GetColor(Color color, Theme theme) {
+  switch (color) {
+<%= groupedTokens.light.allTokens.map(prop => `    case ${prop.name}:
+      return theme == Theme::kLight
+        ? leo::light::${prop.name}
+        : leo::dark::${prop.name};`).join('\n') %>
+    default:
+      return SK_ColorRED;
+  }
+}
+
+} // namespace leo
