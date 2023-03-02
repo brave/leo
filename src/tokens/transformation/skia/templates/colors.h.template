@@ -19,16 +19,16 @@ namespace leo::dark {
 
 namespace leo {
 
-enum Theme {
+enum class Theme {
   kLight,
   kDark
 };
 
-enum Color {
+enum class Color {
 <%= groupedTokens.light.allTokens.map(prop => `  ${prop.name}`).join(',\n') %>
 };
 
-SkColor GetColor(Color color, Theme theme) {
+constexpr SkColor GetColor(Color color, Theme theme) {
   switch (color) {
 <%= groupedTokens.light.allTokens.map(prop => `    case ${prop.name}:
       return theme == Theme::kLight
