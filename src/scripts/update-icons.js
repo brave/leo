@@ -56,17 +56,6 @@ const mutateIcon = (iconName) => {
     return
   }
 
-  // If the icon isn't a color icon, or a flag set the fill to current color.
-  if (!iconName.includes('-color') && !getFlag(iconName)) {
-    for (const filled of document.querySelectorAll('svg, path')) {
-      // Don't fill unfilled elements.
-      const currentFill = filled.getAttribute('fill')
-      if (!currentFill || currentFill === 'none') continue
-
-      filled.setAttribute('fill', 'currentColor')
-    }
-  }
-
   const outputName = getMutatedIconName(iconName)
 
   const rejectReasons = new Set()
