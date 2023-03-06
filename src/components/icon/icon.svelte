@@ -8,16 +8,19 @@
 <script lang="ts">
   export let name: string = undefined
   export let forceColor: boolean = false
-  let hasColor = name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
+  let hasColor =
+    name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
 </script>
 
 <div class="leoIcon">
   <slot>
-    <div
-      class="icon"
-      class:color={hasColor}
-      style:--icon-url={`url('${iconBasePath}/${name}.svg')`}
-    />
+    {#if name}
+      <div
+        class="icon"
+        class:color={hasColor}
+        style:--icon-url={`url('${iconBasePath}/${name}.svg')`}
+      />
+    {/if}
   </slot>
 </div>
 
