@@ -7,7 +7,8 @@
 
 <script lang="ts">
   export let name: string = undefined
-  let hasColor = name?.endsWith('-color') || name?.startsWith('Country=')
+  export let forceColor: boolean = false
+  let hasColor = name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
 </script>
 
 <div class="leoIcon">
