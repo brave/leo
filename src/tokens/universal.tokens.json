@@ -658,7 +658,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#121316ff",
+          "value": "#090a0bff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -672,7 +672,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#1e2025ff",
+          "value": "#1a1c20ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -684,7 +684,7 @@
         "highlight": {
           "description": "",
           "type": "color",
-          "value": "#121316ff",
+          "value": "#0e0f11ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -762,7 +762,7 @@
         "info-background": {
           "description": "",
           "type": "color",
-          "value": "#042038ff",
+          "value": "#063256ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -786,7 +786,7 @@
         "error-background": {
           "description": "",
           "type": "color",
-          "value": "#410912ff",
+          "value": "#630d1bff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -810,7 +810,7 @@
         "warning-background": {
           "description": "",
           "type": "color",
-          "value": "#281d00ff",
+          "value": "#3f2e00ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -834,7 +834,7 @@
         "success-background": {
           "description": "",
           "type": "color",
-          "value": "#0e2311ff",
+          "value": "#15371bff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -3869,7 +3869,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 16,
+            "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -5653,7 +5653,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 16
+            "value": 18
           },
           "paragraphIndent": {
             "type": "dimension",
