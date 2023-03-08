@@ -8,8 +8,8 @@ const getPropertyName = (selector, decl) => {
     .replace(regex, '\\$1')
 }
 
-const wrapInGlobalSelector = (selector) => {
-  return `:global(${selector})`
+const wrapInSelector = (wrap, selector) => {
+  return `${wrap}(${selector})`
 }
 
 const splitRule = (rule, selectorToExtract) => {
@@ -37,7 +37,11 @@ const defaultOptions = {
 }
 
 /**
- * @param {{ darkSelector: string, lightSelector: string, useGlobal?: boolean }} options The options for configuring the selectors for darkmode.
+ * @param {{
+ *  darkSelector: string,
+ *  lightSelector: string,
+ *  wrapIn?: string,
+ * }} options The options for configuring the selectors for darkmode.
  */
 module.exports = (options) => {
   options = { ...defaultOptions, ...options }
@@ -186,9 +190,9 @@ module.exports = (options) => {
       ]
       let darkSelectors = [`:root${options.darkSelector}`, options.darkSelector]
 
-      if (options.useGlobal) {
-        lightSelectors = lightSelectors.map(wrapInGlobalSelector)
-        darkSelectors = darkSelectors.map(wrapInGlobalSelector)
+      if (options.wrapIn) {
+        lightSelectors = lightSelectors.map(s => wrapInSelector(options.wrapIn, s))
+        darkSelectors = darkSelectors.map(s => wrapInSelector(options.wrapIn, s))
       }
 
       const lightRule = new Rule({
