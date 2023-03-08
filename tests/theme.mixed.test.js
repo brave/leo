@@ -197,7 +197,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
     {}
   ))
 
-it('Handles useGlobal', () =>
+it('Handles wrapIn', () =>
   run(
     `.component {
           padding: 12px;
@@ -238,5 +238,5 @@ it('Handles useGlobal', () =>
       background: var(--\\.component_background);
       color: var(--\\.component_color);
     }`,
-    { useGlobal: true }
+    { wrapIn: ':global' }
   ))
