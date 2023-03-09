@@ -736,7 +736,7 @@
         "subtle": {
           "description": "",
           "type": "color",
-          "value": "#292b33ff",
+          "value": "#2e3038ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
