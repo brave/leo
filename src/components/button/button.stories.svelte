@@ -40,7 +40,7 @@
     <h2 class="label capitalize">{size}</h2>
     <div class="button-group">
       {#each buttonKinds as kind}
-        <Button kind={kind} size={size} {...args}>
+        <Button {kind} {size} {...args}>
           <span class="capitalize">{kind}</span>
         </Button>
       {/each}
@@ -55,7 +55,7 @@
     gap: 24px;
     align-items: center;
   }
-  .capitalize { 
+  .capitalize {
     text-transform: capitalize;
   }
   .label {

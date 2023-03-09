@@ -230,7 +230,6 @@
     &:disabled {
       opacity: 0.5;
     }
-
   }
   .leoButton.isHero {
     transition: var(--default-transition);
