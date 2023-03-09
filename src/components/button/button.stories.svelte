@@ -36,30 +36,16 @@
 <Story name="Quaternary" source args={{ kind: 'quaternary' }} />
 
 <Story name="All" let:args>
-  <h2 class="label">Large</h2>
-  <div class="button-group">
-    <Button kind="hero" size="large" {...args}>Hero</Button>
-    <Button kind="primary" size="large" {...args}>Primary</Button>
-    <Button kind="secondary" size="large" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
-    <Button kind="quaternary" size="large" {...args}>Quaternary</Button>
-  </div>
-  <h2 class="label">Medium</h2>
-  <div class="button-group">
-    <Button kind="hero" size="medium" {...args}>Hero</Button>
-    <Button kind="primary" size="medium" {...args}>Primary</Button>
-    <Button kind="secondary" size="medium" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="medium" {...args}>Tertiary</Button>
-    <Button kind="quaternary" size="medium" {...args}>Quaternary</Button>
-  </div>
-  <h2 class="label">Small</h2>
-  <div class="button-group">
-    <Button kind="hero" size="small" {...args}>Hero</Button>
-    <Button kind="primary" size="small" {...args}>Primary</Button>
-    <Button kind="secondary" size="small" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
-    <Button kind="quaternary" size="small" {...args}>Quaternary</Button>
-  </div>
+  {#each buttonSizes as size}
+    <h2 class="label capitalize">{size}</h2>
+    <div class="button-group">
+      {#each buttonKinds as kind}
+        <Button kind={kind} size={size} {...args}>
+          <span class="capitalize">{kind}</span>
+        </Button>
+      {/each}
+    </div>
+  {/each}
 </Story>
 
 <style>
@@ -68,6 +54,9 @@
     display: flex;
     gap: 24px;
     align-items: center;
+  }
+  .capitalize { 
+    text-transform: capitalize;
   }
   .label {
     font: 500 14px sans-serif;

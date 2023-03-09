@@ -67,9 +67,11 @@
   class:isTertiary={kind === 'tertiary'}
   class:isQuaternary={kind === 'quaternary'}
   class:isHero={kind === 'hero'}
+  class:isJumbo={size === 'jumbo'}
   class:isLarge={size === 'large'}
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
+  class:isTiny={size === 'tiny'}
   class:isLoading
   on:click={onClick}
   {...$$restProps}
@@ -139,6 +141,11 @@
   }
 
   // Size Variations
+  .leoButton.isTiny {
+    --icon-size: 12px;
+    font: var(--leo-font-components-button-small);
+    padding: 6px 10px;
+  }
   .leoButton.isSmall {
     --icon-size: 20px;
     font: var(--leo-font-components-button-small);
@@ -153,6 +160,11 @@
     --icon-size: 24px;
     font: var(--leo-font-components-button-large);
     padding: 12px 20px;
+  }
+  .leoButton.isJumbo {
+    --icon-size: 24px;
+    font: var(--leo-font-components-button-jumbo);
+    padding: 18px 26px;
   }
 
   // Kind Variations
