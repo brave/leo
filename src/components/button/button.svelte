@@ -65,6 +65,7 @@
   class:isPrimary={kind === 'primary'}
   class:isSecondary={kind === 'secondary'}
   class:isTertiary={kind === 'tertiary'}
+  class:isQuaternary={kind === 'quaternary'}
   class:isHero={kind === 'hero'}
   class:isLarge={size === 'large'}
   class:isMedium={size === 'medium'}
@@ -206,6 +207,18 @@
         --color: var(--leo-color-dark-text-primary);
       }
     }
+  }
+  .leoButton.isQuaternary {
+    padding-left: 0;
+    padding-right: 0;
+    --color: var(--leo-color-gray-60);
+    --color-hover: var(--color-gray-70);
+    --box-shadow-hover: none;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
   }
   .leoButton.isHero {
     transition: var(--default-transition);

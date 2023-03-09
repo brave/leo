@@ -1,4 +1,4 @@
-export const buttonKinds = ['hero', 'primary', 'secondary', 'tertiary'] as const
+export const buttonKinds = ['hero', 'primary', 'secondary', 'tertiary', 'quaternary'] as const
 export type ButtonKind = (typeof buttonKinds)[number]
 
 export const buttonSizes = ['large', 'medium', 'small'] as const

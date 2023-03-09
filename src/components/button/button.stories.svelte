@@ -33,6 +33,8 @@
 
 <Story name="Tertiary" source args={{ kind: 'tertiary' }} />
 
+<Story name="Quaternary" source args={{ kind: 'quaternary' }} />
+
 <Story name="All" let:args>
   <h2 class="label">Large</h2>
   <div class="button-group">
@@ -40,6 +42,7 @@
     <Button kind="primary" size="large" {...args}>Primary</Button>
     <Button kind="secondary" size="large" {...args}>Secondary</Button>
     <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
+    <Button kind="quaternary" size="large" {...args}>Quaternary</Button>
   </div>
   <h2 class="label">Medium</h2>
   <div class="button-group">
@@ -47,6 +50,7 @@
     <Button kind="primary" size="medium" {...args}>Primary</Button>
     <Button kind="secondary" size="medium" {...args}>Secondary</Button>
     <Button kind="tertiary" size="medium" {...args}>Tertiary</Button>
+    <Button kind="quaternary" size="medium" {...args}>Quaternary</Button>
   </div>
   <h2 class="label">Small</h2>
   <div class="button-group">
@@ -54,6 +58,7 @@
     <Button kind="primary" size="small" {...args}>Primary</Button>
     <Button kind="secondary" size="small" {...args}>Secondary</Button>
     <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
+    <Button kind="quaternary" size="small" {...args}>Quaternary</Button>
   </div>
 </Story>
 
