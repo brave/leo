@@ -224,7 +224,7 @@
     padding-left: 0;
     padding-right: 0;
     --color: var(--leo-color-gray-60);
-    --color-hover: var(--color-gray-70);
+    --color-hover: var(--leo-color-gray-70);
     --box-shadow-hover: none;
 
     &:disabled {
