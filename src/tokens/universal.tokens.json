@@ -3073,31 +3073,7 @@
             }
           }
         },
-        "settings-toolbar-backgroun": {
-          "description": "",
-          "type": "custom-gradient",
-          "value": {
-            "gradientType": "linear",
-            "rotation": 134.9999995731132,
-            "stops": [
-              {
-                "position": 0,
-                "color": "#e7304fff"
-              },
-              {
-                "position": 1,
-                "color": "#b20f96ff"
-              }
-            ]
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:6c4b2dfee803bfd050e5314d0e5e457114f94cb6,",
-              "exportKey": "gradient"
-            }
-          }
-        },
-        "rewards-panel": {
+        "panel-background-alternative": {
           "description": "",
           "type": "custom-gradient",
           "value": {
@@ -3117,6 +3093,30 @@
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "styleId": "S:7d40c65bebc9cad2488922f2c2b931edb969a481,",
+              "exportKey": "gradient"
+            }
+          }
+        },
+        "toolbar-background": {
+          "description": "",
+          "type": "custom-gradient",
+          "value": {
+            "gradientType": "linear",
+            "rotation": 134.9999995731132,
+            "stops": [
+              {
+                "position": 0,
+                "color": "#e7304fff"
+              },
+              {
+                "position": 1,
+                "color": "#b20f96ff"
+              }
+            ]
+          },
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:6c4b2dfee803bfd050e5314d0e5e457114f94cb6,",
               "exportKey": "gradient"
             }
           }
