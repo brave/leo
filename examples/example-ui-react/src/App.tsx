@@ -20,7 +20,7 @@ function App() {
             onChange={(e) => setButtonText(e.target.value)}
           />
         </label>
-        <LeoButton
+        {buttonText && <LeoButton
           className={spinning ? 'spin' : ''}
           kind="primary"
           size="large"
@@ -31,7 +31,7 @@ function App() {
           }}
         >
           {buttonText}
-        </LeoButton>
+        </LeoButton>}
         <LeoButton href="#foo">Link button!</LeoButton>
       </header>
     </div>
