@@ -10,7 +10,7 @@
     "lodash.camelcase": "4.3.0",
     "lodash.merge": "4.6.2",
     "style-dictionary": "3.7.2",
-    "svelte": "github:brave/svelte",
+    "svelte": "3.56.0",
     "svelte-check": "3.0.3",
     "svelte-preprocess": "5.0.1",
     "svelte2tsx": "0.6.1",
