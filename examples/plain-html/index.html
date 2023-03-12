@@ -1,31 +1,34 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using HTML & Web Components"
-    />
-    <link href="./css/variables.css" rel="stylesheet" />
-    <title>Web Components</title>
-    <style>
-      .component-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-    </style>
-  </head>
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script type="module">
-      import './leo/button.js'
-      import './leo/collapse.js'
-      import './leo/toggle.js'
-      import './leo/progressRing.js'
-      import './leo/progressBar.js'
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Web site created using HTML & Web Components" />
+  <link href="./css/variables.css" rel="stylesheet" />
+  <title>Web Components</title>
+  <style>
+    .component-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script type="module">
+    import './leo/button.js'
+    import './leo/collapse.js'
+    import './leo/toggle.js'
+    import './leo/progressRing.js'
+    import './leo/progressBar.js'
+    import './leo/alert.js'
+    import './leo/icon.js'
 
       let count = 10
       const clickable = document.getElementById('clickable')
@@ -35,9 +38,9 @@
       const toggleButton = document.querySelector('#toggle-button')
       const collapse = document.querySelector('leo-collapse')
 
-      clickable.addEventListener('click', () => {
-        count += 10
-        if (count > 100) count = 0
+    clickable.addEventListener('click', () => {
+      count += 10
+      if (count > 100) count = 0
 
         const progress = count/100
         clickable.innerText = `Progress: ${progress}`
@@ -67,6 +70,15 @@
       <leo-toggle>Togglable!</leo-toggle>
       <leo-progressring progress="0.25"></leo-progressring>
       <leo-progressbar progress="0.25"></leo-progressbar>
+      <leo-alert mode="callout">
+        <leo-icon slot="icon" name="warning-circle-filled"></leo-icon>
+        <span slot="title">Hello World</span>
+        <div>This is the content</div>
+        <div slot="actions">
+          <leo-button>Do the thing</leo-button>
+          <leo-button kind="tertiary">Cancel</leo-button>
+        </div>
+      </leo-alert>
     </div>
   </body>
 </html>

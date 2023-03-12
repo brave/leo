@@ -48,7 +48,14 @@
 </div>
 
 <style lang="scss">
+  .leo-alert .actions > *,
+  .leo-alert .actions ::slotted(*) {
+      display: flex;
+      flex-direction: row;
+      gap: var(--leo-spacing-16);
+  }
   .leo-alert {
+
     --leo-icon-color: var(--leo-alert-icon-color, var(--default-icon-color));
     background-color: var(
       --leo-alert-background-color,
@@ -68,13 +75,6 @@
     & .title {
       font: var(--leo-font-heading-h4);
     }
-
-    & :global(.actions > *),
-    :global(.actions::slotted(*)) {
-      display: flex;
-      flex-direction: row;
-      gap: var(--leo-spacing-16);
-    }
   }
 
   .leo-alert.toast {
@@ -93,6 +93,10 @@
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto min-content;
+
+    & .content {
+      grid-column: 2;
+    }
 
     & .actions {
       grid-column: 2;
