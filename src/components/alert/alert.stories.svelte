@@ -3,7 +3,28 @@
   import Button from '../button/button.svelte'
 
   import Alert, { modes, types } from './alert.svelte'
+  import AlertCentre, { showAlert } from './alertCentre.svelte'
+
+  showAlert(
+    {
+      content: 'Hello World',
+      mode: 'toast',
+      type: 'success',
+      actions: [
+        {
+          kind: 'primary',
+          text: 'dismiss',
+          action: () => {
+            console.log('Foo')
+          }
+        }
+      ]
+    },
+    0
+  )
 </script>
+
+<AlertCentre />
 
 <Meta
   title="Alert"
