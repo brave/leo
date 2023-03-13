@@ -28,6 +28,7 @@
     import './leo/progressRing.js'
     import './leo/progressBar.js'
     import './leo/alert.js'
+    import { showAlert } from './leo/alertCentre.js'
     import './leo/icon.js'
 
       let count = 10
@@ -42,43 +43,52 @@
       count += 10
       if (count > 100) count = 0
 
-        const progress = count/100
-        clickable.innerText = `Progress: ${progress}`
-        ring.progress = progress
-        bar.progress = progress
+      const progress = count / 100
+      clickable.innerText = `Progress: ${progress}`
+      ring.progress = progress
+      bar.progress = progress
+
+      showAlert({
+        content: `progress is ${progress}`,
+        actions: [{
+          text: 'dismiss',
+          action: a => a.dismiss()
+        }]
       })
+    })
 
-      let isToggled = false
-      const toggled = () => {
-        isToggled = !isToggled
+    let isToggled = false
+    const toggled = () => {
+      isToggled = !isToggled
 
-        toggle.on = isToggled
-        collapse.isOpen = isToggled
-        toggleButton.textContent = `Open: ${isToggled}`
-      }
+      toggle.on = isToggled
+      collapse.isOpen = isToggled
+      toggleButton.textContent = `Open: ${isToggled}`
+    }
 
-      toggle.addEventListener('toggle', toggled)
-      toggleButton.addEventListener('click', toggled)
-      collapse.addEventListener('toggle', toggled)
-    </script>
-    <div class="component-container">
-      <leo-button id="clickable">Click Me</leo-button>
-      <leo-collapse title="Handy dandy title">
-        Some content which is hidden by default
-      </leo-collapse>
-      <leo-button id="toggle-button" kind="secondary"></leo-button>
-      <leo-toggle>Togglable!</leo-toggle>
-      <leo-progressring progress="0.25"></leo-progressring>
-      <leo-progressbar progress="0.25"></leo-progressbar>
-      <leo-alert mode="callout">
-        <leo-icon slot="icon" name="warning-circle-filled"></leo-icon>
-        <span slot="title">Hello World</span>
-        <div>This is the content</div>
-        <div slot="actions">
-          <leo-button>Do the thing</leo-button>
-          <leo-button kind="tertiary">Cancel</leo-button>
-        </div>
-      </leo-alert>
-    </div>
-  </body>
+    toggle.addEventListener('toggle', toggled)
+    toggleButton.addEventListener('click', toggled)
+    collapse.addEventListener('toggle', toggled)
+  </script>
+  <div class="component-container">
+    <leo-alertcentre></leo-alertcentre>
+    <leo-button id="clickable">Click Me</leo-button>
+    <leo-collapse title="Handy dandy title">
+      Some content which is hidden by default
+    </leo-collapse>
+    <leo-toggle>Togglable!</leo-toggle>
+    <leo-progressring progress="0.25"></leo-progressring>
+    <leo-progressbar progress="0.25"></leo-progressbar>
+    <leo-alert mode="callout">
+      <leo-icon slot="icon" name="warning-circle-filled"></leo-icon>
+      <span slot="title">Hello World</span>
+      <div>This is the content</div>
+      <div slot="actions">
+        <leo-button>Do the thing</leo-button>
+        <leo-button kind="tertiary">Cancel</leo-button>
+      </div>
+    </leo-alert>
+  </div>
+</body>
+
 </html>

@@ -20,18 +20,21 @@
 
   export let type: AlertType = 'error'
   export let mode: AlertMode = 'toast'
+
+  $: currentType = type ?? 'error'
+  $: currentMode = mode ?? 'toast'
 </script>
 
 <div
   class="leo-alert"
-  class:toast={mode === 'toast'}
-  class:callout={mode === 'callout'}
-  style:--default-background={`var(--leo-color-systemfeedback-${type}-background)`}
-  style:--default-icon-color={`var(--leo-color-systemfeedback-${type}-icon)`}
+  class:toast={currentMode === 'toast'}
+  class:callout={currentMode === 'callout'}
+  style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
+  style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
 >
   <div class="icon">
     <slot name="icon">
-      <Icon name={defaultIcons[type]} />
+      <Icon name={defaultIcons[currentType]} />
     </slot>
   </div>
   <div class="content">

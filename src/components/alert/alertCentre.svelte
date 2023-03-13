@@ -63,7 +63,6 @@
 </script>
 
 <script lang="ts">
-  import portal from '../../actions/portal'
   import Alert from './alert.svelte'
   import Icon from '../icon/icon.svelte'
   import Button from '../button/button.svelte'
@@ -77,7 +76,7 @@
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
-<div class="leo-alert-centre" {style} use:portal>
+<div class="leo-alert-centre" {style}>
   {#each $alerts as alert (alert.id)}
     <div
       class="alert-container"
