@@ -5,26 +5,24 @@
   import Alert, { modes, types } from './alert.svelte'
   import AlertCentre, { showAlert } from './alertCentre.svelte'
 
-  showAlert(
+  const alertUser = () => showAlert(
     {
       content: 'Hello World',
       mode: 'toast',
-      type: 'success',
+      type: 'warning',
       actions: [
         {
-          kind: 'primary',
           text: 'dismiss',
-          action: () => {
-            console.log('Foo')
-          }
+          action: (a) => a.dismiss()
         }
       ]
     },
-    0
+    2000
   )
 </script>
 
-<AlertCentre />
+<AlertCentre position='bottom-right' />
+<Button on:click={alertUser}>Show Alert</Button>
 
 <Meta
   title="Alert"

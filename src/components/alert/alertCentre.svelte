@@ -1,16 +1,16 @@
-<svelte:options tag="leo-alert-centre" />
+<svelte:options tag="leo-alertcentre" />
 
 <script lang="ts" context="module">
   import type { AlertMode, AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'
 
   type Action = {
-    kind: ButtonKind
+    kind?: ButtonKind
     text: string
-    action: () => void
+    action: (alert: AlertInfo) => void
   }
 
-  type AlertInfo = {
+  interface AlertOptions {
     mode: AlertMode
     type: AlertType
     content: string
@@ -19,14 +19,45 @@
     actions: Action[]
   }
 
+  class AlertInfo {
+    id = Math.random()
+
+    mode: AlertMode
+    type: AlertType
+    content: string
+    title?: string
+    icons?: string
+    actions: Action[] = []
+
+    duration?: number
+    #timeout: NodeJS.Timeout
+
+    constructor(options: AlertOptions, duration?: number) {
+      Object.assign(this, options)
+
+      this.duration = duration
+      this.resumeDismiss()
+    }
+
+    pauseDismiss() {
+      clearTimeout(this.#timeout)
+    }
+
+    resumeDismiss() {
+      if (!this.duration) return
+      this.#timeout = setTimeout(() => this.dismiss(), this.duration)
+    }
+
+    dismiss() {
+      alerts.update((a) => a.filter((a) => a !== this))
+    }
+  }
+
   const alerts = writable<AlertInfo[]>([])
 
-  export const showAlert = (
-    options: Omit<AlertInfo, 'actions'> & { actions?: Action[] },
-    duration = 2000
-  ) => {
+  export const showAlert = (options: AlertOptions, duration = 2000) => {
     const info = { actions: [], ...options }
-    alerts.update((a) => [...a, info])
+    alerts.update((a) => [...a, new AlertInfo(options, duration)])
     if (duration !== 0)
       setTimeout(
         () => alerts.update((a) => a.filter((a) => a !== info)),
@@ -41,14 +72,23 @@
   import Icon from '../icon/icon.svelte'
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
+  import { fade } from 'svelte/transition'
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'centre'}` =
     'top-centre'
+  $: style = `${position.includes('right') ? 'right' : 'left'}: ${
+    position.includes('centre') ? 'calc(50% - (var(--width) / 2))' : '0'
+  }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
-<div class="leo-alert-centre" use:portal>
+<div class="leo-alert-centre" {style} use:portal>
   {#each $alerts as alert}
-    <div class="alert-container">
+    <div
+      class="alert-container"
+      transition:fade
+      on:mouseenter={() => alert.pauseDismiss()}
+      on:mouseleave={() => alert.resumeDismiss()}
+    >
       <Alert mode={alert.mode} type={alert.type}>
         <div slot="title">
           {alert.title}
@@ -56,8 +96,9 @@
         {alert.content}
         <div slot="actions">
           {#each alert.actions as action}
-            <Button kind={action.kind} on:click={action.action}
-              >{action.text}</Button
+            <Button
+              kind={action.kind ?? 'primary'}
+              on:click={() => action.action(alert)}>{action.text}</Button
             >
           {/each}
         </div>
@@ -72,8 +113,7 @@
     position: fixed;
     width: var(--width);
 
-    top: 0;
-    left: calc(50% - (var(--width) / 2));
+    padding: var(--leo-spacing-8);
 
     display: flex;
     flex-direction: column;
