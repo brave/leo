@@ -19,8 +19,9 @@
     actions: Action[]
   }
 
+  let nextId = 0
   class AlertInfo {
-    id = Math.random()
+    id = ++nextId
 
     mode: AlertMode
     type: AlertType
@@ -34,6 +35,7 @@
 
     constructor(options: AlertOptions, duration?: number) {
       Object.assign(this, options)
+      this.actions = this.actions ?? []
 
       this.duration = duration
       this.resumeDismiss()
@@ -56,13 +58,7 @@
   const alerts = writable<AlertInfo[]>([])
 
   export const showAlert = (options: AlertOptions, duration = 2000) => {
-    const info = { actions: [], ...options }
     alerts.update((a) => [...a, new AlertInfo(options, duration)])
-    if (duration !== 0)
-      setTimeout(
-        () => alerts.update((a) => a.filter((a) => a !== info)),
-        duration
-      )
   }
 </script>
 
@@ -82,7 +78,7 @@
 </script>
 
 <div class="leo-alert-centre" {style} use:portal>
-  {#each $alerts as alert}
+  {#each $alerts as alert (alert.id)}
     <div
       class="alert-container"
       transition:fade
@@ -110,7 +106,7 @@
 <style lang="scss">
   .leo-alert-centre {
     --width: min(540px, 100vw);
-    position: fixed;
+    position: absolute;
     width: var(--width);
 
     padding: var(--leo-spacing-8);

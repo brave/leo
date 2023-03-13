@@ -1,6 +1,9 @@
 <script lang="ts">
+  import AlertCentre from '../src/components/alert/alertCentre.svelte'
   import '../tokens/css/variables.css'
 </script>
+
+<AlertCentre />
 
 <div class="layout">
   <h2>User preference</h2>

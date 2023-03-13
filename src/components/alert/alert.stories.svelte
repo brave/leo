@@ -3,26 +3,32 @@
   import Button from '../button/button.svelte'
 
   import Alert, { modes, types } from './alert.svelte'
-  import AlertCentre, { showAlert } from './alertCentre.svelte'
+  import { showAlert } from './alertCentre.svelte'
 
-  const alertUser = () => showAlert(
-    {
-      content: 'Hello World',
-      mode: 'toast',
-      type: 'warning',
-      actions: [
-        {
-          text: 'dismiss',
-          action: (a) => a.dismiss()
-        }
-      ]
-    },
-    2000
-  )
+  let content = 'Hello World'
+  let title = 'Title'
+  let canDismiss = true
+  let duration = 2000
+
+  $: alertUser = (mode, type) =>
+    showAlert(
+      {
+        content,
+        title,
+        mode: mode ?? 'toast',
+        type: type ?? 'error',
+        actions: canDismiss
+          ? [
+              {
+                text: 'dismiss',
+                action: (a) => a.dismiss()
+              }
+            ]
+          : []
+      },
+      duration
+    )
 </script>
-
-<AlertCentre position='bottom-right' />
-<Button on:click={alertUser}>Show Alert</Button>
 
 <Meta
   title="Alert"
@@ -60,6 +66,30 @@
       {/each}
     {/each}
   </div>
+</Story>
+
+<Story name="Alert Center" let:args>
+  <label>
+    Alert Content
+    <input type="text" bind:value={content} />
+  </label>
+  <label>
+    Alert Title
+    <input type="text" bind:value={title} />
+  </label>
+  <label>
+    Duration
+    <input type="text" bind:value={duration} />
+  </label>
+  <label>
+    Dismissable
+    <input type="checkbox" bind:checked={canDismiss} />
+  </label>
+  <Button
+    on:click={() => {
+      alertUser(args.mode, args.type)
+    }}>Show Alert</Button
+  >
 </Story>
 
 <style>
