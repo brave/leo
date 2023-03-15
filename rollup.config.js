@@ -60,7 +60,7 @@ export default {
       // Don't emit CSS - it doesn't work properly with Web Components.
       emitCss: false,
       compilerOptions: {
-        customElement: true
+        customElement: false
       }
     }),
     resolve({ browser: true }),
