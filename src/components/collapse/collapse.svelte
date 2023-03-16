@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import Button from '../button/button.svelte'
 
   export let title = ''
 
@@ -54,6 +55,9 @@
     <slot />
   </div>
 </details>
+
+
+<Button>{isOpen ? 'open' : 'closed'}</Button>
 
 <style lang="scss">
   .leoCollapse {

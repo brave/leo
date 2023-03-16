@@ -12,6 +12,27 @@ const reflectToAttributes = new Set([
     'boolean'
 ])
 
+const createTextSlot = (text: string) => {
+    let t;
+    return {
+		c() {
+			t = document.createTextNode(text);
+		},
+		m(target, anchor) {
+			target.insertBefore(target, t, anchor || null);
+		},
+		p(ctx, dirty) {
+			// if (dirty & /*isOpen*/ 2 && t_value !== (t_value = (/*isOpen*/ ctx[1] ? 'open' : 'closed') + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (!detaching) return
+            if (t.parentNode) {
+                t.parentNode.removeChild(t);
+            }
+		}
+    }
+}
+
 export default function registerWebComponent(component: any, { name, mode }: Options) {
     const c = new component({ target: document.createElement('div') }) as any
     const props = Object.keys(c.$$.props)
@@ -33,7 +54,12 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
 
             const shadow = this.attachShadow({ mode })
             this.component = new component({
-                target: shadow
+                target: shadow,
+                props: {
+                    $$slots: {
+                        default: [createTextSlot('foo')]
+                    }
+                }
             })
 
             // For some reason setting this on |SvelteWrapper| doesn't work properly.
@@ -66,6 +92,14 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
             // by the component or not so we could end up triggering the event
             // twice (i.e. in the case of 'click')
             // super.addEventListener(event, callback, options)
+        }
+
+        setDefaultSlotText(text: string) {
+            this.component.$$set({
+                '$$scope': {
+                    default: [createTextSlot(text)]
+                }
+            })
         }
     }
 
