@@ -59,12 +59,13 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
             this[name] = newValue
         }
 
-        connectedCallback() {
-            console.log('connected')
-        }
+        addEventListener(event: string, callback: (...args) => void, options: any) {
+            this.component.$on(event, callback)
 
-        disconnectedCallback() {
-            console.log('disconnected')
+            // TODO: We could do this but we don't know if the event is handled
+            // by the component or not so we could end up triggering the event
+            // twice (i.e. in the case of 'click')
+            // super.addEventListener(event, callback, options)
         }
     }
 
