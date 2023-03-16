@@ -12,24 +12,26 @@ const reflectToAttributes = new Set([
     'boolean'
 ])
 
-const createTextSlot = (text: string) => {
-    let t;
+const createSlot = (name?: string) => {
+    let slot: HTMLElement;
     return {
-		c() {
-			t = document.createTextNode(text);
-		},
-		m(target, anchor) {
-			target.insertBefore(target, t, anchor || null);
-		},
-		p(ctx, dirty) {
-			// if (dirty & /*isOpen*/ 2 && t_value !== (t_value = (/*isOpen*/ ctx[1] ? 'open' : 'closed') + "")) set_data(t, t_value);
-		},
-		d(detaching) {
-			if (!detaching) return
-            if (t.parentNode) {
-                t.parentNode.removeChild(t);
+        c() {
+            slot = document.createElement("slot");
+            if (name) {
+                slot.setAttribute('name', name)
             }
-		}
+        },
+        m(target, anchor) {
+            target.insertBefore(slot, anchor || null);
+        },
+        p(ctx, dirty) {
+            // if (dirty & /*isOpen*/ 2 && t_value !== (t_value = (/*isOpen*/ ctx[1] ? 'open' : 'closed') + "")) set_data(t, t_value);
+        },
+        d(detaching) {
+            if (detaching && slot.parentNode) {
+                slot.parentNode.removeChild(slot);
+            }
+        }
     }
 }
 
@@ -53,12 +55,14 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
             super()
 
             const shadow = this.attachShadow({ mode })
+            const node = createSlot()
             this.component = new component({
                 target: shadow,
                 props: {
                     $$slots: {
-                        default: [createTextSlot('foo')]
-                    }
+                        default: [() => node]
+                    },
+                    $$scope: { ctx: [] }
                 }
             })
 
@@ -92,14 +96,6 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
             // by the component or not so we could end up triggering the event
             // twice (i.e. in the case of 'click')
             // super.addEventListener(event, callback, options)
-        }
-
-        setDefaultSlotText(text: string) {
-            this.component.$$set({
-                '$$scope': {
-                    default: [createTextSlot(text)]
-                }
-            })
         }
     }
 
