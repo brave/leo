@@ -20,6 +20,7 @@ for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
 }
 
 inputs.push('./src/components/svelte-react.ts')
+inputs.push('./src/components/svelte-web.ts')
 
 export default {
   input: inputs,
@@ -29,15 +30,7 @@ export default {
     sourcemap: true,
     dir: './',
     chunkFileNames: 'shared/[hash].js',
-    entryFileNames: ({ facadeModuleId, name }) => {
-      // Web component
-      if (facadeModuleId.endsWith('.svelte')) {
-        return `web-components/${name}.js`
-      }
-
-      // Util files for Svelte, like svelte-react
-      return `svelte/[name].js`
-    },
+    entryFileNames: ({ name }) => `shared/${name}.js`,
     format: 'esm'
   },
   // React is external - Leo doesn't need it but its React bindings do. We'll
