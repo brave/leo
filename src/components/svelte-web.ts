@@ -6,6 +6,12 @@ interface Options {
     attributes: string
 }
 
+const reflectToAttributes = new Set([
+    'string',
+    'number',
+    'boolean'
+])
+
 export default function registerWebComponent(component: any, { name, mode }: Options) {
     const c = new component({ target: document.createElement('div') }) as any
     const props = Object.keys(c.$$.props)
@@ -39,6 +45,9 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
                         return this.component.$$.ctx[contextIndex]
                     },
                     set(value) {
+                        if (reflectToAttributes.has(typeof value)) {
+                            this.setAttribute(prop, value)
+                        }
                         this.component.$$set({ [prop]: value })
                     }
                 })
@@ -46,8 +55,8 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
-            console.log(name, oldValue, newValue);
-            (this.component as any).$$set({ [attributePropMap.get(name)]: newValue })
+            if (oldValue === newValue) return
+            this[name] = newValue
         }
 
         connectedCallback() {
