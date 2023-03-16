@@ -6,7 +6,7 @@ interface Options {
     attributes: string
 }
 
-export default function registerWebComponent(component: ConstructorOfATypedSvelteComponent, { name, mode }: Options) {
+export default function registerWebComponent(component: any, { name, mode }: Options) {
     const c = new component({ target: document.createElement('div') }) as any
     const props = Object.keys(c.$$.props)
     const attributePropMap = new Map<string, string>();
@@ -28,9 +28,21 @@ export default function registerWebComponent(component: ConstructorOfATypedSvelt
             const shadow = this.attachShadow({ mode })
             this.component = new component({
                 target: shadow
-            }) as any
+            })
 
-            // console.log(name, component)
+            // For some reason setting this on |SvelteWrapper| doesn't work properly.
+            for (const prop of props) {
+                Object.defineProperty(this, prop, {
+                    enumerable: true,
+                    get() {
+                        const contextIndex = c.$$.props[prop]
+                        return this.component.$$.ctx[contextIndex]
+                    },
+                    set(value) {
+                        this.component.$$set({ [prop]: value })
+                    }
+                })
+            }
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
