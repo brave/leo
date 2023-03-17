@@ -48,7 +48,6 @@
   export let href: Href = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
-  $: console.log($$slots)
 
   const dispatch = createEventDispatcher()
 

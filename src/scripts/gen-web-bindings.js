@@ -19,7 +19,7 @@ const getFileContents = async (svelteFilePath) => {
     fileNameWithoutExtension[0].toUpperCase() +
     fileNameWithoutExtension.substring(1)
 
-    const binding = `
+  const binding = `
 import SvelteWeb from '${SVELTE_WEB_WRAPPER_PATH}'
 import ${componentName} from '../shared/${fileNameWithoutExtension}.js'
 export default SvelteWeb(${componentName}, {

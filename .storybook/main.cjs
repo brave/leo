@@ -20,7 +20,11 @@ module.exports = {
   svelteOptions: {
     preprocess: sveltePreprocess({
       postcss: {
-        plugins: [require('../src/postcss/theme')({ wrapSelector: selector => `:global(${selector})` })]
+        plugins: [
+          require('../src/postcss/theme')({
+            wrapSelector: (selector) => `:global(${selector})`
+          })
+        ]
       }
     }),
     customElement: true
