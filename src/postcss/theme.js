@@ -8,10 +8,6 @@ const getPropertyName = (selector, decl) => {
     .replace(regex, '\\$1')
 }
 
-const wrapInSelector = (wrap, selector) => {
-  return `${wrap}(${selector})`
-}
-
 const splitRule = (rule, selectorToExtract) => {
   // |cloneAfter|, so in an |each| loop, the new rule will be processed.
   const cloned = rule.cloneAfter()
@@ -33,14 +29,15 @@ const splitRule = (rule, selectorToExtract) => {
 
 const defaultOptions = {
   darkSelector: '[data-theme=dark]',
-  lightSelector: '[data-theme=light]'
+  lightSelector: '[data-theme=light]',
+  wrapSelector: (selector) => selector
 }
 
 /**
  * @param {{
  *  darkSelector: string,
  *  lightSelector: string,
- *  wrapIn?: string,
+ *  wrapSelector?: (selector: string) => string,
  * }} options The options for configuring the selectors for darkmode.
  */
 module.exports = (options) => {
@@ -158,8 +155,7 @@ module.exports = (options) => {
         const theme = supportedThemes.find((t) => atRule.params.includes(t))
         if (!theme)
           throw new Error(
-            `Encountered unsupported theme ${
-              atRule.params
+            `Encountered unsupported theme ${atRule.params
             }. Allowed themes are ${supportedThemes.join(', ')}`
           )
 
@@ -190,14 +186,12 @@ module.exports = (options) => {
       ]
       let darkSelectors = [`:root${options.darkSelector}`, options.darkSelector]
 
-      if (options.wrapIn) {
-        lightSelectors = lightSelectors.map((s) =>
-          wrapInSelector(options.wrapIn, s)
-        )
-        darkSelectors = darkSelectors.map((s) =>
-          wrapInSelector(options.wrapIn, s)
-        )
-      }
+      lightSelectors = lightSelectors.map((s) =>
+        options.wrapSelector(s)
+      )
+      darkSelectors = darkSelectors.map((s) =>
+        options.wrapSelector(s)
+      )
 
       const lightRule = new Rule({
         selectors: lightSelectors,
