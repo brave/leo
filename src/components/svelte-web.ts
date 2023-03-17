@@ -58,6 +58,7 @@ export default function registerWebComponent(
 
   class SvelteWrapper extends HTMLElement {
     component: SvelteComponent
+    listeners = new Map<string, Map<Function, Function>>()
 
     static get observedAttributes() {
       return attributes
@@ -186,12 +187,22 @@ export default function registerWebComponent(
     }
 
     addEventListener(event: string, callback: (...args) => void, options: any) {
-      this.component.$on(event, callback)
+      if (!this.listeners.has(event)) {
+        this.listeners.set(event, new Map())
+      }
+
+      const remove = this.component.$on(event, callback)
+      this.listeners.get(event).set(callback, remove)
 
       // TODO: We could do this but we don't know if the event is handled
       // by the component or not so we could end up triggering the event
       // twice (i.e. in the case of 'click')
       // super.addEventListener(event, callback, options)
+    }
+
+    removeEventListener(event: string, callback: (...args) => void) {
+        this.listeners.get(event)?.get(callback)?.()
+        this.listeners.get(event)?.delete(callback)
     }
   }
 

@@ -7,7 +7,8 @@ import themePlugin from './src/postcss/theme.js'
 import fs from 'fs/promises'
 import path from 'path'
 import genTypes from './src/scripts/gen-svelte-types.js'
-import genBindings from './src/scripts/gen-react-bindings.js'
+import genWebBindings from './src/scripts/gen-web-bindings.js'
+import genReactBindings from './src/scripts/gen-react-bindings.js'
 import { getSvelteFiles } from './src/scripts/common.js'
 
 // Entry points are all our Svelte components + the react bindings for those
@@ -72,9 +73,12 @@ export default {
             outputDir: './svelte'
           })
 
+          // Generate Web Components
+          await genWebBindings('./src/components')
+
           // Once we have the type definitions, we can generate the React
           // wrapper.
-          await genBindings('./src/components')
+          await genReactBindings('./src/components')
         }
       }
     }
