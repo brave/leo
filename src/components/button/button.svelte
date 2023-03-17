@@ -79,6 +79,12 @@
 </svelte:element>
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+  }
+  :host button {
+    width: 100%;
+  }
   // Main styles and states
   .leoButton {
     // Gradients cannot have a transition, so we need to reset `transition`
