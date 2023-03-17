@@ -76,11 +76,7 @@
   on:click={onClick}
   {...$$restProps}
 >
-{#if $$slots.default}
-<slot></slot>
-{:else}
-  Leo Button
-{/if}
+  <slot>Leo Button</slot>
 </svelte:element>
 
 <style lang="scss">
