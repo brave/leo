@@ -39,7 +39,6 @@ const createSlot = (name?: string) => {
         }
     }
 }
-window['createSlot'] = createSlot
 
 export default function registerWebComponent(component: any, { name, mode }: Options) {
     // Create & mount a dummy component. We use this to work out what props are
