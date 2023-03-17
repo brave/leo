@@ -238,5 +238,5 @@ it('Handles wrapSelector', () =>
       background: var(--\\.component_background);
       color: var(--\\.component_color);
     }`,
-    { wrapSelector: selector => `:global(${selector})` }
+    { wrapSelector: (selector) => `:global(${selector})` }
   ))

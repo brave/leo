@@ -155,7 +155,8 @@ module.exports = (options) => {
         const theme = supportedThemes.find((t) => atRule.params.includes(t))
         if (!theme)
           throw new Error(
-            `Encountered unsupported theme ${atRule.params
+            `Encountered unsupported theme ${
+              atRule.params
             }. Allowed themes are ${supportedThemes.join(', ')}`
           )
 
@@ -186,12 +187,8 @@ module.exports = (options) => {
       ]
       let darkSelectors = [`:root${options.darkSelector}`, options.darkSelector]
 
-      lightSelectors = lightSelectors.map((s) =>
-        options.wrapSelector(s)
-      )
-      darkSelectors = darkSelectors.map((s) =>
-        options.wrapSelector(s)
-      )
+      lightSelectors = lightSelectors.map((s) => options.wrapSelector(s))
+      darkSelectors = darkSelectors.map((s) => options.wrapSelector(s))
 
       const lightRule = new Rule({
         selectors: lightSelectors,
