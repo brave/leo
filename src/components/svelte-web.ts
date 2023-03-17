@@ -25,6 +25,7 @@ const createSlot = (name?: string) => {
             target.insertBefore(slot, anchor || null);
         },
         p(ctx, dirty) {
+            console.log("Updated slot", ctx, dirty)
             // if (dirty & /*isOpen*/ 2 && t_value !== (t_value = (/*isOpen*/ ctx[1] ? 'open' : 'closed') + "")) set_data(t, t_value);
         },
         d(detaching) {
@@ -34,6 +35,7 @@ const createSlot = (name?: string) => {
         }
     }
 }
+window['createSlot'] = createSlot
 
 export default function registerWebComponent(component: any, { name, mode }: Options) {
     const c = new component({ target: document.createElement('div') }) as any
@@ -60,7 +62,7 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
                 target: shadow,
                 props: {
                     $$slots: {
-                        default: [() => node]
+                        // default: [() => node]
                     },
                     $$scope: { ctx: [] }
                 }
@@ -82,6 +84,31 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
                     }
                 })
             }
+
+            // for (const slot of shadow.querySelectorAll('slot')) {
+            //     slot.addEventListener('slotchange', this.onSlotChanged)
+            // }
+
+            const updateSlots = () => {
+                const slotsNames = Array.from(this.children).map(c => c.getAttribute('slot'))
+                // Add default slot
+                if (this.childNodes.length) slotsNames.push('');
+                const slots = slotsNames
+                    .reduce((prev, next) => ({ ...prev, [next]: [createSlot(next)] }), {})
+                console.log("Found slots:", Object.keys(slots))
+                this.component.$$set({ $$slots: slots })
+            }
+            new MutationObserver(updateSlots).observe(this, {
+                childList: true,
+                attributes: false,
+                attributeOldValue: false,
+                subtree: false,
+                characterData: false,
+                characterDataOldValue: false,
+            })
+            updateSlots()
+
+            this.component.$$.bound[9] = console.log
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
@@ -96,6 +123,10 @@ export default function registerWebComponent(component: any, { name, mode }: Opt
             // by the component or not so we could end up triggering the event
             // twice (i.e. in the case of 'click')
             // super.addEventListener(event, callback, options)
+        }
+
+        onSlotChanged(event: Event) {
+            console.log('slot changed', event.target)
         }
     }
 

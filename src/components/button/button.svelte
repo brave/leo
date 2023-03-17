@@ -48,6 +48,7 @@
   export let href: Href = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
+  $: console.log($$slots)
 
   const dispatch = createEventDispatcher()
 
@@ -75,7 +76,11 @@
   on:click={onClick}
   {...$$restProps}
 >
-  <slot>Leo Button</slot>
+{#if $$slots.default}
+<slot></slot>
+{:else}
+  Leo Button
+{/if}
 </svelte:element>
 
 <style lang="scss">

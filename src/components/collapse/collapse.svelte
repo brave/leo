@@ -56,8 +56,11 @@
   </div>
 </details>
 
-
-<Button>{isOpen ? 'open' : 'closed'}</Button>
+<Button>
+  {#if isOpenInternal}
+    {isOpenInternal && 'open'}
+  {/if}
+</Button>
 
 <style lang="scss">
   .leoCollapse {
