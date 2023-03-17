@@ -12,7 +12,13 @@ import type { SvelteComponentTyped } from 'svelte'
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
 
-export type IntrinsicProps = 'className' | 'id' | 'hidden' | 'role' | 'style' | 'tabIndex'
+export type IntrinsicProps =
+  | 'className'
+  | 'id'
+  | 'hidden'
+  | 'role'
+  | 'style'
+  | 'tabIndex'
 
 export type SvelteProps<T> = T extends SvelteComponentTyped<
   infer Props,
@@ -33,11 +39,11 @@ export type ReactProps<Props, Events> = Props & {
 } & {
   ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
 } & {
-    // Note: The div here isn't important because all props in intrinsicProps are
-    // available on all elements. We just want to make sure we have the correct
-    // React name/value for them.
-    [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
-  }
+  // Note: The div here isn't important because all props in intrinsicProps are
+  // available on all elements. We just want to make sure we have the correct
+  // React name/value for them.
+  [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
+}
 
 const useEventHandlers = (props: any) => {
   const [el, setEl] = useState<HTMLElement>(null)
@@ -46,8 +52,11 @@ const useEventHandlers = (props: any) => {
   // Handle updating event listeners when props change
   useEffect(() => {
     if (!el) return
-    for (const [key, listener] of Object.entries(props) as [string, (...args: any[]) => any][]) {
-      const match = eventRegex.exec(key);
+    for (const [key, listener] of Object.entries(props) as [
+      string,
+      (...args: any[]) => any
+    ][]) {
+      const match = eventRegex.exec(key)
       if (!match) continue
 
       const event = match[1].toLowerCase()
@@ -62,7 +71,9 @@ const useEventHandlers = (props: any) => {
     }
 
     // Remove any listeners which are no longer present
-    for (const removed of Object.keys(lastValue).filter(k => !props[`on${k}`])) {
+    for (const removed of Object.keys(lastValue).filter(
+      (k) => !props[`on${k}`]
+    )) {
       el.removeEventListener(removed, lastValue.current[removed])
       delete lastValue.current[removed]
     }
@@ -70,7 +81,7 @@ const useEventHandlers = (props: any) => {
 
   const setElement = useCallback((el: HTMLElement | null) => {
     lastValue.current = {}
-    setEl(oldValue => {
+    setEl((oldValue) => {
       // Cleanup
       for (const [event, listener] of Object.entries(lastValue.current)) {
         oldValue.removeEventListener(event, listener)
@@ -94,27 +105,27 @@ export default function SvelteWebComponentToReact<
   T extends Record<string, any>
 >(tag: string, component: typeof HTMLElement) {
   return forwardRef(
-    (
-      props: PropsWithChildren<T>,
-      forwardedRef: ForwardedRef<HTMLElement>
-    ) => {
+    (props: PropsWithChildren<T>, forwardedRef: ForwardedRef<HTMLElement>) => {
       const component = useRef<HTMLElement>()
       const { setElement } = useEventHandlers(props)
 
-      const setRef = useCallback((ref: HTMLElement) => {
-        setElement(ref)
+      const setRef = useCallback(
+        (ref: HTMLElement) => {
+          setElement(ref)
 
-        if (!ref) {
-          console.error('No component for tag', tag)
-          return
-        }
+          if (!ref) {
+            console.error('No component for tag', tag)
+            return
+          }
 
-        component.current = ref
-        if (forwardedRef) {
-          if (typeof forwardedRef === 'function') forwardedRef(ref)
-          else forwardedRef.current = ref
-        }
-      }, [setElement])
+          component.current = ref
+          if (forwardedRef) {
+            if (typeof forwardedRef === 'function') forwardedRef(ref)
+            else forwardedRef.current = ref
+          }
+        },
+        [setElement]
+      )
 
       useEffect(() => {
         if (!component.current) return
@@ -125,7 +136,7 @@ export default function SvelteWebComponentToReact<
         // behavior, and triggers a TrustedTypes error.
         for (const [key, value] of Object.entries(props)) {
           if (eventRegex.test(key) || key === 'children') continue
-          (component.current as any)[key] = value;
+          ;(component.current as any)[key] = value
         }
       }, [props])
 
