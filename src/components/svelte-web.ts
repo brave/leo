@@ -57,8 +57,23 @@ export default function registerWebComponent(
   const attributes = Array.from(attributePropMap.keys())
 
   class SvelteWrapper extends HTMLElement {
-    component: SvelteComponent
     listeners = new Map<string, Map<Function, Function>>()
+    #component: SvelteComponent
+    get component() {
+        return this.#component
+    }
+
+    set component(value) {
+        // We need to make sure that when we recreate the component (as in the
+        // case of slots changing) that we copy over all of the event listeners.
+        this.#component = value
+        for (const [event, listeners] of this.listeners.entries()) {
+            for (const [callback, remove] of listeners.entries()) {
+                remove()
+                this.addEventListener(event, callback)
+            }
+        }
+    }
 
     static get observedAttributes() {
       return attributes
