@@ -5,7 +5,8 @@ import {
   forwardRef,
   useCallback,
   type ForwardedRef,
-  type PropsWithChildren
+  type PropsWithChildren,
+  useState
 } from 'react'
 import type { SvelteComponentTyped } from 'svelte'
 
@@ -32,13 +33,14 @@ export type ReactProps<Props, Events> = Props & {
 } & {
   ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
 } & {
-  // Note: The div here isn't important because all props in intrinsicProps are
-  // available on all elements. We just want to make sure we have the correct
-  // React name/value for them.
-  [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
-}
+    // Note: The div here isn't important because all props in intrinsicProps are
+    // available on all elements. We just want to make sure we have the correct
+    // React name/value for them.
+    [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
+  }
 
-const useEventHandlers = (el: HTMLElement | undefined, props: any) => {
+const useEventHandlers = (props: any) => {
+  const [el, setEl] = useState<HTMLElement>(null)
   const lastValue = useRef<{ [key: string]: (...args: any[]) => any }>({})
 
   // Handle updating event listeners when props change
@@ -64,15 +66,22 @@ const useEventHandlers = (el: HTMLElement | undefined, props: any) => {
       el.removeEventListener(removed, lastValue.current[removed])
       delete lastValue.current[removed]
     }
-  }, [props])
+  }, [props, el])
 
-  // Handle cleaning up event listeners when destroying component
-  useEffect(() => () => {
-    if (!el) return
-    for (const [event, listener] of Object.entries(lastValue.current)) {
-      el.removeEventListener(event, listener)
-    } 
+  const setElement = useCallback((el: HTMLElement | null) => {
+    lastValue.current = {}
+    setEl(oldValue => {
+      // Cleanup
+      for (const [event, listener] of Object.entries(lastValue.current)) {
+        oldValue.removeEventListener(event, listener)
+      }
+      return el
+    })
   }, [])
+
+  return {
+    setElement
+  }
 }
 
 /**
@@ -90,8 +99,11 @@ export default function SvelteWebComponentToReact<
       forwardedRef: ForwardedRef<HTMLElement>
     ) => {
       const component = useRef<HTMLElement>()
+      const { setElement } = useEventHandlers(props)
 
       const setRef = useCallback((ref: HTMLElement) => {
+        setElement(ref)
+
         if (!ref) {
           console.error('No component for tag', tag)
           return
@@ -102,9 +114,7 @@ export default function SvelteWebComponentToReact<
           if (typeof forwardedRef === 'function') forwardedRef(ref)
           else forwardedRef.current = ref
         }
-      }, [])
-
-      useEventHandlers(component.current, props)
+      }, [setElement])
 
       useEffect(() => {
         if (!component.current) return
