@@ -56,8 +56,9 @@ export default function registerWebComponent(
   // Note attribute keys, so changes cause us to update our Svelte Component.
   const attributes = Array.from(attributePropMap.keys())
 
+  type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
-    listeners = new Map<string, Map<Function, Function>>()
+    listeners = new Map<string, Map<Callback, Callback>>()
     #component: SvelteComponent
     get component() {
       return this.#component
@@ -201,7 +202,7 @@ export default function registerWebComponent(
       this[name] = newValue
     }
 
-    addEventListener(event: string, callback: (...args) => void, options: any) {
+    addEventListener(event: string, callback: Callback) {
       if (!this.listeners.has(event)) {
         this.listeners.set(event, new Map())
       }
@@ -215,7 +216,7 @@ export default function registerWebComponent(
       // super.addEventListener(event, callback, options)
     }
 
-    removeEventListener(event: string, callback: (...args) => void) {
+    removeEventListener(event: string, callback: Callback) {
       this.listeners.get(event)?.get(callback)?.()
       this.listeners.get(event)?.delete(callback)
     }
