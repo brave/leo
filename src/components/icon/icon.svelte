@@ -1,5 +1,3 @@
-<svelte:options tag="leo-icon" />
-
 <script context="module" lang="ts">
   let iconBasePath = '/icons'
   export const setIconBasePath = (basePath: string) => (iconBasePath = basePath)

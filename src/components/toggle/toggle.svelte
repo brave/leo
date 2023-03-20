@@ -1,5 +1,3 @@
-<svelte:options tag="leo-toggle" />
-
 <script context="module" lang="ts">
   export const sizes = ['small', 'medium'] as const
   export type Sizes = (typeof sizes)[number]
