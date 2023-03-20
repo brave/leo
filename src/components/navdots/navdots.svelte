@@ -1,5 +1,3 @@
-<svelte:options tag="leo-navdots" />
-
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 

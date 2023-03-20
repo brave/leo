@@ -1,5 +1,3 @@
-<svelte:options tag="leo-collapse" />
-
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
