@@ -46,7 +46,7 @@ export type ReactProps<Props, Events> = Props & {
 }
 
 const useEventHandlers = (props: any) => {
-  const [el, setEl] = useState<HTMLElement>(null)
+  const [el, setEl] = useState<HTMLElement>()
   const lastValue = useRef<{ [key: string]: (...args: any[]) => any }>({})
 
   // Handle updating event listeners when props change
@@ -79,12 +79,14 @@ const useEventHandlers = (props: any) => {
     }
   }, [props, el])
 
-  const setElement = useCallback((el: HTMLElement | null) => {
+  const setElement = useCallback((el: HTMLElement | undefined) => {
     lastValue.current = {}
     setEl((oldValue) => {
-      // Cleanup
-      for (const [event, listener] of Object.entries(lastValue.current)) {
-        oldValue.removeEventListener(event, listener)
+      if (oldValue) {
+        // Cleanup
+        for (const [event, listener] of Object.entries(lastValue.current)) {
+          oldValue.removeEventListener(event, listener)
+        }
       }
       return el
     })
