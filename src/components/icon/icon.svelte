@@ -4,13 +4,23 @@
 </script>
 
 <script lang="ts">
-  export let name: string = undefined
+  import type { IconNames, StringWithAutocomplete } from '../types'
+
+  export let name: StringWithAutocomplete<IconNames> = undefined
   export let forceColor: boolean = false
+  export let size: string = 'unset'
+  export let color: string | undefined = 'unset'
+  export let darkModeColor: string | undefined = 'unset'
   let hasColor =
     name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
 </script>
 
-<div class="leoIcon">
+<div
+  class="leoIcon"
+  style:--size-override={size}
+  style:--color-override={color}
+  style:--dark-mode-color-override={darkModeColor}
+>
   <slot>
     {#if name}
       <div
@@ -24,11 +34,13 @@
 
 <style lang="scss">
   .leoIcon {
-    --icon-width: var(--leo-icon-size, 24px);
-    --icon-height: var(--leo-icon-size, 24px);
+    --icon-size: var(--size-override, var(--leo-icon-size, 24px));
 
-    width: var(--icon-width);
-    height: var(--icon-height);
+    --icon-light-mode-color: var(--color-override, currentColor);
+    --icon-dark-mode-color: var(--dark-mode-color-override, currentColor);
+
+    width: var(--icon-size);
+    height: var(--icon-size);
 
     & .icon,
     svg {
@@ -39,10 +51,14 @@
     /* Non color icons are set via a mask-image, so we can change the color
      * by setting the background */
     & .icon:not(.color) {
-      background: currentColor;
+      background: var(--icon-light-mode-color);
       -webkit-mask-image: var(--icon-url);
       mask-image: var(--icon-url);
       mask-repeat: no-repeat;
+
+      @media (prefers-color-scheme: dark) {
+        background: var(--icon-dark-mode-color);
+      }
     }
 
     /* Color icons need to be set via a background rather than a mask so we

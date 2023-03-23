@@ -37,7 +37,7 @@
 
 <Template let:args>
   <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
-    <Icon {...args} />
+    <Icon name={args.name} />
   </div>
 </Template>
 
@@ -45,10 +45,10 @@
 
 <Story name="Custom Icon" let:args>
   <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
-    This icon isn't rendered from our libray - instead an SVG is passed in via a
-    slot. This allows consumers of the libary to import their own SVGs and use
-    them directly inside an icon.
-    <Icon {...args}>
+    This icon isn't rendered from our library - instead an SVG is passed in via
+    a slot. This allows consumers of the library to import their own SVGs and
+    use them directly inside an icon.
+    <Icon name={args.name}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0, 0, 400,400">
         <circle cx="200" cy="200" r="200" fill="#2cb44c" />
         <path

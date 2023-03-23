@@ -1778,4 +1778,4 @@ export default {
     'zilliqa-color': 'zilliqa-color',
     'zrx-color': 'zrx-color'
   }
-}
+} as const
