@@ -1,5 +1,3 @@
-<svelte:options tag="leo-button" />
-
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'

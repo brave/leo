@@ -1,5 +1,3 @@
-<svelte:options tag="leo-progressring" />
-
 <script lang="ts">
   export let progress = 0
   export let mode: 'determinate' | 'indeterminate' = 'indeterminate'

@@ -197,7 +197,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
     {}
   ))
 
-it('Handles wrapIn', () =>
+it('Handles wrapSelector', () =>
   run(
     `.component {
           padding: 12px;
@@ -238,5 +238,5 @@ it('Handles wrapIn', () =>
       background: var(--\\.component_background);
       color: var(--\\.component_color);
     }`,
-    { wrapIn: ':global' }
+    { wrapSelector: (selector) => `:global(${selector})` }
   ))

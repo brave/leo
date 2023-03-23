@@ -6,7 +6,7 @@ const REACT_BINDINGS_DIRECTORY = 'react/'
 fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 
 const COMPONENT_PREFIX = 'leo'
-const SVELTE_REACT_WRAPPER_PATH = '../svelte/svelte-react.js'
+const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)

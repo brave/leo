@@ -72,7 +72,7 @@
     "dev": "rollup -c rollup.config.js --watch",
     "update-icons": "node ./src/scripts/update-icons.js",
     "skiafy-icons": "node ./src/scripts/gen-skia-icons.js",
-    "check": "svelte-check --compiler-warnings \"missing-custom-element-compile-options:ignore\"",
+    "check": "svelte-check",
     "transform-tokens": "node ./src/tokens/transformTokens.js && tsc -p ./tsconfig-tokens.json",
     "test": "jest tests --coverage=false",
     "storybook": "start-storybook -p 6006",

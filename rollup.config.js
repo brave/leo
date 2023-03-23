@@ -7,7 +7,8 @@ import themePlugin from './src/postcss/theme.js'
 import fs from 'fs/promises'
 import path from 'path'
 import genTypes from './src/scripts/gen-svelte-types.js'
-import genBindings from './src/scripts/gen-react-bindings.js'
+import genWebBindings from './src/scripts/gen-web-bindings.js'
+import genReactBindings from './src/scripts/gen-react-bindings.js'
 import { getSvelteFiles } from './src/scripts/common.js'
 
 // Entry points are all our Svelte components + the react bindings for those
@@ -20,6 +21,7 @@ for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
 }
 
 inputs.push('./src/components/svelte-react.ts')
+inputs.push('./src/components/svelte-web.ts')
 
 export default {
   input: inputs,
@@ -29,15 +31,7 @@ export default {
     sourcemap: true,
     dir: './',
     chunkFileNames: 'shared/[hash].js',
-    entryFileNames: ({ facadeModuleId, name }) => {
-      // Web component
-      if (facadeModuleId.endsWith('.svelte')) {
-        return `web-components/${name}.js`
-      }
-
-      // Util files for Svelte, like svelte-react
-      return `svelte/[name].js`
-    },
+    entryFileNames: ({ name }) => `shared/${name}.js`,
     format: 'esm'
   },
   // React is external - Leo doesn't need it but its React bindings do. We'll
@@ -54,13 +48,17 @@ export default {
       include: 'src/components/**/*.svelte',
       preprocess: sveltePreprocess({
         postcss: {
-          plugins: [themePlugin({ wrapIn: ':host-context' })]
+          plugins: [
+            themePlugin({
+              wrapSelector: (selector) => `:global(:host-context(${selector}))`
+            })
+          ]
         }
       }),
       // Don't emit CSS - it doesn't work properly with Web Components.
       emitCss: false,
       compilerOptions: {
-        customElement: true
+        customElement: false
       }
     }),
     resolve({ browser: true }),
@@ -75,9 +73,12 @@ export default {
             outputDir: './svelte'
           })
 
+          // Generate Web Components
+          await genWebBindings('./src/components')
+
           // Once we have the type definitions, we can generate the React
           // wrapper.
-          await genBindings('./src/components')
+          await genReactBindings('./src/components')
         }
       }
     }
