@@ -9,5 +9,5 @@
       "enabled": false
     }
   ],
-  "schedule": "at 10:00 am on Sunday"
+  "schedule": ["at 10:00 am on Sunday"]
 }
