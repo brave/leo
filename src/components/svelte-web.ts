@@ -5,8 +5,15 @@ interface Options {
   name: string
 }
 
+// Properties with these types should be reflected to attributes.
 const reflectToAttributes = new Set(['string', 'number', 'boolean'])
 
+/**
+ * This function creates a faux Svelte component which forwards WebComponent
+ * slots into a Svelte slot.
+ * @param name The name of the slot
+ * @returns A Svelte "component" representing the slot.
+ */
 const createSlot = (name?: string) => {
   let slot: HTMLElement
   return {
@@ -74,8 +81,8 @@ export default function registerWebComponent(
       // case of slots changing) that we copy over all of the event listeners.
       this.#component = value
       for (const [event, listeners] of this.listenerRemovers.entries()) {
-        for (const [callback, remove] of listeners.entries()) {
-          remove()
+        for (const [callback, remover] of listeners.entries()) {
+          remover()
           this.addEventListener(event, callback)
         }
       }
@@ -189,13 +196,18 @@ export default function registerWebComponent(
         Object.defineProperty(this, prop, {
           enumerable: true,
           get() {
-            const contextIndex = c.$$.props[prop]
+            // $$.props is { [propertyName: string]: number } where the number
+            // is the array index into $$.ctx that the value is stored in.
+            const contextIndex = this.component.$$.props[prop]
             return this.component.$$.ctx[contextIndex]
           },
           set(value) {
             if (reflectToAttributes.has(typeof value)) {
               this.setAttribute(prop, value)
             }
+
+            // |.$set| updates the value of a prop. Note: This only works for
+            // props, not slotted content.
             this.component.$set({ [prop]: value })
           }
         })
@@ -212,8 +224,12 @@ export default function registerWebComponent(
         this.listenerRemovers.set(event, new Map())
       }
 
-      const remove = this.component.$on(event, callback)
-      this.listenerRemovers.get(event).set(callback, remove)
+      // Note: $on(<event>, callback) returns a function which removes the
+      // callback from the event.
+      const remover = this.component.$on(event, callback)
+
+      // We store the remover so we can look it up in |removeEventListener|.
+      this.listenerRemovers.get(event).set(callback, remover)
 
       // TODO: We could do this but we don't know if the event is handled
       // by the component or not so we could end up triggering the event
