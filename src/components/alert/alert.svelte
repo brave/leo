@@ -2,7 +2,7 @@
   export const types = ['info', 'warning', 'error', 'success'] as const
   export type AlertType = (typeof types)[number]
 
-  export const modes = ['toast', 'callout'] as const
+  export const modes = ['simple', 'full'] as const
   export type AlertMode = (typeof modes)[number]
 
   const defaultIcons: { [P in AlertType]: string } = {
@@ -17,16 +17,16 @@
   import Icon from '../icon/icon.svelte'
 
   export let type: AlertType = 'error'
-  export let mode: AlertMode = 'toast'
+  export let mode: AlertMode = 'simple'
 
   $: currentType = type ?? 'error'
-  $: currentMode = mode ?? 'toast'
+  $: currentMode = mode ?? 'simple'
 </script>
 
 <div
   class="leo-alert"
-  class:toast={currentMode === 'toast'}
-  class:callout={currentMode === 'callout'}
+  class:simple={currentMode === 'simple'}
+  class:full={currentMode === 'full'}
   style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
   style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
 >
@@ -37,7 +37,7 @@
   </div>
   <div class="content">
     <div class="title">
-      {#if mode == 'callout'}
+      {#if mode == 'full'}
         <slot name="title" />
       {/if}
     </div>
@@ -78,7 +78,7 @@
     }
   }
 
-  .leo-alert.toast {
+  .leo-alert.simple {
     --leo-icon-size: 16px;
 
     display: flex;
@@ -89,7 +89,7 @@
     }
   }
 
-  .leo-alert.callout {
+  .leo-alert.full {
     --leo-icon-size: 26px;
     display: grid;
     grid-template-columns: min-content auto;

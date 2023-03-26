@@ -15,7 +15,7 @@
       {
         content,
         title,
-        mode: mode ?? 'toast',
+        mode: mode ?? 'simple',
         type: type ?? 'error',
         actions: canDismiss
           ? [
