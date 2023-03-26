@@ -1,5 +1,3 @@
-<svelte:options tag="leo-alertcentre" />
-
 <script lang="ts" context="module">
   import type { AlertMode, AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'

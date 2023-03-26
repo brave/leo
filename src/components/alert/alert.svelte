@@ -1,5 +1,3 @@
-<svelte:options tag="leo-alert" />
-
 <script lang="ts" context="module">
   export const types = ['info', 'warning', 'error', 'success'] as const
   export type AlertType = (typeof types)[number]
