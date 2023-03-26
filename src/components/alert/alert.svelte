@@ -18,13 +18,15 @@
 
   export let type: AlertType = 'error'
   export let mode: AlertMode = 'simple'
+  export let isToast = false
 
   $: currentType = type ?? 'error'
   $: currentMode = mode ?? 'simple'
 </script>
 
 <div
-  class="leo-alert"
+  class="leo-alert {currentType}"
+  class:toast={isToast}
   class:simple={currentMode === 'simple'}
   class:full={currentMode === 'full'}
   style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
@@ -51,12 +53,11 @@
 <style lang="scss">
   :global .leo-alert .actions > *,
   .leo-alert .actions ::slotted(*) {
-      display: flex;
-      flex-direction: row;
-      gap: var(--leo-spacing-16);
+    display: flex;
+    flex-direction: row;
+    gap: var(--leo-spacing-16);
   }
   .leo-alert {
-
     --leo-icon-color: var(--leo-alert-icon-color, var(--default-icon-color));
     background-color: var(
       --leo-alert-background-color,
@@ -75,6 +76,24 @@
 
     & .title {
       font: var(--leo-font-heading-h4);
+    }
+  }
+
+  .leo-alert.toast {
+    &.error {
+      background-color: var(--leo-color-red-20);
+    }
+
+    &.warning {
+      background: var(--leo-color-yellow-20);
+    }
+
+    &.info {
+      background: var(--leo-color-blue-20);
+    }
+
+    &.success {
+      background: var(--leo-color-green-20);
     }
   }
 

@@ -82,7 +82,7 @@
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <Alert mode={alert.mode} type={alert.type}>
+      <Alert mode={alert.mode} type={alert.type} isToast>
         <div slot="title">
           {alert.title}
         </div>
