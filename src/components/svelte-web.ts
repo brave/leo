@@ -58,7 +58,12 @@ export default function registerWebComponent(
 
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
-    listeners = new Map<string, Map<Callback, Callback>>()
+    // A map of event name to a map of an event listener to a function for
+    // removing that listener.
+    // For example
+    // this.listenerRemovers.get('click').get(myCallback)() will remove
+    // |myCallback| from the click event.
+    listenerRemovers = new Map<string, Map<Callback, Callback>>()
     #component: SvelteComponent
     get component() {
       return this.#component
@@ -68,7 +73,7 @@ export default function registerWebComponent(
       // We need to make sure that when we recreate the component (as in the
       // case of slots changing) that we copy over all of the event listeners.
       this.#component = value
-      for (const [event, listeners] of this.listeners.entries()) {
+      for (const [event, listeners] of this.listenerRemovers.entries()) {
         for (const [callback, remove] of listeners.entries()) {
           remove()
           this.addEventListener(event, callback)
@@ -191,7 +196,7 @@ export default function registerWebComponent(
             if (reflectToAttributes.has(typeof value)) {
               this.setAttribute(prop, value)
             }
-            this.component.$$set({ [prop]: value })
+            this.component.$set({ [prop]: value })
           }
         })
       }
@@ -203,12 +208,12 @@ export default function registerWebComponent(
     }
 
     addEventListener(event: string, callback: Callback) {
-      if (!this.listeners.has(event)) {
-        this.listeners.set(event, new Map())
+      if (!this.listenerRemovers.has(event)) {
+        this.listenerRemovers.set(event, new Map())
       }
 
       const remove = this.component.$on(event, callback)
-      this.listeners.get(event).set(callback, remove)
+      this.listenerRemovers.get(event).set(callback, remove)
 
       // TODO: We could do this but we don't know if the event is handled
       // by the component or not so we could end up triggering the event
@@ -217,8 +222,8 @@ export default function registerWebComponent(
     }
 
     removeEventListener(event: string, callback: Callback) {
-      this.listeners.get(event)?.get(callback)?.()
-      this.listeners.get(event)?.delete(callback)
+      this.listenerRemovers.get(event)?.get(callback)?.()
+      this.listenerRemovers.get(event)?.delete(callback)
     }
   }
 
