@@ -39,7 +39,7 @@
 
   type $$Props = LinkProps | ButtonProps
 
-  export let kind: Props.ButtonKind = 'primary'
+  export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
   export let isLoading: boolean = false
   export let isDisabled: Disabled = undefined
@@ -62,13 +62,16 @@
   href={href || undefined}
   disabled={isDisabled || undefined}
   class="leoButton"
-  class:isPrimary={kind === 'primary'}
-  class:isSecondary={kind === 'secondary'}
-  class:isTertiary={kind === 'tertiary'}
+  class:isFilled={kind === 'filled'}
+  class:isOutline={kind === 'outline'}
+  class:isPlain={kind === 'plain'}
+  class:isPlainFaint={kind === 'plain-faint'}
   class:isHero={kind === 'hero'}
+  class:isJumbo={size === 'jumbo'}
   class:isLarge={size === 'large'}
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
+  class:isTiny={size === 'tiny'}
   class:isLoading
   on:click={onClick}
   {...$$restProps}
@@ -138,6 +141,11 @@
   }
 
   // Size Variations
+  .leoButton.isTiny {
+    --icon-size: 12px;
+    font: var(--leo-font-components-button-small);
+    padding: 6px 10px;
+  }
   .leoButton.isSmall {
     --icon-size: 20px;
     font: var(--leo-font-components-button-small);
@@ -153,9 +161,14 @@
     font: var(--leo-font-components-button-large);
     padding: 12px 20px;
   }
+  .leoButton.isJumbo {
+    --icon-size: 24px;
+    font: var(--leo-font-components-button-jumbo);
+    padding: 18px 26px;
+  }
 
   // Kind Variations
-  .leoButton.isPrimary {
+  .leoButton.isFilled {
     --bg: var(--leo-color-interaction-button-primary-background);
     --bg-hover: var(--leo-color-light-primary-60);
     --bg-active: var(--bg-hover);
@@ -170,7 +183,7 @@
       --bg-loading: var(--leo-color-dark-primary-60);
     }
   }
-  .leoButton.isSecondary {
+  .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
     --color: var(--leo-color-text-primary);
@@ -189,7 +202,7 @@
       --border-color-hover: var(--leo-color-dark-primary-40);
     }
   }
-  .leoButton.isTertiary {
+  .leoButton.isPlain {
     border-radius: 8px;
     padding-right: 0;
     padding-left: 0;
@@ -205,6 +218,17 @@
       @theme (dark) {
         --color: var(--leo-color-dark-text-primary);
       }
+    }
+  }
+  .leoButton.isPlainFaint {
+    padding-left: 0;
+    padding-right: 0;
+    --color: var(--leo-color-gray-60);
+    --color-hover: var(--leo-color-gray-70);
+    --box-shadow-hover: none;
+
+    &:disabled {
+      opacity: 0.5;
     }
   }
   .leoButton.isHero {

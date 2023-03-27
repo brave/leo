@@ -20,18 +20,20 @@ function App() {
             onChange={(e) => setButtonText(e.target.value)}
           />
         </label>
-        <LeoButton
-          className={spinning ? 'spin' : ''}
-          kind="primary"
-          size="large"
-          onClick={() => {
-            location.hash = ''
-            setSpinning((s) => !s)
-            alert('clicked!')
-          }}
-        >
-          {buttonText}
-        </LeoButton>
+        {buttonText && (
+          <LeoButton
+            className={spinning ? 'spin' : ''}
+            kind="filled"
+            size="large"
+            onClick={() => {
+              location.hash = ''
+              setSpinning((s) => !s)
+              alert('clicked!')
+            }}
+          >
+            {buttonText}
+          </LeoButton>
+        )}
         <LeoButton href="#foo">Link button!</LeoButton>
       </header>
     </div>

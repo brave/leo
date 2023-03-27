@@ -27,34 +27,25 @@
 
 <Story name="Hero" args={{ kind: 'hero' }} />
 
-<Story name="Primary" args={{ kind: 'primary' }} />
+<Story name="Filled" args={{ kind: 'filled' }} />
 
-<Story name="Secondary" source args={{ kind: 'secondary' }} />
+<Story name="Outline" source args={{ kind: 'outline' }} />
 
-<Story name="Tertiary" source args={{ kind: 'tertiary' }} />
+<Story name="Plain" source args={{ kind: 'plain' }} />
+
+<Story name="Plain Faint" source args={{ kind: 'plain-faint' }} />
 
 <Story name="All" let:args>
-  <h2 class="label">Large</h2>
-  <div class="button-group">
-    <Button kind="hero" size="large" {...args}>Hero</Button>
-    <Button kind="primary" size="large" {...args}>Primary</Button>
-    <Button kind="secondary" size="large" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="large" {...args}>Tertiary</Button>
-  </div>
-  <h2 class="label">Medium</h2>
-  <div class="button-group">
-    <Button kind="hero" size="medium" {...args}>Hero</Button>
-    <Button kind="primary" size="medium" {...args}>Primary</Button>
-    <Button kind="secondary" size="medium" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="medium" {...args}>Tertiary</Button>
-  </div>
-  <h2 class="label">Small</h2>
-  <div class="button-group">
-    <Button kind="hero" size="small" {...args}>Hero</Button>
-    <Button kind="primary" size="small" {...args}>Primary</Button>
-    <Button kind="secondary" size="small" {...args}>Secondary</Button>
-    <Button kind="tertiary" size="small" {...args}>Tertiary</Button>
-  </div>
+  {#each buttonSizes as size}
+    <h2 class="label capitalize">{size}</h2>
+    <div class="button-group">
+      {#each buttonKinds as kind}
+        <Button {kind} {size} {...args}>
+          <span class="capitalize">{kind}</span>
+        </Button>
+      {/each}
+    </div>
+  {/each}
 </Story>
 
 <style>
@@ -63,6 +54,9 @@
     display: flex;
     gap: 24px;
     align-items: center;
+  }
+  .capitalize {
+    text-transform: capitalize;
   }
   .label {
     font: 500 14px sans-serif;
