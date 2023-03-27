@@ -39,7 +39,7 @@
 
   type $$Props = LinkProps | ButtonProps
 
-  export let kind: Props.ButtonKind = 'primary'
+  export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
   export let isLoading: boolean = false
   export let isDisabled: Disabled = undefined
@@ -62,10 +62,10 @@
   href={href || undefined}
   disabled={isDisabled || undefined}
   class="leoButton"
-  class:isPrimary={kind === 'primary'}
-  class:isSecondary={kind === 'secondary'}
-  class:isTertiary={kind === 'tertiary'}
-  class:isQuaternary={kind === 'quaternary'}
+  class:isFilled={kind === 'filled'}
+  class:isOutline={kind === 'outline'}
+  class:isPlain={kind === 'plain'}
+  class:isPlainFaint={kind === 'plain-faint'}
   class:isHero={kind === 'hero'}
   class:isJumbo={size === 'jumbo'}
   class:isLarge={size === 'large'}
@@ -168,7 +168,7 @@
   }
 
   // Kind Variations
-  .leoButton.isPrimary {
+  .leoButton.isFilled {
     --bg: var(--leo-color-interaction-button-primary-background);
     --bg-hover: var(--leo-color-light-primary-60);
     --bg-active: var(--bg-hover);
@@ -183,7 +183,7 @@
       --bg-loading: var(--leo-color-dark-primary-60);
     }
   }
-  .leoButton.isSecondary {
+  .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
     --color: var(--leo-color-text-primary);
@@ -202,7 +202,7 @@
       --border-color-hover: var(--leo-color-dark-primary-40);
     }
   }
-  .leoButton.isTertiary {
+  .leoButton.isPlain {
     border-radius: 8px;
     padding-right: 0;
     padding-left: 0;
@@ -220,7 +220,7 @@
       }
     }
   }
-  .leoButton.isQuaternary {
+  .leoButton.isPlainFaint {
     padding-left: 0;
     padding-right: 0;
     --color: var(--leo-color-gray-60);

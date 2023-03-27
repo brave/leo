@@ -27,13 +27,13 @@
 
 <Story name="Hero" args={{ kind: 'hero' }} />
 
-<Story name="Primary" args={{ kind: 'primary' }} />
+<Story name="Filled" args={{ kind: 'filled' }} />
 
-<Story name="Secondary" source args={{ kind: 'secondary' }} />
+<Story name="Outline" source args={{ kind: 'outline' }} />
 
-<Story name="Tertiary" source args={{ kind: 'tertiary' }} />
+<Story name="Plain" source args={{ kind: 'plain' }} />
 
-<Story name="Quaternary" source args={{ kind: 'quaternary' }} />
+<Story name="Plain Faint" source args={{ kind: 'plain-faint' }} />
 
 <Story name="All" let:args>
   {#each buttonSizes as size}

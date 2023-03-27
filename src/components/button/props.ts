@@ -1,9 +1,9 @@
 export const buttonKinds = [
   'hero',
-  'primary',
-  'secondary',
-  'tertiary',
-  'quaternary'
+  'filled',
+  'outline',
+  'plain',
+  'plain-faint'
 ] as const
 export type ButtonKind = (typeof buttonKinds)[number]
 
