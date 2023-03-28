@@ -10,7 +10,7 @@ function processIcon(template, svgContents) {
   const {
     window: { document }
   } = new JSDOM(svgContents)
-  const paths = document.querySelectorAll('path')
+  const paths = document.querySelectorAll('svg > *')
   const pathContents = Array.from(paths)
     .map((p) => p.outerHTML)
     .join('\n')
