@@ -25,7 +25,7 @@
           }
         }
       },
-      "icon": {
+      "icon-tint": {
         "description": "",
         "type": "color",
         "value": "#1c1e2699",
@@ -63,7 +63,7 @@
           }
         }
       },
-      "icon": {
+      "icon-tint": {
         "description": "",
         "type": "color",
         "value": "#ffffff99",
