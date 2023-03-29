@@ -1,4 +1,65 @@
 {
+  "color": {
+    "🌞 light": {
+      "frosted glass": {
+        "description": "",
+        "type": "color",
+        "value": "#fcfcfdf2",
+        "blendMode": "normal",
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:97ed0e95b2652fed09866328114e4b2b562d8fa8,",
+            "exportKey": "color"
+          }
+        }
+      },
+      "frosted glass divider": {
+        "0": {
+          "type": "color",
+          "value": "#ffffffb3",
+          "blendMode": "normal"
+        },
+        "1": {
+          "type": "color",
+          "value": "#16171d26",
+          "blendMode": "normal"
+        },
+        "description": "",
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:7702977c0370c0321dd45ec68e4bc2eeb90f6a00,",
+            "exportKey": "color"
+          }
+        }
+      }
+    },
+    "🌚dark": {
+      "frosted glass": {
+        "description": "",
+        "type": "color",
+        "value": "#181a20f2",
+        "blendMode": "normal",
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:b62e55cdb6acd0223ad22334f686614b99ea0085,",
+            "exportKey": "color"
+          }
+        }
+      },
+      "frosted glass divider": {
+        "description": "",
+        "type": "color",
+        "value": "#0b0c0fa6",
+        "blendMode": "normal",
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:281e42964bfca8bec7e16411bf41ce71e73f8cbe,",
+            "exportKey": "color"
+          }
+        }
+      }
+    }
+  },
   "font": {
     "🍎 ios": {
       "heading": {
@@ -12,7 +73,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 66,
+            "lineHeight": 52,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -34,7 +95,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 54,
+            "lineHeight": 44,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -56,7 +117,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0.37,
-            "lineHeight": 54,
+            "lineHeight": 40,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -78,7 +139,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0.36,
-            "lineHeight": 40,
+            "lineHeight": 34,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -100,7 +161,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0.35,
-            "lineHeight": 32,
+            "lineHeight": 28,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -122,7 +183,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.41,
-            "lineHeight": 24,
+            "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -147,7 +208,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.41,
-            "lineHeight": 24,
+            "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -170,7 +231,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.41,
-            "lineHeight": 24,
+            "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -195,7 +256,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.24,
-            "lineHeight": 22,
+            "lineHeight": 20,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -218,7 +279,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.24,
-            "lineHeight": 22,
+            "lineHeight": 20,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -288,7 +349,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0.07,
-            "lineHeight": 14,
+            "lineHeight": 13,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -310,7 +371,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0.07,
-            "lineHeight": 14,
+            "lineHeight": 13,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -356,7 +417,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 24,
+            "lineHeight": 20,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -427,7 +488,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 66
+            "value": 52
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -473,7 +534,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 54
+            "value": 44
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -519,7 +580,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 54
+            "value": 40
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -565,7 +626,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 40
+            "value": 34
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -611,7 +672,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 32
+            "value": 28
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -657,7 +718,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -706,7 +767,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -753,7 +814,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -802,7 +863,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 22
+            "value": 20
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -849,7 +910,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 22
+            "value": 20
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -991,7 +1052,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 14
+            "value": 13
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1037,7 +1098,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 14
+            "value": 13
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1131,7 +1192,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 20
           },
           "paragraphIndent": {
             "type": "dimension",
