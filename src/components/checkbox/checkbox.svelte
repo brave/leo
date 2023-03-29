@@ -46,14 +46,16 @@
     --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-8));
     --checked-color: var(
       --leo-checkbox-checked-color,
-      var(--leo-color-light-primary-40)
+      var(--leo-color-icon-interactive)
     );
     --checked-color-hover: var(
       --leo-checkbox-checked-color-hover,
       var(--leo-color-primary-50)
     );
-    /* TODO: Use leo-icon-colors once I fix those */
-    --unchecked-color: var(--leo-checkbox-unchecked-color, #6b7084);
+    --unchecked-color: var(
+      --leo-checkbox-unchecked-color,
+      var(--leo-color-icon-default)
+    );
     --unchecked-color-hover: var(
       --leo-checkbox-unchecked-color-hover,
       var(--leo-color-gray-50)
