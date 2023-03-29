@@ -226,7 +226,7 @@
         "primary": {
           "description": "",
           "type": "color",
-          "value": "#1d1f25ff",
+          "value": "#1c1e26ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -238,7 +238,7 @@
         "secondary": {
           "description": "",
           "type": "color",
-          "value": "#6b7084ff",
+          "value": "#666d89ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -250,7 +250,7 @@
         "tertiary": {
           "description": "3:1 contrast. Use with caution ",
           "type": "color",
-          "value": "#858999ff",
+          "value": "#7e85a0ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -274,7 +274,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#1d1f2580",
+          "value": "#1c1f2680",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -288,7 +288,7 @@
         "default": {
           "description": "",
           "type": "color",
-          "value": "#6b7084ff",
+          "value": "#666d89ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -312,7 +312,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#6b708480",
+          "value": "#666d8980",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -340,7 +340,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#f4f6f8ff",
+          "value": "#f5f5f7ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -366,7 +366,7 @@
         "highlight": {
           "description": "",
           "type": "color",
-          "value": "#eff2f5ff",
+          "value": "#f0f1f4ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -390,7 +390,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#acafbb80",
+          "value": "#a8adbf80",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -404,7 +404,7 @@
         "screen-background": {
           "description": "",
           "type": "color",
-          "value": "#12131659",
+          "value": "#11121759",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -418,7 +418,7 @@
         "subtle": {
           "description": "",
           "type": "color",
-          "value": "#e6ebefff",
+          "value": "#e8e9eeff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -430,7 +430,7 @@
         "strong": {
           "description": "",
           "type": "color",
-          "value": "#c7c9d1ff",
+          "value": "#c4c7d4ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -544,7 +544,7 @@
         "primary": {
           "description": "",
           "type": "color",
-          "value": "#eceff2ff",
+          "value": "#edeef1ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -556,7 +556,7 @@
         "secondary": {
           "description": "",
           "type": "color",
-          "value": "#8c90a1ff",
+          "value": "#878da6ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -568,7 +568,7 @@
         "tertiary": {
           "description": "",
           "type": "color",
-          "value": "#686d7dff",
+          "value": "#616884ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -592,7 +592,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#eceff280",
+          "value": "#edeef180",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -606,7 +606,7 @@
         "default": {
           "description": "",
           "type": "color",
-          "value": "#8c90a1ff",
+          "value": "#878da6ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -630,7 +630,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#8c90a180",
+          "value": "#878da680",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -658,7 +658,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#090a0bff",
+          "value": "#09090cff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -672,7 +672,7 @@
         "background": {
           "description": "",
           "type": "color",
-          "value": "#1a1c20ff",
+          "value": "#191b22ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -684,7 +684,7 @@
         "highlight": {
           "description": "",
           "type": "color",
-          "value": "#0e0f11ff",
+          "value": "#0d0e12ff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -708,7 +708,7 @@
         "disabled": {
           "description": "",
           "type": "color",
-          "value": "#585c6d80",
+          "value": "#545a7180",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -722,7 +722,7 @@
         "screen-background": {
           "description": "",
           "type": "color",
-          "value": "#121316b3",
+          "value": "#111217b3",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -736,7 +736,7 @@
         "subtle": {
           "description": "",
           "type": "color",
-          "value": "#2e3038ff",
+          "value": "#2b2e3bff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -748,7 +748,7 @@
         "strong": {
           "description": "",
           "type": "color",
-          "value": "#3e404cff",
+          "value": "#3b3f4fff",
           "blendMode": "normal",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
@@ -887,7 +887,7 @@
           "10": {
             "description": "Backgrounds",
             "type": "color",
-            "value": "#f4f6f8ff",
+            "value": "#f5f5f7ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -899,7 +899,7 @@
           "20": {
             "description": "Disabled text fields",
             "type": "color",
-            "value": "#e2e3e7ff",
+            "value": "#e1e2e8ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -911,7 +911,7 @@
           "30": {
             "description": "",
             "type": "color",
-            "value": "#acafbbff",
+            "value": "#a8adbfff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -923,7 +923,7 @@
           "40": {
             "description": "Minimum text color for accessibility / Placeholders / Disabled buttons",
             "type": "color",
-            "value": "#6b7084ff",
+            "value": "#666d89ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -935,7 +935,7 @@
           "50": {
             "description": "Hover states / Button colors",
             "type": "color",
-            "value": "#585c6dff",
+            "value": "#545a71ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -947,7 +947,7 @@
           "60": {
             "description": "Active states",
             "type": "color",
-            "value": "#424552ff",
+            "value": "#3f4355ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -959,7 +959,7 @@
           "70": {
             "description": "",
             "type": "color",
-            "value": "#1d1f25ff",
+            "value": "#1c1e26ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1921,7 +1921,7 @@
           "10": {
             "description": "Backgrounds",
             "type": "color",
-            "value": "#121316ff",
+            "value": "#111217ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1933,7 +1933,7 @@
           "20": {
             "description": "Disabled text fields",
             "type": "color",
-            "value": "#2e3039ff",
+            "value": "#2c2f3bff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1945,7 +1945,7 @@
           "30": {
             "description": "",
             "type": "color",
-            "value": "#585c6dff",
+            "value": "#545a71ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1957,7 +1957,7 @@
           "40": {
             "description": "Minimum text color for accessibility / Placeholders / Disabled buttons",
             "type": "color",
-            "value": "#8c90a1ff",
+            "value": "#878da6ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1969,7 +1969,7 @@
           "50": {
             "description": "Hover states / Button colors",
             "type": "color",
-            "value": "#acafbbff",
+            "value": "#a8adbfff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1981,7 +1981,7 @@
           "60": {
             "description": "Active states",
             "type": "color",
-            "value": "#c6c8d0ff",
+            "value": "#c3c6d3ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1993,7 +1993,7 @@
           "70": {
             "description": "",
             "type": "color",
-            "value": "#eceff2ff",
+            "value": "#edeef1ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -3218,15 +3218,15 @@
             "stops": [
               {
                 "position": 0,
-                "color": "#72778dff"
+                "color": "#6c7493ff"
               },
               {
                 "position": 0.51,
-                "color": "#5b5f71ff"
+                "color": "#575d75ff"
               },
               {
                 "position": 1,
-                "color": "#393b47ff"
+                "color": "#363a49ff"
               }
             ]
           },

@@ -4,7 +4,7 @@
       "iconbackground-hover": {
         "description": "",
         "type": "color",
-        "value": "#1d1f250f",
+        "value": "#1c1f260f",
         "blendMode": "normal",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
@@ -28,7 +28,7 @@
       "icon": {
         "description": "",
         "type": "color",
-        "value": "#1d1f2599",
+        "value": "#1c1f2699",
         "blendMode": "normal",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
