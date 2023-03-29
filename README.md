@@ -11,8 +11,7 @@ The output files will be created at `/build` by running `npm run transform-token
 
 For component creation see [components](src/components/README.md).
 
-**Note:** components depend on the [css variables](#css) so make sure they're
-available on your page somewhere.
+**Note:** components depend on the [css variables](#css) so make sure they're available on your page somewhere.
 
 ### Web Components
 
