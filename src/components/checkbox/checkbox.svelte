@@ -71,6 +71,7 @@
     flex-direction: row;
     gap: var(--label-gap);
     font: var(--font);
+    cursor: pointer;
   }
 
   .leo-checkbox.disabled {
