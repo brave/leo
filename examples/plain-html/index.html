@@ -30,6 +30,7 @@
     import './leo/alert.js'
     import { showAlert } from './leo/alertCenter.js'
     import './leo/icon.js'
+    import './leo/radioButton.js'
 
       let count = 10
       const clickable = document.getElementById('clickable')
@@ -80,6 +81,11 @@
     <leo-button kind="outline" id="toggle-button"></leo-button>
     <leo-progressring progress="0.25"></leo-progressring>
     <leo-progressbar progress="0.25"></leo-progressbar>
+    <div>
+      <leo-radiobutton name="options" value="foo"></leo-radiobutton>
+      <leo-radiobutton name="options" value="bar"></leo-radiobutton>
+      <leo-radiobutton name="options" value="hello"></leo-radiobutton>
+    </div>
     <leo-alert mode="full">
       <span slot="title">Hello World</span>
       <div>This is the content</div>
