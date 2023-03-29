@@ -3,7 +3,7 @@
   import Button from '../button/button.svelte'
 
   import Alert, { modes, types } from './alert.svelte'
-  import { showAlert } from './alertCentre.svelte'
+  import { showAlert } from './alertCenter.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
@@ -44,8 +44,8 @@
     <div slot="title">Title</div>
     Alert content
     <div slot="actions">
-      <Button kind="tertiary">Secondary</Button>
-      <Button kind="primary">Primary</Button>
+      <Button kind="outline">Secondary</Button>
+      <Button kind="filled">Primary</Button>
     </div>
   </Alert>
 </Template>
@@ -59,8 +59,8 @@
           <div slot="title">Title</div>
           Alert content
           <div slot="actions">
-            <Button kind="tertiary">Secondary</Button>
-            <Button kind="primary">Primary</Button>
+            <Button kind="outline">Secondary</Button>
+            <Button kind="filled">Primary</Button>
           </div>
         </Alert>
       {/each}

@@ -62,19 +62,18 @@
 
 <script lang="ts">
   import Alert from './alert.svelte'
-  import Icon from '../icon/icon.svelte'
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
   import { fade } from 'svelte/transition'
 
-  export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'centre'}` =
-    'top-centre'
+  export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
+    'top-center'
   $: style = `${position.includes('right') ? 'right' : 'left'}: ${
-    position.includes('centre') ? 'calc(50% - (var(--width) / 2))' : '0'
+    position.includes('center') ? 'calc(50% - (var(--width) / 2))' : '0'
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
-<div class="leo-alert-centre" {style}>
+<div class="leo-alert-center" {style}>
   {#each $alerts as alert (alert.id)}
     <div
       class="alert-container"
@@ -90,7 +89,7 @@
         <div slot="actions">
           {#each alert.actions as action}
             <Button
-              kind={action.kind ?? 'primary'}
+              kind={action.kind ?? 'filled'}
               on:click={() => action.action(alert)}>{action.text}</Button
             >
           {/each}
@@ -101,7 +100,7 @@
 </div>
 
 <style lang="scss">
-  .leo-alert-centre {
+  .leo-alert-center {
     --width: min(540px, 100vw);
     position: absolute;
     width: var(--width);

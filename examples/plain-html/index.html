@@ -28,7 +28,7 @@
     import './leo/progressRing.js'
     import './leo/progressBar.js'
     import './leo/alert.js'
-    import { showAlert } from './leo/alertCentre.js'
+    import { showAlert } from './leo/alertCenter.js'
     import './leo/icon.js'
 
       let count = 10
@@ -71,12 +71,13 @@
     collapse.addEventListener('toggle', toggled)
   </script>
   <div class="component-container">
-    <leo-alertcentre></leo-alertcentre>
+    <leo-alertcenter></leo-alertcenter>
     <leo-button id="clickable">Click Me</leo-button>
     <leo-collapse title="Handy dandy title">
       Some content which is hidden by default
     </leo-collapse>
     <leo-toggle>Togglable!</leo-toggle>
+    <leo-button kind="outline" id="toggle-button"></leo-button>
     <leo-progressring progress="0.25"></leo-progressring>
     <leo-progressbar progress="0.25"></leo-progressbar>
     <leo-alert mode="full">
