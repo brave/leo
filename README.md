@@ -7,18 +7,22 @@ It transforms the exported design tokens using [Amazon style dictionary](https:/
 Destination formats for these tokens include CSS variables, Tailwind configuration, C++ (skia variables), Java and Swift.
 The output files will be created at `/build` by running `npm run transform-tokens` which will also run upon install - regularly or when this package is used as a dependency.
 
-## Web Components
+## Components
 
-This package contains a set of UI components at `/web-components` that can be used in any browser rendering environment. They are aimed to be compatible with the majority of modern rendering engines, not only those used within Brave Browser.
+For component creation see [components](src/components/README.md).
 
-Whilst they are developed using Svelte, they are intended to be used as Web Components, usable in many different frameworks or from vanilla HTML and Javascript.
+**Note:** components depend on the [css variables](#css) so make sure they're
+available on your page somewhere.
 
-The Web Components require compliation - they are not precompiled in this repo:
+### Web Components
 
-- Run vite / sveltekit / rollup or webpack with a svelte plugin
-- Ensure that this repo's postcss plugin at `postcss/theme.js` is added to your configuration for svelte's preprocess. See example in .storybook/main.js and `svelteOptions`.
+Web Component wrappers are generated at build time and are available in the top
+level `web-components` folder.
 
-## Platform specifics
+### React
+React wrappers are generated at build time and are available in the top level
+`react` folder.
+
 
 ## CSS
 
