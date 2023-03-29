@@ -19,9 +19,9 @@ Web Component wrappers are generated at build time and are available in the top
 level `web-components` folder.
 
 ### React
+
 React wrappers are generated at build time and are available in the top level
 `react` folder.
-
 
 ## CSS
 
