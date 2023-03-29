@@ -12,7 +12,6 @@
 
   export let checked: boolean
   export let isDisabled = false
-  export let title: string = ''
   export let size: Sizes = 'normal'
 </script>
 
@@ -23,7 +22,7 @@
   class:disabled={isDisabled}
 >
   <div class="check">
-    <input {title} disabled={isDisabled} type="checkbox" bind:checked />
+    <input disabled={isDisabled} type="checkbox" bind:checked />
     {#if checked}
       <div transition:fade={fadeTransition}>
         <Icon name="checkbox-checked" />
@@ -43,19 +42,27 @@
   }
 
   .leo-checkbox {
-    --border-radius: var(--leo-checkbox-border-radius, 2px);
-    --border-color: var(--leo-checkbox-border-color, #6b7084);
+    --focus-border-radius: var(--leo-checkbox-focus-border-radius, 2px);
     --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-8));
     --checked-color: var(
       --leo-checkbox-checked-color,
       var(--leo-color-light-primary-40)
     );
-    --checked-color-hover: var(--leo-checkbox-checked-color-hover, var(--leo-color-primary-50));
+    --checked-color-hover: var(
+      --leo-checkbox-checked-color-hover,
+      var(--leo-color-primary-50)
+    );
     /* TODO: Use leo-icon-colors once I fix those */
     --unchecked-color: var(--leo-checkbox-unchecked-color, #6b7084);
-    --unchecked-color-hover: var(--leo-checkbox-unchecked-color-hover, var(--leo-color-gray-50));
+    --unchecked-color-hover: var(
+      --leo-checkbox-unchecked-color-hover,
+      var(--leo-color-gray-50)
+    );
+    --disabled-color: var(
+      --leo-checkbox-disabled-color,
+      var(--leo-color-text-disabled)
+    );
     --font: var(--leo-checkbox-font, var(--leo-font-primary-default-regular));
-    --disabled-color: var(--leo-checkbox-disabled-color, var(--leo-color-text-disabled));
 
     display: flex;
     align-items: center;
@@ -69,11 +76,11 @@
   }
 
   .normal {
-    --checkbox-size: var(--leo-checkbox-size, 16px);
+    --checkbox-size: var(--leo-checkbox-size, 20px);
   }
 
   .small {
-    --checkbox-size: var(--leo-checkbox-size, 13px);
+    --checkbox-size: var(--leo-checkbox-size, 16px);
   }
 
   .leo-checkbox input {
@@ -103,7 +110,7 @@
     &:has(input:focus-visible) {
       box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
-      border-radius: var(--border-radius);
+      border-radius: var(--focus-border-radius);
     }
   }
 
