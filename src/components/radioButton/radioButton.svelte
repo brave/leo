@@ -102,6 +102,7 @@
     display: flex;
     flex-direction: row;
     gap: var(--label-gap);
+    cursor: pointer;
   }
 
   .leo-radiobutton.small {
