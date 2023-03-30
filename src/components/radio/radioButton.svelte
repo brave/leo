@@ -7,7 +7,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import { fade } from 'svelte/transition'
+  import { fade, scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
 
   export let currentValue: string | number | any
@@ -41,7 +41,7 @@
 </script>
 
 <label
-  class="leo-radioButton"
+  class="leo-radiobutton"
   class:small={size === 'small'}
   class:disabled={isDisabled}
 >
@@ -53,7 +53,7 @@
       on:change={changed}
     />
     {#if currentValue === value && currentValue}
-      <div transition:fade={transition}>
+      <div transition:scale={transition}>
         <Icon name="radio-checked" />
       </div>
     {:else}
@@ -70,56 +70,64 @@
     display: inline-block;
   }
 
-  .leo-radioButton {
-    --focus-border-radius: var(--leo-checkbox-focus-border-radius, 2px);
-    --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-8));
+  .leo-radiobutton {
+    --focus-border-radius: var(--leo-radiobutton-focus-border-radius, 2px);
+    --label-gap: var(--leo-radiobutton-label-gap, var(--leo-spacing-8));
     --checked-color: var(
-      --leo-checkbox-checked-color,
+      --leo-radiobutton-checked-color,
       var(--leo-color-icon-interactive)
     );
     --checked-color-hover: var(
-      --leo-checkbox-checked-color-hover,
+      --leo-radiobutton-checked-color-hover,
       var(--leo-color-primary-50)
     );
     --unchecked-color: var(
-      --leo-checkbox-unchecked-color,
+      --leo-radiobutton-unchecked-color,
       var(--leo-color-icon-default)
     );
     --unchecked-color-hover: var(
-      --leo-checkbox-unchecked-color-hover,
+      --leo-radiobutton-unchecked-color-hover,
       var(--leo-color-gray-50)
     );
     --disabled-color: var(
-      --leo-checkbox-disabled-color,
+      --leo-radiobutton-disabled-color,
       var(--leo-color-text-disabled)
     );
-    --font: var(--leo-checkbox-font, var(--leo-font-primary-default-regular));
-    --checkbox-size: var(--leo-radiobutton-checkbox-size, 20px);
+    --font: var(--leo-radiobutton-font, var(--leo-font-primary-default-regular));
+    --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 20px);
 
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-4);
   }
 
-  .leo-radioButton.small {
-    --checkbox-size: var(--leo-radiobutton-checkbox-size, 16px);
+  .leo-radiobutton.small {
+    --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 16px);
   }
 
-  .leo-radioButton.disabled {
+  .leo-radiobutton.disabled {
     color: var(--disabled-color);
   }
 
-  .leo-radioButton.disabled .check {
+  .leo-radiobutton.disabled .check {
     color: var(--disabled-color) !important;
   }
 
-  .leo-radioButton .check {
-    position: relative;
-    width: var(--checkbox-size);
-    height: var(--checkbox-size);
-    --leo-icon-size: var(--checkbox-size);
+  .leo-radiobutton .check {
+    --leo-icon-size: var(--radiobutton-size);
 
-    color: var(--checked-color);
+    position: relative;
+    width: var(--radiobutton-size);
+    height: var(--radiobutton-size);
+
+    transition: box-shadow .12s ease-in-out;
+    border-radius: var(--leo-radius-full);
+
+    color: var(--unchecked-color);
+
+    &:has(input:checked) {
+      color: var(--checked-color);
+    }
 
     > input {
       opacity: 0;
@@ -131,6 +139,19 @@
       bottom: 0;
       left: 0;
       right: 0;
+    }
+
+    &:has(input:focus-visible) {
+      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+        0px 0px 4px 2px #423eee;
+    }
+  }
+
+  .leo-radiobutton:hover .check {
+    color: var(--unchecked-color-hover);
+
+    &:has(input:checked) {
+      color: var(--checked-color-hover);
     }
   }
 </style>
