@@ -93,7 +93,10 @@
       --leo-radiobutton-disabled-color,
       var(--leo-color-text-disabled)
     );
-    --font: var(--leo-radiobutton-font, var(--leo-font-primary-default-regular));
+    --font: var(
+      --leo-radiobutton-font,
+      var(--leo-font-primary-default-regular)
+    );
     --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 20px);
 
     display: flex;
@@ -120,7 +123,7 @@
     width: var(--radiobutton-size);
     height: var(--radiobutton-size);
 
-    transition: box-shadow .12s ease-in-out;
+    transition: box-shadow 0.12s ease-in-out;
     border-radius: var(--leo-radius-full);
 
     color: var(--unchecked-color);
