@@ -86,6 +86,7 @@
     gap: var(--label-gap);
     font: var(--font);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .leo-checkbox.disabled {
