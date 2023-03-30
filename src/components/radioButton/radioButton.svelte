@@ -103,6 +103,7 @@
     flex-direction: row;
     gap: var(--label-gap);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .leo-radiobutton.small {
