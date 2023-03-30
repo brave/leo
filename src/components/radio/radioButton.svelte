@@ -98,7 +98,7 @@
 
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-4);
+    gap: var(--label-gap);
   }
 
   .leo-radiobutton.small {

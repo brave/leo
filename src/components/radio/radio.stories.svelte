@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
-  import RadioButton from './radioButton.svelte'
+  import RadioButton, { sizes } from './radioButton.svelte'
 
   let currentValue = 'hello'
   let container
@@ -18,7 +18,73 @@
   title="Radio"
   component={RadioButton}
   argTypes={{
-    name: { control: 'text', defaultValue: `options` }
+    '--leo-radiobutton-focus-border-radius': {
+      control: 'text',
+      type: 'string',
+      description: 'The border radius of the focus shadow'
+    },
+    '--leo-radiobutton-label-gap': {
+      control: 'text',
+      type: 'string',
+      description: 'The gap between the label and the checkbox'
+    },
+    '--leo-radiobutton-checked-color': {
+      control: 'color',
+      type: 'string',
+      description: 'The color of the checkbox when checked'
+    },
+    '--leo-radiobutton-checked-color-hover': {
+      control: 'color',
+      type: 'string',
+      description: 'The color of the checkbox when checked and hovered'
+    },
+    '--leo-radiobutton-unchecked-color': {
+      control: 'color',
+      type: 'string',
+      description: 'The color of the checkbox when unchecked'
+    },
+    '--leo-radiobutton-unchecked-color-hover': {
+      control: 'color',
+      type: 'string',
+      description: 'The color of the checkbox when unchecked and hovered'
+    },
+    '--leo-radiobutton-font': {
+      control: 'text',
+      type: 'string',
+      description: 'The font to use for the label'
+    },
+    '--leo-radiobutton-disabled-color': {
+      control: 'color',
+      type: 'string',
+      description: 'The color of the checkbox + label when disabled'
+    },
+    name: {
+      control: 'text',
+      defaultValue: `options`,
+      description:
+        'The name of the group of radio buttons (i.e. the name of the property the buttons are selecting for).'
+    },
+    isDisabled: {
+      control: 'boolean',
+      defaultValue: false,
+      description: 'Whether the control is disabled'
+    },
+    size: {
+      control: 'select',
+      options: sizes,
+      defaultValue: 'normal',
+      description: 'The size of the control'
+    },
+    value: {
+      control: 'none',
+      description:
+        'This is the value |currentValue| will be when the radio is selected'
+    },
+    currentValue: {
+      control: 'none',
+      description:
+        'The current value of the control. In Svelte, this can be bound. WebComponents can also manage it automatically. The checked event is fired with the new value when the current value changes.'
+    }
   }}
 />
 
