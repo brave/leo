@@ -99,6 +99,7 @@
     .dot {
       all: unset;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       margin: var(--dot-vertical-margin) 0;
       width: var(--dot-size);
       height: var(--dot-size);

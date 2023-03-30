@@ -135,6 +135,7 @@
 
     list-style: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     color: var(--summary-color);
     transition: color var(--transition-duration) ease-in-out;

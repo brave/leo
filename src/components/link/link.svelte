@@ -42,6 +42,7 @@
     color: var(--color);
     font: var(--leo-font-text-default-semibold);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
 
     &:hover {
