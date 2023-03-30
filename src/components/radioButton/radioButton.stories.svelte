@@ -15,7 +15,7 @@
 </script>
 
 <Meta
-  title="Radio"
+  title="Radio Button"
   component={RadioButton}
   argTypes={{
     '--leo-radiobutton-focus-border-radius': {
