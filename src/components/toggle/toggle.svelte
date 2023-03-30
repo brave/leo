@@ -137,6 +137,8 @@
     align-items: center;
     flex-direction: var(--label-flex-direction);
     gap: var(--label-gap);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .leo-toggle button {

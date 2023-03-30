@@ -95,6 +95,7 @@
     --box-shadow-hover: var(--leo-effect-elevation-02);
     display: block;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
