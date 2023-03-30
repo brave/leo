@@ -6,6 +6,8 @@
 </script>
 
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte'
+
   import { fade } from 'svelte/transition'
 
   import Icon from '../icon/icon.svelte'
@@ -13,6 +15,13 @@
   export let checked: boolean
   export let isDisabled = false
   export let size: Sizes = 'normal'
+
+  const dispatch = createEventDispatcher()
+  function changed(e) {
+    dispatch('changed', {
+      checked: e.target.checked
+    })
+  }
 </script>
 
 <label
@@ -22,7 +31,12 @@
   class:disabled={isDisabled}
 >
   <div class="check">
-    <input disabled={isDisabled} type="checkbox" bind:checked />
+    <input
+      disabled={isDisabled}
+      type="checkbox"
+      bind:checked
+      on:change={changed}
+    />
     {#if checked}
       <div transition:fade={fadeTransition}>
         <Icon name="checkbox-checked" />
