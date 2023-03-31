@@ -1,6 +1,9 @@
 const fs = require('fs/promises')
 const path = require('path')
 const { JSDOM } = require('jsdom')
+const paper = require('paper-jsdom')
+const { CompoundPath } = paper
+paper.setup()
 
 const TEMPLATE_PATH = path.join(__dirname, 'icons', 'sf-icon.svg.tmpl')
 const ICONS_FOLDER = 'icons/'
@@ -10,7 +13,19 @@ function processIcon(template, svgContents) {
   const {
     window: { document }
   } = new JSDOM(svgContents)
-  const paths = document.querySelectorAll('svg > *')
+
+  const paperSVG = paper.project.importSVG(document.querySelector('svg'))
+  for (const path of paperSVG.getItems({ class: CompoundPath })) {
+    path.reorient()
+  }
+
+  const resultSVG = paperSVG.exportSVG()
+  for (const path of resultSVG.querySelectorAll('path')) {
+    if (path.hasAttribute('fill-rule'))
+      path.setAttribute('fill-rule', 'nonzero')
+  }
+
+  const paths = resultSVG.querySelectorAll('svg > *')
   const pathContents = Array.from(paths)
     .map((p) => p.outerHTML)
     .join('\n')
