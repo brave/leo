@@ -5,8 +5,15 @@ interface Options {
   name: string
 }
 
+// Properties with these types should be reflected to attributes.
 const reflectToAttributes = new Set(['string', 'number', 'boolean'])
 
+/**
+ * This function creates a faux Svelte component which forwards WebComponent
+ * slots into a Svelte slot.
+ * @param name The name of the slot
+ * @returns A Svelte "component" representing the slot.
+ */
 const createSlot = (name?: string) => {
   let slot: HTMLElement
   return {
@@ -58,7 +65,12 @@ export default function registerWebComponent(
 
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
-    listeners = new Map<string, Map<Callback, Callback>>()
+    // A map of event name to a map of an event listener to a function for
+    // removing that listener.
+    // For example
+    // this.listenerRemovers.get('click').get(myCallback)() will remove
+    // |myCallback| from the click event.
+    listenerRemovers = new Map<string, Map<Callback, Callback>>()
     #component: SvelteComponent
     get component() {
       return this.#component
@@ -68,9 +80,9 @@ export default function registerWebComponent(
       // We need to make sure that when we recreate the component (as in the
       // case of slots changing) that we copy over all of the event listeners.
       this.#component = value
-      for (const [event, listeners] of this.listeners.entries()) {
-        for (const [callback, remove] of listeners.entries()) {
-          remove()
+      for (const [event, listeners] of this.listenerRemovers.entries()) {
+        for (const [callback, remover] of listeners.entries()) {
+          remover()
           this.addEventListener(event, callback)
         }
       }
@@ -184,14 +196,19 @@ export default function registerWebComponent(
         Object.defineProperty(this, prop, {
           enumerable: true,
           get() {
-            const contextIndex = c.$$.props[prop]
+            // $$.props is { [propertyName: string]: number } where the number
+            // is the array index into $$.ctx that the value is stored in.
+            const contextIndex = this.component.$$.props[prop]
             return this.component.$$.ctx[contextIndex]
           },
           set(value) {
             if (reflectToAttributes.has(typeof value)) {
               this.setAttribute(prop, value)
             }
-            this.component.$$set({ [prop]: value })
+
+            // |.$set| updates the value of a prop. Note: This only works for
+            // props, not slotted content.
+            this.component.$set({ [prop]: value })
           }
         })
       }
@@ -203,12 +220,16 @@ export default function registerWebComponent(
     }
 
     addEventListener(event: string, callback: Callback) {
-      if (!this.listeners.has(event)) {
-        this.listeners.set(event, new Map())
+      if (!this.listenerRemovers.has(event)) {
+        this.listenerRemovers.set(event, new Map())
       }
 
-      const remove = this.component.$on(event, callback)
-      this.listeners.get(event).set(callback, remove)
+      // Note: $on(<event>, callback) returns a function which removes the
+      // callback from the event.
+      const remover = this.component.$on(event, callback)
+
+      // We store the remover so we can look it up in |removeEventListener|.
+      this.listenerRemovers.get(event).set(callback, remover)
 
       // TODO: We could do this but we don't know if the event is handled
       // by the component or not so we could end up triggering the event
@@ -217,8 +238,8 @@ export default function registerWebComponent(
     }
 
     removeEventListener(event: string, callback: Callback) {
-      this.listeners.get(event)?.get(callback)?.()
-      this.listeners.get(event)?.delete(callback)
+      this.listenerRemovers.get(event)?.get(callback)?.()
+      this.listenerRemovers.get(event)?.delete(callback)
     }
   }
 

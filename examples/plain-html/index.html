@@ -31,6 +31,9 @@
       const clickable = document.getElementById('clickable')
       const ring = document.querySelector('leo-progressring')
       const bar = document.querySelector('leo-progressbar')
+      const toggle = document.querySelector('leo-toggle')
+      const toggleButton = document.querySelector('#toggle-button')
+      const collapse = document.querySelector('leo-collapse')
 
       clickable.addEventListener('click', () => {
         count += 10
@@ -41,13 +44,26 @@
         ring.progress = progress
         bar.progress = progress
       })
+
+      let isToggled = false
+      const toggled = () => {
+        isToggled = !isToggled
+
+        toggle.on = isToggled
+        collapse.isOpen = isToggled
+        toggleButton.textContent = `Open: ${isToggled}`
+      }
+
+      toggle.addEventListener('toggle', toggled)
+      toggleButton.addEventListener('click', toggled)
+      collapse.addEventListener('toggle', toggled)
     </script>
     <div class="component-container">
       <leo-button id="clickable">Click Me</leo-button>
       <leo-collapse title="Handy dandy title">
         Some content which is hidden by default
       </leo-collapse>
-      <leo-button></leo-button>
+      <leo-button id="toggle-button" kind="secondary"></leo-button>
       <leo-toggle>Togglable!</leo-toggle>
       <leo-progressring progress="0.25"></leo-progressring>
       <leo-progressbar progress="0.25"></leo-progressbar>
