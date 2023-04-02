@@ -1,7 +1,7 @@
 const fs = require('fs/promises')
 const path = require('path')
 const { JSDOM } = require('jsdom')
-const paper = require('paper-jsdom')
+const paper = require('paper')
 const { CompoundPath } = paper
 paper.setup()
 
