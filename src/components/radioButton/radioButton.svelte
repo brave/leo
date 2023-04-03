@@ -101,6 +101,7 @@
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: var(--label-gap);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
