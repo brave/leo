@@ -104,6 +104,8 @@
     gap: var(--label-gap);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+
+    font: var(--font);
   }
 
   .leo-radiobutton.small {
