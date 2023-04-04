@@ -43,7 +43,7 @@
   <Alert {...args}>
     <div slot="title">Title</div>
     Alert content
-    <div slot="actions">
+    <div slot="actions" class:reverse={args.mode === 'full'}>
       <Button kind="outline">Secondary</Button>
       <Button kind="filled">Primary</Button>
     </div>
@@ -58,7 +58,7 @@
         <Alert {mode} {type} {...args}>
           <div slot="title">Title</div>
           Alert content
-          <div slot="actions">
+          <div slot="actions" class="actions" class:reverse={mode === 'full'}>
             <Button kind="outline">Secondary</Button>
             <Button kind="filled">Primary</Button>
           </div>
@@ -98,5 +98,13 @@
     flex-direction: column;
     gap: 16px;
     max-width: 500px;
+  }
+
+  /* Note: in the real world we don't need this to reverse the button order (as
+   * we'd just order the buttons differently), but it makes the story look nicer
+   */
+  .reverse {
+    flex-direction: row-reverse !important;
+    justify-content: start;
   }
 </style>
