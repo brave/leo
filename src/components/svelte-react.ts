@@ -116,7 +116,7 @@ export default function SvelteWebComponentToReact<
           setElement(ref)
 
           if (!ref) {
-            console.error('No component for tag', tag)
+            // Note: This will happen when the component unmounts.
             return
           }
 
