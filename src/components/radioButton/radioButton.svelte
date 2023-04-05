@@ -1,8 +1,13 @@
 <script lang="ts" context="module">
+  import { preloadIcon } from '../icon/icon.svelte'
+
   export let sizes = ['small', 'normal'] as const
   export type Sizes = (typeof sizes)[number]
 
   const transition = { duration: 120 }
+
+  preloadIcon('radio-checked')
+  preloadIcon('radio-unchecked')
 </script>
 
 <script lang="ts">
@@ -57,7 +62,7 @@
         <Icon name="radio-checked" />
       </div>
     {:else}
-      <div transition:fade={transition}>
+      <div out:fade={transition}>
         <Icon name="radio-unchecked" />
       </div>
     {/if}
@@ -107,6 +112,10 @@
     -webkit-tap-highlight-color: transparent;
 
     font: var(--font);
+
+    &.disabled {
+      cursor: not-allowed;
+    }
   }
 
   .leo-radiobutton.small {
