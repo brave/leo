@@ -1,6 +1,18 @@
 <script context="module" lang="ts">
   let iconBasePath = '/icons'
   export const setIconBasePath = (basePath: string) => (iconBasePath = basePath)
+
+  const getIconUrl = (name: string) => `${iconBasePath}/${name}.svg`
+
+  // Not actually used by the component, but used to preload SVGs.
+  const svgCache = {}
+  export const preloadIcon = (name: string) => {
+    const image = new Image()
+    image.src = getIconUrl(name)
+
+    // Store the image in our cache, so it isn't garbage collected.
+    svgCache[name] = image
+  }
 </script>
 
 <script lang="ts">
@@ -16,7 +28,7 @@
       <div
         class="icon"
         class:color={hasColor}
-        style:--icon-url={`url('${iconBasePath}/${name}.svg')`}
+        style:--icon-url={`url('${getIconUrl(name)}')`}
       />
     {/if}
   </slot>
