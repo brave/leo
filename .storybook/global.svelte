@@ -23,7 +23,7 @@
 <style>
   .layout {
     padding: 30px;
-    background: var(--leo-color-page-background);
+    background: var(--leo-color-container-background);
     color: var(--leo-color-text-primary);
   }
 

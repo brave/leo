@@ -58,13 +58,15 @@
   export const showAlert = (options: AlertOptions, duration = 2000) => {
     alerts.update((a) => [...a, new AlertInfo(options, duration)])
   }
+
+  const transitionOptions = { y: -64, duration: 120 }
 </script>
 
 <script lang="ts">
   import Alert from './alert.svelte'
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
-  import { fade } from 'svelte/transition'
+  import { fly } from 'svelte/transition'
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
     'top-center'
@@ -77,7 +79,7 @@
   {#each $alerts as alert (alert.id)}
     <div
       class="alert-container"
-      transition:fade
+      transition:fly={transitionOptions}
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >

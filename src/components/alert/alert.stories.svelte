@@ -44,7 +44,7 @@
     <div slot="title">Title</div>
     Alert content
     <div slot="actions" class:reverse={args.mode === 'full'}>
-      <Button kind="outline">Secondary</Button>
+      <Button kind="plain-faint">Secondary</Button>
       <Button kind="filled">Primary</Button>
     </div>
   </Alert>
@@ -59,7 +59,7 @@
           <div slot="title">Title</div>
           Alert content
           <div slot="actions" class="actions" class:reverse={mode === 'full'}>
-            <Button kind="outline">Secondary</Button>
+            <Button kind="plain-faint">Secondary</Button>
             <Button kind="filled">Primary</Button>
           </div>
         </Alert>
