@@ -1,31 +1,35 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using HTML & Web Components"
-    />
-    <link href="./css/variables.css" rel="stylesheet" />
-    <title>Web Components</title>
-    <style>
-      .component-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-    </style>
-  </head>
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script type="module">
-      import './leo/button.js'
-      import './leo/collapse.js'
-      import './leo/toggle.js'
-      import './leo/progressRing.js'
-      import './leo/progressBar.js'
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Web site created using HTML & Web Components" />
+  <link href="./css/variables.css" rel="stylesheet" />
+  <title>Web Components</title>
+  <style>
+    .component-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script type="module">
+    import './leo/button.js'
+    import './leo/collapse.js'
+    import './leo/toggle.js'
+    import './leo/progressRing.js'
+    import './leo/progressBar.js'
+    import './leo/alert.js'
+    import { showAlert } from './leo/alertCenter.js'
+    import './leo/icon.js'
 
       let count = 10
       const clickable = document.getElementById('clickable')
@@ -35,38 +39,56 @@
       const toggleButton = document.querySelector('#toggle-button')
       const collapse = document.querySelector('leo-collapse')
 
-      clickable.addEventListener('click', () => {
-        count += 10
-        if (count > 100) count = 0
+    clickable.addEventListener('click', () => {
+      count += 10
+      if (count > 100) count = 0
 
-        const progress = count/100
-        clickable.innerText = `Progress: ${progress}`
-        ring.progress = progress
-        bar.progress = progress
+      const progress = count / 100
+      clickable.innerText = `Progress: ${progress}`
+      ring.progress = progress
+      bar.progress = progress
+
+      showAlert({
+        content: `progress is ${progress}`,
+        actions: [{
+          text: 'dismiss',
+          action: a => a.dismiss()
+        }]
       })
+    })
 
-      let isToggled = false
-      const toggled = () => {
-        isToggled = !isToggled
+    let isToggled = false
+    const toggled = () => {
+      isToggled = !isToggled
 
-        toggle.on = isToggled
-        collapse.isOpen = isToggled
-        toggleButton.textContent = `Open: ${isToggled}`
-      }
+      toggle.on = isToggled
+      collapse.isOpen = isToggled
+      toggleButton.textContent = `Open: ${isToggled}`
+    }
 
-      toggle.addEventListener('toggle', toggled)
-      toggleButton.addEventListener('click', toggled)
-      collapse.addEventListener('toggle', toggled)
-    </script>
-    <div class="component-container">
-      <leo-button id="clickable">Click Me</leo-button>
-      <leo-collapse title="Handy dandy title">
-        Some content which is hidden by default
-      </leo-collapse>
-      <leo-button id="toggle-button" kind="secondary"></leo-button>
-      <leo-toggle>Togglable!</leo-toggle>
-      <leo-progressring progress="0.25"></leo-progressring>
-      <leo-progressbar progress="0.25"></leo-progressbar>
-    </div>
-  </body>
+    toggle.addEventListener('toggle', toggled)
+    toggleButton.addEventListener('click', toggled)
+    collapse.addEventListener('toggle', toggled)
+  </script>
+  <div class="component-container">
+    <leo-alertcenter></leo-alertcenter>
+    <leo-button id="clickable">Click Me</leo-button>
+    <leo-collapse title="Handy dandy title">
+      Some content which is hidden by default
+    </leo-collapse>
+    <leo-toggle>Togglable!</leo-toggle>
+    <leo-button kind="outline" id="toggle-button"></leo-button>
+    <leo-progressring progress="0.25"></leo-progressring>
+    <leo-progressbar progress="0.25"></leo-progressbar>
+    <leo-alert mode="full">
+      <span slot="title">Hello World</span>
+      <div>This is the content</div>
+      <div slot="actions">
+        <leo-button>Do the thing</leo-button>
+        <leo-button kind="tertiary">Cancel</leo-button>
+      </div>
+    </leo-alert>
+  </div>
+</body>
+
 </html>

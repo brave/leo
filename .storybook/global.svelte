@@ -1,6 +1,9 @@
 <script lang="ts">
+  import AlertCenter from '../src/components/alert/alertCenter.svelte'
   import '../tokens/css/variables.css'
 </script>
+
+<AlertCenter />
 
 <div class="layout">
   <h2>User preference</h2>
@@ -20,7 +23,7 @@
 <style>
   .layout {
     padding: 30px;
-    background: var(--leo-color-page-background);
+    background: var(--leo-color-container-background);
     color: var(--leo-color-text-primary);
   }
 
