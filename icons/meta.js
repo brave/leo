@@ -1,5 +1,5 @@
 export default {
-  'updatedAt': 1680572290505,
+  'updatedAt': 1680736195879,
   'icons': {
     '$pac-color': '$pac-color',
     '0xbtc-color': '0xbtc-color',
@@ -1667,6 +1667,7 @@ export default {
     'usd': 'usd',
     'usdc-color': 'usdc-color',
     'usdt-color': 'usdt-color',
+    'user-accounts': 'user-accounts',
     'user-add': 'user-add',
     'user-check': 'user-check',
     'user-circle': 'user-circle',
