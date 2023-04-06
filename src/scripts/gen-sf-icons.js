@@ -1,3 +1,13 @@
+/**
+ * Note: This script isn't include as part of the build process, as it has some
+ * dependencies which require people to manually install some packages on OSX,
+ * which is a bit painful.
+ *
+ * As a workaround, we've created the leo-sf-symbols repository which contains
+ * prebuilt SF Symbols. The script is include in Leo so you can **choose** to
+ * use it to build them yourself, and to make the leo-sf-symbols repository as
+ * dumb as possible.
+ */
 const fs = require('fs/promises')
 const path = require('path')
 const { JSDOM } = require('jsdom')
@@ -6,8 +16,8 @@ const { CompoundPath } = paper
 paper.setup()
 
 const TEMPLATE_PATH = path.join(__dirname, 'icons', 'sf-icon.svg.tmpl')
-const ICONS_FOLDER = 'icons/'
-const OUTPUT_FOLDER = 'icons-sf/'
+const ICONS_FOLDER = process.env['ICONS_FOLDER'] || path.join(__dirname, '../../icons')
+const OUTPUT_FOLDER = process.env['OUTPUT_FOLDER'] || 'icons-sf'
 
 function processIcon(template, svgContents) {
   const {
@@ -53,3 +63,5 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
         )
       })
   })
+
+  module.exports.processIcon = processIcon
