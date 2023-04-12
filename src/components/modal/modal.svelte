@@ -4,6 +4,7 @@
   import Icon from '../icon/icon.svelte'
 
   export let isOpen = false
+  export let modal = true
   export let showClose = true
   export let showBack = true
 
@@ -21,10 +22,10 @@
   }
 </script>
 
-<dialog class="leo-modal" bind:this={dialog}>
+<dialog class="leo-dialog" class:modal={modal} bind:this={dialog}>
   <div class="title-row">
     {#if showBack}
-      <Button kind="plain-faint" on:click={close}>
+      <Button kind="plain-faint" on:click={() => dispatch('back')}>
         <Icon name="arrow-left" />
       </Button>
     {/if}
@@ -58,7 +59,7 @@
   :host {
   }
 
-  .leo-modal {
+  .leo-dialog {
     position: relative;
 
     width: 500px;
@@ -74,27 +75,27 @@
       var(--leo-spacing-32);
   }
 
-  .leo-modal .title {
+  .leo-dialog .title {
     font: var(--leo-font-heading-h2);
   }
 
-  .leo-modal .close-button {
+  .leo-dialog .close-button {
     position: absolute;
     right: var(--leo-spacing-16);
     top: calc(var(--leo-spacing-16) - 5px);
   }
 
-  .leo-modal .subtitle {
+  .leo-dialog .subtitle {
     margin-bottom: var(--leo-spacing-16);
     font: var(--leo-font-heading-h4);
   }
 
-  .leo-modal .body {
+  .leo-dialog .body {
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-primary-default-regular);
   }
 
-  .leo-modal .actions {
+  .leo-dialog .actions {
     margin-top: var(--leo-spacing-32);
     > * {
       display: flex;
@@ -105,7 +106,7 @@
   }
 
   :global ::slotted(actions),
-  :global .leo-modal div[slot='actions'] {
+  :global .leo-dialog div[slot='actions'] {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -113,11 +114,11 @@
     gap: var(--leo-spacing-16);
   }
 
-  :global .leo-modal div[slot='actions'] > * {
+  :global .leo-dialog div[slot='actions'] > * {
     flex: 1;
   }
 
-  .leo-modal .title-row {
+  .leo-dialog .title-row {
     display: flex;
     flex-direction: row;
     align-items: center;
