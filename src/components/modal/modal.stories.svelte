@@ -13,6 +13,10 @@
   isOpen: {
     control: 'boolean',
     defaultValue: true
+  },
+  size: {
+    control: 'select',
+    options: ['mobile', 'normal']
   }
 }} />
 

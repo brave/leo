@@ -7,6 +7,7 @@
   export let modal = true
   export let showClose = true
   export let showBack = true
+  export let size: 'mobile' | 'normal' = 'normal'
 
   const dispatch = createEventDispatcher()
 
@@ -22,7 +23,12 @@
   }
 </script>
 
-<dialog class="leo-dialog" class:modal bind:this={dialog}>
+<dialog
+  class="leo-dialog"
+  class:mobile={size == 'mobile'}
+  class:modal
+  bind:this={dialog}
+>
   <div class="title-row">
     {#if showBack}
       <Button kind="plain-faint" on:click={() => dispatch('back')}>
@@ -63,6 +69,7 @@
     position: relative;
 
     width: 500px;
+    max-width: calc(100% - var(--leo-spacing-8) * 2);
     margin: auto;
 
     border: none;
@@ -73,6 +80,10 @@
     background: var(--leo-color-container-background);
     padding: var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
       var(--leo-spacing-32);
+  }
+  
+  .leo-dialog.mobile {
+    width: 374px;
   }
 
   .leo-dialog:not(.modal) {
@@ -104,12 +115,12 @@
 
   .leo-dialog .actions {
     margin-top: var(--leo-spacing-32);
-    > * {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: stretch;
-    }
+  }
+
+  :global .leo-dialog.mobile .actions div[slot='actions'] {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: end;
   }
 
   :global ::slotted(actions),
