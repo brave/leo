@@ -8,6 +8,7 @@
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
   import Alert from '../alert/alert.svelte'
+  import DialogHelper from './dialogHelper.svelte'
 </script>
 
 <Meta
@@ -56,3 +57,5 @@
     margin-top: var(--leo-spacing-16);
   }
 </style>
+
+<DialogHelper/>

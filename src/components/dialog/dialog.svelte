@@ -5,8 +5,8 @@
 
   export let isOpen = false
   export let modal = true
-  export let showClose = true
-  export let showBack = true
+  export let showClose = false
+  export let showBack = false
   export let size: 'mobile' | 'normal' = 'normal'
 
   const dispatch = createEventDispatcher()
