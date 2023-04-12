@@ -9,7 +9,12 @@
   import Button from '../button/button.svelte'
 </script>
 
-<Meta title="Modal" component={Modal} argTypes={{}} />
+<Meta title="Modal" component={Modal} argTypes={{
+  isOpen: {
+    control: 'boolean',
+    defaultValue: true
+  }
+}} />
 
 <Template let:args>
   <div style={getStyleFromArgs(args)} >
