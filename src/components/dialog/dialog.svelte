@@ -31,9 +31,11 @@
 >
   <div class="title-row">
     {#if showBack}
-      <Button kind="plain-faint" on:click={() => dispatch('back')}>
-        <Icon name="arrow-left" />
-      </Button>
+      <div class="back-button">
+        <Button kind="plain-faint" on:click={() => dispatch('back')}>
+          <Icon name="arrow-left" />
+        </Button>
+      </div>
     {/if}
     <div class="title">
       <slot name="title" />
@@ -81,7 +83,7 @@
     padding: var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
       var(--leo-spacing-32);
   }
-  
+
   .leo-dialog.mobile {
     width: 374px;
   }
@@ -100,7 +102,14 @@
   .leo-dialog .close-button {
     position: absolute;
     right: var(--leo-spacing-16);
-    top: calc(var(--leo-spacing-16) - 5px);
+    top: var(--leo-spacing-16);
+  }
+
+  .leo-dialog {
+    .close-button,
+    .back-button {
+      --leo-button-padding: var(--leo-spacing-4);
+    }
   }
 
   .leo-dialog .subtitle {
