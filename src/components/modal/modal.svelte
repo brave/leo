@@ -13,7 +13,7 @@
   let dialog: HTMLDialogElement
   $: {
     if (!isOpen && dialog?.open) dialog?.close()
-    if (isOpen && !dialog?.open) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.parentElement) dialog?.showModal()
   }
 
   const close = () => {
@@ -22,7 +22,7 @@
   }
 </script>
 
-<dialog class="leo-dialog" class:modal={modal} bind:this={dialog}>
+<dialog class="leo-dialog" class:modal bind:this={dialog}>
   <div class="title-row">
     {#if showBack}
       <Button kind="plain-faint" on:click={() => dispatch('back')}>
@@ -73,6 +73,13 @@
     background: var(--leo-color-container-background);
     padding: var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
       var(--leo-spacing-32);
+  }
+
+  .leo-dialog:not(.modal) {
+    box-shadow: var(--leo-effect-elevation-04);
+    &::backdrop {
+      display: none;
+    }
   }
 
   .leo-dialog .title {
