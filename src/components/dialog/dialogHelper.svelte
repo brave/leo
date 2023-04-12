@@ -20,6 +20,8 @@
   const dialogs = writable<AlertInfo[]>([])
 
   export const dialog = <T>(options: AlertOptions) => {
+    ensureDialogHelper()
+
     let resolve: (result?: T) => void
     const promise = new Promise((a) => (resolve = a))
 
@@ -84,6 +86,7 @@
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
+  import { ensureDialogHelper } from './ensureDialogHelper'
 </script>
 
 {#each $dialogs as dialog}
