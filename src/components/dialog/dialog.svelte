@@ -18,7 +18,6 @@
   }
 
   const close = () => {
-    isOpen = false
     dispatch('close')
   }
 </script>
@@ -28,6 +27,7 @@
   class:mobile={size == 'mobile'}
   class:modal
   bind:this={dialog}
+  on:close={close}
 >
   <div class="title-row">
     {#if showBack}
@@ -43,7 +43,7 @@
   </div>
   {#if showClose}
     <div class="close-button">
-      <Button kind="plain-faint" on:click={close}>
+      <Button kind="plain-faint" on:click={() => isOpen = false}>
         <Icon name="close" />
       </Button>
     </div>
