@@ -24,7 +24,7 @@
 
 <dialog
   class="leo-dialog"
-  class:mobile={size == 'mobile'}
+  class:mobile={size === 'mobile'}
   class:modal
   bind:this={dialog}
   on:close={close}

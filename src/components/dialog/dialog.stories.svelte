@@ -7,6 +7,7 @@
 
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
+  import Alert from '../alert/alert.svelte'
 </script>
 
 <Meta
@@ -34,6 +35,12 @@
         est et viverra massa enim aliquam. Volutpat tristique id mi blandit
         interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat.
         Sit mauris, orci diam in habitasse nec dolor odio pharetra.
+
+        <div class="alert-container">
+          <Alert>
+            <div>This is an info box</div>
+          </Alert>
+        </div>
       </div>
       <div slot="actions">
         <Button kind="outline">Secondary</Button>
@@ -43,3 +50,9 @@
   </div>
 </Template>
 <Story name="Default" />
+
+<style>
+  .alert-container {
+    margin-top: var(--leo-spacing-16);
+  }
+</style>
