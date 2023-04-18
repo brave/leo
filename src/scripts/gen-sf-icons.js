@@ -3,6 +3,10 @@
  * dependencies which require people to manually install some packages on OSX,
  * which is a bit painful.
  *
+ * Note: This script requires paper-jsdom to be installed. It's not listed as
+ * an optional peer dependency because `npm install` installs optional peer
+ * dependencies...
+ *
  * As a workaround, we've created the leo-sf-symbols repository which contains
  * prebuilt SF Symbols. The script is include in Leo so you can **choose** to
  * use it to build them yourself, and to make the leo-sf-symbols repository as
