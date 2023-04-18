@@ -16,7 +16,8 @@ const { CompoundPath } = paper
 paper.setup()
 
 const TEMPLATE_PATH = path.join(__dirname, 'icons', 'sf-icon.svg.tmpl')
-const ICONS_FOLDER = process.env['ICONS_FOLDER'] || path.join(__dirname, '../../icons')
+const ICONS_FOLDER =
+  process.env['ICONS_FOLDER'] || path.join(__dirname, '../../icons')
 const OUTPUT_FOLDER = process.env['OUTPUT_FOLDER'] || 'icons-sf'
 
 function processIcon(template, svgContents) {
@@ -64,4 +65,4 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
       })
   })
 
-  module.exports.processIcon = processIcon
+module.exports.processIcon = processIcon
