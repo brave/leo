@@ -39,7 +39,6 @@
     "css-tree": "2.3.1",
     "figma-api-exporter": "github:brave/figma-api-exporter#775a17babce35ed165936142caf5c5dca3490395",
     "jsdom": "21.1.0",
-    "paper": "0.12.17",
     "postcss": "8.4.21",
     "postcss-js": "4.0.1",
     "prettier": "2.8.4",
@@ -54,6 +53,7 @@
     "ts-jest": "29.0.5"
   },
   "peerDependencies": {
+    "paper-jsdom-canvas": ">= 0.12.17",
     "react": ">= 16.0.0",
     "typescript": ">= 4.7.0"
   },
@@ -62,6 +62,9 @@
       "optional": true
     },
     "react": {
+      "optional": true
+    },
+    "paper-jsdom-canvas": {
       "optional": true
     }
   },
