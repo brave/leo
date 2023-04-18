@@ -1,0 +1,23 @@
+name: Update SF Symbols
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+
+    steps:
+    - uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.LEO_SF_SYMBOLS_ACCESS_TOKEN }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'brave',
+            repo: 'leo-sf-symbols',
+            workflow_id: 'update.yml',
+            ref: 'main'
+          })
