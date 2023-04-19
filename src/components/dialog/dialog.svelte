@@ -18,6 +18,7 @@
   }
 
   const close = () => {
+    isOpen = false
     dispatch('close')
   }
 </script>

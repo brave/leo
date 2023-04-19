@@ -41,6 +41,8 @@
     const toggle = document.querySelector('leo-toggle')
     const toggleButton = document.querySelector('#toggle-button')
     const collapse = document.querySelector('leo-collapse')
+    const dialogButton = document.querySelector('#dialog-button')
+    const dialog = document.querySelector('leo-dialog')
 
     clickable.addEventListener('click', () => {
       count += 10
@@ -72,6 +74,11 @@
     toggle.addEventListener('toggle', toggled)
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
+    dialogButton.addEventListener('click', () => {
+      dialog.isOpen = true
+      dialogButton.isDisabled = true
+    })
+    dialog.addEventListener('close', () => dialogButton.isDisabled = false)
   </script>
   <div class="component-container">
     <leo-alertcenter></leo-alertcenter>
@@ -96,7 +103,8 @@
         <leo-button kind="tertiary">Cancel</leo-button>
       </div>
     </leo-alert>
-    <leo-dialog>
+    <leo-button id="dialog-button">Show Dialog</leo-button>
+    <leo-dialog showclose>
       <span slot="title">This is the title</span>
       <span slot="subtitle">This is the subtitle</span>
       <div>
