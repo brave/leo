@@ -8,7 +8,7 @@
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
   import Alert from '../alert/alert.svelte'
-  import './dialogHelper.svelte'
+  import './dialogHelpers'
 
   let isOpen = false
 </script>
