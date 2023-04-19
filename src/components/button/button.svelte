@@ -82,6 +82,7 @@
 <style lang="scss">
   :host {
     display: inline-block;
+    flex-grow: 1;
   }
   :host button {
     width: 100%;

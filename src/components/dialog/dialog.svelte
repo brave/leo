@@ -94,8 +94,6 @@
 />
 
 <style lang="scss">
-  :host {
-  }
 
   .leo-dialog {
     position: relative;
@@ -156,23 +154,20 @@
     margin-top: var(--leo-spacing-32);
   }
 
+  :global .leo-dialog.mobile .actions ::slotted(*),
   :global .leo-dialog.mobile .actions div[slot='actions'] {
     flex-direction: column;
     align-items: stretch;
     justify-content: end;
   }
 
-  :global ::slotted(actions),
+  :global .leo-dialog .actions ::slotted(*),
   :global .leo-dialog div[slot='actions'] {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: stretch;
     gap: var(--leo-spacing-16);
-  }
-
-  :global .leo-dialog div[slot='actions'] > * {
-    flex: 1;
   }
 
   .leo-dialog .title-row {
