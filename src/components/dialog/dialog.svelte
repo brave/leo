@@ -8,7 +8,8 @@
   export let showClose = false
   export let showBack = false
   export let size: 'mobile' | 'normal' = 'normal'
-  export let cancellable = true
+  export let escapeCloses = true
+  export let backdropClickCloses = true
 
   const dispatch = createEventDispatcher()
 
@@ -30,9 +31,9 @@
   class:modal
   bind:this={dialog}
   on:close={close}
-  on:cancel={e => {
-    // If the dialog isn't cancellable, stop it from being closed via escape.
-    if (!cancellable) e.preventDefault()
+  on:cancel={(e) => {
+    // Potentially stop the dialog being closed by the escape key
+    if (!escapeCloses) e.preventDefault()
   }}
 >
   <div class="title-row">
@@ -49,7 +50,7 @@
   </div>
   {#if showClose}
     <div class="close-button">
-      <Button kind="plain-faint" on:click={() => isOpen = false}>
+      <Button kind="plain-faint" on:click={() => (isOpen = false)}>
         <Icon name="close" />
       </Button>
     </div>
@@ -68,6 +69,20 @@
     </div>
   {/if}
 </dialog>
+
+<svelte:window
+  on:click|capture={(e) => {
+    const rect = dialog.getBoundingClientRect()
+    const clickedOutside =
+      e.clientX < rect.x ||
+      e.clientY < rect.y ||
+      e.clientX > rect.x + rect.width ||
+      e.clientY > rect.y + rect.height
+    if (isOpen && clickedOutside && backdropClickCloses) {
+      close()
+    }
+  }}
+/>
 
 <style lang="scss">
   :host {
