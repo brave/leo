@@ -9,6 +9,8 @@
   import Button from '../button/button.svelte'
   import Alert from '../alert/alert.svelte'
   import './dialogHelper.svelte'
+
+  let isOpen = false
 </script>
 
 <Meta
@@ -16,8 +18,8 @@
   component={Dialog}
   argTypes={{
     isOpen: {
-      control: 'boolean',
-      defaultValue: true
+      control: 'none',
+      defaultValue: false
     },
     size: {
       control: 'select',
@@ -27,8 +29,9 @@
 />
 
 <Template let:args>
+  <Button isDisabled={isOpen} on:click={() => (isOpen = true)}>Show Dialog</Button>
   <div style={getStyleFromArgs(args)}>
-    <Dialog {...getNonStyleArgs(args)}>
+    <Dialog {...getNonStyleArgs(args)} bind:isOpen>
       <div slot="title">This is the title</div>
       <div slot="subtitle">This is the subtitle</div>
       <div>

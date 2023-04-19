@@ -10,7 +10,7 @@
   <slot />
 </div>
 
-<!-- <div class="layout" data-theme="light">
+<div class="layout" data-theme="light">
   <h2>Light</h2>
   <slot />
 </div>
@@ -18,7 +18,7 @@
 <div class="layout" data-theme="dark">
   <h2>Dark</h2>
   <slot />
-</div> -->
+</div>
 
 <style>
   .layout {
