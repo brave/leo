@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
+  import { fade, blur, scale } from 'svelte/transition'
 
   export let isOpen = false
   export let modal = true
@@ -10,13 +11,13 @@
   export let size: 'mobile' | 'normal' = 'normal'
   export let escapeCloses = true
   export let backdropClickCloses = true
+  export let animate = true
 
   const dispatch = createEventDispatcher()
 
   let dialog: HTMLDialogElement
   $: {
-    if (!isOpen && dialog?.open) dialog?.close()
-    if (isOpen && !dialog?.open && dialog?.getRootNode()) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
 
   const close = () => {
@@ -25,53 +26,61 @@
   }
 </script>
 
-<dialog
-  class="leo-dialog"
-  class:mobile={size === 'mobile'}
-  class:modal
-  bind:this={dialog}
-  on:close={close}
-  on:cancel={(e) => {
-    // Potentially stop the dialog being closed by the escape key
-    if (!escapeCloses) e.preventDefault()
-  }}
->
-  <div class="title-row">
-    {#if showBack}
-      <div class="back-button">
-        <Button kind="plain-faint" on:click={() => dispatch('back')}>
-          <Icon name="arrow-left" />
+{#if isOpen}
+  <dialog
+    transition:scale={{ duration: animate ? 60 : 0, start: 0.8 }}
+    class="leo-dialog"
+    class:mobile={size === 'mobile'}
+    class:modal
+    bind:this={dialog}
+    on:close={close}
+    on:cancel={(e) => {
+      // We handle the modal being opened by adding/removing from the DOM - this
+      // let's the animations work properly.
+      e.preventDefault()
+
+      if (escapeCloses) close()
+    }}
+  >
+    <div class="title-row">
+      {#if showBack}
+        <div class="back-button">
+          <Button kind="plain-faint" on:click={() => dispatch('back')}>
+            <Icon name="arrow-left" />
+          </Button>
+        </div>
+      {/if}
+      <div class="title">
+        <slot name="title" />
+      </div>
+    </div>
+    {#if showClose}
+      <div class="close-button">
+        <Button kind="plain-faint" on:click={close}>
+          <Icon name="close" />
         </Button>
       </div>
     {/if}
-    <div class="title">
-      <slot name="title" />
+    {#if $$slots.subtitle}
+      <div class="subtitle">
+        <slot name="subtitle" />
+      </div>
+    {/if}
+    <div class="body">
+      <slot />
     </div>
-  </div>
-  {#if showClose}
-    <div class="close-button">
-      <Button kind="plain-faint" on:click={() => (isOpen = false)}>
-        <Icon name="close" />
-      </Button>
-    </div>
-  {/if}
-  {#if $$slots.subtitle}
-    <div class="subtitle">
-      <slot name="subtitle" />
-    </div>
-  {/if}
-  <div class="body">
-    <slot />
-  </div>
-  {#if $$slots.actions}
-    <div class="actions">
-      <slot name="actions" />
-    </div>
-  {/if}
-</dialog>
+    {#if $$slots.actions}
+      <div class="actions">
+        <slot name="actions" />
+      </div>
+    {/if}
+  </dialog>
+{/if}
 
 <svelte:window
   on:click|capture={(e) => {
+    if (!dialog) return
+
     const rect = dialog.getBoundingClientRect()
     const clickedOutside =
       e.clientX < rect.x ||
