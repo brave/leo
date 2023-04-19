@@ -29,7 +29,9 @@
 />
 
 <Template let:args>
-  <Button isDisabled={isOpen} on:click={() => (isOpen = true)}>Show Dialog</Button>
+  <Button isDisabled={isOpen} on:click={() => (isOpen = true)}
+    >Show Dialog</Button
+  >
   <div style={getStyleFromArgs(args)}>
     <Dialog {...getNonStyleArgs(args)} bind:isOpen>
       <div slot="title">This is the title</div>

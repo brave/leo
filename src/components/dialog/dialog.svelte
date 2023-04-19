@@ -94,7 +94,6 @@
 />
 
 <style lang="scss">
-
   .leo-dialog {
     position: relative;
 
