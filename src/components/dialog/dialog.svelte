@@ -8,6 +8,7 @@
   export let showClose = false
   export let showBack = false
   export let size: 'mobile' | 'normal' = 'normal'
+  export let cancellable = true
 
   const dispatch = createEventDispatcher()
 
@@ -29,6 +30,10 @@
   class:modal
   bind:this={dialog}
   on:close={close}
+  on:cancel={e => {
+    // If the dialog isn't cancellable, stop it from being closed via escape.
+    if (!cancellable) e.preventDefault()
+  }}
 >
   <div class="title-row">
     {#if showBack}
