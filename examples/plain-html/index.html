@@ -31,14 +31,16 @@
     import { showAlert } from './leo/alertCenter.js'
     import './leo/icon.js'
     import './leo/radioButton.js'
+    import './leo/dialog.js'
+    import './shared/dialogHelpers.js'
 
-      let count = 10
-      const clickable = document.getElementById('clickable')
-      const ring = document.querySelector('leo-progressring')
-      const bar = document.querySelector('leo-progressbar')
-      const toggle = document.querySelector('leo-toggle')
-      const toggleButton = document.querySelector('#toggle-button')
-      const collapse = document.querySelector('leo-collapse')
+    let count = 10
+    const clickable = document.getElementById('clickable')
+    const ring = document.querySelector('leo-progressring')
+    const bar = document.querySelector('leo-progressbar')
+    const toggle = document.querySelector('leo-toggle')
+    const toggleButton = document.querySelector('#toggle-button')
+    const collapse = document.querySelector('leo-collapse')
 
     clickable.addEventListener('click', () => {
       count += 10
@@ -94,6 +96,26 @@
         <leo-button kind="tertiary">Cancel</leo-button>
       </div>
     </leo-alert>
+    <leo-dialog isOpen showClose>
+      <span slot="title">This is the title</span>
+      <span slot="subtitle">This is the subtitle</span>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra
+        est et viverra massa enim aliquam. Volutpat tristique id mi blandit
+        interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat.
+        Sit mauris, orci diam in habitasse nec dolor odio pharetra.
+
+        <div class="alert-container">
+          <Alert>
+            <div>This is an info box</div>
+          </Alert>
+        </div>
+      </div>
+      <div slot="actions">
+        <leo-button kind="outline">Secondary</leo-button>
+        <leo-button kind="filled">Primary</leo-button>
+      </div>
+    </leo-dialog>
   </div>
 </body>
 

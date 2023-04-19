@@ -22,6 +22,7 @@ for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
 
 inputs.push('./src/components/svelte-react.ts')
 inputs.push('./src/components/svelte-web.ts')
+inputs.push('./src/components/dialog/dialogHelpers.ts')
 
 export default {
   input: inputs,

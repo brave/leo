@@ -14,7 +14,7 @@
   let dialog: HTMLDialogElement
   $: {
     if (!isOpen && dialog?.open) dialog?.close()
-    if (isOpen && !dialog?.open && dialog?.parentElement) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.getRootNode()) dialog?.showModal()
   }
 
   const close = () => {
