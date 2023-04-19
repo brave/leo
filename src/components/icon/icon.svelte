@@ -16,7 +16,8 @@
 </script>
 
 <script lang="ts">
-  export let name: string = undefined
+  import type { IconName } from '../../../icons/meta'
+  export let name: IconName = undefined
   export let forceColor: boolean = false
   let hasColor =
     name?.endsWith('-color') || name?.startsWith('Country=') || forceColor

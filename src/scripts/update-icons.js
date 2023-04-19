@@ -115,9 +115,23 @@ const generateMeta = () => {
     updatedAt: Date.now(),
     icons
   }
+
+  const stringified = JSON.stringify(meta, null, 2)
+
+  // Write meta.js
   fs.writeFileSync(
     path.join(FINAL_FOLDER, 'meta.js'),
-    `export default ${JSON.stringify(meta, null, 2)}`
+    `export default ${stringified}`
+  )
+
+  // Write meta.d.ts
+  fs.writeFileSync(
+    path.join(FINAL_FOLDER, 'meta.d.ts'),
+    `import { StringWithAutoComplete } from '../src/types/string'
+
+type Meta = ${stringified}
+export default Meta
+export type IconName = StringWithAutoComplete<keyof Meta['icon']>`
   )
 }
 
