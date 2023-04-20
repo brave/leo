@@ -1,0 +1,16 @@
+# Icons required for Leo Components to function properly.
+leo_required_icons = [
+    # Checkbox
+    "checkbox-checked.svg",
+    "checkbox-unchecked.svg",
+
+    # Radio
+    "radio-checked.svg",
+    "radio-unchecked.svg",
+
+    # Alert
+    "info-filled.svg",
+    "warning-circle-filled.svg",
+    "warning-triangle-filled.svg",
+    "check-circle-filled.svg"
+]
