@@ -48,6 +48,7 @@
   .leoIcon {
     --icon-width: var(--leo-icon-size, 24px);
     --icon-height: var(--leo-icon-size, 24px);
+    --icon-color: var(--leo-icon-color, currentColor);
 
     width: var(--icon-width);
     height: var(--icon-height);
@@ -61,7 +62,7 @@
     /* Non color icons are set via a mask-image, so we can change the color
      * by setting the background */
     & .icon:not(.color) {
-      background: currentColor;
+      background: var(--icon-color);
       -webkit-mask-image: var(--icon-url);
       mask-image: var(--icon-url);
       mask-repeat: no-repeat;
