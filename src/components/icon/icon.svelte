@@ -1,17 +1,16 @@
 <script context="module" lang="ts">
-  import { writable } from "svelte/store"
-
+  import { writable } from 'svelte/store'
 
   let lastIconBasePath = '/icons'
   let iconBasePath = writable(lastIconBasePath)
 
-
   export const setIconBasePath = (basePath: string) => {
-    lastIconBasePath = basePath;
+    lastIconBasePath = basePath
     iconBasePath.set(basePath)
   }
 
-  const getIconUrl = (basePath: string, name: string) => `${basePath}/${name}.svg`
+  const getIconUrl = (basePath: string, name: string) =>
+    `${basePath}/${name}.svg`
 
   // Not actually used by the component, but used to preload SVGs.
   const svgCache = {}
@@ -28,7 +27,7 @@
 <script lang="ts">
   export let name: string = undefined
   export let forceColor: boolean = false
-  let hasColor =
+  $: hasColor =
     name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
 </script>
 
