@@ -1,5 +1,5 @@
 export default {
-  'updatedAt': 1680736195879,
+  'updatedAt': 1681946341341,
   'icons': {
     '$pac-color': '$pac-color',
     '0xbtc-color': '0xbtc-color',
@@ -477,6 +477,8 @@ export default {
     'browser-mobile-tab-new': 'browser-mobile-tab-new',
     'browser-mobile-tab-ntp': 'browser-mobile-tab-ntp',
     'browser-mobile-tab': 'browser-mobile-tab',
+    'browser-mobile-tabs-bottom': 'browser-mobile-tabs-bottom',
+    'browser-mobile-tabs-top': 'browser-mobile-tabs-top',
     'browser-mobile-tabs': 'browser-mobile-tabs',
     'browser-notification': 'browser-notification',
     'browser-ntp-widget': 'browser-ntp-widget',
@@ -1188,6 +1190,7 @@ export default {
     'news-worldnews': 'news-worldnews',
     'newspaper': 'newspaper',
     'nexo-color': 'nexo-color',
+    'nft': 'nft',
     'ngc-color': 'ngc-color',
     'nio-color': 'nio-color',
     'nlc2-color': 'nlc2-color',
@@ -1197,6 +1200,7 @@ export default {
     'note': 'note',
     'notebook': 'notebook',
     'notification-add': 'notification-add',
+    'notification-dot': 'notification-dot',
     'notification-off': 'notification-off',
     'notification-paused': 'notification-paused',
     'notification': 'notification',
