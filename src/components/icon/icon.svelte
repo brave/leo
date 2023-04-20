@@ -1,17 +1,27 @@
 <script context="module" lang="ts">
-  let iconBasePath = '/icons'
-  export const setIconBasePath = (basePath: string) => (iconBasePath = basePath)
+  import { writable } from "svelte/store"
 
-  const getIconUrl = (name: string) => `${iconBasePath}/${name}.svg`
+
+  let lastIconBasePath = '/icons'
+  let iconBasePath = writable(lastIconBasePath)
+
+
+  export const setIconBasePath = (basePath: string) => {
+    lastIconBasePath = basePath;
+    iconBasePath.set(basePath)
+  }
+
+  const getIconUrl = (basePath: string, name: string) => `${basePath}/${name}.svg`
 
   // Not actually used by the component, but used to preload SVGs.
   const svgCache = {}
   export const preloadIcon = (name: string) => {
     const image = new Image()
-    image.src = getIconUrl(name)
+    image.src = getIconUrl(lastIconBasePath, name)
+    image.onerror = () => delete svgCache[image.src]
 
     // Store the image in our cache, so it isn't garbage collected.
-    svgCache[name] = image
+    svgCache[image.src] = image
   }
 </script>
 
@@ -28,7 +38,7 @@
       <div
         class="icon"
         class:color={hasColor}
-        style:--icon-url={`url('${getIconUrl(name)}')`}
+        style:--icon-url={`url('${getIconUrl($iconBasePath, name)}')`}
       />
     {/if}
   </slot>
