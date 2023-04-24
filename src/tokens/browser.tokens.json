@@ -66,7 +66,7 @@
       "icon-tint": {
         "description": "",
         "type": "color",
-        "value": "#b1b7cdb3",
+        "value": "#b1b7cdcc",
         "blendMode": "normal",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
