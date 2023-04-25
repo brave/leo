@@ -136,13 +136,25 @@ export type IconName = StringWithAutoComplete<keyof Meta['icon']>`
 }
 
 const exporter = figmaApiExporter(process.env.FIGMA_API_TOKEN)
-
+const fileId = 'g8Z0q6TMPYDq6zXh9Y7LWD'
 exporter
   .getSvgs({
-    fileId: 'g8Z0q6TMPYDq6zXh9Y7LWD',
+    fileId,
     canvas: '🔮 Icons'
   })
   .then(async (svgsData) => {
+    const map = new Map()
+    for (const svg of svgsData.svgs) {
+      if (!map.has(svg.name))
+        map.set(svg.name, [])
+      map.get(svg.name).push(svg)
+    }
+
+    for (const [name, entries] of map.entries()) {
+      if (entries.length === 1) continue
+      console.warn(`Found icon with duplicated name '${name}'x${entries.length}
+${entries.map(e => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}`).join('\n')}`);
+    }
     await exporter.downloadSvgs({
       saveDirectory: RAW_FOLDER,
       svgsData: svgsData.svgs,

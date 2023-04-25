@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 type Meta = {
-  "updatedAt": 1682463179355,
+  "updatedAt": 1682464726831,
   "icons": {
     "$pac-color": "$pac-color",
     "0xbtc-color": "0xbtc-color",
