@@ -145,15 +145,16 @@ exporter
   .then(async (svgsData) => {
     const map = new Map()
     for (const svg of svgsData.svgs) {
-      if (!map.has(svg.name))
-        map.set(svg.name, [])
+      if (!map.has(svg.name)) map.set(svg.name, [])
       map.get(svg.name).push(svg)
     }
 
     for (const [name, entries] of map.entries()) {
       if (entries.length === 1) continue
       console.warn(`Found icon with duplicated name '${name}'x${entries.length}
-${entries.map(e => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}`).join('\n')}`);
+${entries
+  .map((e) => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}`)
+  .join('\n')}`)
     }
     await exporter.downloadSvgs({
       saveDirectory: RAW_FOLDER,
