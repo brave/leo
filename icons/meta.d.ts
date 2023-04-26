@@ -1859,4 +1859,4 @@ type Meta = {
   }
 }
 export default Meta
-export type IconName = StringWithAutoComplete<keyof Meta['icon']>
+export type IconName = StringWithAutoComplete<keyof Meta['icons']>

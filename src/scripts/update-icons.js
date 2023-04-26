@@ -131,7 +131,7 @@ const generateMeta = () => {
 
 type Meta = ${stringified}
 export default Meta
-export type IconName = StringWithAutoComplete<keyof Meta['icon']>`
+export type IconName = StringWithAutoComplete<keyof Meta['icons']>`
   )
 }
 
@@ -149,13 +149,24 @@ exporter
       map.get(svg.name).push(svg)
     }
 
+    let duplicatesWarning = ''
     for (const [name, entries] of map.entries()) {
       if (entries.length === 1) continue
-      console.warn(`Found icon with duplicated name '${name}'x${entries.length}
-${entries
-  .map((e) => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}`)
-  .join('\n')}`)
+      duplicatesWarning += `Found icon with duplicated name '${name}'x${
+        entries.length
+      }
+      ${entries.map(
+        (e) => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}\n`
+      )}`
     }
+
+    // Note: This string is used as the Github PR body, so it should be valid markdown.
+    if (duplicatesWarning) {
+      console.warn(`### Duplicate Icons:
+
+${duplicatesWarning}`)
+    }
+
     await exporter.downloadSvgs({
       saveDirectory: RAW_FOLDER,
       svgsData: svgsData.svgs,
