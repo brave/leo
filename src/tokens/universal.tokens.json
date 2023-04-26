@@ -2988,6 +2988,22 @@
           }
         }
       }
+    },
+    "🕶️ private": {
+      "container": {
+        "highlight": {
+          "description": "",
+          "type": "color",
+          "value": "#110736ff",
+          "blendMode": "normal",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:2e3dc16adf9771128b71276e286284ab6e3a6e5a,",
+              "exportKey": "color"
+            }
+          }
+        }
+      }
     }
   },
   "gradient": {
