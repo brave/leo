@@ -153,6 +153,14 @@
     margin-top: var(--leo-spacing-32);
   }
 
+  /** The below :global selectors are so that Svelte doesn't remove the classes
+    * at compile time (as the slotted content is put in via the parent).
+    * Note: We have to handle the case where we're in a web component (via the
+    * ::slotted selector) and the case where we're in a Svelte component (via
+    * the div[slot='actions'] selector).
+    *
+    * The :global selector doesn't seem to be able to handle nesting, so we have
+    * two separate selectors for mobile & non-mobile layouts */
   :global .leo-dialog.mobile .actions ::slotted(*),
   :global .leo-dialog.mobile .actions div[slot='actions'] {
     flex-direction: column;
