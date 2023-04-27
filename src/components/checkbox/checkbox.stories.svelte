@@ -18,6 +18,11 @@
       type: 'string',
       description: 'The gap between the label and the checkbox'
     },
+    '--leo-checkbox-flex-direction': {
+      control: 'select',
+      description: 'The flex direction of the label/checkbox',
+      options: ['row', 'row-reverse', 'column', 'column-reverse']
+    },
     '--leo-checkbox-checked-color': {
       control: 'color',
       type: 'string',

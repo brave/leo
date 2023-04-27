@@ -28,6 +28,11 @@
       type: 'string',
       description: 'The gap between the label and the checkbox'
     },
+    '--leo-radiobutton-flex-direction': {
+      control: 'select',
+      description: 'The flex direction of the label/button',
+      options: ['row', 'row-reverse', 'column', 'column-reverse']
+    },
     '--leo-radiobutton-checked-color': {
       control: 'color',
       type: 'string',
