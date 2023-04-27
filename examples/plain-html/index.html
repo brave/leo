@@ -31,14 +31,18 @@
     import { showAlert } from './leo/alertCenter.js'
     import './leo/icon.js'
     import './leo/radioButton.js'
+    import './leo/dialog.js'
+    import './shared/dialogHelpers.js'
 
-      let count = 10
-      const clickable = document.getElementById('clickable')
-      const ring = document.querySelector('leo-progressring')
-      const bar = document.querySelector('leo-progressbar')
-      const toggle = document.querySelector('leo-toggle')
-      const toggleButton = document.querySelector('#toggle-button')
-      const collapse = document.querySelector('leo-collapse')
+    let count = 10
+    const clickable = document.getElementById('clickable')
+    const ring = document.querySelector('leo-progressring')
+    const bar = document.querySelector('leo-progressbar')
+    const toggle = document.querySelector('leo-toggle')
+    const toggleButton = document.querySelector('#toggle-button')
+    const collapse = document.querySelector('leo-collapse')
+    const dialogButton = document.querySelector('#dialog-button')
+    const dialog = document.querySelector('leo-dialog')
 
     clickable.addEventListener('click', () => {
       count += 10
@@ -70,6 +74,11 @@
     toggle.addEventListener('toggle', toggled)
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
+    dialogButton.addEventListener('click', () => {
+      dialog.isOpen = true
+      dialogButton.isDisabled = true
+    })
+    dialog.addEventListener('close', () => dialogButton.isDisabled = false)
   </script>
   <div class="component-container">
     <leo-alertcenter></leo-alertcenter>
@@ -94,6 +103,27 @@
         <leo-button kind="tertiary">Cancel</leo-button>
       </div>
     </leo-alert>
+    <leo-button id="dialog-button">Show Dialog</leo-button>
+    <leo-dialog showclose>
+      <span slot="title">This is the title</span>
+      <span slot="subtitle">This is the subtitle</span>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra
+        est et viverra massa enim aliquam. Volutpat tristique id mi blandit
+        interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat.
+        Sit mauris, orci diam in habitasse nec dolor odio pharetra.
+
+        <div class="alert-container">
+          <Alert>
+            <div>This is an info box</div>
+          </Alert>
+        </div>
+      </div>
+      <div slot="actions">
+        <leo-button kind="outline">Secondary</leo-button>
+        <leo-button kind="filled">Primary</leo-button>
+      </div>
+    </leo-dialog>
   </div>
 </body>
 

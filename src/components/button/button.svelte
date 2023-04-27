@@ -82,6 +82,7 @@
 <style lang="scss">
   :host {
     display: inline-block;
+    flex-grow: 1;
   }
   :host button {
     width: 100%;
@@ -103,6 +104,7 @@
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
+    padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
 
     &:not(:disabled) {
       &:hover,
@@ -145,27 +147,32 @@
   .leoButton.isTiny {
     --icon-size: 12px;
     font: var(--leo-font-components-button-small);
-    padding: 6px 10px;
+    --padding-y: 6px;
+    --padding-x: 10px;
   }
   .leoButton.isSmall {
     --icon-size: 20px;
     font: var(--leo-font-components-button-small);
-    padding: 8px 14px;
+    --padding-y: 8px;
+    --padding-x: 14px;
   }
   .leoButton.isMedium {
     --icon-size: 24px;
     font: var(--leo-font-components-button-default);
-    padding: 10px 16px;
+    --padding-y: 10px;
+    --padding-x: 16px;
   }
   .leoButton.isLarge {
     --icon-size: 24px;
     font: var(--leo-font-components-button-large);
-    padding: 12px 20px;
+    --padding-y: 12px;
+    --padding-x: 30px;
   }
   .leoButton.isJumbo {
     --icon-size: 24px;
     font: var(--leo-font-components-button-jumbo);
-    padding: 18px 26px;
+    --padding-y: 18px;
+    --padding-x: 26px;
   }
 
   // Kind Variations
@@ -205,8 +212,7 @@
   }
   .leoButton.isPlain {
     border-radius: 8px;
-    padding-right: 0;
-    padding-left: 0;
+    --padding-x: 0;
     --color: var(--leo-color-text-interactive);
     --color-hover: var(--leo-color-primary-60);
     --color-active: var(--leo-color-primary-90);
@@ -222,8 +228,7 @@
     }
   }
   .leoButton.isPlainFaint {
-    padding-left: 0;
-    padding-right: 0;
+    --padding-x: 0;
     --color: var(--leo-color-gray-60);
     --color-hover: var(--leo-color-gray-70);
     --box-shadow-hover: none;

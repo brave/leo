@@ -63,6 +63,11 @@ export default function registerWebComponent(
   // Note attribute keys, so changes cause us to update our Svelte Component.
   const attributes = Array.from(attributePropMap.keys())
 
+  // We need to handle boolean attributes specially, as the presence/absence of the attribute indicates the value.
+  const boolProperties = new Set(
+    props.filter((p) => typeof c.$$.ctx[c.$$.props[p]] === 'boolean')
+  )
+
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
     // A map of event name to a map of an event listener to a function for
@@ -203,7 +208,12 @@ export default function registerWebComponent(
           },
           set(value) {
             if (reflectToAttributes.has(typeof value)) {
-              this.setAttribute(prop, value)
+              // Boolean attributes are special - presence/absence indicates
+              // value, rather than actual value.
+              if (boolProperties.has(prop)) {
+                if (value) this.setAttribute(prop, '')
+                else this.removeAttribute(prop)
+              } else this.setAttribute(prop, value)
             }
 
             // |.$set| updates the value of a prop. Note: This only works for
@@ -215,8 +225,11 @@ export default function registerWebComponent(
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
+      const prop = attributePropMap.get(name)
+      if (!prop) return
+
       if (oldValue === newValue) return
-      this[name] = newValue
+      this[prop] = boolProperties.has(prop) ? newValue !== null : newValue
     }
 
     addEventListener(event: string, callback: Callback) {
