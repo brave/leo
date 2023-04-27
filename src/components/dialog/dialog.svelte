@@ -95,24 +95,34 @@
 
 <style lang="scss">
   .leo-dialog {
+    --padding: var(
+      --leo-dialog-padding,
+      var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
+        var(--leo-spacing-32)
+    );
+    --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-16));
+    --background: var(
+      --leo-dialog-background,
+      var(--leo-color-container-background)
+    );
+    --color: var(--leo-dialog-color, var(--leo-color-gray-120));
+
     position: relative;
-
-    width: 500px;
-    max-width: calc(100% - var(--leo-spacing-8) * 2);
     margin: auto;
-
     border: none;
 
-    border-radius: var(--leo-radius-16);
+    width: var(--leo-dialog-width, 500px);
+    max-width: calc(100% - var(--leo-spacing-8) * 2);
 
-    color: var(--leo-color-gray-120);
-    background: var(--leo-color-container-background);
-    padding: var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
-      var(--leo-spacing-32);
+    border-radius: var(--border-radius);
+
+    color: var(--color);
+    background: var(--background);
+    padding: var(--padding);
   }
 
   .leo-dialog.mobile {
-    width: 374px;
+    width: var(--leo-dialog-width, 374px);
   }
 
   .leo-dialog:not(.modal) {

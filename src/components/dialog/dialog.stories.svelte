@@ -17,6 +17,28 @@
   title="Dialog"
   component={Dialog}
   argTypes={{
+    '--leo-dialog-width': {
+      type: 'string',
+      description: 'The CSS width of the dialog'
+    },
+    '--leo-dialog-padding': {
+      type: 'string',
+      description: 'The CSS padding of the dialog'
+    },
+    '--leo-dialog-border-radius': {
+      type: 'string',
+      description: 'The border radius of the dialog'
+    },
+    '--leo-dialog-background': {
+      type: 'string',
+      control: 'color',
+      description: 'The background color of the dialog'
+    },
+    '--leo-dialog-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The default text color of the dialog'
+    },
     isOpen: {
       control: 'none',
       defaultValue: false
