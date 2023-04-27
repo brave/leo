@@ -41,11 +41,12 @@ jobs:
           echo modified=$(`git status --porcelain | grep -q *.svg` && echo true || echo false) >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
         if: steps.check-icons.outputs.modified == 'true'
-        add-paths: /icons
-        commit-message: '[Icons]: Update icons from Figma'
-        branch: update-icons
-        delete-branch: true
-        title: '[Icons]: Update icons from Figma'
-        body-path: .update-icons-output
+        uses: peter-evans/create-pull-request@v5
+        with:
+          add-paths: /icons
+          commit-message: '[Icons]: Update icons from Figma'
+          branch: update-icons
+          delete-branch: true
+          title: '[Icons]: Update icons from Figma'
+          body-path: .update-icons-output
