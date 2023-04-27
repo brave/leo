@@ -37,56 +37,54 @@ export const dialogs = writable<AlertInfo[]>([])
 export const dialog = <T>(options: AlertOptions) => {
   ensureDialogHelper()
 
-  let resolve: (result?: T) => void
-  const promise = new Promise((a) => (resolve = a))
-
-  const info = {
-    title: options.title,
-    body: options.body,
-    actions: options.actions,
-    resolve: (result?: T) => {
-      dialogs.update((d) => d.filter((i) => i !== info))
-      resolve(result)
+  const promise = new Promise((accept) => {
+    const info = {
+      title: options.title,
+      body: options.body,
+      actions: options.actions,
+      resolve: (result?: T) => {
+        dialogs.update((d) => d.filter((i) => i !== info))
+        accept(result)
+      }
     }
-  }
-
-  dialogs.update((d) => [...d, info])
+    dialogs.update((d) => [...d, info])
+  })
 
   return promise
 }
 
 interface AlertDialogOptions {
-  okText?: string
+  okText: string
 }
 
-export const alert = (message: string, options?: AlertDialogOptions) =>
+export const alert = (message: string, options: AlertDialogOptions) =>
   dialog({
     title: message,
     actions: [
       {
-        text: options?.okText ?? 'OK'
+        text: options.okText
       }
     ]
   })
 
 interface ConfirmDialogOptions {
-  okText?: string
-  cancelText?: string
+  okText: string
+  cancelText: string
 }
 
-export const confirm = (message: string, options?: ConfirmDialogOptions) =>
+export const confirm = (message: string, options: ConfirmDialogOptions) =>
   dialog({
     title: message,
     actions: [
       {
         result: false,
         kind: 'outline',
-        text: options?.cancelText ?? 'Cancel'
+        text: options.cancelText
       },
       {
         result: true,
         kind: 'filled',
-        text: options?.okText ?? 'OK'
+        text: options.okText
       }
     ]
   }).then((r) => !!r)
