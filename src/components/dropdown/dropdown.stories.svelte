@@ -4,7 +4,11 @@
   import Dropdown from './dropdown.svelte'
 </script>
 
-<Meta title="Dropdown" component={Dropdown} argTypes={{}} />
+<Meta title="Dropdown" component={Dropdown} argTypes={{
+    placeholder: {
+        defaultValue: 'select...'
+    }
+}} />
 
 <Template let:args>
   <div class="container">

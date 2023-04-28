@@ -24,6 +24,7 @@
     background: var(--background);
     padding: var(--padding);
     font: var(--font);
+    min-height: 24px;
 
     border: 1px solid transparent;
 

@@ -4,7 +4,9 @@
   import Control from '../control/control.svelte'
   import { scale } from 'svelte/transition'
 
+  export let placeholder = ''
   export let value: string
+  export let disabled = false
   export let options: string[]
 
   let isOpen = false
@@ -51,10 +53,14 @@
 </script>
 
 <div class="leo-dropdown">
-  <Control on:click={(e) => (isOpen = !isOpen)}>
+  <Control on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}>
     <slot name="left-icon" slot="left-icon" />
-    <button>
-      <span class="value">{value}</span>
+    <button {disabled}>
+      {#if value}
+        <span class="value">{value}</span>
+      {:else}
+        <span class="placeholder">{placeholder}</span>
+      {/if}
     </button>
     <slot name="right-icon" slot="right-icon" />
   </Control>
@@ -95,6 +101,10 @@
 
   .leo-dropdown .value {
     width: 100%;
+  }
+
+  .leo-dropdown .placeholder {
+    color: var(--leo-color-text-secondary);
   }
 
   .leo-dropdown .menu {
