@@ -3,12 +3,12 @@
   import clickOutside from '../../directives/clickOutside'
   import Control from '../control/control.svelte'
 
-  export let placeholder = ''
   export let value: string
   export let options: string[]
 
   let isOpen = false
   let dispatch = createEventDispatcher()
+  let popup: HTMLDivElement
 
   function selectOption(option: string) {
     value = option
@@ -17,6 +17,32 @@
     dispatch('change', {
       value
     })
+  }
+
+  function changeSelection(e: KeyboardEvent) {
+    if (!isOpen || !popup) return
+
+    if (e.code === 'Escape') {
+        isOpen = false;
+        return;
+    }
+
+    let dir = 0
+    if (e.code == "ArrowUp") dir -= 1
+    if (e.code === "ArrowDown") dir += 1
+    if (dir === 0) return
+
+    const children = Array.from(popup.children)
+    let focusedIndex = Array.from(popup.children).findIndex(e => e.matches(':focus-within'))
+    if (focusedIndex === -1) {
+        focusedIndex = 0
+    } else {
+        focusedIndex += dir
+        if (focusedIndex < 0) focusedIndex = children.length - 1
+        if (focusedIndex >= children.length) focusedIndex = 0
+    }
+
+    (children[focusedIndex] as any)?.focus();
   }
 </script>
 
@@ -30,7 +56,11 @@
   </Control>
   <div class="menu">
     {#if isOpen}
-      <div class="popup" use:clickOutside={(e) => (isOpen = false)}>
+      <div
+        class="popup"
+        use:clickOutside={(e) => (isOpen = false)}
+        bind:this={popup}
+      >
         {#each options as option}
           <button class="popup-item" on:click={(e) => selectOption(option)}
             >{option}</button
@@ -40,6 +70,8 @@
     {/if}
   </div>
 </div>
+
+<svelte:window on:keydown={changeSelection}/>
 
 <style lang="scss">
   .leo-dropdown {
