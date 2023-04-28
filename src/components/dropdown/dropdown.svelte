@@ -53,7 +53,7 @@
 </script>
 
 <div class="leo-dropdown">
-  <Control on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}>
+  <Control {disabled} on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}>
     <slot name="left-icon" slot="left-icon" />
     <button {disabled}>
       {#if value}
