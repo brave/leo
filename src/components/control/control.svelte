@@ -31,6 +31,7 @@
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: var(--leo-spacing-8);
 
     &:not([aria-disabled='true']) {

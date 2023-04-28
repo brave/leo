@@ -3,6 +3,7 @@
   import clickOutside from '../../directives/clickOutside'
   import Control from '../control/control.svelte'
   import { scale } from 'svelte/transition'
+  import Icon from '../icon/icon.svelte'
 
   export let placeholder = ''
   export let value: string
@@ -53,7 +54,10 @@
 </script>
 
 <div class="leo-dropdown">
-  <Control {disabled} on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}>
+  <Control
+    {disabled}
+    on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
+  >
     <slot name="left-icon" slot="left-icon" />
     <button {disabled}>
       {#if value}
@@ -62,7 +66,11 @@
         <span class="placeholder">{placeholder}</span>
       {/if}
     </button>
-    <slot name="right-icon" slot="right-icon" />
+    <slot name="right-icon" slot="right-icon">
+      <div class="indicator" class:open={isOpen}>
+        <Icon name="arrow-small-down" />
+      </div>
+    </slot>
   </Control>
   <div class="menu">
     {#if isOpen}
@@ -109,6 +117,15 @@
 
   .leo-dropdown .menu {
     position: relative;
+    z-index: 1000;
+  }
+
+  .leo-dropdown .indicator {
+    transition: transform .2s ease-in-out;
+
+    &.open {
+        transform: rotate(-180deg);
+    }
   }
 
   .leo-dropdown .popup {
