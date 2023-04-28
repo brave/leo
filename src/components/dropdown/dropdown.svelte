@@ -46,6 +46,7 @@
     }
 
     ;(children[focusedIndex] as any)?.focus()
+    e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
 </script>
 
