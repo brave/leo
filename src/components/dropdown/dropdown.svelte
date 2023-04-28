@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../directives/clickOutside'
   import Control from '../control/control.svelte'
+  import { scale } from 'svelte/transition'
 
   export let value: string
   export let options: string[]
@@ -23,26 +24,28 @@
     if (!isOpen || !popup) return
 
     if (e.code === 'Escape') {
-        isOpen = false;
-        return;
+      isOpen = false
+      return
     }
 
     let dir = 0
-    if (e.code == "ArrowUp") dir -= 1
-    if (e.code === "ArrowDown") dir += 1
+    if (e.code == 'ArrowUp') dir -= 1
+    if (e.code === 'ArrowDown') dir += 1
     if (dir === 0) return
 
     const children = Array.from(popup.children)
-    let focusedIndex = Array.from(popup.children).findIndex(e => e.matches(':focus-within'))
+    let focusedIndex = Array.from(popup.children).findIndex((e) =>
+      e.matches(':focus-within')
+    )
     if (focusedIndex === -1) {
-        focusedIndex = 0
+      focusedIndex = 0
     } else {
-        focusedIndex += dir
-        if (focusedIndex < 0) focusedIndex = children.length - 1
-        if (focusedIndex >= children.length) focusedIndex = 0
+      focusedIndex += dir
+      if (focusedIndex < 0) focusedIndex = children.length - 1
+      if (focusedIndex >= children.length) focusedIndex = 0
     }
 
-    (children[focusedIndex] as any)?.focus();
+    ;(children[focusedIndex] as any)?.focus()
   }
 </script>
 
@@ -58,6 +61,7 @@
     {#if isOpen}
       <div
         class="popup"
+        transition:scale={{ duration: 60, start: 0.8 }}
         use:clickOutside={(e) => (isOpen = false)}
         bind:this={popup}
       >
@@ -71,12 +75,13 @@
   </div>
 </div>
 
-<svelte:window on:keydown={changeSelection}/>
+<svelte:window on:keydown={changeSelection} />
 
 <style lang="scss">
   .leo-dropdown {
     --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
     --font: var(--leo-dropdown-font, var(--leo-font-primary-default-regular));
+    --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
 
     font: var(--font);
     cursor: pointer;
@@ -114,6 +119,8 @@
 
   .leo-dropdown .popup-item {
     padding: var(--leo-spacing-16);
+    transition: background var(--transition-duration) ease-in-out,
+      color var(--transition-duration) ease-in-out;
 
     &:hover {
       background: var(--leo-color-container-interactive-background);
