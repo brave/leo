@@ -59,7 +59,7 @@
     on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
   >
     <slot name="left-icon" slot="left-icon" />
-    <button {disabled}>
+    <button class="click-target" {disabled}>
       {#if value}
         <span class="value">{value}</span>
       {:else}
@@ -105,6 +105,10 @@
     button {
       all: unset;
     }
+  }
+
+  .leo-dropdown .click-target {
+    flex: 1;
   }
 
   .leo-dropdown .value {
