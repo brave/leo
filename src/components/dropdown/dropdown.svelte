@@ -125,7 +125,7 @@
   }
 
   .leo-dropdown .indicator {
-    transition: transform 0.2s ease-in-out;
+    transition: transform var(--transition-duration) ease-in-out;
 
     &.open {
       transform: rotate(-180deg);
