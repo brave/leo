@@ -41,7 +41,7 @@
     }
 
     currentValue = value
-    dispatch('changed', { value })
+    dispatch('change', { value })
   }
 </script>
 

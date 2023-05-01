@@ -16,8 +16,14 @@
       gap: 10px;
     }
 
-    .red {
-      color: red;
+    .blur {
+      filter: blur(1px);
+    }
+
+    .leo-option {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
     }
 
   </style>
@@ -39,6 +45,13 @@
     import './shared/dialogHelpers.js'
     import './leo/dropdown.js'
 
+    const countries = {
+      'NZ': 'New Zealand',
+      'AU': 'Australia',
+      'UK': 'United Kingdom',
+      'CA': 'Canada'
+    }
+
     let count = 10
     const clickable = document.getElementById('clickable')
     const ring = document.querySelector('leo-progressring')
@@ -48,6 +61,19 @@
     const collapse = document.querySelector('leo-collapse')
     const dialogButton = document.querySelector('#dialog-button')
     const dialog = document.querySelector('leo-dialog')
+    const radios = document.querySelectorAll('leo-radiobutton[name=options]')
+    const dropdown = document.querySelector('leo-dropdown')
+    const dropdownSelected = document.querySelector('leo-dropdown [slot="value"]')
+
+    function updateSelectedOption(e) {
+      for (const radio of radios)
+        radio.currentValue = e.detail.value
+      dropdown.value = e.detail.value
+      dropdownSelected.innerText = countries[e.detail.value]
+    }
+    dropdown.addEventListener('change', updateSelectedOption)
+    for (const radio of radios)
+      radio.addEventListener('change', updateSelectedOption)
 
     clickable.addEventListener('click', () => {
       count += 10
@@ -96,9 +122,10 @@
     <leo-progressring progress="0.25"></leo-progressring>
     <leo-progressbar progress="0.25"></leo-progressbar>
     <div>
-      <leo-radiobutton name="options" value="foo"></leo-radiobutton>
-      <leo-radiobutton name="options" value="bar"></leo-radiobutton>
-      <leo-radiobutton name="options" value="hello"></leo-radiobutton>
+      <leo-radiobutton name="options" value="NZ"></leo-radiobutton>
+      <leo-radiobutton name="options" value="AU"></leo-radiobutton>
+      <leo-radiobutton name="options" value="UK"></leo-radiobutton>
+      <leo-radiobutton name="options" value="CA"></leo-radiobutton>
     </div>
     <leo-alert mode="full">
       <span slot="title">Hello World</span>
@@ -109,10 +136,13 @@
       </div>
     </leo-alert>
     <leo-button id="dialog-button">Show Dialog</leo-button>
-    <leo-dropdown>
-      <leo-option value="one">One</leo-option>
-      <leo-option>Two</leo-option>
-      <leo-option value="three"><div class="red">Three</div></leo-option>
+    <leo-dropdown placeholder="Select an option...">
+      <leo-icon slot="left-icon" name="flag"></leo-icon>
+      <div id="selectedCountry" slot="value"></div>
+      <leo-option value="NZ">New Zealand</leo-option>
+      <leo-option value="AU">Australia</leo-option>
+      <leo-option value="UK"><div class="blur">United Kingdom</div>(blurred on purpose)</leo-option>
+      <leo-option value="CA">Canada</leo-option>
     </leo-dropdown>
     <leo-dialog showclose>
       <span slot="title">This is the title</span>
