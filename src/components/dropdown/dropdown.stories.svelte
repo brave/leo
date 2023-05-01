@@ -7,6 +7,13 @@
     getStyleFromArgs
   } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
+
+  const countries = {
+    'NZ': 'New Zealand',
+    'AU': 'Australia',
+    'UK': 'United Kingdom',
+    'CA': 'Canada'
+  }
 </script>
 
 <Meta
@@ -76,8 +83,33 @@
   </div>
 </Story>
 
+<Story name="Custom Options" let:args>
+  <div class="container" style={getStyleFromArgs(args)}>
+    <Dropdown
+      value={undefined}
+      {...getNonStyleArgs(args)}
+      options={['NZ', 'AU', 'UK', "CA"]}
+    >
+      <div slot="value" let:value>
+        {countries[value]}
+      </div>
+      <div class="option" slot="option" let:option>
+        <Icon name={`Country=${option}`}/>
+        {option}
+      </div>
+    </Dropdown>
+  </div>
+</Story>
+
 <style>
   .container {
     width: 200px;
+  }
+
+  .option {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
   }
 </style>

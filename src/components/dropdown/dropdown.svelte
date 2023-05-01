@@ -61,9 +61,13 @@
     <slot name="left-icon" slot="left-icon" />
     <button class="click-target" {disabled}>
       {#if value}
-        <span class="value">{value}</span>
+        <slot name="value" {value}>
+          <span class="value">{value}</span>
+        </slot>
       {:else}
-        <span class="placeholder">{placeholder}</span>
+        <slot name="placeholder">
+          <span class="placeholder">{placeholder}</span>
+        </slot>
       {/if}
     </button>
     <slot name="right-icon" slot="right-icon">
@@ -81,9 +85,9 @@
         bind:this={popup}
       >
         {#each options as option}
-          <button class="popup-item" on:click={(e) => selectOption(option)}
-            >{option}</button
-          >
+          <button class="popup-item" on:click={(e) => selectOption(option)}>
+            <slot name="option" {option}>{option}</slot>
+          </button>
         {/each}
       </div>
     {/if}
