@@ -6,29 +6,39 @@
   import Icon from '../icon/icon.svelte'
 
   export let placeholder = ''
-  export let value: string
+  export let value: string = ''
   export let disabled = false
 
-  let isOpen = false
   let dispatch = createEventDispatcher()
+
+  let isOpen = false
   let popup: HTMLDivElement
   let button: HTMLButtonElement
 
+  // Work out what options have been slotted into the control. We need to handle
+  // being in a web-component (via assignedElements) and Sveltes internal
+  // slotting separately.
   $: options = Array.from(
     (
-      popup?.querySelector('.popup slot') as HTMLSlotElement
+      popup?.querySelector('.leo-dropdown-popup slot') as HTMLSlotElement
     )?.assignedElements() ??
-      popup?.querySelectorAll('option') ??
+      popup?.querySelectorAll('.leo-dropdown-popup > *') ??
       []
   )
 
+  // When the options change, we should assign each one a tabindex - this let's
+  // us handle changing the selection with the keyboard.
   $: {
     for (const [option, index] of options.map((o, i) => [o, i] as const)) {
       option.setAttribute('tabindex', (index + 1).toString())
     }
   }
 
-  function selectOption(option: string | EventTarget) {
+  /**
+   * Selects an option from an element
+   * @param option The element containing the option.
+   */
+  function selectOption(option: EventTarget) {
     if (typeof option === 'string') {
       value = option
     } else {
@@ -43,6 +53,10 @@
     })
   }
 
+  /**
+   * Handles changing the currently focused menu element with the up/down arrow.
+   * @param e The KeyboardEvent
+   */
   function changeSelection(e: KeyboardEvent) {
     if (!isOpen || !popup) return
 
@@ -96,7 +110,7 @@
   <div class="menu">
     {#if isOpen}
       <div
-        class="popup"
+        class="leo-dropdown-popup"
         transition:scale={{ duration: 60, start: 0.8 }}
         use:clickOutside={(e) => (isOpen = false)}
         on:keypress={(e) => {
@@ -156,7 +170,7 @@
     }
   }
 
-  .leo-dropdown .popup {
+  .leo-dropdown .leo-dropdown-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
     position: absolute;
@@ -174,8 +188,8 @@
   }
 
   /* Default Styles for Options */
-  :global .leo-dropdown ::slotted(*),
-  :global .leo-dropdown .popup > * {
+  :global .leo-dropdown-popup ::slotted(*),
+  :global .leo-dropdown-popup > * {
     all: unset;
     display: revert;
 
@@ -184,20 +198,20 @@
       color var(--transition-duration) ease-in-out;
   }
 
-  :global .leo-dropdown ::slotted(*:hover),
-  :global .leo-dropdown .popup > *:hover {
+  :global .leo-dropdown-popup ::slotted(*:hover),
+  :global .leo-dropdown-popup > *:hover {
     background: var(--leo-color-container-interactive-background);
     color: var(--leo-color-text-interactive);
   }
 
-  :global .leo-dropdown ::slotted(*:active),
-  :global .leo-dropdown .popup > *:active {
+  :global .leo-dropdown-popup ::slotted(*:active),
+  :global .leo-dropdown-popup > *:active {
     background: var(--leo-color-primary-20);
     color: var(--leo-color-text-interactive);
   }
 
-  :global .leo-dropdown ::slotted(*:focus-visible),
-  :global .leo-dropdown .popup > *:focus-visible {
+  :global .leo-dropdown-popup ::slotted(*:focus-visible),
+  :global .leo-dropdown-popup > *:focus-visible {
     /** Our glow won't be visible if it's outside the parent, so shrink the
         * padding a little bit so the glow fits inside */
     --glow-size: 3px;
