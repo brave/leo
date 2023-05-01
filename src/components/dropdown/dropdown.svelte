@@ -16,7 +16,7 @@
   let button: HTMLButtonElement
 
   // Work out what options have been slotted into the control. We need to handle
-  // being in a web-component (via assignedElements) and Sveltes internal
+  // being in a web-component (via assignedElements) and Svelte's internal
   // slotting separately.
   $: options = Array.from(
     (
@@ -27,7 +27,7 @@
   )
 
   // When the options change, we should assign each one a tabindex - this let's
-  // us handle changing the selection with the keyboard.
+  // us handle changing the selection with the keyboard (tab or arrow keys).
   $: {
     for (const [option, index] of options.map((o, i) => [o, i] as const)) {
       option.setAttribute('tabindex', (index + 1).toString())
@@ -38,14 +38,24 @@
    * Selects an option from an element
    * @param option The element containing the option.
    */
-  function selectOption(option: EventTarget) {
-    if (typeof option === 'string') {
-      value = option
-    } else {
-      const o = option as HTMLUnknownElement
-      value = o.getAttribute('value') ?? o.textContent
-    }
+  function selectOption(e: Event) {
+    // Find the option which was clicked on, if any.
+    const option = options.find((option) => e.composedPath().includes(option))
+
+    // If the event was triggered for something which isn't an option don't fire
+    // a change event.
+    if (!option) return
+
+    // If the option element doesn't have a value, fallback to using the text
+    // content - this allows writing simplified options:
+    // i.e. <o>1</o>
+    value = option.getAttribute('value') ?? option.textContent
+
+    // Close the popup
     isOpen = false
+
+    // focus the button again for accessibility - this makes it easy to quickly
+    // change the selection.
     button.focus()
 
     dispatch('change', {
@@ -60,16 +70,22 @@
   function changeSelection(e: KeyboardEvent) {
     if (!isOpen || !popup) return
 
+    // Handle closing keys
     if (e.code === 'Escape') {
       isOpen = false
       return
     }
 
+    // We allow the user to select options with ArrowUp/ArrowDown as well as
+    // tab/shift+tab.
     let dir = 0
     if (e.code == 'ArrowUp') dir -= 1
     if (e.code === 'ArrowDown') dir += 1
     if (dir === 0) return
 
+    // First, find the currently focusedIndex. If no option is selected, we'll
+    // select the first option. Otherwise, we select the next/previous item (and
+    // wrap around).
     let focusedIndex = options.findIndex((e) => e.matches(':focus-within'))
     if (focusedIndex === -1) {
       focusedIndex = 0
@@ -115,11 +131,9 @@
         use:clickOutside={(e) => (isOpen = false)}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
-          selectOption(e.target)
+          selectOption(e)
         }}
-        on:click={(e) => {
-          selectOption(e.target)
-        }}
+        on:click={selectOption}
         bind:this={popup}
       >
         <slot />
