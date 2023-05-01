@@ -66,6 +66,7 @@
       -webkit-mask-image: var(--icon-url);
       mask-image: var(--icon-url);
       mask-repeat: no-repeat;
+      mask-position: center;
     }
 
     /* Color icons need to be set via a background rather than a mask so we
@@ -73,6 +74,7 @@
     & .icon.color {
       background: var(--icon-url);
       background-repeat: no-repeat;
+      background-position: center;
     }
   }
 </style>
