@@ -1,5 +1,3 @@
-import { tick } from 'svelte'
-
 export default function clickOutside(
   node: HTMLUnknownElement,
   handler: (e: MouseEvent) => void
@@ -11,6 +9,8 @@ export default function clickOutside(
     handler(e)
   }
 
+  // Note: This needs to be inside a `setTimeout` so when this is added via a
+  // click it doesn't handle that same click.
   setTimeout(() => document.addEventListener('click', isClickOutside))
 
   return {

@@ -201,7 +201,12 @@
     border: 1px solid var(--leo-color-divider-subtle);
   }
 
-  /* Default Styles for Options */
+  /**
+   * Default Styles for our dropdown options. The selectors are broken up
+   * because the :global selector doesn't work with Nesting. Each pseudo element
+   * has two selectors: One for when it's inside a Svelte component, and one for
+   * inside a web component.
+   */
   :global .leo-dropdown-popup ::slotted(*),
   :global .leo-dropdown-popup > * {
     all: unset;
