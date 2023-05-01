@@ -4,26 +4,33 @@
   import Control from '../control/control.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
-  import DropdownOption from './dropdownOption.svelte'
-
-  interface Option {
-    value: string | number
-    el: HTMLElement
-  }
 
   export let placeholder = ''
   export let value: string
   export let disabled = false
-  export let options: string[]
 
   let isOpen = false
   let dispatch = createEventDispatcher()
   let popup: HTMLDivElement
-  let optionsSlot: HTMLDivElement
+  let button: HTMLButtonElement
 
-  function selectOption(option: string) {
-    value = option
+  $: options =Array.from(
+      (
+        popup?.querySelector('.popup slot') as HTMLSlotElement
+      )?.assignedElements() ??
+        popup?.querySelectorAll('option') ??
+        []
+    )
+
+  function selectOption(option: string | EventTarget) {
+    if (typeof option === 'string') {
+      value = option
+    } else {
+      const o = option as HTMLUnknownElement
+      value = o.getAttribute('value') ?? o.textContent
+    }
     isOpen = false
+    button.focus()
 
     dispatch('change', {
       value
@@ -43,29 +50,18 @@
     if (e.code === 'ArrowDown') dir += 1
     if (dir === 0) return
 
-    const children = Array.from(popup.children)
-    let focusedIndex = Array.from(popup.children).findIndex((e) =>
-      e.matches(':focus-within')
-    )
+    let focusedIndex = options.findIndex((e) => e.matches(':focus-within'))
     if (focusedIndex === -1) {
       focusedIndex = 0
     } else {
       focusedIndex += dir
-      if (focusedIndex < 0) focusedIndex = children.length - 1
-      if (focusedIndex >= children.length) focusedIndex = 0
+      if (focusedIndex < 0) focusedIndex = options.length - 1
+      if (focusedIndex >= options.length) focusedIndex = 0
     }
 
-    ;(children[focusedIndex] as any)?.focus()
+    ;(options[focusedIndex] as any)?.focus()
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
-
-  $: slot = optionsSlot?.querySelector('slot')
-  $: betterOptions = Array.from(
-    slot?.assignedElements() ?? optionsSlot?.querySelectorAll('option') ?? []
-  ).map((o) => ({
-    value: o.getAttribute('value') ?? o.textContent,
-    el: o
-  }))
 </script>
 
 <div class="leo-dropdown">
@@ -74,7 +70,7 @@
     on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
   >
     <slot name="left-icon" slot="left-icon" />
-    <button class="click-target" {disabled}>
+    <button bind:this={button} class="click-target" {disabled}>
       {#if value}
         <slot name="value" {value}>
           <span class="value">{value}</span>
@@ -92,22 +88,21 @@
     </slot>
   </Control>
   <div class="menu">
-    <div style="display: none" bind:this={optionsSlot}>
-      <slot />
-    </div>
     {#if isOpen}
       <div
         class="popup"
         transition:scale={{ duration: 60, start: 0.8 }}
         use:clickOutside={(e) => (isOpen = false)}
+        on:keypress={(e) => {
+          if (e.code !== 'Enter' && e.code !== 'Space') return
+          selectOption(e.target)
+        }}
+        on:click={(e) => {
+          selectOption(e.target)
+        }}
         bind:this={popup}
       >
-        {#each betterOptions as option}
-          <DropdownOption
-            value={option}
-            on:click={(e) => selectOption(option.value)}
-          />
-        {/each}
+        <slot />
       </div>
     {/if}
   </div>
@@ -170,5 +165,41 @@
     overflow-y: auto;
     overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);
+  }
+
+  /* Default Styles for Options */
+  :global .leo-dropdown ::slotted(*),
+  :global .leo-dropdown .popup > * {
+    all: unset;
+    display: revert;
+
+    padding: var(--leo-spacing-16);
+    transition: background var(--transition-duration) ease-in-out,
+      color var(--transition-duration) ease-in-out;
+  }
+
+  :global .leo-dropdown ::slotted(*:hover),
+  :global .leo-dropdown .popup > *:hover {
+    background: var(--leo-color-container-interactive-background);
+    color: var(--leo-color-text-interactive);
+  }
+
+  :global .leo-dropdown ::slotted(*:active),
+  :global .leo-dropdown .popup > *:active {
+    background: var(--leo-color-primary-20);
+    color: var(--leo-color-text-interactive);
+  }
+
+  :global .leo-dropdown ::slotted(*:focus-visible),
+  :global .leo-dropdown .popup > *:focus-visible {
+    /** Our glow won't be visible if it's outside the parent, so shrink the
+        * padding a little bit so the glow fits inside */
+    --glow-size: 3px;
+    padding: calc(var(--leo-spacing-16) - var(--glow-size));
+    margin: var(--glow-size);
+
+    border-radius: var(--leo-spacing-8);
+    box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      0px 0px 4px 2px #423eee;
   }
 </style>

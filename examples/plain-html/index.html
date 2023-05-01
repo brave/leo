@@ -85,7 +85,7 @@
     })
     dialog.addEventListener('close', () => dialogButton.isDisabled = false)
   </script>
-  <div class="component-container">
+  <leo-option class="component-container">
     <leo-alertcenter></leo-alertcenter>
     <leo-button id="clickable">Click Me</leo-button>
     <leo-collapse title="Handy dandy title">
@@ -110,9 +110,9 @@
     </leo-alert>
     <leo-button id="dialog-button">Show Dialog</leo-button>
     <leo-dropdown>
-      <option>One</option>
-      <option>Two</option>
-      <option><div class="red">Three</div></option>
+      <leo-option tabindex="1" value="one">One</leo-option>
+      <leo-option tabindex="2">Two</leo-option>
+      <leo-option tabindex="3" value="three"><div class="red">Three</div></leo-option>
     </leo-dropdown>
     <leo-dialog showclose>
       <span slot="title">This is the title</span>
