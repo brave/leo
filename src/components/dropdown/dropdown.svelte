@@ -4,6 +4,12 @@
   import Control from '../control/control.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
+  import DropdownOption from './dropdownOption.svelte'
+
+  interface Option {
+    value: string | number
+    el: HTMLElement
+  }
 
   export let placeholder = ''
   export let value: string
@@ -13,6 +19,7 @@
   let isOpen = false
   let dispatch = createEventDispatcher()
   let popup: HTMLDivElement
+  let optionsSlot: HTMLDivElement
 
   function selectOption(option: string) {
     value = option
@@ -51,6 +58,14 @@
     ;(children[focusedIndex] as any)?.focus()
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
+
+  $: slot = optionsSlot?.querySelector('slot')
+  $: betterOptions = Array.from(
+    slot?.assignedElements() ?? optionsSlot?.querySelectorAll('option') ?? []
+  ).map((o) => ({
+    value: o.getAttribute('value') ?? o.textContent,
+    el: o
+  }))
 </script>
 
 <div class="leo-dropdown">
@@ -77,6 +92,9 @@
     </slot>
   </Control>
   <div class="menu">
+    <div style="display: none" bind:this={optionsSlot}>
+      <slot />
+    </div>
     {#if isOpen}
       <div
         class="popup"
@@ -84,10 +102,11 @@
         use:clickOutside={(e) => (isOpen = false)}
         bind:this={popup}
       >
-        {#each options as option}
-          <button class="popup-item" on:click={(e) => selectOption(option)}>
-            <slot name="option" {option}>{option}</slot>
-          </button>
+        {#each betterOptions as option}
+          <DropdownOption
+            value={option}
+            on:click={(e) => selectOption(option.value)}
+          />
         {/each}
       </div>
     {/if}
@@ -151,33 +170,5 @@
     overflow-y: auto;
     overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);
-  }
-
-  .leo-dropdown .popup-item {
-    padding: var(--leo-spacing-16);
-    transition: background var(--transition-duration) ease-in-out,
-      color var(--transition-duration) ease-in-out;
-
-    &:hover {
-      background: var(--leo-color-container-interactive-background);
-      color: var(--leo-color-text-interactive);
-    }
-
-    &:active {
-      background: var(--leo-color-primary-20);
-      color: var(--leo-color-text-interactive);
-    }
-
-    &:focus-visible {
-      /** Our glow won't be visible if it's outside the parent, so shrink the
-        * padding a little bit so the glow fits inside */
-      --glow-size: 3px;
-      padding: calc(var(--leo-spacing-16) - var(--glow-size));
-      margin: var(--glow-size);
-
-      border-radius: var(--leo-spacing-8);
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
-        0px 0px 4px 2px #423eee;
-    }
   }
 </style>

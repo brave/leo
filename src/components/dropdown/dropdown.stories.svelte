@@ -32,7 +32,11 @@
       value={undefined}
       {...getNonStyleArgs(args)}
       options={['one', 'two', 'three']}
-    />
+    >
+    <option value="one"><div class="unholy" style="color: red">One</div></option>
+    <option value="two">Two</option>
+    <option value="one">Three</option>
+  </Dropdown>
   </div>
 </Template>
 
@@ -111,5 +115,10 @@
     flex-direction: row;
     gap: 8px;
     align-items: center;
+  }
+
+  .unholy {
+    color: red;
+    background: purple;
   }
 </style>

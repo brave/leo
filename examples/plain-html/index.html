@@ -16,6 +16,10 @@
       gap: 10px;
     }
 
+    .red {
+      color: red;
+    }
+
   </style>
 </head>
 
@@ -105,6 +109,11 @@
       </div>
     </leo-alert>
     <leo-button id="dialog-button">Show Dialog</leo-button>
+    <leo-dropdown>
+      <option>One</option>
+      <option>Two</option>
+      <option><div class="red">Three</div></option>
+    </leo-dropdown>
     <leo-dialog showclose>
       <span slot="title">This is the title</span>
       <span slot="subtitle">This is the subtitle</span>
