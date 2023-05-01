@@ -14,13 +14,19 @@
   let popup: HTMLDivElement
   let button: HTMLButtonElement
 
-  $: options =Array.from(
-      (
-        popup?.querySelector('.popup slot') as HTMLSlotElement
-      )?.assignedElements() ??
-        popup?.querySelectorAll('option') ??
-        []
-    )
+  $: options = Array.from(
+    (
+      popup?.querySelector('.popup slot') as HTMLSlotElement
+    )?.assignedElements() ??
+      popup?.querySelectorAll('option') ??
+      []
+  )
+
+  $: {
+    for (const [option, index] of options.map((o, i) => [o, i] as const)) {
+      option.setAttribute('tabindex', (index + 1).toString())
+    }
+  }
 
   function selectOption(option: string | EventTarget) {
     if (typeof option === 'string') {
