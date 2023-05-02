@@ -37,6 +37,7 @@
     import './leo/dialog.js'
     import './shared/dialogHelpers.js'
     import './leo/dropdown.js'
+    import './leo/input.js'
 
     const countries = {
       'NZ': 'New Zealand',
@@ -57,6 +58,7 @@
     const radios = document.querySelectorAll('leo-radiobutton[name=options]')
     const dropdown = document.querySelector('leo-dropdown')
     const dropdownSelected = document.querySelector('leo-dropdown [slot="value"]')
+    const input = document.querySelector('leo-input')
 
     function updateSelectedOption(e) {
       for (const radio of radios)
@@ -93,11 +95,16 @@
       toggle.checked = isToggled
       collapse.isOpen = isToggled
       toggleButton.textContent = `Open: ${isToggled}`
+      input.value = toggleButton.textContent
     }
 
     toggle.addEventListener('change', toggled)
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
+    input.addEventListener('input', e => {
+      toggleButton.textContent = e.target.value
+    })
+
     dialogButton.addEventListener('click', () => {
       dialog.isOpen = true
       dialogButton.isDisabled = true
@@ -112,6 +119,9 @@
     </leo-collapse>
     <leo-toggle>Togglable!</leo-toggle>
     <leo-button kind="outline" id="toggle-button"></leo-button>
+    <leo-input value="Leo Button" required showErrors>
+      What does the button say?
+    </leo-input>
     <leo-progressring progress="0.25"></leo-progressring>
     <leo-progressbar progress="0.25"></leo-progressbar>
     <div>

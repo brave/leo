@@ -14,6 +14,7 @@
   export let mode: Mode = 'outline'
 
   export let showFocusOutline: boolean = false
+  export let error = false
 </script>
 
 <label
@@ -23,6 +24,7 @@
   class:filled={mode === 'filled'}
   class:outline={mode !== 'filled'}
   class:focus={showFocusOutline}
+  class:error
   aria-disabled={disabled}
 >
   <div class="label-row">
@@ -73,6 +75,8 @@
     --border-color: transparent;
     --border-color-hover: transparent;
     --border-color-focus: transparent;
+    --border-color-error: var(--leo-color-systemfeedback-error-icon);
+    --border-color-error-hover: var(--leo-color-light-red-50);
 
     display: flex;
     flex-direction: var(--direction);
@@ -95,6 +99,10 @@
         box-shadow: var(--shadow-focus);
         border-color: var(--border-color-focus);
       }
+
+      &.error .container:hover:not(:has(*:focus-visible)) {
+        border-color: var(--border-color-error-hover);
+      }
     }
   }
 
@@ -113,9 +121,7 @@
 
   .leo-control.filled {
     --background: var(--leo-color-container-highlight);
-
     --shadow-hover: var(--leo-effect-elevation-01);
-
     --border-color: transparent;
     --border-color-hover: var(--leo-color-divider-subtle);
   }
@@ -126,6 +132,10 @@
     --border-color: var(--leo-color-divider-strong);
     --border-color-hover: var(--leo-color-gray-30);
     --shadow-hover: var(--leo-effect-elevation-01);
+  }
+
+  .leo-control.error {
+    --border-color: var(--border-color-error);
   }
 
   .leo-control .control {

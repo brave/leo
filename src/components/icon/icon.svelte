@@ -70,7 +70,9 @@
       background: var(--icon-color);
       -webkit-mask-image: var(--icon-url);
       mask-image: var(--icon-url);
+      -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
+      -webkit-mask-position: center;
       mask-position: center;
     }
 
