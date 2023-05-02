@@ -24,7 +24,7 @@
 
   const dispatch = createEventDispatcher()
   function changed(e) {
-    dispatch('changed', {
+    dispatch('change', {
       checked: e.target.checked
     })
   }

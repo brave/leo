@@ -89,6 +89,14 @@ export default function Component() {
   adding/removing props (though I suspect in future we'll have a workaround
   for this 2023-03-29).
 
+
+### Form Controls
+
+It is possible for web components to be set up as form controls. In order for
+this to work properly, we use a couple of heuristics for when to wire them up.
+1. The control must have a `value` or `checked` property
+2. The control **MUST** emit a `change` event when the value which the form submits changes, with the new value at `event.detail.{value|checked}`.
+
 ## React Components
 
 - React Components are a wrapper around the web components.

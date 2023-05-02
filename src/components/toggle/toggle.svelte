@@ -8,7 +8,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  export let on: boolean = false
+  export let checked: boolean = false
   export let disabled: boolean = false
   export let size: Sizes = 'medium'
 
@@ -20,9 +20,9 @@
 
   const dispatch = createEventDispatcher()
   const toggle = (newValue?: boolean) => {
-    if (newValue === undefined) newValue = !on
-    on = newValue
-    dispatch('toggle', { on })
+    if (newValue === undefined) newValue = !checked
+    checked = newValue
+    dispatch('change', { checked })
   }
 </script>
 
@@ -35,8 +35,8 @@
     if (dragOffsetX === 0) {
       toggle()
     } else {
-      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !on) toggle(true)
-      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && on) toggle(false)
+      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !checked) toggle(true)
+      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && checked) toggle(false)
     }
 
     // Reset the dragging attributes.
@@ -67,7 +67,7 @@
     }}
     {disabled}
     role="switch"
-    aria-checked={on}
+    aria-checked={checked}
   >
     <div
       bind:this={thumb}

@@ -31,7 +31,7 @@ const createSlot = (name?: string) => {
     },
 
     // Props changed
-    p() {},
+    p() { },
 
     // Detach
     d(detaching) {
@@ -256,5 +256,58 @@ export default function registerWebComponent(
     }
   }
 
-  customElements.define(name, SvelteWrapper)
+  const formProperty = ['value', 'checked'].find(p => props.includes(p))
+  class SvelteFormControlWrapper extends SvelteWrapper {
+    static formAssociated = true
+    #internals: ElementInternals
+
+    constructor() {
+      super()
+
+      this.#internals = this.attachInternals()
+      this.component.$on('change', e => {
+        const newValue = e.detail[formProperty]
+        const value = this[formProperty]
+        this.#internals.setFormValue(newValue == value ? newValue : null)
+      })
+    }
+
+    get form() {
+      return this.#internals.form
+    }
+
+    get name() {
+      return this.getAttribute('name')
+    }
+
+    set name(value: string) {
+      this.setAttribute('name', value)
+    }
+
+    get type() {
+      return this.localName;
+    }
+
+    get validity() {
+      return this.#internals.validity
+    }
+
+    get validationMessage() {
+      return this.#internals.validationMessage
+    }
+
+    get willValidate() {
+      return this.#internals.willValidate
+    }
+
+    checkValidity() {
+      return this.#internals.checkValidity()
+    }
+
+    reportValidity() {
+      return this.#internals.reportValidity()
+    }
+  }
+
+  customElements.define(name, formProperty ? SvelteFormControlWrapper : SvelteWrapper)
 }
