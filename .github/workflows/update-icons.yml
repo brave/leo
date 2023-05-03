@@ -38,7 +38,7 @@ jobs:
       - name: Check for changes
         id: check-icons
         run: |
-          echo modified=$(`git status --porcelain | grep -q *.svg` && echo true || echo false) >> $GITHUB_OUTPUT
+          echo modified=$(`git status --porcelain | grep -q .svg$` && echo true || echo false) >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         if: steps.check-icons.outputs.modified == 'true'
