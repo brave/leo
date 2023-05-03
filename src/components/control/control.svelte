@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     gap: var(--leo-spacing-8);
 
     &:not([aria-disabled='true']) {
@@ -47,6 +48,10 @@
         box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
+    }
+
+    & .left-icon, .right-icon {
+      --leo-icon-size: 20px;
     }
   }
 
