@@ -14,16 +14,18 @@
     <slot name="label" />
     {#if required}<span class="required-indicator">*</span>{/if}
   </div>
-  <div class="container" aria-disabled={disabled} on:click on:keyup>
-    <div>
-      <slot name="left-icon" />
+  <div class="control">
+    <div class="container" aria-disabled={disabled} on:click on:keyup>
+      <div>
+        <slot name="left-icon" />
+      </div>
+      <slot />
+      <div>
+        <slot name="right-icon" />
+      </div>
     </div>
-    <slot />
-    <div>
-      <slot name="right-icon" />
-    </div>
+    <slot name="after" />
   </div>
-  <slot name="after" />
 </label>
 
 <style lang="scss">
@@ -37,20 +39,21 @@
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
     --leo-icon-size: 20px;
     --leo-icon-color: var(--leo-color-icon-default);
-    --gap: var(leo-control-label-gap, var(--leo-spacing-4));
+    --gap: var(--leo-control-label-gap, var(--leo-spacing-4));
+    --direction: var(--leo-control-label-direction, column);
 
     display: flex;
-    flex-direction: column;
+    flex-direction: var(--direction);
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
 
     &:not([aria-disabled='true']) {
-      &:hover {
+      & .container:hover {
         border-color: var(--leo-color-divider-subtle);
       }
 
-      &:has(*:focus-visible) {
+      & .container:has(*:focus-visible) {
         box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
@@ -68,13 +71,9 @@
     background: var(--leo-color-container-disabled);
     color: var(--leo-color-text-disabled);
   }
-
-  .leo-control label {
-    display: flex;
-  }
-
-  .leo-control.small label {
-    gap: 2px;
+  
+  .leo-control .control {
+    flex: 1;
   }
 
   .leo-control .container {

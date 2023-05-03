@@ -21,6 +21,10 @@
   title="Dropdown"
   component={Dropdown}
   argTypes={{
+    '--leo-control-label-direction': {
+      control: 'select',
+      options: ['column', 'column-reverse', 'row', 'row-reverse']
+    },
     placeholder: {
       defaultValue: 'select...'
     },
