@@ -9,13 +9,13 @@
   export let required = false
 </script>
 
-<label class="leo-control" class:small={size === 'small'}>
+<label class="leo-control" class:small={size === 'small'} aria-disabled={disabled}>
   <div class="label-row">
     <slot name="label" />
     {#if required}<span class="required-indicator">*</span>{/if}
   </div>
   <div class="control">
-    <div class="container" aria-disabled={disabled} on:click on:keyup>
+    <div class="container" on:click on:keyup>
       <div>
         <slot name="left-icon" />
       </div>
@@ -66,11 +66,6 @@
     --padding: var(--leo-control-padding, 8px);
     --gap: var(--leo-control-label-gap, 2px);
   }
-
-  .leo-control[aria-disabled='true'] {
-    background: var(--leo-color-container-disabled);
-    color: var(--leo-color-text-disabled);
-  }
   
   .leo-control .control {
     flex: 1;
@@ -88,6 +83,11 @@
     border-radius: var(--radius);
     background: var(--background);
     padding: var(--padding);
+  }
+
+  .leo-control[aria-disabled='true'] .container {
+    --background: var(--leo-color-container-disabled);
+    color: var(--leo-color-text-disabled);
   }
 
   .leo-control .label-row {
