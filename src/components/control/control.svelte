@@ -19,17 +19,13 @@
       --leo-control-background,
       var(--leo-color-container-highlight)
     );
-    --padding: var(
-      --leo-control-padding,
-      var(--leo-spacing-12) var(--leo-spacing-8)
-    );
+    --padding: var(--leo-control-padding, 9px);
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
 
     border-radius: var(--radius);
     background: var(--background);
     padding: var(--padding);
     font: var(--font);
-    min-height: 24px;
 
     border: 1px solid transparent;
 
@@ -50,8 +46,10 @@
       }
     }
 
-    & .left-icon, .right-icon {
+    & .left-icon,
+    .right-icon {
       --leo-icon-size: 20px;
+      --leo-icon-color: var(--leo-color-dark-icon-default);
     }
   }
 

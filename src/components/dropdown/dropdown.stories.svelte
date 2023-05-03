@@ -101,7 +101,7 @@
 
 <style>
   .container {
-    width: 200px;
+    width: 250px;
   }
 
   .country {
