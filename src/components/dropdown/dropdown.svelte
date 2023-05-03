@@ -108,15 +108,15 @@
 </script>
 
 <div class="leo-dropdown">
-  <Control
-    bind:disabled
-    bind:required
-    bind:size
-    on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
-  >
+  <Control bind:disabled bind:required bind:size>
     <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
-    <button bind:this={button} class="click-target" {disabled}>
+    <button
+      bind:this={button}
+      class="click-target"
+      {disabled}
+      on:click={(e) => (isOpen = !isOpen)}
+    >
       {#if value}
         <slot name="value" {value}>
           <span class="value">{value}</span>

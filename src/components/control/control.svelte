@@ -19,7 +19,7 @@
     {#if required}<span class="required-indicator">*</span>{/if}
   </div>
   <div class="control">
-    <div class="container" on:click on:keyup>
+    <div class="container">
       <div>
         <slot name="left-icon" />
       </div>
