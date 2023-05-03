@@ -17,6 +17,13 @@
   let popup: HTMLDivElement
   let button: HTMLButtonElement
 
+  function getValue(e: Element) {
+    // If the option element doesn't have a value, fallback to using the text
+    // content - this allows writing simplified options:
+    // i.e. <o>1</o>
+    return e.getAttribute('value') ?? e.textContent
+  }
+
   // Work out what options have been slotted into the control. We need to handle
   // being in a web-component (via assignedElements) and Svelte's internal
   // slotting separately.
@@ -33,6 +40,7 @@
   $: {
     for (const [option, index] of options.map((o, i) => [o, i] as const)) {
       option.setAttribute('tabindex', (index + 1).toString())
+      if (value === getValue(option)) option.setAttribute('aria-selected', '')
     }
   }
 
@@ -48,10 +56,7 @@
     // a change event.
     if (!option) return
 
-    // If the option element doesn't have a value, fallback to using the text
-    // content - this allows writing simplified options:
-    // i.e. <o>1</o>
-    value = option.getAttribute('value') ?? option.textContent
+    value = getValue(option)
 
     // Close the popup
     isOpen = false
@@ -127,7 +132,7 @@
         <Icon name="arrow-small-down" />
       </div>
     </slot>
-    <div class="menu" slot='after'>
+    <div class="menu" slot="after">
       {#if isOpen}
         <div
           class="leo-dropdown-popup"
@@ -226,7 +231,9 @@
     color: var(--leo-color-text-interactive);
   }
 
+  :global .leo-dropdown-popup ::slotted(*[aria-selected]),
   :global .leo-dropdown-popup ::slotted(*:active),
+  :global .leo-dropdown-popup > *[aria-selected],
   :global .leo-dropdown-popup > *:active {
     background: var(--leo-color-primary-20);
     color: var(--leo-color-text-interactive);
