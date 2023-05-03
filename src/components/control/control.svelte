@@ -9,7 +9,11 @@
   export let required = false
 </script>
 
-<label class="leo-control" class:small={size === 'small'} aria-disabled={disabled}>
+<label
+  class="leo-control"
+  class:small={size === 'small'}
+  aria-disabled={disabled}
+>
   <div class="label-row">
     <slot name="label" />
     {#if required}<span class="required-indicator">*</span>{/if}
@@ -66,7 +70,7 @@
     --padding: var(--leo-control-padding, 8px);
     --gap: var(--leo-control-label-gap, 2px);
   }
-  
+
   .leo-control .control {
     flex: 1;
   }
