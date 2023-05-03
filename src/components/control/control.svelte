@@ -3,9 +3,13 @@
 </script>
 
 <div class="leo-control" aria-disabled={disabled} on:click on:keyup>
-  <slot name="left-icon" />
+  <div class="left-icon">
+    <slot name="left-icon" />
+  </div>
   <slot />
-  <slot name="right-icon" />
+  <div class="right-icon">
+    <slot name="right-icon" />
+  </div>
 </div>
 
 <style lang="scss">
