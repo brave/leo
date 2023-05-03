@@ -7,6 +7,7 @@
     getStyleFromArgs
   } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
+  import { sizes } from '../control/control.svelte'
 
   const countries = {
     'NZ': 'New Zealand',
@@ -22,6 +23,10 @@
   argTypes={{
     placeholder: {
       defaultValue: 'select...'
+    },
+    size: {
+      control: 'select',
+      options: sizes
     }
   }}
 />

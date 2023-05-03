@@ -1,13 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../directives/clickOutside'
-  import Control from '../control/control.svelte'
+  import Control, { type Size } from '../control/control.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
 
   export let placeholder = ''
   export let value: string = ''
   export let disabled = false
+  export let size: Size = 'normal'
 
   let dispatch = createEventDispatcher()
 
@@ -103,6 +104,7 @@
 <div class="leo-dropdown">
   <Control
     {disabled}
+    bind:size
     on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
   >
     <slot name="left-icon" slot="left-icon" />
@@ -147,10 +149,13 @@
 <style lang="scss">
   .leo-dropdown {
     --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
-    --leo-control-font: var(--leo-dropdown-font, var(--leo-font-primary-default-regular));
+    --font: var(
+      --leo-dropdown-font,
+      var(--leo-font-primary-default-regular)
+    );
     --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
 
-    font: var(--leo-control-font);
+    font: var(--font);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 

@@ -1,8 +1,20 @@
-<script lang="ts">
-  export let disabled = false
+<script lang="ts" context="module">
+  export let sizes = ['small', 'normal'] as const
+  export type Size = (typeof sizes)[number]
 </script>
 
-<div class="leo-control" aria-disabled={disabled} on:click on:keyup>
+<script lang="ts">
+  export let disabled = false
+  export let size: Size = 'normal'
+</script>
+
+<div
+  class="leo-control"
+  class:small={size === 'small'}
+  aria-disabled={disabled}
+  on:click
+  on:keyup
+>
   <div>
     <slot name="left-icon" />
   </div>
@@ -47,6 +59,12 @@
           0px 0px 4px 2px #423eee;
       }
     }
+  }
+
+  .leo-control.small {
+    --leo-icon-size: 16px;
+    --font: var(--leo-control-font, var(--leo-font-primary-small-regular));
+    --padding: var(--leo-control-padding, 8px);
   }
 
   .leo-control[aria-disabled='true'] {
