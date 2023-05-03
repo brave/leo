@@ -147,10 +147,10 @@
 <style lang="scss">
   .leo-dropdown {
     --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
-    --font: var(--leo-dropdown-font, var(--leo-font-primary-default-regular));
+    --leo-control-font: var(--leo-dropdown-font, var(--leo-font-primary-default-regular));
     --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
 
-    font: var(--font);
+    font: var(--leo-control-font);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 

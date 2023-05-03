@@ -3,11 +3,11 @@
 </script>
 
 <div class="leo-control" aria-disabled={disabled} on:click on:keyup>
-  <div class="left-icon">
+  <div>
     <slot name="left-icon" />
   </div>
   <slot />
-  <div class="right-icon">
+  <div>
     <slot name="right-icon" />
   </div>
 </div>
@@ -21,6 +21,8 @@
     );
     --padding: var(--leo-control-padding, 9px);
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
+    --leo-icon-size: 20px;
+    --leo-icon-color: var(--leo-color-icon-default);
 
     border-radius: var(--radius);
     background: var(--background);
@@ -44,12 +46,6 @@
         box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
-    }
-
-    & .left-icon,
-    .right-icon {
-      --leo-icon-size: 20px;
-      --leo-icon-color: var(--leo-color-dark-icon-default);
     }
   }
 
