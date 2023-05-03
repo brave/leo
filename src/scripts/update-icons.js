@@ -7,6 +7,9 @@ const { optimize } = require('svgo')
 const RAW_FOLDER = './icons-raw'
 const FINAL_FOLDER = './icons'
 
+// Delete all the icons so we definitely catch removed icons.
+fs.rmSync(FINAL_FOLDER, { force: true, recursive: true })
+
 fs.mkdirSync(RAW_FOLDER, { recursive: true })
 fs.mkdirSync(FINAL_FOLDER, { recursive: true })
 
@@ -170,6 +173,7 @@ ${duplicatesWarning}`)
     await exporter.downloadSvgs({
       saveDirectory: RAW_FOLDER,
       svgsData: svgsData.svgs,
+      clearDirectory: true,
       lastModified: svgsData.lastModified
     })
   })
