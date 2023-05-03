@@ -9,6 +9,7 @@
   export let value: string = ''
   export let disabled = false
   export let size: Size = 'normal'
+  export let required = false
 
   let dispatch = createEventDispatcher()
 
@@ -103,10 +104,12 @@
 
 <div class="leo-dropdown">
   <Control
-    {disabled}
+    bind:disabled
+    bind:required
     bind:size
     on:click={disabled ? () => {} : (e) => (isOpen = !isOpen)}
   >
+    <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
     <button bind:this={button} class="click-target" {disabled}>
       {#if value}
@@ -124,24 +127,24 @@
         <Icon name="arrow-small-down" />
       </div>
     </slot>
+    <div class="menu" slot='after'>
+      {#if isOpen}
+        <div
+          class="leo-dropdown-popup"
+          transition:scale={{ duration: 60, start: 0.8 }}
+          use:clickOutside={(e) => (isOpen = false)}
+          on:keypress={(e) => {
+            if (e.code !== 'Enter' && e.code !== 'Space') return
+            selectOption(e)
+          }}
+          on:click={selectOption}
+          bind:this={popup}
+        >
+          <slot />
+        </div>
+      {/if}
+    </div>
   </Control>
-  <div class="menu">
-    {#if isOpen}
-      <div
-        class="leo-dropdown-popup"
-        transition:scale={{ duration: 60, start: 0.8 }}
-        use:clickOutside={(e) => (isOpen = false)}
-        on:keypress={(e) => {
-          if (e.code !== 'Enter' && e.code !== 'Space') return
-          selectOption(e)
-        }}
-        on:click={selectOption}
-        bind:this={popup}
-      >
-        <slot />
-      </div>
-    {/if}
-  </div>
 </div>
 
 <svelte:window on:keydown={changeSelection} />
@@ -149,13 +152,8 @@
 <style lang="scss">
   .leo-dropdown {
     --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
-    --font: var(
-      --leo-dropdown-font,
-      var(--leo-font-primary-default-regular)
-    );
     --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
 
-    font: var(--font);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 

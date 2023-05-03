@@ -6,23 +6,25 @@
 <script lang="ts">
   export let disabled = false
   export let size: Size = 'normal'
+  export let required = false
 </script>
 
-<div
-  class="leo-control"
-  class:small={size === 'small'}
-  aria-disabled={disabled}
-  on:click
-  on:keyup
->
-  <div>
-    <slot name="left-icon" />
+<label class="leo-control" class:small={size === 'small'}>
+  <div class="label-row">
+    <slot name="label" />
+    {#if required}<span class="required-indicator">*</span>{/if}
   </div>
-  <slot />
-  <div>
-    <slot name="right-icon" />
+  <div class="container" aria-disabled={disabled} on:click on:keyup>
+    <div>
+      <slot name="left-icon" />
+    </div>
+    <slot />
+    <div>
+      <slot name="right-icon" />
+    </div>
   </div>
-</div>
+  <slot name="after" />
+</label>
 
 <style lang="scss">
   .leo-control {
@@ -35,19 +37,13 @@
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
     --leo-icon-size: 20px;
     --leo-icon-color: var(--leo-color-icon-default);
-
-    border-radius: var(--radius);
-    background: var(--background);
-    padding: var(--padding);
-    font: var(--font);
-
-    border: 1px solid transparent;
+    --gap: var(leo-control-label-gap, var(--leo-spacing-4));
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--leo-spacing-8);
+    flex-direction: column;
+    justify-content: stretch;
+    font: var(--font);
+    gap: var(--gap);
 
     &:not([aria-disabled='true']) {
       &:hover {
@@ -65,10 +61,43 @@
     --leo-icon-size: 16px;
     --font: var(--leo-control-font, var(--leo-font-primary-small-regular));
     --padding: var(--leo-control-padding, 8px);
+    --gap: var(--leo-control-label-gap, 2px);
   }
 
   .leo-control[aria-disabled='true'] {
     background: var(--leo-color-container-disabled);
     color: var(--leo-color-text-disabled);
+  }
+
+  .leo-control label {
+    display: flex;
+  }
+
+  .leo-control.small label {
+    gap: 2px;
+  }
+
+  .leo-control .container {
+    border: 1px solid transparent;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--leo-spacing-8);
+
+    border-radius: var(--radius);
+    background: var(--background);
+    padding: var(--padding);
+  }
+
+  .leo-control .label-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--leo-spacing-4);
+  }
+
+  .leo-control .required-indicator {
+    color: var(--leo-color-systemfeedback-error-icon);
   }
 </style>

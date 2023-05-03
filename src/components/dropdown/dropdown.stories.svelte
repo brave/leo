@@ -24,6 +24,9 @@
     placeholder: {
       defaultValue: 'select...'
     },
+    label: {
+      defaultValue: 'Label'
+    },
     size: {
       control: 'select',
       options: sizes
@@ -34,6 +37,7 @@
 <Template let:args>
   <div class="container" style={getStyleFromArgs(args)}>
     <Dropdown value={undefined} {...getNonStyleArgs(args)}>
+      <div slot="label">{args.label}</div>
       <leo-option value="one">
         <div>One</div>
       </leo-option>
@@ -48,6 +52,7 @@
 <Story name="Left Icon" let:args>
   <div class="container" style={getStyleFromArgs(args)}>
     <Dropdown {...getNonStyleArgs(args)}>
+      <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
       </div>
@@ -61,6 +66,7 @@
 <Story name="Right Icon" let:args>
   <div class="container" style={getStyleFromArgs(args)}>
     <Dropdown {...getNonStyleArgs(args)}>
+      <div slot="label">{args.label}</div>
       <div slot="right-icon">
         <Icon name="send" />
       </div>
@@ -74,6 +80,7 @@
 <Story name="Both Icons" let:args>
   <div class="container" style={getStyleFromArgs(args)}>
     <Dropdown {...getNonStyleArgs(args)}>
+      <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
       </div>
@@ -90,6 +97,7 @@
 <Story name="Custom Options" let:args>
   <div class="container" style={getStyleFromArgs(args)}>
     <Dropdown {...getNonStyleArgs(args)}>
+      <div slot="label">{args.label}</div>
       <div slot="value" class="country" let:value>
         <Icon name={`Country=${value}`} />
         {countries[value]}
