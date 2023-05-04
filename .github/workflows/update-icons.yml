@@ -44,7 +44,7 @@ jobs:
         if: steps.check-icons.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          add-paths: /icons
+          add-paths: icons/
           commit-message: '[Icons]: Update icons from Figma'
           branch: update-icons
           delete-branch: true
