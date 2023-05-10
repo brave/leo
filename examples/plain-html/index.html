@@ -66,12 +66,12 @@
     const toggled = () => {
       isToggled = !isToggled
 
-      toggle.on = isToggled
+      toggle.checked = isToggled
       collapse.isOpen = isToggled
       toggleButton.textContent = `Open: ${isToggled}`
     }
 
-    toggle.addEventListener('toggle', toggled)
+    toggle.addEventListener('change', toggled)
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
     dialogButton.addEventListener('click', () => {
