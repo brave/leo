@@ -102,17 +102,17 @@
     --width: var(--leo-toggle-width, 56px);
     --height: var(--leo-toggle-height, 32px);
     --padding: var(--leo-toggle-padding, 2px);
-    --on-color: var(
-      --leo-toggle-on-color,
+    --checked-color: var(
+      --leo-toggle-checked-color,
       var(--leo-color-interaction-button-primary-background)
     );
-    --on-color-hover: var(
-      --leo-toggle-on-color-hover,
+    --checked-color-hover: var(
+      --leo-toggle-checked-color-hover,
       var(--leo-color-primary-60)
     );
-    --off-color: var(--leo-toggle-off-color, var(--leo-color-gray-30));
-    --off-color-hover: var(
-      --leo-toggle-off-color-hover,
+    --unchecked-color: var(--leo-toggle-unchecked-color, var(--leo-color-gray-30));
+    --unchecked-color-hover: var(
+      --leo-toggle-unchecked-color-hover,
       var(--leo-color-gray-40)
     );
     --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
@@ -126,8 +126,8 @@
     }
 
     @theme (dark) {
-      --on-color-hover: var(
-        --leo-toggle-on-color-hover,
+      --checked-color-hover: var(
+        --leo-toggle-checked-color-hover,
         var(--leo-color-primary-40)
       );
       --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, black);
@@ -143,7 +143,7 @@
 
   .leo-toggle button {
     all: unset;
-    background: var(--off-color);
+    background: var(--unchecked-color);
     width: var(--width);
     height: var(--height);
     border-radius: var(--leo-radius-full);
@@ -165,24 +165,24 @@
     }
 
     &:hover:not(:disabled) {
-      background-color: var(--off-color-hover);
+      background-color: var(--unchecked-color-hover);
 
       &[aria-checked='true'] {
-        background-color: var(--on-color-hover);
+        background-color: var(--checked-color-hover);
       }
     }
 
     & .thumb {
-      --off-thumb-offset: 0px;
-      --on-thumb-offset: calc(var(--width) - var(--height) + 0.25px);
-      --thumb-offset: var(--off-thumb-offset);
+      --unchecked-thumb-offset: 0px;
+      --checked-thumb-offset: calc(var(--width) - var(--height) + 0.25px);
+      --thumb-offset: var(--unchecked-thumb-offset);
       --drag-offset: 0;
       --thumb-position: max(
         min(
-          var(--on-thumb-offset),
+          var(--checked-thumb-offset),
           calc(var(--thumb-offset) + var(--drag-offset))
         ),
-        var(--off-thumb-offset)
+        var(--unchecked-thumb-offset)
       );
 
       height: 100%;
@@ -211,11 +211,11 @@
     }
 
     &[aria-checked='true'] {
-      background: var(--on-color);
+      background: var(--checked-color);
 
       .thumb {
-        --thumb-offset: var(--on-thumb-offset);
-        color: var(--on-color);
+        --thumb-offset: var(--checked-thumb-offset);
+        color: var(--checked-color);
 
         .on-icon {
           opacity: 1;
