@@ -71,7 +71,7 @@
   <div style={getStyleFromArgs(args)}>
     <Toggle {...args}>
       <div slot="on-icon">
-        <Icon name="check-normal" />
+        <Icon name="cookie" />
       </div>
       {args.label}
     </Toggle>
