@@ -21,21 +21,23 @@
       type: 'string',
       description: 'The padding of the toggle'
     },
-    '--leo-toggle-on-color': {
+    '--leo-toggle-checked-color': {
       control: 'color',
-      description: 'The background color of the toggle when on'
+      description: 'The background color of the toggle when checked'
     },
-    '--leo-toggle-on-color-hover': {
+    '--leo-toggle-checked-color-hover': {
       control: 'color',
-      description: 'The background color of the toggle when on and hovering'
+      description:
+        'The background color of the toggle when checked and hovering'
     },
-    '--leo-toggle-off-color': {
+    '--leo-toggle-unchecked-color': {
       control: 'color',
-      description: 'The background color of the toggle when off'
+      description: 'The background color of the toggle when not checked'
     },
-    '--leo-toggle-off-color-hover': {
+    '--leo-toggle-unchecked-color-hover': {
       control: 'color',
-      description: 'The background color of the toggle when off and hovering'
+      description:
+        'The background color of the toggle when not checked and hovering'
     },
     '--leo-toggle-thumb-color': {
       control: 'color',
@@ -71,7 +73,7 @@
   <div style={getStyleFromArgs(args)}>
     <Toggle {...args}>
       <div slot="on-icon">
-        <Icon name="check-normal" />
+        <Icon name="cookie" />
       </div>
       {args.label}
     </Toggle>
