@@ -110,7 +110,10 @@
       --leo-toggle-checked-color-hover,
       var(--leo-color-primary-60)
     );
-    --unchecked-color: var(--leo-toggle-unchecked-color, var(--leo-color-gray-30));
+    --unchecked-color: var(
+      --leo-toggle-unchecked-color,
+      var(--leo-color-gray-30)
+    );
     --unchecked-color-hover: var(
       --leo-toggle-unchecked-color-hover,
       var(--leo-color-gray-40)

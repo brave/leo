@@ -27,7 +27,8 @@
     },
     '--leo-toggle-checked-color-hover': {
       control: 'color',
-      description: 'The background color of the toggle when checked and hovering'
+      description:
+        'The background color of the toggle when checked and hovering'
     },
     '--leo-toggle-unchecked-color': {
       control: 'color',
@@ -35,7 +36,8 @@
     },
     '--leo-toggle-unchecked-color-hover': {
       control: 'color',
-      description: 'The background color of the toggle when not checked and hovering'
+      description:
+        'The background color of the toggle when not checked and hovering'
     },
     '--leo-toggle-thumb-color': {
       control: 'color',
