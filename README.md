@@ -76,3 +76,4 @@ All Web Components and css variables aim to use the color theme according to the
 ## Tailwind
 
 A tailwind config, complete with plugin, is available at `@brave/leo/build/tailwind/index.js`. Once you configure this, all variables should be available using the `theme()` function.
+This is only a test
