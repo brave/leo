@@ -10,10 +10,10 @@
   import { sizes } from '../formItem/formItem.svelte'
 
   const countries = {
-    'NZ': 'New Zealand',
-    'AU': 'Australia',
-    'UK': 'United Kingdom',
-    'CA': 'Canada'
+    'nz': 'New Zealand',
+    'au': 'Australia',
+    'gb': 'United Kingdom',
+    'ca': 'Canada'
   }
 </script>
 
@@ -103,12 +103,12 @@
     <Dropdown {...getNonStyleArgs(args)}>
       <div slot="label">{args.label}</div>
       <div slot="value" class="country" let:value>
-        <Icon name={`Country=${value}`} />
+        <Icon name={`country-${value}`} />
         {countries[value]}
       </div>
       {#each Object.entries(countries) as [code, name]}
         <leo-option class="country" value={code}>
-          <Icon name={`Country=${code}`} />
+          <Icon name={`country-${code}`} />
           {name}
         </leo-option>
       {/each}
