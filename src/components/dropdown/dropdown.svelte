@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import clickOutside from '../../directives/clickOutside'
-  import Control, { type Size } from '../control/control.svelte'
+  import clickOutside from '../../svelteDirectives/clickOutside'
+  import FormItem, { type Size } from '../formItem/formItem.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
 
@@ -108,7 +108,7 @@
 </script>
 
 <div class="leo-dropdown">
-  <Control bind:disabled bind:required bind:size>
+  <FormItem bind:disabled bind:required bind:size>
     <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
     <button
@@ -149,7 +149,7 @@
         </div>
       {/if}
     </div>
-  </Control>
+  </FormItem>
 </div>
 
 <svelte:window on:keydown={changeSelection} />

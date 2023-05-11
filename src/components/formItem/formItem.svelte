@@ -92,6 +92,7 @@
   .leo-control[aria-disabled='true'] .container {
     --background: var(--leo-color-container-disabled);
     color: var(--leo-color-text-disabled);
+    cursor: not-allowed;
   }
 
   .leo-control .label-row {

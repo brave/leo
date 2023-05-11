@@ -7,7 +7,7 @@
     getStyleFromArgs
   } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
-  import { sizes } from '../control/control.svelte'
+  import { sizes } from '../formItem/formItem.svelte'
 
   const countries = {
     'NZ': 'New Zealand',
