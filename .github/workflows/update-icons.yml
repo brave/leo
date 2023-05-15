@@ -22,8 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: chainguard-dev/actions/setup-gitsign@main
-
       - name: Get npm cache directory path
         id: npm-cache-dir-path
         run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
@@ -59,4 +57,4 @@ jobs:
           delete-branch: true
           title: '[Icons]: Update icons from Figma'
           body-path: .update-icons-output
-          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
+          # token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
