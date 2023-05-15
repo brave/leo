@@ -1,6 +1,9 @@
 name: Update Icons
 
 on:
+  push:
+    branches:
+      - aka/signed-commits
   schedule:
     - cron: '0 8 * * *'
   workflow_dispatch:
@@ -11,9 +14,15 @@ env:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Enable OIDC
+      pull-requests: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: chainguard-dev/actions/setup-gitsign@main
 
       - name: Get npm cache directory path
         id: npm-cache-dir-path
