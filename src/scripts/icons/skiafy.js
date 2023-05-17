@@ -11,6 +11,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  */
 
+/**
+ * @typedef {'M' | 'm' | 'L' | 'l' | 'C' | 'c' | 'S' | 's' | 'H' | 'h' | 'V' | 'v' | 'A' | 'a'} CommandLetter
+ */
+
 const { JSDOM } = require('jsdom')
 const { TinyColor } = require('@ctrl/tinycolor')
 
@@ -68,9 +72,24 @@ module.exports = function (
   return output
 }
 
-/* Code copy from main.js of https://github.com/evanstade/skiafy */
+/* Code based on main.js from https://github.com/evanstade/skiafy */
 
-function ToCommand(letter) {
+/**
+ *
+ * @param {CommandLetter} letter
+ * @param {number} commandIndex The index of where the command appears in the list of commands.
+ * @returns The Skia Icon command
+ */
+function ToCommand(letter, commandIndex) {
+  // Relative commands can appear at the start of SVG paths, but when the new
+  // path starts, the position is set to 0,0. Skia does not do this, and the
+  // relative commands are made relative to the previous path. To fix this, we
+  // convert relative commands to their absolute counterparts, for **ONLY** the
+  // first command.
+  if (commandIndex == 0) {
+    letter = letter.toUpperCase();
+  }
+
   switch (letter) {
     case 'M':
       return 'MOVE_TO'
@@ -106,6 +125,10 @@ function ToCommand(letter) {
   return '~UNKNOWN~'
 }
 
+/**
+ * @param {CommandLetter} letter
+ * @returns {number} The number of arguments the command is expected to have.
+ */
 function LengthForSvgDirective(letter) {
   switch (letter) {
     case 'C':
@@ -130,6 +153,12 @@ function LengthForSvgDirective(letter) {
   return 999
 }
 
+/**
+ * Some commands imply an implicit subsequent command which additional arguments
+ * should be passed to.
+ * @param {CommandLetter} letter
+ * @returns {CommandLetter} The implicit subsequent command
+ */
 function SubsequentCommandForExtraArgs(letter) {
   switch (letter) {
     case 'm':
@@ -140,6 +169,10 @@ function SubsequentCommandForExtraArgs(letter) {
   return letter
 }
 
+/**
+ * @param {number} x
+ * @returns {number} The number, rounded to the nearest 1/100th
+ */
 function RoundToHundredths(x) {
   return Math.floor(x * 100 + 0.5) / 100
 }
@@ -327,22 +360,15 @@ function HandleNode(
           path = path.trim()
         }
 
-        /*        if (isStrokePath) {
-                          var strokeWidth =  svgElement.getAttribute('stroke-width');
-                          if (!strokeWidth || isNaN(strokeWidth))
-                            strokeWidth = 1;
-                
-                          output += 'STROKE, ' + strokeWidth + ',\n';
-                        }*/
-
         output += RunHandles(svgElement)
         for (const command_idx in commands) {
-          var command = commands[command_idx]
-          output += ToCommand(command.command) + ', '
-          for (i in command.args) {
-            var point = command.args[i]
-            output += point
-            if (typeof point == 'number' && (point * 10) % 10 != 0)
+          const command = commands[command_idx]
+          output += ToCommand(command.command, command_idx) + ', '
+          for (const argument of command.args) {
+            output += argument
+
+            // If the number is a float, append an f
+            if (typeof argument == 'number' && (argument * 10) % 10 != 0)
               output += 'f'
             output += ', '
           }
@@ -352,35 +378,31 @@ function HandleNode(
 
       // CIRCLE ----------------------------------------------------------------
       case 'circle':
-        var cx = parseFloat(svgElement.getAttribute('cx'))
-        cx *= scaleX
-        cx += translateX
-        var cy = parseFloat(svgElement.getAttribute('cy'))
-        cy *= scaleY
-        cy += translateY
-        var rad = parseFloat(svgElement.getAttribute('r'))
+        const cx = parseFloat(svgElement.getAttribute('cx'))
+          * scaleX
+          + translateX
+        const cy = parseFloat(svgElement.getAttribute('cy'))
+          * scaleY
+          + translateY
+        const rad = parseFloat(svgElement.getAttribute('r'))
         output += RunHandles(svgElement)
-        output += 'CIRCLE, ' + cx + ', ' + cy + ', ' + rad + ',\n'
+        output += `CIRCLE, ${cx}, ${cy}, ${rad},\n`
         break
 
       // RECT ------------------------------------------------------------------
       case 'rect':
-        var x = parseFloat(svgElement.getAttribute('x')) || 0
-        x *= scaleX
-        x += translateX
-        var y = parseFloat(svgElement.getAttribute('y')) || 0
-        y *= scaleY
-        y += translateY
-        var width = parseFloat(svgElement.getAttribute('width'))
-        var height = parseFloat(svgElement.getAttribute('height'))
+        const x = (parseFloat(svgElement.getAttribute('x')) || 0)
+          * scaleX
+          + translateX
+        const y = (parseFloat(svgElement.getAttribute('y')) || 0)
+          * scaleY
+          + translateY
+        const width = parseFloat(svgElement.getAttribute('width'))
+        const height = parseFloat(svgElement.getAttribute('height'))
+        const round = svgElement.getAttribute('rx') || '0'
 
         output += RunHandles(svgElement)
-        output +=
-          'ROUND_RECT, ' + x + ', ' + y + ', ' + width + ', ' + height + ', '
-
-        var round = svgElement.getAttribute('rx')
-        if (!round) round = '0'
-        output += round + ',\n'
+        output += `ROUND_RECT, ${x}, ${y}, ${width}, ${height}, ${round},\n`
         break
     }
   }
