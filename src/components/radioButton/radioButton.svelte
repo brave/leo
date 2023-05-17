@@ -78,6 +78,7 @@
   .leo-radiobutton {
     --focus-border-radius: var(--leo-radiobutton-focus-border-radius, 2px);
     --label-gap: var(--leo-radiobutton-label-gap, var(--leo-spacing-8));
+    --flex-direction: var(--leo-radiobutton-flex-direction, row);
     --checked-color: var(
       --leo-radiobutton-checked-color,
       var(--leo-color-icon-interactive)
@@ -105,7 +106,7 @@
     --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 20px);
 
     display: flex;
-    flex-direction: row;
+    flex-direction: var(--flex-direction);
     align-items: center;
     gap: var(--label-gap);
     cursor: pointer;
