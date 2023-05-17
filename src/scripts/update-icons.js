@@ -35,10 +35,8 @@ const getFlag = (iconName) => {
 
 const getMutatedIconName = (iconName) => {
   const flag = getFlag(iconName)
-  if (flag) {
-    return `Country=${flag}.svg`
-  }
-  return iconName.toLowerCase()
+  const name = flag ? `Country-${flag}.svg` : iconName
+  return name.toLowerCase().replace(/[^a-zA-Z0-9\.]+/g, '-')
 }
 
 const mutateIcon = (iconName) => {

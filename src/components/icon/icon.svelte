@@ -29,7 +29,7 @@
   export let name: IconName = undefined
   export let forceColor: boolean = false
   $: hasColor =
-    name?.endsWith('-color') || name?.startsWith('Country=') || forceColor
+    name?.endsWith('-color') || name?.startsWith('country-') || forceColor
 </script>
 
 <div class="leoIcon">

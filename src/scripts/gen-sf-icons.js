@@ -55,7 +55,7 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
 
     // Filter out color icons - they don't work with SF Symbols
     icons
-      .filter((i) => !i.includes('color') && !i.includes('Country='))
+      .filter((i) => !i.includes('color') && !i.includes('country-'))
       .map(async (icon) => {
         const svgContent = await fs.readFile(path.join(ICONS_FOLDER, icon), {
           encoding: 'utf8'
