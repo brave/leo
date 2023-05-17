@@ -87,7 +87,7 @@ function ToCommand(letter, commandIndex) {
   // convert relative commands to their absolute counterparts, for **ONLY** the
   // first command.
   if (commandIndex == 0) {
-    letter = letter.toUpperCase();
+    letter = letter.toUpperCase()
   }
 
   switch (letter) {
@@ -378,12 +378,10 @@ function HandleNode(
 
       // CIRCLE ----------------------------------------------------------------
       case 'circle':
-        const cx = parseFloat(svgElement.getAttribute('cx'))
-          * scaleX
-          + translateX
-        const cy = parseFloat(svgElement.getAttribute('cy'))
-          * scaleY
-          + translateY
+        const cx =
+          parseFloat(svgElement.getAttribute('cx')) * scaleX + translateX
+        const cy =
+          parseFloat(svgElement.getAttribute('cy')) * scaleY + translateY
         const rad = parseFloat(svgElement.getAttribute('r'))
         output += RunHandles(svgElement)
         output += `CIRCLE, ${cx}, ${cy}, ${rad},\n`
@@ -391,12 +389,10 @@ function HandleNode(
 
       // RECT ------------------------------------------------------------------
       case 'rect':
-        const x = (parseFloat(svgElement.getAttribute('x')) || 0)
-          * scaleX
-          + translateX
-        const y = (parseFloat(svgElement.getAttribute('y')) || 0)
-          * scaleY
-          + translateY
+        const x =
+          (parseFloat(svgElement.getAttribute('x')) || 0) * scaleX + translateX
+        const y =
+          (parseFloat(svgElement.getAttribute('y')) || 0) * scaleY + translateY
         const width = parseFloat(svgElement.getAttribute('width'))
         const height = parseFloat(svgElement.getAttribute('height'))
         const round = svgElement.getAttribute('rx') || '0'
