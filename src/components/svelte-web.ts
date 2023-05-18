@@ -46,6 +46,11 @@ export default function registerWebComponent(
   component: any,
   { name, mode }: Options
 ) {
+  if (customElements.get(name)) {
+    console.log(`Attempted to register ${name} component multiple times.`);
+    return;
+  }
+
   // Create & mount a dummy component. We use this to work out what props are
   // available and generate a list of available properties.
   const c = new component({ target: document.createElement('div') })
