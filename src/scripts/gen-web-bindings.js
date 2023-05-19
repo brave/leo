@@ -41,12 +41,7 @@ export * from '../shared/${fileNameWithoutExtension}.js'
 
   const typeDefinitions = `
 export default undefined
-
 export * from '../svelte/${containingFolder}/${fileName}'
-export interface IntrinsicElements {
-  // TODO(fallaciousreasoning): Use more accurate definition of the element. This is fine for now.
-  '${elementName}': HTMLElement & { [key: string]: any }
-}
 `
 
   return [binding, typeDefinitions]
