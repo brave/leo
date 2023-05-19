@@ -47,8 +47,8 @@ export default function registerWebComponent(
   { name, mode }: Options
 ) {
   if (customElements.get(name)) {
-    console.log(`Attempted to register ${name} component multiple times.`);
-    return;
+    console.log(`Attempted to register ${name} component multiple times.`)
+    return
   }
 
   // Create & mount a dummy component. We use this to work out what props are

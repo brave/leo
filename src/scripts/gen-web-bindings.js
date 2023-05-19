@@ -55,7 +55,10 @@ const createBinding = async (svelteFilePath) => {
     path.join(WEB_BINDINGS_DIRECTORY, `${filename}.js`),
     binding
   )
-  await fs.writeFile(path.join(WEB_BINDINGS_DIRECTORY, `${filename}.d.ts`), typeDefinitions)
+  await fs.writeFile(
+    path.join(WEB_BINDINGS_DIRECTORY, `${filename}.d.ts`),
+    typeDefinitions
+  )
 }
 
 const createBindings = async (rootDir) => {
