@@ -9,6 +9,11 @@ const COMPONENT_PREFIX = 'leo'
 const SVELTE_WEB_WRAPPER_PATH = '../shared/svelte-web.js'
 
 const getFileContents = async (svelteFilePath) => {
+  const containingFolder = path.relative(
+    './src/components',
+    path.resolve(svelteFilePath, '../')
+  )
+
   const fileName = path.basename(svelteFilePath)
   const extension = path.extname(fileName)
   const fileNameWithoutExtension = fileName.substring(
@@ -19,11 +24,13 @@ const getFileContents = async (svelteFilePath) => {
     fileNameWithoutExtension[0].toUpperCase() +
     fileNameWithoutExtension.substring(1)
 
+  const elementName = `${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}`
+
   const binding = `
 import SvelteWeb from '${SVELTE_WEB_WRAPPER_PATH}'
 import ${componentName} from '../shared/${fileNameWithoutExtension}.js'
 export default SvelteWeb(${componentName}, {
-    name: '${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}',
+    name: '${elementName}',
     mode: 'open'
 });
 
@@ -32,17 +39,28 @@ export default SvelteWeb(${componentName}, {
 export * from '../shared/${fileNameWithoutExtension}.js'
     `.trim()
 
-  return binding
+  const typeDefinitions = `
+export default undefined
+
+export * from '../svelte/${containingFolder}/${fileName}'
+export interface IntrinsicElements {
+  // TODO(fallaciousreasoning): Use more accurate definition of the element. This is fine for now.
+  '${elementName}': HTMLElement & { [key: string]: any }
+}
+`
+
+  return [binding, typeDefinitions]
 }
 
 const createBinding = async (svelteFilePath) => {
   const filename = path.basename(svelteFilePath, '.svelte')
 
-  const binding = await getFileContents(svelteFilePath)
+  const [binding, typeDefinitions] = await getFileContents(svelteFilePath)
   await fs.writeFile(
     path.join(WEB_BINDINGS_DIRECTORY, `${filename}.js`),
     binding
   )
+  await fs.writeFile(path.join(WEB_BINDINGS_DIRECTORY, `${filename}.d.ts`), typeDefinitions)
 }
 
 const createBindings = async (rootDir) => {
