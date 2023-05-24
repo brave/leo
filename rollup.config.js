@@ -45,6 +45,13 @@ export default {
       declarationDir: './svelte',
       sourceMap: true
     }),
+    // Emit type declarations for non-component helpers to the shared folder.
+    typescript({
+      declaration: true,
+      emitDeclarationOnly: true,
+      declarationDir: './shared',
+      include: ['src/components/*.ts']
+    }),
     svelte({
       include: 'src/components/**/*.svelte',
       preprocess: sveltePreprocess({

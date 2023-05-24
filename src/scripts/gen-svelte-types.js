@@ -39,6 +39,6 @@ module.exports = genTypes
 if (require.main == module) {
   genTypes({
     basePath: './',
-    outputDir: './web-components'
+    outputDir: './svelte'
   }).then(() => console.log('Done'))
 }
