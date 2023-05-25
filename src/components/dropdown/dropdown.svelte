@@ -1,3 +1,17 @@
+<script context="module" lang="ts">
+  import type { HTMLAttributes } from 'svelte/elements'
+  declare global {
+    namespace JSX {
+      interface IntrinsicElements {
+        'leo-option': HTMLAttributes<HTMLElement> & {
+          value?: string
+          children?: any
+        }
+      }
+    }
+  }
+</script>
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../svelteDirectives/clickOutside'
@@ -41,6 +55,7 @@
     for (const [option, index] of options.map((o, i) => [o, i] as const)) {
       option.setAttribute('tabindex', (index + 1).toString())
       if (value === getValue(option)) option.setAttribute('aria-selected', '')
+      else option.removeAttribute('aria-selected')
     }
   }
 
@@ -169,6 +184,7 @@
 
   .leo-dropdown .click-target {
     flex: 1;
+    pointer-events: none;
   }
 
   .leo-dropdown .value {

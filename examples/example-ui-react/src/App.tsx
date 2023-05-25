@@ -2,6 +2,7 @@ import * as React from 'react'
 import '../../../tokens/css/variables.css'
 import LeoButton from '../../../react/button'
 import styles from './App.module.css'
+import Dropdown from '../../../react/dropdown'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -34,6 +35,12 @@ function App() {
             {buttonText}
           </LeoButton>
         )}
+        <div data-theme="dark">
+          <Dropdown value="foo">
+            <leo-option value="foo">Foo</leo-option>
+            <leo-option value="bar">Bar</leo-option>
+          </Dropdown>
+        </div>
         <LeoButton href="#foo">Link button!</LeoButton>
       </header>
     </div>
