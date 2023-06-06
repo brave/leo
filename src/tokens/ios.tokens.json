@@ -14,17 +14,10 @@
         }
       },
       "frosted glass divider": {
-        "0": {
-          "type": "color",
-          "value": "#ffffffb3",
-          "blendMode": "normal"
-        },
-        "1": {
-          "type": "color",
-          "value": "#16171d26",
-          "blendMode": "normal"
-        },
         "description": "",
+        "type": "color",
+        "value": "#16171d1a",
+        "blendMode": "normal",
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:7702977c0370c0321dd45ec68e4bc2eeb90f6a00,",
