@@ -859,7 +859,7 @@
     },
     "🎨 extended": {
       "white": {
-        "description": "Don't use for texts / Use gray-120",
+        "description": "",
         "type": "color",
         "value": "#ffffffff",
         "blendMode": "normal",
@@ -871,7 +871,7 @@
         }
       },
       "black": {
-        "description": "Don't use for texts / Use gray-120",
+        "description": "",
         "type": "color",
         "value": "#000000ff",
         "blendMode": "normal",
@@ -897,7 +897,7 @@
             }
           },
           "20": {
-            "description": "Disabled text fields",
+            "description": "",
             "type": "color",
             "value": "#e1e2e8ff",
             "blendMode": "normal",
@@ -921,7 +921,7 @@
             }
           },
           "40": {
-            "description": "Minimum text color for accessibility / Placeholders / Disabled buttons",
+            "description": "",
             "type": "color",
             "value": "#666d89ff",
             "blendMode": "normal",
@@ -933,7 +933,7 @@
             }
           },
           "50": {
-            "description": "Hover states / Button colors",
+            "description": "",
             "type": "color",
             "value": "#545a71ff",
             "blendMode": "normal",
@@ -945,7 +945,7 @@
             }
           },
           "60": {
-            "description": "Active states",
+            "description": "",
             "type": "color",
             "value": "#3f4355ff",
             "blendMode": "normal",
@@ -1007,7 +1007,7 @@
             }
           },
           "40": {
-            "description": "Icon colors",
+            "description": "",
             "type": "color",
             "value": "#5f5cf1ff",
             "blendMode": "normal",
@@ -1019,7 +1019,7 @@
             }
           },
           "50": {
-            "description": "Button colors",
+            "description": "",
             "type": "color",
             "value": "#423eeeff",
             "blendMode": "normal",
@@ -1031,7 +1031,7 @@
             }
           },
           "60": {
-            "description": "Hover states",
+            "description": "",
             "type": "color",
             "value": "#322fb4ff",
             "blendMode": "normal",
@@ -1707,7 +1707,7 @@
             }
           },
           "50": {
-            "description": "- Visited link color",
+            "description": "",
             "type": "color",
             "value": "#af1768ff",
             "blendMode": "normal",
@@ -1919,7 +1919,7 @@
       "🌚 dark": {
         "gray": {
           "10": {
-            "description": "Backgrounds",
+            "description": "",
             "type": "color",
             "value": "#111217ff",
             "blendMode": "normal",
@@ -1931,9 +1931,9 @@
             }
           },
           "20": {
-            "description": "Disabled text fields",
+            "description": "",
             "type": "color",
-            "value": "#2c2f3bff",
+            "value": "#262a33ff",
             "blendMode": "normal",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
@@ -1979,7 +1979,7 @@
             }
           },
           "60": {
-            "description": "Active states",
+            "description": "",
             "type": "color",
             "value": "#c3c6d3ff",
             "blendMode": "normal",
@@ -2017,7 +2017,7 @@
             }
           },
           "20": {
-            "description": "Pressed states",
+            "description": "",
             "type": "color",
             "value": "#23217fff",
             "blendMode": "normal",
@@ -2029,7 +2029,7 @@
             }
           },
           "30": {
-            "description": "Button colors",
+            "description": "",
             "type": "color",
             "value": "#423eeeff",
             "blendMode": "normal",
@@ -2041,7 +2041,7 @@
             }
           },
           "40": {
-            "description": "- Link color",
+            "description": "",
             "type": "color",
             "value": "#8784f4ff",
             "blendMode": "normal",
@@ -2741,7 +2741,7 @@
             }
           },
           "50": {
-            "description": "- Visited link color",
+            "description": "",
             "type": "color",
             "value": "#f092c5ff",
             "blendMode": "normal",
@@ -2952,7 +2952,7 @@
       },
       "logos": {
         "bat-1": {
-          "description": "",
+          "description": "FF4724",
           "type": "color",
           "value": "#ff4724ff",
           "blendMode": "normal",
@@ -2964,7 +2964,7 @@
           }
         },
         "bat-2": {
-          "description": "",
+          "description": "9E1F63",
           "type": "color",
           "value": "#9e1f63ff",
           "blendMode": "normal",
@@ -2976,7 +2976,7 @@
           }
         },
         "bat-3": {
-          "description": "",
+          "description": "662D91",
           "type": "color",
           "value": "#662d91ff",
           "blendMode": "normal",
@@ -4059,7 +4059,7 @@
           "lineHeight": 13.2,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
-          "textCase": "uppercase"
+          "textCase": "none"
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
@@ -6020,7 +6020,7 @@
         },
         "textCase": {
           "type": "string",
-          "value": "uppercase"
+          "value": "none"
         }
       },
       "tableheader": {
