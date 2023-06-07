@@ -30,7 +30,7 @@ enum class Color {
 
 constexpr SkColor GetColor(Color color, Theme theme) {
   switch (color) {
-<%= groupedTokens.light.allTokens.map(prop => `    case ${prop.name}:
+<%= groupedTokens.light.allTokens.map(prop => `    case Color::${prop.name}:
       return theme == Theme::kLight
         ? leo::light::${prop.name}
         : leo::dark::${prop.name};`).join('\n') %>
