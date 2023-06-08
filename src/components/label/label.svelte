@@ -43,6 +43,10 @@
 </div>
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+  }
+
   .leo-label {
     --icon-size: var(--leo-label-icon-size, 13px);
     --font-text: var(--leo-label-font-text, var(--leo-font-components-label));

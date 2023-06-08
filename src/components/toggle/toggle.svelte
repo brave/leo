@@ -98,6 +98,10 @@
 </label>
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+  }
+
   .leo-toggle {
     --width: var(--leo-toggle-width, 56px);
     --height: var(--leo-toggle-height, 32px);

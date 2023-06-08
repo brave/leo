@@ -7,6 +7,10 @@
 </div>
 
 <style lang="scss">
+  :host {
+    display: block;
+  }
+
   .leo-progressbar {
     --radius: var(--leo-progressbar-radius, 10px);
     --transition-duration: var(--leo-progressbar-transition-duration, 0.2s);

@@ -44,6 +44,10 @@
 </nav>
 
 <style lang="scss">
+  :host {
+    display: block;
+  }
+
   .leo-navdots {
     --dot-size: var(--leo-navdots-size, 8px);
     // Expanded dot grows to fill half spacing in each direction.
