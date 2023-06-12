@@ -2,6 +2,8 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import RadioButton, { sizes } from './radioButton.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 
   let currentValue = 'hello'
   let container
@@ -122,5 +124,20 @@
     <div>Current: {currentValue}</div>
   </div>
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The radio button contains a single slot, for setting the label"
+  >
+    <Slot name="default" explanation="The content of the label. If unset, defaults to the value of the radio button">
+      <RadioButton {...args} name="option" value={1} bind:currentValue>
+        Hello label!
+      </RadioButton>
+      <RadioButton {...args} name="option" value={2} bind:currentValue>
+        Hello other label!
+      </RadioButton>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="Default" />
