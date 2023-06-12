@@ -36,6 +36,14 @@
 <Story name="Slots">
   <SlotInfo description="The Alert component has a number of useful slots:">
     <Slot
+      name="default"
+      explanation="the content of the alert"
+    >
+      <Alert>
+        Some content
+      </Alert>
+    </Slot>
+    <Slot
       name="icon"
       explanation="the icon on the left hand side of the
     Alert. This can be used to override the default icon for the different
