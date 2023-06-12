@@ -25,6 +25,7 @@
     padding: 30px;
     background: var(--leo-color-container-background);
     color: var(--leo-color-text-primary);
+    font: var(--leo-font-primary-default-regular);
   }
 
   h2 {

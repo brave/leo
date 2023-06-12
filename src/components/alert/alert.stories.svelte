@@ -4,6 +4,7 @@
 
   import Alert, { modes, types } from './alert.svelte'
   import { showAlert } from './alertCenter.svelte'
+  import Icon from '../icon/icon.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
@@ -29,6 +30,44 @@
       duration
     )
 </script>
+
+<Story name="Slots">
+  <h3>Slots</h3>
+  <div>
+    The Alert component has a number of useful slots:
+    <ul class="slot-descriptions">
+      <li>
+        <span class="slot">icon</span> - the icon on the left hand side of the
+        Alert. This can be used to override the default icon for the different
+        types of Alert
+        <Alert>
+          <Icon name="airplay" slot="icon" />
+          Some content
+        </Alert>
+      </li>
+      <li>
+        <span class="slot">title</span> - the title of the Alert. Only shown
+        when the Alert mode is `full`
+        <Alert mode="full">
+          <div slot="title">Title</div>
+          Some content
+        </Alert>
+      </li>
+      <li>
+        <span class="slot">actions</span> - the actions a user can take from an
+        Alert. These are optional. When specified, these are generally a list of
+        buttons
+        <Alert>
+          <div slot="actions">
+            <Button kind="outline">Don't!</Button>
+            <Button>Do the thing!</Button>
+          </div>
+          Some content
+        </Alert>
+      </li>
+    </ul>
+  </div>
+</Story>
 
 <Meta
   title="Alert"
@@ -106,5 +145,13 @@
   .reverse {
     flex-direction: row-reverse !important;
     justify-content: start;
+  }
+
+  .slot-descriptions > li {
+    margin-top: var(--leo-spacing-4);
+  }
+
+  .slot {
+    font: var(--leo-font-primary-default-semibold);
   }
 </style>
