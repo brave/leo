@@ -88,13 +88,3 @@
 </Story>
 
 <Story name="Default" />
-<Story name="Custom Icon" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Toggle {...args}>
-      <div slot="on-icon">
-        <Icon name="cookie" />
-      </div>
-      {args.label}
-    </Toggle>
-  </div>
-</Story>

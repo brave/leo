@@ -4,6 +4,8 @@
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
 
   import Label, { colors, modes } from './label.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
 
 <Meta
@@ -67,6 +69,18 @@
     </Label>
   </div>
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo description="The label has single slot for it's content">
+    <Slot name="default" explanation="The content of the label. Can be any HTML">
+      <div>
+        <Label {...args}>
+          Label content ==&gt; <Icon name="copy" />
+        </Label>
+      </div>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="All" let:args>
   <div class="column" style={getStyleFromArgs(args)}>

@@ -3,6 +3,9 @@
   import Ring from './progressRing.svelte'
   import Icon from '../icon/icon.svelte'
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import ProgressRing from './progressRing.svelte'
 </script>
 
 <Meta
@@ -37,18 +40,22 @@
   }}
 />
 
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The progress ring has a default slot, for configuring central content"
+  >
+    <Slot name="default" explanation="The content to display inside the ring">
+      <ProgressRing {...args}>
+        <div style="color: var(--leo-color-icon-default)">
+          <Icon name="notification" />
+        </div>
+      </ProgressRing>
+    </Slot>
+  </SlotInfo>
+</Story>
+
 <Story name="Ring" let:args>
   <div style={getStyleFromArgs(args)}>
     <Ring {...args} />
-  </div>
-</Story>
-
-<Story name="Ring Icon" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Ring {...args}>
-      <div style="color: var(--leo-color-icon-default)">
-        <Icon name="notification" />
-      </div>
-    </Ring>
   </div>
 </Story>

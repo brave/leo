@@ -2,6 +2,7 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import NavDots from './navdots.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
   let activeDot = 0
   function handleChange(n) {
@@ -64,5 +65,9 @@
     <NavDots {activeDot} on:change={handleChange} {...args} />
   </div>
 </Template>
+
+<Story name="Slots">
+  <SlotInfo description="The navdots component has no slots" />
+</Story>
 
 <Story name="Default" />
