@@ -3,6 +3,8 @@
   import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
   import Toggle, { sizes } from './toggle.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 </script>
 
 <Meta
@@ -67,6 +69,23 @@
     <Toggle {...args}>{args.label}</Toggle>
   </div>
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The toggle contains a couple of slots for customization"
+  >
+    <Slot name="default" explanation="The content of the label">
+      <Toggle {...args} let:checked>
+        {checked ? 'Checked' : 'Unchecked'}
+      </Toggle>
+    </Slot>
+    <Slot name="on-icon" explanation="The icon shown when the toggle is on. If unset, the tick icon is used">
+      <Toggle {...args}>
+        <Icon name="cookie" slot="on-icon"/>
+      </Toggle>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="Default" />
 <Story name="Custom Icon" let:args>
