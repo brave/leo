@@ -33,13 +33,13 @@
     )
 </script>
 
-<Story name="Slots">
+<Story name="Slots" let:args>
   <SlotInfo description="The Alert component has a number of useful slots:">
     <Slot
       name="default"
       explanation="the content of the alert"
     >
-      <Alert>
+      <Alert {...args}>
         Some content
       </Alert>
     </Slot>
@@ -49,7 +49,7 @@
     Alert. This can be used to override the default icon for the different
     types of Alert"
     >
-      <Alert>
+      <Alert {...args}>
         <Icon name="airplay" slot="icon" />
         Some content
       </Alert>
@@ -60,7 +60,7 @@
       This can be used to override the default icon for the different types of
       Alert"
     >
-      <Alert mode="full">
+      <Alert {...args} mode="full">
         <div slot="title">Title</div>
         Some content
       </Alert>
@@ -71,7 +71,7 @@
       Alert. These are optional. When specified, these are generally a list of
       buttons"
     >
-      <Alert>
+      <Alert {...args}>
         <div slot="actions">
           <Button kind="outline">Don't!</Button>
           <Button>Do the thing!</Button>

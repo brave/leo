@@ -27,12 +27,12 @@
   </Button>
 </Template>
 
-<Story name="Slots">
+<Story name="Slots" let:args>
   <SlotInfo
     description="The button contains a single slot, for setting the content of the button"
   >
     <Slot name="default" explanation="The content of the button">
-      <Button>
+      <Button {...args}>
         Button <b>can</b> <i>contain</i> <s>HTML</s>
       </Button>
     </Slot>
