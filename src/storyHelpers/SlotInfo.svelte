@@ -3,16 +3,10 @@
 </script>
 
 
-<style>
-    :global .slot-descriptions > li {
-      margin-top: var(--leo-spacing-4);
-    }
-</style>
-
 <h3>Slots</h3>
 <div>
     {description}
-    <ul class="slot-descriptions">
+    <ul>
         <slot/>
     </ul>
 </div>

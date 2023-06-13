@@ -9,6 +9,9 @@
 </li>
 
 <style>
+  li {
+    margin-top: var(--leo-spacing-16);
+  }
   .slot {
     font: var(--leo-font-primary-default-semibold);
   }
