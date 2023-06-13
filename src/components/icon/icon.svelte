@@ -54,7 +54,7 @@
     height: var(--icon-height);
 
     & .icon,
-    svg {
+    :global svg {
       width: 100%;
       height: 100%;
     }

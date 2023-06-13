@@ -2,7 +2,6 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import Ring from './progressRing.svelte'
   import Icon from '../icon/icon.svelte'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import ProgressRing from './progressRing.svelte'
@@ -55,7 +54,5 @@
 </Story>
 
 <Story name="Ring" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Ring {...args} />
-  </div>
+  <Ring {...args} />
 </Story>

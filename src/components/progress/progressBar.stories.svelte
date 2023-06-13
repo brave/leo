@@ -1,9 +1,7 @@
 <script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import Bar from './progressBar.svelte'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
-  import Slot from '../../storyHelpers/Slot.svelte'
 </script>
 
 <Meta
@@ -36,7 +34,5 @@
 </Story>
 
 <Story name="Bar" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Bar {...args} />
-  </div>
+  <Bar {...args} />
 </Story>

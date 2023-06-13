@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
   import Toggle, { sizes } from './toggle.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
@@ -65,9 +64,7 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Toggle {...args}>{args.label}</Toggle>
-  </div>
+  <Toggle {...args}>{args.label}</Toggle>
 </Template>
 
 <Story name="Slots" let:args>
@@ -79,9 +76,12 @@
         {checked ? 'Checked' : 'Unchecked'}
       </Toggle>
     </Slot>
-    <Slot name="on-icon" explanation="The icon shown when the toggle is on. If unset, the tick icon is used">
+    <Slot
+      name="on-icon"
+      explanation="The icon shown when the toggle is on. If unset, the tick icon is used"
+    >
       <Toggle {...args}>
-        <Icon name="cookie" slot="on-icon"/>
+        <Icon name="cookie" slot="on-icon" />
       </Toggle>
     </Slot>
   </SlotInfo>

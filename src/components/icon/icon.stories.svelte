@@ -15,6 +15,17 @@
   title="Icon"
   component={Icon}
   argTypes={{
+    '--leo-icon-color': {
+      control: 'color',
+      description: 'The color to use for the icon',
+      type: 'string',
+    },
+    '--leo-icon-size': {
+      control: 'text',
+      description: 'The size of the icon (defaults to 24px if not set)',
+      type: 'string',
+      defaultValue: '24px'
+    },
     name: {
       control: 'select',
       options: Object.values(meta.icons),
@@ -24,21 +35,15 @@
     },
     color: {
       control: 'color',
-      description: 'The color to use for the icon',
+      description: 'The current text color (this is used for the icon if --leo-icon-color is not set)',
       type: 'string',
       defaultValue: 'var(--leo-color-icon-default)'
-    },
-    size: {
-      control: 'number',
-      description: 'The size of the icon (defaults to 24px if not set)',
-      type: 'number',
-      defaultValue: 24
     }
   }}
 />
 
 <Template let:args>
-  <div style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}>
+  <div style={`color: ${args.color}`}>
     <Icon {...args} />
   </div>
 </Template>
@@ -74,7 +79,7 @@
   />
   <div
     class="all"
-    style={`color: ${args.color}; --leo-icon-size: ${args.size}px;`}
+    style={`color: ${args.color};`}
   >
     {#each filteredIcons as icon}
       <div class="icon">

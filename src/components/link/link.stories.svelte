@@ -1,9 +1,5 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import {
-    getNonStyleArgs,
-    getStyleFromArgs
-  } from '../../../.storybook/argHelper'
 
   import Link from './link.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
@@ -67,9 +63,7 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Link href="#foo" {...getNonStyleArgs(args)} />
-  </div>
+    <Link href="#foo" {...args} />
 </Template>
 
 <Story name="Slots" let:args>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import NavDots from './navdots.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
@@ -61,9 +60,7 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <NavDots {activeDot} on:change={handleChange} {...args} />
-  </div>
+  <NavDots {activeDot} on:change={handleChange} {...args} />
 </Template>
 
 <Story name="Slots">

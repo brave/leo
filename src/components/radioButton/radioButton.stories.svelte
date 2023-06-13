@@ -1,19 +1,10 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import RadioButton, { sizes } from './radioButton.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
 
   let currentValue = 'hello'
-  let container
-
-  let button = 0
-
-  // Number of radios per template - we do this here because the template is
-  // duplicated for light/dark/user pref and we don't want them to be in the
-  // same group.
-  let numRadios = 4
 </script>
 
 <Meta
@@ -96,40 +87,23 @@
 />
 
 <Template let:args>
-  <div bind:this={container} style={getStyleFromArgs(args)}>
-    <RadioButton
-      {...args}
-      name={args.name + Math.floor(button++ / numRadios)}
-      bind:currentValue
-      value={'hello'}>Hello</RadioButton
-    >
-    <RadioButton
-      {...args}
-      name={args.name + Math.floor(button++ / numRadios)}
-      bind:currentValue
-      value={'world'}
-    />
-    <RadioButton
-      {...args}
-      name={args.name + Math.floor(button++ / numRadios)}
-      bind:currentValue
-      value={'foo'}
-    />
-    <RadioButton
-      {...args}
-      name={args.name + Math.floor(button++ / numRadios)}
-      bind:currentValue
-      value={'bar'}
-    />
-    <div>Current: {currentValue}</div>
-  </div>
+  <RadioButton {...args} name={args.name} bind:currentValue value={'hello'}
+    >Hello</RadioButton
+  >
+  <RadioButton {...args} name={args.name} bind:currentValue value={'world'} />
+  <RadioButton {...args} name={args.name} bind:currentValue value={'foo'} />
+  <RadioButton {...args} name={args.name} bind:currentValue value={'bar'} />
+  <div>Current: {currentValue}</div>
 </Template>
 
 <Story name="Slots" let:args>
   <SlotInfo
     description="The radio button contains a single slot, for setting the label"
   >
-    <Slot name="default" explanation="The content of the label. If unset, defaults to the value of the radio button">
+    <Slot
+      name="default"
+      explanation="The content of the label. If unset, defaults to the value of the radio button"
+    >
       <RadioButton {...args} name="option" value={1} bind:currentValue>
         Hello label!
       </RadioButton>

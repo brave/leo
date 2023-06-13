@@ -2,10 +2,6 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
   import Dropdown from './dropdown.svelte'
-  import {
-    getNonStyleArgs,
-    getStyleFromArgs
-  } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
   import { sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
@@ -41,8 +37,8 @@
 />
 
 <Template let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown value={undefined} {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown value={undefined} {...args}>
       <div slot="label">{args.label}</div>
       <leo-option value="one">
         <div>One</div>
@@ -125,8 +121,8 @@
 <Story name="Default" />
 
 <Story name="Left Icon" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
@@ -139,8 +135,8 @@
 </Story>
 
 <Story name="Right Icon" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="right-icon">
         <Icon name="send" />
@@ -153,8 +149,8 @@
 </Story>
 
 <Story name="Both Icons" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
@@ -170,8 +166,8 @@
 </Story>
 
 <Story name="Custom Options" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container" style={args}>
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="value" class="country" let:value>
         <Icon name={`country-${value}`} />
