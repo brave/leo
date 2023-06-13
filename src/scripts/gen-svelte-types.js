@@ -4,7 +4,7 @@ const path = require('path')
 const { getSvelteFiles } = require('./common')
 
 const tmpFolder = `.tmp`
-const componentsFolder = 'src/components'
+const componentsFolder = './components'
 
 const genTypes = async (options = {}) => {
   const { basePath = './', outputDir = './' } = options
@@ -17,6 +17,7 @@ const genTypes = async (options = {}) => {
     declarationDir: tmpFolder,
     svelteShimsPath: require.resolve('svelte2tsx/svelte-shims.d.ts')
   })
+
   for await (const tmpFile of getSvelteFiles(tmpFolder)) {
     const relativePath = path.relative(
       path.join(tmpFolder, componentsFolder),
