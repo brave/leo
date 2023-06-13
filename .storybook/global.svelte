@@ -15,11 +15,15 @@
 
 <div class="layout" data-theme={theme}>
   <div class="theme-toggle-container">
-    <Toggle size="small" checked={theme === 'light'} on:change={() => {
-      theme = theme === 'light' ? 'dark' : 'light'
-      document.body.setAttribute('data-theme', theme)
-      localStorage.setItem('theme', theme)
-    }}>
+    <Toggle
+      size="small"
+      checked={theme === 'light'}
+      on:change={() => {
+        theme = theme === 'light' ? 'dark' : 'light'
+        document.body.setAttribute('data-theme', theme)
+        localStorage.setItem('theme', theme)
+      }}
+    >
       {theme[0].toUpperCase() + theme.slice(1)}
       <Icon slot="on-icon" name="theme-light" />
     </Toggle>
@@ -28,7 +32,8 @@
 </div>
 
 <style>
-  :global body, .layout {
+  :global body,
+  .layout {
     background: var(--leo-color-container-background);
     color: var(--leo-color-text-primary);
     font: var(--leo-font-primary-default-regular);

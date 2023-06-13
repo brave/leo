@@ -18,7 +18,7 @@
     '--leo-icon-color': {
       control: 'color',
       description: 'The color to use for the icon',
-      type: 'string',
+      type: 'string'
     },
     '--leo-icon-size': {
       control: 'text',
@@ -35,7 +35,8 @@
     },
     color: {
       control: 'color',
-      description: 'The current text color (this is used for the icon if --leo-icon-color is not set)',
+      description:
+        'The current text color (this is used for the icon if --leo-icon-color is not set)',
       type: 'string',
       defaultValue: 'var(--leo-color-icon-default)'
     }
@@ -49,8 +50,13 @@
 </Template>
 
 <Story name="Slots" let:args>
-  <SlotInfo description="The icon has a single slot for specifying a custom icon, while retaining the Leo Icon styling">
-    <Slot name="default" explanation="The custom icon. Generally an SVG. If an icon name is passed in as well as slotted content, the named icon will be ignored">
+  <SlotInfo
+    description="The icon has a single slot for specifying a custom icon, while retaining the Leo Icon styling"
+  >
+    <Slot
+      name="default"
+      explanation="The custom icon. Generally an SVG. If an icon name is passed in as well as slotted content, the named icon will be ignored"
+    >
       <div>
         <Icon {...args}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0, 0, 400,400">
@@ -77,10 +83,7 @@
     placeholder="Filter icons"
     bind:value={filter}
   />
-  <div
-    class="all"
-    style={`color: ${args.color};`}
-  >
+  <div class="all" style={`color: ${args.color};`}>
     {#each filteredIcons as icon}
       <div class="icon">
         <Icon name={icon} />

@@ -63,7 +63,7 @@
 />
 
 <Template let:args>
-    <Link href="#foo" {...args} />
+  <Link href="#foo" {...args} />
 </Template>
 
 <Story name="Slots" let:args>

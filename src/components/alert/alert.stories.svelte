@@ -35,13 +35,8 @@
 
 <Story name="Slots" let:args>
   <SlotInfo description="The Alert component has a number of useful slots:">
-    <Slot
-      name="default"
-      explanation="the content of the alert"
-    >
-      <Alert {...args}>
-        Some content
-      </Alert>
+    <Slot name="default" explanation="the content of the alert">
+      <Alert {...args}>Some content</Alert>
     </Slot>
     <Slot
       name="icon"

@@ -94,7 +94,7 @@
       </div>
     </div>
   </button>
-  <slot checked={checked} />
+  <slot {checked} />
 </label>
 
 <style lang="scss">

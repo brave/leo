@@ -13,10 +13,13 @@ export const parameters = {
   layout: 'fullscreen'
 }
 
-export const decorators = [(story, context) => {
-  const args = context.args
-  const style = getStyleFromArgs(args)
-  context.args = getNonStyleArgs(args)
-  context.canvasElement.style = style
-  return story()
-}, () => Layout]
+export const decorators = [
+  (story, context) => {
+    const args = context.args
+    const style = getStyleFromArgs(args)
+    context.args = getNonStyleArgs(args)
+    context.canvasElement.style = style
+    return story()
+  },
+  () => Layout
+]

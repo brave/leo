@@ -1,8 +1,8 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import Checkbox, { sizes } from './checkbox.svelte'
-  import Slot from '../../storyHelpers/Slot.svelte';
-  import SlotInfo from '../../storyHelpers/SlotInfo.svelte';
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
 
 <Meta
@@ -74,7 +74,7 @@
 />
 
 <Template let:args>
-    <Checkbox {...args}>{args.label}</Checkbox>
+  <Checkbox {...args}>{args.label}</Checkbox>
 </Template>
 
 <Story name="Slots" let:args>
