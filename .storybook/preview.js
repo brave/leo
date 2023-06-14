@@ -1,4 +1,5 @@
 import Layout from './global.svelte'
+import { getNonStyleArgs, getStyleFromArgs } from './argHelper'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -12,4 +13,13 @@ export const parameters = {
   layout: 'fullscreen'
 }
 
-export const decorators = [() => Layout]
+export const decorators = [
+  (story, context) => {
+    const args = context.args
+    const style = getStyleFromArgs(args)
+    context.args = getNonStyleArgs(args)
+    context.canvasElement.style = style
+    return story()
+  },
+  () => Layout
+]

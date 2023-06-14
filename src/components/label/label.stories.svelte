@@ -1,9 +1,10 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import Icon from '../icon/icon.svelte'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
 
   import Label, { colors, modes } from './label.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
 
 <Meta
@@ -55,21 +56,34 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Label {...args}>
-      {#if args.storyLeftIcon}
-        <Icon name={args.storyLeftIcon} />
-      {/if}
-      Label
-      {#if args.storyRightIcon}
-        <Icon name={args.storyRightIcon} />
-      {/if}
-    </Label>
-  </div>
+  <Label {...args}>
+    {#if args.storyLeftIcon}
+      <Icon name={args.storyLeftIcon} />
+    {/if}
+    Label
+    {#if args.storyRightIcon}
+      <Icon name={args.storyRightIcon} />
+    {/if}
+  </Label>
 </Template>
 
+<Story name="Slots" let:args>
+  <SlotInfo description="The label has single slot for it's content">
+    <Slot
+      name="default"
+      explanation="The content of the label. Can be any HTML"
+    >
+      <div>
+        <Label {...args}>
+          Label content ==&gt; <Icon name="copy" />
+        </Label>
+      </div>
+    </Slot>
+  </SlotInfo>
+</Story>
+
 <Story name="All" let:args>
-  <div class="column" style={getStyleFromArgs(args)}>
+  <div class="column">
     {#each colors as color}
       {#each modes as mode}
         <Label {color} {mode}>

@@ -2,12 +2,10 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
   import Dropdown from './dropdown.svelte'
-  import {
-    getNonStyleArgs,
-    getStyleFromArgs
-  } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
   import { sizes } from '../formItem/formItem.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 
   const countries = {
     'nz': 'New Zealand',
@@ -39,8 +37,8 @@
 />
 
 <Template let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown value={undefined} {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown value={undefined} {...args}>
       <div slot="label">{args.label}</div>
       <leo-option value="one">
         <div>One</div>
@@ -51,11 +49,80 @@
   </div>
 </Template>
 
+<Story name="Slots" let:args>
+  <SlotInfo description="The dropdown provides several slots for customization">
+    <Slot
+      name="default"
+      explanation="The dropdown items. Each item should have a `value` attribute set to the value of the dropdown when that item is selected. This is similar to the <option value='1'>Foo</option> element. Items can be any sort of element, but type definitions are provided for <leo-option value='1'>Foo</leo-option>, so it's generally easiest to use that."
+    >
+      <Dropdown {...args}>
+        <leo-option value="1">Foo</leo-option>
+        <leo-option value="2">Bar</leo-option>
+        <leo-option value="3">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+    <Slot name="label" explanation="A label for the dropdown">
+      <Dropdown {...args}>
+        <div slot="label"><i>A custom <b>label</b> I made</i></div>
+        <leo-option value="1">Foo</leo-option>
+        <leo-option value="2">Bar</leo-option>
+        <leo-option value="3">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+    <Slot name="left-icon" explanation="A left icon to show in the dropdown">
+      <Dropdown {...args}>
+        <Icon name="country-nz" slot="left-icon" />
+        <leo-option value="1">Foo</leo-option>
+        <leo-option value="2">Bar</leo-option>
+        <leo-option value="3">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+    <Slot name="right-icon" explanation="A right icon to show in the dropdown">
+      <Dropdown {...args}>
+        <Icon name="country-nz" slot="right-icon" />
+        <leo-option value="1">Foo</leo-option>
+        <leo-option value="2">Bar</leo-option>
+        <leo-option value="3">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+    <Slot
+      name="placeholder"
+      explanation="Placeholder text to display when no option is selected"
+    >
+      <Dropdown {...args}>
+        <div
+          slot="placeholder"
+          style="color: gray; display: flex; flex-direction: row"
+        >
+          <Icon name="finger-touch" />
+          Maybe I should pick something
+        </div>
+        <leo-option value="1">Foo</leo-option>
+        <leo-option value="2">Bar</leo-option>
+        <leo-option value="3">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+    <Slot
+      name="value"
+      explanation="Let's you custom render the selected value. By default, the value will just be displayed"
+    >
+      <Dropdown {...args}>
+        <div slot="value" let:value>
+          You picked {value}
+        </div>
+        <leo-option value="Foo">Foo</leo-option>
+        <leo-option value="Bar">Bar</leo-option>
+        <leo-option value="Frob">Frob</leo-option>
+      </Dropdown>
+    </Slot>
+  </SlotInfo>
+</Story>
+
 <Story name="Default" />
 
 <Story name="Left Icon" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
@@ -68,8 +135,8 @@
 </Story>
 
 <Story name="Right Icon" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="right-icon">
         <Icon name="send" />
@@ -82,8 +149,8 @@
 </Story>
 
 <Story name="Both Icons" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container">
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
@@ -99,8 +166,8 @@
 </Story>
 
 <Story name="Custom Options" let:args>
-  <div class="container" style={getStyleFromArgs(args)}>
-    <Dropdown {...getNonStyleArgs(args)}>
+  <div class="container" style={args}>
+    <Dropdown {...args}>
       <div slot="label">{args.label}</div>
       <div slot="value" class="country" let:value>
         <Icon name={`country-${value}`} />

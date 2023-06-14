@@ -4,6 +4,9 @@
 
   import Alert, { modes, types } from './alert.svelte'
   import { showAlert } from './alertCenter.svelte'
+  import Icon from '../icon/icon.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
@@ -29,6 +32,50 @@
       duration
     )
 </script>
+
+<Story name="Slots" let:args>
+  <SlotInfo description="The Alert component has a number of useful slots:">
+    <Slot name="default" explanation="the content of the alert">
+      <Alert {...args}>Some content</Alert>
+    </Slot>
+    <Slot
+      name="icon"
+      explanation="the icon on the left hand side of the
+    Alert. This can be used to override the default icon for the different
+    types of Alert"
+    >
+      <Alert {...args}>
+        <Icon name="airplay" slot="icon" />
+        Some content
+      </Alert>
+    </Slot>
+    <Slot
+      name="title"
+      explanation="the icon on the left hand side of the Alert.
+      This can be used to override the default icon for the different types of
+      Alert"
+    >
+      <Alert {...args} mode="full">
+        <div slot="title">Title</div>
+        Some content
+      </Alert>
+    </Slot>
+    <Slot
+      name="actions"
+      explanation="the actions a user can take from an
+      Alert. These are optional. When specified, these are generally a list of
+      buttons"
+    >
+      <Alert {...args}>
+        <div slot="actions">
+          <Button kind="outline">Don't!</Button>
+          <Button>Do the thing!</Button>
+        </div>
+        Some content
+      </Alert>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Meta
   title="Alert"

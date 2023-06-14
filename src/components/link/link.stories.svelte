@@ -1,11 +1,9 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import {
-    getNonStyleArgs,
-    getStyleFromArgs
-  } from '../../../.storybook/argHelper'
 
   import Link from './link.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 </script>
 
 <Meta
@@ -65,9 +63,19 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Link href="#foo" {...getNonStyleArgs(args)} />
-  </div>
+  <Link href="#foo" {...args} />
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The link has a single slot, which works the same as the slot on the anchor tag"
+  >
+    <Slot name="default" explanation="The text of the link">
+      <div>
+        <Link {...args} text={null}>{args.text}</Link>
+      </div>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="Default" />

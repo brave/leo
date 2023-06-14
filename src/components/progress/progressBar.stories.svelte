@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import Bar from './progressBar.svelte'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
 
 <Meta
@@ -29,8 +29,10 @@
   }}
 />
 
+<Story name="Slots">
+  <SlotInfo description="The progress bar has no slots" />
+</Story>
+
 <Story name="Bar" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Bar {...args} />
-  </div>
+  <Bar {...args} />
 </Story>

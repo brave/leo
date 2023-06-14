@@ -1,7 +1,8 @@
 <script>
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import { getStyleFromArgs } from '../../../.storybook/argHelper'
   import Checkbox, { sizes } from './checkbox.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
 
 <Meta
@@ -73,9 +74,19 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Checkbox {...args}>{args.label}</Checkbox>
-  </div>
+  <Checkbox {...args}>{args.label}</Checkbox>
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The checkbox contains a single slot, for setting the label"
+  >
+    <Slot name="default" explanation="The content of the label">
+      <Checkbox {...args}>
+        {args.label || 'Hello label!'}
+      </Checkbox>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="Primary" />

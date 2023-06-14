@@ -3,6 +3,8 @@
 
   import Button from './button.svelte'
   import { buttonKinds, buttonSizes } from './props'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 
   let count = 0
   function handleClick() {
@@ -24,6 +26,18 @@
     You clicked: {count}
   </Button>
 </Template>
+
+<Story name="Slots" let:args>
+  <SlotInfo
+    description="The button contains a single slot, for setting the content of the button"
+  >
+    <Slot name="default" explanation="The content of the button">
+      <Button {...args}>
+        Button <b>can</b> <i>contain</i> <s>HTML</s>
+      </Button>
+    </Slot>
+  </SlotInfo>
+</Story>
 
 <Story name="Hero" args={{ kind: 'hero' }} />
 
