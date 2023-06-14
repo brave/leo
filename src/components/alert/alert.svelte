@@ -51,6 +51,10 @@
 </div>
 
 <style lang="scss">
+  :host {
+    display: block;
+  }
+
   :global .leo-alert .actions > *,
   .leo-alert .actions ::slotted(*) {
     display: flex;

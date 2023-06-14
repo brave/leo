@@ -54,6 +54,10 @@
 </details>
 
 <style lang="scss">
+  :host {
+    display: block;
+  }
+
   .leoCollapse {
     --background-color: var(
       --leo-collapse-background-color,

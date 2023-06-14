@@ -34,6 +34,10 @@
 </div>
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);

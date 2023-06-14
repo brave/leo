@@ -170,6 +170,10 @@
 <svelte:window on:keydown={changeSelection} />
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+  }
+
   .leo-dropdown {
     --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
     --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
