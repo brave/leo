@@ -60,7 +60,7 @@
     {#if args.storyLeftIcon}
       <Icon name={args.storyLeftIcon} />
     {/if}
-    Label
+    TEXT
     {#if args.storyRightIcon}
       <Icon name={args.storyRightIcon} />
     {/if}
