@@ -28,6 +28,7 @@
   import type { IconName } from '../../../icons/meta'
   export let name: IconName = undefined
   export let forceColor: boolean = false
+  export let gradient: string = undefined
   $: hasColor =
     name?.endsWith('-color') || name?.startsWith('country-') || forceColor
 </script>
@@ -38,7 +39,9 @@
       <div
         class="icon"
         class:color={hasColor}
+        class:gradient={!!gradient}
         style:--icon-url={`url('${getIconUrl($iconBasePath, name)}')`}
+        style:--icon-gradient={gradient}
       />
     {/if}
   </slot>
@@ -62,7 +65,13 @@
     /* Non color icons are set via a mask-image, so we can change the color
      * by setting the background */
     & .icon:not(.color) {
-      background: var(--icon-color);
+      &.gradient {
+        background: var(--icon-gradient);
+      } 
+      &:not(.gradient) {
+        background: var(--icon-color);
+      }
+
       -webkit-mask-image: var(--icon-url);
       mask-image: var(--icon-url);
       mask-repeat: no-repeat;
