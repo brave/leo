@@ -163,7 +163,7 @@
 
   .title {
     flex-grow: 1;
-    font: var(--leo-font-heading-h5);
+    font: var(--leo-font-primary-heading-h5);
   }
 
   .content {

@@ -79,7 +79,7 @@
     }
 
     & .title {
-      font: var(--leo-font-heading-h4);
+      font: var(--leo-font-primary-heading-h4);
     }
   }
 
