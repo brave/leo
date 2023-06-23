@@ -94,6 +94,7 @@
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-02);
+    --box-shadow-focus: var(--leo-effect-focus-state);
     display: block;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -117,6 +118,7 @@
       }
 
       &:active {
+        opacity: 0.75;
         background: var(--bg-active, var(--bg));
         color: var(--color-active, var(--color-hover, var(--color)));
       }
@@ -124,7 +126,7 @@
       &:focus-visible {
         outline: none;
         color: var(--color-focus, var(--color));
-        box-shadow: var(--leo-effect-focus-state);
+        box-shadow: var(--box-shadow-focus);
         background: var(--bg-focus, var(--bg));
         border-color: var(--border-color-focus, var(--border-color));
       }
@@ -194,25 +196,27 @@
   .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
-    --color: var(--leo-color-text-primary);
-    --color-hover: var(--leo-color-text-interactive);
-    --color-focus: var(--leo-color-text-primary);
+    --color: var(--leo-color-text-interactive);
+    --color-hover: var(--leo-color-primary-60);
+    --color-focus: var(--leo-color-text-interactive);
     --color-loading: var(--leo-color-gray-70);
     --border-width: 1px;
-    --border-color: var(--leo-color-divider-strong);
-    --border-color-focus: transparent;
+    --border-color: var(--leo-color-divider-interactive);
+    --border-color-hover: var(--leo-color-primary-40);
+    --border-color-focus: var(--leo-color-divider-interactive);
+    --box-shadow-focus: 0px 0px 0px 2px #423EEE, 0px 0px 0px 1px rgba(255, 255, 255, 0.30);
 
     &:disabled {
       opacity: 0.5;
     }
 
     @theme (dark) {
-      --border-color-hover: var(--leo-color-dark-primary-40);
+      --border-color-hover: var(--leo-color-dark-primary-50);
     }
   }
   .leoButton.isPlain {
     border-radius: 8px;
-    --padding-x: 0;
+    --padding-x: 2px;
     --color: var(--leo-color-text-interactive);
     --color-hover: var(--leo-color-primary-60);
     --color-active: var(--leo-color-primary-90);
@@ -228,7 +232,8 @@
     }
   }
   .leoButton.isPlainFaint {
-    --padding-x: 0;
+    border-radius: 8px;
+    --padding-x: 2px;
     --color: var(--leo-color-gray-60);
     --color-hover: var(--leo-color-gray-70);
     --box-shadow-hover: none;
