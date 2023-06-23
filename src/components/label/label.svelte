@@ -22,21 +22,22 @@
   export let color: Color = 'gray'
 
   $: background =
-    mode === 'loud'
-      ? `var(--leo-color-${color}-50)`
-      : 'transparent'
+    mode === 'loud' ? `var(--leo-color-${color}-50)` : 'transparent'
 
   $: text =
     mode === 'loud'
       ? `var(--leo-color-${color}-10)`
       : `var(--leo-color-${color}-50)`
 
-  $: border = mode === 'loud'
-    ? `transparent`
-    : `var(--leo-color-${color}-50)`
+  $: border = mode === 'loud' ? `transparent` : `var(--leo-color-${color}-50)`
 </script>
 
-<div class="leo-label" style:background style:color={text} style:border='1px solid {border}'>
+<div
+  class="leo-label"
+  style:background
+  style:color={text}
+  style:border="1px solid {border}"
+>
   <div class="content">
     <slot>Label</slot>
   </div>

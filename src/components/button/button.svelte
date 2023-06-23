@@ -204,7 +204,8 @@
     --border-color: var(--leo-color-divider-interactive);
     --border-color-hover: var(--leo-color-primary-40);
     --border-color-focus: var(--leo-color-divider-interactive);
-    --box-shadow-focus: 0px 0px 0px 2px #423EEE, 0px 0px 0px 1px rgba(255, 255, 255, 0.30);
+    --box-shadow-focus: 0px 0px 0px 2px #423eee,
+      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
 
     &:disabled {
       opacity: 0.5;

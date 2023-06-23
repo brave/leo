@@ -11,7 +11,7 @@
   export let size: Size = 'normal'
 
   export let required = false
-  export let mode: Mode = 'outline' 
+  export let mode: Mode = 'outline'
 </script>
 
 <label
@@ -53,7 +53,7 @@
     --leo-icon-color: var(--leo-color-icon-default);
     --gap: var(--leo-control-label-gap, var(--leo-spacing-4));
     --direction: var(--leo-control-label-direction, column);
-    
+
     --color: var(--leo-color-text-primary);
     --color-hover: var(--color);
     --color-focus: var(--color);
@@ -64,7 +64,8 @@
 
     --shadow: ;
     --shadow-hover: var(--shadow);
-    --shadow-focus: 0px 0px 0px 2px #423EEE, 0px 0px 0px 1px rgba(255, 255, 255, 0.30);
+    --shadow-focus: 0px 0px 0px 2px #423eee,
+      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
 
     --border-color: transparent;
     --border-color-hover: transparent;
@@ -135,7 +136,7 @@
 
     border-radius: var(--radius);
     padding: var(--padding);
-    
+
     color: var(--color);
     background: var(--background);
     box-shadow: var(--shadow);
