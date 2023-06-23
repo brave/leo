@@ -19,7 +19,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../svelteDirectives/clickOutside'
-  import FormItem, { type Size } from '../formItem/formItem.svelte'
+  import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
 
@@ -28,6 +28,7 @@
   export let disabled = false
   export let size: Size = 'normal'
   export let required = false
+  export let mode: Mode = 'outline'
 
   let dispatch = createEventDispatcher()
 
@@ -128,7 +129,7 @@
 </script>
 
 <div class="leo-dropdown">
-  <FormItem bind:disabled bind:required bind:size>
+  <FormItem bind:disabled bind:required bind:size {mode}>
     <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
     <button
