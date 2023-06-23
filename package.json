@@ -69,6 +69,7 @@
     "format": "prettier ./ --write",
     "format-diff": "prettier ./ --list-different",
     "prepare": "npm run build",
+    "prepack": "npm run prepare",
     "build": "npm run transform-tokens && npm run skiafy-icons && rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js --watch",
     "update-icons": "node ./src/scripts/update-icons.js",
