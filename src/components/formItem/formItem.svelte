@@ -120,7 +120,8 @@
     --background: var(--light-container-background);
     --background-hover: var();
     --border-color: var(--leo-color-divider-strong);
-    --border-color-hover: var(--leo-color-divider-strong);
+    --border-color-hover: var(--leo-color-gray-30);
+    --shadow-hover: var(--leo-effect-elevation-01);
   }
 
   .leo-control .control {
@@ -141,6 +142,8 @@
     background: var(--background);
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
+
+    cursor: pointer;
   }
 
   .leo-control[aria-disabled='true'] .container {

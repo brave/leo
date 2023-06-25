@@ -257,6 +257,8 @@
     padding: var(--leo-spacing-16);
     transition: background var(--transition-duration) ease-in-out,
       color var(--transition-duration) ease-in-out;
+
+    cursor: pointer;
   }
 
   :global .leo-dropdown-popup ::slotted(*:hover),
