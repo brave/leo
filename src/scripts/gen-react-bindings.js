@@ -10,7 +10,7 @@ const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)
-  const typingsPath = path.join('./svelte', relativePath) + '.d.ts'
+  const typingsPath = path.join('./types/components', relativePath) + '.d.ts'
   const typingsContents = await fs.readFile(typingsPath)
   const genericsMatcher = new RegExp(
     `${componentName}<(.*)> extends SvelteComponentTyped`,
@@ -78,14 +78,14 @@ export * from '../web-components/${fileNameWithoutExtension.toLowerCase()}.js'
   const typeDef = `
 import type * as React from 'react'
 import type { ReactProps } from '../src/components/svelte-react'
-import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../svelte/${containingFolder}/${fileName}';
+import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../types/components/${containingFolder}/${fileName}';
 
 export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
 export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
 
 // As we don't currently have type definitions for the web components, export
 // the Type Definitions from the Svelte component.
-export * from '../svelte/${containingFolder}/${fileName}'
+export * from '../types/components/${containingFolder}/${fileName}'
     `.trim()
 
   return [binding, typeDef]

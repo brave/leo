@@ -41,7 +41,7 @@ export * from '../shared/${fileNameWithoutExtension}.js'
 
   const typeDefinitions = `
 export default undefined
-export * from '../svelte/${containingFolder}/${fileName}'
+export * from '../types/components/${containingFolder}/${fileName}'
 `
 
   return [binding, typeDefinitions]
