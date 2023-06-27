@@ -4,9 +4,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
 import sveltePreprocess from 'svelte-preprocess'
 import themePlugin from './src/postcss/theme.js'
-import fs from 'fs/promises'
 import path from 'path'
-import genTypes from './src/scripts/gen-svelte-types.js'
+import genTypes from './src/scripts/gen-types.js'
 import genWebBindings from './src/scripts/gen-web-bindings.js'
 import genReactBindings from './src/scripts/gen-react-bindings.js'
 import { getSvelteFiles } from './src/scripts/common.js'
@@ -42,7 +41,7 @@ export default {
   plugins: [
     typescript({
       declaration: true,
-      declarationDir: './svelte',
+      declarationDir: './types',
       sourceMap: true
     }),
     // Emit type declarations for non-component helpers to the shared folder.
@@ -75,10 +74,10 @@ export default {
       buildEnd: {
         async handler() {
           // To get the type definitions working properly for consumers we create
-          // a copy of the Svelte component type definitions in the svelte folder.
+          // a copy of the type definitions in the types folder.
           await genTypes({
             baseDir: './',
-            outputDir: './svelte'
+            outputDir: './types'
           })
 
           // Generate Web Components
