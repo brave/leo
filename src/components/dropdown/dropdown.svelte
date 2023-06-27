@@ -4,6 +4,10 @@
     namespace JSX {
       interface IntrinsicElements {
         'leo-option': HTMLAttributes<HTMLElement> & {
+          // Note: This should line up with Reacts key type, but we don't want
+          // to depend on React in this layer, so we just define it manually.
+          key?: string | number | null
+
           value?: string
           children?: any
         }
@@ -132,7 +136,7 @@
       {disabled}
       on:click={(e) => (isOpen = !isOpen)}
     >
-      {#if value}
+      {#if value === undefined}
         <slot name="value" {value}>
           <span class="value">{value}</span>
         </slot>
