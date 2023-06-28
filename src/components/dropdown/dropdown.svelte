@@ -4,6 +4,10 @@
     namespace JSX {
       interface IntrinsicElements {
         'leo-option': HTMLAttributes<HTMLElement> & {
+          // Note: This should line up with Reacts key type, but we don't want
+          // to depend on React in this layer, so we just define it manually.
+          key?: string | number | null
+
           value?: string
           children?: any
         }
@@ -20,7 +24,7 @@
   import Icon from '../icon/icon.svelte'
 
   export let placeholder = ''
-  export let value: string = ''
+  export let value: string | undefined = undefined
   export let disabled = false
   export let size: Size = 'normal'
   export let required = false
@@ -48,6 +52,7 @@
       popup?.querySelectorAll('.leo-dropdown-popup > *') ??
       []
   )
+  $: valueText = options.find((o) => getValue(o) === value)?.textContent
 
   // When the options change, we should assign each one a tabindex - this let's
   // us handle changing the selection with the keyboard (tab or arrow keys).
@@ -130,11 +135,11 @@
       bind:this={button}
       class="click-target"
       {disabled}
-      on:click={(e) => (isOpen = !isOpen)}
+      on:click|stopPropagation={(e) => (isOpen = !isOpen)}
     >
-      {#if value}
+      {#if value !== undefined}
         <slot name="value" {value}>
-          <span class="value">{value}</span>
+          <span class="value">{valueText}</span>
         </slot>
       {:else}
         <slot name="placeholder">
@@ -148,21 +153,25 @@
       </div>
     </slot>
     <div class="menu" slot="after">
-      {#if isOpen}
-        <div
-          class="leo-dropdown-popup"
-          transition:scale={{ duration: 60, start: 0.8 }}
-          use:clickOutside={(e) => (isOpen = false)}
-          on:keypress={(e) => {
-            if (e.code !== 'Enter' && e.code !== 'Space') return
-            selectOption(e)
-          }}
-          on:click={selectOption}
-          bind:this={popup}
-        >
-          <slot />
-        </div>
-      {/if}
+      <div
+        class="leo-dropdown-popup"
+        hidden={!isOpen}
+        transition:scale={{ duration: 60, start: 0.8 }}
+        use:clickOutside={isOpen &&
+          ((e) => {
+            e.stopPropagation()
+            e.preventDefault()
+            isOpen = false
+          })}
+        on:keypress={(e) => {
+          if (e.code !== 'Enter' && e.code !== 'Space') return
+          selectOption(e)
+        }}
+        on:click|stopPropagation|preventDefault={selectOption}
+        bind:this={popup}
+      >
+        <slot />
+      </div>
     </div>
   </FormItem>
 </div>
@@ -227,6 +236,10 @@
     overflow-y: auto;
     overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   /**
