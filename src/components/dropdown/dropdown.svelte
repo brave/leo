@@ -134,7 +134,7 @@
       bind:this={button}
       class="click-target"
       {disabled}
-      on:click={(e) => (isOpen = !isOpen)}
+      on:click|stopPropagation={(e) => isOpen = !isOpen}
     >
       {#if value === undefined}
         <slot name="value" {value}>
@@ -152,21 +152,25 @@
       </div>
     </slot>
     <div class="menu" slot="after">
-      {#if isOpen}
-        <div
-          class="leo-dropdown-popup"
-          transition:scale={{ duration: 60, start: 0.8 }}
-          use:clickOutside={(e) => (isOpen = false)}
-          on:keypress={(e) => {
-            if (e.code !== 'Enter' && e.code !== 'Space') return
-            selectOption(e)
-          }}
-          on:click={selectOption}
-          bind:this={popup}
-        >
-          <slot />
-        </div>
-      {/if}
+      <div
+        class="leo-dropdown-popup"
+        hidden={!isOpen}
+        transition:scale={{ duration: 60, start: 0.8 }}
+        use:clickOutside={isOpen && ((e) => {
+          e.stopPropagation()
+          e.preventDefault()
+          isOpen = false
+        })}
+
+        on:keypress={(e) => {
+          if (e.code !== 'Enter' && e.code !== 'Space') return
+          selectOption(e)
+        }}
+        on:click|stopPropagation|preventDefault={selectOption}
+        bind:this={popup}
+      >
+        <slot />
+      </div>
     </div>
   </FormItem>
 </div>
@@ -231,6 +235,10 @@
     overflow-y: auto;
     overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   /**
