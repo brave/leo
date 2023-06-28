@@ -4,9 +4,9 @@ export default function clickOutside(
   node: HTMLUnknownElement,
   handler: Handler
 ) {
-  let lastHandler: Handler;
+  let lastHandler: Handler
   const attachHandler = (handler: Handler) => {
-    if (lastHandler) document.removeEventListener('click', lastHandler);
+    if (lastHandler) document.removeEventListener('click', lastHandler)
 
     lastHandler = (e: MouseEvent) => {
       const path = e.composedPath()
@@ -15,8 +15,6 @@ export default function clickOutside(
       if (handler) handler(e)
     }
 
-    // Note: This needs to be inside a `setTimeout` so when this is added via a
-    // click it doesn't handle that same click.
     document.addEventListener('click', lastHandler)
   }
   attachHandler(handler)

@@ -24,7 +24,7 @@
   import Icon from '../icon/icon.svelte'
 
   export let placeholder = ''
-  export let value: string = ''
+  export let value: string | undefined = undefined
   export let disabled = false
   export let size: Size = 'normal'
   export let required = false
@@ -52,6 +52,7 @@
       popup?.querySelectorAll('.leo-dropdown-popup > *') ??
       []
   )
+  $: valueText = options.find((o) => getValue(o) === value)?.textContent
 
   // When the options change, we should assign each one a tabindex - this let's
   // us handle changing the selection with the keyboard (tab or arrow keys).
@@ -134,11 +135,11 @@
       bind:this={button}
       class="click-target"
       {disabled}
-      on:click|stopPropagation={(e) => isOpen = !isOpen}
+      on:click|stopPropagation={(e) => (isOpen = !isOpen)}
     >
-      {#if value === undefined}
+      {#if value !== undefined}
         <slot name="value" {value}>
-          <span class="value">{value}</span>
+          <span class="value">{valueText}</span>
         </slot>
       {:else}
         <slot name="placeholder">
@@ -156,12 +157,12 @@
         class="leo-dropdown-popup"
         hidden={!isOpen}
         transition:scale={{ duration: 60, start: 0.8 }}
-        use:clickOutside={isOpen && ((e) => {
-          e.stopPropagation()
-          e.preventDefault()
-          isOpen = false
-        })}
-
+        use:clickOutside={isOpen &&
+          ((e) => {
+            e.stopPropagation()
+            e.preventDefault()
+            isOpen = false
+          })}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
           selectOption(e)
