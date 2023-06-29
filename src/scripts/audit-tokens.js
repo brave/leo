@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
 const path = require('path')
-const { getSvelteFiles } = require('./common')
+const { getSvelteFiles, walk } = require('./common')
 
 const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
 const ROOT_FOLDER = path.join(__dirname, '..', '..')
@@ -27,6 +27,27 @@ const extractTokensFromFile = async (file) => {
 }
 
 /**
+ * Extracts all tokens from subfiles in a folder with the provided extensions
+ * @param {string} folder The folder to search for tokens
+ * @param {string[]} extensions The file extensions to check. If undefined, all files will be checked.
+ * @returns {Promise<string[]>} Not deduplicated
+ */
+const extractTokensFromFolder = async (folder, extensions) => {
+    console.log(folder)
+    const result = []
+    for await (const file of await walk(folder)) {
+        console.log(file)
+        if (extensions && !extensions.some(e => file.endsWith(e))) {
+            continue;
+        }
+
+        const tokens = await extractTokensFromFile(file)
+        result.push(...tokens)
+    }
+    return result
+}
+
+/**
  * Returns a set of all available Leo tokens
  * @returns {Promise<Set<string>>}
  */
@@ -38,11 +59,8 @@ const getAvailableTokens = async () => {
         available.add(v)
 
     // Include all variables used to customize components
-    for await (const svelteFile of getSvelteFiles(COMPONENTS_FOLDER)) {
-        const variables = await extractTokensFromFile(svelteFile)
-        for (const v of variables)
-            available.add(v)
-    }
+    for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, ['.svelte']))
+        available.add(v)
 
     return available
 }
