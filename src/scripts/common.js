@@ -1,6 +1,11 @@
 const fs = require('fs/promises')
 const path = require('path')
 
+/**
+ * Recursively walks all files in a folder
+ * @param {The directory to walk} dir
+ * @returns {Promise<AsyncIterable<string>}
+ */
 async function* walk(dir) {
   for await (const d of await fs.opendir(dir)) {
     const entry = path.join(dir, d.name)
@@ -10,6 +15,8 @@ async function* walk(dir) {
 }
 
 module.exports = {
+  walk,
+
   /**
    * Returns the paths to all Svelte files in a directory (and subdirectories).
    * @param {string} root The root folder
