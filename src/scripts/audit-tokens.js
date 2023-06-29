@@ -7,20 +7,18 @@ const ROOT_FOLDER = path.join(__dirname, '..', '..')
 const CSS_VARIABLES = path.join(ROOT_FOLDER, 'tokens', 'css', 'variables.css')
 const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
 const DEFAULT_EXTENSIONS_TO_CHECK = [
-    ".css",
-    ".scss",
-    ".sass",
-    ".ts",
-    ".tsx",
-    ".js",
-    ".jsx",
-    ".less",
-    ".lss",
-    ".svelte"
+  '.css',
+  '.scss',
+  '.sass',
+  '.ts',
+  '.tsx',
+  '.js',
+  '.jsx',
+  '.less',
+  '.lss',
+  '.svelte'
 ]
-const IGNORE = [
-    "/node_modules/"
-]
+const IGNORE = ['/node_modules/']
 
 /**
  * Extracts all Leo tokens from a piece of text
@@ -28,7 +26,7 @@ const IGNORE = [
  * @returns {string[]} All the Leo CSS variables in the source text. Not deduplicated
  */
 const extractTokens = (text) => {
-    return Array.from(text.matchAll(tokenRegex)).map(([v]) => v)
+  return Array.from(text.matchAll(tokenRegex)).map(([v]) => v)
 }
 
 /**
@@ -37,8 +35,8 @@ const extractTokens = (text) => {
  * @returns {string[]}
  */
 const extractTokensFromFile = async (file) => {
-    const text = await fs.readFile(file, 'utf-8')
-    return extractTokens(text)
+  const text = await fs.readFile(file, 'utf-8')
+  return extractTokens(text)
 }
 
 /**
@@ -48,20 +46,20 @@ const extractTokensFromFile = async (file) => {
  * @returns {Promise<string[]>} Not deduplicated
  */
 const extractTokensFromFolder = async (folder, extensions) => {
-    const result = []
-    for await (const file of await walk(folder)) {
-        if (IGNORE.some(ignore => file.includes(ignore))) {
-            continue;
-        }
-
-        if (extensions && !extensions.some(e => file.endsWith(e))) {
-            continue;
-        }
-
-        const tokens = await extractTokensFromFile(file)
-        result.push(...tokens)
+  const result = []
+  for await (const file of await walk(folder)) {
+    if (IGNORE.some((ignore) => file.includes(ignore))) {
+      continue
     }
-    return result
+
+    if (extensions && !extensions.some((e) => file.endsWith(e))) {
+      continue
+    }
+
+    const tokens = await extractTokensFromFile(file)
+    result.push(...tokens)
+  }
+  return result
 }
 
 /**
@@ -69,35 +67,39 @@ const extractTokensFromFolder = async (folder, extensions) => {
  * @returns {Promise<Set<string>>}
  */
 const getAvailableTokens = async () => {
-    const available = new Set();
+  const available = new Set()
 
-    // Include all variables from out tokens file
-    for (const v of await extractTokensFromFile(CSS_VARIABLES))
-        available.add(v)
+  // Include all variables from out tokens file
+  for (const v of await extractTokensFromFile(CSS_VARIABLES)) available.add(v)
 
-    // Include all variables used to customize components
-    for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, ['.svelte']))
-        available.add(v)
+  // Include all variables used to customize components
+  for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, ['.svelte']))
+    available.add(v)
 
-    return available
+  return available
 }
 
 /**
  * Checks a folder to see if any files in it reference non-existent Leo tokens
- * @param {string} folder The folder to check for unknown Leo tokens 
+ * @param {string} folder The folder to check for unknown Leo tokens
  */
 const checkFolder = async (folder) => {
-    const availableTokens = await getAvailableTokens()
-    const usedTokens = await extractTokensFromFolder(folder, DEFAULT_EXTENSIONS_TO_CHECK)
+  const availableTokens = await getAvailableTokens()
+  const usedTokens = await extractTokensFromFolder(
+    folder,
+    DEFAULT_EXTENSIONS_TO_CHECK
+  )
 
-    const missingTokens = usedTokens.filter(t => !availableTokens.has(t))
-    if (missingTokens.length) {
-        console.error(`Found ${missingTokens.length} invalid tokens`)
-        console.error(missingTokens.map(t => `  ${t}`).join('\n'))
-        console.error("The above tokens are not present in Leo, and may have been used by mistake.")
-        process.exit(1)
-    }
-    console.log("Success!")
+  const missingTokens = usedTokens.filter((t) => !availableTokens.has(t))
+  if (missingTokens.length) {
+    console.error(`Found ${missingTokens.length} invalid tokens`)
+    console.error(missingTokens.map((t) => `  ${t}`).join('\n'))
+    console.error(
+      'The above tokens are not present in Leo, and may have been used by mistake.'
+    )
+    process.exit(1)
+  }
+  console.log('Success!')
 }
 
 checkFolder(process.cwd())
