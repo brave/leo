@@ -1,11 +1,26 @@
 const fs = require('fs/promises')
 const path = require('path')
-const { getSvelteFiles, walk } = require('./common')
+const { walk } = require('./common')
 
 const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
 const ROOT_FOLDER = path.join(__dirname, '..', '..')
 const CSS_VARIABLES = path.join(ROOT_FOLDER, 'tokens', 'css', 'variables.css')
 const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
+const DEFAULT_EXTENSIONS_TO_CHECK = [
+    ".css",
+    ".scss",
+    ".sass",
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx",
+    ".less",
+    ".lss",
+    ".svelte"
+]
+const IGNORE = [
+    "/node_modules/"
+]
 
 /**
  * Extracts all Leo tokens from a piece of text
@@ -33,10 +48,12 @@ const extractTokensFromFile = async (file) => {
  * @returns {Promise<string[]>} Not deduplicated
  */
 const extractTokensFromFolder = async (folder, extensions) => {
-    console.log(folder)
     const result = []
     for await (const file of await walk(folder)) {
-        console.log(file)
+        if (IGNORE.some(ignore => file.includes(ignore))) {
+            continue;
+        }
+
         if (extensions && !extensions.some(e => file.endsWith(e))) {
             continue;
         }
@@ -65,7 +82,18 @@ const getAvailableTokens = async () => {
     return available
 }
 
-getAvailableTokens().then((tokens) => {
-    console.log(Array.from(tokens).join('\n'))
-    console.log(tokens.size)
-})
+const checkFolder = async (folder) => {
+    const availableTokens = await getAvailableTokens()
+    const usedTokens = await extractTokensFromFolder(folder, DEFAULT_EXTENSIONS_TO_CHECK)
+
+    const missingTokens = usedTokens.filter(t => !availableTokens.has(t))
+    if (missingTokens.length) {
+        console.error(`Found ${missingTokens.length} invalid tokens`)
+        console.error(missingTokens.map(t => `  ${t}`).join('\n'))
+        console.error("The above tokens are not present in Leo, and may have been used by mistake.")
+        process.exit(1)
+    }
+    console.log("Success!")
+}
+
+checkFolder(process.cwd())
