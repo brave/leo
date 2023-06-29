@@ -82,6 +82,10 @@ const getAvailableTokens = async () => {
     return available
 }
 
+/**
+ * Checks a folder to see if any files in it reference non-existent Leo tokens
+ * @param {string} folder The folder to check for unknown Leo tokens 
+ */
 const checkFolder = async (folder) => {
     const availableTokens = await getAvailableTokens()
     const usedTokens = await extractTokensFromFolder(folder, DEFAULT_EXTENSIONS_TO_CHECK)
