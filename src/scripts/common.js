@@ -10,6 +10,11 @@ async function* walk(dir) {
 }
 
 module.exports = {
+  /**
+   * Returns the paths to all Svelte files in a directory (and subdirectories).
+   * @param {string} root The root folder
+   * @param {boolean} includeDts Whether to include typescript definition files
+   */
   getSvelteFiles: async function* (root, includeDts = true) {
     for await (const file of await walk(root)) {
       if (
