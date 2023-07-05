@@ -45,12 +45,6 @@ jobs:
           # Please check with Brave's security team prior to adding any packages to this list.
           npm rebuild style-dictionary-create-react-app
 
-      - name: Diff Tokens
-        id: diff-tokens
-        run: |
-          curl https://leo.bravesoftware.com/css/variables.css > tokens/css/variables.old.css 
-          diff -u tokens/css/variables.old.css tokens/css/variables.css > tokens/css/variables.diff
-
       - name: Format
         id: format
         run: |
@@ -60,6 +54,12 @@ jobs:
         id: build-leo
         run: |
           npm run build
+
+      - name: Diff Tokens
+        id: diff-tokens
+        run: |
+          curl https://leo.bravesoftware.com/css/variables.css > ./tokens/css/variables.old.css 
+          diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff
 
       - name: Check Types
         id: check-types
