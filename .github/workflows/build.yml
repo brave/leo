@@ -98,23 +98,19 @@ jobs:
           fi
           echo "::endgroup::"
 
-      - name: Fetch Tokens for Main
-        id: fetch-tokens
-        uses: gautemo/fetch-api-data-action@1.0.2
-        with:
-          url: 'https://leo.bravesoftware.com/css/variables.css'
-          file: 'tokens/css/variables.old.css'
-
       - name: Diff Tokens
         id: diff
         run: |
-          echo TOKENS_DIFF="$(diff -u tokens/css/variables.old.css tokens/css/variables.css)" >> $GITHUB_OUTPUT
+          curl https://leo.bravesoftware.com/css/variables.css > tokens/css/variables.old.css 
+          diff -u tokens/css/variables.old.css tokens/css/variables.css > tokens/css/variables.diff
 
       - name: Post GitHub comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
         with:
           script: |
+            const fs = require('fs/promises')
+            const diff = await fs.readFile('./tokens/css/variables.diff', 'utf-8')
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -127,7 +123,9 @@ jobs:
               <details>
                 <summary>Variables Diff</summary>
 
-                ${steps.diff.outputs.TOKENS_DIFF}
+                \`\`\`diff
+                ${diff}
+                \`\`\`
 
                 </details>`
             })
