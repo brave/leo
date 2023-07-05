@@ -45,6 +45,12 @@ jobs:
           # Please check with Brave's security team prior to adding any packages to this list.
           npm rebuild style-dictionary-create-react-app
 
+      - name: Diff Tokens
+        id: diff-tokens
+        run: |
+          curl https://leo.bravesoftware.com/css/variables.css > tokens/css/variables.old.css 
+          diff -u tokens/css/variables.old.css tokens/css/variables.css > tokens/css/variables.diff
+
       - name: Format
         id: format
         run: |
@@ -97,12 +103,6 @@ jobs:
             aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
           fi
           echo "::endgroup::"
-
-      - name: Diff Tokens
-        id: diff
-        run: |
-          curl https://leo.bravesoftware.com/css/variables.css > tokens/css/variables.old.css 
-          diff -u tokens/css/variables.old.css tokens/css/variables.css > tokens/css/variables.diff
 
       - name: Post GitHub comment
         uses: actions/github-script@v6
