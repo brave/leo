@@ -98,6 +98,18 @@ jobs:
           fi
           echo "::endgroup::"
 
+      - name: Fetch Tokens for Main
+        id: fetch-tokens
+        uses: gautemo/fetch-api-data-action@1.0.2
+        with:
+          url: 'https://leo.bravesoftware.com/css/variables.css'
+          file: 'tokens/css/variables.old.css'
+
+      - name: Diff Tokens
+        id: diff
+        run: |
+          echo TOKENS_DIFF="$(diff -u tokens/css/variables.old.css tokens/css/variables.css)" >> $GITHUB_OUTPUT
+
       - name: Post GitHub comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' }}
@@ -107,5 +119,15 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.
+
+              ✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/
+              ✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
+
+              <details>
+                <summary>Variables Diff</summary>
+
+                ${steps.diff.outputs.TOKENS_DIFF}
+
+                </details>`
             })
