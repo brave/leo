@@ -58,8 +58,10 @@ jobs:
       - name: Diff Tokens
         id: diff-tokens
         run: |
-          curl https://leo.bravesoftware.com/css/variables.css > ./tokens/css/variables.old.css 
-          diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff
+          curl https://leo.bravesoftware.com/css/variables.css > ./tokens/css/variables.old.css
+          # Note: Diff has exit code 1 for differences, and there are always
+          # some differences because the file contains a timestamp.
+          diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff || echo "Diff Completed"
 
       - name: Check Types
         id: check-types
