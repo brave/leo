@@ -12,6 +12,8 @@
 
   export let required = false
   export let mode: Mode = 'outline'
+
+  export let showFocusOutline: boolean = false
 </script>
 
 <label
@@ -20,6 +22,7 @@
   class:large={size === 'large'}
   class:filled={mode === 'filled'}
   class:outline={mode !== 'filled'}
+  class:focus={showFocusOutline}
   aria-disabled={disabled}
 >
   <div class="label-row">
@@ -85,7 +88,8 @@
         border-color: var(--border-color-hover);
       }
 
-      & .container:has(*:focus-visible) {
+      & .container:has(*:focus-visible),
+      &.focus .container {
         color: var(--color-focus);
         background: var(--background-focus);
         box-shadow: var(--shadow-focus);

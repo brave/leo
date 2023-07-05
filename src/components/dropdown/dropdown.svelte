@@ -129,7 +129,13 @@
 </script>
 
 <div class="leo-dropdown">
-  <FormItem bind:disabled bind:required bind:size {mode}>
+  <FormItem
+    bind:disabled
+    bind:required
+    bind:size
+    {mode}
+    showFocusOutline={isOpen}
+  >
     <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
     <button
