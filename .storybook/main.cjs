@@ -34,6 +34,10 @@ module.exports = {
     {
       from: '../icons',
       to: '/icons'
+    },
+    {
+      from: '../tokens/css',
+      to: '/css'
     }
   ],
   // svelteOptions: {
