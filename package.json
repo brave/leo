@@ -79,6 +79,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "bin": {
+    "leo-check": "./src/scripts/audit-tokens.js"
+  },
   "license": "MIT",
   "overrides": {
     "axios": "^1.3.2"
