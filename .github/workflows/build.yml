@@ -122,12 +122,12 @@ jobs:
               ✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/
               ✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
 
-              <details>
-                <summary>Variables Diff</summary>
+            <details>
+            <summary>Variables Diff</summary>
 
-                \`\`\`diff
-                ${diff}
-                \`\`\`
+            \`\`\`diff
+            ${diff}
+            \`\`\`
 
-                </details>`
+            </details>`
             })
