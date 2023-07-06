@@ -100,7 +100,6 @@
     transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
-    border-radius: var(--leo-radius-full);
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
@@ -149,30 +148,35 @@
     font: var(--leo-font-components-button-small);
     --padding-y: 6px;
     --padding-x: 10px;
+    border-radius: 14px;
   }
   .leoButton.isSmall {
     --icon-size: 20px;
     font: var(--leo-font-components-button-small);
     --padding-y: 8px;
     --padding-x: 14px;
+    border-radius: 16px;
   }
   .leoButton.isMedium {
     --icon-size: 24px;
     font: var(--leo-font-components-button-default);
     --padding-y: 10px;
     --padding-x: 16px;
+    border-radius: 20px;
   }
   .leoButton.isLarge {
     --icon-size: 24px;
     font: var(--leo-font-components-button-large);
     --padding-y: 12px;
     --padding-x: 30px;
+    border-radius: 22px;
   }
   .leoButton.isJumbo {
     --icon-size: 24px;
     font: var(--leo-font-components-button-jumbo);
     --padding-y: 18px;
     --padding-x: 26px;
+    border-radius: 30px;
   }
 
   // Kind Variations
@@ -258,7 +262,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      border-radius: var(--leo-radius-full);
+      border-radius: inherit;
     }
 
     &::before {
