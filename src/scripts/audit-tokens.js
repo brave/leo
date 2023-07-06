@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const fs = require('fs/promises')
 const path = require('path')
 const { walk } = require('./common')
@@ -46,10 +47,10 @@ const extractTokensFromFile = async (file) => {
  * @param {string[]} extensions The file extensions to check. If undefined, all files will be checked.
  * @returns {Promise<string[]>} Not deduplicated
  */
-const extractTokensFromFolder = async (folder, extensions) => {
+const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
   const result = []
   for await (const file of await walk(folder)) {
-    if (IGNORE.some((ignore) => file.includes(ignore))) {
+    if (ignore.some((i) => file.includes(i))) {
       continue
     }
 
@@ -88,7 +89,8 @@ const checkFolder = async (folder) => {
   const availableTokens = await getAvailableTokens()
   const usedTokens = await extractTokensFromFolder(
     folder,
-    DEFAULT_EXTENSIONS_TO_CHECK
+    DEFAULT_EXTENSIONS_TO_CHECK,
+    IGNORE
   )
 
   const missingTokens = usedTokens.filter((t) => !availableTokens.has(t))
