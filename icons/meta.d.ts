@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 type Meta = {
-  "updatedAt": 1688419818563,
+  "updatedAt": 1688890155096,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -208,13 +208,13 @@ type Meta = {
     "braintrust-color": "braintrust-color",
     "brand-android": "brand-android",
     "brand-apple": "brand-apple",
-    "brave-icon-beta": "brave-icon-beta",
-    "brave-icon-debug": "brave-icon-debug",
+    "brave-icon-beta-color": "brave-icon-beta-color",
+    "brave-icon-debug-color": "brave-icon-debug-color",
     "brave-icon-monochrome": "brave-icon-monochrome",
-    "brave-icon-nightly": "brave-icon-nightly",
+    "brave-icon-nightly-color": "brave-icon-nightly-color",
     "brave-icon-outline": "brave-icon-outline",
     "brave-icon-premium-color": "brave-icon-premium-color",
-    "brave-icon-release": "brave-icon-release",
+    "brave-icon-release-color": "brave-icon-release-color",
     "brave-icon-search": "brave-icon-search",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
@@ -1360,7 +1360,7 @@ type Meta = {
     "product-ipfs-outline": "product-ipfs-outline",
     "product-playlist-add": "product-playlist-add",
     "product-playlist-added": "product-playlist-added",
-    "product-playlist-bold-add": "product-playlist-bold-add",
+    "product-playlist-bold-add-color": "product-playlist-bold-add-color",
     "product-playlist-bold-added": "product-playlist-bold-added",
     "product-playlist-remove": "product-playlist-remove",
     "product-playlist": "product-playlist",
