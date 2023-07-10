@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import Icon from '../icon/icon.svelte'
 
   export let title = ''
 
@@ -32,20 +33,7 @@
       {title}
     </div>
     <div class="arrow">
-      <svg
-        width="16"
-        height="9"
-        viewBox="0 0 16 9"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M0.234303 0.234362C0.546723 -0.0780572 1.05325 -0.0780572 1.36567 0.234362L7.79999 6.66868L14.2343 0.234363C14.5467 -0.078056 15.0533 -0.0780559 15.3657 0.234363C15.6781 0.546783 15.6781 1.05331 15.3657 1.36573L8.64852 8.08289C8.17989 8.55152 7.42009 8.55152 6.95146 8.08289L0.234303 1.36573C-0.0781163 1.05331 -0.0781163 0.546782 0.234303 0.234362Z"
-          fill="currentColor"
-        />
-      </svg>
+      <Icon name="carat-down" />
     </div>
   </summary>
   <div class="content">
