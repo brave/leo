@@ -9,7 +9,8 @@
     computePosition,
     flip as flipMiddleWare,
     shift as shiftMiddleware,
-    offset as offsetMiddleware
+    offset as offsetMiddleware,
+    arrow as arrowMiddleware
   } from '@floating-ui/dom'
 
   export let text: string = undefined
@@ -36,13 +37,15 @@
   export let mode: Mode = 'info'
 
   let tooltip: HTMLElement
+  let arrow: HTMLElement
   let trigger: HTMLElement
 
   function getMiddlewares(
     flip: boolean,
     shift: number | undefined,
     offset: number,
-    additional: Middleware[]
+    additional: Middleware[],
+    arrow: HTMLElement
   ) {
     const result: Middleware[] = []
     if (offset) {
@@ -54,17 +57,35 @@
     if (shift !== undefined) {
       result.push(shiftMiddleware({ padding: shift }))
     }
+    result.push(arrowMiddleware({ element: arrow }))
     result.push(...additional)
     return result
   }
 
   $: computePosition(trigger, tooltip, {
     placement: placement,
-    middleware: getMiddlewares(flip, shift, offset, middleware)
-  }).then(({ x, y }) => {
+    middleware: getMiddlewares(flip, shift, offset, middleware, arrow)
+  }).then(({ x, y, placement, middlewareData }) => {
     Object.assign(tooltip.style, {
       left: `${x}px`,
       top: `${y}px`
+    })
+
+    const { x: arrowX, y: arrowY } = middlewareData.arrow
+
+    const staticSide = {
+      top: 'bottom',
+      right: 'left',
+      bottom: 'top',
+      left: 'right'
+    }[placement.split('-')[0]]
+
+    Object.assign(arrow.style, {
+      left: arrowX != null ? `${arrowX}px` : '',
+      top: arrowY != null ? `${arrowY}px` : '',
+      right: '',
+      bottom: '',
+      [staticSide]: '-4px'
     })
   })
 </script>
@@ -79,6 +100,7 @@
   <slot name="text">
     {text}
   </slot>
+  <div class="arrow" bind:this={arrow} />
 </div>
 
 <div class="trigger" bind:this={trigger}>
@@ -105,6 +127,14 @@
     position: absolute;
 
     width: fit-content;
+  }
+
+  .leo-tooltip .arrow {
+    position: absolute;
+    background: var(--background);
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
   }
 
   .leo-tooltip.hero {
