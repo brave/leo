@@ -40,12 +40,15 @@
   let arrow: HTMLElement
   let trigger: HTMLElement
 
+  let visible: boolean = false
+
   function getMiddlewares(
     flip: boolean,
     shift: number | undefined,
     offset: number,
     additional: Middleware[],
-    arrow: HTMLElement
+    arrow: HTMLElement,
+    visible: boolean
   ) {
     const result: Middleware[] = []
     if (offset) {
@@ -64,7 +67,7 @@
 
   $: computePosition(trigger, tooltip, {
     placement: placement,
-    middleware: getMiddlewares(flip, shift, offset, middleware, arrow)
+    middleware: getMiddlewares(flip, shift, offset, middleware, arrow, visible)
   }).then(({ x, y, placement, middlewareData }) => {
     Object.assign(tooltip.style, {
       left: `${x}px`,
@@ -95,6 +98,7 @@
   class:hero={mode === 'hero'}
   class:info={mode === 'info'}
   class:mini={mode === 'mini'}
+  hidden={!visible}
   bind:this={tooltip}
 >
   <slot name="text">
@@ -103,7 +107,14 @@
   <div class="arrow" bind:this={arrow} />
 </div>
 
-<div class="trigger" bind:this={trigger}>
+<div
+  class="trigger"
+  on:mouseenter={() => (visible = true)}
+  on:mouseleave={() => (visible = false)}
+  on:focusin={() => (visible = true)}
+  on:focusout={() => (visible = false)}
+  bind:this={trigger}
+>
   <slot />
 </div>
 
@@ -127,6 +138,8 @@
     position: absolute;
 
     width: fit-content;
+
+    font: var(--leo-font-primary-default-regular);
   }
 
   .leo-tooltip .arrow {
@@ -148,6 +161,13 @@
   }
 
   .leo-tooltip.mini {
+    --background: var(--leo-color-gray-10);
+    --text: var(--leo-color-text-primary);
+    --padding: var(--leo-spacing-4) 6px;
+    --shadow: var(--leo-effect-elevation-01);
+    --radius: 2px;
+
+    font: var(--leo-font-primary-x-small-regular);
   }
 
   .trigger {
