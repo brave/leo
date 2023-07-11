@@ -55,6 +55,14 @@ jobs:
         run: |
           npm run build
 
+      - name: Diff Tokens
+        id: diff-tokens
+        run: |
+          curl -fsSL -o ./tokens/css/variables.old.css https://leo.bravesoftware.com/css/variables.css
+          # Note: Diff has exit code 1 for differences, and there are always
+          # some differences because the file contains a timestamp.
+          diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff || :
+
       - name: Check Types
         id: check-types
         run: |
@@ -103,9 +111,23 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         with:
           script: |
+            const fs = require('fs/promises')
+            const diff = await fs.readFile('./tokens/css/variables.diff', 'utf-8')
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.\n\n✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/\n✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/`
+              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.
+
+              ✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/
+              ✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
+
+            <details>
+            <summary>Variables Diff</summary>
+
+            \`\`\`diff
+            ${diff}
+            \`\`\`
+
+            </details>`
             })
