@@ -147,8 +147,8 @@
     );
     --text: var(--leo-tooltip-text-color, var(--leo-color-text-primary));
     --shadow: var(--leo-tooltip-shadow, var(--leo-effect-elevation-03));
-    --padding: var(--leo-tooltip-padding, var(--leo-spacing-24));
-    --radius: var(--leo-spacing-8);
+    --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
+    --radius: var(--leo-radius-m);
 
     position: relative;
     z-index: 0;
@@ -183,14 +183,14 @@
   }
 
   .leo-tooltip .tooltip.info {
-    --background: var(--leo-color-interaction-button-primary-background);
+    --background: var(--leo-color-button-background);
     --text: var(--leo-color-container-background);
   }
 
   .leo-tooltip .tooltip.mini {
     --background: var(--leo-color-gray-10);
     --text: var(--leo-color-text-primary);
-    --padding: var(--leo-spacing-4) 6px;
+    --padding: var(--leo-spacing-s) 6px;
     --shadow: var(--leo-effect-elevation-01);
     --radius: 2px;
 
