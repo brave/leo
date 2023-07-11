@@ -9,8 +9,7 @@
     'blue',
     'purple',
     'pink',
-    'teal',
-    'CTA'
+    'teal'
   ] as const
   export type Color = (typeof colors)[number]
 
@@ -23,20 +22,22 @@
   export let color: Color = 'gray'
 
   $: background =
-    color === 'CTA'
-      ? `var(--leo-gradient-hero)`
-      : mode === 'loud'
-      ? `var(--leo-color-${color}-40)`
-      : `var(--leo-color-${color}-10)`
+    mode === 'loud' ? `var(--leo-color-${color}-50)` : 'transparent'
+
   $: text =
-    color === 'CTA'
-      ? `var(--leo-color-white)`
-      : mode === 'loud'
+    mode === 'loud'
       ? `var(--leo-color-${color}-10)`
       : `var(--leo-color-${color}-50)`
+
+  $: border = mode === 'loud' ? `transparent` : `var(--leo-color-${color}-50)`
 </script>
 
-<div class="leo-label" style:background style:color={text}>
+<div
+  class="leo-label"
+  style:background
+  style:color={text}
+  style:border="1px solid {border}"
+>
   <div class="content">
     <slot>Label</slot>
   </div>
@@ -48,10 +49,10 @@
   }
 
   .leo-label {
-    --icon-size: var(--leo-label-icon-size, 13px);
+    --icon-size: var(--leo-label-icon-size, 14px);
     --font-text: var(--leo-label-font-text, var(--leo-font-components-label));
-    --padding: var(--leo-label-padding, var(--leo-spacing-4));
-    --radius: var(--leo-label-radius, var(--leo-radius-4));
+    --padding: var(--leo-label-padding, 2px 3px);
+    --radius: var(--leo-label-radius, 6px);
 
     --leo-icon-size: var(--icon-size);
 

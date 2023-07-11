@@ -6,6 +6,7 @@
   import { sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import { modes } from '../formItem/formItem.svelte'
 
   const countries = {
     'nz': 'New Zealand',
@@ -32,6 +33,10 @@
     size: {
       control: 'select',
       options: sizes
+    },
+    mode: {
+      control: 'select',
+      options: modes
     }
   }}
 />
