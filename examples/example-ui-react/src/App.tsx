@@ -1,9 +1,16 @@
 import * as React from 'react'
 import '../../../tokens/css/variables.css'
 import LeoButton from '../../../react/button'
+import Tooltip from '../../../react/tooltip'
 import styles from './App.module.css'
 import Input from '../../../react/input'
 import Dropdown from '../../../react/dropdown'
+
+import { color } from '../../../tokens/css'
+
+color.white
+
+let f = '#FFFFFF'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -41,7 +48,9 @@ function App() {
             <leo-option value="bar">Bar</leo-option>
           </Dropdown>
         </div>
-        <LeoButton href="#foo">Link button!</LeoButton>
+        <Tooltip text="Hello World" visible={spinning} onVisibilitychange={() => { console.log("Closed")}}>
+          <LeoButton href="#foo">Link button!</LeoButton>
+        </Tooltip>
       </header>
     </div>
   )
