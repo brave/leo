@@ -80,7 +80,7 @@
       var(--leo-color-text-primary)
     );
     --summary-color-hover: var(
-      --leo-collapse-summary-color,
+      --leo-collapse-summary-color-hover,
       var(--leo-color-text-interactive)
     );
     --icon-color: var(--leo-collapse-icon-color, var(--leo-color-icon-default));
