@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 type Meta = {
-  "updatedAt": 1688890155096,
+  "updatedAt": 1689062955852,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1804,6 +1804,7 @@ type Meta = {
     "window-settings": "window-settings",
     "window-tab-close": "window-tab-close",
     "window-tab-new": "window-tab-new",
+    "window-tab-private": "window-tab-private",
     "window-tab": "window-tab",
     "window-tabs-horizontal": "window-tabs-horizontal",
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
