@@ -106,7 +106,13 @@
   }
 </script>
 
-<div class="leo-tooltip">
+<div
+  class="leo-tooltip"
+  on:mouseenter={() => setVisible(true)}
+  on:mouseleave={() => setVisible(false)}
+  on:focusin={() => setVisible(true)}
+  on:focusout={() => setVisible(false)}
+>
   {#key visible}
     <div
       class="tooltip"
@@ -124,25 +130,13 @@
     </div>
   {/key}
 
-  <div
-    class="trigger"
-    on:mouseenter={() => setVisible(true)}
-    on:mouseleave={() => setVisible(false)}
-    on:focusin={() => setVisible(true)}
-    on:focusout={() => setVisible(false)}
-    bind:this={trigger}
-  >
+  <div class="trigger" bind:this={trigger}>
     <slot />
   </div>
 </div>
 
 <style lang="scss">
   .leo-tooltip {
-    position: relative;
-    z-index: 0;
-  }
-
-  .tooltip {
     --background: var(
       --leo-tooltip-background,
       var(--leo-color-container-background)
@@ -152,6 +146,12 @@
     --padding: var(--leo-tooltip-padding, var(--leo-spacing-24));
     --radius: var(--leo-spacing-8);
 
+    position: relative;
+    z-index: 0;
+    width: fit-content;
+  }
+
+  .leo-tooltip .tooltip {
     background: var(--background);
     color: var(--text);
     box-shadow: var(--shadow);
@@ -159,13 +159,12 @@
     border-radius: var(--radius);
 
     position: absolute;
-
-    width: fit-content;
+    width: max-content;
 
     font: var(--leo-font-primary-default-regular);
   }
 
-  .tooltip .arrow {
+  .leo-tooltip .tooltip .arrow {
     position: absolute;
     background: var(--background);
     width: 8px;
@@ -174,17 +173,17 @@
     z-index: -1;
   }
 
-  .tooltip.hero {
+  .leo-tooltip .tooltip.hero {
     --background: var(--leo-gradient-hero);
     --text: var(--leo-color-container-background);
   }
 
-  .tooltip.info {
+  .leo-tooltip .tooltip.info {
     --background: var(--leo-color-interaction-button-primary-background);
     --text: var(--leo-color-container-background);
   }
 
-  .tooltip.mini {
+  .leo-tooltip .tooltip.mini {
     --background: var(--leo-color-gray-10);
     --text: var(--leo-color-text-primary);
     --padding: var(--leo-spacing-4) 6px;
@@ -194,7 +193,7 @@
     font: var(--leo-font-primary-x-small-regular);
   }
 
-  .trigger {
+  .leo-tooltip .trigger {
     width: fit-content;
   }
 </style>
