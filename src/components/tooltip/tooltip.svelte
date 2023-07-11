@@ -40,7 +40,11 @@
   export let mode: Mode = 'mini'
 
   /* Whether the tooltip is currently visible */
-  export let visible: boolean = false
+  export let visible: boolean | undefined = undefined
+
+  // Note: This is separate from the |visible| flag because we want to handle
+  // controlled and uncontrolled states for this component.
+  $: visibleInternal = visible ?? false 
 
   const dispatch = createEventDispatcher()
 
@@ -101,8 +105,8 @@
   function setVisible(newVisible: boolean) {
     if (newVisible === visible) return
 
-    visible = newVisible
-    dispatch('visibilitychange', { visible })
+    if (visible === undefined) visibleInternal = newVisible
+    dispatch('visibilitychange', { visible: newVisible })
   }
 </script>
 
@@ -113,14 +117,14 @@
   on:focusin={() => setVisible(true)}
   on:focusout={() => setVisible(false)}
 >
-  {#key visible}
+  {#key visibleInternal}
     <div
       class="tooltip"
       class:hero={mode === 'hero'}
       class:info={mode === 'info'}
       class:mini={mode === 'mini'}
       transition:fade={{ duration: 60 }}
-      hidden={!visible}
+      hidden={!visibleInternal}
       bind:this={tooltip}
     >
       <slot name="text">
