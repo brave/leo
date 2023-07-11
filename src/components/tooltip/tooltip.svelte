@@ -12,29 +12,31 @@
     offset as offsetMiddleware,
     arrow as arrowMiddleware
   } from '@floating-ui/dom'
+  import { fade } from 'svelte/transition'
 
   export let text: string = undefined
 
-  // The default placement of the tooltip:
-  // https://floating-ui.com/docs/tutorial#placements
+  /** The default placement of the tooltip
+    * https://floating-ui.com/docs/tutorial#placements */
   export let placement: Placement = 'top'
 
-  // Whether the element should flip to the opposite placement if it doesn't fit
-  // https://floating-ui.com/docs/flip
+  /** Whether the element should flip to the opposite placement if it doesn't fit
+    * https://floating-ui.com/docs/flip */
   export let flip: boolean = true
 
-  // The shift padding to apply to the tooltip. See
-  // https://floating-ui.com/docs/shift for more details.
+  /** The shift padding to apply to the tooltip. See
+    * https://floating-ui.com/docs/shift for more details. */
   export let shift: number | undefined = 8
 
-  // The gap between the target and the tooltip:
-  // https://floating-ui.com/docs/offset
+  /** The gap between the target and the tooltip:
+    * https://floating-ui.com/docs/offset */
   export let offset: number = 8
 
-  // Additional middleware to apply.
+  /** Additional middleware to apply. */
   export let middleware: Middleware[] = []
 
-  export let mode: Mode = 'info'
+  /** The mode of the tooltip. */
+  export let mode: Mode = 'mini'
 
   let tooltip: HTMLElement
   let arrow: HTMLElement
@@ -93,11 +95,13 @@
   })
 </script>
 
+{#key visible}
 <div
   class="leo-tooltip"
   class:hero={mode === 'hero'}
   class:info={mode === 'info'}
   class:mini={mode === 'mini'}
+  transition:fade={{duration: 60}}
   hidden={!visible}
   bind:this={tooltip}
 >
@@ -106,6 +110,7 @@
   </slot>
   <div class="arrow" bind:this={arrow} />
 </div>
+{/key}
 
 <div
   class="trigger"
