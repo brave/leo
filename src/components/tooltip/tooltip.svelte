@@ -12,24 +12,25 @@
     offset as offsetMiddleware,
     arrow as arrowMiddleware
   } from '@floating-ui/dom'
+  import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
 
   export let text: string = undefined
 
   /** The default placement of the tooltip
-    * https://floating-ui.com/docs/tutorial#placements */
+   * https://floating-ui.com/docs/tutorial#placements */
   export let placement: Placement = 'top'
 
   /** Whether the element should flip to the opposite placement if it doesn't fit
-    * https://floating-ui.com/docs/flip */
+   * https://floating-ui.com/docs/flip */
   export let flip: boolean = true
 
   /** The shift padding to apply to the tooltip. See
-    * https://floating-ui.com/docs/shift for more details. */
+   * https://floating-ui.com/docs/shift for more details. */
   export let shift: number | undefined = 8
 
   /** The gap between the target and the tooltip:
-    * https://floating-ui.com/docs/offset */
+   * https://floating-ui.com/docs/offset */
   export let offset: number = 8
 
   /** Additional middleware to apply. */
@@ -38,11 +39,14 @@
   /** The mode of the tooltip. */
   export let mode: Mode = 'mini'
 
+  /* Whether the tooltip is currently visible */
+  export let visible: boolean = false
+
+  const dispatch = createEventDispatcher()
+
   let tooltip: HTMLElement
   let arrow: HTMLElement
   let trigger: HTMLElement
-
-  let visible: boolean = false
 
   function getMiddlewares(
     flip: boolean,
@@ -93,38 +97,52 @@
       [staticSide]: '-4px'
     })
   })
+
+  function setVisible(newVisible: boolean) {
+    if (newVisible === visible) return
+
+    visible = newVisible
+    dispatch('visibilitychange', { visible })
+  }
 </script>
 
-{#key visible}
-<div
-  class="leo-tooltip"
-  class:hero={mode === 'hero'}
-  class:info={mode === 'info'}
-  class:mini={mode === 'mini'}
-  transition:fade={{duration: 60}}
-  hidden={!visible}
-  bind:this={tooltip}
->
-  <slot name="text">
-    {text}
-  </slot>
-  <div class="arrow" bind:this={arrow} />
-</div>
-{/key}
+<div class="leo-tooltip">
+  {#key visible}
+    <div
+      class="tooltip"
+      class:hero={mode === 'hero'}
+      class:info={mode === 'info'}
+      class:mini={mode === 'mini'}
+      transition:fade={{ duration: 60 }}
+      hidden={!visible}
+      bind:this={tooltip}
+    >
+      <slot name="text">
+        {text}
+      </slot>
+      <div class="arrow" bind:this={arrow} />
+    </div>
+  {/key}
 
-<div
-  class="trigger"
-  on:mouseenter={() => (visible = true)}
-  on:mouseleave={() => (visible = false)}
-  on:focusin={() => (visible = true)}
-  on:focusout={() => (visible = false)}
-  bind:this={trigger}
->
-  <slot />
+  <div
+    class="trigger"
+    on:mouseenter={() => setVisible(true)}
+    on:mouseleave={() => setVisible(false)}
+    on:focusin={() => setVisible(true)}
+    on:focusout={() => setVisible(false)}
+    bind:this={trigger}
+  >
+    <slot />
+  </div>
 </div>
 
 <style lang="scss">
   .leo-tooltip {
+    position: relative;
+    z-index: 0;
+  }
+
+  .tooltip {
     --background: var(
       --leo-tooltip-background,
       var(--leo-color-container-background)
@@ -147,25 +165,26 @@
     font: var(--leo-font-primary-default-regular);
   }
 
-  .leo-tooltip .arrow {
+  .tooltip .arrow {
     position: absolute;
     background: var(--background);
     width: 8px;
     height: 8px;
     transform: rotate(45deg);
+    z-index: -1;
   }
 
-  .leo-tooltip.hero {
+  .tooltip.hero {
     --background: var(--leo-gradient-hero);
     --text: var(--leo-color-container-background);
   }
 
-  .leo-tooltip.info {
+  .tooltip.info {
     --background: var(--leo-color-interaction-button-primary-background);
     --text: var(--leo-color-container-background);
   }
 
-  .leo-tooltip.mini {
+  .tooltip.mini {
     --background: var(--leo-color-gray-10);
     --text: var(--leo-color-text-primary);
     --padding: var(--leo-spacing-4) 6px;
