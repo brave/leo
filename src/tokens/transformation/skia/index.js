@@ -2,10 +2,15 @@ const StyleDictionary = require('style-dictionary')
 const _template = require('lodash/template')
 const fs = require('fs')
 
+StyleDictionary.registerTransform({
+  name: 'color/hex8ToSkiaString',
+  ...require('./colorToSkiaString')
+})
+
 StyleDictionary.registerTransformGroup({
   name: 'skia',
   transforms: StyleDictionary.transformGroup.css.concat([
-    'color/hex8ToRgbaPartial'
+    'color/hex8ToSkiaString'
   ])
 })
 
@@ -20,10 +25,8 @@ const transformName = (token) =>
 
 const transformValue = (token) => {
   if (token.type === 'color') {
-    // convert to hex
+    // The value is already in a format Skia can use.
     return token.value
-      .split(',')
-      .map((s) => '0x' + Number(s).toString(16).padStart(2, '0').toUpperCase())
   }
 
   if (token.type === 'custom-spacing') {

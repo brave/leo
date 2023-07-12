@@ -32,8 +32,8 @@ StyleDictionary.registerTransform({
   ...require('../web/webGradient')
 })
 StyleDictionary.registerTransform({
-  name: 'color/hex8ToRgbaPartial',
-  ...require('../common/colorToRgbaPartial')
+  name: 'color/hex8ToRgbPartial',
+  ...require('../common/colorToRgbPartial')
 })
 
 StyleDictionary.registerTransformGroup({
@@ -45,7 +45,7 @@ StyleDictionary.registerTransformGroup({
     'web/padding',
     'tw/font',
     'web/gradient',
-    'color/hex8ToRgbaPartial'
+    'color/hex8ToRgbPartial'
   ])
 })
 
