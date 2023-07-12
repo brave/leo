@@ -5,7 +5,7 @@ const fs = require('fs')
 StyleDictionary.registerTransformGroup({
   name: 'skia',
   transforms: StyleDictionary.transformGroup.css.concat([
-    'color/hex8ToRgbaPartial'
+    'color/hex8ToRgbPartial'
   ])
 })
 
