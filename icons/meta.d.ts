@@ -1,9 +1,10 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 type Meta = {
-  "updatedAt": 1689062955852,
+  "updatedAt": 1689235755424,
   "icons": {
     "-pac-color": "-pac-color",
+    ".product-speedreader": ".product-speedreader",
     "0xbtc-color": "0xbtc-color",
     "1.5x": "1.5x",
     "1inch-color": "1inch-color",
@@ -1015,6 +1016,7 @@ type Meta = {
     "image-info": "image-info",
     "image": "image",
     "immutablex-color": "immutablex-color",
+    "import-arrow": "import-arrow",
     "inbox-empty": "inbox-empty",
     "inbox-full": "inbox-full",
     "inbox": "inbox",
@@ -1366,7 +1368,6 @@ type Meta = {
     "product-playlist": "product-playlist",
     "product-private-window": "product-private-window",
     "product-readermode": "product-readermode",
-    "product-speedreader": "product-speedreader",
     "product-sync": "product-sync",
     "product-tor": "product-tor",
     "product-translate": "product-translate",
