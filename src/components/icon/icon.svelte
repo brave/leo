@@ -14,14 +14,15 @@
 
   // Not actually used by the component, but used to preload SVGs.
   const svgCache = {}
-  export const preloadIcon = (name: string) => {
-    const image = new Image()
-    image.src = getIconUrl(lastIconBasePath, name)
-    image.onerror = () => delete svgCache[image.src]
+  export const preloadIcon = (name: string) =>
+    requestIdleCallback(() => {
+      const image = new Image()
+      image.src = getIconUrl(lastIconBasePath, name)
+      image.onerror = () => delete svgCache[image.src]
 
-    // Store the image in our cache, so it isn't garbage collected.
-    svgCache[image.src] = image
-  }
+      // Store the image in our cache, so it isn't garbage collected.
+      svgCache[image.src] = image
+    })
 </script>
 
 <script lang="ts">
