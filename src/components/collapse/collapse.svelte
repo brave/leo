@@ -47,6 +47,15 @@
   }
 
   .leoCollapse {
+    --summary-padding: var(
+      --leo-collapse-summary-padding,
+      var(--leo-spacing-16) 18px
+    );
+    --content-padding: var(
+      --leo-collapse-content-padding,
+      var(--leo-spacing-8) var(--leo-spacing-24) var(--leo-spacing-24)
+        var(--leo-spacing-24)
+    );
     --background-color: var(
       --leo-collapse-background-color,
       var(--leo-color-container-background)
@@ -123,7 +132,7 @@
     align-items: center;
     gap: var(--leo-spacing-8);
 
-    padding: var(--leo-spacing-16) 18px;
+    padding: var(--summary-padding);
 
     list-style: none;
     cursor: pointer;
@@ -155,8 +164,7 @@
   }
 
   .content {
-    padding: var(--leo-spacing-8) var(--leo-spacing-24) var(--leo-spacing-24)
-      var(--leo-spacing-24);
+    padding: var(--content-padding);
     font: var(--leo-font-text-default-regular);
   }
 
