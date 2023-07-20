@@ -11,6 +11,14 @@
   title="Collapse"
   component={Collapse}
   argTypes={{
+    '--leo-collapse-summary-padding': {
+      type: 'string',
+      description: 'The padding to apply to the collapse summary'
+    },
+    '--leo-collapse-content-padding': {
+      type: 'string',
+      description: 'The padding to apply to the collapse content'
+    },
     '--leo-collapse-background-color': {
       control: 'color',
       description: 'The background color of the collapse'
