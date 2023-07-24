@@ -14,14 +14,19 @@
 
   // Not actually used by the component, but used to preload SVGs.
   const svgCache = {}
-  export const preloadIcon = (name: string) => {
-    const image = new Image()
-    image.src = getIconUrl(lastIconBasePath, name)
-    image.onerror = () => delete svgCache[image.src]
+  export const preloadIcon = (name: string) =>
+    // Note: We do this in a |requestIdleCallback| because we want to do this as
+    // soon as possible, but we want to make sure the consumer has a chance to
+    // call setIconBasePath before we go and preload the icons (or we'll get a
+    // 404).
+    requestIdleCallback(() => {
+      const image = new Image()
+      image.src = getIconUrl(lastIconBasePath, name)
+      image.onerror = () => delete svgCache[image.src]
 
-    // Store the image in our cache, so it isn't garbage collected.
-    svgCache[image.src] = image
-  }
+      // Store the image in our cache, so it isn't garbage collected.
+      svgCache[image.src] = image
+    })
 </script>
 
 <script lang="ts">
