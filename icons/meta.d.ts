@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
-type Meta = {
-  "updatedAt": 1690099686482,
+const meta = {
+  "updatedAt": 1690157770742,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1893,6 +1893,7 @@ type Meta = {
     "zilliqa-color": "zilliqa-color",
     "zrx-color": "zrx-color"
   }
-}
-export default Meta
+} as const
+export type Meta = typeof meta
+export default meta
 export type IconName = StringWithAutoComplete<keyof Meta['icons']>

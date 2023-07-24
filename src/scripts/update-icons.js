@@ -130,8 +130,9 @@ const generateMeta = () => {
     path.join(FINAL_FOLDER, 'meta.d.ts'),
     `import { StringWithAutoComplete } from '../src/types/string'
 
-type Meta = ${stringified}
-export default Meta
+const meta = ${stringified} as const
+export type Meta = typeof meta
+export default meta
 export type IconName = StringWithAutoComplete<keyof Meta['icons']>`
   )
 }
