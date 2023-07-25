@@ -2,12 +2,10 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
   import Input from './input.svelte'
-  import {
-    getNonStyleArgs,
-    getStyleFromArgs
-  } from '../../../.storybook/argHelper'
   import Icon from '../icon/icon.svelte'
   import { modes, sizes } from '../formItem/formItem.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
 
   let characterCountValue = ''
 </script>
@@ -57,6 +55,45 @@
     <div slot="extra">{characterCountValue.length}/100</div>
     <Icon name="send" slot="right-icon" />
   </Input>
+</Story>
+
+<Story name="Slots" let:args>
+  <SlotInfo description="The input provides several slots for customization">
+    <Slot
+      name="left-icon"
+      explanation="An icon displayed on the left hand side of the input"
+    >
+      <Input {...args}>
+        <Icon name="list-heart" slot="left-icon" />
+      </Input>
+    </Slot>
+    <Slot
+      name="right-icon"
+      explanation="An icon displayed on the right hand side of the input. If unset, a picker icon may be displayed here for some inputs (such as the date/time/color pickers)"
+    >
+      <Input {...args}>
+        <Icon name="code" slot="right-icon" />
+      </Input>
+    </Slot>
+    <Slot
+      name="extra"
+      explanation="A slot for displaying extra information in the input"
+    >
+      <Input {...args}>
+        <span slot="extra">This is a very helpful message</span>
+      </Input>
+    </Slot>
+    <Slot
+      name="errors"
+      explanation="A slot where any errors related to the component will be shown. Errors are only show if showErrors and hasErrors are set on the Input (this one has them forced on)"
+    >
+      <Input {...args} hasErrors showErrors>
+        <div slot="errors">
+          Your password must contain a proof of Pythagoras' theorem!
+        </div>
+      </Input>
+    </Slot>
+  </SlotInfo>
 </Story>
 
 <style>
