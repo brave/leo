@@ -40,27 +40,23 @@
 />
 
 <Template let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Input {...getNonStyleArgs(args)}>
-      {args.label}
-      <div slot="errors">
-        <Icon name="warning-triangle-filled" />
-        Something went wrong!
-      </div>
-    </Input>
-  </div>
+  <Input {...args}>
+    {args.label}
+    <div slot="errors">
+      <Icon name="warning-triangle-filled" />
+      Something went wrong!
+    </div>
+  </Input>
 </Template>
 
 <Story name="Default" />
 
 <Story name="Character Count" let:args>
-  <div style={getStyleFromArgs(args)}>
-    <Input {...getNonStyleArgs(args)} bind:value={characterCountValue}>
-      {args.label}
-      <div slot="extra">{characterCountValue.length}/100</div>
-      <Icon name="send" slot="right-icon" />
-    </Input>
-  </div>
+  <Input {...args} bind:value={characterCountValue}>
+    {args.label}
+    <div slot="extra">{characterCountValue.length}/100</div>
+    <Icon name="send" slot="right-icon" />
+  </Input>
 </Story>
 
 <style>
