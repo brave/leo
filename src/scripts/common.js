@@ -9,6 +9,7 @@ const path = require('path')
 async function* walk(dir) {
   for await (const d of await fs.opendir(dir)) {
     const entry = path.join(dir, d.name)
+    if (d.isSymbolicLink()) continue
     if (d.isDirectory()) yield* walk(entry)
     else if (d.isFile()) yield entry
   }
