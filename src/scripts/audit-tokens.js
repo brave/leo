@@ -45,15 +45,14 @@ const extractTokensFromFile = async (file) => {
  * Extracts all tokens from subfiles in a folder with the provided extensions
  * @param {string} folder The folder to search for tokens
  * @param {string[]} extensions The file extensions to check. If undefined, all files will be checked.
+ * @param {string[]} ignore Path segments which should be skipped, like |node_modules|
  * @returns {Promise<string[]>} Not deduplicated
  */
 const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
   const result = []
-  for await (const file of await walk(folder)) {
-    if (ignore.some((i) => file.includes(i))) {
-      continue
-    }
-
+  for await (const file of await walk(folder, (name) =>
+    ignore.some((i) => i === name)
+  )) {
     if (extensions && !extensions.some((e) => file.endsWith(e))) {
       continue
     }

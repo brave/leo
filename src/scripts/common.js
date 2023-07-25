@@ -1,15 +1,20 @@
+const { Dirent } = require('fs')
 const fs = require('fs/promises')
 const path = require('path')
 
 /**
  * Recursively walks all files in a folder
- * @param {The directory to walk} dir
+ * @param {string} dir The directory to walk
+ * @param {((name: string, path: string, entry: Dirent) => boolean)?} skip A function for filtering out entries
  * @returns {Promise<AsyncIterable<string>}
  */
-async function* walk(dir) {
+async function* walk(dir, skip) {
   for await (const d of await fs.opendir(dir)) {
     const entry = path.join(dir, d.name)
-    if (d.isSymbolicLink()) continue
+
+    // Allow the consumer to filter out files/folders.
+    if (skip && skip(d.name, entry, d)) continue
+
     if (d.isDirectory()) yield* walk(entry)
     else if (d.isFile()) yield entry
   }
