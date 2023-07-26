@@ -70,14 +70,14 @@ module.exports = {
           destination: 'spacing.h',
           format: 'skia/spacing.h',
           filter: {
-            type: 'custom-spacing'
+            type: 'number'
           }
         },
         {
           destination: 'radius.h',
           format: 'skia/radius.h',
           filter: {
-            type: 'custom-radius'
+            type: 'number'
           }
         }
       ]
