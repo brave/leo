@@ -28,7 +28,14 @@ const IGNORE = ['node_modules']
  * @returns {string[]} All the Leo CSS variables in the source text. Not deduplicated
  */
 const extractTokens = (text) => {
-  return Array.from(text.matchAll(tokenRegex)).map(([v]) => v)
+  const lines = text.split('\n')
+  return lines.flatMap((line, lineNumber) => {
+    return Array.from(line.matchAll(tokenRegex)).map((match) => ({
+      token: match[0],
+      column: match.index + 1,
+      line: lineNumber + 1
+    }))
+  })
 }
 
 /**
@@ -38,7 +45,7 @@ const extractTokens = (text) => {
  */
 const extractTokensFromFile = async (file) => {
   const text = await fs.readFile(file, 'utf-8')
-  return extractTokens(text)
+  return extractTokens(text).map(match => ({ file: `${file}:${match.line}:${match.column}`, token: match.token }))
 }
 
 /**
@@ -46,7 +53,7 @@ const extractTokensFromFile = async (file) => {
  * @param {string} folder The folder to search for tokens
  * @param {string[]} extensions The file extensions to check. If undefined, all files will be checked.
  * @param {string[]} ignore Path segments which should be skipped, like |node_modules|
- * @returns {Promise<string[]>} Not deduplicated
+ * @returns {Promise<{ file: string, token: string }[]>} Not deduplicated
  */
 const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
   const result = []
@@ -71,11 +78,12 @@ const getAvailableTokens = async () => {
   const available = new Set()
 
   // Include all variables from out tokens file
-  for (const v of await extractTokensFromFile(CSS_VARIABLES)) available.add(v)
+  for (const v of await extractTokensFromFile(CSS_VARIABLES))
+    available.add(v.token)
 
   // Include all variables used to customize components
   for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, ['.svelte']))
-    available.add(v)
+    available.add(v.token)
 
   return available
 }
@@ -92,10 +100,18 @@ const checkFolder = async (folder) => {
     IGNORE
   )
 
-  const missingTokens = usedTokens.filter((t) => !availableTokens.has(t))
+  const missingTokens = Object.entries(usedTokens
+    .filter((t) => !availableTokens.has(t.token))
+    .reduce((prev, next) => {
+      const items = prev[next.token] || (prev[next.token] = [])
+      items.push(next.file)
+      return prev
+    }, {}))
+
   if (missingTokens.length) {
     console.error(`Found ${missingTokens.length} invalid tokens`)
-    console.error(missingTokens.map((t) => `  ${t}`).join('\n'))
+    console.error(missingTokens.map(([token, usages]) => `  ${token} (used ${usages.length} times)
+${usages.map(u => `    ${u}`).join('\n')}`).join('\n\n'))
     console.error(
       'The above tokens are not present in Leo, and may have been used by mistake.'
     )
