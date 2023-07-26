@@ -79,7 +79,8 @@ StyleDictionary.registerFormat({
         token.path.includes('light')
       ),
       dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
-      rest: filteredTokens(dictionary)
+      rest: filteredTokens(dictionary, (token) => !token.path.includes('light')
+        && !token.path.includes('dark'))
     }
 
     return template({ groupedTokens, options, file })
