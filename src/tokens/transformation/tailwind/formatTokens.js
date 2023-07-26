@@ -7,6 +7,8 @@ const formatColorVar = (name, isStatic = true) => {
   return `rgba(var(--tw-${name}), <alpha-value>)`
 }
 
+const kebabCase = (str) => str && str.toLowerCase().replaceAll(" ", "-");
+
 /**
  * This function transforms tokens into a nested object
  * structure ready for Tailwind. The conditional statements
@@ -33,6 +35,9 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
        */
       let colorGroup = colorTokens[t.attributes.type] ?? {}
 
+      const tItem = kebabCase(t.attributes.item);
+      const tSubItem = kebabCase(t.attributes.subitem);
+
       /**
        * `state` is for the deepest level on a token.
        * E.g. `icon` in colors.systemfeedback.success.icon
@@ -40,10 +45,10 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
       if (t.attributes.state) {
         if (!staticTheme) {
           // If not on a static theme, do not place within `dark` or `light` groups
-          colorTokens[t.attributes.item] = colorTokens[t.attributes.item] || {}
+          colorTokens[tItem] = colorTokens[tItem] || {}
           const tokenGroup =
-            colorTokens[t.attributes.item][t.attributes.subitem] ?? {}
-          colorTokens[t.attributes.item][t.attributes.subitem] = merge(
+            colorTokens[tItem][tSubItem] ?? {}
+          colorTokens[tItem][tSubItem] = merge(
             tokenGroup,
             {
               [t.attributes.state]: formatColorVar(name, staticTheme)
@@ -51,9 +56,9 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
           )
         } else {
           // If on a static theme, place within `dark` or `light` groups
-          const tokenGroup = colorGroup[t.attributes.item]
-          colorGroup[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorGroup[tItem]
+          colorGroup[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         }
       } else if (t.attributes.subitem) {
@@ -62,9 +67,9 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
          * property do not place within `dark` or `light` groups
          */
         if (themes.includes(t.attributes.type) && !staticTheme) {
-          const tokenGroup = colorTokens[t.attributes.item] ?? {}
-          colorTokens[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorTokens[tItem] ?? {}
+          colorTokens[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
 
           /**
@@ -75,13 +80,13 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
         } else if (themes.includes(t.attributes.item) && !staticTheme) {
           const tokenGroup = colorTokens[t.attributes.type] ?? {}
           colorTokens[t.attributes.type] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         } else {
           // If on a static theme, place within `dark` or `light` groups
-          const tokenGroup = colorGroup[t.attributes.item]
-          colorGroup[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorGroup[tItem]
+          colorGroup[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         }
 
@@ -89,7 +94,7 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
          * If `item` property is the token name, don't nest inside object
          */
       } else if (t.attributes.item) {
-        colorGroup[t.attributes.item] = formatColorVar(name, staticTheme)
+        colorGroup[tItem] = formatColorVar(name, staticTheme)
 
         /**
          * If `item` property is the token name, set directly on colorGroup
@@ -129,7 +134,7 @@ module.exports = ({ dictionary }) => {
       const { fontSize, ...rest } = t.value
 
       // E.g.
-      let fontName = `${t.attributes.item}`
+      let fontName = `${t.attributes.type}-${t.attributes.item}`
 
       if (t.attributes.subitem) {
         fontName += `-${t.attributes.subitem}`
@@ -139,24 +144,6 @@ module.exports = ({ dictionary }) => {
       if (t.attributes.state) {
         fontName += `-${t.attributes.state}`
       }
-
-      /*
-       * Prefer "components" over "desktop" if present
-       * (e.g. `components-button-small` instead of `desktop-button-small`)
-       */
-      if (t.attributes.type.includes('components')) {
-        fontName = fontName.replace(
-          t.attributes.item,
-          t.attributes.type.replace(/[^a-zA-Z]/g, '')
-        )
-      }
-
-      /**
-       * Remove extraneous sections. E.g.
-       * `text-h1` rather than `text-heading-h1`
-       * `text-default-small-regular` rather than text-text-default-small-regular`
-       */
-      fontName = fontName.replace(/^heading-/, '').replace(/^text-/, '')
 
       fontSizes.set(fontName, [fontSize, rest])
     } else if (type === 'custom-radius') {

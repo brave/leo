@@ -6,6 +6,47 @@ const preprocess = require('svelte-preprocess')
 const postcssJs = require('postcss-js')
 const postcss = require('postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')()
+const theme = require("../../../postcss/theme");
+
+const tokenCategories = [
+  'font',
+  'typography',
+  'color',
+  'spacing',
+  'radius',
+  'effect',
+  'gradient'
+]
+
+const leoVarsPattern = RegExp(
+  `var\\(--leo-(${tokenCategories.join('|')})-(.*?)\\)`,
+  'gm'
+)
+
+const getTWThemeFromVar = (category, token) => {
+  const tokenParts = token.split('-')
+  let tokenPath;
+  switch (category) {
+    case 'color':
+      tokenPath = `colors.${tokenParts.join('.')}`
+      break;
+    case 'font':
+      tokenPath = `fontSize.${tokenParts.join('-')}`
+      break;
+    case 'gradient':
+      tokenPath = `backgroundImage.${tokenParts.join('-')}`
+      break;
+    case 'effect':
+      tokenPath = `backgroundImage.${tokenParts
+        .join('-')
+        .replace('elevation-', '')}`
+      break;
+    case 'radius':
+      tokenPath = `borderRadius.${tokenParts.join('-')}`
+      break;
+  }
+  return `theme('${tokenPath}')`
+}
 
 module.exports = {
   do: async function (dictionary, config) {
@@ -22,7 +63,7 @@ module.exports = {
           [
             preprocess({
               postcss: {
-                plugins: [sortMediaQueries]
+                plugins: [theme, sortMediaQueries]
               }
             })
           ],
@@ -41,14 +82,16 @@ module.exports = {
         if (rawCSS) {
           const css = rawCSS.replace(/\.REMOVE_ME/g, '')
           const root = postcss.parse(css)
-          const cssAsJs = postcssJs.objectify(root)
+          let cssAsJs = postcssJs.objectify(root)
+
+          const fnName = fileParts.name === 'link' ? 'addBase' : 'addComponents'
 
           return writeFile(
             join(config.buildPath, 'plugins', `${fileParts.name}Component.js`),
             `const plugin = require("tailwindcss/plugin");
 
-module.exports = plugin(function ({ addComponents }) {
-	addComponents(${JSON.stringify(cssAsJs, null, 2)});
+module.exports = plugin(function ({ ${fnName}, theme }) {
+	${fnName}(${JSON.stringify(cssAsJs, null, 2)});
 });`
           )
         } else {
