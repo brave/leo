@@ -193,7 +193,7 @@
     font: var(--leo-font-components-button-large);
     --padding-y: 12px;
     --padding-x: 30px;
-    --radius: 22px;
+    --radius: 23px;
     --leo-icon-size: 20px;
 
     &.fab {
