@@ -160,12 +160,12 @@
 
   .title {
     flex-grow: 1;
-    font: var(--leo-font-primary-heading-h5);
+    font: var(--leo-font-primary-heading-h3);
   }
 
   .content {
     padding: var(--content-padding);
-    font: var(--leo-font-text-default-regular);
+    font: var(--leo-font-primary-default-regular);
   }
 
   .arrow {

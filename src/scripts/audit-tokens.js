@@ -87,6 +87,7 @@ const getAvailableTokens = async () => {
     '--leo-spacing',
     '--leo-effect',
     '--leo-typography',
+    '--leo-font',
     '--leo-gradient',
   ]
 
