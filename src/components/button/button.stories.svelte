@@ -5,6 +5,7 @@
   import { buttonKinds, buttonSizes } from './props'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import Icon from '../icon/icon.svelte'
 
   let count = 0
   function handleClick() {
@@ -49,16 +50,28 @@
 
 <Story name="Plain Faint" source args={{ kind: 'plain-faint' }} />
 
+<Story name="FAB" let:args>
+  <Button {...args} fab>
+    <Icon name="check-circle-outline" />
+  </Button>
+</Story>
+
 <Story name="All" let:args>
-  {#each buttonSizes as size}
-    <h2 class="label capitalize">{size}</h2>
-    <div class="button-group">
-      {#each buttonKinds as kind}
-        <Button {kind} {size} {...args}>
-          <span class="capitalize">{kind}</span>
-        </Button>
-      {/each}
-    </div>
+  {#each [false, true] as fab}
+    {#each buttonSizes as size}
+      <h2 class="label capitalize">{size}</h2>
+      <div class="button-group">
+        {#each buttonKinds as kind}
+          <Button {kind} {size} {fab} {...args}>
+            {#if !fab}
+              <span class="capitalize">{kind}</span>
+            {:else}
+              <Icon name="check-circle-outline" />
+            {/if}
+          </Button>
+        {/each}
+      </div>
+    {/each}
   {/each}
 </Story>
 

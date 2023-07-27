@@ -24,6 +24,7 @@
     kind?: Props.ButtonKind
     size?: Props.ButtonSize
     isLoading?: boolean
+    fab?: boolean
   }
 
   type ButtonProps = CommonProps &
@@ -44,6 +45,7 @@
   export let isLoading: boolean = false
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
+  export let fab = false
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
 
@@ -72,6 +74,7 @@
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
   class:isTiny={size === 'tiny'}
+  class:fab
   class:isLoading
   on:click={onClick}
   {...$$restProps}
@@ -95,12 +98,15 @@
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-02);
     --box-shadow-focus: var(--leo-effect-focus-state);
+    --radius: 0;
+
     display: block;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
+    border-radius: var(--radius);
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
@@ -150,35 +156,62 @@
     font: var(--leo-font-components-button-small);
     --padding-y: 6px;
     --padding-x: 10px;
-    border-radius: 14px;
+    --radius: 14px;
+    --leo-icon-size: 16px;
+
+    &.fab {
+      --padding-x: 6px;
+    }
   }
   .leoButton.isSmall {
     --icon-size: 20px;
     font: var(--leo-font-components-button-small);
     --padding-y: 8px;
     --padding-x: 14px;
-    border-radius: 16px;
+    --radius: 16px;
+    --leo-icon-size: 18px;
+
+    &.fab {
+      --padding-x: 8px;
+    }
   }
   .leoButton.isMedium {
     --icon-size: 24px;
     font: var(--leo-font-components-button-default);
     --padding-y: 10px;
     --padding-x: 16px;
-    border-radius: 20px;
+    --radius: 20px;
+    --leo-icon-size: 20px;
+
+    &.fab {
+      --padding-x: 12px;
+      --padding-y: 12px;
+    }
   }
   .leoButton.isLarge {
     --icon-size: 24px;
     font: var(--leo-font-components-button-large);
     --padding-y: 12px;
     --padding-x: 30px;
-    border-radius: 22px;
+    --radius: 22px;
+    --leo-icon-size: 20px;
+
+    &.fab {
+      --padding-x: 15px;
+      --padding-y: 15px;
+    }
   }
   .leoButton.isJumbo {
     --icon-size: 24px;
     font: var(--leo-font-components-button-jumbo);
     --padding-y: 18px;
     --padding-x: 26px;
-    border-radius: 30px;
+    --radius: 30px;
+    --leo-icon-size: 24px;
+
+    &.fab {
+      --padding-x: 18px;
+    }
   }
 
   // Kind Variations
@@ -220,7 +253,7 @@
     }
   }
   .leoButton.isPlain {
-    border-radius: 8px;
+    --radius: 8px;
     --padding-x: 2px;
     --color: var(--leo-color-text-interactive);
     --color-hover: var(--leo-color-primary-60);
@@ -237,7 +270,7 @@
     }
   }
   .leoButton.isPlainFaint {
-    border-radius: 8px;
+    --radius: 8px;
     --padding-x: 2px;
     --color: var(--leo-color-gray-60);
     --color-hover: var(--leo-color-gray-70);
@@ -268,7 +301,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      border-radius: inherit;
+      border-radius: var(--radius);
     }
 
     &::before {
@@ -291,5 +324,10 @@
     &:hover {
       --default-bg-opacity: 0;
     }
+  }
+
+  .leoButton.fab {
+    --radius: 10000px;
+    aspect-ratio: 1 / 1;
   }
 </style>
