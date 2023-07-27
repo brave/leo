@@ -721,7 +721,7 @@
           "value": "#170064"
         }
       },
-      "dialogs-and-modals": {
+      "dialogs": {
         "button-transparent-hover": {
           "type": "color",
           "value": "rgba(17, 19, 23, 0.5000)"
@@ -1239,7 +1239,7 @@
           "value": "#e9edff"
         }
       },
-      "dialogs-and-modals": {
+      "dialogs": {
         "button-transparent-hover": {
           "type": "color",
           "value": "rgba(17, 19, 23, 0.5000)"

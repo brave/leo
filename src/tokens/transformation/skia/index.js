@@ -74,8 +74,10 @@ StyleDictionary.registerFormat({
         token.path.includes('light')
       ),
       dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
-      rest: filteredTokens(dictionary, (token) => !token.path.includes('light')
-        && !token.path.includes('dark'))
+      rest: filteredTokens(
+        dictionary,
+        (token) => !token.path.includes('light') && !token.path.includes('dark')
+      )
     }
 
     return template({ groupedTokens, options, file })
@@ -88,7 +90,13 @@ StyleDictionary.registerFormat({
     const template = _template(
       fs.readFileSync(__dirname + '/templates/spacing.h.template')
     )
-    return template({ tokens: filteredTokens(dictionary, (token) => token.path.includes('spacing')), options, file })
+    return template({
+      tokens: filteredTokens(dictionary, (token) =>
+        token.path.includes('spacing')
+      ),
+      options,
+      file
+    })
   }
 })
 
@@ -98,6 +106,12 @@ StyleDictionary.registerFormat({
     const template = _template(
       fs.readFileSync(__dirname + '/templates/radius.h.template')
     )
-    return template({ tokens: filteredTokens(dictionary, (token) => token.path.includes('radius')), options, file })
+    return template({
+      tokens: filteredTokens(dictionary, (token) =>
+        token.path.includes('radius')
+      ),
+      options,
+      file
+    })
   }
 })

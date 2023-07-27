@@ -45,7 +45,10 @@ const extractTokens = (text) => {
  */
 const extractTokensFromFile = async (file) => {
   const text = await fs.readFile(file, 'utf-8')
-  return extractTokens(text).map(match => ({ file: `${file}:${match.line}:${match.column}`, token: match.token }))
+  return extractTokens(text).map((match) => ({
+    file: `${file}:${match.line}:${match.column}`,
+    token: match.token
+  }))
 }
 
 /**
@@ -100,18 +103,26 @@ const checkFolder = async (folder) => {
     IGNORE
   )
 
-  const missingTokens = Object.entries(usedTokens
-    .filter((t) => !availableTokens.has(t.token))
-    .reduce((prev, next) => {
-      const items = prev[next.token] || (prev[next.token] = [])
-      items.push(next.file)
-      return prev
-    }, {}))
+  const missingTokens = Object.entries(
+    usedTokens
+      .filter((t) => !availableTokens.has(t.token))
+      .reduce((prev, next) => {
+        const items = prev[next.token] || (prev[next.token] = [])
+        items.push(next.file)
+        return prev
+      }, {})
+  )
 
   if (missingTokens.length) {
     console.error(`Found ${missingTokens.length} invalid tokens`)
-    console.error(missingTokens.map(([token, usages]) => `  ${token} (used ${usages.length} times)
-${usages.map(u => `    ${u}`).join('\n')}`).join('\n\n'))
+    console.error(
+      missingTokens
+        .map(
+          ([token, usages]) => `  ${token} (used ${usages.length} times)
+${usages.map((u) => `    ${u}`).join('\n')}`
+        )
+        .join('\n\n')
+    )
     console.error(
       'The above tokens are not present in Leo, and may have been used by mistake.'
     )

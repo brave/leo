@@ -16,7 +16,10 @@ module.exports = ({ dictionary, options, file }) => {
 
     // Note: We don't export the dark & light versions of the tokens separately
     // - developers can refer to the primitive tokens instead.
-    rest: filteredTokens(dictionary, (token) => !matchDarkThemeToken(token) && !matchLightThemeToken(token))
+    rest: filteredTokens(
+      dictionary,
+      (token) => !matchDarkThemeToken(token) && !matchLightThemeToken(token)
+    )
   }
 
   // Note: replace strips out '-light-' and '-dark-' inside media queries

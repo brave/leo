@@ -31,7 +31,7 @@ enum class Theme {
 };
 
 enum class Color {
-<%= groupedTokens.light.allTokens.map(p => `  ${p.name}`).join(',\n') %>
+<%= groupedTokens.light.allTokens.map(p => `  ${p.name}`).join(',\n') %>,
 <%= groupedTokens.rest.allTokens.map(p => `  ${p.name}`).join(',\n') %>
 };
 
