@@ -97,10 +97,10 @@
   .leo-dialog {
     --padding: var(
       --leo-dialog-padding,
-      var(--leo-spacing-32) var(--leo-spacing-32) var(--leo-spacing-40)
-        var(--leo-spacing-32)
+      var(--leo-spacing-3xl) var(--leo-spacing-3xl) var(--leo-spacing-4xl)
+        var(--leo-spacing-3xl)
     );
-    --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-16));
+    --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-xl));
     --background: var(
       --leo-dialog-background,
       var(--leo-color-container-background)
@@ -112,7 +112,7 @@
     border: none;
 
     width: var(--leo-dialog-width, 500px);
-    max-width: calc(100% - var(--leo-spacing-8) * 2);
+    max-width: calc(100% - var(--leo-spacing-m) * 2);
 
     border-radius: var(--border-radius);
 
@@ -138,19 +138,19 @@
 
   .leo-dialog .close-button {
     position: absolute;
-    right: var(--leo-spacing-16);
-    top: var(--leo-spacing-16);
+    right: var(--leo-spacing-xl);
+    top: var(--leo-spacing-xl);
   }
 
   .leo-dialog {
     .close-button,
     .back-button {
-      --leo-button-padding: var(--leo-spacing-4);
+      --leo-button-padding: var(--leo-spacing-s);
     }
   }
 
   .leo-dialog .subtitle {
-    margin-bottom: var(--leo-spacing-16);
+    margin-bottom: var(--leo-spacing-xl);
     font: var(--leo-font-primary-heading-h4);
   }
 
@@ -160,7 +160,7 @@
   }
 
   .leo-dialog .actions {
-    margin-top: var(--leo-spacing-32);
+    margin-top: var(--leo-spacing-3xl);
   }
 
   /** The below :global selectors are so that Svelte doesn't remove the classes
@@ -184,7 +184,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: stretch;
-    gap: var(--leo-spacing-16);
+    gap: var(--leo-spacing-xl);
   }
 
   .leo-dialog .title-row {
@@ -192,7 +192,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    gap: var(--leo-spacing-12);
-    margin-bottom: var(--leo-spacing-32);
+    gap: var(--leo-spacing-l);
+    margin-bottom: var(--leo-spacing-3xl);
   }
 </style>

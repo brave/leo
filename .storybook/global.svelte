@@ -47,6 +47,6 @@
     display: flex;
     flex-direction: column;
     align-items: end;
-    margin-bottom: var(--leo-spacing-8);
+    margin-bottom: var(--leo-spacing-m);
   }
 </style>

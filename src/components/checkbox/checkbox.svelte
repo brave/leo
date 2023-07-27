@@ -63,7 +63,7 @@
 
   .leo-checkbox {
     --focus-border-radius: var(--leo-checkbox-focus-border-radius, 2px);
-    --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-8));
+    --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-m));
     --flex-direction: var(--leo-checkbox-flex-direction, row);
     --checked-color: var(
       --leo-checkbox-checked-color,

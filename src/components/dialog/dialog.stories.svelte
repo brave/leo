@@ -132,6 +132,6 @@
 
 <style>
   .alert-container {
-    margin-top: var(--leo-spacing-16);
+    margin-top: var(--leo-spacing-xl);
   }
 </style>
