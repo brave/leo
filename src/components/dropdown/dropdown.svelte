@@ -269,7 +269,7 @@
 
   :global .leo-dropdown-popup ::slotted(*:hover),
   :global .leo-dropdown-popup > *:hover {
-    background: var(--leo-color-container-interactive-background);
+    background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
 

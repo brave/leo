@@ -62,7 +62,7 @@
     );
     --background-color-hover: var(
       --leo-collapse-background-color-hover,
-      var(--leo-color-container-interactive-background)
+      var(--leo-color-container-interactive)
     );
     --icon-size: var(--leo-collapse-icon-size, 24px);
     --transition-duration: var(--leo-collapse-transition-duration, 0.12s);

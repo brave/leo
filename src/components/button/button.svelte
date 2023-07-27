@@ -216,20 +216,15 @@
 
   // Kind Variations
   .leoButton.isFilled {
-    --bg: var(--leo-color-interaction-button-primary-background);
-    --bg-hover: var(--leo-color-light-primary-60);
+    --bg: var(--leo-color-button-background);
+    --bg-hover: var(--leo-color-primitive-primary-70);
     --bg-active: var(--bg-hover);
     --bg-focus: var(--bg);
-    --bg-loading: var(--leo-color-light-primary-70);
+    --bg-loading: var(--bg);
     --bg-disabled: var(--leo-color-gray-30);
     --color: white;
-
-    @theme (dark) {
-      --bg-hover: var(--leo-color-dark-primary-40);
-      --bg-active: var(--leo-color-dark-primary-40);
-      --bg-loading: var(--leo-color-dark-primary-60);
-    }
   }
+
   .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
@@ -239,7 +234,7 @@
     --color-loading: var(--leo-color-gray-70);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
-    --border-color-hover: var(--leo-color-primary-40);
+    --border-color-hover: var(--leo-color-primitive-primary-40);
     --border-color-focus: var(--leo-color-divider-interactive);
     --box-shadow-focus: 0px 0px 0px 2px #423eee,
       0px 0px 0px 1px rgba(255, 255, 255, 0.3);
@@ -249,7 +244,7 @@
     }
 
     @theme (dark) {
-      --border-color-hover: var(--leo-color-dark-primary-50);
+      --border-color-hover: var(--leo-color-primitive-primary-60);
     }
   }
   .leoButton.isPlain {
@@ -257,16 +252,12 @@
     --padding-x: 2px;
     --color: var(--leo-color-text-interactive);
     --color-hover: var(--leo-color-primary-60);
-    --color-active: var(--leo-color-primary-90);
-    --color-loading: var(--leo-color-primary-50);
+    --color-active: var(--color);
+    --color-loading: var(--color);
     --box-shadow-hover: none;
 
     &:disabled {
-      --color: var(--leo-color-light-text-secondary);
-
-      @theme (dark) {
-        --color: var(--leo-color-dark-text-primary);
-      }
+      --color: var(--leo-color-text-primary);
     }
   }
   .leoButton.isPlainFaint {

@@ -105,7 +105,7 @@
       --leo-dialog-background,
       var(--leo-color-container-background)
     );
-    --color: var(--leo-dialog-color, var(--leo-color-gray-120));
+    --color: var(--leo-dialog-color, var(--leo-color-text-primary));
 
     position: relative;
     margin: auto;
