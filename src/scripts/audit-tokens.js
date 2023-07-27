@@ -20,7 +20,7 @@ const DEFAULT_EXTENSIONS_TO_CHECK = [
   '.lss',
   '.svelte'
 ]
-const IGNORE = ['node_modules']
+const IGNORE = ['node_modules', 'audit-tokens.js']
 
 /**
  * Extracts all Leo tokens from a piece of text
@@ -80,13 +80,36 @@ const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
 const getAvailableTokens = async () => {
   const available = new Set()
 
+  // Variables which are not defined by components
+  const variablePrefixes = [
+    '--leo-color',
+    '--leo-radius',
+    '--leo-spacing',
+    '--leo-effect',
+    '--leo-typography'
+  ]
+
   // Include all variables from out tokens file
   for (const v of await extractTokensFromFile(CSS_VARIABLES))
     available.add(v.token)
 
   // Include all variables used to customize components
-  for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, ['.svelte']))
+  for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, [
+    '.svelte'
+  ])) {
+    // Variables with these prefixes aren't defined in the components, they're
+    // used there. This lets us detect bad variables in our components. Note: we
+    // dynamically construct a few tokens, so if the token ends with a `-` we
+    // treat it as a real token.
+    if (
+      variablePrefixes.some((prefix) => v.token.startsWith(prefix)) &&
+      !v.token.endsWith('-')
+    ) {
+      continue
+    }
+
     available.add(v.token)
+  }
 
   return available
 }

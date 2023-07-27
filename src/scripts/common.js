@@ -15,7 +15,7 @@ async function* walk(dir, skip) {
     // Allow the consumer to filter out files/folders.
     if (skip && skip(d.name, entry, d)) continue
 
-    if (d.isDirectory()) yield* walk(entry)
+    if (d.isDirectory()) yield* walk(entry, skip)
     else if (d.isFile()) yield entry
   }
 }
