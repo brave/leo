@@ -68,6 +68,11 @@ jobs:
         run: |
           npm run check
 
+      - name: Audit Tokens
+        id: audit-tokens
+        run: |
+          node ./src/scripts/audit-tokens.js
+
       - name: Build the React example project
         id: example-react
         working-directory: ./examples/example-ui-react
