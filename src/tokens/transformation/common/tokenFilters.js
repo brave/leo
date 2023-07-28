@@ -13,20 +13,24 @@ const filteredTokens = (dictionary, filterFn) => {
   }
 }
 
-function matchThemableToken(token, modifierPathSegment) {
+function matchThemableToken(
+  token,
+  modifierPathSegment,
+  tokenPaths = ['color', 'effect.elevation']
+) {
+  const tokenPath = token.path.join('.').toLowerCase();
   return (
-    (token.path[0]?.toLowerCase() === 'color' ||
-      token.path.includes('elevation')) &&
+    tokenPaths.some(p => tokenPath.startsWith(p)) &&
     token.path.includes(modifierPathSegment)
   )
 }
 
-function matchDarkThemeToken(token) {
-  return matchThemableToken(token, 'dark')
+function matchDarkThemeToken(token, tokenPaths) {
+  return matchThemableToken(token, 'dark', tokenPaths)
 }
 
-function matchLightThemeToken(token) {
-  return matchThemableToken(token, 'light')
+function matchLightThemeToken(token, tokenPaths) {
+  return matchThemableToken(token, 'light', tokenPaths)
 }
 
 module.exports = {
