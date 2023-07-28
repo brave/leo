@@ -55,6 +55,11 @@ jobs:
         run: |
           npm run build
 
+      - name: Audit Tokens
+        id: audit-tokens
+        run: |
+          node ./src/scripts/audit-tokens.js
+
       - name: Diff Tokens
         id: diff-tokens
         run: |
@@ -67,11 +72,6 @@ jobs:
         id: check-types
         run: |
           npm run check
-
-      - name: Audit Tokens
-        id: audit-tokens
-        run: |
-          node ./src/scripts/audit-tokens.js
 
       - name: Build the React example project
         id: example-react
