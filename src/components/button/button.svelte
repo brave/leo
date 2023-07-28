@@ -298,12 +298,7 @@
     &::before {
       transition: var(--default-transition);
       z-index: -1;
-      background: linear-gradient(
-        138.21219643124405deg,
-        rgb(139, 16, 198) 22%,
-        rgb(208, 36, 128) 70%,
-        rgb(233, 94, 60) 96%
-      );
+      background: var(--leo-gradient-hero);
       opacity: var(--default-bg-opacity);
     }
 

@@ -88,7 +88,7 @@ const getAvailableTokens = async () => {
     '--leo-effect',
     '--leo-typography',
     '--leo-font',
-    '--leo-gradient',
+    '--leo-gradient'
   ]
 
   // Include all variables from out tokens file
