@@ -72,7 +72,7 @@ export default SvelteToReact('${COMPONENT_PREFIX}-${fileNameWithoutExtension.toL
 
 // Reexport everything from our component, so React consumers can do anything
 // the base component can do.
-export * from '../web-components/${fileNameWithoutExtension.toLowerCase()}.js'
+export * from '../web-components/${fileNameWithoutExtension}.js'
     `.trim()
 
   const typeDef = `
