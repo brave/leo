@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "brave/browser/ui/color/brave_color_id.h"
+#include "chrome/browser/ui/color/chrome_color_id.h"
 #include "third_party/skia/include/core/SkColor.h"
 
 namespace leo::light {
@@ -26,8 +28,10 @@ enum class Theme {
   kDark
 };
 
-enum class Color {
-<%= groupedTokens.light.allTokens.map(prop => `  ${prop.name}`).join(',\n') %>
+enum class Color : ui::ColorId {
+  kLeoColorsStart = kBraveColorsEnd,
+<%= groupedTokens.light.allTokens.map(prop => `  ${prop.name}`).join(',\n') %>,
+  kLeoColorsEnd
 };
 
 constexpr SkColor GetColor(Color color, Theme theme) {
