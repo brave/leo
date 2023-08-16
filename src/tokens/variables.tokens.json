@@ -736,7 +736,7 @@
         },
         "frosted-glass-background": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.9000)"
+          "value": "rgba(255, 255, 255, 0.9700)"
         },
         "divider": {
           "type": "color",
@@ -1254,7 +1254,7 @@
         },
         "frosted-glass-background": {
           "type": "color",
-          "value": "rgba(13, 15, 20, 0.8000)"
+          "value": "rgba(13, 15, 20, 0.9000)"
         },
         "divider": {
           "type": "color",
