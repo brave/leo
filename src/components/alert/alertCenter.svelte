@@ -107,10 +107,10 @@
     position: absolute;
     width: var(--width);
 
-    padding: var(--leo-spacing-8);
+    padding: var(--leo-spacing-m);
 
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-8);
+    gap: var(--leo-spacing-m);
   }
 </style>

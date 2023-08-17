@@ -9,17 +9,21 @@
 
 namespace leo::light {
 <%= groupedTokens.light.allTokens.map(prop => {
-  return `constexpr SkColor ${prop.name} = ${prop.value}`;
-}).map(s => `${s};`).join('\n') %>
+  return `constexpr SkColor ${prop.name} = ${prop.value};`;
+}).join('\n') %>
 } // namespace leo::light
 
 namespace leo::dark {
 <%= groupedTokens.dark.allTokens.map(prop => {
-  return `constexpr SkColor ${prop.name} = ${prop.value}`;
-}).map(s => `${s};`).join('\n') %>
+  return `constexpr SkColor ${prop.name} = ${prop.value};`;
+}).join('\n') %>
 } // namespace leo::dark
 
 namespace leo {
+
+<%= groupedTokens.rest.allTokens.map(prop => {
+  return `constexpr SkColor ${prop.name} = ${prop.value};`;
+}).join('\n') %>
 
 enum class Theme {
   kLight,
@@ -27,7 +31,8 @@ enum class Theme {
 };
 
 enum class Color {
-<%= groupedTokens.light.allTokens.map(prop => `  ${prop.name}`).join(',\n') %>
+<%= groupedTokens.light.allTokens.map(p => `  ${p.name}`).join(',\n') %>,
+<%= groupedTokens.rest.allTokens.map(p => `  ${p.name}`).join(',\n') %>
 };
 
 constexpr SkColor GetColor(Color color, Theme theme) {
@@ -36,6 +41,8 @@ constexpr SkColor GetColor(Color color, Theme theme) {
       return theme == Theme::kLight
         ? leo::light::${prop.name}
         : leo::dark::${prop.name};`).join('\n') %>
+<%= groupedTokens.rest.allTokens.map(prop => `    case Color::${prop.name}:
+      return ${prop.name};`).join('\n') %>
     default:
       return SK_ColorRED;
   }

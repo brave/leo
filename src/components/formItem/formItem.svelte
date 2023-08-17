@@ -45,7 +45,7 @@
 
 <style lang="scss">
   .leo-control {
-    --radius: var(--leo-control-radius, var(--leo-spacing-8));
+    --radius: var(--leo-control-radius, var(--leo-spacing-m));
     --background: var(
       --leo-control-background,
       var(--leo-color-container-highlight)
@@ -54,7 +54,7 @@
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
     --leo-icon-size: 20px;
     --leo-icon-color: var(--leo-color-icon-default);
-    --gap: var(--leo-control-label-gap, var(--leo-spacing-4));
+    --gap: var(--leo-control-label-gap, var(--leo-spacing-s));
     --direction: var(--leo-control-label-direction, column);
 
     --color: var(--leo-color-text-primary);
@@ -137,7 +137,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: var(--leo-spacing-8);
+    gap: var(--leo-spacing-m);
 
     border-radius: var(--radius);
     padding: var(--padding);
@@ -159,7 +159,7 @@
   .leo-control .label-row {
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-4);
+    gap: var(--leo-spacing-s);
   }
 
   .leo-control .required-indicator {

@@ -10,7 +10,7 @@
 
 <style>
   li {
-    margin-top: var(--leo-spacing-16);
+    margin-top: var(--leo-spacing-xl);
   }
   .slot {
     font: var(--leo-font-primary-default-semibold);

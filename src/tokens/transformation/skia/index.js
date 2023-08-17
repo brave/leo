@@ -29,15 +29,10 @@ const transformValue = (token) => {
     return token.value
   }
 
-  if (token.type === 'custom-spacing') {
+  if (token.type === 'number') {
     // We just store the number, rather than creating a gfx::Insets to make it
     // easier to combine the various spacings.
-    return token.value.top
-  }
-
-  if (token.type === 'custom-radius') {
-    // We only support a consistent radius on all corners.
-    return token.value.topLeft
+    return token.value
   }
 
   console.error(token)
@@ -79,7 +74,10 @@ StyleDictionary.registerFormat({
         token.path.includes('light')
       ),
       dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
-      rest: filteredTokens(dictionary)
+      rest: filteredTokens(
+        dictionary,
+        (token) => !token.path.includes('light') && !token.path.includes('dark')
+      )
     }
 
     return template({ groupedTokens, options, file })
@@ -92,7 +90,13 @@ StyleDictionary.registerFormat({
     const template = _template(
       fs.readFileSync(__dirname + '/templates/spacing.h.template')
     )
-    return template({ tokens: filteredTokens(dictionary), options, file })
+    return template({
+      tokens: filteredTokens(dictionary, (token) =>
+        token.path.includes('spacing')
+      ),
+      options,
+      file
+    })
   }
 })
 
@@ -102,6 +106,12 @@ StyleDictionary.registerFormat({
     const template = _template(
       fs.readFileSync(__dirname + '/templates/radius.h.template')
     )
-    return template({ tokens: filteredTokens(dictionary), options, file })
+    return template({
+      tokens: filteredTokens(dictionary, (token) =>
+        token.path.includes('radius')
+      ),
+      options,
+      file
+    })
   }
 })

@@ -6,7 +6,8 @@ const acceptedTypes = [
   'custom-fontStyle',
   'custom-shadow',
   'custom-gradient',
-  'custom-spacing'
+  'custom-spacing',
+  'number'
 ]
 const disallowedPathParts = ['android', 'ios']
 

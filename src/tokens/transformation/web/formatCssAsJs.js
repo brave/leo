@@ -51,7 +51,7 @@ function formattedVariables(properties) {
     let value = properties[key]
     if (!isToken(value)) {
       // If we are a collection of colors, which we have dark and light versions
-      // of, then we should also provide a theme-less version of the properties
+      // we only want to export the themeless version
       // (i.e. without the 'dark' and 'light' parts of the name)
       // as that is what the css variable formatter does too.
       // TODO(petemill): This is ugly, there's got to be a cleaner way, or at least centralize this between
@@ -63,9 +63,17 @@ function formattedVariables(properties) {
       ) {
         value = {
           ...value,
+          // Make a copy of the light tokens (they all point to the CSS variable
+          // without the `light` path segment). These will be our themeless
+          // tokens.
           ...removeSegmentFromNameInAllTokens(value['light'], 'light')
         }
+
+        // Delete the separate dark/light property
+        delete value['light']
+        delete value['dark']
       }
+
       result[cleanKey(key)] = formattedVariables(value)
       continue
     }

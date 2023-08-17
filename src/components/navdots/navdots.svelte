@@ -63,7 +63,7 @@
 
     --active-dot-color: var(
       --leo-navdots-active-color,
-      var(--leo-color-interaction-button-primary-background)
+      var(--leo-color-button-background)
     );
     --active-dot-color-hover: var(
       --leo-navdots-active-color-hover,

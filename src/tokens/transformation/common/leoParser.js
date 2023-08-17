@@ -17,10 +17,7 @@ module.exports = {
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
     // end up deleting everything under gradient).
-    contents = removeKeyFromObject(contents, 'gradient', false)
-
-    // Replace extended e.g. color|extended|primary-10
-    contents = removeKeyFromObject(contents, 'extended')
+    if (contents.gradient) contents.gradient = contents.gradient.gradient
 
     /**
      * Convert layers from multiple tokens to single token with array of values.

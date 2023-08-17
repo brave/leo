@@ -191,7 +191,7 @@
   }
 
   .leo-dropdown {
-    --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-8));
+    --dropdown-gap: var(--leo-dropdown-gap, var(--leo-spacing-m));
     --transition-duration: var(--leo-dropdown-transition-duration, 0.12s);
 
     cursor: pointer;
@@ -238,7 +238,7 @@
 
     display: flex;
     flex-direction: column;
-    border-radius: var(--leo-radius-8);
+    border-radius: var(--leo-radius-m);
     max-height: 200px;
     overflow-y: auto;
     overflow-x: visible;
@@ -260,7 +260,7 @@
     all: unset;
     display: revert;
 
-    padding: var(--leo-spacing-16);
+    padding: var(--leo-spacing-xl);
     transition: background var(--transition-duration) ease-in-out,
       color var(--transition-duration) ease-in-out;
 
@@ -269,7 +269,7 @@
 
   :global .leo-dropdown-popup ::slotted(*:hover),
   :global .leo-dropdown-popup > *:hover {
-    background: var(--leo-color-container-interactive-background);
+    background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
 
@@ -286,10 +286,10 @@
     /** Our glow won't be visible if it's outside the parent, so shrink the
         * padding a little bit so the glow fits inside */
     --glow-size: 3px;
-    padding: calc(var(--leo-spacing-16) - var(--glow-size));
+    padding: calc(var(--leo-spacing-xl) - var(--glow-size));
     margin: var(--glow-size);
 
-    border-radius: var(--leo-spacing-8);
+    border-radius: var(--leo-spacing-m);
     box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
   }
