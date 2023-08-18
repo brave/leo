@@ -2,6 +2,7 @@ import type { SvelteComponent } from 'svelte'
 
 interface Options {
   mode: 'open' | 'closed'
+  eventTypes: string[]
   name: string
 }
 
@@ -31,7 +32,7 @@ const createSlot = (name?: string) => {
     },
 
     // Props changed
-    p() { },
+    p() {},
 
     // Detach
     d(detaching) {
@@ -44,7 +45,7 @@ const createSlot = (name?: string) => {
 
 export default function registerWebComponent(
   component: any,
-  { name, mode }: Options
+  { name, mode, eventTypes }: Options
 ) {
   if (customElements.get(name)) {
     console.log(`Attempted to register ${name} component multiple times.`)
@@ -74,9 +75,6 @@ export default function registerWebComponent(
   )
 
   class SvelteWrapper extends HTMLElement {
-    // A list of events which should be dispatched from the component. Ideally,
-    // we would infer these at compile time but we don't have that information.
-    #forwardEvents = new Set<string>()
     #component: SvelteComponent
     get component() {
       return this.#component
@@ -89,10 +87,7 @@ export default function registerWebComponent(
 
       // Make sure we forward events from the new component, otherwise our
       // listeners will break.
-      const ensureListeners = Array.from(this.#forwardEvents)
-      this.#forwardEvents.clear()
-      for (const type of ensureListeners)
-        this.#ensureEventForwarder(type)
+      for (const type of eventTypes) this.#ensureEventForwarder(type)
     }
 
     static get observedAttributes() {
@@ -240,15 +235,25 @@ export default function registerWebComponent(
     }
 
     #ensureEventForwarder(type: string) {
-      // Make sure we don't create the eventForwarder multiple times.
-      if (this.#forwardEvents.has(type)) return;
-      this.component.$on(type, e => this.dispatchEvent(e))
+      this.component.$on(type, (e) => this.dispatchEvent(e))
     }
 
-    addEventListener(event: string, callback: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) {
-      // Make sure the event is forwarded from the internal component.
-      this.#ensureEventForwarder(event)
-      super.addEventListener(event, callback, options)
+    addEventListener(
+      event: string,
+      callback: EventListener,
+      options?: boolean | AddEventListenerOptions
+    ) {
+      // If this is an event normally present on HTMLElements but is being
+      // provided internally from the CustomElement we want to only trigger the
+      // handler is this is a CustomEvent.
+      let maybeWrapped = callback
+      if (eventTypes.includes(event)) {
+        maybeWrapped = (...args) => {
+          if (!(args[0] instanceof CustomEvent)) return
+          callback(...args)
+        }
+      }
+      super.addEventListener(event, maybeWrapped, options)
     }
   }
 
