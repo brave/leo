@@ -31,7 +31,7 @@ const createSlot = (name?: string) => {
     },
 
     // Props changed
-    p() {},
+    p() { },
 
     // Detach
     d(detaching) {
@@ -73,14 +73,10 @@ export default function registerWebComponent(
     props.filter((p) => typeof c.$$.ctx[c.$$.props[p]] === 'boolean')
   )
 
-  type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
-    // A map of event name to a map of an event listener to a function for
-    // removing that listener.
-    // For example
-    // this.listenerRemovers.get('click').get(myCallback)() will remove
-    // |myCallback| from the click event.
-    listenerRemovers = new Map<string, Map<Callback, Callback>>()
+    // A list of events which should be dispatched from the component. Ideally,
+    // we would infer these at compile time but we don't have that information.
+    #forwardEvents = new Set<string>()
     #component: SvelteComponent
     get component() {
       return this.#component
@@ -90,12 +86,13 @@ export default function registerWebComponent(
       // We need to make sure that when we recreate the component (as in the
       // case of slots changing) that we copy over all of the event listeners.
       this.#component = value
-      for (const [event, listeners] of this.listenerRemovers.entries()) {
-        for (const [callback, remover] of listeners.entries()) {
-          remover()
-          this.addEventListener(event, callback)
-        }
-      }
+
+      // Make sure we forward events from the new component, otherwise our
+      // listeners will break.
+      const ensureListeners = Array.from(this.#forwardEvents)
+      this.#forwardEvents.clear()
+      for (const type of ensureListeners)
+        this.#ensureEventForwarder(type)
     }
 
     static get observedAttributes() {
@@ -242,27 +239,16 @@ export default function registerWebComponent(
       this[prop] = boolProperties.has(prop) ? newValue !== null : newValue
     }
 
-    addEventListener(event: string, callback: Callback) {
-      if (!this.listenerRemovers.has(event)) {
-        this.listenerRemovers.set(event, new Map())
-      }
-
-      // Note: $on(<event>, callback) returns a function which removes the
-      // callback from the event.
-      const remover = this.component.$on(event, callback)
-
-      // We store the remover so we can look it up in |removeEventListener|.
-      this.listenerRemovers.get(event).set(callback, remover)
-
-      // TODO: We could do this but we don't know if the event is handled
-      // by the component or not so we could end up triggering the event
-      // twice (i.e. in the case of 'click')
-      // super.addEventListener(event, callback, options)
+    #ensureEventForwarder(type: string) {
+      // Make sure we don't create the eventForwarder multiple times.
+      if (this.#forwardEvents.has(type)) return;
+      this.component.$on(type, e => this.dispatchEvent(e))
     }
 
-    removeEventListener(event: string, callback: Callback) {
-      this.listenerRemovers.get(event)?.get(callback)?.()
-      this.listenerRemovers.get(event)?.delete(callback)
+    addEventListener(event: string, callback: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) {
+      // Make sure the event is forwarded from the internal component.
+      this.#ensureEventForwarder(event)
+      super.addEventListener(event, callback, options)
     }
   }
 
