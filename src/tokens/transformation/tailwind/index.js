@@ -20,6 +20,10 @@ StyleDictionary.registerTransform({
   ...require('../web/webRadius')
 })
 StyleDictionary.registerTransform({
+  name: 'web/size',
+  ...require('../web/webSize')
+})
+StyleDictionary.registerTransform({
   name: 'web/padding',
   ...require('../web/webPadding')
 })
@@ -42,6 +46,7 @@ StyleDictionary.registerTransformGroup({
     'size/px',
     'tw/shadow',
     'web/radius',
+    'web/size',
     'web/padding',
     'tw/font',
     'web/gradient',

@@ -7,7 +7,7 @@ const formatColorVar = (name, isStatic = true) => {
   return `rgba(var(--tw-${name}), <alpha-value>)`
 }
 
-const kebabCase = (str) => str && str.toLowerCase().replaceAll(" ", "-");
+const kebabCase = (str) => str && str.toLowerCase().replaceAll(' ', '-')
 
 /**
  * This function transforms tokens into a nested object
@@ -27,16 +27,12 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
       /**
        * The following conditions are in order to properly group
        * color tokens and format into a nested object structure
-       * for use in Tailwind. This results in three ways of accessing
-       * a color using dot notation:
-       * Dark: colors.dark.systemfeedback.success.icon
-       * Light: colors.light.systemfeedback.success.icon
-       * Dynamic: colors.systemfeedback.success.icon
+       * for use in Tailwind.
        */
       let colorGroup = colorTokens[t.attributes.type] ?? {}
 
-      const tItem = kebabCase(t.attributes.item);
-      const tSubItem = kebabCase(t.attributes.subitem);
+      const tItem = kebabCase(t.attributes.item)
+      const tSubItem = kebabCase(t.attributes.subitem)
 
       /**
        * `state` is for the deepest level on a token.
@@ -46,14 +42,10 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
         if (!staticTheme) {
           // If not on a static theme, do not place within `dark` or `light` groups
           colorTokens[tItem] = colorTokens[tItem] || {}
-          const tokenGroup =
-            colorTokens[tItem][tSubItem] ?? {}
-          colorTokens[tItem][tSubItem] = merge(
-            tokenGroup,
-            {
-              [t.attributes.state]: formatColorVar(name, staticTheme)
-            }
-          )
+          const tokenGroup = colorTokens[tItem][tSubItem] ?? {}
+          colorTokens[tItem][tSubItem] = merge(tokenGroup, {
+            [t.attributes.state]: formatColorVar(name, staticTheme)
+          })
         } else {
           // If on a static theme, place within `dark` or `light` groups
           const tokenGroup = colorGroup[tItem]
@@ -103,14 +95,12 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
         colorGroup = formatColorVar(name, staticTheme)
       }
 
-      colorTokens[t.attributes.type] = colorGroup
+      if (Object.keys(colorGroup).length > 0) {
+        colorTokens[t.attributes.type] = colorGroup
+      }
     }
   })
   return colorTokens
-}
-
-function createStaticColorTokens(tokens) {
-  return createColorTokensFromGroup(tokens)
 }
 
 function createDynamicColorTokens(tokens) {
@@ -118,12 +108,12 @@ function createDynamicColorTokens(tokens) {
 }
 
 module.exports = ({ dictionary }) => {
-  const staticColorTokens = createStaticColorTokens(dictionary.allTokens)
   const dynamicColorTokens = createDynamicColorTokens(dictionary.allTokens)
-  const colorTokens = merge(dynamicColorTokens, staticColorTokens)
+  const colorTokens = merge(dynamicColorTokens)
 
   const fontSizes = new Map()
   const borderRadii = new Map()
+  const spacing = new Map([[0, 0]]) // Initialize with option for 0 spacing
   const gradients = new Map()
   const boxShadows = new Map()
   const dropShadows = new Map()
@@ -146,12 +136,14 @@ module.exports = ({ dictionary }) => {
       }
 
       fontSizes.set(fontName, [fontSize, rest])
-    } else if (type === 'custom-radius') {
+    } else if (t.attributes.category === 'radius') {
       if (t.attributes.type === 'full') {
         borderRadii.set(t.attributes.type, '9999px')
       } else {
         borderRadii.set(t.attributes.type, t.value)
       }
+    } else if (t.attributes.category === 'spacing') {
+      spacing.set(t.attributes.type, t.value)
     } else if (type === 'custom-gradient') {
       const [, ...pathParts] = t.path
       gradients.set(pathParts.join('-'), t.value)
@@ -174,6 +166,7 @@ module.exports = ({ dictionary }) => {
       colors: colorTokens,
       primaryFont: ['Poppins', 'Helvetica', 'sans-serif'],
       fontSize: Object.fromEntries(fontSizes),
+      spacing: Object.fromEntries(spacing),
       borderRadius: Object.fromEntries(borderRadii),
       boxShadow: Object.fromEntries(boxShadows),
       dropShadow: Object.fromEntries(dropShadows),

@@ -6,7 +6,8 @@ const {
   boxShadow,
   dropShadow,
   gradients,
-  borderRadius
+  borderRadius,
+  spacing
 } = require('./tokens')
 
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
     fontSize,
     boxShadow,
     borderRadius,
+    spacing,
     dropShadow,
     colors: colors,
     fontFamily: {
