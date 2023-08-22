@@ -40,7 +40,7 @@
     --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
 
     color: var(--color);
-    font: var(--leo-font-primary-default-semibold);
+    font: var(--leo-link-font, inherit);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
