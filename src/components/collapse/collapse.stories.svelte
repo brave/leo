@@ -96,6 +96,15 @@
         Collapse content
       </Collapse>
     </Slot>
+    <Slot
+      name="title"
+      explanation="The title for the collapse. When provided, this overrides the title property. It allows for more advanced styling"
+    >
+      <Collapse {...args} title="Title">
+        <div slot="title"><b>Foo</b> <i>bar</i> <s>hello</s></div>
+        Collapse content
+      </Collapse>
+    </Slot>
   </SlotInfo>
 </Story>
 
