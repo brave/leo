@@ -29,8 +29,8 @@
       defaultValue: 'Download Brave'
     },
     '--leo-link-font': {
-      type: 'text',
-      control: 'string',
+      type: 'string',
+      control: 'text',
       description: 'The font of the link'
     },
     '--leo-link-color': {
@@ -60,8 +60,8 @@
         'The focused color of the link. Defaults to the link color, if not set'
     },
     '--leo-link-focus-shadow': {
-      type: 'text',
-      control: 'string',
+      type: 'string',
+      control: 'text',
       description: 'The focused shadow for the link'
     }
   }}
