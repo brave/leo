@@ -26,7 +26,7 @@
 </a>
 
 <style lang="scss">
-  a:not(.leoButton) {
+  a {
     all: unset;
 
     --color: var(--leo-link-color, var(--leo-color-text-interactive));
