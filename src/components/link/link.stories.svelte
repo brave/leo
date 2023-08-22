@@ -28,11 +28,6 @@
       type: 'string',
       defaultValue: 'Download Brave'
     },
-    '--leo-link-font': {
-      type: 'string',
-      control: 'text',
-      description: 'The font of the link'
-    },
     '--leo-link-color': {
       type: 'string',
       control: 'color',
