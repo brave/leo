@@ -91,7 +91,8 @@
     width: 100%;
   }
   // Main styles and states
-  .leoButton {
+  .leoButton,
+  .leoButton:visited:not(:hover) {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
@@ -111,30 +112,30 @@
     color: var(--color);
     text-decoration: none;
     padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
+  }
 
-    &:not(:disabled) {
-      &:hover,
-      [data-is-button-target]:hover :host .leoButton,
-      [data-is-button-target]:hover .leoButton {
-        background: var(--bg-hover, var(--bg));
-        color: var(--color-hover, var(--color));
-        box-shadow: var(--box-shadow-hover);
-        border-color: var(--border-color-hover, var(--border-color));
-      }
+  .leoButton:not(:disabled) {
+    &:hover,
+    [data-is-button-target]:hover :host .leoButton,
+    [data-is-button-target]:hover .leoButton {
+      background: var(--bg-hover, var(--bg));
+      color: var(--color-hover, var(--color));
+      box-shadow: var(--box-shadow-hover);
+      border-color: var(--border-color-hover, var(--border-color));
+    }
 
-      &:active {
-        opacity: 0.75;
-        background: var(--bg-active, var(--bg));
-        color: var(--color-active, var(--color-hover, var(--color)));
-      }
+    &:active {
+      opacity: 0.75;
+      background: var(--bg-active, var(--bg));
+      color: var(--color-active, var(--color-hover, var(--color)));
+    }
 
-      &:focus-visible {
-        outline: none;
-        color: var(--color-focus, var(--color));
-        box-shadow: var(--box-shadow-focus);
-        background: var(--bg-focus, var(--bg));
-        border-color: var(--border-color-focus, var(--border-color));
-      }
+    &:focus-visible {
+      outline: none;
+      color: var(--color-focus, var(--color));
+      box-shadow: var(--box-shadow-focus);
+      background: var(--bg-focus, var(--bg));
+      border-color: var(--border-color-focus, var(--border-color));
     }
   }
 
