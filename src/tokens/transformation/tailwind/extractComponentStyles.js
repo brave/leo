@@ -6,7 +6,7 @@ const preprocess = require('svelte-preprocess')
 const postcssJs = require('postcss-js')
 const postcss = require('postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')()
-const theme = require("../../../postcss/theme");
+const theme = require('../../../postcss/theme')
 
 const tokenCategories = [
   'font',
@@ -25,25 +25,25 @@ const leoVarsPattern = RegExp(
 
 const getTWThemeFromVar = (category, token) => {
   const tokenParts = token.split('-')
-  let tokenPath;
+  let tokenPath
   switch (category) {
     case 'color':
       tokenPath = `colors.${tokenParts.join('.')}`
-      break;
+      break
     case 'font':
       tokenPath = `fontSize.${tokenParts.join('-')}`
-      break;
+      break
     case 'gradient':
       tokenPath = `backgroundImage.${tokenParts.join('-')}`
-      break;
+      break
     case 'effect':
       tokenPath = `backgroundImage.${tokenParts
         .join('-')
         .replace('elevation-', '')}`
-      break;
+      break
     case 'radius':
       tokenPath = `borderRadius.${tokenParts.join('-')}`
-      break;
+      break
   }
   return `theme('${tokenPath}')`
 }

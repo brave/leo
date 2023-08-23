@@ -24,7 +24,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         ...gradients
-      },
+      }
     }
   },
   plugins: require('./plugins')

@@ -18,9 +18,9 @@ function matchThemableToken(
   modifierPathSegment,
   tokenPaths = ['color', 'effect.elevation']
 ) {
-  const tokenPath = token.path.join('.').toLowerCase();
+  const tokenPath = token.path.join('.').toLowerCase()
   return (
-    tokenPaths.some(p => tokenPath.startsWith(p)) &&
+    tokenPaths.some((p) => tokenPath.startsWith(p)) &&
     token.path.includes(modifierPathSegment)
   )
 }
