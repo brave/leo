@@ -30,7 +30,9 @@
       </div>
     {/if}
     <div class="title">
-      {title}
+      <slot name="title">
+        {title}
+      </slot>
     </div>
     <div class="arrow">
       <Icon name="carat-down" />
