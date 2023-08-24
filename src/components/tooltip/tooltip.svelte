@@ -74,6 +74,9 @@
       {offset}
       {placement}
       {shift}
+      autoUpdate
+      middleware={[arrowMiddleware({ padding: 0, element: trigger })]}
+      on:computedposition={positionArrow}
     >
       <div
         class="tooltip"
@@ -107,8 +110,6 @@
     --shadow: var(--leo-tooltip-shadow, var(--leo-effect-elevation-03));
     --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
     --radius: var(--leo-radius-m);
-
-    z-index: 0;
   }
 
   .leo-tooltip .tooltip {

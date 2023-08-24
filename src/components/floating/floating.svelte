@@ -5,6 +5,7 @@
     flip as flipMiddleWare,
     shift as shiftMiddleware,
     offset as offsetMiddleware,
+    autoUpdate as createAutoUpdater
   } from '@floating-ui/dom'
   import { createEventDispatcher } from 'svelte'
 
@@ -30,6 +31,8 @@
   /** The target element to float near */
   export let target: HTMLElement;
 
+  export let autoUpdate: boolean = false;
+
   let dispatch = createEventDispatcher()
 
   let floating: HTMLElement
@@ -53,23 +56,41 @@
     result.push(...additional)
     return result
   }
+  
+  function updatePosition(...args: any[]) {
+    if (!floating || !target) return
 
-  $: computePosition(target, floating, {
-    placement: placement,
-    middleware: getMiddlewares(flip, shift, offset, middleware)
-  }).then(({ x, y, placement, middlewareData }) => {
-    Object.assign(floating.style, {
-      left: `${x}px`,
-      top: `${y}px`,
-    })
+    computePosition(target, floating, {
+        placement: placement,
+        middleware: getMiddlewares(flip, shift, offset, middleware)
+    }).then(({ x, y, placement, middlewareData }) => {
+        Object.assign(floating.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+        })
 
-    dispatch('computedposition', {
-      x,
-      y,
-      middlewareData,
-      placement
+        dispatch('computedposition', {
+            x,
+            y,
+            middlewareData,
+            placement
+        })
     })
-  })
+  }
+
+  let cleanup: Function
+
+  $: {
+    cleanup?.()
+
+    if (autoUpdate && target && floating) {
+        console.log('created updater')
+        cleanup = createAutoUpdater(target, floating, updatePosition)
+    } else {
+        updatePosition(target, floating, flip, shift, offset, middleware)
+    }
+  }
+
 </script>
 
 <div bind:this={floating} class="leo-floating">
