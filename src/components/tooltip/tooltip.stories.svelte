@@ -1,14 +1,16 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import Tooltip, { modes } from './tooltip.svelte'
   import Button from '../button/button.svelte'
+  import Checkbox from '../checkbox/checkbox.svelte'
 
   const sides = ['top', 'bottom', 'left', 'right']
   const positions = ['', '-start', '-end']
   const placements = positions.flatMap((p) => sides.map((s) => `${s}${p}`))
+
+  let showTooltip = false
 </script>
 
 <Meta
@@ -36,3 +38,10 @@
 </Story>
 
 <Story name="Default" />
+
+<Story name="Controlled" let:args>
+  <Checkbox bind:checked={showTooltip}>Show tooltip</Checkbox>
+  <Tooltip {...args} visible={showTooltip}>
+    Some text with a triggered tooltip
+  </Tooltip>
+</Story>
