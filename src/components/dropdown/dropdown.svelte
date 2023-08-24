@@ -22,6 +22,7 @@
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import { scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
+  import Floating from '../floating/floating.svelte'
 
   export let placeholder = ''
   export let value: string | undefined = undefined
@@ -35,6 +36,7 @@
   let isOpen = false
   let popup: HTMLDivElement
   let button: HTMLButtonElement
+  let dropdown: HTMLDivElement
 
   function getValue(e: Element) {
     // If the option element doesn't have a value, fallback to using the text
@@ -129,58 +131,60 @@
 </script>
 
 <div class="leo-dropdown">
-  <FormItem
-    bind:disabled
-    bind:required
-    bind:size
-    {mode}
-    showFocusOutline={isOpen}
-  >
-    <slot name="label" slot="label" />
-    <slot name="left-icon" slot="left-icon" />
-    <button
-      bind:this={button}
-      class="click-target"
-      {disabled}
-      on:click|stopPropagation={(e) => (isOpen = !isOpen)}
+  <div bind:this={dropdown}>
+    <FormItem
+      bind:disabled
+      bind:required
+      bind:size
+      {mode}
+      showFocusOutline={isOpen}
     >
-      {#if value !== undefined}
-        <slot name="value" {value}>
-          <span class="value">{valueText}</span>
-        </slot>
-      {:else}
-        <slot name="placeholder">
-          <span class="placeholder">{placeholder}</span>
-        </slot>
-      {/if}
-    </button>
-    <slot name="right-icon" slot="right-icon">
-      <div class="indicator" class:open={isOpen}>
-        <Icon name="arrow-small-down" />
-      </div>
-    </slot>
-    <div class="menu" slot="after">
-      <div
-        class="leo-dropdown-popup"
-        hidden={!isOpen}
-        transition:scale={{ duration: 60, start: 0.8 }}
-        use:clickOutside={isOpen &&
-          ((e) => {
-            e.stopPropagation()
-            e.preventDefault()
-            isOpen = false
-          })}
-        on:keypress={(e) => {
-          if (e.code !== 'Enter' && e.code !== 'Space') return
-          selectOption(e)
-        }}
-        on:click|stopPropagation|preventDefault={selectOption}
-        bind:this={popup}
+      <slot name="label" slot="label" />
+      <slot name="left-icon" slot="left-icon" />
+      <button
+        bind:this={button}
+        class="click-target"
+        {disabled}
+        on:click|stopPropagation={(e) => (isOpen = !isOpen)}
       >
-        <slot />
-      </div>
+        {#if value !== undefined}
+          <slot name="value" {value}>
+            <span class="value">{valueText}</span>
+          </slot>
+        {:else}
+          <slot name="placeholder">
+            <span class="placeholder">{placeholder}</span>
+          </slot>
+        {/if}
+      </button>
+      <slot name="right-icon" slot="right-icon">
+        <div class="indicator" class:open={isOpen}>
+          <Icon name="arrow-small-down" />
+        </div>
+      </slot>
+    </FormItem>
+  </div>
+  <Floating target={dropdown}>
+    <div
+      class="leo-dropdown-popup"
+      hidden={!isOpen}
+      transition:scale={{ duration: 60, start: 0.8 }}
+      use:clickOutside={isOpen &&
+        ((e) => {
+          e.stopPropagation()
+          e.preventDefault()
+          isOpen = false
+        })}
+      on:keypress={(e) => {
+        if (e.code !== 'Enter' && e.code !== 'Space') return
+        selectOption(e)
+      }}
+      on:click|stopPropagation|preventDefault={selectOption}
+      bind:this={popup}
+    >
+      <slot />
     </div>
-  </FormItem>
+  </Floating>
 </div>
 
 <svelte:window on:keydown={changeSelection} />
@@ -231,10 +235,6 @@
   .leo-dropdown .leo-dropdown-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
-    position: absolute;
-    top: var(--dropdown-gap);
-    left: 0;
-    right: 0;
 
     display: flex;
     flex-direction: column;
