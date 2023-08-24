@@ -164,10 +164,11 @@
       </slot>
     </FormItem>
   </div>
-  <Floating target={dropdown}>
+  <Floating target={dropdown} placement='bottom-start'>
     <div
       class="leo-dropdown-popup"
       hidden={!isOpen}
+      style:min-width="{dropdown?.getBoundingClientRect().width}px"
       transition:scale={{ duration: 60, start: 0.8 }}
       use:clickOutside={isOpen &&
         ((e) => {

@@ -4,39 +4,18 @@
 </script>
 
 <script lang="ts">
-  import type { Middleware, Placement } from '@floating-ui/dom'
-  import {
-    computePosition,
-    flip as flipMiddleWare,
-    shift as shiftMiddleware,
-    offset as offsetMiddleware,
-    arrow as arrowMiddleware
-  } from '@floating-ui/dom'
+  import type { Middleware, MiddlewareData, Placement } from '@floating-ui/dom'
+  import { arrow as arrowMiddleware } from '@floating-ui/dom'
   import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
+  import Floating from '../floating/floating.svelte'
 
   export let text: string = undefined
 
-  /** The default placement of the tooltip
-   * https://floating-ui.com/docs/tutorial#placements */
   export let placement: Placement = 'top'
-
-  /** Whether the element should flip to the opposite placement if it doesn't fit
-   * https://floating-ui.com/docs/flip */
   export let flip: boolean = true
-
-  /** The shift padding to apply to the tooltip. See
-   * https://floating-ui.com/docs/shift for more details. */
   export let shift: number | undefined = 8
-
-  /** The gap between the target and the tooltip:
-   * https://floating-ui.com/docs/offset */
   export let offset: number = 8
-
-  /** Additional middleware to apply. */
-  export let middleware: Middleware[] = []
-
-  /** The mode of the tooltip. */
   export let mode: Mode = 'mini'
 
   /* Whether the tooltip is currently visible */
@@ -44,7 +23,7 @@
 
   // Note: This is separate from the |visible| flag because we want to handle
   // controlled and uncontrolled states for this component.
-  $: visibleInternal = visible ?? false 
+  $: visibleInternal = visible ?? false
 
   const dispatch = createEventDispatcher()
 
@@ -52,46 +31,17 @@
   let arrow: HTMLElement
   let trigger: HTMLElement
 
-  function getMiddlewares(
-    flip: boolean,
-    shift: number | undefined,
-    offset: number,
-    additional: Middleware[],
-    arrow: HTMLElement,
-    visible: boolean /* included so this is recalculated when it changes */
+  function positionArrow(
+    e: CustomEvent<{ middlewareData: MiddlewareData; placement: Placement }>
   ) {
-    const result: Middleware[] = []
-    if (offset) {
-      result.push(offsetMiddleware(offset))
-    }
-    if (flip) {
-      result.push(flipMiddleWare())
-    }
-    if (shift !== undefined) {
-      result.push(shiftMiddleware({ padding: shift }))
-    }
-    result.push(arrowMiddleware({ element: arrow }))
-    result.push(...additional)
-    return result
-  }
-
-  $: computePosition(trigger, tooltip, {
-    placement: placement,
-    middleware: getMiddlewares(flip, shift, offset, middleware, arrow, visible)
-  }).then(({ x, y, placement, middlewareData }) => {
-    Object.assign(tooltip.style, {
-      left: `${x}px`,
-      top: `${y}px`
-    })
-
-    const { x: arrowX, y: arrowY } = middlewareData.arrow
+    const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow
 
     const staticSide = {
       top: 'bottom',
       right: 'left',
       bottom: 'top',
       left: 'right'
-    }[placement.split('-')[0]]
+    }[e.detail.placement.split('-')[0]]
 
     Object.assign(arrow.style, {
       left: arrowX != null ? `${arrowX}px` : '',
@@ -100,7 +50,7 @@
       bottom: '',
       [staticSide]: '-4px'
     })
-  })
+  }
 
   function setVisible(newVisible: boolean) {
     if (newVisible === visible) return
@@ -118,20 +68,28 @@
   on:focusout={() => setVisible(false)}
 >
   {#key visibleInternal}
-    <div
-      class="tooltip"
-      class:hero={mode === 'hero'}
-      class:info={mode === 'info'}
-      class:mini={mode === 'mini'}
-      transition:fade={{ duration: 60 }}
-      hidden={!visibleInternal}
-      bind:this={tooltip}
+    <Floating
+      target={trigger}
+      {flip}
+      {offset}
+      {placement}
+      {shift}
     >
-      <slot name="text">
-        {text}
-      </slot>
-      <div class="arrow" bind:this={arrow} />
-    </div>
+      <div
+        class="tooltip"
+        class:hero={mode === 'hero'}
+        class:info={mode === 'info'}
+        class:mini={mode === 'mini'}
+        transition:fade={{ duration: 60 }}
+        hidden={!visibleInternal}
+        bind:this={tooltip}
+      >
+        <slot name="text">
+          {text}
+        </slot>
+        <div class="arrow" bind:this={arrow} />
+      </div>
+    </Floating>
   {/key}
 
   <div class="trigger" bind:this={trigger}>
@@ -150,9 +108,7 @@
     --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
     --radius: var(--leo-radius-m);
 
-    position: relative;
     z-index: 0;
-    width: fit-content;
   }
 
   .leo-tooltip .tooltip {
@@ -161,9 +117,6 @@
     box-shadow: var(--shadow);
     padding: var(--padding);
     border-radius: var(--radius);
-
-    position: absolute;
-    width: max-content;
 
     font: var(--leo-font-primary-default-regular);
   }

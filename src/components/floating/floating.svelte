@@ -60,7 +60,7 @@
   }).then(({ x, y, placement, middlewareData }) => {
     Object.assign(floating.style, {
       left: `${x}px`,
-      top: `${y}px`
+      top: `${y}px`,
     })
 
     dispatch('computedposition', {
@@ -73,16 +73,12 @@
 </script>
 
 <div bind:this={floating} class="leo-floating">
-  <slot name="floating" />
-</div>
-
-<div bind:this={target}>
   <slot />
 </div>
 
 <style lang="scss">
   .leo-floating {
-    position: relative;
+    position: absolute;
     z-index: 0;
     width: fit-content;
   }
