@@ -27,7 +27,7 @@
     },
     type: {
       control: 'select',
-      options: ['text', 'password', 'date', 'time', 'color']
+      options: ['text', 'password', 'date', 'time', 'color', 'number']
     },
     size: {
       control: 'select',
@@ -61,7 +61,7 @@
 </Story>
 
 <Story name="Slots" let:args>
-  <SlotInfo description="The input provides several slots for customization">
+  <SlotInfo description="The input provides several slots for customization. In addition, it accepts all properties which the default HTML Input element accepts">
     <Slot
       name="left-icon"
       explanation="An icon displayed on the left hand side of the input"

@@ -6,7 +6,7 @@
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
   type $$Props = Omit<SvelteHTMLElements['input'], OverrideProps> & {
-    type: 'text' | 'password' | 'date' | 'time' | 'color'
+    type: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
     value: string | number | boolean
     size: Size
     hasErrors: boolean
@@ -66,6 +66,12 @@
   }
 
   let input: HTMLInputElement = undefined
+  let hasErrorsInternal = false
+
+  function onInput(e) {
+    value = e.target['value']
+    hasErrorsInternal = (required && !value) || !input.checkValidity()
+  }
 </script>
 
 <FormItem
@@ -73,7 +79,7 @@
   bind:disabled
   {size}
   {mode}
-  error={(hasErrors || (required && !value)) && showErrors}
+  error={(hasErrors || hasErrorsInternal) && showErrors}
 >
   <slot name="left-icon" slot="left-icon" />
   <div class="input-container">
@@ -85,7 +91,7 @@
       {value}
       bind:this={input}
       on:change
-      on:input={(e) => (value = e.target['value'])}
+      on:input={onInput}
       on:input
       on:focus
       on:blur
