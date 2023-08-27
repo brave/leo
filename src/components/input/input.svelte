@@ -1,10 +1,21 @@
 <script lang="ts">
+  import type { SvelteHTMLElements } from 'svelte/elements'
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
 
-  export let type: 'text' | 'password' | 'date' | 'time' | 'color' = 'text'
-  export let value: string | number | boolean = ''
+  type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
+  type $$Props = Omit<SvelteHTMLElements['input'], OverrideProps> & {
+    type: 'text' | 'password' | 'date' | 'time' | 'color'
+    value: string | number | boolean
+    size: Size
+    hasErrors: boolean
+    showErrors: boolean
+    mode: Mode | undefined
+  }
+
+  export let type: $$Props['type'] = 'text'
+  export let value: $$Props['value'] = ''
   export let required = false
   export let disabled = false
   export let size: Size = 'normal'
@@ -30,6 +41,7 @@
   <slot name="left-icon" slot="left-icon" />
   <div class="input-container">
     <input
+      {...$$restProps}
       class="leo-input"
       {disabled}
       {type}
