@@ -64,6 +64,11 @@
   <SlotInfo
     description="The input provides several slots for customization. In addition, it accepts all properties which the default HTML Input element accepts"
   >
+    <Slot name="default" explanation="The label for the input">
+      <Input {...args}>
+        <span>This is a label: <b>foo</b><i>bar</i><s>hello</s></span>
+      </Input>
+    </Slot>
     <Slot
       name="left-icon"
       explanation="An icon displayed on the left hand side of the input"
