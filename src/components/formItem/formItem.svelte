@@ -110,7 +110,7 @@
     --border-color-hover: transparent;
     --border-color-focus: transparent;
     --border-color-error: var(--leo-color-systemfeedback-error-icon);
-    --border-color-error-hover: var(--leo-color-light-red-50);
+    --border-color-error-hover: var(--leo-color-red-50);
 
     display: flex;
     flex-direction: var(--direction);

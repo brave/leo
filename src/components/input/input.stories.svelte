@@ -105,10 +105,10 @@
   [slot='errors'] {
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-8);
+    gap: var(--leo-spacing-m);
     align-items: center;
 
-    margin-top: var(--leo-spacing-4);
+    margin-top: var(--leo-spacing-s);
 
     color: var(--leo-color-systemfeedback-error-icon);
   }
