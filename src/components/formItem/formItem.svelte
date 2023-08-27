@@ -1,9 +1,44 @@
 <script lang="ts" context="module">
+  import type { ArgType } from '@storybook/addons'
   export let sizes = ['small', 'normal', 'large'] as const
   export type Size = (typeof sizes)[number]
 
   export let modes = ['filled', 'outline'] as const
   export type Mode = (typeof modes)[number]
+
+  export let cssProperties: { [key: `--leo-control-${string}`]: ArgType<any> } =
+    {
+      '--leo-control-label-direction': {
+        description:
+          'Controls how the label and control flow together. Accepts a <flex-direction>',
+        control: 'select',
+        options: ['column', 'column-reverse', 'row', 'row-reverse']
+      },
+      '--leo-control-radius': {
+        description: 'The border radius of the control',
+        type: 'string'
+      },
+      '--leo-control-padding': {
+        description: 'The padding of the control',
+        type: 'string'
+      },
+      '--leo-control-font': {
+        description: 'The font used by the control',
+        type: 'string'
+      },
+      '--leo-control-icon-size': {
+        description: 'The icon size used by the control',
+        type: 'string'
+      },
+      '--leo-control-icon-color': {
+        description: 'The icon color used by the control',
+        control: 'color'
+      },
+      '--leo-control-label-gap': {
+        description: 'The gap between the label and the control',
+        type: 'string'
+      }
+    }
 </script>
 
 <script lang="ts">
@@ -14,6 +49,7 @@
   export let mode: Mode = 'outline'
 
   export let showFocusOutline: boolean = false
+  export let error = false
 </script>
 
 <label
@@ -23,6 +59,7 @@
   class:filled={mode === 'filled'}
   class:outline={mode !== 'filled'}
   class:focus={showFocusOutline}
+  class:error
   aria-disabled={disabled}
 >
   <div class="label-row">
@@ -46,14 +83,13 @@
 <style lang="scss">
   .leo-control {
     --radius: var(--leo-control-radius, var(--leo-spacing-m));
-    --background: var(
-      --leo-control-background,
-      var(--leo-color-container-highlight)
-    );
     --padding: var(--leo-control-padding, 9px);
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
-    --leo-icon-size: 20px;
-    --leo-icon-color: var(--leo-color-icon-default);
+    --leo-icon-size: var(--leo-control-icon-size, 20px);
+    --leo-icon-color: var(
+      --leo-control-icon-color,
+      var(--leo-color-icon-default)
+    );
     --gap: var(--leo-control-label-gap, var(--leo-spacing-s));
     --direction: var(--leo-control-label-direction, column);
 
@@ -73,6 +109,8 @@
     --border-color: transparent;
     --border-color-hover: transparent;
     --border-color-focus: transparent;
+    --border-color-error: var(--leo-color-systemfeedback-error-icon);
+    --border-color-error-hover: var(--leo-color-red-50);
 
     display: flex;
     flex-direction: var(--direction);
@@ -95,6 +133,10 @@
         box-shadow: var(--shadow-focus);
         border-color: var(--border-color-focus);
       }
+
+      &.error .container:hover:not(:has(*:focus-visible)) {
+        border-color: var(--border-color-error-hover);
+      }
     }
   }
 
@@ -113,9 +155,7 @@
 
   .leo-control.filled {
     --background: var(--leo-color-container-highlight);
-
     --shadow-hover: var(--leo-effect-elevation-01);
-
     --border-color: transparent;
     --border-color-hover: var(--leo-color-divider-subtle);
   }
@@ -126,6 +166,10 @@
     --border-color: var(--leo-color-divider-strong);
     --border-color-hover: var(--leo-color-gray-30);
     --shadow-hover: var(--leo-effect-elevation-01);
+  }
+
+  .leo-control.error {
+    --border-color: var(--border-color-error);
   }
 
   .leo-control .control {

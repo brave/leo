@@ -3,7 +3,7 @@
 
   import Dropdown from './dropdown.svelte'
   import Icon from '../icon/icon.svelte'
-  import { sizes } from '../formItem/formItem.svelte'
+  import { cssProperties, sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import { modes } from '../formItem/formItem.svelte'
@@ -20,10 +20,7 @@
   title="Dropdown"
   component={Dropdown}
   argTypes={{
-    '--leo-control-label-direction': {
-      control: 'select',
-      options: ['column', 'column-reverse', 'row', 'row-reverse']
-    },
+    ...cssProperties,
     placeholder: {
       defaultValue: 'select...'
     },
