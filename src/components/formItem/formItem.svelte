@@ -22,7 +22,7 @@
         description: 'The padding of the control',
         type: 'string'
       },
-      '--leo-control-font': { 
+      '--leo-control-font': {
         description: 'The font used by the control',
         type: 'string'
       },
@@ -86,7 +86,10 @@
     --padding: var(--leo-control-padding, 9px);
     --font: var(--leo-control-font, var(--leo-font-primary-default-regular));
     --leo-icon-size: var(--leo-control-icon-size, 20px);
-    --leo-icon-color: var(--leo-control-icon-color, var(--leo-color-icon-default));
+    --leo-icon-color: var(
+      --leo-control-icon-color,
+      var(--leo-color-icon-default)
+    );
     --gap: var(--leo-control-label-gap, var(--leo-spacing-s));
     --direction: var(--leo-control-label-direction, column);
 
