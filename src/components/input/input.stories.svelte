@@ -18,9 +18,15 @@
       control: 'select',
       options: ['row', 'row-reverse', 'column', 'column-reverse']
     },
+    placeholder: {
+      type: 'string',
+      description: 'The placeholder'
+    },
     label: {
       type: 'string',
-      defaultValue: 'Label'
+      defaultValue: 'Label',
+      description:
+        "This isn't a real prop of the component, it's just useful for configuring the storybook"
     },
     type: {
       control: 'select',

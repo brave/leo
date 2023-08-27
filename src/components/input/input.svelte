@@ -14,13 +14,50 @@
     mode: Mode | undefined
   }
 
+  /**
+   * The type of input to render. The Input component just supports a subset of
+   * those supported by the HTML Input element.
+   */
   export let type: $$Props['type'] = 'text'
+
+  /**
+   * The value of the input control.
+   */
   export let value: $$Props['value'] = ''
+
+  /*
+   * Whether the value is required. In addition to showing a required indicator,
+   * this performs some basic validation (i.e. is value truthy), and if it fails
+   * (and showErrors is true), the component will be rendered in its error
+   * state.
+   */
   export let required = false
+
+  /**
+   * Whether the component is disabled.
+   */
   export let disabled = false
+
+  /**
+   * The size of the input.
+   */
   export let size: Size = 'normal'
+
+  /**
+   * Whether the component has any errors. If true, and showErrors is set then
+   * the errors slot will be rendered and the component will show in its error
+   * state.
+   */
   export let hasErrors = false
+
+  /**
+   * Whether any errors the component has should be shown.
+   */
   export let showErrors = false
+
+  /**
+   * The mode of the input.
+   */
   export let mode: Mode | undefined = undefined
 
   const pickerIcons = {
