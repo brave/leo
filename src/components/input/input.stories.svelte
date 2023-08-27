@@ -3,7 +3,7 @@
 
   import Input from './input.svelte'
   import Icon from '../icon/icon.svelte'
-  import { modes, sizes } from '../formItem/formItem.svelte'
+  import { cssProperties, modes, sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
 
@@ -14,10 +14,7 @@
   title="Input"
   component={Input}
   argTypes={{
-    '--leo-control-layout': {
-      control: 'select',
-      options: ['row', 'row-reverse', 'column', 'column-reverse']
-    },
+    ...cssProperties,
     placeholder: {
       type: 'string',
       description: 'The placeholder'
