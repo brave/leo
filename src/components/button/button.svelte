@@ -105,11 +105,12 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: background 0.12s ease-in-out, var(--default-transition);
-    box-shadow: none;
-    border: solid var(--border-width, 0px) var(--border-color, transparent);
-    border-radius: var(--radius);
-    background: var(--bg);
-    color: var(--color);
+    box-shadow: var(--leo-button-shadow, none);
+    border: solid var(--border-width, 0px)
+      var(--leo-button-border-color, var(--border-color, transparent));
+    border-radius: var(--leo-button-border-radius, var(--radius));
+    background: var(--leo-button-background, var(--bg));
+    color: var(--leo-button-color, var(--color));
     text-decoration: none;
     padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
   }
@@ -118,36 +119,73 @@
     &:hover,
     [data-is-button-target]:hover :host .leoButton,
     [data-is-button-target]:hover .leoButton {
-      background: var(--bg-hover, var(--bg));
-      color: var(--color-hover, var(--color));
-      box-shadow: var(--box-shadow-hover);
-      border-color: var(--border-color-hover, var(--border-color));
+      background: var(
+        --leo-button-background-hover,
+        var(--bg-hover, var(--bg))
+      );
+      color: var(--leo-button-color-hover, var(--color-hover, var(--color)));
+      box-shadow: var(--leo-button-shadow-hover, var(--box-shadow-hover));
+      border-color: var(
+        --leo-button-border-hover,
+        var(--border-color-hover, var(--border-color))
+      );
     }
 
     &:active {
       opacity: 0.75;
-      background: var(--bg-active, var(--bg));
-      color: var(--color-active, var(--color-hover, var(--color)));
+      background: var(
+        --leo-button-background-active,
+        var(--bg-active, var(--bg))
+      );
+      color: var(
+        --leo-button-color-active,
+        var(--color-active, var(--color-hover, var(--color)))
+      );
+      border: var(
+        --leo-button-border-active,
+        var(
+          --border-color-active,
+          var(--border-color-hover, var(--border-color))
+        )
+      );
+      box-shadow: var(--leo-button-shadow-active, inherit);
     }
 
     &:focus-visible {
       outline: none;
-      color: var(--color-focus, var(--color));
-      box-shadow: var(--box-shadow-focus);
-      background: var(--bg-focus, var(--bg));
-      border-color: var(--border-color-focus, var(--border-color));
+      color: var(--leo-button-color-focus, var(--color-focus, var(--color)));
+      box-shadow: var(--leo-button-shadow-focus, var(--box-shadow-focus));
+      background: var(
+        --leo-button-background-focus,
+        var(--bg-focus, var(--bg))
+      );
+      border-color: var(
+        --leo-button-border-focus,
+        var(--border-color-focus, var(--border-color))
+      );
     }
   }
 
   // State Definitions
   .leoButton.isLoading {
     opacity: 0.75;
-    background: var(--bg-loading, var(--bg));
-    color: var(--color-loading, var(--color));
+    background: var(
+      --leo-button-background-loading,
+      var(--bg-loading, var(--bg))
+    );
+    color: var(--leo-button-color-color, var(--color-loading, var(--color)));
+    border-color: var(--leo-button-border-color, inherit);
+    box-shadow: var(--leo-button-shadow-loading, inherit);
   }
   :host:disabled .leoButton,
   .leoButton:disabled {
-    background: var(--bg-disabled, var(--bg));
+    color: var(--leo-button-color-disabled, inherit);
+    background: var(
+      --leo-button-background-disabled,
+      var(--bg-disabled, var(--bg))
+    );
+    border-color: var(--leo-button-border-disabled, inherit);
+    box-shadow: var(--leo-button-shadow-disabled, inherit);
     opacity: 0.5;
   }
 
@@ -293,7 +331,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      border-radius: var(--radius);
+      border-radius: var(--leo-button-border-radius, var(--radius));
     }
 
     &::before {

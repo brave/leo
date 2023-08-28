@@ -17,6 +17,99 @@
   title="Button"
   component={Button}
   argTypes={{
+    '--leo-button-color': {
+      description: 'The text color of the button',
+      control: 'color'
+    },
+    '--leo-button-color-hover': {
+      description: 'The hover text color of the button',
+      control: 'color'
+    },
+    '--leo-button-color-focus': {
+      description: 'The focus text color of the button',
+      control: 'color'
+    },
+    '--leo-button-color-active': {
+      description: 'The active text color of the button',
+      control: 'color'
+    },
+    '--leo-button-color-loading': {
+      description: 'The loading text color of the button',
+      control: 'color'
+    },
+    '--leo-button-color-disabled': {
+      description: 'The disabled text color of the button',
+      control: 'color'
+    },
+    '--leo-button-background': {
+      description: 'The background of the button',
+      control: 'color'
+    },
+    '--leo-button-background-hover': {
+      description: 'The hover background of the button',
+      control: 'color'
+    },
+    '--leo-button-background-focus': {
+      description: 'The focus background of the button',
+      control: 'color'
+    },
+    '--leo-button-background-active': {
+      description: 'The active background of the button',
+      control: 'color'
+    },
+    '--leo-button-background-loading': {
+      description: 'The loading background of the button',
+      control: 'color'
+    },
+    '--leo-button-background-disabled': {
+      description: 'The disabled background of the button',
+      control: 'color'
+    },
+    '--leo-button-border': {
+      description: 'The border of the button',
+      control: 'color'
+    },
+    '--leo-button-border-hover': {
+      description: 'The hover border of the button',
+      control: 'color'
+    },
+    '--leo-button-border-focus': {
+      description: 'The focus border of the button',
+      control: 'color'
+    },
+    '--leo-button-border-active': {
+      description: 'The active border of the button',
+      control: 'color'
+    },
+    '--leo-button-border-radius': {
+      description: 'The border radius of the button',
+      type: 'string'
+    },
+    '--leo-button-border-loading': {
+      description: 'The loading border of the button',
+      control: 'color'
+    },
+    '--leo-button-border-disabled': {
+      description: 'The disabled border of the button',
+      control: 'color'
+    },
+    '--leo-button-shadow-hover': {
+      description: 'The hover shadow of the button',
+      type: 'string'
+    },
+    '--leo-button-shadow-focus': {
+      description: 'The focus shadow of the button',
+      type: 'string'
+    },
+    '--leo-button-shadow-active': {
+      type: 'string'
+    },
+    '--leo-button-shadow-loading': {
+      type: 'string'
+    },
+    '--leo-button-shadow-disabled': {
+      type: 'string'
+    },
     kind: { control: 'select', options: buttonKinds },
     size: { control: 'select', options: buttonSizes }
   }}
