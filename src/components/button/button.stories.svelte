@@ -102,12 +102,19 @@
       type: 'string'
     },
     '--leo-button-shadow-active': {
+      description: 'The active shadow of the button',
       type: 'string'
     },
     '--leo-button-shadow-loading': {
+      description: 'The loading shadow of the button',
       type: 'string'
     },
     '--leo-button-shadow-disabled': {
+      description: 'The disabled shadow of the button',
+      type: 'string'
+    },
+    '--leo-button-padding': {
+      description: 'The padding of the button',
       type: 'string'
     },
     kind: { control: 'select', options: buttonKinds },
