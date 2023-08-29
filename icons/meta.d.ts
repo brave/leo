@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1693123695854,
+  "updatedAt": 1693346152260,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -55,6 +55,7 @@ const meta = {
     "ankr-color": "ankr-color",
     "ant-color": "ant-color",
     "antena": "antena",
+    "anthropic-color": "anthropic-color",
     "apenft-color": "apenft-color",
     "apex-color": "apex-color",
     "apollocurrency-color": "apollocurrency-color",
@@ -310,7 +311,7 @@ const meta = {
     "characters": "characters",
     "charger-plug": "charger-plug",
     "chat-color": "chat-color",
-    "chatgpt": "chatgpt",
+    "chatgpt-color": "chatgpt-color",
     "check-circle-filled": "check-circle-filled",
     "check-circle-outline": "check-circle-outline",
     "check-normal": "check-normal",
@@ -362,6 +363,7 @@ const meta = {
     "cob-color": "cob-color",
     "code-off": "code-off",
     "code": "code",
+    "codellama-color": "codellama-color",
     "coinbase-color": "coinbase-color",
     "coindesk-color": "coindesk-color",
     "coingecko-color": "coingecko-color",
@@ -1148,6 +1150,7 @@ const meta = {
     "message-typing": "message-typing",
     "message-write": "message-write",
     "message": "message",
+    "meta-color": "meta-color",
     "metamask-color": "metamask-color",
     "mft-color": "mft-color",
     "microphone-off": "microphone-off",
@@ -1385,7 +1388,6 @@ const meta = {
     "product-sync": "product-sync",
     "product-tor": "product-tor",
     "product-translate": "product-translate",
-    "product-vpn-new": "product-vpn-new",
     "product-vpn": "product-vpn",
     "protocol-handler-off": "protocol-handler-off",
     "protocol-handler": "protocol-handler",
@@ -1780,6 +1782,7 @@ const meta = {
     "vpn-error": "vpn-error",
     "vpn-off": "vpn-off",
     "vpn-on": "vpn-on",
+    "vpn-shield-color": "vpn-shield-color",
     "vrc-color": "vrc-color",
     "vrsc-color": "vrsc-color",
     "vtc-color": "vtc-color",
