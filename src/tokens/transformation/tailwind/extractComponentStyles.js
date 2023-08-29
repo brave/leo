@@ -7,6 +7,7 @@ const postcssJs = require('postcss-js')
 const postcss = require('postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')()
 const theme = require('../../../postcss/theme')
+const { walk } = require('../../../scripts/common')
 
 const tokenCategories = [
   'font',
@@ -50,13 +51,11 @@ const getTWThemeFromVar = (category, token) => {
 
 module.exports = {
   do: async function (dictionary, config) {
-    getAllFiles(join(__dirname, '../../../components'))
-      .filter((file) => {
-        const fileParts = parse(file)
-        return !file.includes('.stories.') && fileParts.ext === '.svelte'
-      })
-      .map(async (file) => {
-        const fileParts = parse(file)
+    for await (const file of await walk(
+      join(__dirname, '../../../components')
+    )) {
+      const fileParts = parse(file)
+      if (!file.includes('.stories.') && fileParts.ext === '.svelte') {
         const componentFile = await readFile(file, 'utf-8')
         const { code: Component } = await svelte.preprocess(
           componentFile,
@@ -86,7 +85,7 @@ module.exports = {
 
           const fnName = fileParts.name === 'link' ? 'addBase' : 'addComponents'
 
-          return writeFile(
+          await writeFile(
             join(config.buildPath, 'plugins', `${fileParts.name}Component.js`),
             `const plugin = require("tailwindcss/plugin");
 
@@ -94,27 +93,9 @@ module.exports = plugin(function ({ ${fnName}, theme }) {
 	${fnName}(${JSON.stringify(cssAsJs, null, 2)});
 });`
           )
-        } else {
-          return Promise.resolve()
         }
-      })
+      }
+    }
   },
   undo: function () {}
-}
-
-// HT: https://coderrocketfuel.com/article/recursively-list-all-the-files-in-a-directory-using-node-js
-function getAllFiles(dirPath, arrayOfFiles) {
-  const files = readdirSync(dirPath)
-
-  arrayOfFiles = arrayOfFiles || []
-
-  files.forEach(function (file) {
-    if (statSync(`${dirPath}/${file}`).isDirectory()) {
-      arrayOfFiles = getAllFiles(`${dirPath}/${file}`, arrayOfFiles)
-    } else {
-      arrayOfFiles.push(join(dirPath, '/', file))
-    }
-  })
-
-  return arrayOfFiles
 }
