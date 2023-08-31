@@ -6,12 +6,12 @@
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
   type $$Props = Omit<SvelteHTMLElements['input'], OverrideProps> & {
-    type: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
-    value: string | number | boolean
-    size: Size
-    hasErrors: boolean
-    showErrors: boolean
-    mode: Mode | undefined
+    type?: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
+    value?: string | number | boolean
+    size?: Size
+    hasErrors?: boolean
+    showErrors?: boolean
+    mode?: Mode | undefined
   }
 
   /**
