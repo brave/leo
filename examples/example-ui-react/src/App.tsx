@@ -16,7 +16,10 @@ function App() {
         <h1>A React App</h1>
         <label>
           Edit the button text:
-          <Input value={buttonText} onInput={e => setButtonText((e.target as any)['value'])} />
+          <Input
+            value={buttonText}
+            onInput={(e) => setButtonText(e.detail.value)}
+          />
         </label>
         {buttonText && (
           <LeoButton
