@@ -55,6 +55,7 @@ jobs:
         with:
           add-paths: icons/
           commit-message: '[Icons]: Update icons from Figma'
+          author: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
           committer: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
           branch: update-icons
           delete-branch: true
