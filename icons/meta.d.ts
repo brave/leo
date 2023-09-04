@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1693346152260,
+  "updatedAt": 1693831905633,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -212,7 +212,6 @@ const meta = {
     "brave-icon-monochrome": "brave-icon-monochrome",
     "brave-icon-nightly-color": "brave-icon-nightly-color",
     "brave-icon-outline": "brave-icon-outline",
-    "brave-icon-premium-color": "brave-icon-premium-color",
     "brave-icon-release-color": "brave-icon-release-color",
     "brave-icon-search": "brave-icon-search",
     "brave-wallet-add": "brave-wallet-add",
@@ -1358,6 +1357,8 @@ const meta = {
     "ppp-color": "ppp-color",
     "ppt-color": "ppt-color",
     "pre-color": "pre-color",
+    "premium-indicator-color": "premium-indicator-color",
+    "premium-indicator": "premium-indicator",
     "previous-circle": "previous-circle",
     "previous-filled": "previous-filled",
     "previous-outline": "previous-outline",
@@ -1418,10 +1419,6 @@ const meta = {
     "rcn-color": "rcn-color",
     "rdd-color": "rdd-color",
     "rdn-color": "rdn-color",
-    "readermode-dislexyc": "readermode-dislexyc",
-    "readermode-mono": "readermode-mono",
-    "readermode-sans": "readermode-sans",
-    "readermode-serif": "readermode-serif",
     "reading-list-add": "reading-list-add",
     "reading-list-empty": "reading-list-empty",
     "reading-list": "reading-list",
