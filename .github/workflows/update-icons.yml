@@ -40,12 +40,23 @@ jobs:
         run: |
           echo modified=$(`git status --porcelain | grep -q \.svg$` && echo true || echo false) >> $GITHUB_OUTPUT
 
+      - name: Configure GPG
+        if: steps.check-icons.outputs.modified == 'true'
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
       - name: Create Pull Request
         if: steps.check-icons.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           add-paths: icons/
           commit-message: '[Icons]: Update icons from Figma'
+          author: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          committer: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
           branch: update-icons
           delete-branch: true
           title: '[Icons]: Update icons from Figma'
