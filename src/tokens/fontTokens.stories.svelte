@@ -1,9 +1,10 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css'
-  import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte';
+  import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
 
-  const { macos, monospace, windows, primary, secondary, mobile, components } = allFonts;
+  const { macos, monospace, windows, primary, secondary, mobile, components } =
+    allFonts
 </script>
 
 <Meta title="Font Tokens" />

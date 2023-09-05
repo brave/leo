@@ -4,7 +4,7 @@
 
   export let level = 1
   export let name = ''
-  export let tokens;
+  export let tokens
 
   const headingTag = `h${level}`
 
@@ -13,24 +13,31 @@
 
   const handleClick = async ({ currentTarget }) => {
     await navigator.clipboard.writeText(currentTarget.title)
-    currentTarget.classList.add("isCopied")
+    currentTarget.classList.add('isCopied')
     setTimeout(() => {
-      currentTarget.classList.remove("isCopied")
+      currentTarget.classList.remove('isCopied')
     }, 1000)
   }
 
-  const filteredTokens = getTokens(tokens);
+  const filteredTokens = getTokens(tokens)
 </script>
 
-<svelte:element this={name ? 'section' : 'div'} id="{name}">
+<svelte:element this={name ? 'section' : 'div'} id={name}>
   {#if name}
-    <svelte:element this={headingTag} class="group-heading">{name}</svelte:element>
+    <svelte:element this={headingTag} class="group-heading"
+      >{name}</svelte:element
+    >
   {/if}
 
-  {#if typeof filteredTokens[0][1] === "string"}
+  {#if typeof filteredTokens[0][1] === 'string'}
     <div class="color-swatch-group">
       {#each filteredTokens as [name, token]}
-        <button title="{token}" class="color-swatch" style="--swatch-bg:{token}" on:click={handleClick}>
+        <button
+          title={token}
+          class="color-swatch"
+          style="--swatch-bg:{token}"
+          on:click={handleClick}
+        >
           <span class="copied">
             <Label color="green" mode="loud">
               <Icon name="check-circle-filled" />
@@ -44,9 +51,9 @@
     </div>
   {:else}
     {#each filteredTokens as [name, tokens]}
-      {#if typeof tokens !== "string"}
+      {#if typeof tokens !== 'string'}
         <svelte:self {name} {tokens} level={level + 1} />
-      {:else if ["white", "black"].includes(name)}
+      {:else if ['white', 'black'].includes(name)}
         <svelte:self {name} tokens={{ [name]: tokens }} level={level + 1} />
       {/if}
     {/each}
