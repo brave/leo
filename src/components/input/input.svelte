@@ -3,15 +3,16 @@
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
+  import { createEventDispatcher } from 'svelte'
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
   type $$Props = Omit<SvelteHTMLElements['input'], OverrideProps> & {
-    type: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
-    value: string | number | boolean
-    size: Size
-    hasErrors: boolean
-    showErrors: boolean
-    mode: Mode | undefined
+    type?: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
+    value?: string | number | boolean
+    size?: Size
+    hasErrors?: boolean
+    showErrors?: boolean
+    mode?: Mode | undefined
   }
 
   /**
@@ -60,6 +61,38 @@
    */
   export let mode: Mode | undefined = undefined
 
+  type InputEventDetail = {
+    innerEvent: Event & { target: HTMLInputElement }
+    value: string
+    valueAsNumber: number
+    valueAsDate: number
+  }
+
+  // Unfortunately, e.target isn't typed properly by Svelte's type definitions
+  // in web components. This means we need to forward all the events we're
+  // interested in manually, inside our own wrapper.
+  const dispatch = createEventDispatcher<{
+    change: InputEventDetail
+    input: InputEventDetail
+    focus: InputEventDetail
+    blur: InputEventDetail
+    keydown: InputEventDetail
+    keyup: InputEventDetail
+    keypress: InputEventDetail
+    focusin: InputEventDetail
+    focusout: InputEventDetail
+  }>()
+
+  function forwardEvent(e: Event) {
+    const event = e as Event & { target: HTMLInputElement }
+    dispatch(e.type as any, {
+      value,
+      valueAsDate: event.target.valueAsDate,
+      valueAsNumber: event.target.valueAsNumber,
+      innerEvent: event
+    })
+  }
+
   const pickerIcons = {
     date: 'calendar',
     time: 'clock'
@@ -90,16 +123,16 @@
       {type}
       {value}
       bind:this={input}
-      on:change
+      on:change={forwardEvent}
       on:input={onInput}
-      on:input
-      on:focus
-      on:blur
-      on:keydown
-      on:keypress
-      on:keyup
-      on:focusin
-      on:focusout
+      on:input={forwardEvent}
+      on:focus={forwardEvent}
+      on:blur={forwardEvent}
+      on:keydown={forwardEvent}
+      on:keypress={forwardEvent}
+      on:keyup={forwardEvent}
+      on:focusin={forwardEvent}
+      on:focusout={forwardEvent}
     />
     <div class="extra">
       <slot name="extra" />
