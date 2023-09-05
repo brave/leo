@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import isSSR from '../../util/isSSR'
+  import isSSR from '../../svelteDirectives/isSSR'
   import { writable } from 'svelte/store'
 
   let lastIconBasePath = '/icons'
