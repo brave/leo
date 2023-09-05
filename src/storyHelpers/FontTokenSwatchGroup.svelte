@@ -28,17 +28,17 @@
   {/if}
 
   {#if typeof filteredTokens[0][1] === "string"}
-    <div class="color-swatch-group">
+    <div class="font-group">
       {#each filteredTokens as [name, token]}
-        <button title="{token}" class="color-swatch" style="--swatch-bg:{token}" on:click={handleClick}>
+        <svelte:element this={`h${level+1}`} class="group-heading">{name}</svelte:element>
+        <button title="{token}" class="font" style="--swatch-bg:{token}" on:click={handleClick}>
           <span class="copied">
             <Label color="green" mode="loud">
               <Icon name="check-circle-filled" />
               Copied!
             </Label>
           </span>
-          <span class="sample" />
-          {name}
+          <span class="sample" style="font: {token}">Keep it bravey.</span>
         </button>
       {/each}
     </div>
@@ -56,19 +56,18 @@
 <style>
   .group-heading {
     text-transform: capitalize;
+    margin: 0 0 0.5rem;
   }
 
-  .color-swatch-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 150px));
+  .font-group {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
     padding-bottom: 1rem;
   }
 
-  .color-swatch {
+  .font {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     font-size: 0.75rem;
     color: var(--leo-color-text-primary);
     gap: 0.5rem;
@@ -80,21 +79,20 @@
     position: relative;
   }
 
-  .color-swatch .sample {
-    display: block;
+  .font .sample {
+    background: var(--leo-color-page-background);
     width: 100%;
-    aspect-ratio: 1/1;
-    background-color: var(--swatch-bg);
+    padding: 2rem;
   }
 
-  .color-swatch .copied {
+  .font .copied {
     position: absolute;
-    top: 30%;
+    right: 30%;
     opacity: 0;
     transition: opacity 0.13s ease-out;
   }
 
-  .color-swatch:global(.isCopied) .copied {
+  .font:global(.isCopied) .copied {
     opacity: 1;
   }
 </style>
