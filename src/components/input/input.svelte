@@ -83,12 +83,13 @@
     focusout: InputEventDetail
   }>()
 
-  function forwardEvent(e: Event & { target: HTMLInputElement }) {
+  function forwardEvent(e: Event) {
+    const event = e as Event & { target: HTMLInputElement }
     dispatch(e.type as any, {
       value,
-      valueAsDate: e.target.valueAsDate,
-      valueAsNumber: e.target.valueAsNumber,
-      innerEvent: e
+      valueAsDate: event.target.valueAsDate,
+      valueAsNumber: event.target.valueAsNumber,
+      innerEvent: event
     })
   }
 
