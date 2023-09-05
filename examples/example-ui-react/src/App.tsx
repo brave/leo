@@ -2,6 +2,7 @@ import * as React from 'react'
 import '../../../tokens/css/variables.css'
 import LeoButton from '../../../react/button'
 import styles from './App.module.css'
+import Input from '../../../react/input'
 import Dropdown from '../../../react/dropdown'
 
 function App() {
@@ -10,15 +11,14 @@ function App() {
   const [spinning, setSpinning] = React.useState(false)
 
   return (
-    <div className={styles['App']}>
+    <div className={styles['App']} data-theme="dark">
       <header className={styles['App-header']}>
         <h1>A React App</h1>
         <label>
           Edit the button text:
-          <input
-            type="text"
+          <Input
             value={buttonText}
-            onChange={(e) => setButtonText(e.target.value)}
+            onInput={(e) => setButtonText(e.detail.value)}
           />
         </label>
         {buttonText && (
