@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1693842763841,
+  "updatedAt": 1694035371155,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1336,6 +1336,7 @@ export default {
     "plug-connected": "plug-connected",
     "plug-x": "plug-x",
     "plug": "plug",
+    "plus-add-circle": "plus-add-circle",
     "plus-add": "plus-add",
     "poa-color": "poa-color",
     "pocket": "pocket",
