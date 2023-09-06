@@ -2,7 +2,7 @@
   import Label from '../components/label/label.svelte'
   import Icon from '../components/icon/icon.svelte'
 
-  export let text = "";
+  export let text = ''
 
   const handleClick = async ({ currentTarget }) => {
     await navigator.clipboard.writeText(text)

@@ -1,5 +1,5 @@
 <script>
-  import Copiable from "./Copiable.svelte"
+  import Copiable from './Copiable.svelte'
 
   export let level = 1
   export let name = ''
