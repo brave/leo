@@ -53,7 +53,7 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
             [tSubItem]: formatColorVar(name, staticTheme)
           })
         }
-      } else if (t.attributes.subitem) {
+      } else if (tSubItem) {
         /**
          * If not on a static theme AND theme is determined by `type`
          * property do not place within `dark` or `light` groups
@@ -108,8 +108,7 @@ function createDynamicColorTokens(tokens) {
 }
 
 module.exports = ({ dictionary }) => {
-  const dynamicColorTokens = createDynamicColorTokens(dictionary.allTokens)
-  const colorTokens = merge(dynamicColorTokens)
+  const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
   const fontSizes = new Map()
   const borderRadii = new Map()

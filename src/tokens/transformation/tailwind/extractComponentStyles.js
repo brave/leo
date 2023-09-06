@@ -9,46 +9,6 @@ const sortMediaQueries = require('postcss-sort-media-queries')()
 const theme = require('../../../postcss/theme')
 const { walk } = require('../../../scripts/common')
 
-const tokenCategories = [
-  'font',
-  'typography',
-  'color',
-  'spacing',
-  'radius',
-  'effect',
-  'gradient'
-]
-
-const leoVarsPattern = RegExp(
-  `var\\(--leo-(${tokenCategories.join('|')})-(.*?)\\)`,
-  'gm'
-)
-
-const getTWThemeFromVar = (category, token) => {
-  const tokenParts = token.split('-')
-  let tokenPath
-  switch (category) {
-    case 'color':
-      tokenPath = `colors.${tokenParts.join('.')}`
-      break
-    case 'font':
-      tokenPath = `fontSize.${tokenParts.join('-')}`
-      break
-    case 'gradient':
-      tokenPath = `backgroundImage.${tokenParts.join('-')}`
-      break
-    case 'effect':
-      tokenPath = `backgroundImage.${tokenParts
-        .join('-')
-        .replace('elevation-', '')}`
-      break
-    case 'radius':
-      tokenPath = `borderRadius.${tokenParts.join('-')}`
-      break
-  }
-  return `theme('${tokenPath}')`
-}
-
 module.exports = {
   do: async function (dictionary, config) {
     for await (const file of await walk(

@@ -13,6 +13,11 @@ const filteredTokens = (dictionary, filterFn) => {
   }
 }
 
+/**
+ * @param {any} token The token
+ * @param {string} modifierPathSegment path segment which represents a theme
+ * @param {string[]} tokenPaths tokens starting with one of these prefixes (use `.` to join multiple path segments).
+ **/
 function matchThemableToken(
   token,
   modifierPathSegment,
