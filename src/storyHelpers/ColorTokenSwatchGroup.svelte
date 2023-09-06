@@ -67,6 +67,10 @@
     background: none;
     cursor: pointer;
     position: relative;
+    box-shadow: var(--leo-effect-elevation-01);
+    border-radius: var(--leo-radius-m);
+    overflow: hidden;
+    padding-bottom: 0.5rem;
   }
 
   .color-swatch .sample {
