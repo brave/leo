@@ -14,8 +14,8 @@ const formatBoxShadowVar = (name, isStatic = true) => {
 
 const formatDropShadowVars = (name, shadowCount, isStatic = true) => {
   name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
-  return [...(new Array(shadowCount))].map((v, i) => {
-    return `var(--tw-${name}-drop-shadow-${i + 1})`;
+  return [...new Array(shadowCount)].map((v, i) => {
+    return `var(--tw-${name}-drop-shadow-${i + 1})`
   })
 }
 
@@ -161,11 +161,17 @@ module.exports = ({ dictionary }) => {
     } else if (type === 'custom-shadow') {
       const [, ...pathParts] = t.path
       boxShadows.set(
-        pathParts.filter(v => !['elevation', 'light', 'dark'].includes(v)).join('-').replace(' ', '-'),
+        pathParts
+          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
+          .join('-')
+          .replace(' ', '-'),
         formatBoxShadowVar(name, false)
       )
       dropShadows.set(
-        pathParts.filter(v => !['elevation', 'light', 'dark'].includes(v)).join('-').replace(' ', '-'),
+        pathParts
+          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
+          .join('-')
+          .replace(' ', '-'),
         formatDropShadowVars(name, t.value.dropShadow.length, true, false)
       )
     }

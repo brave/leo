@@ -18,7 +18,10 @@ module.exports = ({ dictionary, options, file }) => {
     ),
     rest: filteredTokens(
       dictionary,
-      (token) => ['color', 'custom-shadow'].includes(token.type) && !matchDarkThemeToken(token) && !matchLightThemeToken(token)
+      (token) =>
+        ['color', 'custom-shadow'].includes(token.type) &&
+        !matchDarkThemeToken(token) &&
+        !matchLightThemeToken(token)
     )
   }
 
