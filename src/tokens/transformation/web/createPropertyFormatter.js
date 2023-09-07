@@ -115,7 +115,9 @@ function createPropertyFormatter({
     if (format === 'tailwind' && prop.type === 'custom-shadow') {
       value = prop.value.boxShadow
       drop_shadow_props = prop.value.dropShadow.map((v, i) => {
-        return `${indentation}${name}-drop-shadow-${i + 1}${separator} ${v}${suffix}`
+        return `${indentation}${name}-drop-shadow-${
+          i + 1
+        }${separator} ${v}${suffix}`
       })
     }
 
@@ -170,7 +172,7 @@ function createPropertyFormatter({
       }
     }
 
-    return drop_shadow_props ? [to_ret_prop, ...drop_shadow_props] : to_ret_prop;
+    return drop_shadow_props ? [to_ret_prop, ...drop_shadow_props] : to_ret_prop
   }
 }
 
