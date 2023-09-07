@@ -11,14 +11,14 @@ module.exports = ({ dictionary, options, file }) => {
   const { outputReferences } = opts
   const groupedTokens = {
     light: filteredTokens(dictionary, (token) =>
-      matchLightThemeToken(token, ['color'])
+      matchLightThemeToken(token, ['color', 'effect'])
     ),
     dark: filteredTokens(dictionary, (token) =>
-      matchDarkThemeToken(token, ['color'])
+      matchDarkThemeToken(token, ['color', 'effect'])
     ),
     rest: filteredTokens(
       dictionary,
-      (token) => !matchDarkThemeToken(token) && !matchLightThemeToken(token)
+      (token) => ['color', 'custom-shadow'].includes(token.type) && !matchDarkThemeToken(token) && !matchLightThemeToken(token)
     )
   }
 

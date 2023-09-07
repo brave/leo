@@ -61,7 +61,7 @@ function formattedVariables({
   }
 
   return allTokens
-    .map(
+    .flatMap(
       createPropertyFormatter({
         outputReferences,
         dictionary,

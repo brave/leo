@@ -21,7 +21,7 @@ const filteredTokens = (dictionary, filterFn) => {
 function matchThemableToken(
   token,
   modifierPathSegment,
-  tokenPaths = ['color', 'effect.elevation']
+  tokenPaths = ['color', 'effect']
 ) {
   const tokenPath = token.path.join('.').toLowerCase()
   return (

@@ -7,6 +7,18 @@ const formatColorVar = (name, isStatic = true) => {
   return `rgba(var(--tw-${name}), <alpha-value>)`
 }
 
+const formatBoxShadowVar = (name, isStatic = true) => {
+  name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
+  return `var(--tw-${name})`
+}
+
+const formatDropShadowVars = (name, shadowCount, isStatic = true) => {
+  name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
+  return [...(new Array(shadowCount))].map((v, i) => {
+    return `var(--tw-${name}-drop-shadow-${i + 1})`;
+  })
+}
+
 const kebabCase = (str) => str && str.toLowerCase().replaceAll(' ', '-')
 
 /**
@@ -111,11 +123,11 @@ module.exports = ({ dictionary }) => {
   const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
   const fontSizes = new Map()
-  const borderRadii = new Map()
+  const borderRadii = new Map([['none', 0]])
   const spacing = new Map([[0, 0]]) // Initialize with option for 0 spacing
   const gradients = new Map()
-  const boxShadows = new Map()
-  const dropShadows = new Map()
+  const boxShadows = new Map([['none', 'none']])
+  const dropShadows = new Map([['none', '0 0 #0000']])
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
@@ -149,12 +161,12 @@ module.exports = ({ dictionary }) => {
     } else if (type === 'custom-shadow') {
       const [, ...pathParts] = t.path
       boxShadows.set(
-        pathParts.join('-').replace(' ', '-').replace('elevation-', ''),
-        t.value.boxShadow
+        pathParts.filter(v => !['elevation', 'light', 'dark'].includes(v)).join('-').replace(' ', '-'),
+        formatBoxShadowVar(name, false)
       )
       dropShadows.set(
-        pathParts.join('-').replace(' ', '-').replace('elevation-', ''),
-        t.value.dropShadow
+        pathParts.filter(v => !['elevation', 'light', 'dark'].includes(v)).join('-').replace(' ', '-'),
+        formatDropShadowVars(name, t.value.dropShadow.length, true, false)
       )
     }
   })
