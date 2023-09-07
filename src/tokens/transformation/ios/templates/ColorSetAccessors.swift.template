@@ -1,0 +1,36 @@
+// Copyright (c) 2023 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// you can obtain one at https://mozilla.org/MPL/2.0/.
+
+import SwiftUI
+
+#if swift(<5.9)
+
+public struct ColorResource {
+  var name: String
+  var bundle: Bundle
+}
+
+extension ColorResource {
+<%= Object.keys(colors).sort().map((name, index) => {
+  return `  public static var ${colors[name]}: ColorResource {
+    ColorResource(name: "${name}", bundle: Bundle.module)
+  }`
+}).join('\n') %>
+}
+
+extension Color {
+  /// Initialize a `Color` with a color resource.
+  public init(_ resource: ColorResource) {
+    self.init(resource.name, bundle: resource.bundle)
+  }
+}
+
+extension UIColor {
+  public convenience init(resource: ColorResource) {
+    self.init(named: resource.name, in: resource.bundle, compatibleWith: nil)!
+  }
+}
+
+#endif

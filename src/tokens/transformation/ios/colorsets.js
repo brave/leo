@@ -35,7 +35,7 @@ const ratioRgb = (color) => {
 module.exports = {
   // This is going to run once per theme.
   do: (dictionary, platform) => {
-    const assetPath = `${platform.buildPath}/DesignToken.xcassets`
+    const assetPath = `${platform.buildPath}/Colors.xcassets`
     fs.emptyDirSync(assetPath)
     fs.writeFileSync(
       `${assetPath}/Contents.json`,
@@ -45,8 +45,16 @@ module.exports = {
     dictionary.allTokens
       .filter((token) => token.type === 'color')
       .forEach((token) => {
-        const colorsetPath = `${assetPath}/${changeCase.pascalCase(
-          token.path.slice(2).join(' ')
+        if (token.name === 'ColorBlack' || token.name === 'ColorWhite') {
+          // The system already provides these and will conflict with the names
+          return
+        }
+        const colorsetPath = `${assetPath}/${changeCase.snakeCase(
+          token.path
+            .filter(
+              (path) => path !== 'dark' && path !== 'light' && path !== 'color'
+            )
+            .join(' ')
         )}.colorset`
         fs.ensureDirSync(colorsetPath)
 
@@ -61,11 +69,11 @@ module.exports = {
           idiom: 'universal',
           color: {
             'color-space': 'srgb',
-            components: ratioRgb(token.value)
+            components: ratioRgb(token.original.value)
           }
         }
 
-        if (token.path[0] === 'dark') {
+        if (token.path.includes('dark')) {
           color.appearances = [
             {
               appearance: 'luminosity',
