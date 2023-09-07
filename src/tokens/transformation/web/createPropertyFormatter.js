@@ -107,9 +107,19 @@ function createPropertyFormatter({
     createPropertyNameFormatter(format, formatting)
 
   return function (prop) {
-    const name = formatName(prop)
+    let name = formatName(prop)
     let to_ret_prop = `${indentation}${name}${separator} `
     let value = prop.value
+    let drop_shadow_props
+
+    if (format === 'tailwind' && prop.type === 'custom-shadow') {
+      value = prop.value.boxShadow
+      drop_shadow_props = prop.value.dropShadow.map((v, i) => {
+        return `${indentation}${name}-drop-shadow-${
+          i + 1
+        }${separator} ${v}${suffix}`
+      })
+    }
 
     /**
      * A single value can have multiple references either by interpolation:
@@ -162,7 +172,7 @@ function createPropertyFormatter({
       }
     }
 
-    return to_ret_prop
+    return drop_shadow_props ? [to_ret_prop, ...drop_shadow_props] : to_ret_prop
   }
 }
 

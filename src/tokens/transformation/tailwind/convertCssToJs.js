@@ -5,6 +5,9 @@ const postcss = require('postcss')
 
 const cssFiles = ['variables.css']
 
+const genPluginFilePath = (file, config) =>
+  join(config.buildPath, 'plugins', `_${file}.ts`)
+
 module.exports = {
   do: function (dictionary, config) {
     cssFiles.forEach((file) => {
@@ -13,14 +16,14 @@ module.exports = {
       const cssAsJs = postcssJs.objectify(root)
 
       writeFileSync(
-        join(config.buildPath, `${file}.ts`),
+        genPluginFilePath(file, config),
         `module.exports = ${JSON.stringify(cssAsJs, null, 2)}`
       )
     })
   },
   undo: function (dictionary, config) {
     cssFiles.forEach((file) => {
-      unlink(join(config.buildPath, `${file}.js`))
+      unlink(genPluginFilePath(file, config))
     })
   }
 }

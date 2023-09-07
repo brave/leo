@@ -20,6 +20,10 @@ StyleDictionary.registerTransform({
   ...require('../web/webRadius')
 })
 StyleDictionary.registerTransform({
+  name: 'web/size',
+  ...require('../web/webSize')
+})
+StyleDictionary.registerTransform({
   name: 'web/padding',
   ...require('../web/webPadding')
 })
@@ -42,6 +46,7 @@ StyleDictionary.registerTransformGroup({
     'size/px',
     'tw/shadow',
     'web/radius',
+    'web/size',
     'web/padding',
     'tw/font',
     'web/gradient',
@@ -71,4 +76,10 @@ StyleDictionary.registerAction({
   name: 'tailwind/convert_css_to_js',
   do: require('./convertCssToJs').do,
   undo: require('./convertCssToJs').undo
+})
+
+StyleDictionary.registerAction({
+  name: 'tailwind/extract_component_styles',
+  do: require('./extractComponentStyles').do,
+  undo: require('./extractComponentStyles').undo
 })
