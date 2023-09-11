@@ -3,34 +3,24 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at https://mozilla.org/MPL/2.0/.
 
-import SwiftUI
+import Foundation
 
-#if swift(<5.9)
+#if SWIFT_PACKAGE
+private let resourceBundle = Bundle.module
+#else
+private class ResourceBundleClass {}
+private let resourceBundle = Bundle(for: ResourceBundleClass.self)
+#endif
 
-public struct ColorResource {
-  var name: String
-  var bundle: Bundle
+public struct FigmaColorResource {
+  public var name: String
+  public var bundle: Bundle
 }
 
-extension ColorResource {
+extension FigmaColorResource {
 <%= Object.keys(colors).sort().map((name, index) => {
-  return `  public static var ${colors[name]}: ColorResource {
-    ColorResource(name: "${name}", bundle: Bundle.module)
+  return `  public static var ${colors[name]}: FigmaColorResource {
+    FigmaColorResource(name: "${name}", bundle: resourceBundle)
   }`
 }).join('\n') %>
 }
-
-extension Color {
-  /// Initialize a `Color` with a color resource.
-  public init(_ resource: ColorResource) {
-    self.init(resource.name, bundle: resource.bundle)
-  }
-}
-
-extension UIColor {
-  public convenience init(resource: ColorResource) {
-    self.init(named: resource.name, in: resource.bundle, compatibleWith: nil)!
-  }
-}
-
-#endif
