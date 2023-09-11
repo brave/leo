@@ -1,0 +1,119 @@
+// Copyright (c) 2023 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// you can obtain one at https://mozilla.org/MPL/2.0/.
+
+import SwiftUI
+
+public struct FigmaGradient {
+  public struct Stop {
+    public var color: UIColor
+    public var position: Double
+
+    public init(color: UIColor, position: Double) {
+      self.color = color
+      self.position = position
+    }
+  }
+  public var type: CAGradientLayerType = .axial
+  public var stops: [Stop]
+  public var startPoint: CGPoint
+  public var endPoint: CGPoint
+
+  public init(stops: [Stop], angle: Angle) {
+    let (startPoint, endPoint) = endPointsFromCSSAngle(angle)
+    self.init(stops: stops, startPoint: startPoint, endPoint: endPoint)
+  }
+
+  public init(stops: [Stop], startPoint: CGPoint, endPoint: CGPoint) {
+    self.stops = stops
+    self.startPoint = startPoint
+    self.endPoint = endPoint
+  }
+}
+
+extension FigmaGradient {
+<%= gradients.linear.map(token => {
+  const stops = token.value.stops
+  return `  public static var ${token.name}: FigmaGradient {
+    FigmaGradient(
+      stops: [
+        ${stops.map(stop => `Stop(color: UIColor(rgba: 0x${stop.color.slice(1)}), position: ${stop.position})`).join(',\n        ')}
+      ],
+      angle: .degrees(${token.value.rotation})
+    )
+  }`
+}).join('\n') %>
+}
+
+extension UIColor {
+  fileprivate convenience init(rgba: UInt32) {
+    self.init(
+      red: CGFloat((rgba & 0xFF000000) >> 24) / 255.0,
+      green: CGFloat((rgba & 0x00FF0000) >> 16) / 255.0,
+      blue: CGFloat((rgba & 0x0000FF00) >> 8) / 255.0,
+      alpha: CGFloat((rgba & 0x000000FF) >> 0) / 255.0
+    )
+  }
+}
+
+/// Compute the endpoints so that a gradient of the given angle covers a box of
+/// the given size.
+///
+/// This is a Swift port of the `blink::cssvalue::EndPointsFromAngle` function
+/// in Chromium's blink renderer adjusted to consider how CoreGraphics/SwiftUI
+/// renders gradients.
+private func endPointsFromCSSAngle(_ angle: Angle) -> (start: CGPoint, end: CGPoint) {
+  var angle = angle.degrees.truncatingRemainder(dividingBy: 360)
+  if angle < 0 {
+    angle += 360
+  }
+
+  switch angle {
+  case .zero, .nan:
+    return (.init(x: 0, y: 1), .zero)
+  case 90:
+    return (.zero, .init(x: 1, y: 0))
+  case 180:
+    return (.zero, .init(x: 0, y: 1))
+  case 270:
+    return (.init(x: 1, y: 0), .zero)
+  default:
+    break
+  }
+
+  // `angle` is a "bearing angle" (0deg = N, 90deg = E),
+  // but tan expects 0deg = E, 90deg = N.
+  let slope = tan(Angle(degrees: 90 - angle).radians)
+
+  // We find the endpoint by computing the intersection of the line formed by
+  // the slope, and a line perpendicular to it that intersects the corner.
+  let perpendicularSlope = -1 / slope
+
+  // Compute start corner relative to center, in Cartesian space (+y = up).
+  let halfHeight = 0.5
+  let halfWidth = 0.5
+  var endCorner: CGPoint = .zero
+  if angle < 90 {
+    endCorner = .init(x: halfWidth, y: halfHeight)
+  } else if angle < 180 {
+    endCorner = .init(x: halfWidth, y: -halfHeight)
+  } else if angle < 270 {
+    endCorner = .init(x: -halfWidth, y: -halfHeight)
+  } else {
+    endCorner = .init(x: -halfWidth, y: halfHeight)
+  }
+
+  // Compute c (of y = mx + c) using the corner point.
+  let c = endCorner.y - perpendicularSlope * endCorner.x
+  let endX = c / (slope - perpendicularSlope)
+  let endY = perpendicularSlope * endX + c
+
+  // We computed the end point, so set the second point, taking into account the
+  // moved origin and the fact that we're in drawing space (+y = down).
+  // Reflect around the center for the start point.
+  return (
+    .init(x: halfWidth - endX, y: halfHeight + endY),
+    .init(x: halfWidth + endX, y: halfWidth - endY)
+  )
+}

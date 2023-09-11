@@ -84,78 +84,24 @@ module.exports = {
     },
     ios: {
       transformGroup: 'ios',
-      buildPath: 'tokens/ios/',
-      files: [
-        {
-          destination: 'StyleDictionaryColor.h',
-          format: 'ios/colors.h',
-          filter: {
-            type: 'color'
-          }
-        },
-        {
-          destination: 'StyleDictionaryColor.m',
-          format: 'ios/colors.m',
-          className: 'StyleDictionaryColor',
-          type: 'StyleDictionaryColorName',
-          filter: {
-            type: 'color'
-          }
-        },
-        {
-          destination: 'StyleDictionarySize.h',
-          format: 'ios/static.h',
-          className: 'StyleDictionarySize',
-          type: 'float',
-          filter: {
-            type: 'number'
-          }
-        },
-        {
-          destination: 'StyleDictionarySize.m',
-          format: 'ios/static.m',
-          className: 'StyleDictionarySize',
-          type: 'float',
-          filter: {
-            type: 'number'
-          }
-        }
-      ]
-    },
-    'ios-swift': {
-      transformGroup: 'ios-swift',
       buildPath: 'tokens/ios-swift/',
       files: [
         {
-          destination: 'StyleDictionary.swift',
-          format: 'ios-swift/class.swift',
-          className: 'StyleDictionary',
-          filter: {}
-        }
-      ]
-    },
-    'ios-swift-separate-enums': {
-      transformGroup: 'ios-swift-separate',
-      buildPath: 'tokens/ios-swift/',
-      files: [
-        {
-          destination: 'StyleDictionaryColor.swift',
-          format: 'ios-swift/enum.swift',
-          className: 'StyleDictionaryColor',
+          destination: 'Gradients.swift',
+          format: 'ios/gradients',
           filter: {
-            type: 'color'
+            type: 'custom-gradient'
           }
         },
         {
-          destination: 'StyleDictionarySize.swift',
-          format: 'ios-swift/enum.swift',
-          className: 'StyleDictionarySize',
-          type: 'float',
+          destination: 'ColorSetAccessors.swift',
+          format: 'ios/colorSetAccessors',
           filter: {
-            type: 'number'
+            type: 'color'
           }
         }
-      ]
+      ],
+      actions: ['ios/colorSets']
     }
   }
 }

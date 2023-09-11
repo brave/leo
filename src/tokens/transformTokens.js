@@ -5,6 +5,7 @@ const baseConfig = require('./config')
 require('./transformation/web')
 require('./transformation/tailwind')
 require('./transformation/skia')
+require('./transformation/ios')
 
 // Register Global transforms
 StyleDictionary.registerTransform({
