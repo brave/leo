@@ -64,10 +64,12 @@
       placement: placement,
       middleware: getMiddlewares(flip, shift, offset, middleware)
     }).then(({ x, y, placement, middlewareData }) => {
-      Object.assign(floating.style, {
-        left: `${x}px`,
-        top: `${y}px`
-      })
+      if (floating) {
+        Object.assign(floating.style, {
+          left: `${x}px`,
+          top: `${y}px`
+        })
+      }
 
       dispatch('computedposition', {
         x,

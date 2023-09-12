@@ -33,7 +33,20 @@
 <Story name="Slots" let:args>
   <SlotInfo description="">
     <Slot name="default" explanation="The trigger for the tooltip">
-      <Tooltip {...args} />
+      <Tooltip {...args}>
+        <Button>Trigger</Button>
+      </Tooltip>
+    </Slot>
+    <Slot
+      name="content"
+      explanation="The HTML content of the tooltip. If unspecified, the value of the `text` prop will be used"
+    >
+      <Tooltip {...args}>
+        <div slot="content">
+          The <s>HTML</s> content <i>of</i> the <b>tooltip</b>
+        </div>
+        <span>Hover over me!</span>
+      </Tooltip>
     </Slot>
   </SlotInfo>
 </Story>
