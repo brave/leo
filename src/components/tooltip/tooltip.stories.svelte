@@ -5,12 +5,13 @@
   import Tooltip, { modes } from './tooltip.svelte'
   import Button from '../button/button.svelte'
   import Checkbox from '../checkbox/checkbox.svelte'
+  import Icon from '../icon/icon.svelte'
 
   const sides = ['top', 'bottom', 'left', 'right']
   const positions = ['', '-start', '-end']
   const placements = positions.flatMap((p) => sides.map((s) => `${s}${p}`))
 
-  let showTooltip = false
+  let showTooltip = true
 </script>
 
 <Meta
@@ -42,6 +43,48 @@
 <Story name="Controlled" let:args>
   <Checkbox bind:checked={showTooltip}>Show tooltip</Checkbox>
   <Tooltip {...args} visible={showTooltip}>
+    <div slot="content" class="tooltip-content">
+      <div class="close">
+        <Button
+          kind="plain-faint"
+          fab
+          size="tiny"
+          on:click={() => (showTooltip = false)}
+        >
+          <Icon name="close" />
+        </Button>
+      </div>
+      <div class="title">
+        <Icon name="info-outline" />
+        This is the title
+      </div>
+      {args.text}
+      <Button kind="outline">Text</Button>
+    </div>
     Some text with a triggered tooltip
   </Tooltip>
 </Story>
+
+<style>
+  .title {
+    font: var(--leo-font-primary-heading-h4);
+    display: flex;
+    flex-direction: row;
+    gap: var(--leo-spacing-s);
+    align-items: center;
+    --leo-icon-size: 18px;
+    --leo-icon-color: var(--leo-color-icon-default);
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .tooltip-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--leo-spacing-xl);
+  }
+</style>

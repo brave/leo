@@ -90,7 +90,7 @@
         hidden={!visibleInternal}
         bind:this={tooltip}
       >
-        <slot name="text">
+        <slot name="content">
           {text}
         </slot>
         <div

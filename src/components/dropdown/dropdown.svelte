@@ -164,7 +164,7 @@
       </slot>
     </FormItem>
   </div>
-  <Floating target={dropdown} placement='bottom-start'>
+  <Floating target={dropdown} placement="bottom-start">
     <div
       class="leo-dropdown-popup"
       hidden={!isOpen}

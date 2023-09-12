@@ -48,7 +48,13 @@ function App() {
             <leo-option value="bar">Bar</leo-option>
           </Dropdown>
         </div>
-        <Tooltip text="Hello World" visible={spinning} onVisibilitychange={() => { console.log("Closed")}}>
+        <Tooltip
+          text="Hello World"
+          visible={spinning}
+          onVisibilitychange={() => {
+            console.log('Closed')
+          }}
+        >
           <LeoButton href="#foo">Link button!</LeoButton>
         </Tooltip>
       </header>

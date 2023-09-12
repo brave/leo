@@ -100,6 +100,8 @@
     --box-shadow-hover: var(--leo-effect-elevation-02);
     --box-shadow-focus: var(--leo-effect-focus-state);
     --radius: 0;
+    --border-color: transparent;
+    --border-width: 0px;
 
     display: block;
     cursor: pointer;
