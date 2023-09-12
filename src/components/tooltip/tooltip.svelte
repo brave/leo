@@ -75,7 +75,7 @@
       {placement}
       {shift}
       autoUpdate
-      middleware={[arrowMiddleware({ padding: 0, element: trigger })]}
+      middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
       on:computedposition={positionArrow}
     >
       <div
