@@ -4,7 +4,7 @@
 </script>
 
 <script lang="ts">
-  import type { Middleware, MiddlewareData, Placement } from '@floating-ui/dom'
+  import type { MiddlewareData, Placement } from '@floating-ui/dom'
   import { arrow as arrowMiddleware } from '@floating-ui/dom'
   import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
@@ -42,6 +42,8 @@
       bottom: 'top',
       left: 'right'
     }[e.detail.placement.split('-')[0]]
+
+    if (!arrow) return
 
     Object.assign(arrow.style, {
       left: arrowX != null ? `${arrowX}px` : '',
@@ -83,6 +85,7 @@
         class:hero={mode === 'hero'}
         class:info={mode === 'info'}
         class:mini={mode === 'mini'}
+        class:default={mode === 'default' || !mode}
         transition:fade={{ duration: 60 }}
         hidden={!visibleInternal}
         bind:this={tooltip}
@@ -90,7 +93,11 @@
         <slot name="text">
           {text}
         </slot>
-        <div class="arrow" bind:this={arrow} />
+        <div
+          class="arrow"
+          hidden={mode === 'default' || mode === 'mini'}
+          bind:this={arrow}
+        />
       </div>
     </Floating>
   {/key}
@@ -110,6 +117,8 @@
     --shadow: var(--leo-tooltip-shadow, var(--leo-effect-elevation-03));
     --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
     --radius: var(--leo-radius-m);
+    --border-color: transparent;
+    --border-width: 0px;
   }
 
   .leo-tooltip .tooltip {
@@ -118,7 +127,7 @@
     box-shadow: var(--shadow);
     padding: var(--padding);
     border-radius: var(--radius);
-
+    border: var(--border-width) solid var(--border-color);
     font: var(--leo-font-primary-default-regular);
   }
 
@@ -143,12 +152,21 @@
 
   .leo-tooltip .tooltip.mini {
     --background: var(--leo-color-gray-10);
+    @theme dark {
+      --background: var(--leo-color-gray-20);
+    }
+
     --text: var(--leo-color-text-primary);
     --padding: var(--leo-spacing-s) 6px;
     --shadow: var(--leo-effect-elevation-01);
     --radius: 2px;
 
     font: var(--leo-font-primary-x-small-regular);
+  }
+
+  .leo-tooltip .tooltip.default {
+    --border-color: var(--leo-color-divider-subtle);
+    --border-width: 1px;
   }
 
   .leo-tooltip .trigger {

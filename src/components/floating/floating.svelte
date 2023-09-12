@@ -29,9 +29,9 @@
   export let middleware: Middleware[] = []
 
   /** The target element to float near */
-  export let target: HTMLElement;
+  export let target: HTMLElement
 
-  export let autoUpdate: boolean = false;
+  export let autoUpdate: boolean = false
 
   let dispatch = createEventDispatcher()
 
@@ -56,25 +56,25 @@
     result.push(...additional)
     return result
   }
-  
+
   function updatePosition(...args: any[]) {
     if (!floating || !target) return
 
     computePosition(target, floating, {
-        placement: placement,
-        middleware: getMiddlewares(flip, shift, offset, middleware)
+      placement: placement,
+      middleware: getMiddlewares(flip, shift, offset, middleware)
     }).then(({ x, y, placement, middlewareData }) => {
-        Object.assign(floating.style, {
+      Object.assign(floating.style, {
         left: `${x}px`,
-        top: `${y}px`,
-        })
+        top: `${y}px`
+      })
 
-        dispatch('computedposition', {
-            x,
-            y,
-            middlewareData,
-            placement
-        })
+      dispatch('computedposition', {
+        x,
+        y,
+        middlewareData,
+        placement
+      })
     })
   }
 
@@ -84,13 +84,11 @@
     cleanup?.()
 
     if (autoUpdate && target && floating) {
-        console.log('created updater')
-        cleanup = createAutoUpdater(target, floating, updatePosition)
+      cleanup = createAutoUpdater(target, floating, updatePosition)
     } else {
-        updatePosition(target, floating, flip, shift, offset, middleware)
+      updatePosition(target, floating, flip, shift, offset, middleware)
     }
   }
-
 </script>
 
 <div bind:this={floating} class="leo-floating">
