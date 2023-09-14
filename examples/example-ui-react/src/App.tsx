@@ -6,12 +6,6 @@ import styles from './App.module.css'
 import Input from '../../../react/input'
 import Dropdown from '../../../react/dropdown'
 
-import { color } from '../../../tokens/css'
-
-color.white
-
-let f = '#FFFFFF'
-
 function App() {
   // Verify that we can change props and children (slots)
   const [buttonText, setButtonText] = React.useState('I am a LEO Button')
@@ -48,13 +42,7 @@ function App() {
             <leo-option value="bar">Bar</leo-option>
           </Dropdown>
         </div>
-        <Tooltip
-          text="Hello World"
-          visible={spinning}
-          onVisibilitychange={() => {
-            console.log('Closed')
-          }}
-        >
+        <Tooltip text="Hello World">
           <LeoButton href="#foo">Link button!</LeoButton>
         </Tooltip>
       </header>
