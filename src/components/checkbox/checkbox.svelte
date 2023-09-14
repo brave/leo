@@ -23,8 +23,8 @@
   export let size: Sizes = 'normal'
 
   const dispatch = createEventDispatcher()
-  function changed(e) {
-    dispatch('changed', {
+  function change(e) {
+    dispatch('change', {
       checked: e.target.checked
     })
   }
@@ -41,7 +41,7 @@
       disabled={isDisabled}
       type="checkbox"
       bind:checked
-      on:change={changed}
+      on:change={change}
     />
     {#if checked}
       <div transition:fade={fadeTransition}>
