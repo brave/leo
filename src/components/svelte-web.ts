@@ -47,8 +47,10 @@ export default function registerWebComponent(
   { name, mode }: Options
 ) {
   if (!globalThis.customElements) {
-    console.log(`Component ${name} not registered as there is no customElements in this environment. Perhaps this is an SSR compile, which is not supported for Leo components yet.`)
-    return;
+    console.log(
+      `Component ${name} not registered as there is no customElements in this environment. Perhaps this is an SSR compile, which is not supported for Leo components yet.`
+    )
+    return
   }
 
   if (customElements.get(name)) {

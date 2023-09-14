@@ -20,7 +20,7 @@
     // soon as possible, but we want to make sure the consumer has a chance to
     // call setIconBasePath before we go and preload the icons (or we'll get a
     // 404).
-    if (isSSR) return;
+    if (isSSR) return
     requestIdleCallback(() => {
       const image = new Image()
       image.src = getIconUrl(lastIconBasePath, name)
