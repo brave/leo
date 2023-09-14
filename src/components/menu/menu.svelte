@@ -17,8 +17,10 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../svelteDirectives/clickOutside'
+  import Floating from '../floating/floating.svelte'
 
   export let isOpen = false
+  export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
 
   let dispatch = createEventDispatcher()
@@ -62,11 +64,9 @@
     // a change event.
     if (!item) return
 
-    if (item.tagName === 'LEO-OPTION') {
-      currentValue = getValue(item)
-    }
-
-    dispatch('select-item', { currentValue })
+    dispatch('select-item', {
+      value: item.tagName === 'LEO-OPTION' ? getValue(item) : null
+    })
   }
 
   /**
@@ -111,15 +111,14 @@
 </script>
 
 <div class="leo-menu">
-  <slot name="anchor" />
   {#if isOpen}
-    <div class="menu-wrapper">
+    <Floating {target} placement="bottom-start">
       <div
         class="leo-menu-popup"
         id="menu"
         role="menu"
-        aria-labelledby="anchor-button"
         tabindex="-1"
+        style:min-width="{target?.getBoundingClientRect().width}px"
         bind:this={popup}
         use:clickOutside={isOpen && handleBlur}
         on:keypress={(e) => {
@@ -130,7 +129,7 @@
       >
         <slot />
       </div>
-    </div>
+    </Floating>
   {/if}
 </div>
 
@@ -163,23 +162,15 @@
     }
   }
 
-  .leo-menu .menu-wrapper {
-    position: relative;
-    z-index: 1000;
-  }
-
   .leo-menu .leo-menu-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
 
     display: flex;
     flex-direction: column;
     border-radius: var(--leo-radius-m);
     max-height: 200px;
+    width: 100%;
     overflow-y: auto;
     overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);

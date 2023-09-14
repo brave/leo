@@ -3,13 +3,16 @@
 
   import Menu from './menu.svelte'
   import Icon from '../icon/icon.svelte'
+
+  let button
 </script>
 
 <Meta title="Menu" component={Menu} />
 
 <Template let:args>
   <div class="container">
-    <Menu isOpen={true}>
+    <button bind:this={button}> View page source </button>
+    <Menu isOpen={true} target={button}>
       <leo-menu-item>
         <div>Regenerate</div>
       </leo-menu-item>
