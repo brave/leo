@@ -148,7 +148,8 @@
   :host:disabled .leoButton,
   .leoButton:disabled {
     background: var(--bg-disabled, var(--bg));
-    opacity: 0.5;
+    color: var(--leo-color-text-disabled);
+    border-color: var(--leo-color-button-disabled);
   }
 
   // Size Variations
@@ -222,7 +223,7 @@
     --bg-active: var(--bg-hover);
     --bg-focus: var(--bg);
     --bg-loading: var(--bg);
-    --bg-disabled: var(--leo-color-gray-30);
+    --bg-disabled: var(--leo-color-button-disabled);
     --color: white;
   }
 
@@ -239,10 +240,6 @@
     --border-color-focus: var(--leo-color-divider-interactive);
     --box-shadow-focus: 0px 0px 0px 2px #423eee,
       0px 0px 0px 1px rgba(255, 255, 255, 0.3);
-
-    &:disabled {
-      opacity: 0.5;
-    }
 
     @theme (dark) {
       --border-color-hover: var(--leo-color-primitive-primary-60);
@@ -267,50 +264,48 @@
     --color: var(--leo-color-gray-60);
     --color-hover: var(--leo-color-gray-70);
     --box-shadow-hover: none;
-
-    &:disabled {
-      opacity: 0.5;
-    }
   }
   .leoButton.isHero {
     transition: var(--default-transition);
     --bg: transparent;
     --bg-focus: var(--bg);
-    --bg-disabled: var(--leo-color-gray-30);
+    --bg-disabled: var(--leo-color-button-disabled);
     --color: white;
     --default-bg-opacity: 1;
 
     position: relative;
     z-index: 0;
 
-    &::before,
-    &::after {
-      content: '';
-      pointer-events: none;
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      border-radius: var(--radius);
-    }
+    &:not(:disabled) {
+      &::before,
+      &::after {
+        content: '';
+        pointer-events: none;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: var(--radius);
+      }
 
-    &::before {
-      transition: var(--default-transition);
-      z-index: -1;
-      background: var(--leo-gradient-hero);
-      opacity: var(--default-bg-opacity);
-    }
+      &::before {
+        transition: var(--default-transition);
+        z-index: -1;
+        background: var(--leo-gradient-hero);
+        opacity: var(--default-bg-opacity);
+      }
 
-    &::after {
-      z-index: -2;
-      background: linear-gradient(
-        101.5deg,
-        #770eaa 21.56%,
-        #b72070 74.97%,
-        #e6461e 104.58%
-      );
+      &::after {
+        z-index: -2;
+        background: linear-gradient(
+          101.5deg,
+          #770eaa 21.56%,
+          #b72070 74.97%,
+          #e6461e 104.58%
+        );
+      }
     }
 
     &:hover {
