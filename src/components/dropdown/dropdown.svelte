@@ -67,6 +67,10 @@
     }
   }
 
+  // Note: we check isOpen !== undefined here so this is recalculated every time the
+  // dropdown is opened/closed.
+  $: minWidth = (isOpen !== undefined && dropdown?.getBoundingClientRect().width) || 0
+
   /**
    * Selects an option from an element
    * @param option The element containing the option.
@@ -168,7 +172,7 @@
     <div
       class="leo-dropdown-popup"
       hidden={!isOpen}
-      style:min-width="{dropdown?.getBoundingClientRect().width}px"
+      style:min-width="{minWidth}px"
       transition:scale={{ duration: 60, start: 0.8 }}
       use:clickOutside={isOpen &&
         ((e) => {
