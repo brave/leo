@@ -69,7 +69,8 @@
 
   // Note: we check isOpen !== undefined here so this is recalculated every time the
   // dropdown is opened/closed.
-  $: minWidth = (isOpen !== undefined && dropdown?.getBoundingClientRect().width) || 0
+  $: minWidth =
+    (isOpen !== undefined && dropdown?.getBoundingClientRect().width) || 0
 
   /**
    * Selects an option from an element
@@ -168,7 +169,7 @@
       </slot>
     </FormItem>
   </div>
-  <Floating target={dropdown} placement="bottom-start">
+  <Floating target={dropdown} autoUpdate placement="bottom-start">
     <div
       class="leo-dropdown-popup"
       hidden={!isOpen}

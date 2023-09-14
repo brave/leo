@@ -31,6 +31,9 @@
   /** The target element to float near */
   export let target: HTMLElement
 
+  /** Auto update the placement of the dropdown:
+   * https://floating-ui.com/docs/autoUpdate
+   */
   export let autoUpdate: boolean = false
 
   let dispatch = createEventDispatcher()
