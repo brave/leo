@@ -23,7 +23,7 @@
   export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
 
-  let dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
   let popup: HTMLDivElement
 
@@ -127,7 +127,7 @@
 
 <div class="leo-menu">
   {#if isOpen}
-    <Floating {target} placement="bottom-start">
+    <Floating {target} placement="bottom-start" autoUpdate>
       <div
         class="leo-menu-popup"
         id="menu"
