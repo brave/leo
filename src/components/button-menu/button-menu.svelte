@@ -13,12 +13,10 @@
     <slot name="anchor-content">Click</slot>
   </button>
   <Menu
-    {isOpen}
+    bind:isOpen
     target={button}
-    on:blur={() => (isOpen = false)}
-    on:escape={() => (isOpen = false)}
-    on:select-item={(e) => (isOpen = false)}
-    on:click={(e) => (isOpen = !isOpen)}
+    on:click={() => (isOpen = !isOpen)}
+    on:close
   >
     <slot />
   </Menu>

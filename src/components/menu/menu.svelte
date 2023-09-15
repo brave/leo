@@ -56,6 +56,11 @@
     }
   }
 
+  // Note: we check isOpen !== undefined here so this is recalculated every time the
+  // dropdown is opened/closed.
+  $: minWidth =
+    (isOpen !== undefined && target?.getBoundingClientRect().width) || 0
+
   function selectMenuItem(e: Event) {
     // Find the option which was clicked on, if any.
     const item = menuItems.find((item) => e.composedPath().includes(item))
@@ -64,9 +69,17 @@
     // a change event.
     if (!item) return
 
+    if (item.tagName === 'LEO-OPTION') {
+      currentValue = getValue(item)
+    }
+
+    isOpen = false
+
     dispatch('select-item', {
-      value: item.tagName === 'LEO-OPTION' ? getValue(item) : null
+      value: currentValue
     })
+
+    dispatch('close')
   }
 
   /**
@@ -78,7 +91,8 @@
 
     // Handle closing keys
     if (e.code === 'Escape') {
-      dispatch('escape')
+      isOpen = false
+      dispatch('close')
       return
     }
 
@@ -106,7 +120,8 @@
   }
 
   function handleBlur(e) {
-    dispatch('blur')
+    isOpen = false
+    dispatch('close')
   }
 </script>
 
@@ -118,7 +133,7 @@
         id="menu"
         role="menu"
         tabindex="-1"
-        style:min-width="{target?.getBoundingClientRect().width}px"
+        style:min-width="{minWidth}px"
         bind:this={popup}
         use:clickOutside={isOpen && handleBlur}
         on:keypress={(e) => {
