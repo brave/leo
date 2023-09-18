@@ -147,7 +147,7 @@
           if (e.code !== 'Enter' && e.code !== 'Space') return
           selectMenuItem(e)
         }}
-        on:click|stopPropagation|preventDefault={selectMenuItem}
+        on:click={selectMenuItem}
       >
         <slot />
       </div>
