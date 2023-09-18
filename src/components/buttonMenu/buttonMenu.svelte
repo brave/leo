@@ -1,3 +1,17 @@
+<script context="module" lang="ts">
+import type { HTMLAttributes } from 'svelte/elements'
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'leo-menu-item': HTMLAttributes<HTMLElement> & {
+        key?: string | number | null
+        children?: any
+      }
+    }
+  }
+}
+</script>
+
 <script lang="ts">
   import Menu from '../menu/menu.svelte'
 
