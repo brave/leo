@@ -40,4 +40,10 @@ declare global {
   :host {
     display: inline-block;
   }
+
+  .leo-button-menu {
+    button {
+      all: unset;
+    }
+  }
 </style>
