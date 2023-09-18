@@ -27,7 +27,9 @@
 <Story name="Default" />
 
 <Story name="Slots" let:args>
-  <SlotInfo description="The dropdown provides several slots for customization">
+  <SlotInfo
+    description="The ButtonMenu provides several slots for customization. It accepts 'leo-menu-item' and 'leo-option.' 'Leo-menu-item' is mainly used for context menus, which are contained within a menu, while 'leo-option' is used for selectable choices."
+  >
     <Slot
       name="anchor-content"
       explanation="A custom icon inside of anchor button"

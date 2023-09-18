@@ -9,6 +9,11 @@
           key?: string | number | null
           children?: any
         }
+        'leo-option': HTMLAttributes<HTMLElement> & {
+          key?: string | number | null
+          value?: string
+          children?: any
+        }
       }
     }
   }
@@ -47,6 +52,8 @@
       menuItem.setAttribute('tabindex', (index + 1).toString())
 
       if (menuItem.tagName === 'LEO-OPTION') {
+        menuItem.setAttribute('role', 'option')
+
         if (currentValue === getValue(menuItem)) {
           menuItem.setAttribute('aria-selected', '')
         } else menuItem.removeAttribute('aria-selected')
