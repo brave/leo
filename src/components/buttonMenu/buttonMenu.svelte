@@ -1,7 +1,7 @@
 <script lang="ts">
   import Menu from '../menu/menu.svelte'
 
-  let isOpen = false
+  export let isOpen = false
   let button: HTMLButtonElement
 </script>
 

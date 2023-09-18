@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
 
-  import ButtonMenu from './button-menu.svelte'
+  import ButtonMenu from './buttonMenu.svelte'
   import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
