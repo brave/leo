@@ -5,6 +5,7 @@
   import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import Toggle from '../toggle/toggle.svelte'
 </script>
 
 <Meta title="ButtonMenu" component={ButtonMenu} />
@@ -14,12 +15,17 @@
     <ButtonMenu>
       <leo-menu-item> Copy </leo-menu-item>
       <leo-menu-item> Share </leo-menu-item>
+      <div class="section">Section</div>
       <leo-menu-item>
         <div class="item">
           <div>New Chat</div>
           <Icon name="plus-add" />
         </div>
       </leo-menu-item>
+      <div class="item">
+        <div>Suggested questions</div>
+        <Toggle />
+      </div>
     </ButtonMenu>
   </div>
 </Template>
@@ -53,7 +59,7 @@
 
 <style>
   .container {
-    width: 250px;
+    width: 300px;
   }
 
   .item {
@@ -61,5 +67,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+  }
+
+  .section {
+    border-top: 1px solid rgba(128, 128, 128, 0.225);
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 12px;
+    color: grey;
+  }
+
+  .section:hover {
+    color: grey;
   }
 </style>

@@ -48,7 +48,13 @@ function App() {
           <div slot="anchor-content">ButtonMenu</div>
           <leo-menu-item>Llama2-13b</leo-menu-item>
           <leo-menu-item>Llama2-7b</leo-menu-item>
-          <div style={{ padding: '10px 0', fontSize: 12, borderTop: '1px solid blue' }}>
+          <div
+            style={{
+              padding: '10px 0',
+              fontSize: 12,
+              borderTop: '1px solid blue'
+            }}
+          >
             Coding
           </div>
           <leo-menu-item>Llama2-13b</leo-menu-item>

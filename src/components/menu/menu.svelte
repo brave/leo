@@ -242,7 +242,10 @@
       0px 0px 4px 2px #423eee;
   }
 
-  :global .leo-menu-popup > ::slotted(*:hover:not(leo-menu-item):not(leo-option)) {
+  :global
+    .leo-menu-popup
+    > ::slotted(*:hover:not(leo-menu-item):not(leo-option)),
+  :global .leo-menu-popup > *:hover:not(leo-menu-item):not(leo-option) {
     color: inherit;
     background: none;
     cursor: default;
