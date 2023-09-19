@@ -81,7 +81,9 @@
       currentValue = getValue(item)
     }
 
-    isOpen = false
+    if (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') {
+      isOpen = false
+    }
 
     dispatch('select-item', {
       value: currentValue
@@ -238,5 +240,11 @@
     border-radius: var(--leo-spacing-m);
     box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
+  }
+
+  :global .leo-menu-popup > ::slotted(*:hover:not(leo-menu-item):not(leo-option)) {
+    color: inherit;
+    background: none;
+    cursor: default;
   }
 </style>
