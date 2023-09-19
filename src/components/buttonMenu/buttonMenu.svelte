@@ -43,6 +43,9 @@
   }
 
   .leo-button-menu {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
     button {
       all: unset;
     }
