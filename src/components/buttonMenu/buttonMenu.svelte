@@ -6,6 +6,7 @@
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           children?: any
+          onClick?: EventListener
         }
       }
     }
