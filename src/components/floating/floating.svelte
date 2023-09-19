@@ -103,7 +103,7 @@
 <style lang="scss">
   .leo-floating {
     position: absolute;
-    z-index: 0;
+    z-index: 999;
     width: fit-content;
   }
 </style>
