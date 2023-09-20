@@ -34,7 +34,7 @@
 
 <Story name="Slots" let:args>
   <SlotInfo
-    description="The ButtonMenu provides several slots for customization. It accepts 'leo-menu-item' and 'leo-option.' 'Leo-menu-item' is mainly used for context menus, which are contained within a menu, while 'leo-option' is used for selectable choices."
+    description="The ButtonMenu provides several slots for customization. It accepts '<leo-menu-item>' and '<leo-option>' elements as well as any other element types. Use '<leo-menu-item>' for menu-style commands and '<leo-option>' for select-style selectable choices."
   >
     <Slot
       name="anchor-content"
