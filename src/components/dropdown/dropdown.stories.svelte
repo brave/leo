@@ -52,7 +52,9 @@
 </Template>
 
 <Story name="Slots" let:args>
-  <SlotInfo description="The dropdown provides several slots for customization">
+  <SlotInfo
+    description="The dropdown provides several slots for customization. It accepts '<leo-option>'"
+  >
     <Slot
       name="default"
       explanation="The dropdown items. Each item should have a `value` attribute set to the value of the dropdown when that item is selected. This is similar to the <option value='1'>Foo</option> element. Items can be any sort of element, but type definitions are provided for <leo-option value='1'>Foo</leo-option>, so it's generally easiest to use that."

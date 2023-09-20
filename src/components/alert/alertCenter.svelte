@@ -91,7 +91,7 @@
         <div slot="actions">
           {#each alert.actions as action}
             <Button
-              kind={action.kind ?? 'filled'}
+              kind={action.kind || 'filled'}
               on:click={() => action.action(alert)}>{action.text}</Button
             >
           {/each}

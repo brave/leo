@@ -38,6 +38,7 @@
     import './shared/dialogHelpers.js'
     import './leo/dropdown.js'
     import './leo/input.js'
+    import './leo/tooltip.js'
 
     const countries = {
       'NZ': 'New Zealand',
@@ -102,7 +103,7 @@
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
     input.addEventListener('input', e => {
-      toggleButton.textContent = e.target.value
+      toggleButton.textContent = e.detail.value
     })
 
     dialogButton.addEventListener('click', () => {
@@ -118,7 +119,9 @@
       Some content which is hidden by default
     </leo-collapse>
     <leo-toggle>Togglable!</leo-toggle>
-    <leo-button kind="outline" id="toggle-button"></leo-button>
+    <leo-tooltip text="toggles the collapse & stuff" mode="hero">
+      <leo-button kind="outline" id="toggle-button"></leo-button>
+    </leo-tooltip>
     <leo-input value="Leo Button" required showErrors>
       What does the button say?
     </leo-input>
@@ -144,7 +147,9 @@
       <div id="selectedCountry" slot="value"></div>
       <leo-option value="NZ">New Zealand</leo-option>
       <leo-option value="AU">Australia</leo-option>
-      <leo-option value="UK"><div class="blur">United Kingdom</div>(blurred on purpose)</leo-option>
+      <leo-option value="UK">
+        <div class="blur">United Kingdom</div>(blurred on purpose)
+      </leo-option>
       <leo-option value="CA">Canada</leo-option>
     </leo-dropdown>
     <leo-dialog showclose>

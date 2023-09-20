@@ -57,7 +57,7 @@
       handledClick = true
       dragStartX = e.clientX
     }}
-    on:click={(e) => {
+    on:click|stopPropagation={(e) => {
       if (handledClick || disabled) {
         handledClick = false
         return

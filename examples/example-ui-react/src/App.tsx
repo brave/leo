@@ -1,9 +1,12 @@
 import * as React from 'react'
 import '../../../tokens/css/variables.css'
 import LeoButton from '../../../react/button'
+import Tooltip from '../../../react/tooltip'
 import styles from './App.module.css'
 import Input from '../../../react/input'
 import Dropdown from '../../../react/dropdown'
+import ButtonMenu from '../../../react/buttonMenu'
+import Toggle from '../../../react/toggle'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -41,7 +44,29 @@ function App() {
             <leo-option value="bar">Bar</leo-option>
           </Dropdown>
         </div>
-        <LeoButton href="#foo">Link button!</LeoButton>
+        <ButtonMenu>
+          <div slot="anchor-content">ButtonMenu</div>
+          <leo-menu-item>Llama2-13b</leo-menu-item>
+          <leo-menu-item>Llama2-7b</leo-menu-item>
+          <div
+            style={{
+              padding: '10px 0',
+              fontSize: 12,
+              borderTop: '1px solid blue'
+            }}
+          >
+            Coding
+          </div>
+          <leo-menu-item>Llama2-13b</leo-menu-item>
+          <leo-menu-item>Llama2-7b</leo-menu-item>
+          <div>
+            <span>Suggested questions</span>
+            <Toggle />
+          </div>
+        </ButtonMenu>
+        <Tooltip text="Hello World">
+          <LeoButton href="#foo">Link button!</LeoButton>
+        </Tooltip>
       </header>
     </div>
   )
