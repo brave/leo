@@ -7,6 +7,9 @@
           // Note: This should line up with Reacts key type, but we don't want
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
+          // Menu items can have borders, so we need to allow that.
+          // TODO(petemill): probably make this in to a Component with props and built-in styles
+          className?: string
           children?: any
           onClick?: EventListener
         }
