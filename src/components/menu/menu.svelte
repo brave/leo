@@ -174,19 +174,6 @@
     }
   }
 
-  .leo-menu .click-target {
-    --glow-size: 3px;
-
-    padding: var(--glow-size);
-
-    &:focus-visible {
-      padding: var(--glow-size);
-      border-radius: var(--leo-spacing-m);
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
-        0px 0px 4px 2px #423eee;
-    }
-  }
-
   .leo-menu .leo-menu-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
@@ -194,10 +181,7 @@
     display: flex;
     flex-direction: column;
     border-radius: var(--leo-radius-m);
-    max-height: 200px;
     width: 100%;
-    overflow-y: auto;
-    overflow-x: visible;
     border: 1px solid var(--leo-color-divider-subtle);
   }
 

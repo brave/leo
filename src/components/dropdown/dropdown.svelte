@@ -36,9 +36,11 @@
   let dropdown: HTMLDivElement
 
   function onItemSelect(e: CustomEvent) {
-    // Close the popup
-    isOpen = false
     dispatch('change', e.detail)
+  }
+
+  function onClick() {
+    isOpen = !isOpen
   }
 </script>
 
@@ -57,7 +59,7 @@
         bind:this={button}
         class="click-target"
         {disabled}
-        on:click|stopPropagation={(e) => (isOpen = !isOpen)}
+        on:click|stopPropagation={onClick}
       >
         {#if value !== undefined}
           <slot name="value" {value}>
@@ -103,5 +105,14 @@
   .leo-dropdown .click-target {
     flex: 1;
     pointer-events: none;
+    --glow-size: 3px;
+
+    padding: var(--glow-size);
+
+    &:focus-visible {
+      border-radius: var(--leo-spacing-m);
+      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+        0px 0px 4px 2px #423eee;
+    }
   }
 </style>
