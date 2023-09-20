@@ -746,15 +746,15 @@
       "divider": {
         "interactive": {
           "type": "color",
-          "value": "#b7c6ff"
+          "value": "rgba(124, 145, 255, 0.4000)"
         },
         "subtle": {
           "type": "color",
-          "value": "#dbdee2"
+          "value": "rgba(161, 171, 186, 0.4000)"
         },
         "strong": {
           "type": "color",
-          "value": "#c2c9d3"
+          "value": "rgba(104, 116, 133, 0.4000)"
         }
       },
       "button": {
@@ -1264,15 +1264,15 @@
       "divider": {
         "interactive": {
           "type": "color",
-          "value": "#3f39e8"
+          "value": "rgba(124, 145, 255, 0.4000)"
         },
         "subtle": {
           "type": "color",
-          "value": "#30343d"
+          "value": "rgba(104, 116, 133, 0.4000)"
         },
         "strong": {
           "type": "color",
-          "value": "#3f4855"
+          "value": "rgba(104, 116, 133, 0.4000)"
         }
       },
       "button": {
