@@ -41,16 +41,22 @@
   }
 
   $: menuItems = Array.from(
-    (
-      popup?.querySelector('.leo-menu-popup slot') as HTMLSlotElement
-    )?.assignedElements() ??
-      popup?.querySelectorAll('.leo-menu-popup > *') ??
+    // TODO(petemil): support slot *descendents* that are leo-menu-item or leo-option (or something else unstyled like leo-menu-action?) so that we can
+    // select items that are in complex positions (see an example in the browser app menu zoom controls).
+    (popup?.querySelector('.leo-menu-popup slot') as HTMLSlotElement)
+      ?.assignedElements()
+      ?.filter((element) =>
+        ['LEO-OPTION', 'LEO-MENU-ITEM'].includes(element.tagName)
+      ) ??
+      popup?.querySelectorAll(
+        '.leo-menu-popup > :is(leo-menu-item, leo-option'
+      ) ??
       []
   )
 
   $: {
-    for (const [menuItem, index] of menuItems.map((o, i) => [o, i] as const)) {
-      menuItem.setAttribute('tabindex', (index + 1).toString())
+    for (const menuItem of menuItems) {
+      menuItem.setAttribute('tabindex', '0')
 
       if (menuItem.tagName === 'LEO-OPTION') {
         menuItem.setAttribute('role', 'option')
@@ -77,19 +83,28 @@
     // a change event.
     if (!item) return
 
+    // Use data-is-interactive=true to prevent the menu from closing when selected. This infers
+    // there is interacitivity inside the menu item (e.g. a Toggle), which would be good for the user
+    // to see change state and allowing the user to manually close when ready.
+    if (
+      (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') &&
+      !item.dataset.isInteractive
+    ) {
+      isOpen = false
+      dispatch('close')
+    }
+
     if (item.tagName === 'LEO-OPTION') {
       currentValue = getValue(item)
+
+      dispatch('select-item', {
+        value: currentValue
+      })
     }
 
-    if (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') {
-      isOpen = false
+    if (item.tagName === 'LEO-MENU-ITEM') {
+      item.click()
     }
-
-    dispatch('select-item', {
-      value: currentValue
-    })
-
-    dispatch('close')
   }
 
   /**
@@ -178,50 +193,63 @@
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
 
-    display: flex;
-    flex-direction: column;
+    // TODO(petemill): Make the "floating-ui" element be this popup element,
+    // so that we get the correct thing scrolling when overflow happens. In the meantime,
+    // overflow: 'auto' (or anything but 'visible') helps clip the content
+    // to the border-radius.
+    overflow: auto;
+
+    border: 1px solid var(--leo-color-divider-subtle);
     border-radius: var(--leo-radius-m);
     width: 100%;
-    border: 1px solid var(--leo-color-divider-subtle);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* custom items can fit in by making optional use of these variables */
+  :global .leo-menu-popup ::slotted(*),
+  :global .leo-menu-popup > * {
+    --leo-menu-item-margin: var(--leo-spacing-s);
+    --leo-menu-item-padding: var(--leo-spacing-xl);
+    --leo-menu-item-border-radius: var(--leo-spacing-m);
   }
 
   /**
    * Default Styles for our dropdown options. The selectors are broken up
-   * because the :global selector doesn't work with Nesting. Each pseudo element
-   * has two selectors: One for when it's inside a Svelte component, and one for
-   * inside a web component.
+   * because the :global selector doesn't work with Nesting or combinations (e.g. :is or in ::slotted).
+   * Each pseudo element has two sets of selectors: One for when it's inside a Svelte component, and one for
+   * inside a web component. This could be simplified if leo-menu-item becomes its own Component.
    */
-  :global .leo-menu-popup ::slotted(*),
-  :global .leo-menu-popup > * {
+  :global .leo-menu-popup ::slotted(leo-menu-item),
+  :global .leo-menu-popup ::slotted(leo-option),
+  :global .leo-menu-popup > leo-menu-item,
+  :global .leo-menu-popup > leo-option {
     all: unset;
-    display: revert;
-    padding: var(--leo-spacing-xl);
     cursor: pointer;
+    margin: var(--leo-menu-item-margin);
+    border-radius: var(--leo-menu-item-border-radius);
+    padding: var(--leo-menu-item-padding);
+    display: revert;
   }
 
-  :global .leo-menu-popup ::slotted(*:hover),
-  :global .leo-menu-popup > *:hover {
-    background: var(--leo-color-container-interactive);
-    color: var(--leo-color-text-interactive);
+  :global .leo-menu-popup ::slotted(leo-menu-item:hover),
+  :global .leo-menu-popup ::slotted(leo-option:hover),
+  :global .leo-menu-popup > leo-menu-item:hover,
+  :global .leo-menu-popup > leo-option:hover {
+    background: var(--leo-color-container-highlight);
+    color: var(--leo-color-text-highlight);
   }
 
   :global .leo-menu-popup ::slotted(*[aria-selected]),
   :global .leo-menu-popup ::slotted(*:active),
   :global .leo-menu-popup > *[aria-selected],
   :global .leo-menu-popup > *:active {
-    background: var(--leo-color-primary-20);
+    background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
 
   :global .leo-menu-popup ::slotted(*:focus-visible),
   :global .leo-menu-popup > *:focus-visible {
-    /** Our glow won't be visible if it's outside the parent, so shrink the
-        * padding a little bit so the glow fits inside */
-    --glow-size: 3px;
-    padding: calc(var(--leo-spacing-xl) - var(--glow-size));
-    margin: var(--glow-size);
-
-    border-radius: var(--leo-spacing-m);
     box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
   }
