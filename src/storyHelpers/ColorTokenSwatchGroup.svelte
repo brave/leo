@@ -4,6 +4,7 @@
   export let level = 1
   export let name = ''
   export let tokens
+  export let swatchSize = 150
 
   const headingTag = `h${level}`
 
@@ -21,7 +22,7 @@
   {/if}
 
   {#if typeof filteredTokens[0][1] === 'string'}
-    <div class="color-swatch-group">
+    <div class="color-swatch-group" style={`--swatch-size: ${swatchSize}px`}>
       {#each filteredTokens as [name, token]}
         <Copiable text={token}>
           <div class="color-swatch" style="--swatch-bg:{token}">
@@ -49,7 +50,7 @@
 
   .color-swatch-group {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 150px));
+    grid-template-columns: repeat(auto-fill, minmax(50px, var(--swatch-size)));
     gap: 1rem;
     padding-bottom: 1rem;
   }
