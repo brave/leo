@@ -14,7 +14,11 @@
   const filteredTokens = getTokens(tokens)
 </script>
 
-<svelte:element this={name ? 'section' : 'div'} id={name}>
+<svelte:element
+  this={name ? 'section' : 'div'}
+  id={name}
+  class="section section-{level}"
+>
   {#if name}
     <svelte:element this={headingTag} class="group-heading">
       {name}
@@ -44,6 +48,18 @@
 </svelte:element>
 
 <style>
+  .section-2 {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--leo-color-divider-subtle);
+    margin-bottom: 3rem;
+  }
+
+  .section-2:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
   .group-heading {
     text-transform: capitalize;
   }

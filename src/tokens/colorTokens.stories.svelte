@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import { font as allFonts, color as allColors } from '../../tokens/css'
+  import { Meta, Story } from '@storybook/addon-svelte-csf'
+  import { color as allColors } from '../../tokens/css'
   import ColorTokenSwatchGroup from '../storyHelpers/ColorTokenSwatchGroup.svelte'
 
   const {

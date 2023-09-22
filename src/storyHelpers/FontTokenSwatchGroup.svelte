@@ -13,7 +13,11 @@
   const filteredTokens = getTokens(tokens)
 </script>
 
-<svelte:element this={name ? 'section' : 'div'} id={name}>
+<svelte:element
+  this={name ? 'section' : 'div'}
+  id={name}
+  class="section section-{level}"
+>
   {#if name}
     <svelte:element this={headingTag} class="group-heading">
       {name}
@@ -23,11 +27,17 @@
   {#if typeof filteredTokens[0][1] === 'string'}
     <div class="font-group">
       {#each filteredTokens as [name, token]}
-        <svelte:element this={`h${level + 1}`} class="group-heading"
-          >{name}</svelte:element
-        >
         <Copiable text={token}>
-          <span class="font-sample" style="font: {token}">Keep it bravey.</span>
+          <div class="font-sample">
+            <svelte:element
+              this={`h${level + 1}`}
+              class="group-heading"
+              style="--heading-color: var(--leo-color-text-tertiary); opacity: 0.75;"
+            >
+              {name}
+            </svelte:element>
+            <span style="font: {token}">Keep it bravey.</span>
+          </div>
         </Copiable>
       {/each}
     </div>
@@ -43,9 +53,22 @@
 </svelte:element>
 
 <style>
+  .section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--leo-color-divider-subtle);
+    margin-bottom: 3rem;
+  }
+
+  .section:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
   .group-heading {
     text-transform: capitalize;
     margin: 0 0 0.5rem;
+    color: var(--heading-color, inherit);
   }
 
   .font-group {
@@ -57,6 +80,8 @@
 
   .font-sample {
     display: flex;
+    flex-direction: column;
+    align-items: start;
     font-size: 0.75rem;
     color: var(--leo-color-text-primary);
     background: var(--leo-color-page-background);
