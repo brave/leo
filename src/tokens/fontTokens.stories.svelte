@@ -25,7 +25,7 @@
   <FontTokenSwatchGroup tokens={mobile} />
 </Story>
 
-<Story name="Primarcy">
+<Story name="Primary">
   <FontTokenSwatchGroup tokens={primary} />
 </Story>
 
