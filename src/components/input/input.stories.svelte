@@ -11,7 +11,7 @@
 </script>
 
 <Meta
-  title="Input"
+  title="Components/Input"
   component={Input}
   argTypes={{
     ...cssProperties,

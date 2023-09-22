@@ -7,7 +7,7 @@
 </script>
 
 <Meta
-  title="Toggle"
+  title="Components/Toggle"
   component={Toggle}
   argTypes={{
     '--leo-toggle-width': {

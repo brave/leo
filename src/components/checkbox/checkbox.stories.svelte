@@ -6,7 +6,7 @@
 </script>
 
 <Meta
-  title="Checkbox"
+  title="Components/Checkbox"
   component={Checkbox}
   argTypes={{
     '--leo-checkbox-focus-border-radius': {

@@ -8,7 +8,7 @@
 </script>
 
 <Meta
-  title="Radio Button"
+  title="Components/Radio Button"
   component={RadioButton}
   argTypes={{
     '--leo-radiobutton-focus-border-radius': {

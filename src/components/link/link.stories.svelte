@@ -7,7 +7,7 @@
 </script>
 
 <Meta
-  title="Link"
+  title="Components/Link"
   component={Link}
   argTypes={{
     href: {

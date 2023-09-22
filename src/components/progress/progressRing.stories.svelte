@@ -8,7 +8,7 @@
 </script>
 
 <Meta
-  title="Progress Ring"
+  title="Components/Progress Ring"
   component={Ring}
   argTypes={{
     '--leo-progressring-spin-rate': {

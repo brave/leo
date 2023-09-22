@@ -14,38 +14,48 @@
     divider,
     dialogs,
     systemfeedback,
-    ...rest
+    white,
+    black,
+    ...themeable
   } = allColors
-  const { white, black, ...themable } = rest
+
+  const semantic = {
+    page,
+    container,
+    text,
+    button,
+    icon,
+    dialogs,
+    divider,
+    systemfeedback
+  }
+
+  const allColorsForDisplay = {
+    themeable,
+    semantic,
+    primitive,
+    legacy,
+    white,
+    black
+  }
 </script>
 
-<Meta title="Color Tokens" />
+<Meta title="Tokens/Colors" />
 
 <Story name="All Colors">
-  <ColorTokenSwatchGroup tokens={allColors} />
+  <ColorTokenSwatchGroup tokens={allColorsForDisplay} />
+</Story>
+
+<Story name="Themeable">
+  <ColorTokenSwatchGroup tokens={themeable} />
+</Story>
+
+<Story name="Semantic">
+  <ColorTokenSwatchGroup tokens={semantic} />
 </Story>
 
 <Story name="Primitive">
   <ColorTokenSwatchGroup tokens={primitive} />
-</Story>
-
-<Story name="Themable">
-  <ColorTokenSwatchGroup tokens={themable} />
-</Story>
-
-<Story name="Semantic">
-  <ColorTokenSwatchGroup
-    tokens={{
-      text,
-      icon,
-      button,
-      container,
-      page,
-      divider,
-      dialogs,
-      systemfeedback
-    }}
-  />
 </Story>
 
 <Story name="Legacy">

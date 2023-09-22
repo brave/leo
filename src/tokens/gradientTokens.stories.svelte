@@ -4,7 +4,7 @@
   import ColorTokenSwatchGroup from '../storyHelpers/ColorTokenSwatchGroup.svelte'
 </script>
 
-<Meta title="Gradient Tokens" />
+<Meta title="Tokens/Gradients" />
 
 <Story name="All Gradients">
   <ColorTokenSwatchGroup tokens={allGradients} swatchSize={300} />

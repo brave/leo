@@ -8,7 +8,7 @@
 </script>
 
 <Meta
-  title="Label"
+  title="Components/Label"
   component={Label}
   argTypes={{
     color: {

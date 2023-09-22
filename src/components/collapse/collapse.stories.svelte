@@ -8,7 +8,7 @@
 </script>
 
 <Meta
-  title="Collapse"
+  title="Components/Collapse"
   component={Collapse}
   argTypes={{
     '--leo-collapse-summary-padding': {
@@ -85,13 +85,13 @@
 <Story name="Slots" let:args>
   <SlotInfo description="The collapse has some slots to allow customization">
     <Slot name="default" explanation="The content of the collapse">
-      <Collapse {...args} title="Title">Collapse content</Collapse>
+      <Collapse {...args} title="Components/Title">Collapse content</Collapse>
     </Slot>
     <Slot
       name="icon"
       explanation="The icon for the collapse. Displayed before the title"
     >
-      <Collapse {...args} title="Title">
+      <Collapse {...args} title="Components/Title">
         <Icon name="country-nz" slot="icon" />
         Collapse content
       </Collapse>
@@ -100,7 +100,7 @@
       name="title"
       explanation="The title for the collapse. When provided, this overrides the title property. It allows for more advanced styling"
     >
-      <Collapse {...args} title="Title">
+      <Collapse {...args} title="Components/Title">
         <div slot="title"><b>Foo</b> <i>bar</i> <s>hello</s></div>
         Collapse content
       </Collapse>
@@ -109,7 +109,7 @@
 </Story>
 
 <Story name="Primary" let:args>
-  <Collapse title="Title" {...args}>
+  <Collapse title="Components/Title" {...args}>
     <div slot="icon">
       <Icon name="info-outline" />
     </div>

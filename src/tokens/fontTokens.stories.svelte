@@ -3,12 +3,12 @@
   import { font as allFonts } from '../../tokens/css'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
 
-  const { macos, windows, monospace, ...allFontsForDisplay } = allFonts;
-  const { primary, secondary, mobile, components } =
-  allFontsForDisplay
+  const { macos, windows, monospace, ...rest } = allFonts
+  const { primary, secondary, mobile, components } = rest
+  const allFontsForDisplay = { primary, secondary, components, mobile }
 </script>
 
-<Meta title="Font Tokens" />
+<Meta title="Tokens/Fonts" />
 
 <Story name="All Fonts">
   <FontTokenSwatchGroup tokens={allFontsForDisplay} />
