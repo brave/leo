@@ -1,24 +1,17 @@
 <script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+  import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
 
-  const { macos, monospace, windows, primary, secondary, mobile, components } =
-    allFonts
+  const { macos, windows, monospace, ...allFontsForDisplay } = allFonts;
+  const { primary, secondary, mobile, components } =
+  allFontsForDisplay
 </script>
 
 <Meta title="Font Tokens" />
 
 <Story name="All Fonts">
-  <FontTokenSwatchGroup tokens={allFonts} />
-</Story>
-
-<Story name="macOS">
-  <FontTokenSwatchGroup tokens={macos} />
-</Story>
-
-<Story name="Windows">
-  <FontTokenSwatchGroup tokens={windows} />
+  <FontTokenSwatchGroup tokens={allFontsForDisplay} />
 </Story>
 
 <Story name="Mobile">
@@ -33,6 +26,6 @@
   <FontTokenSwatchGroup tokens={secondary} />
 </Story>
 
-<Story name="Monospace">
-  <FontTokenSwatchGroup tokens={monospace} />
+<Story name="Components">
+  <FontTokenSwatchGroup tokens={components} />
 </Story>
