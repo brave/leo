@@ -55,7 +55,7 @@ module.exports = {
         svelte: path.resolve('node_modules', 'svelte')
       },
       // Make sure we compile stories.svelte files
-      extensions: [...config.resolve.extensions, '.css', '.svelte'],
+      extensions: [...config.resolve.extensions, '.svelte'],
       mainFields: ['svelte', ...config.resolve.mainFields]
     }
 
