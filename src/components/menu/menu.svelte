@@ -52,7 +52,7 @@
         '.leo-menu-popup > :is(leo-menu-item, leo-option'
       ) ??
       []
-  )
+  ) as HTMLElement[]
 
   $: {
     for (const menuItem of menuItems) {
