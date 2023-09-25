@@ -52,7 +52,7 @@
         '.leo-menu-popup > :is(leo-menu-item, leo-option'
       ) ??
       []
-  )
+  ) as HTMLElement[]
 
   $: {
     for (const menuItem of menuItems) {
@@ -237,7 +237,6 @@
   :global .leo-menu-popup > leo-menu-item:hover,
   :global .leo-menu-popup > leo-option:hover {
     background: var(--leo-color-container-highlight);
-    color: var(--leo-color-text-highlight);
   }
 
   :global .leo-menu-popup ::slotted(*[aria-selected]),
