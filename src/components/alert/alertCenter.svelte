@@ -103,7 +103,7 @@
 
 <style lang="scss">
   .leo-alert-center {
-    --width: min(540px, 100vw);
+    --width: var(--leo-alert-center-width, min(540px, 100vw));
     position: absolute;
     width: var(--width);
 

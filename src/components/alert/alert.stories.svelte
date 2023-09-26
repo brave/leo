@@ -82,7 +82,11 @@
   component={Alert}
   argTypes={{
     mode: { control: 'select', options: modes },
-    type: { control: 'select', options: types }
+    type: { control: 'select', options: types },
+    '--leo-alert-center-width': {
+      type: 'string',
+      description: 'The width to apply to the alert center'
+    }
   }}
 />
 
