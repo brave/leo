@@ -110,11 +110,11 @@
   [slot='errors'] {
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-m);
+    gap: var(--nl-spacing-m);
     align-items: center;
 
-    margin-top: var(--leo-spacing-s);
+    margin-top: var(--nl-spacing-s);
 
-    color: var(--leo-color-systemfeedback-error-icon);
+    color: var(--nl-color-systemfeedback-error-icon);
   }
 </style>

@@ -28,33 +28,33 @@
       type: 'string',
       defaultValue: 'Download Brave'
     },
-    '--leo-link-color': {
+    '--nl-link-color': {
       type: 'string',
       control: 'color',
       description: 'The color of the link'
     },
-    '--leo-link-hover-color': {
+    '--nl-link-hover-color': {
       type: 'string',
       control: 'color',
       description: 'The hover color of the link'
     },
-    '--leo-link-visited-color': {
+    '--nl-link-visited-color': {
       type: 'string',
       control: 'color',
       description: 'The visited color of the link'
     },
-    '--leo-link-disabled-color': {
+    '--nl-link-disabled-color': {
       type: 'string',
       control: 'color',
       description: 'The disabled color of the link'
     },
-    '--leo-link-focus-color': {
+    '--nl-link-focus-color': {
       type: 'string',
       control: 'color',
       description:
         'The focused color of the link. Defaults to the link color, if not set'
     },
-    '--leo-link-focus-shadow': {
+    '--nl-link-focus-shadow': {
       type: 'string',
       control: 'text',
       description: 'The focused shadow for the link'

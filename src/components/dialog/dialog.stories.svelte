@@ -16,24 +16,24 @@
   title="Dialog"
   component={Dialog}
   argTypes={{
-    '--leo-dialog-width': {
+    '--nl-dialog-width': {
       type: 'string',
       description: 'The CSS width of the dialog'
     },
-    '--leo-dialog-padding': {
+    '--nl-dialog-padding': {
       type: 'string',
       description: 'The CSS padding of the dialog'
     },
-    '--leo-dialog-border-radius': {
+    '--nl-dialog-border-radius': {
       type: 'string',
       description: 'The border radius of the dialog'
     },
-    '--leo-dialog-background': {
+    '--nl-dialog-background': {
       type: 'string',
       control: 'color',
       description: 'The background color of the dialog'
     },
-    '--leo-dialog-color': {
+    '--nl-dialog-color': {
       type: 'string',
       control: 'color',
       description: 'The default text color of the dialog'
@@ -132,6 +132,6 @@
 
 <style>
   .alert-container {
-    margin-top: var(--leo-spacing-xl);
+    margin-top: var(--nl-spacing-xl);
   }
 </style>

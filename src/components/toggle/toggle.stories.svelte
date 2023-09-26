@@ -10,48 +10,48 @@
   title="Toggle"
   component={Toggle}
   argTypes={{
-    '--leo-toggle-width': {
+    '--nl-toggle-width': {
       type: 'string',
       description: 'The width of the toggle (in CSS units)'
     },
-    '--leo-toggle-height': {
+    '--nl-toggle-height': {
       type: 'string',
       description: 'The height of the toggle (in CSS units)'
     },
-    '--leo-toggle-padding': {
+    '--nl-toggle-padding': {
       type: 'string',
       description: 'The padding of the toggle'
     },
-    '--leo-toggle-checked-color': {
+    '--nl-toggle-checked-color': {
       control: 'color',
       description: 'The background color of the toggle when checked'
     },
-    '--leo-toggle-checked-color-hover': {
+    '--nl-toggle-checked-color-hover': {
       control: 'color',
       description:
         'The background color of the toggle when checked and hovering'
     },
-    '--leo-toggle-unchecked-color': {
+    '--nl-toggle-unchecked-color': {
       control: 'color',
       description: 'The background color of the toggle when not checked'
     },
-    '--leo-toggle-unchecked-color-hover': {
+    '--nl-toggle-unchecked-color-hover': {
       control: 'color',
       description:
         'The background color of the toggle when not checked and hovering'
     },
-    '--leo-toggle-thumb-color': {
+    '--nl-toggle-thumb-color': {
       control: 'color',
       description: 'The color of the thumb'
     },
-    '--leo-toggle-thumb-disabled-color': {
+    '--nl-toggle-thumb-disabled-color': {
       control: 'color',
       description: 'The color of the thumb when the control is disabled'
     },
-    '--leo-toggle-label-gap': {
+    '--nl-toggle-label-gap': {
       control: 'The space between the label and the toggle (in CSS units)'
     },
-    '--leo-toggle-label-flex-direction': {
+    '--nl-toggle-label-flex-direction': {
       control: 'select',
       options: ['row', 'row-reverse', 'column', 'column-reverse'],
       description:

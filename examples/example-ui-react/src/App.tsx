@@ -1,6 +1,6 @@
 import * as React from 'react'
 import '../../../tokens/css/variables.css'
-import LeoButton from '../../../react/button'
+import NalaButton from '../../../react/button'
 import Tooltip from '../../../react/tooltip'
 import styles from './App.module.css'
 import Input from '../../../react/input'
@@ -10,7 +10,7 @@ import Toggle from '../../../react/toggle'
 
 function App() {
   // Verify that we can change props and children (slots)
-  const [buttonText, setButtonText] = React.useState('I am a LEO Button')
+  const [buttonText, setButtonText] = React.useState('I am a NALA Button')
   const [spinning, setSpinning] = React.useState(false)
 
   return (
@@ -25,7 +25,7 @@ function App() {
           />
         </label>
         {buttonText && (
-          <LeoButton
+          <NalaButton
             className={spinning ? 'spin' : ''}
             kind="filled"
             size="large"
@@ -36,18 +36,18 @@ function App() {
             }}
           >
             {buttonText}
-          </LeoButton>
+          </NalaButton>
         )}
         <div data-theme="dark">
           <Dropdown value="foo">
-            <leo-option value="foo">Foo</leo-option>
-            <leo-option value="bar">Bar</leo-option>
+            <nl-option value="foo">Foo</nl-option>
+            <nl-option value="bar">Bar</nl-option>
           </Dropdown>
         </div>
         <ButtonMenu>
           <div slot="anchor-content">ButtonMenu</div>
-          <leo-menu-item>Llama2-13b</leo-menu-item>
-          <leo-menu-item>Llama2-7b</leo-menu-item>
+          <nl-menu-item>Llama2-13b</nl-menu-item>
+          <nl-menu-item>Llama2-7b</nl-menu-item>
           <div
             style={{
               padding: '10px 0',
@@ -57,15 +57,15 @@ function App() {
           >
             Coding
           </div>
-          <leo-menu-item>Llama2-13b</leo-menu-item>
-          <leo-menu-item>Llama2-7b</leo-menu-item>
+          <nl-menu-item>Llama2-13b</nl-menu-item>
+          <nl-menu-item>Llama2-7b</nl-menu-item>
           <div>
             <span>Suggested questions</span>
             <Toggle />
           </div>
         </ButtonMenu>
         <Tooltip text="Hello World">
-          <LeoButton href="#foo">Link button!</LeoButton>
+          <NalaButton href="#foo">Link button!</NalaButton>
         </Tooltip>
       </header>
     </div>

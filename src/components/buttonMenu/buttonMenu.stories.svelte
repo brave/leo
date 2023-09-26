@@ -15,21 +15,21 @@
 <Template let:args>
   <div class="container">
     <ButtonMenu>
-      <leo-menu-item> Copy </leo-menu-item>
-      <leo-menu-item> Share </leo-menu-item>
+      <nl-menu-item> Copy </nl-menu-item>
+      <nl-menu-item> Share </nl-menu-item>
       <div class="section">Section</div>
-      <leo-menu-item>
+      <nl-menu-item>
         <div class="item">
           <div>New Chat</div>
           <Icon name="plus-add" />
         </div>
-      </leo-menu-item>
+      </nl-menu-item>
       <div class="custom-item">
         <div>Suggested questions</div>
         <Toggle size="small" />
       </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <leo-menu-item
+      <nl-menu-item
         class="item"
         on:click|stopPropagation={(e) => {
           toggleIsChecked = !toggleIsChecked
@@ -38,27 +38,27 @@
       >
         <div>Suggested questions</div>
         <Toggle checked={toggleIsChecked} size="small" />
-      </leo-menu-item>
+      </nl-menu-item>
     </ButtonMenu>
   </div>
 </Template>
 
 <Story name="Default" />
 
-<!-- TODO(petemill): We should probably only allow leo-menu-item for ButtonMenu, otherwise it gets complicated about event dispatching. Alternatively, we
+<!-- TODO(petemill): We should probably only allow nl-menu-item for ButtonMenu, otherwise it gets complicated about event dispatching. Alternatively, we
         should cleanup item selection handling in Menu.svelte and have Menu know whether it is in Select mode or not. -->
 <Story name="Slots" let:args>
   <SlotInfo description="">
     <Slot name="default" explanation="The menu items">
       <p>
         The ButtonMenu provides a default slot for menu items. It accepts
-        &lt;leo-menu-item&gt; and &lt;leo-option&gt; elements as well as any
-        other element types.
+        &lt;nl-menu-item&gt; and &lt;nl-option&gt; elements as well as any other
+        element types.
       </p>
       <ul>
         <li>
-          Use &lt;leo-menu-item&gt; for menu-style commands and
-          &lt;leo-option&gt; for select-style selectable choices.
+          Use &lt;nl-menu-item&gt; for menu-style commands and &lt;nl-option&gt;
+          for select-style selectable choices.
         </li>
         <li>
           Add the data-is-interactive=true attribute if you want the item to not
@@ -81,14 +81,14 @@
         <div slot="anchor-content">
           <Icon name="more-horizontal" />
         </div>
-        <leo-menu-item> Copy </leo-menu-item>
-        <leo-menu-item> Share </leo-menu-item>
-        <leo-menu-item>
+        <nl-menu-item> Copy </nl-menu-item>
+        <nl-menu-item> Share </nl-menu-item>
+        <nl-menu-item>
           <div class="item">
             <div>New Chat</div>
             <Icon name="plus-add" />
           </div>
-        </leo-menu-item>
+        </nl-menu-item>
       </ButtonMenu>
     </Slot>
   </SlotInfo>
@@ -100,7 +100,7 @@
   }
 
   .item {
-    --leo-icon-size: 18px;
+    --nl-icon-size: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,8 +108,8 @@
   }
 
   .custom-item {
-    margin: var(--leo-menu-item-margin);
-    padding: var(--leo-menu-item-padding);
+    margin: var(--nl-menu-item-margin);
+    padding: var(--nl-menu-item-padding);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -117,7 +117,7 @@
   }
 
   .section {
-    margin: var(--leo-menu-item-margin);
+    margin: var(--nl-menu-item-margin);
     border-top: 1px solid rgba(128, 128, 128, 0.225);
     padding-top: 0;
     padding-bottom: 0;

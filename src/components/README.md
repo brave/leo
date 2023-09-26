@@ -1,6 +1,6 @@
 # Components
 
-Leo's components are written in Svelte and compiled/wrapped into other formats.
+Nala's components are written in Svelte and compiled/wrapped into other formats.
 
 Currently, the supported formats are:
 
@@ -16,7 +16,7 @@ has a `ring` and a `bar` component).
 
 When compiled, all components are lifted up to the same folder, so names should
 be unique between folders. This is to make imports nicer, as you can import your
-preferred component from `@brave/leo/react/button` instead of `@brave/leo/react/button/button`.
+preferred component from `@brave/nala/react/button` instead of `@brave/nala/react/button/button`.
 
 ### Example Component
 
@@ -62,7 +62,7 @@ Our new component can now be used from any of our supported platforms:
 
 ```html
 <!-- Plain HTML -->
-<leo-my-cool-component greeting="Kia ora">NZ</leo-my-cool-component>
+<nl-my-cool-component greeting="Kia ora">NZ</nl-my-cool-component>
 <script type="module">
     import 'web-components/my-cool-component.js'
 </script>

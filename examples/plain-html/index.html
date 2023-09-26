@@ -25,20 +25,20 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <script type="module">
-    import './leo/button.js'
-    import './leo/collapse.js'
-    import './leo/toggle.js'
-    import './leo/progressRing.js'
-    import './leo/progressBar.js'
-    import './leo/alert.js'
-    import { showAlert } from './leo/alertCenter.js'
-    import './leo/icon.js'
-    import './leo/radioButton.js'
-    import './leo/dialog.js'
+    import './nala/button.js'
+    import './nala/collapse.js'
+    import './nala/toggle.js'
+    import './nala/progressRing.js'
+    import './nala/progressBar.js'
+    import './nala/alert.js'
+    import { showAlert } from './nala/alertCenter.js'
+    import './nala/icon.js'
+    import './nala/radioButton.js'
+    import './nala/dialog.js'
     import './shared/dialogHelpers.js'
-    import './leo/dropdown.js'
-    import './leo/input.js'
-    import './leo/tooltip.js'
+    import './nala/dropdown.js'
+    import './nala/input.js'
+    import './nala/tooltip.js'
 
     const countries = {
       'NZ': 'New Zealand',
@@ -49,17 +49,17 @@
 
     let count = 10
     const clickable = document.getElementById('clickable')
-    const ring = document.querySelector('leo-progressring')
-    const bar = document.querySelector('leo-progressbar')
-    const toggle = document.querySelector('leo-toggle')
+    const ring = document.querySelector('nl-progressring')
+    const bar = document.querySelector('nl-progressbar')
+    const toggle = document.querySelector('nl-toggle')
     const toggleButton = document.querySelector('#toggle-button')
-    const collapse = document.querySelector('leo-collapse')
+    const collapse = document.querySelector('nl-collapse')
     const dialogButton = document.querySelector('#dialog-button')
-    const dialog = document.querySelector('leo-dialog')
-    const radios = document.querySelectorAll('leo-radiobutton[name=options]')
-    const dropdown = document.querySelector('leo-dropdown')
-    const dropdownSelected = document.querySelector('leo-dropdown [slot="value"]')
-    const input = document.querySelector('leo-input')
+    const dialog = document.querySelector('nl-dialog')
+    const radios = document.querySelectorAll('nl-radiobutton[name=options]')
+    const dropdown = document.querySelector('nl-dropdown')
+    const dropdownSelected = document.querySelector('nl-dropdown [slot="value"]')
+    const input = document.querySelector('nl-input')
 
     function updateSelectedOption(e) {
       for (const radio of radios)
@@ -113,46 +113,46 @@
     dialog.addEventListener('close', () => dialogButton.isDisabled = false)
   </script>
   <div class="component-container">
-    <leo-alertcenter></leo-alertcenter>
-    <leo-button id="clickable">Click Me</leo-button>
-    <leo-collapse title="Handy dandy title">
+    <nl-alertcenter></nl-alertcenter>
+    <nl-button id="clickable">Click Me</nl-button>
+    <nl-collapse title="Handy dandy title">
       Some content which is hidden by default
-    </leo-collapse>
-    <leo-toggle>Togglable!</leo-toggle>
-    <leo-tooltip text="toggles the collapse & stuff" mode="hero">
-      <leo-button kind="outline" id="toggle-button"></leo-button>
-    </leo-tooltip>
-    <leo-input value="Leo Button" required showErrors>
+    </nl-collapse>
+    <nl-toggle>Togglable!</nl-toggle>
+    <nl-tooltip text="toggles the collapse & stuff" mode="hero">
+      <nl-button kind="outline" id="toggle-button"></nl-button>
+    </nl-tooltip>
+    <nl-input value="Nala Button" required showErrors>
       What does the button say?
-    </leo-input>
-    <leo-progressring progress="0.25"></leo-progressring>
-    <leo-progressbar progress="0.25"></leo-progressbar>
+    </nl-input>
+    <nl-progressring progress="0.25"></nl-progressring>
+    <nl-progressbar progress="0.25"></nl-progressbar>
     <div>
-      <leo-radiobutton name="options" value="NZ"></leo-radiobutton>
-      <leo-radiobutton name="options" value="AU"></leo-radiobutton>
-      <leo-radiobutton name="options" value="UK"></leo-radiobutton>
-      <leo-radiobutton name="options" value="CA"></leo-radiobutton>
+      <nl-radiobutton name="options" value="NZ"></nl-radiobutton>
+      <nl-radiobutton name="options" value="AU"></nl-radiobutton>
+      <nl-radiobutton name="options" value="UK"></nl-radiobutton>
+      <nl-radiobutton name="options" value="CA"></nl-radiobutton>
     </div>
-    <leo-alert mode="full">
+    <nl-alert mode="full">
       <span slot="title">Hello World</span>
       <div>This is the content</div>
       <div slot="actions">
-        <leo-button>Do the thing</leo-button>
-        <leo-button kind="tertiary">Cancel</leo-button>
+        <nl-button>Do the thing</nl-button>
+        <nl-button kind="tertiary">Cancel</nl-button>
       </div>
-    </leo-alert>
-    <leo-button id="dialog-button">Show Dialog</leo-button>
-    <leo-dropdown placeholder="Select an option...">
-      <leo-icon slot="left-icon" name="flag"></leo-icon>
+    </nl-alert>
+    <nl-button id="dialog-button">Show Dialog</nl-button>
+    <nl-dropdown placeholder="Select an option...">
+      <nl-icon slot="left-icon" name="flag"></nl-icon>
       <div id="selectedCountry" slot="value"></div>
-      <leo-option value="NZ">New Zealand</leo-option>
-      <leo-option value="AU">Australia</leo-option>
-      <leo-option value="UK">
+      <nl-option value="NZ">New Zealand</nl-option>
+      <nl-option value="AU">Australia</nl-option>
+      <nl-option value="UK">
         <div class="blur">United Kingdom</div>(blurred on purpose)
-      </leo-option>
-      <leo-option value="CA">Canada</leo-option>
-    </leo-dropdown>
-    <leo-dialog showclose>
+      </nl-option>
+      <nl-option value="CA">Canada</nl-option>
+    </nl-dropdown>
+    <nl-dialog showclose>
       <span slot="title">This is the title</span>
       <span slot="subtitle">This is the subtitle</span>
       <div>
@@ -168,10 +168,10 @@
         </div>
       </div>
       <div slot="actions">
-        <leo-button kind="outline">Secondary</leo-button>
-        <leo-button kind="filled">Primary</leo-button>
+        <nl-button kind="outline">Secondary</nl-button>
+        <nl-button kind="filled">Primary</nl-button>
       </div>
-    </leo-dialog>
+    </nl-dialog>
   </div>
 </body>
 

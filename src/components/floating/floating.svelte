@@ -96,12 +96,12 @@
   }
 </script>
 
-<div bind:this={floating} class="leo-floating">
+<div bind:this={floating} class="nala-floating">
   <slot />
 </div>
 
 <style lang="scss">
-  .leo-floating {
+  .nala-floating {
     position: absolute;
     z-index: 999;
     width: fit-content;

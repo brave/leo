@@ -49,7 +49,7 @@
   }}
 />
 
-<label class={`leo-toggle size-${size}`}>
+<label class={`nala-toggle size-${size}`}>
   <button
     on:mousedown={(e) => {
       if (disabled) return
@@ -102,30 +102,30 @@
     display: inline-block;
   }
 
-  .leo-toggle {
-    --width: var(--leo-toggle-width, 56px);
-    --height: var(--leo-toggle-height, 32px);
-    --padding: var(--leo-toggle-padding, 2px);
+  .nala-toggle {
+    --width: var(--nl-toggle-width, 56px);
+    --height: var(--nl-toggle-height, 32px);
+    --padding: var(--nl-toggle-padding, 2px);
     --checked-color: var(
-      --leo-toggle-checked-color,
-      var(--leo-color-button-background)
+      --nl-toggle-checked-color,
+      var(--nl-color-button-background)
     );
     --checked-color-hover: var(
-      --leo-toggle-checked-color-hover,
-      var(--leo-color-primary-60)
+      --nl-toggle-checked-color-hover,
+      var(--nl-color-primary-60)
     );
     --unchecked-color: var(
-      --leo-toggle-unchecked-color,
-      var(--leo-color-gray-30)
+      --nl-toggle-unchecked-color,
+      var(--nl-color-gray-30)
     );
     --unchecked-color-hover: var(
-      --leo-toggle-unchecked-color-hover,
-      var(--leo-color-gray-40)
+      --nl-toggle-unchecked-color-hover,
+      var(--nl-color-gray-40)
     );
-    --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
-    --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
-    --label-gap: var(--leo-toggle-label-gap, var(--leo-spacing-s));
-    --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
+    --thumb-color: var(--nl-toggle-thumb-color, var(--nl-color-white));
+    --thumb-disabled-color: var(--nl-toggle-thumb-disabled-color, white);
+    --label-gap: var(--nl-toggle-label-gap, var(--nl-spacing-s));
+    --label-flex-direction: var(--nl-toggle-label-flex-direction, row);
 
     &.size-small {
       --width: 40px;
@@ -134,10 +134,10 @@
 
     @theme (dark) {
       --checked-color-hover: var(
-        --leo-toggle-checked-color-hover,
-        var(--leo-color-primary-40)
+        --nl-toggle-checked-color-hover,
+        var(--nl-color-primary-40)
       );
-      --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, black);
+      --thumb-disabled-color: var(--nl-toggle-thumb-disabled-color, black);
     }
 
     display: flex;
@@ -148,12 +148,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .leo-toggle button {
+  .nala-toggle button {
     all: unset;
     background: var(--unchecked-color);
     width: var(--width);
     height: var(--height);
-    border-radius: var(--leo-radius-full);
+    border-radius: var(--nl-radius-full);
     padding: var(--padding);
     transition: background-color 0.2s ease-in-out;
     flex-shrink: 0;
@@ -195,7 +195,7 @@
       height: 100%;
       aspect-ratio: 1/1;
       background: white;
-      border-radius: var(--leo-radius-full);
+      border-radius: var(--nl-radius-full);
       transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
@@ -208,7 +208,7 @@
       align-items: center;
       justify-content: center;
 
-      box-shadow: var(--leo-effect-elevation-02);
+      box-shadow: var(--nl-effect-elevation-02);
 
       .on-icon {
         transition: opacity 0.2s ease-in-out;

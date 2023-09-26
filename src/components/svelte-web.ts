@@ -48,7 +48,7 @@ export default function registerWebComponent(
 ) {
   if (!globalThis.customElements) {
     console.log(
-      `Component ${name} not registered as there is no customElements in this environment. Perhaps this is an SSR compile, which is not supported for Leo components yet.`
+      `Component ${name} not registered as there is no customElements in this environment. Perhaps this is an SSR compile, which is not supported for Nala components yet.`
     )
     return
   }

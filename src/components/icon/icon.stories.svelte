@@ -15,12 +15,12 @@
   title="Icon"
   component={Icon}
   argTypes={{
-    '--leo-icon-color': {
+    '--nl-icon-color': {
       control: 'color',
       description: 'The color to use for the icon',
       type: 'string'
     },
-    '--leo-icon-size': {
+    '--nl-icon-size': {
       control: 'text',
       description: 'The size of the icon (defaults to 24px if not set)',
       type: 'string',
@@ -36,9 +36,9 @@
     color: {
       control: 'color',
       description:
-        'The current text color (this is used for the icon if --leo-icon-color is not set)',
+        'The current text color (this is used for the icon if --nl-icon-color is not set)',
       type: 'string',
-      defaultValue: 'var(--leo-color-icon-default)'
+      defaultValue: 'var(--nl-color-icon-default)'
     }
   }}
 />
@@ -51,7 +51,7 @@
 
 <Story name="Slots" let:args>
   <SlotInfo
-    description="The icon has a single slot for specifying a custom icon, while retaining the Leo Icon styling"
+    description="The icon has a single slot for specifying a custom icon, while retaining the Nala Icon styling"
   >
     <Slot
       name="default"

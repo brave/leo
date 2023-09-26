@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.LEO_SF_SYMBOLS_ACCESS_TOKEN }}
+          github-token: ${{ secrets.NALA_SF_SYMBOLS_ACCESS_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: 'brave',
-              repo: 'leo-sf-symbols',
+              repo: 'nala-sf-symbols',
               workflow_id: 'update.yml',
               ref: 'main'
             })

@@ -21,7 +21,7 @@
   }
 </script>
 
-<nav class="leo-navdots" aria-label={label}>
+<nav class="nala-navdots" aria-label={label}>
   <ol class="dot-container" bind:this={container}>
     {#each dots as dot}
       <li>
@@ -48,31 +48,31 @@
     display: block;
   }
 
-  .leo-navdots {
-    --dot-size: var(--leo-navdots-size, 8px);
+  .nala-navdots {
+    --dot-size: var(--nl-navdots-size, 8px);
     // Expanded dot grows to fill half spacing in each direction.
     --expanded-dot-size: var(
-      --leo-navdots-expanded-size,
+      --nl-navdots-expanded-size,
       calc(var(--dot-size) + var(--dot-spacing))
     );
 
-    --dot-spacing: var(--leo-navdots-spacing, 10px);
-    --dot-vertical-margin: var(--leo-navdots-vertical-margin, 1px);
-    --transition-duration: var(--leo-navdots-transition-duration, 0.2s);
-    --transition-easing: var(--leo-navdots-easing, ease-in-out);
+    --dot-spacing: var(--nl-navdots-spacing, 10px);
+    --dot-vertical-margin: var(--nl-navdots-vertical-margin, 1px);
+    --transition-duration: var(--nl-navdots-transition-duration, 0.2s);
+    --transition-easing: var(--nl-navdots-easing, ease-in-out);
 
     --active-dot-color: var(
-      --leo-navdots-active-color,
-      var(--leo-color-button-background)
+      --nl-navdots-active-color,
+      var(--nl-color-button-background)
     );
     --active-dot-color-hover: var(
-      --leo-navdots-active-color-hover,
-      var(--leo-color-icon-interactive)
+      --nl-navdots-active-color-hover,
+      var(--nl-color-icon-interactive)
     );
-    --dot-color: var(--leo-navdots-color, var(--leo-color-primary-20));
+    --dot-color: var(--nl-navdots-color, var(--nl-color-primary-20));
     --dot-color-hover: var(
-      --leo-navdots-color-hover,
-      var(--leo-color-primary-30)
+      --nl-navdots-color-hover,
+      var(--nl-color-primary-30)
     );
 
     --current-dot: 0;

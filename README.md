@@ -1,4 +1,4 @@
-# Leo - Brave's Design System
+# Nala - Brave's Design System
 
 ## Tokens
 
@@ -25,7 +25,7 @@ React wrappers are generated at build time and are available in the top level
 
 ## CSS
 
-To get started with the CSS variables exported, you must have the contents of `build/css/variables.css` included in your html page. Perhaps directly through a `<link rel="stylesheet">` element, or indirectly through webpack's css-loader and `import '@brave/leo/build/css/variables.css'`.
+To get started with the CSS variables exported, you must have the contents of `build/css/variables.css` included in your html page. Perhaps directly through a `<link rel="stylesheet">` element, or indirectly through webpack's css-loader and `import '@brave/nala/build/css/variables.css'`.
 
 ### Typography
 
@@ -75,4 +75,4 @@ All Web Components and css variables aim to use the color theme according to the
 
 ## Tailwind
 
-A tailwind config, complete with plugin, is available at `@brave/leo/build/tailwind/index.js`. Once you configure this, all variables should be available using the `theme()` function.
+A tailwind config, complete with plugin, is available at `@brave/nala/build/tailwind/index.js`. Once you configure this, all variables should be available using the `theme()` function.

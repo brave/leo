@@ -61,4 +61,4 @@ jobs:
           delete-branch: true
           title: '[Icons]: Update icons from Figma'
           body-path: .update-icons-output
-          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
+          token: ${{ secrets.NALA_UPDATE_ICONS_PAT }}

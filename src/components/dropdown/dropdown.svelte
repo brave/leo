@@ -1,21 +1,3 @@
-<script context="module" lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements'
-  declare global {
-    namespace JSX {
-      interface IntrinsicElements {
-        'leo-option': HTMLAttributes<HTMLElement> & {
-          // Note: This should line up with Reacts key type, but we don't want
-          // to depend on React in this layer, so we just define it manually.
-          key?: string | number | null
-
-          value?: string
-          children?: any
-        }
-      }
-    }
-  }
-</script>
-
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
@@ -44,7 +26,7 @@
   }
 </script>
 
-<div class="leo-dropdown">
+<div class="nala-dropdown">
   <div bind:this={dropdown}>
     <FormItem
       bind:disabled
@@ -93,7 +75,7 @@
     display: inline-block;
   }
 
-  .leo-dropdown {
+  .nala-dropdown {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
@@ -102,7 +84,7 @@
     }
   }
 
-  .leo-dropdown .click-target {
+  .nala-dropdown .click-target {
     flex: 1;
     pointer-events: none;
     --glow-size: 3px;
@@ -110,7 +92,7 @@
     padding: var(--glow-size);
 
     &:focus-visible {
-      border-radius: var(--leo-spacing-m);
+      border-radius: var(--nl-spacing-m);
       box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
     }

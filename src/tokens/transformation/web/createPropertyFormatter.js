@@ -28,7 +28,7 @@ function createPropertyNameFormatter(format, formatting = {}) {
 
   switch (format) {
     case 'css':
-      prefix = '--leo-'
+      prefix = '--nl-'
       indentation = '  '
       separator = ':'
       break

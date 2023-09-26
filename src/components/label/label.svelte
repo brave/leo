@@ -22,18 +22,18 @@
   export let color: Color = 'gray'
 
   $: background =
-    mode === 'loud' ? `var(--leo-color-${color}-50)` : 'transparent'
+    mode === 'loud' ? `var(--nl-color-${color}-50)` : 'transparent'
 
   $: text =
     mode === 'loud'
-      ? `var(--leo-color-${color}-10)`
-      : `var(--leo-color-${color}-50)`
+      ? `var(--nl-color-${color}-10)`
+      : `var(--nl-color-${color}-50)`
 
-  $: border = mode === 'loud' ? `transparent` : `var(--leo-color-${color}-50)`
+  $: border = mode === 'loud' ? `transparent` : `var(--nl-color-${color}-50)`
 </script>
 
 <div
-  class="leo-label"
+  class="nala-label"
   style:background
   style:color={text}
   style:border="1px solid {border}"
@@ -48,13 +48,13 @@
     display: inline-block;
   }
 
-  .leo-label {
-    --icon-size: var(--leo-label-icon-size, 14px);
-    --font-text: var(--leo-label-font-text, var(--leo-font-components-label));
-    --padding: var(--leo-label-padding, 2px 3px);
-    --radius: var(--leo-label-radius, 6px);
+  .nala-label {
+    --icon-size: var(--nl-label-icon-size, 14px);
+    --font-text: var(--nl-label-font-text, var(--nl-font-components-label));
+    --padding: var(--nl-label-padding, 2px 3px);
+    --radius: var(--nl-label-radius, 6px);
 
-    --leo-icon-size: var(--icon-size);
+    --nl-icon-size: var(--icon-size);
 
     display: inline-block;
     border-radius: var(--radius);

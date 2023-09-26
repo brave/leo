@@ -11,67 +11,67 @@
   title="Collapse"
   component={Collapse}
   argTypes={{
-    '--leo-collapse-summary-padding': {
+    '--nl-collapse-summary-padding': {
       type: 'string',
       description: 'The padding to apply to the collapse summary'
     },
-    '--leo-collapse-content-padding': {
+    '--nl-collapse-content-padding': {
       type: 'string',
       description: 'The padding to apply to the collapse content'
     },
-    '--leo-collapse-background-color': {
+    '--nl-collapse-background-color': {
       control: 'color',
       description: 'The background color of the collapse'
     },
-    '--leo-collapse-background-color-hover': {
+    '--nl-collapse-background-color-hover': {
       control: 'color',
       description: 'The background color of the collapse when hovering'
     },
-    '--leo-collapse-icon-size': {
+    '--nl-collapse-icon-size': {
       type: 'string',
       description: 'The size of icons in the collapse'
     },
-    '--leo-collapse-transition-duration': {
+    '--nl-collapse-transition-duration': {
       type: 'string',
       description: 'The transition duration'
     },
-    '--leo-collapse-border-color': {
+    '--nl-collapse-border-color': {
       control: 'color',
       description: 'The border color of the collapse'
     },
-    '--leo-collapse-border-color-hover': {
+    '--nl-collapse-border-color-hover': {
       control: 'color',
       description: 'The border color of the collapse when hovered'
     },
-    '--leo-collapse-shadow': {
+    '--nl-collapse-shadow': {
       type: 'string',
       description: 'The shadow of the collapse'
     },
-    '--leo-collapse-shadow-hover': {
+    '--nl-collapse-shadow-hover': {
       type: 'string',
       description: 'The shadow of the collapse when hovered'
     },
-    '--leo-collapse-shadow-focus': {
+    '--nl-collapse-shadow-focus': {
       type: 'string',
       description: 'The shadow of the collapse when focused'
     },
-    '--leo-collapse-radius': {
+    '--nl-collapse-radius': {
       type: 'string',
       description: 'The border radius of the collapse'
     },
-    '--leo-collapse-summary-color': {
+    '--nl-collapse-summary-color': {
       control: 'color',
       description: 'The color of the summary text'
     },
-    '--leo-collapse-summary-color-hover': {
+    '--nl-collapse-summary-color-hover': {
       control: 'color',
       description: 'The color of the summary text when hovered'
     },
-    '--leo-collapse-icon-color': {
+    '--nl-collapse-icon-color': {
       control: 'color',
       description: 'The color of the icons in the collapse'
     },
-    '--leo-collapse-icon-color-hover': {
+    '--nl-collapse-icon-color-hover': {
       control: 'color',
       description: 'The color of icons in the collapse in a hover state'
     }

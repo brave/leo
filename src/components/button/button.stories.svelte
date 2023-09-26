@@ -17,7 +17,7 @@
   title="Button"
   component={Button}
   argTypes={{
-    '--leo-button-padding': {
+    '--nl-button-padding': {
       control: 'text',
       type: 'string',
       description: 'The padding to apply to the button content'

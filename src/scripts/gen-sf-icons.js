@@ -7,9 +7,9 @@
  * an optional peer dependency because `npm install` installs optional peer
  * dependencies...
  *
- * As a workaround, we've created the leo-sf-symbols repository which contains
- * prebuilt SF Symbols. The script is include in Leo so you can **choose** to
- * use it to build them yourself, and to make the leo-sf-symbols repository as
+ * As a workaround, we've created the nala-sf-symbols repository which contains
+ * prebuilt SF Symbols. The script is include in Nala so you can **choose** to
+ * use it to build them yourself, and to make the nala-sf-symbols repository as
  * dumb as possible.
  */
 const fs = require('fs/promises')
@@ -61,7 +61,7 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
           encoding: 'utf8'
         })
         const skiaContent = processIcon(template, svgContent)
-        const outputFileName = `leo.${icon.replace('-', '.')}`
+        const outputFileName = `nala.${icon.replace('-', '.')}`
         await fs.writeFile(
           path.join(OUTPUT_FOLDER, outputFileName),
           skiaContent

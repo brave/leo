@@ -25,7 +25,7 @@ inputs.push('./src/components/dialog/dialogHelpers.ts')
 
 export default {
   input: inputs,
-  // Note we output in ESM & AMD formats to make it easier to consume Leo from
+  // Note we output in ESM & AMD formats to make it easier to consume Nala from
   // different places.
   output: {
     sourcemap: true,
@@ -34,7 +34,7 @@ export default {
     entryFileNames: ({ name }) => `shared/${name}.js`,
     format: 'esm'
   },
-  // React is external - Leo doesn't need it but its React bindings do. We'll
+  // React is external - Nala doesn't need it but its React bindings do. We'll
   // use whatever version of React the consumer is using, but we don't want it
   // to be a peer dependency.
   external: ['react'],

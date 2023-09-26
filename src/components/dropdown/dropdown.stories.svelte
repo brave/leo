@@ -42,51 +42,51 @@
   <div class="container">
     <Dropdown value={undefined} {...args}>
       <div slot="label">{args.label}</div>
-      <leo-option value="one">
+      <nl-option value="one">
         <div>One</div>
-      </leo-option>
-      <leo-option value="two">Two</leo-option>
-      <leo-option>Three</leo-option>
+      </nl-option>
+      <nl-option value="two">Two</nl-option>
+      <nl-option>Three</nl-option>
     </Dropdown>
   </div>
 </Template>
 
 <Story name="Slots" let:args>
   <SlotInfo
-    description="The dropdown provides several slots for customization. It accepts '<leo-option>'"
+    description="The dropdown provides several slots for customization. It accepts '<nl-option>'"
   >
     <Slot
       name="default"
-      explanation="The dropdown items. Each item should have a `value` attribute set to the value of the dropdown when that item is selected. This is similar to the <option value='1'>Foo</option> element. Items can be any sort of element, but type definitions are provided for <leo-option value='1'>Foo</leo-option>, so it's generally easiest to use that."
+      explanation="The dropdown items. Each item should have a `value` attribute set to the value of the dropdown when that item is selected. This is similar to the <option value='1'>Foo</option> element. Items can be any sort of element, but type definitions are provided for <nl-option value='1'>Foo</nl-option>, so it's generally easiest to use that."
     >
       <Dropdown {...args}>
-        <leo-option value="1">Foo</leo-option>
-        <leo-option value="2">Bar</leo-option>
-        <leo-option value="3">Frob</leo-option>
+        <nl-option value="1">Foo</nl-option>
+        <nl-option value="2">Bar</nl-option>
+        <nl-option value="3">Frob</nl-option>
       </Dropdown>
     </Slot>
     <Slot name="label" explanation="A label for the dropdown">
       <Dropdown {...args}>
         <div slot="label"><i>A custom <b>label</b> I made</i></div>
-        <leo-option value="1">Foo</leo-option>
-        <leo-option value="2">Bar</leo-option>
-        <leo-option value="3">Frob</leo-option>
+        <nl-option value="1">Foo</nl-option>
+        <nl-option value="2">Bar</nl-option>
+        <nl-option value="3">Frob</nl-option>
       </Dropdown>
     </Slot>
     <Slot name="left-icon" explanation="A left icon to show in the dropdown">
       <Dropdown {...args}>
         <Icon name="country-nz" slot="left-icon" />
-        <leo-option value="1">Foo</leo-option>
-        <leo-option value="2">Bar</leo-option>
-        <leo-option value="3">Frob</leo-option>
+        <nl-option value="1">Foo</nl-option>
+        <nl-option value="2">Bar</nl-option>
+        <nl-option value="3">Frob</nl-option>
       </Dropdown>
     </Slot>
     <Slot name="right-icon" explanation="A right icon to show in the dropdown">
       <Dropdown {...args}>
         <Icon name="country-nz" slot="right-icon" />
-        <leo-option value="1">Foo</leo-option>
-        <leo-option value="2">Bar</leo-option>
-        <leo-option value="3">Frob</leo-option>
+        <nl-option value="1">Foo</nl-option>
+        <nl-option value="2">Bar</nl-option>
+        <nl-option value="3">Frob</nl-option>
       </Dropdown>
     </Slot>
     <Slot
@@ -101,9 +101,9 @@
           <Icon name="finger-touch" />
           Maybe I should pick something
         </div>
-        <leo-option value="1">Foo</leo-option>
-        <leo-option value="2">Bar</leo-option>
-        <leo-option value="3">Frob</leo-option>
+        <nl-option value="1">Foo</nl-option>
+        <nl-option value="2">Bar</nl-option>
+        <nl-option value="3">Frob</nl-option>
       </Dropdown>
     </Slot>
     <Slot
@@ -114,9 +114,9 @@
         <div slot="value" let:value>
           You picked {value}
         </div>
-        <leo-option value="Foo">Foo</leo-option>
-        <leo-option value="Bar">Bar</leo-option>
-        <leo-option value="Frob">Frob</leo-option>
+        <nl-option value="Foo">Foo</nl-option>
+        <nl-option value="Bar">Bar</nl-option>
+        <nl-option value="Frob">Frob</nl-option>
       </Dropdown>
     </Slot>
   </SlotInfo>
@@ -131,9 +131,9 @@
       <div slot="left-icon">
         <Icon name="check-circle-outline" />
       </div>
-      <leo-option>One</leo-option>
-      <leo-option>Two</leo-option>
-      <leo-option>Three</leo-option>
+      <nl-option>One</nl-option>
+      <nl-option>Two</nl-option>
+      <nl-option>Three</nl-option>
     </Dropdown>
   </div>
 </Story>
@@ -145,9 +145,9 @@
       <div slot="right-icon">
         <Icon name="send" />
       </div>
-      <leo-option>One</leo-option>
-      <leo-option>Two</leo-option>
-      <leo-option>Three</leo-option>
+      <nl-option>One</nl-option>
+      <nl-option>Two</nl-option>
+      <nl-option>Three</nl-option>
     </Dropdown>
   </div>
 </Story>
@@ -162,9 +162,9 @@
       <div slot="right-icon">
         <Icon name="send" />
       </div>
-      <leo-option>One</leo-option>
-      <leo-option>Two</leo-option>
-      <leo-option>Three</leo-option>
+      <nl-option>One</nl-option>
+      <nl-option>Two</nl-option>
+      <nl-option>Three</nl-option>
     </Dropdown>
   </div>
 </Story>
@@ -178,10 +178,10 @@
         {countries[value]}
       </div>
       {#each Object.entries(countries) as [code, name]}
-        <leo-option class="country" value={code}>
+        <nl-option class="country" value={code}>
           <Icon name={`country-${code}`} />
           {name}
-        </leo-option>
+        </nl-option>
       {/each}
     </Dropdown>
   </div>

@@ -63,7 +63,7 @@
 </script>
 
 <div
-  class="leo-tooltip"
+  class="nala-tooltip"
   on:mouseenter={() => setVisible(true)}
   on:mouseleave={() => setVisible(false)}
   on:focusin={() => setVisible(true)}
@@ -108,30 +108,30 @@
 </div>
 
 <style lang="scss">
-  .leo-tooltip {
+  .nala-tooltip {
     --background: var(
-      --leo-tooltip-background,
-      var(--leo-color-container-background)
+      --nl-tooltip-background,
+      var(--nl-color-container-background)
     );
-    --text: var(--leo-tooltip-text-color, var(--leo-color-text-primary));
-    --shadow: var(--leo-tooltip-shadow, var(--leo-effect-elevation-03));
-    --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
-    --radius: var(--leo-radius-m);
+    --text: var(--nl-tooltip-text-color, var(--nl-color-text-primary));
+    --shadow: var(--nl-tooltip-shadow, var(--nl-effect-elevation-03));
+    --padding: var(--nl-tooltip-padding, var(--nl-spacing-2xl));
+    --radius: var(--nl-radius-m);
     --border-color: transparent;
     --border-width: 0px;
   }
 
-  .leo-tooltip .tooltip {
+  .nala-tooltip .tooltip {
     background: var(--background);
     color: var(--text);
     box-shadow: var(--shadow);
     padding: var(--padding);
     border-radius: var(--radius);
     border: var(--border-width) solid var(--border-color);
-    font: var(--leo-font-primary-default-regular);
+    font: var(--nl-font-primary-default-regular);
   }
 
-  .leo-tooltip .tooltip .arrow {
+  .nala-tooltip .tooltip .arrow {
     position: absolute;
     background: var(--background);
     width: 8px;
@@ -140,36 +140,36 @@
     z-index: -1;
   }
 
-  .leo-tooltip .tooltip.hero {
-    --background: var(--leo-gradient-hero);
-    --text: var(--leo-color-container-background);
+  .nala-tooltip .tooltip.hero {
+    --background: var(--nl-gradient-hero);
+    --text: var(--nl-color-container-background);
   }
 
-  .leo-tooltip .tooltip.info {
-    --background: var(--leo-color-button-background);
-    --text: var(--leo-color-container-background);
+  .nala-tooltip .tooltip.info {
+    --background: var(--nl-color-button-background);
+    --text: var(--nl-color-container-background);
   }
 
-  .leo-tooltip .tooltip.mini {
-    --background: var(--leo-color-gray-10);
+  .nala-tooltip .tooltip.mini {
+    --background: var(--nl-color-gray-10);
     @theme dark {
-      --background: var(--leo-color-gray-20);
+      --background: var(--nl-color-gray-20);
     }
 
-    --text: var(--leo-color-text-primary);
-    --padding: var(--leo-spacing-s) 6px;
-    --shadow: var(--leo-effect-elevation-01);
+    --text: var(--nl-color-text-primary);
+    --padding: var(--nl-spacing-s) 6px;
+    --shadow: var(--nl-effect-elevation-01);
     --radius: 2px;
 
-    font: var(--leo-font-primary-x-small-regular);
+    font: var(--nl-font-primary-x-small-regular);
   }
 
-  .leo-tooltip .tooltip.default {
-    --border-color: var(--leo-color-divider-subtle);
+  .nala-tooltip .tooltip.default {
+    --border-color: var(--nl-color-divider-subtle);
     --border-width: 1px;
   }
 
-  .leo-tooltip .trigger {
+  .nala-tooltip .trigger {
     width: fit-content;
   }
 </style>

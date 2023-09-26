@@ -5,8 +5,8 @@
 
 #pragma once
 
-namespace leo {
+namespace nala {
 <%= tokens.allTokens.map(prop => {
   return `constexpr int ${prop.name} = ${prop.value}`;
 }).map(s => `${s};`).join('\n') %>
-} // namespace leo
+} // namespace nala

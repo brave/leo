@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="leo-progressring"
+  class="nala-progressring"
   class:spin={mode === 'indeterminate'}
   style:--progress={progress}
 >
@@ -46,22 +46,22 @@
       transform: rotate(360deg);
     }
   }
-  .leo-progressring {
-    --size: var(--leo-progressring-size, 48px);
-    --spin-rate: var(--leo-progressring-spin-rate, 1s);
-    --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
+  .nala-progressring {
+    --size: var(--nl-progressring-size, 48px);
+    --spin-rate: var(--nl-progressring-spin-rate, 1s);
+    --transition-duration: var(--nl-progressring-transition-duration, 0.2s);
     --stroke-color: var(
-      --leo-progressring-color,
-      var(--leo-color-button-background)
+      --nl-progressring-color,
+      var(--nl-color-button-background)
     );
-    --stroke-width: var(--leo-progressring-stroke-width, 4px);
+    --stroke-width: var(--nl-progressring-stroke-width, 4px);
     --radius: 24px;
     --normalized-radius: calc(var(--radius) - var(--stroke-width));
     --circumference: calc(var(--normalized-radius) * 2 * 3.141592);
 
     --background-color: var(
-      --leo-progressring-background-color,
-      var(--leo-color-primary-20)
+      --nl-progressring-background-color,
+      var(--nl-color-primary-20)
     );
 
     width: var(--size);

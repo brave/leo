@@ -31,7 +31,7 @@
 </script>
 
 <label
-  class="leo-checkbox"
+  class="nala-checkbox"
   class:small={size === 'small'}
   class:normal={size !== 'small'}
   class:disabled={isDisabled}
@@ -61,31 +61,31 @@
     display: inline-block;
   }
 
-  .leo-checkbox {
-    --focus-border-radius: var(--leo-checkbox-focus-border-radius, 2px);
-    --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-m));
-    --flex-direction: var(--leo-checkbox-flex-direction, row);
+  .nala-checkbox {
+    --focus-border-radius: var(--nl-checkbox-focus-border-radius, 2px);
+    --label-gap: var(--nl-checkbox-label-gap, var(--nl-spacing-m));
+    --flex-direction: var(--nl-checkbox-flex-direction, row);
     --checked-color: var(
-      --leo-checkbox-checked-color,
-      var(--leo-color-icon-interactive)
+      --nl-checkbox-checked-color,
+      var(--nl-color-icon-interactive)
     );
     --checked-color-hover: var(
-      --leo-checkbox-checked-color-hover,
-      var(--leo-color-primary-50)
+      --nl-checkbox-checked-color-hover,
+      var(--nl-color-primary-50)
     );
     --unchecked-color: var(
-      --leo-checkbox-unchecked-color,
-      var(--leo-color-icon-default)
+      --nl-checkbox-unchecked-color,
+      var(--nl-color-icon-default)
     );
     --unchecked-color-hover: var(
-      --leo-checkbox-unchecked-color-hover,
-      var(--leo-color-gray-50)
+      --nl-checkbox-unchecked-color-hover,
+      var(--nl-color-gray-50)
     );
     --disabled-color: var(
-      --leo-checkbox-disabled-color,
-      var(--leo-color-text-disabled)
+      --nl-checkbox-disabled-color,
+      var(--nl-color-text-disabled)
     );
-    --font: var(--leo-checkbox-font, var(--leo-font-primary-default-regular));
+    --font: var(--nl-checkbox-font, var(--nl-font-primary-default-regular));
 
     display: flex;
     align-items: center;
@@ -100,24 +100,24 @@
     }
   }
 
-  .leo-checkbox.disabled {
+  .nala-checkbox.disabled {
     color: var(--disabled-color);
   }
 
   .normal {
-    --checkbox-size: var(--leo-checkbox-size, 20px);
+    --checkbox-size: var(--nl-checkbox-size, 20px);
   }
 
   .small {
-    --checkbox-size: var(--leo-checkbox-size, 16px);
+    --checkbox-size: var(--nl-checkbox-size, 16px);
   }
 
-  .leo-checkbox input {
+  .nala-checkbox input {
     opacity: 0;
   }
 
-  .leo-checkbox .check {
-    --leo-icon-size: var(--checkbox-size);
+  .nala-checkbox .check {
+    --nl-icon-size: var(--checkbox-size);
     position: relative;
     width: var(--checkbox-size);
     height: var(--checkbox-size);
@@ -143,11 +143,11 @@
     }
   }
 
-  .leo-checkbox.disabled .check {
+  .nala-checkbox.disabled .check {
     color: var(--disabled-color) !important;
   }
 
-  .leo-checkbox:hover .check {
+  .nala-checkbox:hover .check {
     color: var(--unchecked-color-hover);
 
     &:has(input:checked) {

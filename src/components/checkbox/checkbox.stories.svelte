@@ -9,42 +9,42 @@
   title="Checkbox"
   component={Checkbox}
   argTypes={{
-    '--leo-checkbox-focus-border-radius': {
+    '--nl-checkbox-focus-border-radius': {
       control: 'text',
       type: 'string',
       description: 'The border radius of the focus shadow'
     },
-    '--leo-checkbox-label-gap': {
+    '--nl-checkbox-label-gap': {
       control: 'text',
       type: 'string',
       description: 'The gap between the label and the checkbox'
     },
-    '--leo-checkbox-flex-direction': {
+    '--nl-checkbox-flex-direction': {
       control: 'select',
       description: 'The flex direction of the label/checkbox',
       options: ['row', 'row-reverse', 'column', 'column-reverse']
     },
-    '--leo-checkbox-checked-color': {
+    '--nl-checkbox-checked-color': {
       control: 'color',
       type: 'string',
       description: 'The color of the checkbox when checked'
     },
-    '--leo-checkbox-checked-color-hover': {
+    '--nl-checkbox-checked-color-hover': {
       control: 'color',
       type: 'string',
       description: 'The color of the checkbox when checked and hovered'
     },
-    '--leo-checkbox-unchecked-color': {
+    '--nl-checkbox-unchecked-color': {
       control: 'color',
       type: 'string',
       description: 'The color of the checkbox when unchecked'
     },
-    '--leo-checkbox-unchecked-color-hover': {
+    '--nl-checkbox-unchecked-color-hover': {
       control: 'color',
       type: 'string',
       description: 'The color of the checkbox when unchecked and hovered'
     },
-    '--leo-checkbox-font': {
+    '--nl-checkbox-font': {
       control: 'text',
       type: 'string',
       description: 'The font to use for the label'

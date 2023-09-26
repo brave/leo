@@ -7,19 +7,19 @@
 
 #include "third_party/skia/include/core/SkColor.h"
 
-namespace leo::light {
+namespace nala::light {
 <%= groupedTokens.light.allTokens.map(prop => {
   return `constexpr SkColor ${prop.name} = ${prop.value};`;
 }).join('\n') %>
-} // namespace leo::light
+} // namespace nala::light
 
-namespace leo::dark {
+namespace nala::dark {
 <%= groupedTokens.dark.allTokens.map(prop => {
   return `constexpr SkColor ${prop.name} = ${prop.value};`;
 }).join('\n') %>
-} // namespace leo::dark
+} // namespace nala::dark
 
-namespace leo {
+namespace nala {
 
 <%= groupedTokens.rest.allTokens.map(prop => {
   return `constexpr SkColor ${prop.name} = ${prop.value};`;
@@ -39,8 +39,8 @@ constexpr SkColor GetColor(Color color, Theme theme) {
   switch (color) {
 <%= groupedTokens.light.allTokens.map(prop => `    case Color::${prop.name}:
       return theme == Theme::kLight
-        ? leo::light::${prop.name}
-        : leo::dark::${prop.name};`).join('\n') %>
+        ? nala::light::${prop.name}
+        : nala::dark::${prop.name};`).join('\n') %>
 <%= groupedTokens.rest.allTokens.map(prop => `    case Color::${prop.name}:
       return ${prop.name};`).join('\n') %>
     default:
@@ -48,4 +48,4 @@ constexpr SkColor GetColor(Color color, Theme theme) {
   }
 }
 
-} // namespace leo
+} // namespace nala

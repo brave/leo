@@ -37,17 +37,17 @@
       type: 'text',
       defaultValue: 'check-circle-outline'
     },
-    '--leo-label-icon-size': {
+    '--nl-label-icon-size': {
       control: 'text',
       description: 'The size of the icons (if any) inside the label',
       type: 'number'
     },
-    '--leo-label-font-text': {
+    '--nl-label-font-text': {
       control: 'text',
       description: 'The font used for the label text',
       type: 'text'
     },
-    '--leo-label-padding': {
+    '--nl-label-padding': {
       control: 'text',
       description: 'The internal padding of the label',
       type: 'text'
@@ -106,7 +106,7 @@
   .column {
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-s);
+    gap: var(--nl-spacing-s);
     align-items: flex-start;
   }
 </style>

@@ -3,14 +3,14 @@
   declare global {
     namespace JSX {
       interface IntrinsicElements {
-        'leo-menu-item': HTMLAttributes<HTMLElement> & {
+        'nl-menu-item': HTMLAttributes<HTMLElement> & {
           // Note: This should line up with Reacts key type, but we don't want
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
           children?: any
           onClick?: EventListener
         }
-        'leo-option': HTMLAttributes<HTMLElement> & {
+        'nl-option': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           value?: string
           children?: any
@@ -41,15 +41,15 @@
   }
 
   $: menuItems = Array.from(
-    // TODO(petemil): support slot *descendents* that are leo-menu-item or leo-option (or something else unstyled like leo-menu-action?) so that we can
+    // TODO(petemil): support slot *descendents* that are nl-menu-item or nl-option (or something else unstyled like nala-menu-action?) so that we can
     // select items that are in complex positions (see an example in the browser app menu zoom controls).
-    (popup?.querySelector('.leo-menu-popup slot') as HTMLSlotElement)
+    (popup?.querySelector('.nala-menu-popup slot') as HTMLSlotElement)
       ?.assignedElements()
       ?.filter((element) =>
-        ['LEO-OPTION', 'LEO-MENU-ITEM'].includes(element.tagName)
+        ['NALA-OPTION', 'NALA-MENU-ITEM'].includes(element.tagName)
       ) ??
       popup?.querySelectorAll(
-        '.leo-menu-popup > :is(leo-menu-item, leo-option'
+        '.nala-menu-popup > :is(nl-menu-item, nl-option'
       ) ??
       []
   ) as HTMLElement[]
@@ -58,7 +58,7 @@
     for (const menuItem of menuItems) {
       menuItem.setAttribute('tabindex', '0')
 
-      if (menuItem.tagName === 'LEO-OPTION') {
+      if (menuItem.tagName === 'NALA-OPTION') {
         menuItem.setAttribute('role', 'option')
 
         if (currentValue === getValue(menuItem)) {
@@ -87,14 +87,14 @@
     // there is interacitivity inside the menu item (e.g. a Toggle), which would be good for the user
     // to see change state and allowing the user to manually close when ready.
     if (
-      (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') &&
+      (item.tagName === 'NALA-OPTION' || item.tagName === 'NALA-MENU-ITEM') &&
       !item.dataset.isInteractive
     ) {
       isOpen = false
       dispatch('close')
     }
 
-    if (item.tagName === 'LEO-OPTION') {
+    if (item.tagName === 'NALA-OPTION') {
       currentValue = getValue(item)
 
       dispatch('select-item', {
@@ -102,7 +102,7 @@
       })
     }
 
-    if (item.tagName === 'LEO-MENU-ITEM') {
+    if (item.tagName === 'NALA-MENU-ITEM') {
       item.click()
     }
   }
@@ -150,11 +150,11 @@
   }
 </script>
 
-<div class="leo-menu">
+<div class="nala-menu">
   {#if isOpen}
     <Floating {target} placement="bottom-start" autoUpdate>
       <div
-        class="leo-menu-popup"
+        class="nala-menu-popup"
         id="menu"
         role="menu"
         tabindex="-1"
@@ -180,7 +180,7 @@
     display: inline-block;
   }
 
-  .leo-menu {
+  .nala-menu {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
@@ -189,9 +189,9 @@
     }
   }
 
-  .leo-menu .leo-menu-popup {
-    background: var(--leo-color-container-background);
-    box-shadow: var(--leo-effect-elevation-03);
+  .nala-menu .nala-menu-popup {
+    background: var(--nl-color-container-background);
+    box-shadow: var(--nl-effect-elevation-03);
 
     // TODO(petemill): Make the "floating-ui" element be this popup element,
     // so that we get the correct thing scrolling when overflow happens. In the meantime,
@@ -199,64 +199,64 @@
     // to the border-radius.
     overflow: auto;
 
-    border: 1px solid var(--leo-color-divider-subtle);
-    border-radius: var(--leo-radius-m);
+    border: 1px solid var(--nl-color-divider-subtle);
+    border-radius: var(--nl-radius-m);
     width: 100%;
     display: flex;
     flex-direction: column;
   }
 
   /* custom items can fit in by making optional use of these variables */
-  :global .leo-menu-popup ::slotted(*),
-  :global .leo-menu-popup > * {
-    --leo-menu-item-margin: var(--leo-spacing-s);
-    --leo-menu-item-padding: var(--leo-spacing-xl);
-    --leo-menu-item-border-radius: var(--leo-spacing-m);
+  :global .nala-menu-popup ::slotted(*),
+  :global .nala-menu-popup > * {
+    --nl-menu-item-margin: var(--nl-spacing-s);
+    --nl-menu-item-padding: var(--nl-spacing-xl);
+    --nl-menu-item-border-radius: var(--nl-spacing-m);
   }
 
   /**
    * Default Styles for our dropdown options. The selectors are broken up
    * because the :global selector doesn't work with Nesting or combinations (e.g. :is or in ::slotted).
    * Each pseudo element has two sets of selectors: One for when it's inside a Svelte component, and one for
-   * inside a web component. This could be simplified if leo-menu-item becomes its own Component.
+   * inside a web component. This could be simplified if nl-menu-item becomes its own Component.
    */
-  :global .leo-menu-popup ::slotted(leo-menu-item),
-  :global .leo-menu-popup ::slotted(leo-option),
-  :global .leo-menu-popup > leo-menu-item,
-  :global .leo-menu-popup > leo-option {
+  :global .nala-menu-popup ::slotted(nl-menu-item),
+  :global .nala-menu-popup ::slotted(nl-option),
+  :global .nala-menu-popup > nl-menu-item,
+  :global .nala-menu-popup > nl-option {
     all: unset;
     cursor: pointer;
-    margin: var(--leo-menu-item-margin);
-    border-radius: var(--leo-menu-item-border-radius);
-    padding: var(--leo-menu-item-padding);
+    margin: var(--nl-menu-item-margin);
+    border-radius: var(--nl-menu-item-border-radius);
+    padding: var(--nl-menu-item-padding);
     display: revert;
   }
 
-  :global .leo-menu-popup ::slotted(leo-menu-item:hover),
-  :global .leo-menu-popup ::slotted(leo-option:hover),
-  :global .leo-menu-popup > leo-menu-item:hover,
-  :global .leo-menu-popup > leo-option:hover {
-    background: var(--leo-color-container-highlight);
+  :global .nala-menu-popup ::slotted(nl-menu-item:hover),
+  :global .nala-menu-popup ::slotted(nl-option:hover),
+  :global .nala-menu-popup > nl-menu-item:hover,
+  :global .nala-menu-popup > nl-option:hover {
+    background: var(--nl-color-container-highlight);
   }
 
-  :global .leo-menu-popup ::slotted(*[aria-selected]),
-  :global .leo-menu-popup ::slotted(*:active),
-  :global .leo-menu-popup > *[aria-selected],
-  :global .leo-menu-popup > *:active {
-    background: var(--leo-color-container-interactive);
-    color: var(--leo-color-text-interactive);
+  :global .nala-menu-popup ::slotted(*[aria-selected]),
+  :global .nala-menu-popup ::slotted(*:active),
+  :global .nala-menu-popup > *[aria-selected],
+  :global .nala-menu-popup > *:active {
+    background: var(--nl-color-container-interactive);
+    color: var(--nl-color-text-interactive);
   }
 
-  :global .leo-menu-popup ::slotted(*:focus-visible),
-  :global .leo-menu-popup > *:focus-visible {
+  :global .nala-menu-popup ::slotted(*:focus-visible),
+  :global .nala-menu-popup > *:focus-visible {
     box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
   }
 
   :global
-    .leo-menu-popup
-    > ::slotted(*:hover:not(leo-menu-item):not(leo-option)),
-  :global .leo-menu-popup > *:hover:not(leo-menu-item):not(leo-option) {
+    .nala-menu-popup
+    > ::slotted(*:hover:not(nl-menu-item):not(nl-option)),
+  :global .nala-menu-popup > *:hover:not(nl-menu-item):not(nl-option) {
     color: inherit;
     background: none;
     cursor: default;

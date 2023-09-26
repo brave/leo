@@ -22,7 +22,7 @@
   }
 </script>
 
-<details class="leoCollapse" open={isOpenInternal}>
+<details class="nala-collapse" open={isOpenInternal}>
   <summary on:click={toggle}>
     {#if $$slots.icon}
       <div class="icon">
@@ -48,55 +48,55 @@
     display: block;
   }
 
-  .leoCollapse {
+  .nala-collapse {
     --summary-padding: var(
-      --leo-collapse-summary-padding,
-      var(--leo-spacing-xl) 18px
+      --nl-collapse-summary-padding,
+      var(--nl-spacing-xl) 18px
     );
     --content-padding: var(
-      --leo-collapse-content-padding,
-      var(--leo-spacing-m) var(--leo-spacing-2xl) var(--leo-spacing-2xl)
-        var(--leo-spacing-2xl)
+      --nl-collapse-content-padding,
+      var(--nl-spacing-m) var(--nl-spacing-2xl) var(--nl-spacing-2xl)
+        var(--nl-spacing-2xl)
     );
     --background-color: var(
-      --leo-collapse-background-color,
-      var(--leo-color-container-background)
+      --nl-collapse-background-color,
+      var(--nl-color-container-background)
     );
     --background-color-hover: var(
-      --leo-collapse-background-color-hover,
-      var(--leo-color-container-interactive)
+      --nl-collapse-background-color-hover,
+      var(--nl-color-container-interactive)
     );
-    --icon-size: var(--leo-collapse-icon-size, 24px);
-    --transition-duration: var(--leo-collapse-transition-duration, 0.12s);
+    --icon-size: var(--nl-collapse-icon-size, 24px);
+    --transition-duration: var(--nl-collapse-transition-duration, 0.12s);
     --border-color: var(
-      --leo-collapse-border-color,
-      var(--leo-color-divider-subtle)
+      --nl-collapse-border-color,
+      var(--nl-color-divider-subtle)
     );
     --border-color-hover: var(
-      --leo-collapse-border-color-hover,
-      var(--leo-color-primary-20)
+      --nl-collapse-border-color-hover,
+      var(--nl-color-primary-20)
     );
-    --shadow: var(--leo-collapse-shadow, var(--leo-effect-elevation-01));
+    --shadow: var(--nl-collapse-shadow, var(--nl-effect-elevation-01));
     --shadow-hover: var(
-      --leo-collapse-shadow-hover,
-      var(--leo-effect-elevation-02)
+      --nl-collapse-shadow-hover,
+      var(--nl-effect-elevation-02)
     );
     --shadow-focus: var(
-      --leo-collapse-shadow-focus,
-      var(--leo-effect-focus-state)
+      --nl-collapse-shadow-focus,
+      var(--nl-effect-focus-state)
     );
-    --radius: var(--leo-collapse-radius, var(--leo-radius-xl));
+    --radius: var(--nl-collapse-radius, var(--nl-radius-xl));
     --summary-color: var(
-      --leo-collapse-summary-color,
-      var(--leo-color-text-primary)
+      --nl-collapse-summary-color,
+      var(--nl-color-text-primary)
     );
     --summary-color-hover: var(
-      --leo-collapse-summary-color-hover,
-      var(--leo-color-text-interactive)
+      --nl-collapse-summary-color-hover,
+      var(--nl-color-text-interactive)
     );
-    --icon-color: var(--leo-collapse-icon-color, var(--leo-color-icon-default));
+    --icon-color: var(--nl-collapse-icon-color, var(--nl-color-icon-default));
     --icon-color-hover: var(
-      --leo-collapse-icon-color-hover,
+      --nl-collapse-icon-color-hover,
       var(--summary-color-hover)
     );
 
@@ -132,7 +132,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--leo-spacing-m);
+    gap: var(--nl-spacing-m);
 
     padding: var(--summary-padding);
 
@@ -162,12 +162,12 @@
 
   .title {
     flex-grow: 1;
-    font: var(--leo-font-primary-heading-h3);
+    font: var(--nl-font-primary-heading-h3);
   }
 
   .content {
     padding: var(--content-padding);
-    font: var(--leo-font-primary-default-regular);
+    font: var(--nl-font-primary-default-regular);
   }
 
   .arrow {

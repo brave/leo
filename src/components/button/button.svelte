@@ -63,7 +63,7 @@
   this={tag}
   href={href || undefined}
   disabled={isDisabled || undefined}
-  class="leoButton"
+  class="nala-button"
   class:isFilled={kind === 'filled'}
   class:isOutline={kind === 'outline'}
   class:isPlain={kind === 'plain'}
@@ -79,7 +79,7 @@
   on:click={onClick}
   {...$$restProps}
 >
-  <slot>Leo Button</slot>
+  <slot />
 </svelte:element>
 
 <style lang="scss">
@@ -91,14 +91,14 @@
     width: 100%;
   }
   // Main styles and states
-  .leoButton,
-  .leoButton:visited:not(:hover) {
+  .nala-button,
+  .nala-button:visited:not(:hover) {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
-    --box-shadow-hover: var(--leo-effect-elevation-02);
-    --box-shadow-focus: var(--leo-effect-focus-state);
+    --box-shadow-hover: var(--nl-effect-elevation-02);
+    --box-shadow-focus: var(--nl-effect-focus-state);
     --radius: 0;
     --border-color: transparent;
     --border-width: 0px;
@@ -113,13 +113,13 @@
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
-    padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
+    padding: var(--nl-button-padding, var(--padding-y) var(--padding-x));
   }
 
-  .leoButton:not(:disabled) {
+  .nala-button:not(:disabled) {
     &:hover,
-    [data-is-button-target]:hover :host .leoButton,
-    [data-is-button-target]:hover .leoButton {
+    [data-is-button-target]:hover :host .nala-button,
+    [data-is-button-target]:hover .nala-button {
       background: var(--bg-hover, var(--bg));
       color: var(--color-hover, var(--color));
       box-shadow: var(--box-shadow-hover);
@@ -142,76 +142,76 @@
   }
 
   // State Definitions
-  .leoButton.isLoading {
+  .nala-button.isLoading {
     opacity: 0.75;
     background: var(--bg-loading, var(--bg));
     color: var(--color-loading, var(--color));
   }
-  :host:disabled .leoButton,
-  .leoButton:disabled {
+  :host:disabled .nala-button,
+  .nala-button:disabled {
     background: var(--bg-disabled, var(--bg));
-    color: var(--leo-color-text-disabled);
-    border-color: var(--leo-color-button-disabled);
+    color: var(--nl-color-text-disabled);
+    border-color: var(--nl-color-button-disabled);
   }
 
   // Size Variations
-  .leoButton.isTiny {
+  .nala-button.isTiny {
     --icon-size: 12px;
-    font: var(--leo-font-components-button-small);
+    font: var(--nl-font-components-button-small);
     --padding-y: 6px;
     --padding-x: 10px;
     --radius: 14px;
-    --leo-icon-size: 16px;
+    --nl-icon-size: 16px;
 
     &.fab {
       --padding-x: 6px;
     }
   }
-  .leoButton.isSmall {
+  .nala-button.isSmall {
     --icon-size: 20px;
-    font: var(--leo-font-components-button-small);
+    font: var(--nl-font-components-button-small);
     --padding-y: 8px;
     --padding-x: 14px;
     --radius: 16px;
-    --leo-icon-size: 18px;
+    --nl-icon-size: 18px;
 
     &.fab {
       --padding-x: 8px;
     }
   }
-  .leoButton.isMedium {
+  .nala-button.isMedium {
     --icon-size: 24px;
-    font: var(--leo-font-components-button-default);
+    font: var(--nl-font-components-button-default);
     --padding-y: 10px;
     --padding-x: 16px;
     --radius: 20px;
-    --leo-icon-size: 20px;
+    --nl-icon-size: 20px;
 
     &.fab {
       --padding-x: 12px;
       --padding-y: 12px;
     }
   }
-  .leoButton.isLarge {
+  .nala-button.isLarge {
     --icon-size: 24px;
-    font: var(--leo-font-components-button-large);
+    font: var(--nl-font-components-button-large);
     --padding-y: 12px;
     --padding-x: 30px;
     --radius: 23px;
-    --leo-icon-size: 20px;
+    --nl-icon-size: 20px;
 
     &.fab {
       --padding-x: 15px;
       --padding-y: 15px;
     }
   }
-  .leoButton.isJumbo {
+  .nala-button.isJumbo {
     --icon-size: 24px;
-    font: var(--leo-font-components-button-jumbo);
+    font: var(--nl-font-components-button-jumbo);
     --padding-y: 18px;
     --padding-x: 26px;
     --radius: 30px;
-    --leo-icon-size: 24px;
+    --nl-icon-size: 24px;
 
     &.fab {
       --padding-x: 18px;
@@ -219,59 +219,59 @@
   }
 
   // Kind Variations
-  .leoButton.isFilled {
-    --bg: var(--leo-color-button-background);
-    --bg-hover: var(--leo-color-primitive-primary-70);
+  .nala-button.isFilled {
+    --bg: var(--nl-color-button-background);
+    --bg-hover: var(--nl-color-primitive-primary-70);
     --bg-active: var(--bg-hover);
     --bg-focus: var(--bg);
     --bg-loading: var(--bg);
-    --bg-disabled: var(--leo-color-button-disabled);
+    --bg-disabled: var(--nl-color-button-disabled);
     --color: white;
   }
 
-  .leoButton.isOutline {
+  .nala-button.isOutline {
     --bg: transparent;
-    --bg-active: --leo-color-gray-20;
-    --color: var(--leo-color-text-interactive);
-    --color-hover: var(--leo-color-primary-60);
-    --color-focus: var(--leo-color-text-interactive);
-    --color-loading: var(--leo-color-gray-70);
+    --bg-active: --nl-color-gray-20;
+    --color: var(--nl-color-text-interactive);
+    --color-hover: var(--nl-color-primary-60);
+    --color-focus: var(--nl-color-text-interactive);
+    --color-loading: var(--nl-color-gray-70);
     --border-width: 1px;
-    --border-color: var(--leo-color-divider-interactive);
-    --border-color-hover: var(--leo-color-primitive-primary-40);
-    --border-color-focus: var(--leo-color-divider-interactive);
+    --border-color: var(--nl-color-divider-interactive);
+    --border-color-hover: var(--nl-color-primitive-primary-40);
+    --border-color-focus: var(--nl-color-divider-interactive);
     --box-shadow-focus: 0px 0px 0px 2px #423eee,
       0px 0px 0px 1px rgba(255, 255, 255, 0.3);
 
     @theme (dark) {
-      --border-color-hover: var(--leo-color-primitive-primary-60);
+      --border-color-hover: var(--nl-color-primitive-primary-60);
     }
   }
-  .leoButton.isPlain {
+  .nala-button.isPlain {
     --radius: 8px;
     --padding-x: 2px;
-    --color: var(--leo-color-text-interactive);
-    --color-hover: var(--leo-color-primary-60);
+    --color: var(--nl-color-text-interactive);
+    --color-hover: var(--nl-color-primary-60);
     --color-active: var(--color);
     --color-loading: var(--color);
     --box-shadow-hover: none;
 
     &:disabled {
-      --color: var(--leo-color-text-primary);
+      --color: var(--nl-color-text-primary);
     }
   }
-  .leoButton.isPlainFaint {
+  .nala-button.isPlainFaint {
     --radius: 8px;
     --padding-x: 2px;
-    --color: var(--leo-color-gray-60);
-    --color-hover: var(--leo-color-gray-70);
+    --color: var(--nl-color-gray-60);
+    --color-hover: var(--nl-color-gray-70);
     --box-shadow-hover: none;
   }
-  .leoButton.isHero {
+  .nala-button.isHero {
     transition: var(--default-transition);
     --bg: transparent;
     --bg-focus: var(--bg);
-    --bg-disabled: var(--leo-color-button-disabled);
+    --bg-disabled: var(--nl-color-button-disabled);
     --color: white;
     --default-bg-opacity: 1;
 
@@ -295,7 +295,7 @@
       &::before {
         transition: var(--default-transition);
         z-index: -1;
-        background: var(--leo-gradient-hero);
+        background: var(--nl-gradient-hero);
         opacity: var(--default-bg-opacity);
       }
 
@@ -315,7 +315,7 @@
     }
   }
 
-  .leoButton.fab {
+  .nala-button.fab {
     --radius: 10000px;
     aspect-ratio: 1 / 1;
   }

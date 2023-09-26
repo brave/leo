@@ -29,7 +29,7 @@
 {#if isOpen}
   <dialog
     transition:scale={{ duration: animate ? 60 : 0, start: 0.8 }}
-    class="leo-dialog"
+    class="nala-dialog"
     class:mobile={size === 'mobile'}
     class:modal
     bind:this={dialog}
@@ -94,25 +94,25 @@
 />
 
 <style lang="scss">
-  .leo-dialog {
+  .nala-dialog {
     --padding: var(
-      --leo-dialog-padding,
-      var(--leo-spacing-3xl) var(--leo-spacing-3xl) var(--leo-spacing-4xl)
-        var(--leo-spacing-3xl)
+      --nl-dialog-padding,
+      var(--nl-spacing-3xl) var(--nl-spacing-3xl) var(--nl-spacing-4xl)
+        var(--nl-spacing-3xl)
     );
-    --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-xl));
+    --border-radius: var(--nl-dialog-border-radius, var(--nl-radius-xl));
     --background: var(
-      --leo-dialog-background,
-      var(--leo-color-container-background)
+      --nl-dialog-background,
+      var(--nl-color-container-background)
     );
-    --color: var(--leo-dialog-color, var(--leo-color-text-primary));
+    --color: var(--nl-dialog-color, var(--nl-color-text-primary));
 
     position: relative;
     margin: auto;
     border: none;
 
-    width: var(--leo-dialog-width, 500px);
-    max-width: calc(100% - var(--leo-spacing-m) * 2);
+    width: var(--nl-dialog-width, 500px);
+    max-width: calc(100% - var(--nl-spacing-m) * 2);
 
     border-radius: var(--border-radius);
 
@@ -121,46 +121,46 @@
     padding: var(--padding);
   }
 
-  .leo-dialog.mobile {
-    width: var(--leo-dialog-width, 374px);
+  .nala-dialog.mobile {
+    width: var(--nl-dialog-width, 374px);
   }
 
-  .leo-dialog:not(.modal) {
-    box-shadow: var(--leo-effect-elevation-04);
+  .nala-dialog:not(.modal) {
+    box-shadow: var(--nl-effect-elevation-04);
     &::backdrop {
       display: none;
     }
   }
 
-  .leo-dialog .title {
-    font: var(--leo-font-primary-heading-h2);
+  .nala-dialog .title {
+    font: var(--nl-font-primary-heading-h2);
   }
 
-  .leo-dialog .close-button {
+  .nala-dialog .close-button {
     position: absolute;
-    right: var(--leo-spacing-xl);
-    top: var(--leo-spacing-xl);
+    right: var(--nl-spacing-xl);
+    top: var(--nl-spacing-xl);
   }
 
-  .leo-dialog {
+  .nala-dialog {
     .close-button,
     .back-button {
-      --leo-button-padding: var(--leo-spacing-s);
+      --nl-button-padding: var(--nl-spacing-s);
     }
   }
 
-  .leo-dialog .subtitle {
-    margin-bottom: var(--leo-spacing-xl);
-    font: var(--leo-font-primary-heading-h4);
+  .nala-dialog .subtitle {
+    margin-bottom: var(--nl-spacing-xl);
+    font: var(--nl-font-primary-heading-h4);
   }
 
-  .leo-dialog .body {
-    color: var(--leo-color-text-secondary);
-    font: var(--leo-font-primary-default-regular);
+  .nala-dialog .body {
+    color: var(--nl-color-text-secondary);
+    font: var(--nl-font-primary-default-regular);
   }
 
-  .leo-dialog .actions {
-    margin-top: var(--leo-spacing-3xl);
+  .nala-dialog .actions {
+    margin-top: var(--nl-spacing-3xl);
   }
 
   /** The below :global selectors are so that Svelte doesn't remove the classes
@@ -171,28 +171,28 @@
     *
     * The :global selector doesn't seem to be able to handle nesting, so we have
     * two separate selectors for mobile & non-mobile layouts */
-  :global .leo-dialog.mobile .actions ::slotted(*),
-  :global .leo-dialog.mobile .actions div[slot='actions'] {
+  :global .nala-dialog.mobile .actions ::slotted(*),
+  :global .nala-dialog.mobile .actions div[slot='actions'] {
     flex-direction: column;
     align-items: stretch;
     justify-content: end;
   }
 
-  :global .leo-dialog .actions ::slotted(*),
-  :global .leo-dialog div[slot='actions'] {
+  :global .nala-dialog .actions ::slotted(*),
+  :global .nala-dialog div[slot='actions'] {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: stretch;
-    gap: var(--leo-spacing-xl);
+    gap: var(--nl-spacing-xl);
   }
 
-  .leo-dialog .title-row {
+  .nala-dialog .title-row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    gap: var(--leo-spacing-l);
-    margin-bottom: var(--leo-spacing-3xl);
+    gap: var(--nl-spacing-l);
+    margin-bottom: var(--nl-spacing-3xl);
   }
 </style>

@@ -1,6 +1,6 @@
 module.exports = {
   source: ['src/tokens/*.json'],
-  parsers: [require('./transformation/common/leoParser')],
+  parsers: [require('./transformation/common/nalaParser')],
   platforms: {
     tailwind: {
       transformGroup: 'tailwind/css',

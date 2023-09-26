@@ -4,7 +4,7 @@ const fs = require('fs/promises')
 const path = require('path')
 const { walk } = require('./common')
 
-const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
+const tokenRegex = /--nl-([a-zA-Z0-9]|-)+/gi
 const ROOT_FOLDER = path.join(__dirname, '..', '..')
 const CSS_VARIABLES = path.join(ROOT_FOLDER, 'tokens', 'css', 'variables.css')
 const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
@@ -23,9 +23,9 @@ const DEFAULT_EXTENSIONS_TO_CHECK = [
 const IGNORE = ['node_modules', 'audit-tokens.js']
 
 /**
- * Extracts all Leo tokens from a piece of text
+ * Extracts all Nala tokens from a piece of text
  * @param {string} text
- * @returns {string[]} All the Leo CSS variables in the source text. Not deduplicated
+ * @returns {string[]} All the Nala CSS variables in the source text. Not deduplicated
  */
 const extractTokens = (text) => {
   const lines = text.split('\n')
@@ -39,7 +39,7 @@ const extractTokens = (text) => {
 }
 
 /**
- * Extracts all Leo tokens from a file
+ * Extracts all Nala tokens from a file
  * @param {string} file The path of the file
  * @returns {string[]}
  */
@@ -74,7 +74,7 @@ const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
 }
 
 /**
- * Returns a set of all available Leo tokens
+ * Returns a set of all available Nala tokens
  * @returns {Promise<Set<string>>}
  */
 const getAvailableTokens = async () => {
@@ -82,13 +82,13 @@ const getAvailableTokens = async () => {
 
   // Variables which are not defined by components
   const variablePrefixes = [
-    '--leo-color',
-    '--leo-radius',
-    '--leo-spacing',
-    '--leo-effect',
-    '--leo-typography',
-    '--leo-font',
-    '--leo-gradient'
+    '--nl-color',
+    '--nl-radius',
+    '--nl-spacing',
+    '--nl-effect',
+    '--nl-typography',
+    '--nl-font',
+    '--nl-gradient'
   ]
 
   // Include all variables from out tokens file
@@ -117,8 +117,8 @@ const getAvailableTokens = async () => {
 }
 
 /**
- * Checks a folder to see if any files in it reference non-existent Leo tokens
- * @param {string} folder The folder to check for unknown Leo tokens
+ * Checks a folder to see if any files in it reference non-existent Nala tokens
+ * @param {string} folder The folder to check for unknown Nala tokens
  */
 const checkFolder = async (folder) => {
   const availableTokens = await getAvailableTokens()
@@ -149,7 +149,7 @@ ${usages.map((u) => `    ${u}`).join('\n')}`
         .join('\n\n')
     )
     console.error(
-      'The above tokens are not present in Leo, and may have been used by mistake.'
+      'The above tokens are not present in Nala, and may have been used by mistake.'
     )
     process.exit(1)
   }

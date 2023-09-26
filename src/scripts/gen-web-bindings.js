@@ -5,7 +5,7 @@ const { getSvelteFiles } = require('./common')
 const WEB_BINDINGS_DIRECTORY = 'web-components/'
 fs.mkdir(WEB_BINDINGS_DIRECTORY, { recursive: true })
 
-const COMPONENT_PREFIX = 'leo'
+const COMPONENT_PREFIX = 'nl'
 const SVELTE_WEB_WRAPPER_PATH = '../shared/svelte-web.js'
 
 const getFileContents = async (svelteFilePath) => {

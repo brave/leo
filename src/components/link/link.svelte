@@ -15,7 +15,7 @@
   rel="noopener"
   {...$$restProps}
   {href}
-  class="leo-link"
+  class="nala-link"
   class:disabled={isDisabled}
   aria-disabled={isDisabled}
   on:click={(e) => {
@@ -29,15 +29,15 @@
   a {
     all: unset;
 
-    --color: var(--leo-link-color, var(--leo-color-text-interactive));
-    --hover-color: var(--leo-link-hover-color, var(--leo-color-primary-60));
-    --visited-color: var(--leo-link-visited-color, var(--leo-color-pink-50));
+    --color: var(--nl-link-color, var(--nl-color-text-interactive));
+    --hover-color: var(--nl-link-hover-color, var(--nl-color-primary-60));
+    --visited-color: var(--nl-link-visited-color, var(--nl-color-pink-50));
     --disabled-color: var(
-      --leo-link-disabled-color,
-      var(--leo-color-text-disabled)
+      --nl-link-disabled-color,
+      var(--nl-color-text-disabled)
     );
-    --focus-color: var(--leo-link-focus-color, var(--color));
-    --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
+    --focus-color: var(--nl-link-focus-color, var(--color));
+    --focus-shadow: var(--nl-link-focus-shadow, var(--nl-effect-focus-state));
 
     color: var(--color);
     cursor: pointer;

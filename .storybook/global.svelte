@@ -34,9 +34,9 @@
 <style>
   :global body,
   .layout {
-    background: var(--leo-color-container-background);
-    color: var(--leo-color-text-primary);
-    font: var(--leo-font-primary-default-regular);
+    background: var(--nl-color-container-background);
+    color: var(--nl-color-text-primary);
+    font: var(--nl-font-primary-default-regular);
   }
 
   .layout {
@@ -47,6 +47,6 @@
     display: flex;
     flex-direction: column;
     align-items: end;
-    margin-bottom: var(--leo-spacing-m);
+    margin-bottom: var(--nl-spacing-m);
   }
 </style>

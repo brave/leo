@@ -8,20 +8,20 @@
   title="Progress Bar"
   component={Bar}
   argTypes={{
-    '--leo-progressbar-radius': {
+    '--nl-progressbar-radius': {
       type: 'string',
       description: 'The border radius of the progress bar'
     },
-    '--leo-progressbar-height': {
+    '--nl-progressbar-height': {
       type: 'string',
       description: 'The height of the progress bar'
     },
-    '--leo-progressbar-background-color': {
+    '--nl-progressbar-background-color': {
       type: 'string',
       control: 'color',
       description: 'The background color of the progress bar'
     },
-    '--leo-progressbar-color': {
+    '--nl-progressbar-color': {
       type: 'string',
       control: 'color',
       description: 'The color of the progress on the progress bar'

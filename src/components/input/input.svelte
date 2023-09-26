@@ -118,7 +118,7 @@
   <div class="input-container">
     <input
       {...$$restProps}
-      class="leo-input"
+      class="nala-input"
       {disabled}
       {type}
       {value}
@@ -152,12 +152,12 @@
 {/if}
 
 <style lang="scss">
-  .leo-input {
+  .nala-input {
     all: unset;
     width: 100%;
   }
 
-  .leo-input::-webkit-calendar-picker-indicator {
+  .nala-input::-webkit-calendar-picker-indicator {
     opacity: 0;
     flex: 1;
   }
@@ -173,6 +173,6 @@
   }
 
   .extra {
-    color: var(--leo-color-text-secondary);
+    color: var(--nl-color-text-secondary);
   }
 </style>

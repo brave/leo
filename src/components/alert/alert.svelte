@@ -25,12 +25,12 @@
 </script>
 
 <div
-  class="leo-alert {currentType}"
+  class="nala-alert {currentType}"
   class:toast={isToast}
   class:simple={currentMode === 'simple'}
   class:full={currentMode === 'full'}
-  style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
-  style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
+  style:--default-background={`var(--nl-color-systemfeedback-${currentType}-background)`}
+  style:--default-icon-color={`var(--nl-color-systemfeedback-${currentType}-icon)`}
 >
   <div class="icon">
     <slot name="icon">
@@ -55,54 +55,54 @@
     display: block;
   }
 
-  :global .leo-alert .actions > *,
-  .leo-alert .actions ::slotted(*) {
+  :global .nala-alert .actions > *,
+  .nala-alert .actions ::slotted(*) {
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-xl);
+    gap: var(--nl-spacing-xl);
   }
-  .leo-alert {
-    --leo-icon-color: var(--leo-alert-icon-color, var(--default-icon-color));
+  .nala-alert {
+    --nl-icon-color: var(--nl-alert-icon-color, var(--default-icon-color));
     background-color: var(
-      --leo-alert-background-color,
+      --nl-alert-background-color,
       var(--default-background)
     );
     display: flex;
-    color: var(--leo-color-text-primary);
-    padding: var(--leo-spacing-xl);
-    border-radius: var(--leo-radius-m);
-    gap: var(--leo-spacing-xl);
-    font: var(--leo-font-primary-default-regular);
+    color: var(--nl-color-text-primary);
+    padding: var(--nl-spacing-xl);
+    border-radius: var(--nl-radius-m);
+    gap: var(--nl-spacing-xl);
+    font: var(--nl-font-primary-default-regular);
 
     & .icon {
-      color: var(--leo-icon-color);
+      color: var(--nl-icon-color);
     }
 
     & .title {
-      font: var(--leo-font-primary-heading-h4);
+      font: var(--nl-font-primary-heading-h4);
     }
   }
 
-  .leo-alert.toast {
+  .nala-alert.toast {
     &.error {
-      background-color: var(--leo-color-red-20);
+      background-color: var(--nl-color-red-20);
     }
 
     &.warning {
-      background: var(--leo-color-yellow-20);
+      background: var(--nl-color-yellow-20);
     }
 
     &.info {
-      background: var(--leo-color-blue-20);
+      background: var(--nl-color-blue-20);
     }
 
     &.success {
-      background: var(--leo-color-green-20);
+      background: var(--nl-color-green-20);
     }
   }
 
-  .leo-alert.simple {
-    --leo-icon-size: 16px;
+  .nala-alert.simple {
+    --nl-icon-size: 16px;
 
     display: flex;
     flex-direction: row;
@@ -112,8 +112,8 @@
     }
   }
 
-  .leo-alert.full {
-    --leo-icon-size: 26px;
+  .nala-alert.full {
+    --nl-icon-size: 26px;
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto min-content;

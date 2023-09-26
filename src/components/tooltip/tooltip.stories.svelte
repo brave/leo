@@ -80,13 +80,13 @@
 
 <style>
   .title {
-    font: var(--leo-font-primary-heading-h4);
+    font: var(--nl-font-primary-heading-h4);
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-s);
+    gap: var(--nl-spacing-s);
     align-items: center;
-    --leo-icon-size: 18px;
-    --leo-icon-color: var(--leo-color-icon-default);
+    --nl-icon-size: 18px;
+    --nl-icon-color: var(--nl-color-icon-default);
   }
 
   .close {
@@ -98,6 +98,6 @@
   .tooltip-content {
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-xl);
+    gap: var(--nl-spacing-xl);
   }
 </style>

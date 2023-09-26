@@ -2,7 +2,7 @@
   export let progress: number = 0
 </script>
 
-<div class="leo-progressbar">
+<div class="nala-progressbar">
   <div class="progress" style="width: {progress * 100}%" />
 </div>
 
@@ -11,14 +11,14 @@
     display: block;
   }
 
-  .leo-progressbar {
-    --radius: var(--leo-progressbar-radius, 10px);
-    --transition-duration: var(--leo-progressbar-transition-duration, 0.2s);
+  .nala-progressbar {
+    --radius: var(--nl-progressbar-radius, 10px);
+    --transition-duration: var(--nl-progressbar-transition-duration, 0.2s);
     background: var(
-      --leo-progressbar-background-color,
-      var(--leo-color-primary-20)
+      --nl-progressbar-background-color,
+      var(--nl-color-primary-20)
     );
-    height: var(--leo-progressbar-height, 4px);
+    height: var(--nl-progressbar-height, 4px);
     border-radius: var(--radius);
 
     .progress {
@@ -26,8 +26,8 @@
       width: 100%;
       transition: width var(--transition-duration) ease-in-out;
       background: var(
-        --leo-progressbar-color,
-        var(--leo-color-button-background)
+        --nl-progressbar-color,
+        var(--nl-color-button-background)
       );
       border-radius: var(--radius);
     }

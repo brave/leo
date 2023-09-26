@@ -7,7 +7,7 @@ export const ensureDialogHelper = () => {
   if (helper) return
 
   const mountPoint = document.createElement('div')
-  mountPoint.id = 'leo-dialog-helper'
+  mountPoint.id = 'nala-dialog-helper'
 
   document.body.appendChild(mountPoint)
 
@@ -89,7 +89,7 @@ export const confirm = (message: string, options: ConfirmDialogOptions) =>
     ]
   }).then((r) => !!r)
 
-const leo = (window as any)?.leo ?? ((window as any).leo = {})
-leo.alert = alert
-leo.confirm = confirm
-leo.dialog = dialog
+const nala = (window as any)?.nala ?? ((window as any).nala = {})
+nala.alert = alert
+nala.confirm = confirm
+nala.dialog = dialog

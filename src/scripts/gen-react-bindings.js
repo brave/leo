@@ -5,7 +5,7 @@ const { getSvelteFiles } = require('./common')
 const REACT_BINDINGS_DIRECTORY = 'react/'
 fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 
-const COMPONENT_PREFIX = 'leo'
+const COMPONENT_PREFIX = 'nl'
 const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {

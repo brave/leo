@@ -14,7 +14,7 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
         encoding: 'utf8'
       })
       const skiaContent = skiafy(svgContent)
-      const outputFileName = `leo_${path
+      const outputFileName = `nala_${path
         .basename(icon, '.svg')
         .replaceAll('-', '_')}.icon`
       await fs.writeFile(path.join(OUTPUT_FOLDER, outputFileName), skiaContent)

@@ -41,7 +41,7 @@
     name?.endsWith('-color') || name?.startsWith('country-') || forceColor
 </script>
 
-<div class="leoIcon">
+<div class="nala-icon">
   <slot>
     {#if name}
       <div
@@ -54,10 +54,10 @@
 </div>
 
 <style lang="scss">
-  .leoIcon {
-    --icon-width: var(--leo-icon-size, 24px);
-    --icon-height: var(--leo-icon-size, 24px);
-    --icon-color: var(--leo-icon-color, currentColor);
+  .nala-icon {
+    --icon-width: var(--nl-icon-size, 24px);
+    --icon-height: var(--nl-icon-size, 24px);
+    --icon-color: var(--nl-icon-color, currentColor);
 
     width: var(--icon-width);
     height: var(--icon-height);

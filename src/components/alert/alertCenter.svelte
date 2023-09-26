@@ -75,7 +75,7 @@
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
-<div class="leo-alert-center" {style}>
+<div class="nala-alert-center" {style}>
   {#each $alerts as alert (alert.id)}
     <div
       class="alert-container"
@@ -102,15 +102,15 @@
 </div>
 
 <style lang="scss">
-  .leo-alert-center {
+  .nala-alert-center {
     --width: min(540px, 100vw);
     position: absolute;
     width: var(--width);
 
-    padding: var(--leo-spacing-m);
+    padding: var(--nl-spacing-m);
 
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-m);
+    gap: var(--nl-spacing-m);
   }
 </style>

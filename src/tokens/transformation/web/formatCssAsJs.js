@@ -44,7 +44,7 @@ function formattedVariables(properties) {
     // (which only allows string values, so we use an array here)
     // in the event a developer forgets to choose a low-level token property
     // with a string value. It's named toString to attempt to avoid any confusion.
-    // https://github.com/brave/leo/pull/187#issuecomment-1410907561
+    // https://github.com/brave/nala/pull/187#issuecomment-1410907561
     [FAKE_PROPERTY_NAME]: ['']
   }
   for (const key in properties) {

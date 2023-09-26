@@ -11,21 +11,21 @@
   title="Progress Ring"
   component={Ring}
   argTypes={{
-    '--leo-progressring-spin-rate': {
+    '--nl-progressring-spin-rate': {
       type: 'string',
       description: 'The rate that the indeterminate spinner spins at'
     },
-    '--leo-progressring-color': {
+    '--nl-progressring-color': {
       type: 'string',
       control: 'color',
       description: 'The color of the progress on the progress ring'
     },
-    '--leo-progressring-background-color': {
+    '--nl-progressring-background-color': {
       type: 'string',
       control: 'color',
       description: 'The color of the progress ring'
     },
-    '--leo-progressring-size': {
+    '--nl-progressring-size': {
       type: 'string',
       description: 'The size of the progress ring'
     },
@@ -45,7 +45,7 @@
   >
     <Slot name="default" explanation="The content to display inside the ring">
       <ProgressRing {...args}>
-        <div style="color: var(--leo-color-icon-default)">
+        <div style="color: var(--nl-color-icon-default)">
           <Icon name="notification" />
         </div>
       </ProgressRing>
