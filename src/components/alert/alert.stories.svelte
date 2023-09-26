@@ -86,7 +86,7 @@
     '--leo-alert-center-width': {
       type: 'string',
       description: 'The width to apply to the alert center'
-    },
+    }
   }}
 />
 
