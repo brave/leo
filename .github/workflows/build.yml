@@ -46,8 +46,8 @@ jobs:
         run: |
           npm run format-diff
 
-      - name: Build Leo
-        id: build-leo
+      - name: Build nala
+        id: build-nala
         run: |
           npm run build
 
@@ -59,7 +59,7 @@ jobs:
       - name: Diff Tokens
         id: diff-tokens
         run: |
-          curl -fsSL -o ./tokens/css/variables.old.css https://leo.bravesoftware.com/css/variables.css
+          curl -fsSL -o ./tokens/css/variables.old.css https://nala.bravesoftware.com/css/variables.css
           # Note: Diff has exit code 1 for differences, and there are always
           # some differences because the file contains a timestamp.
           diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff || :
@@ -80,7 +80,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: github-actions-pr-leo-${{ github.run_id }}
+          role-session-name: github-actions-pr-nala-${{ github.run_id }}
           aws-region: us-west-2
 
       - name: Deploy
@@ -120,8 +120,8 @@ jobs:
               repo: context.repo.repo,
               body: `👋 Thanks for Submitting! This PR is available for preview at the link below.
 
-              ✅ PR tip preview: https://${context.issue.number}.pr.leo.bravesoftware.com/
-              ✅ Commit preview: https://${context.issue.number}.pr.leo.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
+              ✅ PR tip preview: https://${context.issue.number}.pr.nala.bravesoftware.com/
+              ✅ Commit preview: https://${context.issue.number}.pr.nala.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
 
             <details>
             <summary>Variables Diff</summary>
