@@ -8,6 +8,8 @@
   import Toggle from '../toggle/toggle.svelte'
 
   export let toggleIsChecked = false
+
+  const handleAction = () => console.log('action')
 </script>
 
 <Meta title="Components/ButtonMenu" component={ButtonMenu} />
@@ -15,7 +17,8 @@
 <Template let:args>
   <div class="container">
     <ButtonMenu>
-      <leo-menu-item> Copy </leo-menu-item>
+      <!-- svelte-ignore a11y-click-events-have-key-events leo-menu-item peovides key events -->
+      <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
       <leo-menu-item> Share </leo-menu-item>
       <div class="section">Section</div>
       <leo-menu-item>
@@ -26,18 +29,19 @@
       </leo-menu-item>
       <div class="custom-item">
         <div>Suggested questions</div>
-        <Toggle size="small" />
+        <Toggle bind:checked={toggleIsChecked} size="small" />
       </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <leo-menu-item
         class="item"
-        on:click|stopPropagation={(e) => {
+        on:click={(e) => {
+          handleAction()
           toggleIsChecked = !toggleIsChecked
         }}
         data-is-interactive="true"
       >
         <div>Suggested questions</div>
-        <Toggle checked={toggleIsChecked} size="small" />
+        <Toggle bind:checked={toggleIsChecked} size="small" />
       </leo-menu-item>
     </ButtonMenu>
   </div>
