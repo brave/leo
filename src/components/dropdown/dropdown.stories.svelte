@@ -17,7 +17,7 @@
 </script>
 
 <Meta
-  title="Dropdown"
+  title="Components/Dropdown"
   component={Dropdown}
   argTypes={{
     ...cssProperties,

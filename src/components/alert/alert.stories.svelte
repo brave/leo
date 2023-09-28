@@ -78,7 +78,7 @@
 </Story>
 
 <Meta
-  title="Alert"
+  title="Components/Alert"
   component={Alert}
   argTypes={{
     mode: { control: 'select', options: modes },

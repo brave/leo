@@ -13,7 +13,7 @@
 </script>
 
 <Meta
-  title="Dialog"
+  title="Components/Dialog"
   component={Dialog}
   argTypes={{
     '--leo-dialog-width': {

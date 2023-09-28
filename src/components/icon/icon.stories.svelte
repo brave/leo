@@ -12,7 +12,7 @@
 </script>
 
 <Meta
-  title="Icon"
+  title="Components/Icon"
   component={Icon}
   argTypes={{
     '--leo-icon-color': {

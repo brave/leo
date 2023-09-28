@@ -5,7 +5,7 @@
 </script>
 
 <Meta
-  title="Progress Bar"
+  title="Components/Progress Bar"
   component={Bar}
   argTypes={{
     '--leo-progressbar-radius': {

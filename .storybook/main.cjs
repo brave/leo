@@ -6,6 +6,7 @@ module.exports = {
     builder: 'webpack5'
   },
   'stories': [
+    '../src/tokens/**/*.stories.svelte',
     '../src/components/**/*.stories.svelte',
     '../src/components/**/*.stories.js'
   ],

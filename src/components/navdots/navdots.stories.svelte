@@ -10,7 +10,7 @@
 </script>
 
 <Meta
-  title="Nav Dots"
+  title="Components/Nav Dots"
   component={NavDots}
   argTypes={{
     dotCount: { control: 'number', defaultValue: 10 },

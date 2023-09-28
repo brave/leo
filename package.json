@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
+    "@fontsource/manrope": "5.0.12",
+    "@fontsource/poppins": "5.0.8",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-typescript": "11.0.0",
     "@storybook/addon-actions": "6.5.16",

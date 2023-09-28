@@ -10,7 +10,7 @@
   export let toggleIsChecked = false
 </script>
 
-<Meta title="ButtonMenu" component={ButtonMenu} />
+<Meta title="Components/ButtonMenu" component={ButtonMenu} />
 
 <Template let:args>
   <div class="container">
