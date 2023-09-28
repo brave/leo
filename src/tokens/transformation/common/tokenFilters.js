@@ -13,20 +13,29 @@ const filteredTokens = (dictionary, filterFn) => {
   }
 }
 
-function matchThemableToken(token, modifierPathSegment) {
+/**
+ * @param {any} token The token
+ * @param {string} modifierPathSegment path segment which represents a theme
+ * @param {string[]} tokenPaths tokens starting with one of these prefixes (use `.` to join multiple path segments).
+ **/
+function matchThemableToken(
+  token,
+  modifierPathSegment,
+  tokenPaths = ['color', 'effect']
+) {
+  const tokenPath = token.path.join('.').toLowerCase()
   return (
-    (token.path[0]?.toLowerCase() === 'color' ||
-      token.path.includes('elevation')) &&
+    tokenPaths.some((p) => tokenPath.startsWith(p)) &&
     token.path.includes(modifierPathSegment)
   )
 }
 
-function matchDarkThemeToken(token) {
-  return matchThemableToken(token, 'dark')
+function matchDarkThemeToken(token, tokenPaths) {
+  return matchThemableToken(token, 'dark', tokenPaths)
 }
 
-function matchLightThemeToken(token) {
-  return matchThemableToken(token, 'light')
+function matchLightThemeToken(token, tokenPaths) {
+  return matchThemableToken(token, 'light', tokenPaths)
 }
 
 module.exports = {

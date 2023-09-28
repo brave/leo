@@ -7,6 +7,20 @@ const formatColorVar = (name, isStatic = true) => {
   return `rgba(var(--tw-${name}), <alpha-value>)`
 }
 
+const formatBoxShadowVar = (name, isStatic = true) => {
+  name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
+  return `var(--tw-${name})`
+}
+
+const formatDropShadowVars = (name, shadowCount, isStatic = true) => {
+  name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
+  return [...new Array(shadowCount)].map((v, i) => {
+    return `var(--tw-${name}-drop-shadow-${i + 1})`
+  })
+}
+
+const kebabCase = (str) => str && str.toLowerCase().replaceAll(' ', '-')
+
 /**
  * This function transforms tokens into a nested object
  * structure ready for Tailwind. The conditional statements
@@ -25,13 +39,12 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
       /**
        * The following conditions are in order to properly group
        * color tokens and format into a nested object structure
-       * for use in Tailwind. This results in three ways of accessing
-       * a color using dot notation:
-       * Dark: colors.dark.systemfeedback.success.icon
-       * Light: colors.light.systemfeedback.success.icon
-       * Dynamic: colors.systemfeedback.success.icon
+       * for use in Tailwind.
        */
       let colorGroup = colorTokens[t.attributes.type] ?? {}
+
+      const tItem = kebabCase(t.attributes.item)
+      const tSubItem = kebabCase(t.attributes.subitem)
 
       /**
        * `state` is for the deepest level on a token.
@@ -40,31 +53,27 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
       if (t.attributes.state) {
         if (!staticTheme) {
           // If not on a static theme, do not place within `dark` or `light` groups
-          colorTokens[t.attributes.item] = colorTokens[t.attributes.item] || {}
-          const tokenGroup =
-            colorTokens[t.attributes.item][t.attributes.subitem] ?? {}
-          colorTokens[t.attributes.item][t.attributes.subitem] = merge(
-            tokenGroup,
-            {
-              [t.attributes.state]: formatColorVar(name, staticTheme)
-            }
-          )
+          colorTokens[tItem] = colorTokens[tItem] || {}
+          const tokenGroup = colorTokens[tItem][tSubItem] ?? {}
+          colorTokens[tItem][tSubItem] = merge(tokenGroup, {
+            [t.attributes.state]: formatColorVar(name, staticTheme)
+          })
         } else {
           // If on a static theme, place within `dark` or `light` groups
-          const tokenGroup = colorGroup[t.attributes.item]
-          colorGroup[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorGroup[tItem]
+          colorGroup[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         }
-      } else if (t.attributes.subitem) {
+      } else if (tSubItem) {
         /**
          * If not on a static theme AND theme is determined by `type`
          * property do not place within `dark` or `light` groups
          */
         if (themes.includes(t.attributes.type) && !staticTheme) {
-          const tokenGroup = colorTokens[t.attributes.item] ?? {}
-          colorTokens[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorTokens[tItem] ?? {}
+          colorTokens[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
 
           /**
@@ -75,13 +84,13 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
         } else if (themes.includes(t.attributes.item) && !staticTheme) {
           const tokenGroup = colorTokens[t.attributes.type] ?? {}
           colorTokens[t.attributes.type] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         } else {
           // If on a static theme, place within `dark` or `light` groups
-          const tokenGroup = colorGroup[t.attributes.item]
-          colorGroup[t.attributes.item] = merge(tokenGroup, {
-            [t.attributes.subitem]: formatColorVar(name, staticTheme)
+          const tokenGroup = colorGroup[tItem]
+          colorGroup[tItem] = merge(tokenGroup, {
+            [tSubItem]: formatColorVar(name, staticTheme)
           })
         }
 
@@ -89,7 +98,7 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
          * If `item` property is the token name, don't nest inside object
          */
       } else if (t.attributes.item) {
-        colorGroup[t.attributes.item] = formatColorVar(name, staticTheme)
+        colorGroup[tItem] = formatColorVar(name, staticTheme)
 
         /**
          * If `item` property is the token name, set directly on colorGroup
@@ -98,14 +107,12 @@ function createColorTokensFromGroup(tokens, staticTheme = true) {
         colorGroup = formatColorVar(name, staticTheme)
       }
 
-      colorTokens[t.attributes.type] = colorGroup
+      if (Object.keys(colorGroup).length > 0) {
+        colorTokens[t.attributes.type] = colorGroup
+      }
     }
   })
   return colorTokens
-}
-
-function createStaticColorTokens(tokens) {
-  return createColorTokensFromGroup(tokens)
 }
 
 function createDynamicColorTokens(tokens) {
@@ -113,15 +120,14 @@ function createDynamicColorTokens(tokens) {
 }
 
 module.exports = ({ dictionary }) => {
-  const staticColorTokens = createStaticColorTokens(dictionary.allTokens)
-  const dynamicColorTokens = createDynamicColorTokens(dictionary.allTokens)
-  const colorTokens = merge(dynamicColorTokens, staticColorTokens)
+  const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
   const fontSizes = new Map()
-  const borderRadii = new Map()
+  const borderRadii = new Map([['none', 0]])
+  const spacing = new Map([[0, 0]]) // Initialize with option for 0 spacing
   const gradients = new Map()
-  const boxShadows = new Map()
-  const dropShadows = new Map()
+  const boxShadows = new Map([['none', 'none']])
+  const dropShadows = new Map([['none', '0 0 #0000']])
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
@@ -129,7 +135,7 @@ module.exports = ({ dictionary }) => {
       const { fontSize, ...rest } = t.value
 
       // E.g.
-      let fontName = `${t.attributes.item}`
+      let fontName = `${t.attributes.type}-${t.attributes.item}`
 
       if (t.attributes.subitem) {
         fontName += `-${t.attributes.subitem}`
@@ -140,43 +146,33 @@ module.exports = ({ dictionary }) => {
         fontName += `-${t.attributes.state}`
       }
 
-      /*
-       * Prefer "components" over "desktop" if present
-       * (e.g. `components-button-small` instead of `desktop-button-small`)
-       */
-      if (t.attributes.type.includes('components')) {
-        fontName = fontName.replace(
-          t.attributes.item,
-          t.attributes.type.replace(/[^a-zA-Z]/g, '')
-        )
-      }
-
-      /**
-       * Remove extraneous sections. E.g.
-       * `text-h1` rather than `text-heading-h1`
-       * `text-default-small-regular` rather than text-text-default-small-regular`
-       */
-      fontName = fontName.replace(/^heading-/, '').replace(/^text-/, '')
-
       fontSizes.set(fontName, [fontSize, rest])
-    } else if (type === 'custom-radius') {
+    } else if (t.attributes.category === 'radius') {
       if (t.attributes.type === 'full') {
         borderRadii.set(t.attributes.type, '9999px')
       } else {
         borderRadii.set(t.attributes.type, t.value)
       }
+    } else if (t.attributes.category === 'spacing') {
+      spacing.set(t.attributes.type, t.value)
     } else if (type === 'custom-gradient') {
       const [, ...pathParts] = t.path
       gradients.set(pathParts.join('-'), t.value)
     } else if (type === 'custom-shadow') {
       const [, ...pathParts] = t.path
       boxShadows.set(
-        pathParts.join('-').replace(' ', '-').replace('elevation-', ''),
-        t.value.boxShadow
+        pathParts
+          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
+          .join('-')
+          .replace(' ', '-'),
+        formatBoxShadowVar(name, false)
       )
       dropShadows.set(
-        pathParts.join('-').replace(' ', '-').replace('elevation-', ''),
-        t.value.dropShadow
+        pathParts
+          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
+          .join('-')
+          .replace(' ', '-'),
+        formatDropShadowVars(name, t.value.dropShadow.length, true, false)
       )
     }
   })
@@ -187,6 +183,7 @@ module.exports = ({ dictionary }) => {
       colors: colorTokens,
       primaryFont: ['Poppins', 'Helvetica', 'sans-serif'],
       fontSize: Object.fromEntries(fontSizes),
+      spacing: Object.fromEntries(spacing),
       borderRadius: Object.fromEntries(borderRadii),
       boxShadow: Object.fromEntries(boxShadows),
       dropShadow: Object.fromEntries(dropShadows),
