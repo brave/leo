@@ -19,6 +19,9 @@
     ...themeable
   } = allColors
 
+  const reversedThemeable = Object.entries(themeable).reverse()
+  const reversedPrimitive = Object.entries(themeable).reverse()
+
   const semantic = {
     page,
     container,
@@ -31,9 +34,9 @@
   }
 
   const allColorsForDisplay = {
-    themeable,
+    themeable: reversedThemeable,
     semantic,
-    primitive,
+    primitive: reversedPrimitive,
     legacy,
     white,
     black
@@ -47,7 +50,7 @@
 </Story>
 
 <Story name="Themeable">
-  <ColorTokenSwatchGroup tokens={themeable} />
+  <ColorTokenSwatchGroup tokens={reversedThemeable} />
 </Story>
 
 <Story name="Semantic">
@@ -55,7 +58,7 @@
 </Story>
 
 <Story name="Primitive">
-  <ColorTokenSwatchGroup tokens={primitive} />
+  <ColorTokenSwatchGroup tokens={reversedPrimitive} />
 </Story>
 
 <Story name="Legacy">

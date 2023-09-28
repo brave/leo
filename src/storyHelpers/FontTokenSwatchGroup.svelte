@@ -8,7 +8,9 @@
   const headingTag = `h${level}`
 
   const getTokens = (obj) =>
-    Object.entries(obj).filter((i) => i[0] !== 'toString')
+    !Array.isArray(obj)
+      ? Object.entries(obj).filter((i) => i[0] !== 'toString')
+      : obj.filter((i) => i[0] !== 'toString')
 
   const filteredTokens = getTokens(tokens)
 </script>
