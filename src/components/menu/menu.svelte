@@ -83,9 +83,10 @@
     // a change event.
     if (!item) return
 
-    // Use data-is-interactive=true to prevent the menu from closing when selected. This infers
+    // Use data-is-interactive=true to prevent the menu from closing when selected. This implies
     // there is interacitivity inside the menu item (e.g. a Toggle), which would be good for the user
-    // to see change state and allowing the user to manually close when ready.
+    // to see change state and allowing the user to manually close when ready. In other words, when we want
+    // the styles and menu navigation features of leo-menu-item, but we don't want the auto-close.
     if (
       (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') &&
       !item.dataset.isInteractive
@@ -102,7 +103,9 @@
       })
     }
 
-    if (item.tagName === 'LEO-MENU-ITEM') {
+    // When using keyboard navigation to call selectMenuItem, ensure click handlers happen on the item,
+    // but not when this was called in a click handler, otherwise we'll get 2x clicks.
+    if (item.tagName === 'LEO-MENU-ITEM' && e.type !== 'click') {
       item.click()
     }
   }

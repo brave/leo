@@ -12,6 +12,9 @@ function App() {
   // Verify that we can change props and children (slots)
   const [buttonText, setButtonText] = React.useState('I am a LEO Button')
   const [spinning, setSpinning] = React.useState(false)
+  const [isThing, setIsThing] = React.useState(false)
+
+  const handleAction = () => console.log('action')
 
   return (
     <div className={styles['App']} data-theme="dark">
@@ -46,8 +49,8 @@ function App() {
         </div>
         <ButtonMenu>
           <div slot="anchor-content">ButtonMenu</div>
-          <leo-menu-item>Llama2-13b</leo-menu-item>
-          <leo-menu-item>Llama2-7b</leo-menu-item>
+          <leo-menu-item onClick={handleAction}>Llama2-13b</leo-menu-item>
+          <leo-menu-item onClick={handleAction}>Llama2-7b</leo-menu-item>
           <div
             style={{
               padding: '10px 0',
@@ -57,12 +60,19 @@ function App() {
           >
             Coding
           </div>
-          <leo-menu-item>Llama2-13b</leo-menu-item>
-          <leo-menu-item>Llama2-7b</leo-menu-item>
-          <div>
+          <leo-menu-item onClick={handleAction}>Llama2-13b</leo-menu-item>
+          <leo-menu-item onClick={handleAction}>Llama2-7b</leo-menu-item>
+          <div onClick={() => setIsThing(!isThing)}>
             <span>Suggested questions</span>
-            <Toggle />
+            <Toggle checked={isThing} />
           </div>
+          <leo-menu-item
+            onClick={() => setIsThing(!isThing)}
+            data-is-interactive={true}
+          >
+            <span>Suggested questions</span>
+            <Toggle checked={isThing} />
+          </leo-menu-item>
         </ButtonMenu>
         <Tooltip text="Hello World">
           <LeoButton href="#foo">Link button!</LeoButton>
