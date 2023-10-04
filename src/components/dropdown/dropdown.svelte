@@ -59,7 +59,10 @@
         bind:this={button}
         class="click-target"
         {disabled}
-        on:click|stopPropagation={onClick}
+        on:click|stopPropagation={(e) => {
+          console.log('Clicked button')
+          onClick()
+        }}
       >
         {#if value !== undefined}
           <slot name="value" {value}>
@@ -83,7 +86,14 @@
     bind:isOpen
     bind:currentValue={value}
     on:select-item={onItemSelect}
-    on:close={() => button.focus()}
+    on:close={(e) => {
+      button.focus()
+      console.log(e.detail.originalEvent.composedPath())
+      if (e.detail.originalEvent.composedPath().includes(dropdown)) {
+        console.log('Closed via button')
+        isOpen = true
+      }
+    }}
   >
     <slot />
   </Menu>

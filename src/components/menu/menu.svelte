@@ -147,13 +147,13 @@
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
 
-  function handleBlur(e) {
+  function handleBlur(e: MouseEvent) {
     isOpen = false
-    dispatch('close')
+    dispatch('close', { originalEvent: e })
   }
 </script>
 
-<div class="leo-menu">
+<div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
   {#if isOpen}
     <Floating {target} placement="bottom-start" autoUpdate>
       <div
@@ -163,7 +163,6 @@
         tabindex="-1"
         style:min-width="{minWidth}px"
         bind:this={popup}
-        use:clickOutside={isOpen && handleBlur}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
           selectMenuItem(e)
