@@ -131,7 +131,10 @@ module.exports = ({ dictionary }) => {
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    if (type === 'custom-fontStyle') {
+    if (
+      type === 'custom-fontStyle' &&
+      !['macos', 'windows'].includes(t.attributes.type)
+    ) {
       const { fontSize, ...rest } = t.value
 
       // E.g.
@@ -145,6 +148,9 @@ module.exports = ({ dictionary }) => {
       if (t.attributes.state) {
         fontName += `-${t.attributes.state}`
       }
+
+      // Remove "desktop" for typography
+      fontName = fontName.replace(/desktop-/gm, '')
 
       fontSizes.set(fontName, [fontSize, rest])
     } else if (t.attributes.category === 'radius') {
