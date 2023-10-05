@@ -47,6 +47,8 @@
     originalEvent: Event,
     reason: CloseEventDetail['reason']
   ) {
+    // Allow event handlers to cancel closing the dropdown by calling
+    // |preventDefault|.
     if (dispatch('close', { originalEvent, reason }, { cancelable: true })) {
       isOpen = false
     }

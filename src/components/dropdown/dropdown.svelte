@@ -59,10 +59,7 @@
         bind:this={button}
         class="click-target"
         {disabled}
-        on:click|stopPropagation={(e) => {
-          console.log('Clicked button')
-          onClick()
-        }}
+        on:click|stopPropagation={onClick}
       >
         {#if value !== undefined}
           <slot name="value" {value}>
@@ -87,9 +84,14 @@
     bind:currentValue={value}
     on:select-item={onItemSelect}
     on:close={(e) => {
+      // Note: We cancel the |close| event if it was the dropdown that we
+      // clicked on, as that already toggles the dropdown. If we do both, the
+      // dropdown will instantly close and reopen.
       if (e.detail.originalEvent.composedPath().includes(dropdown)) {
         e.preventDefault()
       } else {
+        // Focus the button when closing the dropdown, so keyboard users can
+        // reopen it.
         button.focus()
       }
     }}
