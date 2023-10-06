@@ -25,11 +25,34 @@
   import clickOutside from '../../svelteDirectives/clickOutside'
   import Floating from '../floating/floating.svelte'
 
+  interface CloseEventDetail {
+    originalEvent: Event
+    reason: 'select' | 'blur' | 'cancel'
+  }
+
+  interface SelectItemEventDetail {
+    value: string | undefined
+  }
+
   export let isOpen = false
   export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    close: CloseEventDetail
+    'select-item': SelectItemEventDetail
+  }>()
+
+  function dispatchClose(
+    originalEvent: Event,
+    reason: CloseEventDetail['reason']
+  ) {
+    // Allow event handlers to cancel closing the dropdown by calling
+    // |preventDefault|.
+    if (dispatch('close', { originalEvent, reason }, { cancelable: true })) {
+      isOpen = false
+    }
+  }
 
   let popup: HTMLDivElement
 
@@ -91,8 +114,7 @@
       (item.tagName === 'LEO-OPTION' || item.tagName === 'LEO-MENU-ITEM') &&
       !item.dataset.isInteractive
     ) {
-      isOpen = false
-      dispatch('close')
+      dispatchClose(e, 'select')
     }
 
     if (item.tagName === 'LEO-OPTION') {
@@ -119,8 +141,7 @@
 
     // Handle closing keys
     if (e.code === 'Escape') {
-      isOpen = false
-      dispatch('close')
+      dispatchClose(e, 'cancel')
       return
     }
 
@@ -147,13 +168,12 @@
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
 
-  function handleBlur(e) {
-    isOpen = false
-    dispatch('close')
+  function handleBlur(e: MouseEvent) {
+    dispatchClose(e, 'blur')
   }
 </script>
 
-<div class="leo-menu">
+<div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
   {#if isOpen}
     <Floating {target} placement="bottom-start" autoUpdate>
       <div
@@ -163,7 +183,6 @@
         tabindex="-1"
         style:min-width="{minWidth}px"
         bind:this={popup}
-        use:clickOutside={isOpen && handleBlur}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
           selectMenuItem(e)
