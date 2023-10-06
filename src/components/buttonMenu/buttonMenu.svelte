@@ -26,10 +26,7 @@
     firing a `click` event. This may be triggered with a keypress or click.
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    bind:this={anchor}
-    on:click|stopPropagation={() => (isOpen = !isOpen)}
-  >
+  <div bind:this={anchor} on:click|stopPropagation={() => (isOpen = !isOpen)}>
     <slot name="anchor-content">Click</slot>
   </div>
   <Menu
