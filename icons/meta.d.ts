@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1696147712105,
+  "updatedAt": 1696925408505,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -796,10 +796,10 @@ const meta = {
     "eth-color": "eth-color",
     "eth-logo": "eth-logo",
     "eth2-color": "eth2-color",
-    "ethereum-color": "ethereum-color",
     "ethereum-off": "ethereum-off",
     "ethereum-on": "ethereum-on",
     "ethereumclassic-color": "ethereumclassic-color",
+    "etherscan-color": "etherscan-color",
     "ethos-color": "ethos-color",
     "etn-color": "etn-color",
     "etoro-color": "etoro-color",
@@ -952,6 +952,7 @@ const meta = {
     "globe-settings": "globe-settings",
     "globe-time": "globe-time",
     "globe": "globe",
+    "glow-color": "glow-color",
     "glxt-color": "glxt-color",
     "gmail-color": "gmail-color",
     "gmr-color": "gmr-color",
@@ -1485,6 +1486,8 @@ const meta = {
     "rcn-color": "rcn-color",
     "rdd-color": "rdd-color",
     "rdn-color": "rdn-color",
+    "readermode-column-default": "readermode-column-default",
+    "readermode-column-wide": "readermode-column-wide",
     "readermode-dislexyc": "readermode-dislexyc",
     "readermode-mono": "readermode-mono",
     "readermode-sans": "readermode-sans",
