@@ -60,7 +60,7 @@
     // If the option element doesn't have a value, fallback to using the text
     // content - this allows writing simplified options:
     // i.e. <o>1</o>
-    return e.getAttribute('value') ?? e.textContent
+    return e.getAttribute('value') ?? e['value'] ?? e.textContent
   }
 
   $: menuItems = Array.from(
