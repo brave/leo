@@ -104,6 +104,7 @@
 <style lang="scss">
   .leo-alert-center {
     --width: var(--leo-alert-center-width, min(540px, 100vw));
+    z-index: var(--leo-alert-center-z-index, 1000);
     position: absolute;
     width: var(--width);
 
