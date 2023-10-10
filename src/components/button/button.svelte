@@ -159,7 +159,7 @@
     --icon-size: 12px;
     font: var(--leo-font-components-button-small);
     --padding-y: 6px;
-    --padding-x: 10px;
+    --padding-x: var(--leo-spacing-m);
     --radius: 14px;
     --leo-icon-size: 16px;
 
