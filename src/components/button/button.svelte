@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
   import type * as Props from './props'
+  import ProgressRing from '../progress/progressRing.svelte'
 
   // This black magic comes from this thread:
   // https://github.com/sveltejs/language-tools/issues/442#issuecomment-1278618531
@@ -23,13 +24,13 @@
   interface CommonProps {
     kind?: Props.ButtonKind
     size?: Props.ButtonSize
-    isLoading?: boolean
     fab?: boolean
   }
 
   type ButtonProps = CommonProps &
     Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
       isDisabled?: Disabled
+      isLoading?: boolean
       href?: never
     }
 
@@ -62,7 +63,6 @@
 <svelte:element
   this={tag}
   href={href || undefined}
-  disabled={isDisabled || undefined}
   class="leoButton"
   class:isFilled={kind === 'filled'}
   class:isOutline={kind === 'outline'}
@@ -76,10 +76,26 @@
   class:isTiny={size === 'tiny'}
   class:fab
   class:isLoading
+  disabled={isLoading || isDisabled || undefined}
   on:click={onClick}
   {...$$restProps}
 >
-  <slot>Leo Button</slot>
+  {#if isLoading}
+    {#if $$slots.loading}
+      <slot name="loading" />
+    {:else if !fab}
+      <div>
+        <slot>Leo Button</slot>
+      </div>
+    {/if}
+    <ProgressRing />
+  {:else}
+    <slot name="icon-before" />
+    <div>
+      <slot>Leo Button</slot>
+    </div>
+    <slot name="icon-after" />
+  {/if}
 </svelte:element>
 
 <style lang="scss">
@@ -102,8 +118,14 @@
     --radius: 0;
     --border-color: transparent;
     --border-width: 0px;
+    --leo-icon-color: var(--icon-color);
+    --leo-progressring-size: var(--leo-icon-size);
+    --leo-progressring-color: var(--icon-color);
 
-    display: block;
+    display: flex;
+    gap: var(--icon-gap);
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: background 0.12s ease-in-out, var(--default-transition);
@@ -120,6 +142,7 @@
     &:hover,
     [data-is-button-target]:hover :host .leoButton,
     [data-is-button-target]:hover .leoButton {
+      --leo-icon-color: var(--icon-hover-color, var(--icon-color));
       background: var(--bg-hover, var(--bg));
       color: var(--color-hover, var(--color));
       box-shadow: var(--box-shadow-hover);
@@ -149,6 +172,11 @@
   }
   :host:disabled .leoButton,
   .leoButton:disabled {
+    cursor: auto;
+  }
+  :host:disabled .leoButton:not(.isLoading),
+  .leoButton:disabled:not(.isLoading) {
+    --icon-color: var(--leo-color-icon-disabled);
     background: var(--bg-disabled, var(--bg));
     color: var(--leo-color-text-disabled);
     border-color: var(--leo-color-button-disabled);
@@ -156,36 +184,36 @@
 
   // Size Variations
   .leoButton.isTiny {
-    --icon-size: 12px;
     font: var(--leo-font-components-button-small);
     --padding-y: 6px;
     --padding-x: var(--leo-spacing-m);
     --radius: 14px;
     --leo-icon-size: 16px;
+    --icon-gap: 8px;
 
     &.fab {
       --padding-x: 6px;
     }
   }
   .leoButton.isSmall {
-    --icon-size: 20px;
     font: var(--leo-font-components-button-small);
     --padding-y: 8px;
     --padding-x: 14px;
-    --radius: 16px;
+    --radius: 18px;
     --leo-icon-size: 18px;
+    --icon-gap: 8px;
 
     &.fab {
       --padding-x: 8px;
     }
   }
   .leoButton.isMedium {
-    --icon-size: 24px;
     font: var(--leo-font-components-button-default);
     --padding-y: 10px;
     --padding-x: 16px;
-    --radius: 20px;
+    --radius: 22px;
     --leo-icon-size: 20px;
+    --icon-gap: 8px;
 
     &.fab {
       --padding-x: 12px;
@@ -193,12 +221,12 @@
     }
   }
   .leoButton.isLarge {
-    --icon-size: 24px;
     font: var(--leo-font-components-button-large);
-    --padding-y: 12px;
+    --padding-y: 15px;
     --padding-x: 30px;
-    --radius: 23px;
+    --radius: 26px;
     --leo-icon-size: 20px;
+    --icon-gap: 10px;
 
     &.fab {
       --padding-x: 15px;
@@ -206,12 +234,12 @@
     }
   }
   .leoButton.isJumbo {
-    --icon-size: 24px;
     font: var(--leo-font-components-button-jumbo);
     --padding-y: 18px;
     --padding-x: 26px;
     --radius: 30px;
     --leo-icon-size: 24px;
+    --icon-gap: 12px;
 
     &.fab {
       --padding-x: 18px;
@@ -226,7 +254,8 @@
     --bg-focus: var(--bg);
     --bg-loading: var(--bg);
     --bg-disabled: var(--leo-color-button-disabled);
-    --color: white;
+    --color: var(--leo-color-white);
+    --icon-color: var(--leo-color-white);
   }
 
   .leoButton.isOutline {
@@ -235,13 +264,15 @@
     --color: var(--leo-color-text-interactive);
     --color-hover: var(--leo-color-primary-60);
     --color-focus: var(--leo-color-text-interactive);
-    --color-loading: var(--leo-color-gray-70);
+    --color-loading: var(--leo-color-text-interactive);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
     --border-color-hover: var(--leo-color-primitive-primary-40);
     --border-color-focus: var(--leo-color-divider-interactive);
     --box-shadow-focus: 0px 0px 0px 2px #423eee,
       0px 0px 0px 1px rgba(255, 255, 255, 0.3);
+    --icon-color: var(--leo-color-icon-interactive);
+    --icon-hover-color: var(--leo-color-primary-60);
 
     @theme (dark) {
       --border-color-hover: var(--leo-color-primitive-primary-60);
@@ -255,30 +286,35 @@
     --color-active: var(--color);
     --color-loading: var(--color);
     --box-shadow-hover: none;
+    --icon-color: var(--leo-color-icon-interactive);
+    --icon-hover-color: var(--leo-color-primary-60);
 
-    &:disabled {
+    &:disabled:not(.isLoading) {
       --color: var(--leo-color-text-primary);
     }
   }
   .leoButton.isPlainFaint {
     --radius: 8px;
     --padding-x: 2px;
-    --color: var(--leo-color-gray-60);
+    --color: var(--leo-color-text-secondary);
     --color-hover: var(--leo-color-gray-70);
     --box-shadow-hover: none;
+    --icon-color: var(--leo-color-icon-default);
+    --icon-hover-color: var(--leo-color-gray-70);
   }
   .leoButton.isHero {
     transition: var(--default-transition);
     --bg: transparent;
     --bg-focus: var(--bg);
     --bg-disabled: var(--leo-color-button-disabled);
-    --color: white;
+    --color: var(--leo-color-white);
     --default-bg-opacity: 1;
+    --icon-color: var(--leo-color-white);
 
     position: relative;
     z-index: 0;
 
-    &:not(:disabled) {
+    &:not(:disabled:not(.isLoading)) {
       &::before,
       &::after {
         content: '';
@@ -310,7 +346,7 @@
       }
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       --default-bg-opacity: 0;
     }
   }
