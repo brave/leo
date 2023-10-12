@@ -23,7 +23,8 @@
       description: 'The padding to apply to the button content'
     },
     kind: { control: 'select', options: buttonKinds },
-    size: { control: 'select', options: buttonSizes }
+    size: { control: 'select', options: buttonSizes },
+    isDisabled: { control: 'boolean' }
   }}
 />
 
@@ -40,6 +41,33 @@
     <Slot name="default" explanation="The content of the button">
       <Button {...args}>
         Button <b>can</b> <i>contain</i> <s>HTML</s>
+      </Button>
+    </Slot>
+
+    <Slot
+      name="icon-before"
+      explanation="An icon displayed before the button content"
+    >
+      <Button {...args}>
+        Text
+        <Icon name="check-circle-outline" slot="icon-before" />
+      </Button>
+    </Slot>
+
+    <Slot
+      name="icon-after"
+      explanation="An icon displayed on after the button content"
+    >
+      <Button {...args}>
+        Text
+        <Icon name="check-circle-outline" slot="icon-after" />
+      </Button>
+    </Slot>
+
+    <Slot name="loading" explanation="Text to display if button is loading">
+      <Button {...args} isLoading={true}>
+        <svelte:fragment slot="loading">Loading</svelte:fragment>
+        <Icon name="check-circle-outline" slot="icon-after" />
       </Button>
     </Slot>
   </SlotInfo>
@@ -77,6 +105,21 @@
         {/each}
       </div>
     {/each}
+  {/each}
+</Story>
+
+<Story name="All with icons" let:args>
+  {#each buttonSizes as size}
+    <h2 class="label capitalize">{size}</h2>
+    <div class="button-group">
+      {#each buttonKinds as kind}
+        <Button {kind} {size} {...args}>
+          <Icon name="check-circle-outline" slot="icon-before" />
+          <span class="capitalize">{kind}</span>
+          <Icon name="check-circle-outline" slot="icon-after" />
+        </Button>
+      {/each}
+    </div>
   {/each}
 </Story>
 
