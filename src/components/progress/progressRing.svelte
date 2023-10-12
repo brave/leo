@@ -65,7 +65,7 @@
       animation-duration: var(--spin-rate);
       animation-name: spin;
       animation-iteration-count: infinite;
-      animation-timing-function: linear;
+      animation-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
     }
 
     circle {
