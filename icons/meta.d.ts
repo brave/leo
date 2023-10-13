@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1696925408505,
+  "updatedAt": 1697184572675,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -963,6 +963,7 @@ const meta = {
     "google-calendar-color": "google-calendar-color",
     "google-color": "google-color",
     "google-docs-color": "google-docs-color",
+    "google-play-color": "google-play-color",
     "google-sheets-color": "google-sheets-color",
     "graph-chart-down": "graph-chart-down",
     "graph-chart-up": "graph-chart-up",
@@ -1318,6 +1319,7 @@ const meta = {
     "payment-affirm-color": "payment-affirm-color",
     "payment-alipay-color": "payment-alipay-color",
     "payment-amazon-pay-color": "payment-amazon-pay-color",
+    "payment-apple-color": "payment-apple-color",
     "payment-apple-pay-color": "payment-apple-pay-color",
     "payment-authorize.net-color": "payment-authorize.net-color",
     "payment-bancontact-color": "payment-bancontact-color",
@@ -1331,6 +1333,7 @@ const meta = {
     "payment-forbrugsforeningen-color": "payment-forbrugsforeningen-color",
     "payment-giropay-color": "payment-giropay-color",
     "payment-google-pay-color": "payment-google-pay-color",
+    "payment-googleplay-color": "payment-googleplay-color",
     "payment-ideal-color": "payment-ideal-color",
     "payment-interac-color": "payment-interac-color",
     "payment-jko-pay-color": "payment-jko-pay-color",
