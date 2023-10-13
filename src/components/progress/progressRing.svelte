@@ -12,24 +12,8 @@
 >
   <slot />
   <svg viewBox="0 0 48 48">
-    <circle
-      style:r="var(--normalized-radius)"
-      style:cx="var(--radius)"
-      style:cy="var(--radius)"
-      style:stroke-width="var(--stroke-width)"
-      stroke="var(--background-color)"
-      fill="transparent"
-    />
-    <circle
-      style:r="var(--normalized-radius)"
-      style:cx="var(--radius)"
-      style:cy="var(--radius)"
-      style:stroke-width="var(--stroke-width)"
-      stroke="var(--stroke-color)"
-      style:stroke-dasharray="var(--circumference) var(--circumference)"
-      style:stroke-dashoffset={'calc(var(--circumference) * (1 - var(--progress)))'}
-      fill="transparent"
-    />
+    <circle class="leo-progressring__background" />
+    <circle class="leo-progressring__ring" />
   </svg>
 </div>
 
@@ -59,10 +43,7 @@
     --normalized-radius: calc(var(--radius) - var(--stroke-width));
     --circumference: calc(var(--normalized-radius) * 2 * 3.141592);
 
-    --background-color: var(
-      --leo-progressring-background-color,
-      var(--leo-color-primary-20)
-    );
+    --background-color: var(--stroke-color);
 
     width: var(--size);
     height: var(--size);
@@ -92,6 +73,22 @@
       transform-origin: 50% 50%;
       transition: stroke-dashoffset var(--transition-duration);
       stroke-linecap: round;
+      r: var(--normalized-radius);
+      cx: var(--radius);
+      cy: var(--radius);
+      stroke-width: var(--stroke-width);
+      fill: transparent;
+    }
+
+    &__background {
+      filter: opacity(0.3);
+      stroke: var(--background-color);
+    }
+
+    &__ring {
+      stroke-dasharray: var(--circumference) var(--circumference);
+      stroke-dashoffset: calc(var(--circumference) * (1 - var(--progress)));
+      stroke: var(--stroke-color);
     }
   }
 </style>

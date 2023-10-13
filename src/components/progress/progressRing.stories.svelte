@@ -20,14 +20,18 @@
       control: 'color',
       description: 'The color of the progress on the progress ring'
     },
-    '--leo-progressring-background-color': {
-      type: 'string',
-      control: 'color',
-      description: 'The color of the progress ring'
-    },
     '--leo-progressring-size': {
       type: 'string',
       description: 'The size of the progress ring'
+    },
+    progress: {
+      control: {
+        type: 'number',
+        min: 0,
+        max: 1,
+        step: 0.1
+      },
+      description: 'A number between 0 and 1 to describe current progress'
     },
     mode: {
       type: 'string',
