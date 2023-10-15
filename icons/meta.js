@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1697184572675,
+  "updatedAt": 1697357331171,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
