@@ -107,7 +107,6 @@
   <slot name="errors" />
 {/if}
 
-
 <style lang="scss">
   :host {
     display: inline-block;

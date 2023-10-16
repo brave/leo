@@ -127,9 +127,7 @@
         <leo-option value="Error 1">Error 1</leo-option>
         <leo-option value="Error 2">Error 2</leo-option>
         <leo-option value="Error 3">Error 3</leo-option>
-        <div slot="errors">
-          Something is not quite right here!
-        </div>
+        <div slot="errors">Something is not quite right here!</div>
       </Dropdown>
     </Slot>
   </SlotInfo>
