@@ -8,6 +8,50 @@ fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 const COMPONENT_PREFIX = 'leo'
 const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
+const getEventsTypeDefinition = (
+  componentName,
+  componentEventNames,
+  svelteFilePath
+) => `
+export type ${componentName}EventProps = EventProps<{
+${componentEventNames
+  .map(
+    ({ eventName, detailType }) =>
+      `  ${eventName}?: (event: ${detailType}) => void`
+  )
+  .join(';\n')}
+}>
+`
+
+const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
+  const pathToType = path.join(
+    __dirname,
+    '../../',
+    'types',
+    path.relative('./src', svelteFilePath + '.d.ts')
+  )
+  const fileContents = await fs.readFile(pathToType)
+
+  const typeRegex = /\s+([a-zA-Z0-9]+): (CustomEvent<{(\n|.)*?}>)/gm
+
+  const componentEventNames = [
+    ...fileContents.toString().matchAll(typeRegex)
+  ].map((match) => ({
+    eventName: `on${match[1]}`,
+    detailType: match[2]
+  }))
+
+  if (componentEventNames.length > 0) {
+    return getEventsTypeDefinition(
+      componentName,
+      componentEventNames,
+      svelteFilePath
+    )
+  } else {
+    return []
+  }
+}
+
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)
   const typingsPath = path.join('./types/components', relativePath) + '.d.ts'
@@ -57,6 +101,10 @@ const getReactFileContents = async (svelteFilePath) => {
     fileNameWithoutExtension[0].toUpperCase() +
     fileNameWithoutExtension.substring(1)
   const generics = await getComponentGenerics(svelteFilePath, componentName)
+  const eventTypeDefinition = await findEventsTypeDefinition(
+    svelteFilePath,
+    componentName
+  )
   const hasGenerics = !!generics.length
   const funcConstraints = hasGenerics
     ? `<${generics.map((g) => `${g.name} extends ${g.constraint}`).join(', ')}>`
@@ -77,10 +125,12 @@ export * from '../web-components/${fileNameWithoutExtension}.js'
 
   const typeDef = `
 import type * as React from 'react'
-import type { ReactProps } from '../src/components/svelte-react'
+import type { ReactProps, EventProps } from '../src/components/svelte-react'
 import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../types/components/${containingFolder}/${fileName}';
-
-export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
+${eventTypeDefinition && eventTypeDefinition}
+export type ${componentName}Props${funcConstraints} = ${
+    eventTypeDefinition && `${componentName}EventProps &`
+  } ReactProps<SvelteProps${propParams}, SvelteEvents${propParams}>;
 export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
 
 // As we don't currently have type definitions for the web components, export

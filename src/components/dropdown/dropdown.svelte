@@ -28,10 +28,11 @@
   export let size: Size = 'normal'
   export let required = false
   export let mode: Mode = 'outline'
-
   export let showErrors = false
 
-  let dispatch = createEventDispatcher()
+  let dispatch = createEventDispatcher<{
+    change: { value: string }
+  }>()
 
   let isOpen = false
   let button: HTMLButtonElement
