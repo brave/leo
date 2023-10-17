@@ -1,5 +1,4 @@
 const fs = require('fs/promises')
-const capitalize = require('lodash.capitalize')
 const path = require('path')
 const { getSvelteFiles } = require('./common')
 
@@ -35,7 +34,7 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
 
     const componentEventNames = [
       ...findDefinedEvents.matchAll(eventNameRegex)
-    ].map((match) => `on${capitalize(match[1])}`)
+    ].map((match) => `on${match[1][0].toUpperCase()}${match[1].substring(1)}`)
 
     return getEventsTypeDefinition(componentName, componentEventNames)
   } else {
