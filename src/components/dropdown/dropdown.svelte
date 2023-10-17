@@ -31,7 +31,7 @@
   export let showErrors = false
 
   let dispatch = createEventDispatcher<{
-    change: CustomEvent
+    change: { value: string }
   }>()
 
   let isOpen = false

@@ -34,7 +34,7 @@
   $: visibleInternal = visible ?? false
 
   const dispatch = createEventDispatcher<{
-    visibilitychange: CustomEvent
+    visibilitychange: { visible: boolean }
   }>()
 
   let tooltip: HTMLElement

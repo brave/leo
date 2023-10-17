@@ -23,7 +23,7 @@
   export let size: Sizes = 'normal'
 
   const dispatch = createEventDispatcher<{
-    change: CustomEvent
+    change: { checked: boolean }
   }>()
 
   function change(e) {

@@ -12,7 +12,7 @@
   $: isOpenInternal = isOpen ?? false
 
   const dispatcher = createEventDispatcher<{
-    toggle: CustomEvent
+    toggle: { open: boolean }
   }>()
 
   const toggle = (e) => {

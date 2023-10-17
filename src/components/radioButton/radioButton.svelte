@@ -23,7 +23,7 @@
 
   const tagName = 'leo-radiobutton'
   const dispatch = createEventDispatcher<{
-    change: CustomEvent
+    change: { value: string | number | any }
   }>()
 
   function changed(e) {

@@ -19,7 +19,7 @@
   let dragOffsetX: number = 0
 
   const dispatch = createEventDispatcher<{
-    change: CustomEvent
+    change: { checked: boolean }
   }>()
 
   const onChange = (newValue?: boolean) => {
