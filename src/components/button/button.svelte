@@ -50,7 +50,9 @@
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    click: CustomEvent
+  }>()
 
   /**
    * Optional click handler

@@ -22,7 +22,10 @@
   export let isDisabled = false
   export let size: Sizes = 'normal'
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    change: CustomEvent
+  }>()
+
   function change(e) {
     dispatch('change', {
       checked: e.target.checked

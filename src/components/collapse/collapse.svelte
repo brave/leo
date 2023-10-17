@@ -11,7 +11,10 @@
   export let isOpen: boolean | undefined
   $: isOpenInternal = isOpen ?? false
 
-  const dispatcher = createEventDispatcher()
+  const dispatcher = createEventDispatcher<{
+    toggle: CustomEvent
+  }>()
+
   const toggle = (e) => {
     e.preventDefault()
 

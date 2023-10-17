@@ -13,7 +13,9 @@
   export let backdropClickCloses = true
   export let animate = true
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    close: CustomEvent
+  }>()
 
   let dialog: HTMLDialogElement
   $: {

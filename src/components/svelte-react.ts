@@ -35,8 +35,6 @@ export type SvelteEvents<T> = T extends SvelteComponentTyped<
   ? Events
   : {}
 export type ReactProps<Props, Events> = Props & {
-  [P in keyof Events as `on${Capitalize<P & string>}`]?: (e: Events[P]) => void
-} & {
   ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
 } & {
   // Note: The div here isn't important because all props in intrinsicProps are

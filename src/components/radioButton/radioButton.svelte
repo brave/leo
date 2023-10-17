@@ -22,7 +22,9 @@
   export let isDisabled = false
 
   const tagName = 'leo-radiobutton'
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    change: CustomEvent
+  }>()
 
   function changed(e) {
     if (isDisabled || !e.target.checked) return

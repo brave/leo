@@ -9,6 +9,7 @@
     "@floating-ui/dom": "1.4.4",
     "@tsconfig/svelte": "3.0.0",
     "lodash.camelcase": "4.3.0",
+    "lodash.capitalize": "^4.2.1",
     "lodash.merge": "4.6.2",
     "style-dictionary": "3.7.2",
     "svelte": "3.56.0",

@@ -18,7 +18,10 @@
   let dragStartX: number | undefined
   let dragOffsetX: number = 0
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    change: CustomEvent
+  }>()
+
   const onChange = (newValue?: boolean) => {
     if (newValue === undefined) newValue = !checked
     checked = newValue
