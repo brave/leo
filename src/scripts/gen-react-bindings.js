@@ -8,8 +8,11 @@ fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 const COMPONENT_PREFIX = 'leo'
 const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
-const getEventsTypeDefinition = (componentName, componentEventNames) => {
-  if (componentEventNames.length === 0) return null
+const getEventsTypeDefinition = (componentName, componentEventNames, svelteFilePath) => {
+  if (componentEventNames.length === 0) {
+    console.warn(`### Untyped createEventDispatcher definition in ${svelteFilePath}`)
+    return null
+  }
 
   return `
 export type ${componentName}EventProps = {
@@ -24,7 +27,7 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('../components', svelteFilePath)
   const fileContents = await fs.readFile(relativePath)
 
-  const eventDispatcherRegex = /createEventDispatcher<{((\n.*)+)\s}>/g
+  const eventDispatcherRegex = /createEventDispatcher(?:<{((\n.*)+)\s}>)?\(/g
   const findDefinedEvents = fileContents
     .toString()
     .match(eventDispatcherRegex)?.[0]
@@ -36,7 +39,7 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
       ...findDefinedEvents.matchAll(eventNameRegex)
     ].map((match) => `on${match[1][0].toUpperCase()}${match[1].substring(1)}`)
 
-    return getEventsTypeDefinition(componentName, componentEventNames)
+    return getEventsTypeDefinition(componentName, componentEventNames, svelteFilePath)
   } else {
     return []
   }
