@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1697357331171,
+  "updatedAt": 1697789392258,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -106,6 +106,7 @@ const meta = {
     "audr-color": "audr-color",
     "aurora-color": "aurora-color",
     "auto-color": "auto-color",
+    "autofill": "autofill",
     "autoplay-off": "autoplay-off",
     "autoplay-on": "autoplay-on",
     "avax-color": "avax-color",
@@ -213,6 +214,7 @@ const meta = {
     "brave-icon-nightly-color": "brave-icon-nightly-color",
     "brave-icon-outline": "brave-icon-outline",
     "brave-icon-release-color": "brave-icon-release-color",
+    "brave-icon-search-color": "brave-icon-search-color",
     "brave-icon-search": "brave-icon-search",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
@@ -1010,6 +1012,7 @@ const meta = {
     "help-outline": "help-outline",
     "hex-color": "hex-color",
     "hierarchy-structure": "hierarchy-structure",
+    "highlight": "highlight",
     "hight-color": "hight-color",
     "hipster-glasses": "hipster-glasses",
     "history": "history",
@@ -1590,6 +1593,8 @@ const meta = {
     "shield-done": "shield-done",
     "shield-help-filled": "shield-help-filled",
     "shield-help": "shield-help",
+    "shield-player-filled": "shield-player-filled",
+    "shield-player": "shield-player",
     "shield-plus-filled": "shield-plus-filled",
     "shield-plus": "shield-plus",
     "shield-refresh-filled": "shield-refresh-filled",
