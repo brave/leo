@@ -12,39 +12,36 @@ const getEventsTypeDefinition = (
   componentName,
   componentEventNames,
   svelteFilePath
-) => {
-  if (componentEventNames.length === 0) {
-    console.warn(
-      `### Untyped createEventDispatcher definition in ${svelteFilePath}`
-    )
-    return null
-  }
-
-  return `
+) => `
 export type ${componentName}EventProps = {
 ${componentEventNames
-  .map((event) => `  ${event}?: (event: CustomEvent) => void`)
+  .map(
+    ({ eventName, detailType }) =>
+      `  ${eventName}?: (event: ${detailType}) => void`
+  )
   .join(';\n')}
 }
 `
-}
 
 const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
-  const relativePath = path.relative('../components', svelteFilePath)
-  const fileContents = await fs.readFile(relativePath)
+  const pathToType = path.join(
+    __dirname,
+    '../../',
+    'types',
+    path.relative('./src', svelteFilePath + '.d.ts')
+  )
+  const fileContents = await fs.readFile(pathToType)
 
-  const eventDispatcherRegex = /createEventDispatcher(?:<{((\n.*)+)\s}>)?\(/g
-  const findDefinedEvents = fileContents
-    .toString()
-    .match(eventDispatcherRegex)?.[0]
+  const typeRegex = /\s+([a-zA-Z0-9]+): (CustomEvent<{(\n|.)*?}>)/gm
 
-  if (findDefinedEvents) {
-    const eventNameRegex = /(\w+)\:.*/g
+  const componentEventNames = [
+    ...fileContents.toString().matchAll(typeRegex)
+  ].map((match) => ({
+    eventName: `on${match[1][0].toUpperCase()}${match[1].substring(1)}`,
+    detailType: match[2]
+  }))
 
-    const componentEventNames = [
-      ...findDefinedEvents.matchAll(eventNameRegex)
-    ].map((match) => `on${match[1][0].toUpperCase()}${match[1].substring(1)}`)
-
+  if (componentEventNames.length > 0) {
     return getEventsTypeDefinition(
       componentName,
       componentEventNames,
