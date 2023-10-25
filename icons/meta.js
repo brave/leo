@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1698134990629,
+  "updatedAt": 1698264958686,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1593,6 +1593,7 @@ export default {
     "shield-disable": "shield-disable",
     "shield-done-filled": "shield-done-filled",
     "shield-done": "shield-done",
+    "shield-filled": "shield-filled",
     "shield-help-filled": "shield-help-filled",
     "shield-help": "shield-help",
     "shield-plus-filled": "shield-plus-filled",
@@ -1601,6 +1602,7 @@ export default {
     "shield-refresh": "shield-refresh",
     "shield-star-filled": "shield-star-filled",
     "shield-star": "shield-star",
+    "shield": "shield",
     "shift-color": "shift-color",
     "shop-alternative": "shop-alternative",
     "shop-location": "shop-location",
