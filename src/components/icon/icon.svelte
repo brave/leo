@@ -62,7 +62,7 @@
     width: var(--icon-width);
     height: var(--icon-height);
     flex-shrink: 0;
-    
+
     & .icon,
     :global svg {
       width: 100%;

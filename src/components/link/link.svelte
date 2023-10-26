@@ -27,8 +27,6 @@
 
 <style lang="scss">
   a {
-    all: unset;
-
     --color: var(--leo-link-color, var(--leo-color-text-interactive));
     --hover-color: var(--leo-link-hover-color, var(--leo-color-primary-60));
     --visited-color: var(--leo-link-visited-color, var(--leo-color-pink-50));
@@ -54,7 +52,9 @@
 
     &:focus-visible:not(.disabled) {
       color: var(--focus-color);
+      outline: none;
       box-shadow: var(--focus-shadow);
+      border-radius: var(--leo-radius-xs);
     }
 
     &.disabled {
