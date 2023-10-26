@@ -33,6 +33,7 @@
   .leo-navigation-item {
     --color: var(--leo-color-text-secondary);
     --leo-icon-color: var(--leo-color-icon-default);
+    --leo-icon-size: var(--leo-icon-s);
 
     a {
       cursor: pointer;
