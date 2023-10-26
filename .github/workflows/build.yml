@@ -1,4 +1,4 @@
-name: Deploy
+name: Build
 on:
   pull_request:
   push:
@@ -12,36 +12,22 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read # This is required for actions/checkout
-      pull-requests: write # For actions/github-script
-    environment:
-      name: staging
-    env:
-      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
-
     steps:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
 
-      - name: Get npm cache directory path
-        id: npm-cache-dir-path
-        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
-        id: npm-cache
+      - uses: actions/setup-node@v4
+        id: setup-node
         with:
-          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
         run: |
           npm ci --ignore-scripts
           # Please check with Brave's security team prior to adding any packages to this list.
-          npm rebuild style-dictionary-create-react-app
+
+      - run: npm rebuild style-dictionary-create-react-app
 
       - name: Format
         id: format
@@ -78,59 +64,16 @@ jobs:
           npm install --no-save
           npm run build
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@010d0da01d0b5a38af31e9c3470dbfdabdecca3a # v4.0.1
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: github-actions-pr-nala-${{ github.run_id }}
-          aws-region: us-west-2
-
-      - name: Deploy
-        id: build-site
+      - name: Build Storybook
         env:
-          AWS_REGION: us-west-2
           NODE_OPTIONS: '--max_old_space_size=6144'
-        run: |
-          shopt -s inherit_errexit
-          set -xeEo pipefail
-          HEAD_SHA=${{ github.event.pull_request.head.sha }}
-          [ -z "$AWS_ACCESS_KEY_ID" ] && exit 1
-          BUCKET_PATH=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH" | grep -E '^[0-9]+$' || true)
-          npm run build-storybook
-          echo "::group::Upload to AWS S3"
-          cd ./storybook-static
-          aws configure set default.s3.max_concurrent_requests 100
-          aws configure set default.s3.max_queue_size 10000
-          if [[ -z ${BUCKET_PATH} ]]; then # non PR
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*'
-          else
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/commit-${HEAD_SHA}/" --delete
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${BUCKET_PATH}/" --delete --exclude 'commit-*/*'
-          fi
-          echo "::endgroup::"
+        run: npm run build-storybook
 
-      - name: Post GitHub comment
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
-        if: ${{ github.event_name == 'pull_request' }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
-          script: |
-            const fs = require('fs/promises')
-            const diff = await fs.readFile('./tokens/css/variables.diff', 'utf-8')
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `👋 Thanks for Submitting! This PR is available for preview at the link below.
-
-              ✅ PR tip preview: https://${context.issue.number}.pr.nala.bravesoftware.com/
-              ✅ Commit preview: https://${context.issue.number}.pr.nala.bravesoftware.com/commit-${context.payload.pull_request.head.sha}/
-
-            <details>
-            <summary>Variables Diff</summary>
-
-            \`\`\`diff
-            ${diff}
-            \`\`\`
-
-            </details>`
-            })
+          name: build
+          if-no-files-found: error
+          path: |
+            ./storybook-static
+            ./tokens/css/variables.diff
