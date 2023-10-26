@@ -6,8 +6,25 @@
   import { createEventDispatcher } from 'svelte'
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
+  type LeoInputTypeAttribute =
+    | 'color'
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'file'
+    | 'hidden'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'range'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url'
+    | 'week'
   type $$Props = Omit<SvelteHTMLElements['input'], OverrideProps> & {
-    type?: 'text' | 'password' | 'date' | 'time' | 'color' | 'number'
+    type?: LeoInputTypeAttribute
     value?: string | number | boolean
     size?: Size
     hasErrors?: boolean
