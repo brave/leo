@@ -29,6 +29,9 @@
   export let required = false
   export let mode: Mode = 'outline'
 
+  export let hasErrors = false
+  export let showErrors = false
+
   let dispatch = createEventDispatcher()
 
   let isOpen = false
@@ -52,6 +55,7 @@
       bind:size
       {mode}
       showFocusOutline={isOpen}
+      error={hasErrors && showErrors}
     >
       <slot name="label" slot="label" />
       <slot name="left-icon" slot="left-icon" />
@@ -99,6 +103,9 @@
     <slot />
   </Menu>
 </div>
+{#if showErrors && hasErrors}
+  <slot name="errors" />
+{/if}
 
 <style lang="scss">
   :host {

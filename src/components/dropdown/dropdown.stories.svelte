@@ -119,6 +119,17 @@
         <leo-option value="Frob">Frob</leo-option>
       </Dropdown>
     </Slot>
+    <Slot
+      name="error"
+      explanation="A slot where any errors related to the component will be shown. Errors are only shown if showErrors and hasErrors are set on the Dropdown (this one has them forced on)"
+    >
+      <Dropdown {...args} hasErrors showErrors>
+        <leo-option value="Error 1">Error 1</leo-option>
+        <leo-option value="Error 2">Error 2</leo-option>
+        <leo-option value="Error 3">Error 3</leo-option>
+        <div slot="errors">Something is not quite right here!</div>
+      </Dropdown>
+    </Slot>
   </SlotInfo>
 </Story>
 
@@ -197,5 +208,16 @@
     flex-direction: row;
     gap: 8px;
     align-items: center;
+  }
+
+  [slot='errors'] {
+    display: flex;
+    flex-direction: row;
+    gap: var(--leo-spacing-m);
+    align-items: center;
+
+    margin-top: var(--leo-spacing-s);
+
+    color: var(--leo-color-systemfeedback-error-icon);
   }
 </style>
