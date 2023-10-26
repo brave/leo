@@ -54,11 +54,11 @@
 
 <label
   class="leo-control"
-  class:small={size === 'small'}
-  class:large={size === 'large'}
-  class:filled={mode === 'filled'}
-  class:outline={mode !== 'filled'}
-  class:focus={showFocusOutline}
+  class:isSmall={size === 'small'}
+  class:isLarge={size === 'large'}
+  class:isFilled={mode === 'filled'}
+  class:isOutline={mode !== 'filled'}
+  class:isFocused={showFocusOutline}
   class:error
   aria-disabled={disabled}
 >
@@ -127,7 +127,7 @@
       }
 
       & .container:has(*:focus-visible),
-      &.focus .container {
+      &.isFocused .container {
         color: var(--color-focus);
         background: var(--background-focus);
         box-shadow: var(--shadow-focus);
@@ -140,28 +140,28 @@
     }
   }
 
-  .leo-control.small {
+  .leo-control.isSmall {
     --leo-icon-size: 16px;
     --font: var(--leo-control-font, var(--leo-font-primary-small-regular));
     --padding: var(--leo-control-padding, 8px);
     --gap: var(--leo-control-label-gap, 2px);
   }
 
-  .leo-control.large {
+  .leo-control.isLarge {
     --leo-icon-size: 22px;
     --padding: var(--leo-control-padding, 14px 8px);
     --gap: var(--leo-control-label-gap, 12px);
   }
 
-  .leo-control.filled {
+  .leo-control.isFilled {
     --background: var(--leo-color-container-highlight);
     --shadow-hover: var(--leo-effect-elevation-01);
     --border-color: transparent;
     --border-color-hover: var(--leo-color-divider-subtle);
   }
 
-  .leo-control.outline {
-    --background: var(--light-container-background);
+  .leo-control.isOutline {
+    --background: var(--leo-color-container-background);
     --background-hover: var();
     --border-color: var(--leo-color-divider-strong);
     --border-color-hover: var(--leo-color-gray-30);
