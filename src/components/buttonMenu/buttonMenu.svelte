@@ -17,19 +17,21 @@
   import Menu from '../menu/menu.svelte'
 
   export let isOpen = false
-  let button: HTMLButtonElement
+  let anchor: HTMLElement
 </script>
 
 <div class="leo-button-menu">
-  <button
-    bind:this={button}
-    on:click|stopPropagation={() => (isOpen = !isOpen)}
-  >
+  <!-- 
+    We disable this check - the menu is triggered by the contained element
+    firing a `click` event. This may be triggered with a keypress or click.
+  -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div bind:this={anchor} on:click|stopPropagation={() => (isOpen = !isOpen)}>
     <slot name="anchor-content">Click</slot>
-  </button>
+  </div>
   <Menu
     bind:isOpen
-    target={button}
+    target={anchor}
     on:click={() => (isOpen = !isOpen)}
     on:close
   >

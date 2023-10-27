@@ -4,6 +4,7 @@
 /shared
 /svelte
 /examples/plain-html/
+/examples/example-ui-react/public/icons/
 /icons/
 
 # The .tokens.json files should be ignored as they're generated from Figma.

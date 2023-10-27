@@ -7,6 +7,7 @@ import Input from '../../../react/input'
 import Dropdown from '../../../react/dropdown'
 import ButtonMenu from '../../../react/buttonMenu'
 import Toggle from '../../../react/toggle'
+import Icon from '../../../react/icon'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -48,7 +49,9 @@ function App() {
           </Dropdown>
         </div>
         <ButtonMenu>
-          <div slot="anchor-content">ButtonMenu</div>
+          <LeoButton fab kind="plain-faint" slot="anchor-content">
+            <Icon name="more-horizontal" />
+          </LeoButton>
           <leo-menu-item onClick={handleAction}>Llama2-13b</leo-menu-item>
           <leo-menu-item onClick={handleAction}>Llama2-7b</leo-menu-item>
           <div
