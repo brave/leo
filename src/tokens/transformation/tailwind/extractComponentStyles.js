@@ -1,6 +1,5 @@
 const svelte = require('svelte/compiler')
-const { readdirSync, statSync } = require('fs')
-const { writeFile, readFile } = require('fs/promises')
+const { writeFile, readFile, mkdir } = require('fs/promises')
 const { join, parse } = require('path')
 const preprocess = require('svelte-preprocess')
 const postcssJs = require('postcss-js')
@@ -8,6 +7,28 @@ const postcss = require('postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')()
 const theme = require('../../../postcss/theme')
 const { walk } = require('../../../scripts/common')
+
+const writePlugin = async (contents, name, dir) => {
+  const fnName = name === 'link' ? 'addBase' : 'addComponents'
+
+  try {
+    await writeFile(
+      join(dir, `${name}Component.js`),
+      `const plugin = require("tailwindcss/plugin");
+
+module.exports = plugin(function ({ ${fnName}, theme }) {
+${fnName}(${JSON.stringify(contents, null, 2)});
+});`
+    )
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      await mkdir(dir)
+      await writePlugin(contents, name, dir)
+    } else {
+      console.error(e)
+    }
+  }
+}
 
 module.exports = {
   do: async function (dictionary, config) {
@@ -41,18 +62,10 @@ module.exports = {
         if (rawCSS) {
           const css = rawCSS.replace(/\.REMOVE_ME/g, '')
           const root = postcss.parse(css)
-          let cssAsJs = postcssJs.objectify(root)
+          const cssAsJs = postcssJs.objectify(root)
+          const pluginDir = join(config.buildPath, 'plugins/components')
 
-          const fnName = fileParts.name === 'link' ? 'addBase' : 'addComponents'
-
-          await writeFile(
-            join(config.buildPath, 'plugins', `${fileParts.name}Component.js`),
-            `const plugin = require("tailwindcss/plugin");
-
-module.exports = plugin(function ({ ${fnName}, theme }) {
-	${fnName}(${JSON.stringify(cssAsJs, null, 2)});
-});`
-          )
+          await writePlugin(cssAsJs, fileParts.name, pluginDir)
         }
       }
     }
