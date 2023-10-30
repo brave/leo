@@ -156,7 +156,7 @@
   </slot>
   <slot slot="label" />
 </FormItem>
-{#if showErrors && $$slots.errors}
+{#if showErrors}
   <slot name="errors" />
 {/if}
 
