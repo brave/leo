@@ -29,7 +29,6 @@
   export let required = false
   export let mode: Mode = 'outline'
 
-  export let hasErrors = false
   export let showErrors = false
 
   let dispatch = createEventDispatcher()
@@ -55,7 +54,7 @@
       bind:size
       {mode}
       showFocusOutline={isOpen}
-      error={hasErrors && showErrors}
+      error={showErrors && $$slots.errors}
     >
       <slot name="label" slot="label" />
       <slot name="left-icon" slot="left-icon" />
@@ -103,7 +102,7 @@
     <slot />
   </Menu>
 </div>
-{#if showErrors && hasErrors}
+{#if showErrors}
   <slot name="errors" />
 {/if}
 

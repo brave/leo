@@ -95,9 +95,9 @@
     </Slot>
     <Slot
       name="errors"
-      explanation="A slot where any errors related to the component will be shown. Errors are only show if showErrors and hasErrors are set on the Input (this one has them forced on)"
+      explanation="A slot where any errors related to the component will be shown. Errors are only show if showErrors is set and an error slot exists on the Input (this one has them forced on)"
     >
-      <Input {...args} hasErrors showErrors>
+      <Input {...args} showErrors>
         <div slot="errors">
           Your password must contain a proof of Pythagoras' theorem!
         </div>

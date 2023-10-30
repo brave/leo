@@ -121,9 +121,9 @@
     </Slot>
     <Slot
       name="error"
-      explanation="A slot where any errors related to the component will be shown. Errors are only shown if showErrors and hasErrors are set on the Dropdown (this one has them forced on)"
+      explanation="A slot where any errors related to the component will be shown. Errors are only shown if showErrors is set and an error slot exists on the Dropdown (this one has them forced on)"
     >
-      <Dropdown {...args} hasErrors showErrors>
+      <Dropdown {...args} showErrors>
         <leo-option value="Error 1">Error 1</leo-option>
         <leo-option value="Error 2">Error 2</leo-option>
         <leo-option value="Error 3">Error 3</leo-option>

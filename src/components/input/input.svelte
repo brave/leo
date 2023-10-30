@@ -27,7 +27,6 @@
     type?: LeoInputTypeAttribute
     value?: string | number | boolean
     size?: Size
-    hasErrors?: boolean
     showErrors?: boolean
     mode?: Mode | undefined
   }
@@ -60,13 +59,6 @@
    * The size of the input.
    */
   export let size: Size = 'normal'
-
-  /**
-   * Whether the component has any errors. If true, and showErrors is set then
-   * the errors slot will be rendered and the component will show in its error
-   * state.
-   */
-  export let hasErrors = false
 
   /**
    * Whether any errors the component has should be shown.
@@ -129,7 +121,7 @@
   bind:disabled
   {size}
   {mode}
-  error={(hasErrors || hasErrorsInternal) && showErrors}
+  error={($$slots.errors || hasErrorsInternal) && showErrors}
 >
   <slot name="left-icon" slot="left-icon" />
   <div class="input-container">
@@ -164,7 +156,7 @@
   </slot>
   <slot slot="label" />
 </FormItem>
-{#if showErrors && hasErrors}
+{#if showErrors}
   <slot name="errors" />
 {/if}
 
