@@ -15,6 +15,7 @@
 
   const dispatch = createEventDispatcher<{
     close: {}
+    back: {}
   }>()
 
   let dialog: HTMLDialogElement
