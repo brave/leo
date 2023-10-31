@@ -13,14 +13,14 @@ const getEventsTypeDefinition = (
   componentEventNames,
   svelteFilePath
 ) => `
-export type ${componentName}EventProps = {
+export type ${componentName}EventProps = EventProps<{
 ${componentEventNames
   .map(
     ({ eventName, detailType }) =>
       `  ${eventName}?: (event: ${detailType}) => void`
   )
   .join(';\n')}
-}
+}>
 `
 
 const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
@@ -37,7 +37,7 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
   const componentEventNames = [
     ...fileContents.toString().matchAll(typeRegex)
   ].map((match) => ({
-    eventName: `on${match[1][0].toUpperCase()}${match[1].substring(1)}`,
+    eventName: `on${match[1]}`,
     detailType: match[2]
   }))
 
@@ -125,7 +125,7 @@ export * from '../web-components/${fileNameWithoutExtension}.js'
 
   const typeDef = `
 import type * as React from 'react'
-import type { ReactProps } from '../src/components/svelte-react'
+import type { ReactProps, EventProps } from '../src/components/svelte-react'
 import type { ${componentName}Events as SvelteEvents, ${componentName}Props as SvelteProps } from '../types/components/${containingFolder}/${fileName}';
 ${eventTypeDefinition && eventTypeDefinition}
 export type ${componentName}Props${funcConstraints} = ${

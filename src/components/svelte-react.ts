@@ -6,7 +6,8 @@ import {
   useCallback,
   type ForwardedRef,
   type PropsWithChildren,
-  useState
+  useState,
+  type DOMAttributes
 } from 'react'
 import type { SvelteComponentTyped } from 'svelte'
 
@@ -43,6 +44,16 @@ export type ReactProps<Props, Events> = Props & {
   [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
 }
 
+type EventPropsNames = keyof DOMAttributes<unknown>
+
+type EventPropsNameMap = {
+  [P in EventPropsNames as Lowercase<P>]: P
+}
+export type EventProps<T> = {
+  [P in keyof T as P extends Lowercase<EventPropsNames>
+    ? EventPropsNameMap[P]
+    : P]: T[P]
+}
 const useEventHandlers = (props: any) => {
   const [el, setEl] = useState<HTMLElement>()
   const lastValue = useRef<{ [key: string]: (...args: any[]) => any }>({})
