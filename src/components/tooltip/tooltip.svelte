@@ -31,17 +31,21 @@
   let arrow: HTMLElement
   let trigger: HTMLElement
 
+  let arrowPlacement: string = undefined
+
   function positionArrow(
     e: CustomEvent<{ middlewareData: MiddlewareData; placement: Placement }>
   ) {
     const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow
+
+    arrowPlacement = e.detail.placement.split('-')[0]
 
     const staticSide = {
       top: 'bottom',
       right: 'left',
       bottom: 'top',
       left: 'right'
-    }[e.detail.placement.split('-')[0]]
+    }[arrowPlacement]
 
     if (!arrow) return
 
@@ -54,6 +58,37 @@
     })
   }
 
+  let tooltipHovered = false
+  let triggerHovered = false
+
+  const handleMouseleave = (() => {
+    let timeout
+
+    return () => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        if (!triggerHovered && !tooltipHovered) {
+          setVisible(false)
+        }
+      }, 150)
+    }
+  })()
+
+  const handleTriggerMouseenter = () => {
+    triggerHovered = true
+    setVisible(true)
+  }
+
+  const handleTriggerMouseleave = () => {
+    triggerHovered = false
+    handleMouseleave()
+  }
+
+  const handleTooltipMouseleave = () => {
+    tooltipHovered = false
+    handleMouseleave()
+  }
+
   function setVisible(newVisible: boolean) {
     if (newVisible === visible) return
 
@@ -62,13 +97,7 @@
   }
 </script>
 
-<div
-  class="leo-tooltip"
-  on:mouseenter={() => setVisible(true)}
-  on:mouseleave={() => setVisible(false)}
-  on:focusin={() => setVisible(true)}
-  on:focusout={() => setVisible(false)}
->
+<div class="leo-tooltip">
   {#key visibleInternal}
     <Floating
       target={trigger}
@@ -77,6 +106,8 @@
       {placement}
       {shift}
       autoUpdate
+      on:mouseleave={handleTooltipMouseleave}
+      on:mouseenter={() => (tooltipHovered = true)}
       middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
       on:computedposition={positionArrow}
     >
@@ -93,16 +124,19 @@
         <slot name="content">
           {text}
         </slot>
-        <div
-          class="arrow"
-          hidden={mode === 'default' || mode === 'mini'}
-          bind:this={arrow}
-        />
+        <div class={`arrow ${arrowPlacement}`} bind:this={arrow} />
       </div>
     </Floating>
   {/key}
 
-  <div class="trigger" bind:this={trigger}>
+  <div
+    on:focusin={() => setVisible(true)}
+    on:focusout={() => setVisible(false)}
+    on:mouseenter={handleTriggerMouseenter}
+    on:mouseleave={handleTriggerMouseleave}
+    class="trigger"
+    bind:this={trigger}
+  >
     <slot />
   </div>
 </div>
@@ -131,13 +165,39 @@
     font: var(--leo-font-primary-default-regular);
   }
 
-  .leo-tooltip .tooltip .arrow {
-    position: absolute;
-    background: var(--background);
-    width: 8px;
-    height: 8px;
-    transform: rotate(45deg);
-    z-index: -1;
+  .leo-tooltip .tooltip {
+    & .arrow {
+      position: absolute;
+      background: var(--background);
+      width: 8px;
+      height: 8px;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    &.default .arrow {
+      border: var(--border-width) solid var(--border-color);
+      z-index: 10;
+      &.left,
+      &.bottom {
+        border-bottom: 0;
+      }
+
+      &.right,
+      &.bottom {
+        border-right: 0;
+      }
+
+      &.right,
+      &.top {
+        border-top: 0;
+      }
+
+      &.left,
+      &.top {
+        border-left: 0;
+      }
+    }
   }
 
   .leo-tooltip .tooltip.hero {

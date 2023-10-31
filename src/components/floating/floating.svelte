@@ -96,7 +96,7 @@
   }
 </script>
 
-<div bind:this={floating} class="leo-floating">
+<div on:mouseenter on:mouseleave bind:this={floating} class="leo-floating">
   <slot />
 </div>
 
