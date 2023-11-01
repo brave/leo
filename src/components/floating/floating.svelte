@@ -60,6 +60,9 @@
     return result
   }
 
+  // We need this check because the middleware sometimes generates an
+  // x or y value of undefined, 1, or less. This causes the arrow on
+  // the floating element to be positioned in the corner incorrectly.
   function hasInvalidArrowPosition({ x, y }: { x?: number; y?: number }) {
     return (!x && !y) || x <= 1 || y <= 1
   }
