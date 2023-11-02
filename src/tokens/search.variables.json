@@ -1,0 +1,159 @@
+{
+  "color": {},
+  "light": {
+    "divider": {
+      "subtle": {
+        "type": "color",
+        "value": "#eceef2"
+      }
+    },
+    "links": {
+      "adbackground-default": {
+        "type": "color",
+        "value": "rgba(24, 65, 210, 0.0300)"
+      },
+      "adbackground-hover": {
+        "type": "color",
+        "value": "rgba(24, 65, 210, 0.0800)"
+      },
+      "link-default": {
+        "type": "color",
+        "value": "#1841d2"
+      }
+    },
+    "tabs": {
+      "background-default": {
+        "type": "color",
+        "value": "#a6aec0"
+      },
+      "background-hover": {
+        "type": "color",
+        "value": "#96a0b5"
+      },
+      "line-default": {
+        "type": "color",
+        "value": "#5483ed"
+      },
+      "line-hover": {
+        "type": "color",
+        "value": "#3861fb"
+      },
+      "searchtext-default": {
+        "type": "color",
+        "value": "#ff6022"
+      }
+    },
+    "search": {
+      "serpheader-background": {
+        "type": "color",
+        "value": "#f9fafd"
+      },
+      "serppage-background": {
+        "type": "color",
+        "value": "#f2f4f7"
+      },
+      "serpcontainer-background": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "serphighlight-background": {
+        "type": "color",
+        "value": "#edeef1"
+      },
+      "serp-breadcrumbs": {
+        "type": "color",
+        "value": "#9599a9"
+      },
+      "infoboxtitle": {
+        "type": "color",
+        "value": "#087783"
+      },
+      "searchbarbg": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "landingpage-background": {
+        "type": "color",
+        "value": "#eef2f6"
+      }
+    }
+  },
+  "dark": {
+    "divider": {
+      "subtle": {
+        "type": "color",
+        "value": "#30343d"
+      }
+    },
+    "links": {
+      "adbackground-default": {
+        "type": "color",
+        "value": "rgba(119, 153, 229, 0.0800)"
+      },
+      "adbackground-hover": {
+        "type": "color",
+        "value": "rgba(119, 153, 229, 0.1600)"
+      },
+      "link-default": {
+        "type": "color",
+        "value": "#7799e5"
+      }
+    },
+    "tabs": {
+      "background-default": {
+        "type": "color",
+        "value": "#3f475a"
+      },
+      "background-hover": {
+        "type": "color",
+        "value": "#343b4b"
+      },
+      "line-default": {
+        "type": "color",
+        "value": "#3861fb"
+      },
+      "line-hover": {
+        "type": "color",
+        "value": "#3861fb"
+      },
+      "searchtext-default": {
+        "type": "color",
+        "value": "#ff6022"
+      }
+    },
+    "search": {
+      "serpheader-background": {
+        "type": "color",
+        "value": "#1a1c23"
+      },
+      "serppage-background": {
+        "type": "color",
+        "value": "#17191e"
+      },
+      "serpcontainer-background": {
+        "type": "color",
+        "value": "#242731"
+      },
+      "serphighlight-background": {
+        "type": "color",
+        "value": "#30343d"
+      },
+      "serp-breadcrumbs": {
+        "type": "color",
+        "value": "#afb3c1"
+      },
+      "infoboxtitle": {
+        "type": "color",
+        "value": "#997b08"
+      },
+      "searchbarbg": {
+        "type": "color",
+        "value": "#242731"
+      },
+      "landingpage-background": {
+        "type": "color",
+        "value": "#1e2028"
+      }
+    }
+  }
+}

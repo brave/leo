@@ -1,17 +1,17 @@
 {
   "font": {
-    "🍏 macos": {
+    "💻 browser": {
       "large": {
         "regular": {
           "type": "custom-fontStyle",
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.08,
+            "letterSpacing": -0.2,
             "lineHeight": 19.2,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -29,11 +29,11 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.08,
+            "letterSpacing": -0.2,
             "lineHeight": 19.2,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -53,11 +53,11 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.08,
+            "letterSpacing": -0.1,
             "lineHeight": 16.8,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -75,11 +75,11 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.08,
+            "letterSpacing": -0.1,
             "lineHeight": 16.8,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -99,11 +99,11 @@
           "value": {
             "fontSize": 13,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.29,
+            "letterSpacing": 0,
             "lineHeight": 15.6,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -121,11 +121,11 @@
           "value": {
             "fontSize": 13,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.29,
+            "letterSpacing": 0,
             "lineHeight": 15.6,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -145,11 +145,11 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.29,
+            "letterSpacing": 0,
             "lineHeight": 14.4,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -167,11 +167,11 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "SF Pro Text",
+            "fontFamily": "Inter",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.29,
+            "letterSpacing": 0,
             "lineHeight": 14.4,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -185,196 +185,10 @@
           }
         }
       }
-    },
-    "🪟 windows": {
-      "large": {
-        "regular": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 16,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 400,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 19.2,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:c902b529086bf511035aa4a4e52197e11e06e7dc,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "semibold": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 16,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 19.2,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:f96ed1f0127de13e698947830314ce0b34a961e3,",
-              "exportKey": "font"
-            }
-          }
-        }
-      },
-      "default": {
-        "regular": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 14,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 400,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 16.8,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:ee5411e4753b17b4d31094fbf86869fd469a0c79,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "semibold": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 14,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 16.8,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:7e4b87e8a6c1bfed539b1bd937ea4ebb94c75128,",
-              "exportKey": "font"
-            }
-          }
-        }
-      },
-      "small": {
-        "regular": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 13,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 400,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 15.6,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:ab9d2dad4dc84b38f4212ab2638c8b02bf433efd,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "semibold": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 13,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 15.6,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:df2aa50aeb6dd85987c63ba5c7840ca648559273,",
-              "exportKey": "font"
-            }
-          }
-        }
-      },
-      "x-small": {
-        "regular": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 12,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 400,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 14.4,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:5685d64a658c8f243b88b56322feab4ad0f622cb,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "semibold": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 12,
-            "textDecoration": "none",
-            "fontFamily": "Segoe UI Variable",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 14.4,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:c1c79e33a664ab785df97e86614655c9b98dd490,",
-              "exportKey": "font"
-            }
-          }
-        }
-      }
     }
   },
   "typography": {
-    "🍏 macos": {
+    "💻 browser": {
       "large": {
         "regular": {
           "fontSize": {
@@ -387,7 +201,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "SF Pro Text"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -403,7 +217,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.08
+            "value": -0.2
           },
           "lineHeight": {
             "type": "dimension",
@@ -433,7 +247,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "SF Pro Text"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -449,7 +263,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.08
+            "value": -0.2
           },
           "lineHeight": {
             "type": "dimension",
@@ -481,7 +295,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "SF Pro Text"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -497,7 +311,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.08
+            "value": -0.1
           },
           "lineHeight": {
             "type": "dimension",
@@ -527,7 +341,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "SF Pro Text"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -543,7 +357,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.08
+            "value": -0.1
           },
           "lineHeight": {
             "type": "dimension",
@@ -575,385 +389,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "SF Pro Text"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 400
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.29
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 15.6
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "semibold": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 13
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "SF Pro Text"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.29
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 15.6
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        }
-      },
-      "x-small": {
-        "regular": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 12
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "SF Pro Text"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 400
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.29
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 14.4
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "semibold": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 12
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "SF Pro Text"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.29
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 14.4
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        }
-      }
-    },
-    "🪟 windows": {
-      "large": {
-        "regular": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 16
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Segoe UI Variable"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 400
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 19.2
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "semibold": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 16
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Segoe UI Variable"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 19.2
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        }
-      },
-      "default": {
-        "regular": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 14
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Segoe UI Variable"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 400
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 16.8
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "semibold": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 14
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Segoe UI Variable"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 16.8
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        }
-      },
-      "small": {
-        "regular": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 13
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Segoe UI Variable"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -999,7 +435,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Segoe UI Variable"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -1047,7 +483,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Segoe UI Variable"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
@@ -1093,7 +529,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Segoe UI Variable"
+            "value": "Inter"
           },
           "fontWeight": {
             "type": "number",
