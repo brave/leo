@@ -2,8 +2,13 @@ const StyleDictionary = require('style-dictionary')
 
 // Filters
 StyleDictionary.registerFilter({
-  name: 'filterWeb',
-  matcher: require('../web/filterWeb')
+  name: 'tw/filterTokens',
+  matcher: require('./twFilterTokens')
+})
+
+StyleDictionary.registerFilter({
+  name: 'tw/filterFonts',
+  matcher: require('./twFilterFonts')
 })
 
 // Transforms
@@ -65,7 +70,12 @@ StyleDictionary.registerFormat({
   formatter: require('./formatTokens')
 })
 
-// Formats
+StyleDictionary.registerFormat({
+  name: 'tailwind/fonts',
+  formatter: require('./formatFonts')
+})
+
+// Actions
 StyleDictionary.registerAction({
   name: 'tailwind/copy_static_files',
   do: require('./copyStaticFiles').do,

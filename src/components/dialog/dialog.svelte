@@ -138,7 +138,7 @@
   }
 
   .leo-dialog .title {
-    font: var(--leo-font-primary-heading-h2);
+    font: var(--leo-font-heading-h2);
   }
 
   .leo-dialog .close-button {
@@ -156,12 +156,12 @@
 
   .leo-dialog .subtitle {
     margin-bottom: var(--leo-spacing-xl);
-    font: var(--leo-font-primary-heading-h4);
+    font: var(--leo-font-heading-h4);
   }
 
   .leo-dialog .body {
     color: var(--leo-color-text-secondary);
-    font: var(--leo-font-primary-default-regular);
+    font: var(--leo-font-default-regular);
   }
 
   .leo-dialog .actions {

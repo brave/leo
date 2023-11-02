@@ -1,7 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
 const {
-  primaryFont,
-  fontSize,
   colors,
   boxShadow,
   dropShadow,
@@ -12,15 +9,12 @@ const {
 
 module.exports = {
   theme: {
-    fontSize,
+    fontSize: {},
     boxShadow,
     borderRadius,
     spacing,
     dropShadow,
     colors: colors,
-    fontFamily: {
-      sans: [...primaryFont, ...defaultTheme.fontFamily.sans]
-    },
     extend: {
       backgroundImage: {
         ...gradients
