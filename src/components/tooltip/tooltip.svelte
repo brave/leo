@@ -18,8 +18,16 @@
   export let offset: number = 8
   export let mode: Mode = 'mini'
 
+  /** The length of time the tooltip is open in ms after mouse leave of
+   * the trigger or tooltip */
+  export let mouseleaveTimeout: number = 150
+
   /* Whether the tooltip is currently visible */
   export let visible: boolean | undefined = undefined
+
+  /** The length of time in ms the tooltip element takes to fade
+   * after the users mouse leaves the trigger or tooltip*/
+  export let fadeDuration: number = 0
 
   // Note: This is separate from the |visible| flag because we want to handle
   // controlled and uncontrolled states for this component.
@@ -70,7 +78,7 @@
         if (!triggerHovered && !tooltipHovered) {
           setVisible(false)
         }
-      }, 150)
+      }, mouseleaveTimeout)
     }
   })()
 
@@ -116,8 +124,8 @@
         class:hero={mode === 'hero'}
         class:info={mode === 'info'}
         class:mini={mode === 'mini'}
+        transition:fade={{ duration: fadeDuration }}
         class:default={mode === 'default' || !mode}
-        transition:fade={{ duration: 60 }}
         hidden={!visibleInternal}
         bind:this={tooltip}
       >
