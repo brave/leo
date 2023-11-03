@@ -118,13 +118,13 @@
       }
     },
     "tabbar": {
-      "tab-background": {
+      "tabbar-background": {
         "type": "color",
         "value": "#edeef1"
       },
       "tabactive-background": {
         "type": "color",
-        "value": "#f6f7f8"
+        "value": "#ffffff"
       }
     },
     "os-color": {
@@ -260,13 +260,13 @@
       }
     },
     "tabbar": {
-      "tab-background": {
+      "tabbar-background": {
         "type": "color",
         "value": "#0d0f14"
       },
       "tabactive-background": {
         "type": "color",
-        "value": "#21242a"
+        "value": "#30343d"
       }
     },
     "os-color": {
@@ -402,13 +402,13 @@
       }
     },
     "tabbar": {
-      "tab-background": {
+      "tabbar-background": {
         "type": "color",
         "value": "#13052a"
       },
       "tabactive-background": {
         "type": "color",
-        "value": "#2a0d58"
+        "value": "#3d127b"
       }
     },
     "os-color": {
@@ -544,13 +544,13 @@
       }
     },
     "tabbar": {
-      "tab-background": {
+      "tabbar-background": {
         "type": "color",
         "value": "#190423"
       },
       "tabactive-background": {
         "type": "color",
-        "value": "#350b49"
+        "value": "#4c0f67"
       }
     },
     "os-color": {
