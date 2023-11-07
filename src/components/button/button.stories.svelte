@@ -22,6 +22,11 @@
       type: 'string',
       description: 'The padding to apply to the button content'
     },
+    '--leo-button-radius': {
+      control: 'text',
+      type: 'string',
+      description: 'The border-radius of the button'
+    },
     kind: { control: 'select', options: buttonKinds },
     size: { control: 'select', options: buttonSizes },
     isDisabled: { control: 'boolean' }

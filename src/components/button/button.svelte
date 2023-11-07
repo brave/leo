@@ -131,7 +131,7 @@
     transition: background 0.12s ease-in-out, var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
-    border-radius: var(--radius);
+    border-radius: var(--leo-button-radius, var(--radius));
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
@@ -325,7 +325,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        border-radius: var(--radius);
+        border-radius: var(--leo-button-radius, var(--radius));
       }
 
       &::before {
