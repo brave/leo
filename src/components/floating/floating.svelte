@@ -63,7 +63,10 @@
   // We need this check because the middleware sometimes generates an
   // x or y value of undefined, 1, or less. This causes the arrow on
   // the floating element to be positioned in the corner incorrectly.
-  function hasInvalidArrowPosition({ x, y }: { x?: number; y?: number }) {
+  function hasInvalidArrowPosition(event?: { x?: number; y?: number }) {
+    if (!event) return true
+
+    const { x, y } = event
     return (!x && !y) || x <= 1 || y <= 1
   }
 
@@ -74,13 +77,15 @@
       placement: placement,
       middleware: getMiddlewares(flip, shift, offset, middleware)
     }).then(({ x, y, placement, middlewareData }) => {
-      if (hasInvalidArrowPosition(middlewareData.arrow)) return
-
       if (floating) {
         Object.assign(floating.style, {
           left: `${x}px`,
           top: `${y}px`
         })
+      }
+
+      if (hasInvalidArrowPosition(middlewareData.arrow)) {
+        delete middlewareData.arrow
       }
 
       dispatch('computedposition', {
