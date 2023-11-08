@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1699171731342,
+  "updatedAt": 1699430946186,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -890,6 +890,7 @@ const meta = {
     "folder-bookmark": "folder-bookmark",
     "folder-check": "folder-check",
     "folder-code": "folder-code",
+    "folder-color": "folder-color",
     "folder-copy": "folder-copy",
     "folder-delete": "folder-delete",
     "folder-download": "folder-download",
@@ -902,7 +903,8 @@ const meta = {
     "folder-linked": "folder-linked",
     "folder-locked": "folder-locked",
     "folder-new": "folder-new",
-    "folder-open-o": "folder-open-o",
+    "folder-open-color": "folder-open-color",
+    "folder-open": "folder-open",
     "folder-sad": "folder-sad",
     "folder-search": "folder-search",
     "folder-share": "folder-share",
