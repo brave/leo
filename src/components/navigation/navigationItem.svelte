@@ -1,43 +1,111 @@
 <script lang="ts">
+  import { createEventDispatcher, onMount } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
   import type { IconName } from '../../../icons/meta'
   import Icon from '../icon/icon.svelte'
 
+  // This black magic comes from this thread:
+  // https://github.com/sveltejs/language-tools/issues/442#issuecomment-1278618531
+  //
+  // To quote that thread - This is "absolute bonkers!"
+  //
+  // It's interesting, minor variations which I would expect to work on don't,
+  // and this is the only combination which seems to do what we want and I'm not
+  // clear on why. You're welcome to try other approaches here.
+  //
+  // Tips, for if things aren't working right:
+  // 1) npm run gen-types
+  // 2) Reload your VSCode Window (sometimes the Svelte Type Checker struggles).
+  // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
   type Href = $$Generic<string | undefined>
+  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
+  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
-  type $$Props = Omit<SvelteHTMLElements['a'], 'class' | 'href'> & {
-    href: Href
+  type CommonProps = {
+    inList?: boolean
     icon?: IconName
-    isActive?: boolean
   }
 
-  export let href: Href
+  type ButtonProps = CommonProps &
+    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
+      isDisabled?: Disabled
+      isLoading?: boolean
+      href?: never
+    }
+
+  type LinkProps = CommonProps &
+    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
+      href: Href
+      isCurrent?: boolean
+    }
+
+  type $$Props = LinkProps | ButtonProps
+
+  export let href: Href = undefined
   export let icon: IconName = undefined
-  export let isActive: boolean = false
+  export let isLoading: boolean = false
+  export let isDisabled: boolean = false
+  export let isCurrent: boolean = window.location.pathname === href
+  export let inList: boolean = true
+
+  const checkIfCurrent = () => {
+    isCurrent = window.location.pathname === href
+  }
+
+  $: tag = href ? 'a' : ('button' as 'a' | 'button')
+
+  /**
+   * Optional click handler
+   */
+  const dispatch = createEventDispatcher()
+  function onClick(event) {
+    dispatch('click', event)
+  }
+
+  onMount(() => {
+    ;['pushState', 'replaceState'].forEach((name) => {
+      const original = history[name]
+      history[name] = function () {
+        original.apply(history, arguments)
+        checkIfCurrent()
+      }
+    })
+
+    window.addEventListener('popstate', checkIfCurrent)
+  })
 </script>
 
-<li class="leo-navigation-item">
-  <a {href} {...$$restProps} class:isActive>
+<svelte:element this={inList ? 'li' : 'div'} class="leo-navigation-item">
+  <svelte:element
+    this={tag}
+    href={href || undefined}
+    disabled={isLoading || isDisabled || undefined}
+    on:click={onClick}
+    {...$$restProps}
+    class:isCurrent
+  >
     {#if icon}
       <Icon name={icon} />
     {/if}
     <slot />
-  </a>
+  </svelte:element>
 
   {#if $$slots.subnav}
     <slot name="subnav" />
   {/if}
-</li>
+</svelte:element>
 
 <style lang="scss">
   .leo-navigation-item {
-    --color: var(--leo-color-text-secondary);
+    --nav-item-color: var(--leo-color-text-secondary);
     --leo-icon-color: var(--leo-color-icon-default);
     --leo-icon-size: var(--leo-icon-s);
 
-    a {
+    a,
+    button {
       cursor: pointer;
       display: flex;
+      width: 100%;
       gap: var(--leo-spacing-xl);
       align-items: center;
       height: 48px;
@@ -49,7 +117,7 @@
       text-decoration: none;
 
       font: var(--leo-font-components-button-default);
-      color: var(--color);
+      color: var(--nav-item-color);
 
       &:hover {
         background: var(--leo-color-container-highlight);
@@ -59,8 +127,8 @@
         box-shadow: var(--leo-effect-focus-state);
       }
 
-      &.isActive {
-        --color: var(--leo-color-text-interactive);
+      &.isCurrent {
+        --nav-item-color: var(--leo-color-text-interactive);
         --leo-icon-color: var(--leo-color-icon-interactive);
 
         &::before {
@@ -76,12 +144,6 @@
           transform: translateY(-50%);
         }
       }
-    }
-
-    :global(ul) {
-      padding: var(--leo-spacing-m) 0 0;
-      margin-left: 35px;
-      border-left: 1px solid var(--leo-color-divider-subtle);
     }
   }
 </style>

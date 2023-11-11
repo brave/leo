@@ -7,6 +7,7 @@
   import NavigationItem from './navigationItem.svelte'
   import NavigationHeader from './navigationHeader.svelte'
   import NavigationActions from './navigationActions.svelte'
+  import NavigationMenu from './navigationMenu.svelte'
   import Icon from '../icon/icon.svelte'
 </script>
 
@@ -24,28 +25,32 @@
       <h1><span class="logo-mark">Brave</span> Accounts</h1>
     </NavigationHeader>
 
-    {#each [1, 2, 3, 4, 5] as item}
-      <NavigationItem href="#" icon="browser-ntp-widget" isActive={item === 3}
-        >Item {item}</NavigationItem
-      >
-    {/each}
-    <NavigationItem href="#" icon="browser-ntp-widget">
-      Item with sub nav
-      <ul slot="subnav">
-        <NavigationItem href="#" icon="agenda" isActive={true}
-          >Testing</NavigationItem
+    <NavigationMenu>
+      {#each [1, 2, 3, 4, 5] as item}
+        <NavigationItem
+          href="#"
+          icon="browser-ntp-widget"
+          isCurrent={item === 3}>Item {item}</NavigationItem
         >
+      {/each}
+      <NavigationItem href="#" icon="browser-ntp-widget">
+        Item with sub nav
+        <NavigationMenu slot="subnav">
+          <NavigationItem href="#" icon="agenda" isCurrent={true}
+            >Testing</NavigationItem
+          >
 
-        <NavigationItem href="#" icon="browser-ntp-widget">
-          Item with sub nav
-          <ul slot="subnav">
-            <NavigationItem href="#" icon="agenda" isActive={true}
-              >Testing</NavigationItem
-            >
-          </ul>
-        </NavigationItem>
-      </ul>
-    </NavigationItem>
+          <NavigationItem href="#" icon="browser-ntp-widget">
+            Item with sub nav
+            <NavigationMenu slot="subnav">
+              <NavigationItem href="#" icon="agenda" isCurrent={true}
+                >Testing</NavigationItem
+              >
+            </NavigationMenu>
+          </NavigationItem>
+        </NavigationMenu>
+      </NavigationItem>
+    </NavigationMenu>
   </Navigation>
 </Template>
 

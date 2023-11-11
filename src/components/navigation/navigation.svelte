@@ -2,7 +2,7 @@
   export let kind: 'vertical' | 'horizontal' = 'vertical'
 </script>
 
-<nav
+<div
   class="leo-navigation"
   class:isVertical={kind === 'vertical'}
   class:isHorizontal={kind === 'horizontal'}
@@ -11,29 +11,21 @@
     <slot name="header" />
   {/if}
 
-  <ul>
+  <nav>
     <slot />
-  </ul>
+  </nav>
 
   {#if $$slots.actions}
     <slot name="actions" />
   {/if}
-</nav>
+</div>
 
 <style lang="scss">
   .leo-navigation {
     --nav-direction: row;
     display: flex;
     flex-direction: var(--nav-direction);
-
-    :global(ul) {
-      display: flex;
-      flex-direction: var(--nav-direction);
-      gap: var(--leo-spacing-m);
-      margin: 0;
-      padding: var(--leo-spacing-2xl) 0;
-      list-style: none;
-    }
+    height: 100%;
 
     &.isVertical {
       --nav-direction: column;

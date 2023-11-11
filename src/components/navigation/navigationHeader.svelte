@@ -9,6 +9,6 @@
     gap: var(--leo-spacing-m);
     align-items: center;
     justify-self: self-start;
-    padding: var(--leo-spacing-2xl) 20px;
+    padding: var(--leo-navigation-header-padding, var(--leo-spacing-2xl)) 20px;
   }
 </style>
