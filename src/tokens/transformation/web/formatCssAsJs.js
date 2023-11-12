@@ -94,6 +94,12 @@ module.exports = ({ dictionary, file }) => {
     'desktop'
   )
   const themeObject = formattedVariables(properties)
+
+  // Some properties aren't valid names for Javascript Variables
+  const renameProperties = {
+    'private': 'privateMode'
+  }
+
   // Separate out each main property, to allow for tree shaking and easy type-to-complete
   // imports in code editors.
   for (const property in themeObject) {
@@ -101,7 +107,7 @@ module.exports = ({ dictionary, file }) => {
       continue
     }
     fileContents +=
-      `export const ${property} = ` +
+      `export const ${renameProperties[property] ?? property} = ` +
       JSON.stringify(themeObject[property], null, 2) +
       ' as const \n'
   }
