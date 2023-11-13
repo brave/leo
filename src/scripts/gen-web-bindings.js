@@ -8,6 +8,19 @@ fs.mkdir(WEB_BINDINGS_DIRECTORY, { recursive: true })
 const COMPONENT_PREFIX = 'leo'
 const SVELTE_WEB_WRAPPER_PATH = '../shared/svelte-web.js'
 
+/**
+ * Returns a list of events emitted by the custom element. This uses a regex for
+ * CustomEvents defined in the typeDefinition file.
+ * @param {string} typeDefinitionFile The path to the type definition file
+ */
+const getEventTypes = async (typeDefinitionFile) => {
+  const typeDefinition = await fs.readFile(typeDefinitionFile + '.d.ts', 'utf8')
+  const eventTypeRegex = /\s(?<eventType>[a-z]+): CustomEvent/g
+  return Array.from(typeDefinition.matchAll(eventTypeRegex)).map(
+    (m) => m.groups.eventType
+  )
+}
+
 const getFileContents = async (svelteFilePath) => {
   const containingFolder = path.relative(
     './src/components',
@@ -26,11 +39,15 @@ const getFileContents = async (svelteFilePath) => {
 
   const elementName = `${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}`
 
+  const typeDefinitionFile = `types/components/${containingFolder}/${fileName}`
+  const eventTypes = await getEventTypes(typeDefinitionFile)
+
   const binding = `
 import SvelteWeb from '${SVELTE_WEB_WRAPPER_PATH}'
 import ${componentName} from '../shared/${fileNameWithoutExtension}.js'
 export default SvelteWeb(${componentName}, {
     name: '${elementName}',
+    eventTypes: ${JSON.stringify(eventTypes)},
     mode: 'open'
 });
 
@@ -41,7 +58,7 @@ export * from '../shared/${fileNameWithoutExtension}.js'
 
   const typeDefinitions = `
 export default undefined
-export * from '../types/components/${containingFolder}/${fileName}'
+export * from '../${typeDefinitionFile}'
 `
 
   return [binding, typeDefinitions]
