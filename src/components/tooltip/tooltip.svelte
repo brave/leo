@@ -33,7 +33,9 @@
   // controlled and uncontrolled states for this component.
   $: visibleInternal = visible ?? false
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher<{
+    visibilitychange: { visible: boolean }
+  }>()
 
   let tooltip: HTMLElement
   let arrow: HTMLElement
