@@ -32,7 +32,7 @@
 </div>
 
 <style>
-  :global body,
+  :global(body),
   .layout {
     background: var(--leo-color-container-background);
     color: var(--leo-color-text-primary);

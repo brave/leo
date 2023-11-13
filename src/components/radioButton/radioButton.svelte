@@ -14,6 +14,7 @@
   import { createEventDispatcher } from 'svelte'
   import { fade, scale } from 'svelte/transition'
   import Icon from '../icon/icon.svelte'
+  import type { ChangeEventHandler } from 'svelte/elements'
 
   export let currentValue: string | number | any
   export let value: string | number | any
@@ -26,19 +27,21 @@
     change: { value: string | number | any }
   }>()
 
-  function changed(e) {
-    if (isDisabled || !e.target.checked) return
+  const changed: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (isDisabled || !e.currentTarget?.checked) return
 
     // If we're in a custom element, make sure we update all the
     // other elements in our group, to make the behavior the same
     // as the built in radio.
-    const maybeElement = e.target.getRootNode()?.host
+    const maybeElement = (e.currentTarget.getRootNode() as ShadowRoot)?.host
     if (maybeElement && maybeElement.tagName === tagName.toUpperCase()) {
       // Note: We query the rootNode containing the element so we work
       // even when our element is contained inside another shadowRoot.
-      const elements = maybeElement
-        .getRootNode()
-        .querySelectorAll(`${tagName}[name=${name}]`)
+      const elements = (
+        maybeElement.getRootNode() as Document | ShadowRoot
+      ).querySelectorAll(`${tagName}[name=${name}]`) as any as {
+        currentValue: typeof value
+      }[]
       for (const el of elements) el.currentValue = value
     }
 

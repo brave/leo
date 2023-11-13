@@ -23,23 +23,25 @@
     '--leo-icon-size': {
       control: 'text',
       description: 'The size of the icon (defaults to 24px if not set)',
-      type: 'string',
-      defaultValue: '24px'
+      type: 'string'
     },
     name: {
       control: 'select',
       options: Object.values(meta.icons),
       description: 'The name of the icon to use',
-      type: 'string',
-      defaultValue: 'shield-alert-filled'
+      type: 'string'
     },
     color: {
       control: 'color',
       description:
         'The current text color (this is used for the icon if --leo-icon-color is not set)',
-      type: 'string',
-      defaultValue: 'var(--leo-color-icon-default)'
+      type: 'string'
     }
+  }}
+  args={{
+    color: 'var(--leo-color-icon-default)',
+    name: 'shield-alert-filled',
+    '--leo-icon-size': '24px'
   }}
 />
 

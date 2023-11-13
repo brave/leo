@@ -1,44 +1,49 @@
 <script lang="ts" context="module">
-  import type { ArgType } from '@storybook/addons'
   export let sizes = ['small', 'normal', 'large'] as const
   export type Size = (typeof sizes)[number]
 
   export let modes = ['filled', 'outline'] as const
   export type Mode = (typeof modes)[number]
 
-  export let cssProperties: { [key: `--leo-control-${string}`]: ArgType<any> } =
-    {
-      '--leo-control-label-direction': {
-        description:
-          'Controls how the label and control flow together. Accepts a <flex-direction>',
-        control: 'select',
-        options: ['column', 'column-reverse', 'row', 'row-reverse']
-      },
-      '--leo-control-radius': {
-        description: 'The border radius of the control',
-        type: 'string'
-      },
-      '--leo-control-padding': {
-        description: 'The padding of the control',
-        type: 'string'
-      },
-      '--leo-control-font': {
-        description: 'The font used by the control',
-        type: 'string'
-      },
-      '--leo-control-icon-size': {
-        description: 'The icon size used by the control',
-        type: 'string'
-      },
-      '--leo-control-icon-color': {
-        description: 'The icon color used by the control',
-        control: 'color'
-      },
-      '--leo-control-label-gap': {
-        description: 'The gap between the label and the control',
-        type: 'string'
-      }
+  export let cssProperties: {
+    [key: `--leo-control-${string}`]: {
+      description: string
+      control?: string
+      options?: string[]
+      type?: string
     }
+  } = {
+    '--leo-control-label-direction': {
+      description:
+        'Controls how the label and control flow together. Accepts a <flex-direction>',
+      control: 'select',
+      options: ['column', 'column-reverse', 'row', 'row-reverse']
+    },
+    '--leo-control-radius': {
+      description: 'The border radius of the control',
+      type: 'string'
+    },
+    '--leo-control-padding': {
+      description: 'The padding of the control',
+      type: 'string'
+    },
+    '--leo-control-font': {
+      description: 'The font used by the control',
+      type: 'string'
+    },
+    '--leo-control-icon-size': {
+      description: 'The icon size used by the control',
+      type: 'string'
+    },
+    '--leo-control-icon-color': {
+      description: 'The icon color used by the control',
+      control: 'color'
+    },
+    '--leo-control-label-gap': {
+      description: 'The gap between the label and the control',
+      type: 'string'
+    }
+  }
 </script>
 
 <script lang="ts">

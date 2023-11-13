@@ -53,8 +53,8 @@ export type EventProps<T> = {
   [P in keyof T as P extends Lowercase<EventPropsNames>
     ? EventPropsNameMap[P]
     : P extends `on${infer EventName}`
-    ? `on${Capitalize<EventName>}`
-    : P]: T[P]
+      ? `on${Capitalize<EventName>}`
+      : P]: T[P]
 }
 const useEventHandlers = (props: any) => {
   const [el, setEl] = useState<HTMLElement>()

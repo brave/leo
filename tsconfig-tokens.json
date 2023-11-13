@@ -2,6 +2,6 @@
   "include": ["tokens/**/*"],
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "node16"
+    "moduleResolution": "Bundler"
   }
 }

@@ -10,7 +10,7 @@
   import { fade } from 'svelte/transition'
   import Floating from '../floating/floating.svelte'
 
-  export let text: string = undefined
+  export let text: string | undefined = undefined
 
   export let placement: Placement = 'top'
   export let flip: boolean = true
@@ -41,21 +41,25 @@
   let arrow: HTMLElement
   let trigger: HTMLElement
 
-  let arrowPlacement: string = undefined
+  let arrowPlacement: string | undefined = undefined
 
   function positionArrow(
     e: CustomEvent<{ middlewareData: MiddlewareData; placement: Placement }>
   ) {
-    const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow
+    const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow as {
+      x?: number
+      y?: number
+    }
 
     arrowPlacement = e.detail.placement.split('-')[0]
 
-    const staticSide = {
-      top: 'bottom',
-      right: 'left',
-      bottom: 'top',
-      left: 'right'
-    }[arrowPlacement]
+    const staticSide =
+      {
+        top: 'bottom',
+        right: 'left',
+        bottom: 'top',
+        left: 'right'
+      }[arrowPlacement] ?? 'top'
 
     if (!arrow) return
 
@@ -72,7 +76,7 @@
   let triggerHovered = false
 
   const handleMouseleave = (() => {
-    let timeout
+    let timeout: NodeJS.Timeout
 
     return () => {
       clearTimeout(timeout)

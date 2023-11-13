@@ -14,28 +14,24 @@
     color: {
       control: 'select',
       description: 'The color to use for the icon',
-      options: colors,
-      defaultValue: 'teal'
+      options: colors
     },
     mode: {
       control: 'select',
       options: modes,
-      description: 'The mode of the label',
-      defaultValue: 'loud'
+      description: 'The mode of the label'
     },
     storyLeftIcon: {
       control: 'text',
       description:
         'Icon to the left of the label. This is only used for demonstration purposes',
-      type: 'text',
-      defaultValue: 'check-circle-outline'
+      type: 'text'
     },
     storyRightIcon: {
       control: 'text',
       description:
         'Icon to the right of the label. This is only used for demonstration purposes',
-      type: 'text',
-      defaultValue: 'check-circle-outline'
+      type: 'text'
     },
     '--leo-label-icon-size': {
       control: 'text',
@@ -52,6 +48,12 @@
       description: 'The internal padding of the label',
       type: 'text'
     }
+  }}
+  args={{
+    storyRightIcon: 'check-circle-outline',
+    storyLeftIcon: 'check-circle-outline',
+    mode: 'loud',
+    color: 'teal'
   }}
 />
 

@@ -4,7 +4,7 @@
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
   let activeDot = 0
-  function handleChange(n) {
+  function handleChange(n: CustomEvent<{ activeDot: number }>) {
     activeDot = n.detail.activeDot
   }
 </script>
@@ -13,7 +13,7 @@
   title="Components/Nav Dots"
   component={NavDots}
   argTypes={{
-    dotCount: { control: 'number', defaultValue: 10 },
+    dotCount: { control: 'number' },
 
     '--leo-navdots-size': {
       type: 'string',
@@ -56,6 +56,9 @@
       control: 'color',
       description: 'The color of the non-active dots when hovering'
     }
+  }}
+  args={{
+    dotCount: 10
   }}
 />
 

@@ -57,19 +57,21 @@
     size: {
       control: 'select',
       description: 'The size of the checkbox',
-      options: sizes,
-      defaultValue: 'normal'
+      options: sizes
     },
     checked: {
       control: 'boolean',
-      description: 'Is the checkbox checked',
-      defaultValue: false
+      description: 'Is the checkbox checked'
     },
     label: {
       control: 'text',
-      description: 'The checkbox label. This is passed in via slot',
-      defaultValue: 'Label'
+      description: 'The checkbox label. This is passed in via slot'
     }
+  }}
+  args={{
+    label: 'Label',
+    checked: false,
+    size: 'normal'
   }}
 />
 

@@ -58,8 +58,12 @@
         'Controls how the label is laid out in relation to the toggle.'
     },
 
-    size: { control: 'select', options: sizes, defaultValue: 'medium' },
-    label: { control: 'text', defaultValue: 'Label' }
+    size: { control: 'select', options: sizes },
+    label: { control: 'text' }
+  }}
+  args={{
+    label: 'Label',
+    size: 'medium'
   }}
 />
 
