@@ -12,13 +12,13 @@ module.exports = {
       /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
       ''
     )
-    console.log(filePath)
     contents = JSON.parse(contents)
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
     // end up deleting everything under gradient).
-    if (contents.gradient?.gradient) contents.gradient = contents.gradient.gradient
+    if (contents.gradient?.gradient)
+      contents.gradient = contents.gradient.gradient
 
     /**
      * Convert layers from multiple tokens to single token with array of values.
@@ -30,9 +30,6 @@ module.exports = {
      */
     const categories = Object.entries(contents)
     for (const [category, categoryValue] of categories) {
-      if (typeof categoryValue !== 'object') {
-        console.log(categories)
-      }
       const types = Object.entries(categoryValue)
 
       for (const [type, typeValue] of types) {
