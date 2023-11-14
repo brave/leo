@@ -11,6 +11,11 @@ function isToken(tokenOrTokenCategory) {
   return !!tokenOrTokenCategory.type
 }
 
+/**
+ * Converts a key to a useful JS property name.
+ * @param {string} key 
+ * @returns The JS version of the key
+ */
 function cleanKey(key) {
   return camelCase(key.trim())
 }
@@ -37,6 +42,7 @@ function removeSegmentFromNameInAllTokens(tokenCategory, nameSegment) {
   return result
 }
 
+const literals = {}
 function formattedVariables(properties) {
   const result = {
     // The nonsensical 'toString' property exists to force the category
@@ -78,7 +84,10 @@ function formattedVariables(properties) {
       continue
     }
     const name = formatName(value)
-    result[cleanKey(key)] = `var(${name})`
+    const cssVar = `var(${name})`
+    literals[cssVar] = ''
+    console.log(cssVar, ":", value.value)
+    result[cleanKey(key)] = cssVar
   }
   return result
 }
