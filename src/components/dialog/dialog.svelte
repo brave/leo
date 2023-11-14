@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import { scale } from 'svelte/transition'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
-  import { fade, blur, scale } from 'svelte/transition'
 
   export let isOpen = false
   export let modal = true
@@ -45,18 +45,20 @@
       if (escapeCloses) close()
     }}
   >
-    <div class="title-row">
-      {#if showBack}
-        <div class="back-button">
-          <Button kind="plain-faint" on:click={() => dispatch('back')}>
-            <Icon name="arrow-left" />
-          </Button>
+    {#if showBack || $$slots.title}
+      <div class="title-row">
+        {#if showBack}
+          <div class="back-button">
+            <Button kind="plain-faint" on:click={() => dispatch('back')}>
+              <Icon name="arrow-left" />
+            </Button>
+          </div>
+        {/if}
+        <div class="title">
+          <slot name="title" />
         </div>
-      {/if}
-      <div class="title">
-        <slot name="title" />
       </div>
-    </div>
+    {/if}
     {#if showClose}
       <div class="close-button">
         <Button kind="plain-faint" on:click={close}>
