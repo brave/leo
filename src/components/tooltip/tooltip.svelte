@@ -172,7 +172,7 @@
     padding: var(--padding);
     border-radius: var(--radius);
     border: var(--border-width) solid var(--border-color);
-    font: var(--leo-font-primary-default-regular);
+    font: var(--leo-font-default-regular);
   }
 
   .leo-tooltip .tooltip {
@@ -231,7 +231,7 @@
     --shadow: var(--leo-effect-elevation-01);
     --radius: 2px;
 
-    font: var(--leo-font-primary-x-small-regular);
+    font: var(--leo-font-x-small-regular);
   }
 
   .leo-tooltip .tooltip.default {

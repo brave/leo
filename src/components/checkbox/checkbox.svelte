@@ -88,7 +88,7 @@
       --leo-checkbox-disabled-color,
       var(--leo-color-text-disabled)
     );
-    --font: var(--leo-checkbox-font, var(--leo-font-primary-default-regular));
+    --font: var(--leo-checkbox-font, var(--leo-font-default-regular));
 
     display: flex;
     align-items: center;
