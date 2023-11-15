@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
+    "@fontsource/inter": "5.0.15",
     "@fontsource/manrope": "5.0.12",
     "@fontsource/poppins": "5.0.8",
     "@rollup/plugin-node-resolve": "15.0.1",
