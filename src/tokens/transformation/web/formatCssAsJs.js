@@ -1,7 +1,7 @@
 const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
 const { createPropertyNameFormatter } = require('./createPropertyFormatter')
-
+const { TinyColor } = require('@ctrl/tinycolor')
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
@@ -13,7 +13,7 @@ function isToken(tokenOrTokenCategory) {
 
 /**
  * Converts a key to a useful JS property name.
- * @param {string} key 
+ * @param {string} key
  * @returns The JS version of the key
  */
 function cleanKey(key) {
@@ -43,6 +43,18 @@ function removeSegmentFromNameInAllTokens(tokenCategory, nameSegment) {
 }
 
 const literals = {}
+/**
+ * Gets the literal value of token
+ * @param {{ value: string, type: string }} token
+ */
+function getLiteral(token) {
+  if (token.type === 'color') {
+    const color = new TinyColor(token.value)
+    return color.getAlpha() === 1 ? color.toHexString() : color.toHex8String()
+  }
+  return token.value
+}
+
 function formattedVariables(properties) {
   const result = {
     // The nonsensical 'toString' property exists to force the category
@@ -85,8 +97,7 @@ function formattedVariables(properties) {
     }
     const name = formatName(value)
     const cssVar = `var(${name})`
-    literals[cssVar] = ''
-    console.log(cssVar, ":", value.value)
+    literals[cssVar] = getLiteral(value)
     result[cleanKey(key)] = cssVar
   }
   return result
@@ -114,5 +125,15 @@ module.exports = ({ dictionary, file }) => {
       JSON.stringify(themeObject[property], null, 2) +
       ' as const \n'
   }
-  return fileContents
+
+  // Add a comment above variables with the literal value of the variable.
+  const variableRegex = /\n(\s+)(".*":) "(var\([a-z0-9-]+\))"/gm
+  return fileContents.replace(
+    variableRegex,
+    (substring, spacing, name, variable) => {
+      return `
+${spacing}/** ${literals[variable]} */
+${spacing}${name} "${variable}"`
+    }
+  )
 }
