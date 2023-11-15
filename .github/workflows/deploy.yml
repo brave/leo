@@ -22,7 +22,7 @@ jobs:
       CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
       S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
       PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
-      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
 
     steps:
       - name: Download artifact
