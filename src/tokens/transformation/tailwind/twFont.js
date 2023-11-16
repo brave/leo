@@ -8,7 +8,8 @@ module.exports = {
       fontSize: `${font.fontSize}px`,
       lineHeight: `${font.lineHeight}px`,
       letterSpacing: `${font.letterSpacing}px`,
-      fontWeight: font.fontWeight
+      fontWeight: font.fontWeight,
+      fontFamily: font.fontFamily
     }
   }
 }

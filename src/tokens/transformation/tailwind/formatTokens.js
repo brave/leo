@@ -122,7 +122,6 @@ function createDynamicColorTokens(tokens) {
 module.exports = ({ dictionary }) => {
   const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
-  const fontSizes = new Map()
   const borderRadii = new Map([['none', 0]])
   const spacing = new Map([[0, 0]]) // Initialize with option for 0 spacing
   const gradients = new Map()
@@ -131,29 +130,7 @@ module.exports = ({ dictionary }) => {
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    if (
-      type === 'custom-fontStyle' &&
-      !['macos', 'windows'].includes(t.attributes.type)
-    ) {
-      const { fontSize, ...rest } = t.value
-
-      // E.g.
-      let fontName = `${t.attributes.type}-${t.attributes.item}`
-
-      if (t.attributes.subitem) {
-        fontName += `-${t.attributes.subitem}`
-      }
-
-      // Ensure we don't lose modifiers like "default", "regular", "semibold", etc.
-      if (t.attributes.state) {
-        fontName += `-${t.attributes.state}`
-      }
-
-      // Remove "desktop" for typography
-      fontName = fontName.replace(/desktop-/gm, '')
-
-      fontSizes.set(fontName, [fontSize, rest])
-    } else if (t.attributes.category === 'radius') {
+    if (t.attributes.category === 'radius') {
       if (t.attributes.type === 'full') {
         borderRadii.set(t.attributes.type, '9999px')
       } else {
@@ -187,8 +164,6 @@ module.exports = ({ dictionary }) => {
   return `module.exports = ${JSON.stringify(
     {
       colors: colorTokens,
-      primaryFont: ['Poppins', 'Helvetica', 'sans-serif'],
-      fontSize: Object.fromEntries(fontSizes),
       spacing: Object.fromEntries(spacing),
       borderRadius: Object.fromEntries(borderRadii),
       boxShadow: Object.fromEntries(boxShadows),
