@@ -18,6 +18,24 @@
   title="Components/Tooltip"
   component={Tooltip}
   argTypes={{
+    '--leo-tooltip-padding': {
+      type: 'string',
+      description: 'The internal padding on the tooltip'
+    },
+    '--leo-tooltip-text-color': {
+      type: 'string',
+      control: 'color',
+      description: 'The text color for the tooltip'
+    },
+    '--leo-tooltip-background': {
+      type: 'string',
+      control: 'color',
+      description: 'The background color of the tooltip'
+    },
+    '--leo-tooltip-shadow': {
+      type: 'string',
+      description: 'The shadow effect for the tooltip'
+    },
     text: { control: 'text', defaultValue: 'A helpful hint' },
     mode: { control: 'select', options: modes, defaultValue: 'default' },
     placement: { control: 'select', options: placements }
