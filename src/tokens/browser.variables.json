@@ -73,10 +73,6 @@
       "scrim": {
         "type": "color",
         "value": "rgba(13, 15, 20, 0.3500)"
-      },
-      "-legacy--frostedglass": {
-        "type": "color",
-        "value": "rgba(255, 255, 255, 0.9500)"
       }
     },
     "material": {
@@ -215,10 +211,6 @@
       "scrim": {
         "type": "color",
         "value": "rgba(13, 15, 20, 0.7000)"
-      },
-      "-legacy--frostedglass": {
-        "type": "color",
-        "value": "rgba(255, 255, 255, 0.9500)"
       }
     },
     "material": {
@@ -284,7 +276,7 @@
       }
     }
   },
-  "----private": {
+  "----private-window": {
     "text": {
       "primary": {
         "type": "color",
@@ -357,10 +349,6 @@
       "scrim": {
         "type": "color",
         "value": "rgba(19, 5, 42, 0.7000)"
-      },
-      "-legacy--frostedglass": {
-        "type": "color",
-        "value": "rgba(255, 255, 255, 0.9500)"
       }
     },
     "material": {
@@ -426,7 +414,7 @@
       }
     }
   },
-  "---tor": {
+  "---tor-window": {
     "text": {
       "primary": {
         "type": "color",
@@ -499,10 +487,6 @@
       "scrim": {
         "type": "color",
         "value": "rgba(25, 4, 35, 0.7000)"
-      },
-      "-legacy--frostedglass": {
-        "type": "color",
-        "value": "rgba(255, 255, 255, 0.9500)"
       }
     },
     "material": {
