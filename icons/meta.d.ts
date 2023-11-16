@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1699517390051,
+  "updatedAt": 1700153664006,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -702,7 +702,6 @@ const meta = {
     "decentraland-color": "decentraland-color",
     "decred-color": "decred-color",
     "deez-color": "deez-color",
-    "default-true": "default-true",
     "delivery-box": "delivery-box",
     "dent-color": "dent-color",
     "deprecated-bat-color": "deprecated-bat-color",
@@ -823,11 +822,9 @@ const meta = {
     "fct-color": "fct-color",
     "fei-color": "fei-color",
     "fil-color": "fil-color",
-    "file-archive": "file-archive",
     "file-audio": "file-audio",
     "file-backup": "file-backup",
     "file-bookmark": "file-bookmark",
-    "file-clip": "file-clip",
     "file-code": "file-code",
     "file-copy": "file-copy",
     "file-corrupted": "file-corrupted",
@@ -1636,6 +1633,7 @@ const meta = {
     "smartphone-desktop": "smartphone-desktop",
     "smartphone-hand-pointer": "smartphone-hand-pointer",
     "smartphone-hand": "smartphone-hand",
+    "smartphone-home": "smartphone-home",
     "smartphone-landscape": "smartphone-landscape",
     "smartphone-laptop": "smartphone-laptop",
     "smartphone-off": "smartphone-off",
@@ -1721,7 +1719,6 @@ const meta = {
     "swap-vertical": "swap-vertical",
     "swarmcity-color": "swarmcity-color",
     "symbol-color": "symbol-color",
-    "sync": "sync",
     "synthetix-color": "synthetix-color",
     "sys-color": "sys-color",
     "syscoin-color": "syscoin-color",
