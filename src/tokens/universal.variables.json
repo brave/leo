@@ -580,7 +580,7 @@
       "type": "color",
       "value": "#000000"
     },
-    "light": {
+    "---light": {
       "text": {
         "primary": {
           "type": "color",
@@ -702,7 +702,7 @@
       "systemfeedback": {
         "info-text": {
           "type": "color",
-          "value": "#004882"
+          "value": "#0061aa"
         },
         "info-icon": {
           "type": "color",
@@ -714,7 +714,7 @@
         },
         "success-text": {
           "type": "color",
-          "value": "#105614"
+          "value": "#19721e"
         },
         "success-icon": {
           "type": "color",
@@ -726,7 +726,7 @@
         },
         "warning-text": {
           "type": "color",
-          "value": "#5d4200"
+          "value": "#755b00"
         },
         "warning-icon": {
           "type": "color",
@@ -738,7 +738,7 @@
         },
         "error-text": {
           "type": "color",
-          "value": "#89001e"
+          "value": "#b3002a"
         },
         "error-icon": {
           "type": "color",
@@ -1110,7 +1110,7 @@
         }
       }
     },
-    "dark": {
+    "---dark": {
       "text": {
         "primary": {
           "type": "color",
@@ -1232,7 +1232,7 @@
       "systemfeedback": {
         "info-text": {
           "type": "color",
-          "value": "#c7e1ff"
+          "value": "#a0cdff"
         },
         "info-icon": {
           "type": "color",
@@ -1244,7 +1244,7 @@
         },
         "success-text": {
           "type": "color",
-          "value": "#b6f0b4"
+          "value": "#94df91"
         },
         "success-icon": {
           "type": "color",
@@ -1256,7 +1256,7 @@
         },
         "warning-text": {
           "type": "color",
-          "value": "#f8dc90"
+          "value": "#f3c211"
         },
         "warning-icon": {
           "type": "color",
@@ -1268,7 +1268,7 @@
         },
         "error-text": {
           "type": "color",
-          "value": "#ffd1cf"
+          "value": "#ffb1b0"
         },
         "error-icon": {
           "type": "color",
