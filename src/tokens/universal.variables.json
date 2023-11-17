@@ -1108,6 +1108,24 @@
           "type": "color",
           "value": "#350b49"
         }
+      },
+      "material": {
+        "thick": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.9500)"
+        },
+        "regular": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.7300)"
+        },
+        "thin": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.5600)"
+        },
+        "ultrathin": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.3200)"
+        }
       }
     },
     "---dark": {
@@ -1638,6 +1656,24 @@
           "type": "color",
           "value": "#f6e8ff"
         }
+      },
+      "material": {
+        "thick": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.8500)"
+        },
+        "regular": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.6900)"
+        },
+        "thin": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.5100)"
+        },
+        "ultrathin": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.3500)"
+        }
       }
     }
   },
@@ -1672,6 +1708,10 @@
     }
   },
   "spacing": {
+    "none": {
+      "type": "number",
+      "value": 0
+    },
     "xs": {
       "type": "number",
       "value": 2

@@ -75,24 +75,6 @@
           "value": "rgba(13, 15, 20, 0.3500)"
         }
       },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.9500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.7300)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.5600)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.3200)"
-        }
-      },
       "chrome": {
         "background-desktop": {
           "type": "color",
@@ -211,24 +193,6 @@
         "scrim": {
           "type": "color",
           "value": "rgba(13, 15, 20, 0.7000)"
-        }
-      },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(13, 15, 20, 0.8500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(13, 15, 20, 0.6900)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(13, 15, 20, 0.5100)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(13, 15, 20, 0.3500)"
         }
       },
       "chrome": {
@@ -351,24 +315,6 @@
           "value": "rgba(19, 5, 42, 0.7000)"
         }
       },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(19, 5, 42, 0.8500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(19, 5, 42, 0.6900)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(19, 5, 42, 0.5100)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(19, 5, 42, 0.3500)"
-        }
-      },
       "chrome": {
         "background-desktop": {
           "type": "color",
@@ -487,24 +433,6 @@
         "scrim": {
           "type": "color",
           "value": "rgba(25, 4, 35, 0.7000)"
-        }
-      },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(25, 4, 35, 0.8500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(25, 4, 35, 0.6900)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(25, 4, 35, 0.5100)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(25, 4, 35, 0.3500)"
         }
       },
       "chrome": {
