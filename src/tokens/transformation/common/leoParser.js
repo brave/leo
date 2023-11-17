@@ -13,7 +13,7 @@ module.exports = {
         /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
         ''
       )
-      .replaceAll(/-{2,}/, '')
+      .replaceAll(/-{2,}/g, '')
     contents = JSON.parse(contents)
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
