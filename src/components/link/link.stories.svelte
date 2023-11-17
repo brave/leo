@@ -9,24 +9,21 @@
 <Meta
   title="Components/Link"
   component={Link}
-  argTypes={{
+  argTypes="{{
     href: {
       control: 'text',
       description: 'The href for the link',
-      type: 'string',
-      defaultValue: 'https://brave.com'
+      type: 'string'
     },
     target: {
       control: 'text',
       description: 'The target for the link',
-      type: 'string',
-      defaultValue: '_blank'
+      type: 'string'
     },
     text: {
       control: 'text',
       description: 'The text content of the link',
-      type: 'string',
-      defaultValue: 'Download Brave'
+      type: 'string'
     },
     '--leo-link-color': {
       type: 'string',
@@ -59,6 +56,11 @@
       control: 'text',
       description: 'The focused shadow for the link'
     }
+  }},"
+  args={{
+    text: 'Download Brave',
+    target: '_blank',
+    href: 'https://brave.com'
   }}
 />
 

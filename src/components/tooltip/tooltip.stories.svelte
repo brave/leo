@@ -36,9 +36,13 @@
       type: 'string',
       description: 'The shadow effect for the tooltip'
     },
-    text: { control: 'text', defaultValue: 'A helpful hint' },
-    mode: { control: 'select', options: modes, defaultValue: 'default' },
+    text: { control: 'text' },
+    mode: { control: 'select', options: modes },
     placement: { control: 'select', options: placements }
+  }}
+  args={{
+    text: 'A helpful hint',
+    mode: 'default'
   }}
 />
 

@@ -21,12 +21,6 @@
   component={Dropdown}
   argTypes={{
     ...cssProperties,
-    placeholder: {
-      defaultValue: 'select...'
-    },
-    label: {
-      defaultValue: 'Label'
-    },
     size: {
       control: 'select',
       options: sizes
@@ -35,6 +29,10 @@
       control: 'select',
       options: modes
     }
+  }}
+  args={{
+    label: 'Label',
+    placeholder: 'select...'
   }}
 />
 

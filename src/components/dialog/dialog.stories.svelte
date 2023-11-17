@@ -39,13 +39,15 @@
       description: 'The default text color of the dialog'
     },
     isOpen: {
-      control: 'none',
-      defaultValue: false
+      control: 'none'
     },
     size: {
       control: 'select',
       options: ['mobile', 'normal']
     }
+  }}
+  args={{
+    isOpen: false
   }}
 />
 

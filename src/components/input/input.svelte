@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SvelteHTMLElements } from 'svelte/elements'
+  import type { ChangeEventHandler, SvelteHTMLElements } from 'svelte/elements'
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
@@ -107,12 +107,12 @@
     time: 'clock'
   }
 
-  let input: HTMLInputElement = undefined
+  let input: HTMLInputElement | undefined = undefined
   let hasErrorsInternal = false
 
-  function onInput(e) {
-    value = e.target['value']
-    hasErrorsInternal = (required && !value) || !input.checkValidity()
+  function onInput(e: Event & { currentTarget: HTMLInputElement }) {
+    value = e.currentTarget['value']
+    hasErrorsInternal = (required && !value) || !input?.checkValidity()
   }
 </script>
 
@@ -149,7 +149,7 @@
   </div>
   <slot name="right-icon" slot="right-icon">
     {#if pickerIcons[type]}
-      <Button kind="plain-faint" on:click={() => input.showPicker()}>
+      <Button kind="plain-faint" on:click={() => input?.showPicker()}>
         <Icon name={pickerIcons[type]} />
       </Button>
     {/if}

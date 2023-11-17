@@ -9,7 +9,7 @@ import genTypes from './src/scripts/gen-types.js'
 import genWebBindings from './src/scripts/gen-web-bindings.js'
 import genReactBindings from './src/scripts/gen-react-bindings.js'
 import { getSvelteFiles } from './src/scripts/common.js'
-
+import { onwarn } from './svelte.config.js'
 // Entry points are all our Svelte components + the react bindings for those
 // components.
 const COMPONENTS_FOLDER = path.resolve('./', 'src', 'components')
@@ -66,7 +66,8 @@ export default {
       emitCss: false,
       compilerOptions: {
         customElement: false
-      }
+      },
+      onwarn
     }),
     resolve({ browser: true }),
     {
