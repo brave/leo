@@ -21,7 +21,6 @@
     },
     label: {
       type: 'string',
-      defaultValue: 'Label',
       description:
         "This isn't a real prop of the component, it's just useful for configuring the storybook"
     },
@@ -37,6 +36,9 @@
       control: 'select',
       options: modes
     }
+  }}
+  args={{
+    label: 'Label'
   }}
 />
 

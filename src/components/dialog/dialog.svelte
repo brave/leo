@@ -14,8 +14,8 @@
   export let animate = true
 
   const dispatch = createEventDispatcher<{
-    close: {}
-    back: {}
+    close: undefined
+    back: undefined
   }>()
 
   let dialog: HTMLDialogElement

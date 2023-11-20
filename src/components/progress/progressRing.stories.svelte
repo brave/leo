@@ -37,9 +37,11 @@
       type: 'string',
       description: 'The mode of the progress indicator',
       control: 'select',
-      options: ['determinate', 'indeterminate'],
-      defaultValue: 'indeterminate'
+      options: ['determinate', 'indeterminate']
     }
+  }}
+  args={{
+    mode: 'indeterminate'
   }}
 />
 

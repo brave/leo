@@ -58,19 +58,16 @@
     },
     name: {
       control: 'text',
-      defaultValue: `options`,
       description:
         'The name of the group of radio buttons (i.e. the name of the property the buttons are selecting for).'
     },
     isDisabled: {
       control: 'boolean',
-      defaultValue: false,
       description: 'Whether the control is disabled'
     },
     size: {
       control: 'select',
       options: sizes,
-      defaultValue: 'normal',
       description: 'The size of the control'
     },
     value: {
@@ -83,6 +80,11 @@
       description:
         'The current value of the control. In Svelte, this can be bound. WebComponents can also manage it automatically. The checked event is fired with the new value when the current value changes.'
     }
+  }}
+  args={{
+    size: 'normal',
+    isDisabled: false,
+    name: 'options'
   }}
 />
 

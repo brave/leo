@@ -15,7 +15,7 @@
     toggle: { open: boolean }
   }>()
 
-  const toggle = (e) => {
+  const toggle = (e: Event) => {
     e.preventDefault()
 
     // We only support toggling if this component isn't being 'controlled'
