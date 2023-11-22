@@ -4,6 +4,7 @@
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
   "compilerOptions": {
     "strictNullChecks": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "target": "ES6"
   }
 }
