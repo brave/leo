@@ -47,9 +47,9 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
       componentEventNames,
       svelteFilePath
     )
-  } else {
-    return []
   }
+
+  return ''
 }
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
