@@ -32,7 +32,7 @@ const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
   )
   const fileContents = await fs.readFile(pathToType)
 
-  const typeRegex = /\s+([a-zA-Z0-9]+): (CustomEvent<{(\n|.)*?}>)/gm
+  const typeRegex = /\s+([a-zA-Z0-9]+): (CustomEvent<((.|\n)*?)>)/gm
 
   const componentEventNames = [
     ...fileContents.toString().matchAll(typeRegex)
