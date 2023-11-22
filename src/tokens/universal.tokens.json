@@ -507,7 +507,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -529,7 +529,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -545,6 +545,28 @@
               "exportKey": "font"
             }
           }
+        },
+        "link": {
+          "type": "custom-fontStyle",
+          "value": {
+            "fontSize": 16,
+            "textDecoration": "underline",
+            "fontFamily": "Inter",
+            "fontWeight": 400,
+            "fontStyle": "normal",
+            "fontStretch": "normal",
+            "letterSpacing": -0.2,
+            "lineHeight": 26,
+            "paragraphIndent": 0,
+            "paragraphSpacing": 0,
+            "textCase": "none"
+          },
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:40493b5f9a74eabdbd96c4f7b266cde211c17ff6,",
+              "exportKey": "font"
+            }
+          }
         }
       },
       "default": {
@@ -553,7 +575,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -575,7 +597,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -591,6 +613,28 @@
               "exportKey": "font"
             }
           }
+        },
+        "link": {
+          "type": "custom-fontStyle",
+          "value": {
+            "fontSize": 14,
+            "textDecoration": "underline",
+            "fontFamily": "Inter Variable",
+            "fontWeight": 400,
+            "fontStyle": "normal",
+            "fontStretch": "normal",
+            "letterSpacing": -0.1,
+            "lineHeight": 22,
+            "paragraphIndent": 0,
+            "paragraphSpacing": 0,
+            "textCase": "none"
+          },
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:430f31dc2cb2669741a4122385f6dc64c5e65d42,",
+              "exportKey": "font"
+            }
+          }
         }
       },
       "small": {
@@ -599,7 +643,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -621,7 +665,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -637,6 +681,28 @@
               "exportKey": "font"
             }
           }
+        },
+        "link": {
+          "type": "custom-fontStyle",
+          "value": {
+            "fontSize": 12,
+            "textDecoration": "underline",
+            "fontFamily": "Inter Variable",
+            "fontWeight": 400,
+            "fontStyle": "normal",
+            "fontStretch": "normal",
+            "letterSpacing": 0,
+            "lineHeight": 20,
+            "paragraphIndent": 0,
+            "paragraphSpacing": 0,
+            "textCase": "none"
+          },
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:52f8827d0c7623b36a7b1d605e57cb4bc5ec8685,",
+              "exportKey": "font"
+            }
+          }
         }
       },
       "x-small": {
@@ -645,7 +711,7 @@
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -667,7 +733,7 @@
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -680,6 +746,28 @@
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "styleId": "S:22a1f6e89102dd0fa256bdd5222683f52c415779,",
+              "exportKey": "font"
+            }
+          }
+        },
+        "link": {
+          "type": "custom-fontStyle",
+          "value": {
+            "fontSize": 11,
+            "textDecoration": "underline",
+            "fontFamily": "Inter Variable",
+            "fontWeight": 400,
+            "fontStyle": "normal",
+            "fontStretch": "normal",
+            "letterSpacing": 0,
+            "lineHeight": 18,
+            "paragraphIndent": 0,
+            "paragraphSpacing": 0,
+            "textCase": "none"
+          },
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "styleId": "S:d02c9bc1b42b0efb84853607a2c554b8796d7f2d,",
               "exportKey": "font"
             }
           }
@@ -896,7 +984,7 @@
         "value": {
           "fontSize": 10,
           "textDecoration": "none",
-          "fontFamily": "Inter",
+          "fontFamily": "Inter Variable",
           "fontWeight": 700,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -918,7 +1006,7 @@
         "value": {
           "fontSize": 13,
           "textDecoration": "none",
-          "fontFamily": "Inter",
+          "fontFamily": "Inter Variable",
           "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -1054,7 +1142,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#3f39e8ff",
+          "color": "#552beeff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 2
@@ -1875,7 +1963,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -1921,11 +2009,57 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
             "value": 600
+          },
+          "fontStyle": {
+            "type": "string",
+            "value": "normal"
+          },
+          "fontStretch": {
+            "type": "string",
+            "value": "normal"
+          },
+          "letterSpacing": {
+            "type": "dimension",
+            "value": -0.2
+          },
+          "lineHeight": {
+            "type": "dimension",
+            "value": 26
+          },
+          "paragraphIndent": {
+            "type": "dimension",
+            "value": 0
+          },
+          "paragraphSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "textCase": {
+            "type": "string",
+            "value": "none"
+          }
+        },
+        "link": {
+          "fontSize": {
+            "type": "dimension",
+            "value": 16
+          },
+          "textDecoration": {
+            "type": "string",
+            "value": "underline"
+          },
+          "fontFamily": {
+            "type": "string",
+            "value": "Inter"
+          },
+          "fontWeight": {
+            "type": "number",
+            "value": 400
           },
           "fontStyle": {
             "type": "string",
@@ -1969,7 +2103,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -2015,11 +2149,57 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
             "value": 600
+          },
+          "fontStyle": {
+            "type": "string",
+            "value": "normal"
+          },
+          "fontStretch": {
+            "type": "string",
+            "value": "normal"
+          },
+          "letterSpacing": {
+            "type": "dimension",
+            "value": -0.1
+          },
+          "lineHeight": {
+            "type": "dimension",
+            "value": 22
+          },
+          "paragraphIndent": {
+            "type": "dimension",
+            "value": 0
+          },
+          "paragraphSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "textCase": {
+            "type": "string",
+            "value": "none"
+          }
+        },
+        "link": {
+          "fontSize": {
+            "type": "dimension",
+            "value": 14
+          },
+          "textDecoration": {
+            "type": "string",
+            "value": "underline"
+          },
+          "fontFamily": {
+            "type": "string",
+            "value": "Inter Variable"
+          },
+          "fontWeight": {
+            "type": "number",
+            "value": 400
           },
           "fontStyle": {
             "type": "string",
@@ -2063,7 +2243,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -2109,11 +2289,57 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
             "value": 600
+          },
+          "fontStyle": {
+            "type": "string",
+            "value": "normal"
+          },
+          "fontStretch": {
+            "type": "string",
+            "value": "normal"
+          },
+          "letterSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "lineHeight": {
+            "type": "dimension",
+            "value": 20
+          },
+          "paragraphIndent": {
+            "type": "dimension",
+            "value": 0
+          },
+          "paragraphSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "textCase": {
+            "type": "string",
+            "value": "none"
+          }
+        },
+        "link": {
+          "fontSize": {
+            "type": "dimension",
+            "value": 12
+          },
+          "textDecoration": {
+            "type": "string",
+            "value": "underline"
+          },
+          "fontFamily": {
+            "type": "string",
+            "value": "Inter Variable"
+          },
+          "fontWeight": {
+            "type": "number",
+            "value": 400
           },
           "fontStyle": {
             "type": "string",
@@ -2157,7 +2383,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -2203,11 +2429,57 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
             "value": 600
+          },
+          "fontStyle": {
+            "type": "string",
+            "value": "normal"
+          },
+          "fontStretch": {
+            "type": "string",
+            "value": "normal"
+          },
+          "letterSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "lineHeight": {
+            "type": "dimension",
+            "value": 18
+          },
+          "paragraphIndent": {
+            "type": "dimension",
+            "value": 0
+          },
+          "paragraphSpacing": {
+            "type": "dimension",
+            "value": 0
+          },
+          "textCase": {
+            "type": "string",
+            "value": "none"
+          }
+        },
+        "link": {
+          "fontSize": {
+            "type": "dimension",
+            "value": 11
+          },
+          "textDecoration": {
+            "type": "string",
+            "value": "underline"
+          },
+          "fontFamily": {
+            "type": "string",
+            "value": "Inter Variable"
+          },
+          "fontWeight": {
+            "type": "number",
+            "value": 400
           },
           "fontStyle": {
             "type": "string",
@@ -2672,7 +2944,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2718,7 +2990,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
