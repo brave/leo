@@ -46,6 +46,9 @@
   function positionArrow(
     e: CustomEvent<{ middlewareData: MiddlewareData; placement: Placement }>
   ) {
+
+    if(!e.detail.middlewareData.arrow) return
+
     const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow as {
       x?: number
       y?: number
