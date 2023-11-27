@@ -1,6 +1,4 @@
 <script context="module" lang="ts">
-  import { createEventDispatcher } from 'svelte'
-  import type { HTMLAttributes } from 'svelte/elements'
   declare global {
     namespace JSX {
       interface IntrinsicElements {
@@ -18,6 +16,9 @@
 </script>
 
 <script lang="ts">
+  import type { HTMLAttributes } from 'svelte/elements'
+  import { createEventDispatcher, onMount } from 'svelte'
+
   type Size = 'default' | 'small' | 'tiny'
 
   export let selected: string | undefined = undefined
@@ -100,6 +101,18 @@
       item.click()
     }
   }
+
+  let pill: HTMLDivElement;
+
+  onMount(() => {
+    pill.addEventListener("transitionstart", () => {
+      segmentedControl.classList.add("transitioning");
+    });
+
+    pill.addEventListener("transitionend", () => {
+      segmentedControl.classList.remove("transitioning");
+    });
+  });
 </script>
 
 <div
@@ -113,7 +126,7 @@
   }}
   on:click={selectItem}
 >
-  <div class="pill" style:width={`${pillWidth}px`} style:left={`${pillPosition}px`} />
+  <div class="pill" style:width={`${pillWidth}px`} style:left={`${pillPosition}px`} bind:this={pill} />
   <slot />
 </div>
 
@@ -180,13 +193,16 @@
       box-shadow: var(--item-shadow);
       position: relative;
       z-index: 10;
+    }
 
+    :global & > leo-segmented-item,
+    :global & > leo-segmented-item .icon {
       transition: background 0.12s ease-in-out, color 0.12s ease-in-out,
         box-shadow 0.12s ease-in-out;
     }
 
-    :global & ::slotted(leo-segmented-item:hover),
-    :global & > leo-segmented-item:hover {
+    :global &:not(.transitioning) ::slotted(leo-segmented-item:hover),
+    :global &:not(.transitioning) > leo-segmented-item:hover {
       --item-bg: var(--leo-color-page-background);
       --item-color: var(--leo-color-text-primary);
       --item-shadow: var(--leo-effect-elevation-01);
