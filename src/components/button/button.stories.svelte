@@ -6,7 +6,6 @@
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import Icon from '../icon/icon.svelte'
-  import Button2 from './button2.svelte'
 
   let count = 0
   function handleClick() {
@@ -18,10 +17,7 @@
   title="Components/Button"
   component={Button}
   argTypes={{
-    '--leo-button-primary-color': {
-      control: 'color'
-    },
-    '--leo-button-secondary-color': {
+    '--leo-button-color': {
       control: 'color'
     },
     '--leo-button-padding': {
@@ -99,18 +95,6 @@
   <Button {...args} fab>
     <Icon name="check-circle-outline" />
   </Button>
-</Story>
-
-<Story name="Button 2" let:args>
-
-  {#each buttonSizes as size}
-  <h2 class="label capitalize">{size}</h2>
-  <div class="button-group">
-    {#each buttonKinds as kind}
-      <Button2 {...args} kind={kind} size={size}>Foo</Button2>
-    {/each}
-  </div>
-{/each}
 </Story>
 
 <Story name="All" let:args>
