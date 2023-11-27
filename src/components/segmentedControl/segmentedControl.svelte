@@ -29,8 +29,6 @@
   let pillWidth: number;
   let pillPosition: number;
 
-  $: console.log(selected)
-
   const dispatch = createEventDispatcher<{
     'select-item': any
   }>()
@@ -137,7 +135,7 @@
     --control-padding: var(--leo-spacing-s);
     --item-padding: var(--leo-spacing-xl);
     --gap: var(--leo-spacing-s);
-    --control-height: 40px;
+    --control-height: 48px;
 
     display: flex;
     max-width: max-content;
@@ -152,7 +150,7 @@
 
     &.isSmall {
       --leo-icon-size: var(--leo-icon-s);
-      --control-height: 32px;
+      --control-height: 40px;
       --item-padding: var(--leo-spacing-l);
     }
 
@@ -173,8 +171,8 @@
       transition: width 0.2s cubic-bezier(0.22, 1, 0.36, 1), left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    :global & ::slotted(leo-segmented-item),
-    :global & > leo-segmented-item {
+    :global :where(&) ::slotted(leo-segmented-item),
+    :global :where(&) > leo-segmented-item {
       --leo-icon-color: var(--leo-color-icon-default);
       --item-color: var(--leo-color-text-secondary);
       --item-bg: transparent;
@@ -213,10 +211,15 @@
       --item-shadow: var(--leo-effect-focus-state);
     }
 
+    :global & ::slotted(leo-segmented-item[aria-selected]),
+    :global & > leo-segmented-item[aria-selected] {
+      --item-color: var(--leo-color-text-primary);
+    }
+
     :global & ::slotted(leo-segmented-item[aria-selected]:hover),
     :global & > leo-segmented-item[aria-selected]:hover {
-      --leo-icon-color: var(--leo-color-text-primary);
-      --item-bg: transparent;
+      --leo-icon-color: currentColor;
+      --item-bg: var(--leo-color-container-background);
     }
   }
 </style>
