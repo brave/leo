@@ -1142,7 +1142,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#552beeff",
+          "color": "#3f39e8ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 2
