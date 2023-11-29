@@ -9,7 +9,7 @@
     segmentedControlSizes
   } from './segmentedControl.svelte'
 
-  let selected = 'item1'
+  let selected = 'full'
 </script>
 
 <Meta
@@ -38,19 +38,14 @@
   <p>Selected item: <code>{selected}</code></p>
   {#key args.size}
     <SegmentedControl {...args} bind:value={selected}>
-      <ControlItem value="item1">
+      <ControlItem value="full">
         <Icon slot="icon-before" name="check-circle-outline" />
-        Item
+        Full
       </ControlItem>
 
-      <ControlItem value="item2">
+      <ControlItem value="simple">
         <Icon slot="icon-before" name="check-circle-outline" />
-        Item
-      </ControlItem>
-
-      <ControlItem value="item3">
-        <Icon slot="icon-before" name="check-circle-outline" />
-        Item
+        Simple
       </ControlItem>
     </SegmentedControl>
   {/key}

@@ -5,6 +5,7 @@
 
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'
+  import Alert from '../alert/alert.svelte'
 
   export let value: string | undefined = undefined
   export let size: Size = 'default'
@@ -26,7 +27,11 @@
   }
 
   $: controlItems = Array.from(
-    segmentedControl?.querySelectorAll('.leo-control-item') ?? []
+    (segmentedControl?.querySelector('slot') as HTMLSlotElement)
+      ?.assignedElements()
+      ?.filter((element) => element.tagName === 'LEO-CONTROLITEM') ??
+      segmentedControl?.querySelectorAll('.leo-control-item') ??
+      []
   ) as HTMLElement[]
 
   $: {
@@ -36,8 +41,6 @@
       if (value === getValue(controlItem)) {
         controlItem.setAttribute('aria-selected', '')
         pillWidth = controlItem.getBoundingClientRect().width
-        console.log(pillWidth)
-
         pillPosition = controlItem.offsetLeft
       } else controlItem.removeAttribute('aria-selected')
     }
@@ -90,14 +93,20 @@
 </div>
 
 <style lang="scss">
+  :host {
+    position: relative;
+  }
+
   .leo-segmented-control {
     --leo-icon-size: var(--leo-icon-m);
     --bg: var(--leo-color-container-highlight);
     --control-padding: var(--leo-spacing-s);
-    --leo-control-item-padding: var(--leo-spacing-xl);
-    --leo-control-item-icon-gap: var(--leo-spacing-m);
     --gap: var(--leo-spacing-s);
     --control-height: 48px;
+
+    --leo-control-item-padding: var(--leo-spacing-xl);
+    --leo-control-item-icon-gap: var(--leo-spacing-m);
+    --leo-control-item-font: var(--leo-font-components-button-default);
 
     display: flex;
     max-width: max-content;
@@ -114,6 +123,7 @@
       --leo-icon-size: var(--leo-icon-s);
       --control-height: 40px;
       --leo-control-item-padding: var(--leo-spacing-l);
+      --leo-control-item-font: var(--leo-font-components-button-small);
     }
 
     &.size-tiny {
@@ -122,6 +132,7 @@
       --gap: var(--leo-spacing-xs);
       --control-height: 28px;
       --leo-control-item-padding: var(--leo-spacing-m);
+      --leo-control-item-font: var(--leo-font-components-button-small);
     }
 
     .pill {
@@ -135,28 +146,35 @@
         left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    :where(&) > :global .leo-control-item {
+    :where(&) > :global .leo-control-item,
+    :where(&) > :global ::slotted(leo-controlitem) {
       --leo-icon-color: var(--leo-color-icon-default);
       --leo-control-item-color: var(--leo-color-text-secondary);
       --leo-control-item-background: transparent;
+      --leo-control-item-radius: calc(var(--control-height) - var(--control-padding));
     }
 
-    :where(&:not(.transitioning)) > :global .leo-control-item:hover {
+    :where(&:not(.transitioning)) > :global .leo-control-item:hover,
+    :where(&:not(.transitioning)) > :global ::slotted(leo-controlitem:hover) {
       --leo-control-item-background: var(--leo-color-page-background);
       --leo-control-item-color: var(--leo-color-text-primary);
       --leo-control-item-shadow: var(--leo-effect-elevation-01);
     }
 
-    :where(&) > :global .leo-control-item:focus-visible {
+    :where(&) > :global .leo-control-item:focus-visible,
+    :where(&) > :global ::slotted(leo-controlitem:focus-visible) {
       --leo-control-item-shadow: var(--leo-effect-focus-state);
     }
 
-    :where(&) > :global .leo-control-item[aria-selected] {
+    :where(&) > :global .leo-control-item[aria-selected],
+    :where(&) > :global ::slotted(leo-controlitem[aria-selected]) {
       --leo-control-item-color: var(--leo-color-text-primary);
     }
 
     :where(&.transitioning) > :global .leo-control-item[aria-selected],
-    :where(&) > :global .leo-control-item[aria-selected]:hover {
+    :where(&.transitioning) > :global ::slotted(leo-controlitem[aria-selected]),
+    :where(&) > :global .leo-control-item[aria-selected]:hover,
+    :where(&) > :global ::slotted(leo-controlitem[aria-selected]:hover) {
       --leo-icon-color: currentColor;
       --leo-control-item-background: var(--leo-color-container-background);
     }

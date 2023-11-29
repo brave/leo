@@ -43,6 +43,8 @@
     import './leo/dropdown.js'
     import './leo/input.js'
     import './leo/tooltip.js'
+    import './leo/segmentedControl.js'
+    import './leo/controlItem.js'
 
     const countries = {
       'NZ': 'New Zealand',
@@ -64,6 +66,7 @@
     const dropdown = document.querySelector('leo-dropdown')
     const dropdownSelected = document.querySelector('leo-dropdown [slot="value"]')
     const input = document.querySelector('leo-input')
+    const segmentedControl = document.querySelector('leo-segmentedcontrol');
 
     function updateSelectedOption(e) {
       for (const radio of radios)
@@ -115,6 +118,10 @@
       dialogButton.isDisabled = true
     })
     dialog.addEventListener('close', () => dialogButton.isDisabled = false)
+
+    segmentedControl.addEventListener('change', (e) => {
+      document.querySelector('leo-alert').mode = e.detail.value;
+    })
   </script>
   <div class="component-container">
     <leo-alertcenter></leo-alertcenter>
@@ -176,6 +183,16 @@
         <leo-button kind="filled">Primary</leo-button>
       </div>
     </leo-dialog>
+    <leo-segmentedcontrol value="full">
+      <leo-controlitem value="full">
+        Full
+        <leo-icon slot="icon-after" name="fullscreen-on"></leo-icon>
+      </leo-controlitem>
+      <leo-controlitem value="simple">
+        Simple
+        <leo-icon slot="icon-after" name="fullscreen-off"></leo-icon>
+      </leo-controlitem>
+    </leo-segmentedcontrol>
   </div>
 </body>
 
