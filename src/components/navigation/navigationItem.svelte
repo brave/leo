@@ -103,6 +103,7 @@
 
     a,
     button {
+      all: unset;
       cursor: pointer;
       display: flex;
       width: 100%;

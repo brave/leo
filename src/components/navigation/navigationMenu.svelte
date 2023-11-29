@@ -16,7 +16,8 @@
     list-style: none;
   }
 
-  ul.isSubnav {
+  ul.isSubnav,
+  :host([slot="subnav"]) ul {
     padding: var(--leo-spacing-m) 0 0;
     margin-left: 33px;
     border-left: 1px solid var(--leo-color-divider-subtle);
