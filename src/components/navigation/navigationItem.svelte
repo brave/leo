@@ -107,6 +107,7 @@
       cursor: pointer;
       display: flex;
       width: 100%;
+      box-sizing: border-box;
       gap: var(--leo-spacing-xl);
       align-items: center;
       height: 48px;
