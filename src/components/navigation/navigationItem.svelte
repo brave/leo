@@ -75,6 +75,7 @@
   })
 </script>
 
+<!-- Note that this doesn't currently work properly in WC land due to the nested dynamic elements -->
 <svelte:element this={inList ? 'li' : 'div'} class="leo-navigation-item">
   <svelte:element
     this={tag}
