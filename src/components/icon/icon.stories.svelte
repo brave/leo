@@ -25,6 +25,16 @@
       description: 'The size of the icon (defaults to 24px if not set)',
       type: 'string'
     },
+    '--leo-icon-height': {
+      control: 'text',
+      description: 'For irregular icon aspect ratios, you can set the height of the icon (defaults to 24px if not set)',
+      type: 'string'
+    },
+    '--leo-icon-width': {
+      control: 'text',
+      description: 'For irregular icon aspect ratios, you can set the width of the icon (defaults to 24px if not set)',
+      type: 'string'
+    },
     name: {
       control: 'select',
       options: Object.values(meta.icons),

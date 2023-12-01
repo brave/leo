@@ -22,7 +22,7 @@
     // 404).
     if (isSSR) return
 
-    requestIdleCallback(() => {
+    window.requestIdleCallback?.(() => {
       const image = new Image()
       image.src = getIconUrl(lastIconBasePath, name)
       image.onerror = () => delete svgCache[image.src]
@@ -37,11 +37,12 @@
   import type { IconName } from '../../../icons/meta'
   export let name: IconName = undefined
   export let forceColor: boolean = false
+  export let title: string = undefined
   $: hasColor =
     name?.endsWith('-color') || name?.startsWith('country-') || forceColor
 </script>
 
-<div class="leoIcon">
+<div class="leoIcon" {title}>
   <slot>
     {#if name}
       <div
@@ -55,8 +56,8 @@
 
 <style lang="scss">
   .leoIcon {
-    --icon-width: var(--leo-icon-size, 24px);
-    --icon-height: var(--leo-icon-size, 24px);
+    --icon-width: var(--leo-icon-width, var(--leo-icon-size, 24px));
+    --icon-height: var(--leo-icon-height, var(--leo-icon-size, 24px));
     --icon-color: var(--leo-icon-color, currentColor);
 
     width: var(--icon-width);
