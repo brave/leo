@@ -4,16 +4,22 @@
 
   type Action = {
     kind?: ButtonKind
-    text: string
     action: (alert: AlertInfo) => void
-  }
+  } & ({
+    text: string
+    icon?: IconName
+  } | {
+    icon: IconName
+    text?: string
+  })
 
-  interface AlertOptions {
+  export interface AlertOptions {
     mode: AlertMode
     type: AlertType
     content: string
     title?: string
-    icon?: string
+    icon?: IconName
+    component?: ComponentType<SvelteComponent>
     actions: Action[]
   }
 
@@ -25,7 +31,8 @@
     type: AlertType
     content: string
     title?: string
-    icons?: string
+    icon?: IconName
+    component?: ComponentType<SvelteComponent>
     actions: Action[] = []
 
     duration?: number
@@ -67,6 +74,9 @@
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
   import { fly } from 'svelte/transition'
+  import type { ComponentType, SvelteComponent } from 'svelte'
+  import type { IconName } from '../../../icons/meta'
+  import Icon from '../icon/icon.svelte'
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
     'top-center'
@@ -83,7 +93,7 @@
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <Alert mode={alert.mode} type={alert.type} isToast>
+      <svelte:component this={alert.component || Alert} {...alert} isToast>
         <div slot="title">
           {alert.title}
         </div>
@@ -91,12 +101,22 @@
         <div slot="actions">
           {#each alert.actions as action}
             <Button
+              fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
-              on:click={() => action.action(alert)}>{action.text}</Button
+              on:click={() => action.action(alert)}
             >
+              {#if action.icon && !action.text}
+                <Icon name={action.icon} />
+              {:else}
+                {action.text}
+              {/if}
+              <div slot="icon-after" hidden={!action.text || !action.icon}>
+                <Icon name={action.icon} />
+              </div>
+            </Button>
           {/each}
         </div>
-      </Alert>
+      </svelte:component>
     </div>
   {/each}
 </div>
@@ -105,7 +125,7 @@
   .leo-alert-center {
     --width: var(--leo-alert-center-width, min(540px, 100vw));
     z-index: var(--leo-alert-center-z-index, 1000);
-    position: absolute;
+    position: var(--leo-alert-center-position, fixed);
     width: var(--width);
 
     padding: var(--leo-spacing-m);
