@@ -203,7 +203,6 @@
   }
 
   .leo-menu {
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
     button {
@@ -244,10 +243,10 @@
    * Each pseudo element has two sets of selectors: One for when it's inside a Svelte component, and one for
    * inside a web component. This could be simplified if leo-menu-item becomes its own Component.
    */
-  :global .leo-menu-popup ::slotted(leo-menu-item),
-  :global .leo-menu-popup ::slotted(leo-option),
-  :global .leo-menu-popup > leo-menu-item,
-  :global .leo-menu-popup > leo-option {
+  :global :where(.leo-menu-popup) ::slotted(leo-menu-item),
+  :global :where(.leo-menu-popup) ::slotted(leo-option),
+  :global :where(.leo-menu-popup) > leo-menu-item,
+  :global :where(.leo-menu-popup) > leo-option {
     all: unset;
     cursor: pointer;
     margin: var(--leo-menu-item-margin);
@@ -256,33 +255,30 @@
     display: revert;
   }
 
-  :global .leo-menu-popup ::slotted(leo-menu-item:hover),
-  :global .leo-menu-popup ::slotted(leo-option:hover),
-  :global .leo-menu-popup > leo-menu-item:hover,
-  :global .leo-menu-popup > leo-option:hover {
+  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:hover),
+  :global :where(.leo-menu-popup) ::slotted(leo-option:hover),
+  :global :where(.leo-menu-popup) > leo-menu-item:hover,
+  :global :where(.leo-menu-popup) > leo-option:hover {
     background: var(--leo-color-container-highlight);
   }
 
-  :global .leo-menu-popup ::slotted(*[aria-selected]),
-  :global .leo-menu-popup ::slotted(*:active),
-  :global .leo-menu-popup > *[aria-selected],
-  :global .leo-menu-popup > *:active {
+  :global :where(.leo-menu-popup) ::slotted(leo-option[aria-selected]),
+  :global :where(.leo-menu-popup) ::slotted(leo-menu-item[aria-selected]),
+  :global :where(.leo-menu-popup) ::slotted(leo-option:active),
+  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:active),
+  :global :where(.leo-menu-popup) > leo-option[aria-selected],
+  :global :where(.leo-menu-popup) > leo-menu-item[aria-selected],
+  :global :where(.leo-menu-popup) > leo-option:active,
+  :global :where(.leo-menu-popup) > leo-menu-item:active {
     background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
 
-  :global .leo-menu-popup ::slotted(*:focus-visible),
-  :global .leo-menu-popup > *:focus-visible {
+  :global :where(.leo-menu-popup) ::slotted(leo-option:focus-visible),
+  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:focus-visible),
+  :global :where(.leo-menu-popup) > leo-option:focus-visible,
+  :global :where(.leo-menu-popup) > leo-menu-item:focus-visible {
     box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
-  }
-
-  :global
-    .leo-menu-popup
-    > ::slotted(*:hover:not(leo-menu-item):not(leo-option)),
-  :global .leo-menu-popup > *:hover:not(leo-menu-item):not(leo-option) {
-    color: inherit;
-    background: none;
-    cursor: default;
   }
 </style>
