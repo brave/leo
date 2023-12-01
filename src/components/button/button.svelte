@@ -157,6 +157,11 @@
     color: var(--color);
     text-decoration: none;
     padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
+    max-height: max-content;
+
+    &.fab {
+      max-width: max-content;
+    }
   }
 
   .leoButton:not(:disabled) {
@@ -322,6 +327,11 @@
     &:disabled:not(.isLoading) {
       --color: var(--leo-color-text-primary);
     }
+
+    &.fab {
+      --padding-y: 0;
+      --padding-x: 0;
+    }
   }
   .leoButton.isPlainFaint {
     --radius: 8px;
@@ -331,6 +341,11 @@
     --box-shadow-hover: none;
     --icon-color: var(--leo-color-icon-default);
     --icon-hover-color: var(--leo-color-gray-70);
+
+    &.fab {
+      --padding-y: 0;
+      --padding-x: 0;
+    }
   }
   .leoButton.isHero {
     transition: var(--default-transition);
