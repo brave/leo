@@ -36,12 +36,12 @@
     z-index: 10;
 
     &,
-    & :global(.icon),
-    :global & ::slotted(.icon) {
+    .item-icon {
       transition: background 0.12s ease-in-out, color 0.12s ease-in-out, box-shadow 0.12s ease-in-out;
     }
 
     .item-icon {
+      color: var(--leo-control-item-icon-color);
       width: var(--leo-icon-size);
 
       &.no-icon {

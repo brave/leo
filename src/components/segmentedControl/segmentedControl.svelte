@@ -5,7 +5,6 @@
 
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'
-  import Alert from '../alert/alert.svelte'
 
   export let value: string | undefined = undefined
   export let size: Size = 'default'
@@ -40,8 +39,10 @@
 
       if (value === getValue(controlItem)) {
         controlItem.setAttribute('aria-selected', '')
-        pillWidth = controlItem.getBoundingClientRect().width
-        pillPosition = controlItem.offsetLeft
+        window.requestAnimationFrame(() => {
+          pillWidth = controlItem.getBoundingClientRect().width
+          pillPosition = controlItem.offsetLeft
+        })
       } else controlItem.removeAttribute('aria-selected')
     }
   }
@@ -148,10 +149,12 @@
 
     :where(&) > :global .leo-control-item,
     :where(&) > :global ::slotted(leo-controlitem) {
-      --leo-icon-color: var(--leo-color-icon-default);
+      --leo-control-item-icon-color: var(--leo-color-icon-default);
       --leo-control-item-color: var(--leo-color-text-secondary);
       --leo-control-item-background: transparent;
-      --leo-control-item-radius: calc(var(--control-height) - var(--control-padding));
+      --leo-control-item-radius: calc(
+        var(--control-height) - var(--control-padding)
+      );
     }
 
     :where(&:not(.transitioning)) > :global .leo-control-item:hover,
@@ -175,7 +178,7 @@
     :where(&.transitioning) > :global ::slotted(leo-controlitem[aria-selected]),
     :where(&) > :global .leo-control-item[aria-selected]:hover,
     :where(&) > :global ::slotted(leo-controlitem[aria-selected]:hover) {
-      --leo-icon-color: currentColor;
+      --leo-control-item-icon-color: currentColor;
       --leo-control-item-background: var(--leo-color-container-background);
     }
   }
