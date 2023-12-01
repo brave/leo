@@ -31,6 +31,7 @@
   class:full={currentMode === 'full'}
   style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
   style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
+  style:--default-text-color={`var(--leo-color-systemfeedback-${currentType}-text)`}
 >
   <div class="icon">
     <slot name="icon">
@@ -68,14 +69,16 @@
       var(--default-background)
     );
     display: flex;
-    color: var(--leo-color-text-primary);
+    color: var(--default-text-color, var(--leo-color-text-primary));
     padding: var(--leo-spacing-xl);
     border-radius: var(--leo-radius-m);
     gap: var(--leo-spacing-xl);
     font: var(--leo-font-default-regular);
 
     & .icon {
+      --leo-icon-size: var(--leo-icon-m);
       color: var(--leo-icon-color);
+      padding-top: var(--leo-spacing-xs);
     }
 
     & .title {
@@ -106,7 +109,7 @@
 
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     & .content {
       flex: 1;
     }

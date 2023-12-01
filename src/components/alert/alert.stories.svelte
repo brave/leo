@@ -24,6 +24,7 @@
           ? [
               {
                 text: 'dismiss',
+                icon: 'check-normal',
                 action: (a) => a.dismiss()
               }
             ]
@@ -86,6 +87,10 @@
     '--leo-alert-center-width': {
       type: 'string',
       description: 'The width to apply to the alert center'
+    },
+    '--leo-alert-center-position': {
+      type: 'string',
+      description: 'The position of the alert center'
     }
   }}
 />
