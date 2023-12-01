@@ -48,11 +48,12 @@
 </script>
 
 <div class="leo-dropdown">
-  <div bind:this={dropdown}>
+  <div>
     <FormItem
       bind:disabled
       bind:required
       bind:size
+      bind:controlElement={dropdown}
       {mode}
       showFocusOutline={isOpen}
       error={showErrors && $$slots.errors}

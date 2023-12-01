@@ -181,7 +181,7 @@
         id="menu"
         role="menu"
         tabindex="-1"
-        style:min-width="{minWidth}px"
+        style:--leo-menu-control-width={`${minWidth}px`}
         bind:this={popup}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
@@ -224,6 +224,8 @@
     border: 1px solid var(--leo-color-divider-subtle);
     border-radius: var(--leo-radius-m);
     width: max-content;
+    min-width: var(--leo-menu-control-width);
+    max-width: var(--leo-menu-popup-max-width);
     display: flex;
     flex-direction: column;
   }

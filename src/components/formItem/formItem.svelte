@@ -55,6 +55,8 @@
 
   export let showFocusOutline: boolean = false
   export let error = false
+
+  export let controlElement: HTMLDivElement = undefined;
 </script>
 
 <label
@@ -71,7 +73,7 @@
     <slot name="label" />
     {#if required}<span class="required-indicator">*</span>{/if}
   </div>
-  <div class="control">
+  <div class="control" bind:this={controlElement}>
     <div class="container">
       <div>
         <slot name="left-icon" />
