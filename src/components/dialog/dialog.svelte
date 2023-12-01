@@ -1,14 +1,28 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import type { SvelteHTMLElements } from 'svelte/elements'
   import { scale } from 'svelte/transition'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
+
+  type DialogSizes = 'mobile' | 'normal'
+
+  type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open'> & {
+    isOpen?: boolean
+    modal?: boolean
+    showClose?: boolean
+    showBack?: boolean
+    size?: DialogSizes
+    escapeCloses?: boolean
+    backdropClickCloses?: boolean
+    animate?: boolean
+  }
 
   export let isOpen = false
   export let modal = true
   export let showClose = false
   export let showBack = false
-  export let size: 'mobile' | 'normal' = 'normal'
+  export let size: DialogSizes = 'normal'
   export let escapeCloses = true
   export let backdropClickCloses = true
   export let animate = true
@@ -23,6 +37,8 @@
     if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
 
+  const hasHeader = showBack || $$slots.title || $$slots.subtitle
+
   const close = () => {
     isOpen = false
     dispatch('close')
@@ -32,9 +48,12 @@
 {#if isOpen}
   <dialog
     transition:scale={{ duration: animate ? 60 : 0, start: 0.8 }}
+    {...$$restProps}
     class="leo-dialog"
     class:mobile={size === 'mobile'}
     class:modal
+    class:hasHeader
+    class:hasActions={$$slots.actions}
     bind:this={dialog}
     on:close={close}
     on:cancel={(e) => {
@@ -45,20 +64,6 @@
       if (escapeCloses) close()
     }}
   >
-    {#if showBack || $$slots.title}
-      <div class="title-row">
-        {#if showBack}
-          <div class="back-button">
-            <Button kind="plain-faint" on:click={() => dispatch('back')}>
-              <Icon name="arrow-left" />
-            </Button>
-          </div>
-        {/if}
-        <div class="title">
-          <slot name="title" />
-        </div>
-      </div>
-    {/if}
     {#if showClose}
       <div class="close-button">
         <Button kind="plain-faint" on:click={close}>
@@ -66,10 +71,28 @@
         </Button>
       </div>
     {/if}
-    {#if $$slots.subtitle}
-      <div class="subtitle">
-        <slot name="subtitle" />
-      </div>
+    {#if hasHeader}
+      <header>
+        {#if showBack || $$slots.title}
+          <div class="title-row">
+            {#if showBack}
+              <div class="back-button">
+                <Button kind="plain-faint" on:click={() => dispatch('back')}>
+                  <Icon name="arrow-left" />
+                </Button>
+              </div>
+            {/if}
+            <div class="title">
+              <slot name="title" />
+            </div>
+          </div>
+        {/if}
+        {#if $$slots.subtitle}
+          <div class="subtitle">
+            <slot name="subtitle" />
+          </div>
+        {/if}
+      </header>
     {/if}
     <div class="body">
       <slot />
@@ -100,11 +123,7 @@
 
 <style lang="scss">
   .leo-dialog {
-    --padding: var(
-      --leo-dialog-padding,
-      var(--leo-spacing-3xl) var(--leo-spacing-3xl) var(--leo-spacing-4xl)
-        var(--leo-spacing-3xl)
-    );
+    --padding: var(--leo-dialog-padding, var(--leo-spacing-4xl));
     --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-xl));
     --background: var(
       --leo-dialog-background,
@@ -112,9 +131,10 @@
     );
     --color: var(--leo-dialog-color, var(--leo-color-text-primary));
 
-    position: relative;
+    position: fixed;
     margin: auto;
     border: none;
+    display: grid;
 
     width: var(--leo-dialog-width, 500px);
     max-width: calc(100% - var(--leo-spacing-m) * 2);
@@ -122,11 +142,25 @@
     border-radius: var(--border-radius);
 
     color: var(--color);
-    background: var(--background);
-    padding: var(--padding);
+
+    padding: 0;
+    background: transparent;
+  }
+
+  .leo-dialog.hasHeader {
+    grid-template-rows: auto 1fr;
+  }
+
+  .leo-dialog.hasActions {
+    grid-template-rows: 1fr auto;
+  }
+
+  .leo-dialog.hasHeader.hasActions {
+    grid-template-rows: auto 1fr auto;
   }
 
   .leo-dialog.mobile {
+    --padding: var(--leo-dialog-padding, var(--leo-spacing-2xl));
     width: var(--leo-dialog-width, 374px);
   }
 
@@ -135,6 +169,11 @@
     &::backdrop {
       display: none;
     }
+  }
+
+  .leo-dialog header {
+    background: var(--background);
+    padding: var(--padding);
   }
 
   .leo-dialog .title {
@@ -160,12 +199,24 @@
   }
 
   .leo-dialog .body {
+    overflow-y: auto;
+    background: var(--background);
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-default-regular);
+    padding: var(--padding);
+  }
+
+  .leo-dialog.hasHeader .body {
+    padding-top: 0;
+  }
+
+  .leo-dialog.hasActions .body {
+    padding-bottom: 0;
   }
 
   .leo-dialog .actions {
-    margin-top: var(--leo-spacing-3xl);
+    background: var(--background);
+    padding: var(--padding);
   }
 
   /** The below :global selectors are so that Svelte doesn't remove the classes
@@ -198,6 +249,5 @@
     align-items: center;
     justify-content: start;
     gap: var(--leo-spacing-l);
-    margin-bottom: var(--leo-spacing-3xl);
   }
 </style>
