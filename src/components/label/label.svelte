@@ -13,7 +13,7 @@
   ] as const
   export type Color = (typeof colors)[number]
 
-  export const modes = ['default', 'loud'] as const
+  export const modes = ['default', 'loud', 'outline'] as const
   export type Mode = (typeof modes)[number]
 </script>
 
@@ -22,14 +22,20 @@
   export let color: Color = 'gray'
 
   $: background =
-    mode === 'loud' ? `var(--leo-color-${color}-50)` : 'transparent'
+    mode === 'default'
+      ? `var(--leo-color-${color}-20)`
+      : mode === 'loud'
+        ? `var(--leo-color-${color}-50)`
+        : 'transparent'
 
   $: text =
-    mode === 'loud'
-      ? `var(--leo-color-${color}-10)`
-      : `var(--leo-color-${color}-50)`
+    mode === 'default'
+      ? `var(--leo-color-${color}-50)`
+      : mode === 'loud'
+        ? `var(--leo-color-${color}-10)`
+        : `var(--leo-color-${color}-50)`
 
-  $: border = mode === 'loud' ? `transparent` : `var(--leo-color-${color}-50)`
+  $: border = mode === 'outline' ? `var(--leo-color-${color}-50)` : `transparent`
 </script>
 
 <div
@@ -51,15 +57,17 @@
   .leo-label {
     --icon-size: var(--leo-label-icon-size, 14px);
     --font-text: var(--leo-label-font-text, var(--leo-font-components-label));
-    --padding: var(--leo-label-padding, 2px 3px);
+    --padding: var(--leo-label-padding, 0 var(--leo-spacing-s));
     --radius: var(--leo-label-radius, 6px);
 
     --leo-icon-size: var(--icon-size);
 
-    display: inline-block;
+    display: inline-flex;
     border-radius: var(--radius);
     padding: var(--padding);
     font: var(--font-text);
+    height: var(--leo-icon-m);
+    align-items: center;
   }
 
   .content {
