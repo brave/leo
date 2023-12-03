@@ -17,6 +17,9 @@
   title="Components/Button"
   component={Button}
   argTypes={{
+    '--leo-button-color': {
+      control: 'color'
+    },
     '--leo-button-padding': {
       control: 'text',
       type: 'string',

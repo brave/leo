@@ -108,6 +108,23 @@
   :host button {
     width: 100%;
   }
+
+  .leoButton {
+    /**
+     * These are not literally the foreground/background of the button, but
+     * rather the base colors, which will be remixed to make generate the
+     * button color palette.
+     */
+    --foreground: var(--leo-color-text-primary);
+    --background: var(--leo-color-container-background);
+
+    --primary-color: var(
+      --leo-button-color,
+      var(--leo-color-button-background)
+    );
+    --mixed-primary-color: var(--primary-color);
+  }
+
   // Main styles and states
   .leoButton,
   .leoButton:visited:not(:hover) {
@@ -130,7 +147,9 @@
     align-items: center;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    transition: background 0.12s ease-in-out, var(--default-transition);
+    transition:
+      background 0.12s ease-in-out,
+      var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 0px) var(--border-color, transparent);
     border-radius: var(--leo-button-radius, var(--radius));
@@ -145,6 +164,17 @@
     [data-is-button-target]:hover :host .leoButton,
     [data-is-button-target]:hover .leoButton {
       --leo-icon-color: var(--icon-hover-color, var(--icon-color));
+      --mixed-primary-color: var(--leo-color-primitive-primary-70);
+
+      /** If we support the color-mix syntax, infer the hover color */
+      @supports (color: color-mix(in srgb, transparent, transparent)) {
+        --mixed-primary-color: color-mix(
+          in srgb,
+          var(--primary-color),
+          var(--foreground) 20%
+        );
+      }
+
       background: var(--bg-hover, var(--bg));
       color: var(--color-hover, var(--color));
       box-shadow: var(--box-shadow-hover);
@@ -250,46 +280,44 @@
 
   // Kind Variations
   .leoButton.isFilled {
-    --bg: var(--leo-color-button-background);
-    --bg-hover: var(--leo-color-primitive-primary-70);
-    --bg-active: var(--bg-hover);
-    --bg-focus: var(--bg);
-    --bg-loading: var(--bg);
+    --bg: var(--mixed-primary-color);
     --bg-disabled: var(--leo-color-button-disabled);
     --color: var(--leo-color-white);
-    --icon-color: var(--leo-color-white);
+    --icon-color: var(--color);
   }
 
   .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
-    --color: var(--leo-color-text-interactive);
-    --color-hover: var(--leo-color-primary-60);
-    --color-focus: var(--leo-color-text-interactive);
-    --color-loading: var(--leo-color-text-interactive);
+    --color: var(--mixed-primary-color);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
     --border-color-hover: var(--leo-color-primitive-primary-40);
     --border-color-focus: var(--leo-color-divider-interactive);
-    --box-shadow-focus: 0px 0px 0px 2px #423eee,
-      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
-    --icon-color: var(--leo-color-icon-interactive);
-    --icon-hover-color: var(--leo-color-primary-60);
 
     @theme (dark) {
       --border-color-hover: var(--leo-color-primitive-primary-60);
     }
+
+    /** If we support color mix, infer border colors from primary color */
+    @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --border-color: color-mix(
+        in srgb,
+        var(--primary-color),
+        var(--background) 50%
+      );
+      --border-color-hover: var(--primary-color);
+    }
+
+    --box-shadow-focus: 0px 0px 0px 2px #423eee,
+      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
+    --icon-color: var(--color);
   }
   .leoButton.isPlain {
     --radius: 8px;
     --padding-x: 2px;
-    --color: var(--leo-color-text-interactive);
-    --color-hover: var(--leo-color-primary-60);
-    --color-active: var(--color);
-    --color-loading: var(--color);
+    --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
-    --icon-color: var(--leo-color-icon-interactive);
-    --icon-hover-color: var(--leo-color-primary-60);
 
     &:disabled:not(.isLoading) {
       --color: var(--leo-color-text-primary);
@@ -311,7 +339,6 @@
     --bg-disabled: var(--leo-color-button-disabled);
     --color: var(--leo-color-white);
     --default-bg-opacity: 1;
-    --icon-color: var(--leo-color-white);
 
     position: relative;
     z-index: 0;
