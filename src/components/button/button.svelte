@@ -170,8 +170,8 @@
       @supports (color: color-mix(in srgb, transparent, transparent)) {
         --mixed-primary-color: color-mix(
           in srgb,
-          var(--primary-color) 80%,
-          var(--foreground)
+          var(--primary-color),
+          var(--foreground) 20%
         );
       }
 
@@ -303,8 +303,8 @@
     @supports (color: color-mix(in srgb, transparent, transparent)) {
       --border-color: color-mix(
         in srgb,
-        var(--primary-color) 50%,
-        var(--background)
+        var(--primary-color),
+        var(--background) 50%
       );
       --border-color-hover: var(--primary-color);
     }
