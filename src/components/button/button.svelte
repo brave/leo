@@ -110,6 +110,11 @@
   }
 
   .leoButton {
+    /**
+     * These are not literally the foreground/background of the button, but
+     * rather the base colors, which will be remixed to make generate the
+     * button color palette.
+     */
     --foreground: var(--leo-color-text-primary);
     --background: var(--leo-color-container-background);
 
