@@ -114,6 +114,7 @@ module.exports = ({ dictionary, file }) => {
     'desktop'
   )
   const themeObject = formattedVariables(properties)
+
   // Separate out each main property, to allow for tree shaking and easy type-to-complete
   // imports in code editors.
   for (const property in themeObject) {

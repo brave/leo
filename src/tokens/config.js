@@ -9,7 +9,7 @@ module.exports = {
         {
           destination: 'variables.css',
           format: 'tailwind/css',
-          filter: 'filterWeb',
+          filter: 'tw/filterTokens',
           options: {
             showFileHeader: false,
             prefix: `tw`
@@ -18,7 +18,15 @@ module.exports = {
         {
           destination: 'tokens.ts',
           format: 'tailwind/tokens',
-          filter: 'filterWeb',
+          filter: 'tw/filterTokens',
+          options: {
+            showFileHeader: false
+          }
+        },
+        {
+          destination: 'plugins/typography.ts',
+          format: 'tailwind/fonts',
+          filter: 'tw/filterFonts',
           options: {
             showFileHeader: false
           }

@@ -72,14 +72,14 @@
     padding: var(--leo-spacing-xl);
     border-radius: var(--leo-radius-m);
     gap: var(--leo-spacing-xl);
-    font: var(--leo-font-primary-default-regular);
+    font: var(--leo-font-default-regular);
 
     & .icon {
       color: var(--leo-icon-color);
     }
 
     & .title {
-      font: var(--leo-font-primary-heading-h4);
+      font: var(--leo-font-heading-h4);
     }
   }
 

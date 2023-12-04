@@ -13,6 +13,6 @@
     margin-top: var(--leo-spacing-xl);
   }
   .slot {
-    font: var(--leo-font-primary-default-semibold);
+    font: var(--leo-font-default-semibold);
   }
 </style>
