@@ -95,13 +95,14 @@
 
 <style lang="scss">
   :host {
+    display: flex;
     position: relative;
   }
 
   .leo-segmented-control {
     --leo-icon-size: var(--leo-icon-m);
     --bg: var(--leo-color-container-highlight);
-    --control-padding: var(--leo-spacing-s);
+    --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
     --control-height: 48px;
 
@@ -129,7 +130,7 @@
 
     &.size-tiny {
       --leo-icon-size: var(--leo-icon-xs);
-      --control-padding: var(--leo-spacing-xs);
+      --control-padding: var(--leo-control-padding, var(--leo-spacing-xs));
       --gap: var(--leo-spacing-xs);
       --control-height: 28px;
       --leo-control-item-padding: var(--leo-spacing-m);

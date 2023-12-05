@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let value: any
+  export let value: string | number
 </script>
 
 <button class="leo-control-item" {value}>
@@ -16,6 +16,7 @@
 
 <style lang="scss">
   :host {
+    display: flex;
     height: 100%;
   }
   .leo-control-item {
