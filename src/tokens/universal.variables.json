@@ -706,7 +706,7 @@
         },
         "info-icon": {
           "type": "color",
-          "value": "#1075c9"
+          "value": "#0061aa"
         },
         "info-background": {
           "type": "color",
@@ -718,7 +718,7 @@
         },
         "success-icon": {
           "type": "color",
-          "value": "#3c823c"
+          "value": "#19721e"
         },
         "success-background": {
           "type": "color",
@@ -730,7 +730,7 @@
         },
         "warning-icon": {
           "type": "color",
-          "value": "#8c6f03"
+          "value": "#755b00"
         },
         "warning-background": {
           "type": "color",
@@ -742,7 +742,7 @@
         },
         "error-icon": {
           "type": "color",
-          "value": "#e11f3d"
+          "value": "#b3002a"
         },
         "error-background": {
           "type": "color",
@@ -1254,7 +1254,7 @@
         },
         "info-icon": {
           "type": "color",
-          "value": "#399fff"
+          "value": "#a0cdff"
         },
         "info-background": {
           "type": "color",
@@ -1266,7 +1266,7 @@
         },
         "success-icon": {
           "type": "color",
-          "value": "#2aba32"
+          "value": "#94df91"
         },
         "success-background": {
           "type": "color",
@@ -1278,7 +1278,7 @@
         },
         "warning-icon": {
           "type": "color",
-          "value": "#bd9600"
+          "value": "#f3c211"
         },
         "warning-background": {
           "type": "color",
@@ -1290,7 +1290,7 @@
         },
         "error-icon": {
           "type": "color",
-          "value": "#ff5a63"
+          "value": "#ffb1b0"
         },
         "error-background": {
           "type": "color",
