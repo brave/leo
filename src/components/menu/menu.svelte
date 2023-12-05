@@ -223,7 +223,7 @@
 
     border: 1px solid var(--leo-color-divider-subtle);
     border-radius: var(--leo-radius-m);
-    width: 100%;
+    width: max-content;
     display: flex;
     flex-direction: column;
   }
