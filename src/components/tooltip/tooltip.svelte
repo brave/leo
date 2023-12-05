@@ -173,6 +173,7 @@
   }
 
   .leo-tooltip .tooltip {
+    width: max-content;
     background: var(--background);
     color: var(--text);
     box-shadow: var(--shadow);
