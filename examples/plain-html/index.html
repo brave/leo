@@ -23,6 +23,33 @@
     .blur {
       filter: blur(1px);
     }
+
+    .navigation-container {
+      border-radius: var(--leo-radius-m);
+      background: var(--leo-color-container-background);
+      box-shadow:
+        0px 1px 4px 0px rgba(0, 0, 0, 0.07),
+        0px 1px 0px 0px rgba(0, 0, 0, 0.04);
+      width: 300px;
+      height: 100%;
+    }
+
+    .navigation-theme-switcher {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--leo-spacing-m);
+    }
+
+    .navigation-theme-switcher span {
+      padding-left: var(--leo-spacing-m);
+      color: var(--leo-color-text-secondary);
+      font: var(--leo-font-components-navbutton);
+    }
+  
+    .navigation-action-items {
+      padding-top: var(--leo-spacing-m);
+    }
   </style>
 </head>
 
@@ -49,8 +76,8 @@
     import './leo/navigationHeader.js'
     import './leo/navigationMenu.js'
     import './leo/navigationItem.js'
-    import './leo/navigationSeparator.js'
     import './leo/navigationActions.js'
+    import './leo/hr.js'
 
     const countries = {
       'NZ': 'New Zealand',
@@ -201,41 +228,60 @@
       </leo-controlitem>
     </leo-segmentedcontrol>
 
+    <div class="navigation-container">
     <leo-navigation>
       <leo-navigationheader slot="header">
         <leo-icon slot="logo" name="social-brave-release-favicon-fullheight-color"></leo-icon>
-        <h1 style="font: var(--leo-font-primary-heading-h4)"><span class="logo-mark">Brave</span> Accounts</h1>
+        <h1 style="font: var(--leo-font-heading-h4); color: var(--leo-color-text-primary);">Brave Accounts</h1>
       </leo-navigationheader>
-
+    
       <leo-navigationmenu>
-        <leo-navigationitem href="https://brave.com" icon="browser-ntp-widget" isCurrent>
-          Item 1
-        </leo-navigationitem>
-        <leo-navigationitem href="#" icon="browser-ntp-widget">
-          Item with sub nav
+        <leo-navigationitem icon="browser-home" href="#home">Home</leo-navigationitem>
+
+        <leo-navigationitem icon="discover" href="#explore">Explore</leo-navigationitem>
+
+        <leo-navigationitem icon="discover" href="#explore">
+          Settings
+
           <leo-navigationmenu slot="subnav">
-            <leo-navigationitem href="#" icon="agenda" isCurrent>
-              Testing
-            </leo-navigationitem>
-            <leo-navigationitem href="#" icon="browser-ntp-widget">
-              Item with sub nav
+            <leo-navigationitem icon="globe" href="#settings-languages">Languages</leo-navigationitem>
+
+            <leo-navigationitem icon="lock" href="#settings-security">
+              Security
+
               <leo-navigationmenu slot="subnav">
-                <leo-navigationitem href="#" icon="agenda" isCurrent>
-                  Testing
-                </leo-navigationitem>
+                <leo-navigationitem icon="user-accounts" href="#settings-security-account">Account</leo-navigationitem>
+    
+                <leo-navigationitem icon="browser-extensions" href="#settings-security-tokens">Tokens</leo-navigationitem>
               </leo-navigationmenu>
             </leo-navigationitem>
           </leo-navigationmenu>
         </leo-navigationitem>
       </leo-navigationmenu>
-
+    
       <leo-navigationactions slot="actions">
-        <leo-toggle>
-          Switch theme
-          <Icon slot="on-icon" name="theme-dark" />
-        </leo-toggle>
+        <div class="navigation-theme-switcher">
+          <span>Theme</span>
+          <leo-segmentedcontrol size="tiny" value="light">
+            <leo-controlitem value="light">
+              <leo-icon name="theme-light"></leo-icon>
+            </leo-controlitem>
+            <leo-controlitem value="dark">
+              <leo-icon name="theme-dark"></leo-icon>
+            </leo-controlitem>
+            <leo-controlitem value="system">
+              <leo-icon name="theme-system"></leo-icon>
+            </leo-controlitem>
+          </leo-segmentedcontrol>
+        </div>
+        <leo-hr></leo-hr>
+        <div class="navigation-action-items">
+          <leo-navigationitem outsideList="true" icon="help-outline">Help</leo-navigationitem>
+          <leo-navigationitem outsideList="true" icon="outside">Log out</leo-navigationitem>
+        </div>
       </leo-navigationactions>
     </leo-navigation>
+  </div>
   </div>
 </body>
 

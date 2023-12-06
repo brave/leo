@@ -22,7 +22,7 @@
   type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   type CommonProps = {
-    inList?: boolean
+    outsideList?: boolean
     icon?: IconName
   }
 
@@ -46,10 +46,10 @@
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
   export let isCurrent: boolean = window.location.pathname === href
-  export let inList: boolean = true
+  export let outsideList: boolean = true
 
   const checkIfCurrent = () => {
-    isCurrent = window.location.pathname === href
+    isCurrent = window.location.pathname === href || window.location.hash === href;
   }
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
@@ -70,13 +70,13 @@
         checkIfCurrent()
       }
     })
-
-    window.addEventListener('popstate', checkIfCurrent)
   })
 </script>
 
+<svelte:window on:popstate={checkIfCurrent} />
+
 <!-- Note that this doesn't currently work properly in WC land due to the nested dynamic elements -->
-<svelte:element this={inList ? 'li' : 'div'} class="leo-navigation-item">
+<svelte:element this={outsideList ? 'div' : 'li'} class="leo-navigation-item">
   <svelte:element
     this={tag}
     href={href || undefined}
