@@ -73,7 +73,7 @@
   })
 </script>
 
-<svelte:window on:popstate={checkIfCurrent} />
+<svelte:window on:popstate={checkIfCurrent} on:hashchange={checkIfCurrent} />
 
 <!-- Note that this doesn't currently work properly in WC land due to the nested dynamic elements -->
 <svelte:element this={outsideList ? 'div' : 'li'} class="leo-navigation-item">

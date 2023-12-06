@@ -3,9 +3,7 @@
 </script>
 
 <div
-  class="leo-navigation"
-  class:isVertical={kind === 'vertical'}
-  class:isHorizontal={kind === 'horizontal'}
+  class="leo-navigation kind-{kind}"
 >
   {#if $$slots.header}
     <slot name="header" />
@@ -27,7 +25,7 @@
     flex-direction: var(--nav-direction);
     height: 100%;
 
-    &.isVertical {
+    &.kind-vertical {
       --nav-direction: column;
     }
   }
