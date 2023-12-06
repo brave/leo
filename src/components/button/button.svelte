@@ -336,11 +336,19 @@
   .leoButton.isPlainFaint {
     --radius: 8px;
     --padding-x: 2px;
-    --color: var(--leo-color-text-secondary);
-    --color-hover: var(--leo-color-gray-70);
+    --foreground: transparent;
+    --primary-color: currentColor;
+    --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
-    --icon-color: var(--leo-color-icon-default);
-    --icon-hover-color: var(--leo-color-gray-70);
+    --icon-color: var(--mixed-primary-color);
+
+    @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --icon-color: color-mix(
+        in srgb,
+        var(--primary-color),
+        var(--background) 30%
+      );
+    }
 
     &.fab {
       --padding-y: 0;
