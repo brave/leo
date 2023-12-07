@@ -46,7 +46,7 @@
   export let isLoading: boolean = false
   export let isDisabled: boolean = false
   export let isCurrent: boolean = window.location.pathname === href
-  export let outsideList: boolean = true
+  export let outsideList: boolean = false
 
   const checkIfCurrent = () => {
     isCurrent = window.location.pathname === href || window.location.hash === href;
