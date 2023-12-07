@@ -21,6 +21,13 @@
   component={Dropdown}
   argTypes={{
     ...cssProperties,
+    '--leo-floating-max-width': {
+      description: 'Max width for the dropdown popup (if greater than control width)',
+      type: 'string'
+    },
+    '--leo-menu-control-width': {
+      description: '(read only): Computed width of menu control'
+    },
     size: {
       control: 'select',
       options: sizes

@@ -4,7 +4,7 @@
 </script>
 
 <script lang="ts">
-  import type { MiddlewareData, Placement } from '@floating-ui/dom'
+  import type { MiddlewareData, Placement, Strategy } from '@floating-ui/dom'
   import { arrow as arrowMiddleware } from '@floating-ui/dom'
   import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
@@ -13,6 +13,8 @@
   export let text: string | undefined = undefined
 
   export let placement: Placement = 'top'
+  export let fallbackPlacements: Placement[] = undefined
+  export let positionStrategy: Strategy = undefined
   export let flip: boolean = true
   export let shift: number | undefined = 8
   export let offset: number = 8
@@ -121,6 +123,8 @@
       {flip}
       {offset}
       {placement}
+      {fallbackPlacements}
+      {positionStrategy}
       {shift}
       autoUpdate
       on:mouseleave={handleTooltipMouseleave}
@@ -173,7 +177,6 @@
   }
 
   .leo-tooltip .tooltip {
-    width: max-content;
     background: var(--background);
     color: var(--text);
     box-shadow: var(--shadow);

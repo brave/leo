@@ -12,7 +12,19 @@
   const handleAction = () => console.log('action')
 </script>
 
-<Meta title="Components/ButtonMenu" component={ButtonMenu} />
+<Meta
+  title="Components/ButtonMenu"
+  component={ButtonMenu}
+  argTypes={{
+    '--leo-floating-max-width': {
+      description: 'Max width for the menu popup (if greater than control width)',
+      type: 'string'
+    },
+    '--leo-menu-control-width': {
+      description: '[Readonly]: Computed width of menu control'
+    }
+  }}
+/>
 
 <Template let:args>
   <div class="container">
