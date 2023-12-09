@@ -24,6 +24,7 @@
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../svelteDirectives/clickOutside'
   import Floating from '../floating/floating.svelte'
+  import { size as sizeMiddleware } from '@floating-ui/dom'
 
   interface CloseEventDetail {
     originalEvent: Event
@@ -171,11 +172,17 @@
   function handleBlur(e: MouseEvent) {
     dispatchClose(e, 'blur')
   }
+
+  function applySizeMiddleware({rects, availableHeight}) {
+    popup.style.maxHeight = `calc(${availableHeight}px - var(--leo-spacing-xl))`;
+  }
+
+  let floatingMiddleware = [sizeMiddleware({apply: applySizeMiddleware })];
 </script>
 
 <div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
   {#if isOpen}
-    <Floating {target} placement="bottom-start" autoUpdate>
+    <Floating {target} placement="bottom-start" autoUpdate middleware={floatingMiddleware}>
       <div
         class="leo-menu-popup"
         id="menu"
