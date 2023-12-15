@@ -1,0 +1,500 @@
+{
+  "color": {
+    "---light": {
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#0d0f14"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#3f4855"
+        },
+        "tertiary": {
+          "type": "color",
+          "value": "#687485"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(33, 36, 42, 0.5000)"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#3f39e8"
+        }
+      },
+      "icon": {
+        "default": {
+          "type": "color",
+          "value": "#687485"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(104, 116, 133, 0.5000)"
+        },
+        "active": {
+          "type": "color",
+          "value": "#3f39e8"
+        }
+      },
+      "browserbutton": {
+        "background-hover": {
+          "type": "color",
+          "value": "#edeef1"
+        },
+        "background-active-toolbar": {
+          "type": "color",
+          "value": "#ffffff"
+        },
+        "background-active-urlbar": {
+          "type": "color",
+          "value": "#edeef1"
+        }
+      },
+      "tabswitcher": {
+        "button": {
+          "type": "color",
+          "value": "#ffffff"
+        },
+        "background": {
+          "type": "color",
+          "value": "#f6f7f8"
+        }
+      },
+      "container": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#ffffff"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#ffffff"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#e9eeff"
+        },
+        "scrim": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.3500)"
+        }
+      },
+      "chrome": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#f6f7f8"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#f6f7f8"
+        }
+      },
+      "divider": {
+        "subtle": {
+          "type": "color",
+          "value": "rgba(161, 171, 186, 0.4000)"
+        },
+        "strong": {
+          "type": "color",
+          "value": "rgba(104, 116, 133, 0.4000)"
+        }
+      },
+      "tabbar": {
+        "tabbar-background": {
+          "type": "color",
+          "value": "#edeef1"
+        },
+        "tabactive-background": {
+          "type": "color",
+          "value": "#ffffff"
+        }
+      },
+      "os-color": {
+        "type": "color",
+        "value": "#000000"
+      },
+      "group": {
+        "text": {
+          "type": "color",
+          "value": "#127537"
+        },
+        "background": {
+          "type": "color",
+          "value": "rgba(18, 117, 55, 0.1500)"
+        }
+      }
+    },
+    "---dark": {
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#f6f7f8"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#c2c9d3"
+        },
+        "tertiary": {
+          "type": "color",
+          "value": "#a1abba"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(237, 238, 241, 0.5000)"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "icon": {
+        "default": {
+          "type": "color",
+          "value": "#a1abba"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(161, 171, 186, 0.5000)"
+        },
+        "active": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "browserbutton": {
+        "background-hover": {
+          "type": "color",
+          "value": "#0d0f14"
+        },
+        "background-active-toolbar": {
+          "type": "color",
+          "value": "#30343d"
+        },
+        "background-active-urlbar": {
+          "type": "color",
+          "value": "#30343d"
+        }
+      },
+      "tabswitcher": {
+        "button": {
+          "type": "color",
+          "value": "#21242a"
+        },
+        "background": {
+          "type": "color",
+          "value": "#30343d"
+        }
+      },
+      "container": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#0d0f14"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#21242a"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#161065"
+        },
+        "scrim": {
+          "type": "color",
+          "value": "rgba(13, 15, 20, 0.7000)"
+        }
+      },
+      "chrome": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#21242a"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#0d0f14"
+        }
+      },
+      "divider": {
+        "subtle": {
+          "type": "color",
+          "value": "rgba(104, 116, 133, 0.4000)"
+        },
+        "strong": {
+          "type": "color",
+          "value": "rgba(161, 171, 186, 0.4000)"
+        }
+      },
+      "tabbar": {
+        "tabbar-background": {
+          "type": "color",
+          "value": "#0d0f14"
+        },
+        "tabactive-background": {
+          "type": "color",
+          "value": "#30343d"
+        }
+      },
+      "os-color": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "group": {
+        "text": {
+          "type": "color",
+          "value": "#74c38e"
+        },
+        "background": {
+          "type": "color",
+          "value": "rgba(116, 195, 142, 0.2500)"
+        }
+      }
+    },
+    "----private-window": {
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#f5f3ff"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#ccbefe"
+        },
+        "tertiary": {
+          "type": "color",
+          "value": "#a380ff"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(238, 235, 255, 0.5000)"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "icon": {
+        "default": {
+          "type": "color",
+          "value": "#a380ff"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(163, 128, 255, 0.5000)"
+        },
+        "active": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "browserbutton": {
+        "background-hover": {
+          "type": "color",
+          "value": "#13052a"
+        },
+        "background-active-toolbar": {
+          "type": "color",
+          "value": "#3d127b"
+        },
+        "background-active-urlbar": {
+          "type": "color",
+          "value": "#3d127b"
+        }
+      },
+      "tabswitcher": {
+        "button": {
+          "type": "color",
+          "value": "#2a0d58"
+        },
+        "background": {
+          "type": "color",
+          "value": "#3d127b"
+        }
+      },
+      "container": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#13052a"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#2a0d58"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#161065"
+        },
+        "scrim": {
+          "type": "color",
+          "value": "rgba(19, 5, 42, 0.7000)"
+        }
+      },
+      "chrome": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#2a0d58"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#13052a"
+        }
+      },
+      "divider": {
+        "subtle": {
+          "type": "color",
+          "value": "rgba(123, 99, 191, 0.4000)"
+        },
+        "strong": {
+          "type": "color",
+          "value": "rgba(163, 128, 255, 0.4000)"
+        }
+      },
+      "tabbar": {
+        "tabbar-background": {
+          "type": "color",
+          "value": "#13052a"
+        },
+        "tabactive-background": {
+          "type": "color",
+          "value": "#3d127b"
+        }
+      },
+      "os-color": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "group": {
+        "text": {
+          "type": "color",
+          "value": "#74c38e"
+        },
+        "background": {
+          "type": "color",
+          "value": "rgba(116, 195, 142, 0.2500)"
+        }
+      }
+    },
+    "---tor-window": {
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#faf2ff"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#e3b3ff"
+        },
+        "tertiary": {
+          "type": "color",
+          "value": "#c76cf6"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(246, 232, 255, 0.5000)"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "icon": {
+        "default": {
+          "type": "color",
+          "value": "#c76cf6"
+        },
+        "disabled": {
+          "type": "color",
+          "value": "rgba(199, 108, 246, 0.5000)"
+        },
+        "active": {
+          "type": "color",
+          "value": "#7c91ff"
+        }
+      },
+      "browserbutton": {
+        "background-hover": {
+          "type": "color",
+          "value": "#190423"
+        },
+        "background-active-toolbar": {
+          "type": "color",
+          "value": "#4c0f67"
+        },
+        "background-active-urlbar": {
+          "type": "color",
+          "value": "#4c0f67"
+        }
+      },
+      "tabswitcher": {
+        "button": {
+          "type": "color",
+          "value": "#350b49"
+        },
+        "background": {
+          "type": "color",
+          "value": "#4c0f67"
+        }
+      },
+      "container": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#190423"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#350b49"
+        },
+        "interactive": {
+          "type": "color",
+          "value": "#161065"
+        },
+        "scrim": {
+          "type": "color",
+          "value": "rgba(25, 4, 35, 0.7000)"
+        }
+      },
+      "chrome": {
+        "background-desktop": {
+          "type": "color",
+          "value": "#350b49"
+        },
+        "background-mobile": {
+          "type": "color",
+          "value": "#190423"
+        }
+      },
+      "divider": {
+        "subtle": {
+          "type": "color",
+          "value": "rgba(145, 94, 174, 0.4000)"
+        },
+        "strong": {
+          "type": "color",
+          "value": "rgba(199, 108, 246, 0.4000)"
+        }
+      },
+      "tabbar": {
+        "tabbar-background": {
+          "type": "color",
+          "value": "#190423"
+        },
+        "tabactive-background": {
+          "type": "color",
+          "value": "#4c0f67"
+        }
+      },
+      "os-color": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "group": {
+        "text": {
+          "type": "color",
+          "value": "#74c38e"
+        },
+        "background": {
+          "type": "color",
+          "value": "rgba(116, 195, 142, 0.2500)"
+        }
+      }
+    }
+  }
+}
