@@ -17,7 +17,7 @@
   component={ButtonMenu}
   argTypes={{
     '--leo-menu-control-width': {
-      description: '[Readonly]: Computed width of menu control'
+      description: '(readonly): Computed width of menu control'
     }
   }}
 />

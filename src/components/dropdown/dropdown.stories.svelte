@@ -22,7 +22,7 @@
   argTypes={{
     ...cssProperties,
     '--leo-menu-control-width': {
-      description: '(read only): Computed width of menu control'
+      description: '(readonly): Computed width of menu control'
     },
     size: {
       control: 'select',
