@@ -127,6 +127,5 @@
   .leo-floating {
     z-index: 999;
     width: max-content;
-    max-width: var(--leo-floating-max-width);
   }
 </style>

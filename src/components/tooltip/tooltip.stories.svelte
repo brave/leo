@@ -37,10 +37,6 @@
       type: 'string',
       description: 'The shadow effect for the tooltip'
     },
-    '--leo-floating-max-width': {
-      description: 'Max width for the tooltip',
-      type: 'string'
-    },
     text: { control: 'text' },
     mode: { control: 'select', options: modes },
     placement: { control: 'select', options: placements },
