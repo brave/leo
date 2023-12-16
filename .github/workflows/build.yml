@@ -70,7 +70,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392 # v4
         with:
           name: build
           if-no-files-found: error
