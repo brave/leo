@@ -7,6 +7,7 @@
   import Checkbox from '../checkbox/checkbox.svelte'
   import Icon from '../icon/icon.svelte'
 
+  const strategies = ['absolute', 'fixed']
   const sides = ['top', 'bottom', 'left', 'right']
   const positions = ['', '-start', '-end']
   const placements = positions.flatMap((p) => sides.map((s) => `${s}${p}`))
@@ -38,7 +39,9 @@
     },
     text: { control: 'text' },
     mode: { control: 'select', options: modes },
-    placement: { control: 'select', options: placements }
+    placement: { control: 'select', options: placements },
+    fallbackPlacements: { control: 'multi-select', options: placements },
+    positionStrategy: { control: 'select', options: strategies }
   }}
   args={{
     text: 'A helpful hint',

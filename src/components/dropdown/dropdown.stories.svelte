@@ -21,6 +21,9 @@
   component={Dropdown}
   argTypes={{
     ...cssProperties,
+    '--leo-menu-control-width': {
+      description: '(readonly): Computed width of menu control'
+    },
     size: {
       control: 'select',
       options: sizes

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Middleware, Placement } from '@floating-ui/dom'
+  import type { Middleware, Placement, Strategy } from '@floating-ui/dom'
   import {
     computePosition,
     flip as flipMiddleWare,
@@ -9,19 +9,27 @@
   } from '@floating-ui/dom'
   import { createEventDispatcher } from 'svelte'
 
-  /** The default placement of the tooltip
+  /** The default placement of the floating element
    * https://floating-ui.com/docs/tutorial#placements */
   export let placement: Placement = 'top'
+
+  /** The fallback placements of the floating element in case initial doesn't fit
+   * https://floating-ui.com/docs/flip#fallbackplacements */
+   export let fallbackPlacements: Placement[] = undefined;
+
+   /** The CSS position property to use for floating element
+   * https://floating-ui.com/docs/computeposition#strategy */
+   export let positionStrategy: Strategy = 'absolute';
 
   /** Whether the element should flip to the opposite placement if it doesn't fit
    * https://floating-ui.com/docs/flip */
   export let flip: boolean = true
 
-  /** The shift padding to apply to the tooltip. See
+  /** The shift padding to apply to the floating element. See
    * https://floating-ui.com/docs/shift for more details. */
   export let shift: number | undefined = 8
 
-  /** The gap between the target and the tooltip:
+  /** The gap between the target and the floating element:
    * https://floating-ui.com/docs/offset */
   export let offset: number = 8
 
@@ -51,7 +59,7 @@
       result.push(offsetMiddleware(offset))
     }
     if (flip) {
-      result.push(flipMiddleWare())
+      result.push(flipMiddleWare({ fallbackPlacements }))
     }
     if (shift !== undefined) {
       result.push(shiftMiddleware({ padding: shift }))
@@ -75,6 +83,7 @@
 
     computePosition(target, floating, {
       placement: placement,
+      strategy: positionStrategy,
       middleware: getMiddlewares(flip, shift, offset, middleware)
     }).then(({ x, y, placement, middlewareData }) => {
       if (floating) {
@@ -110,14 +119,13 @@
   }
 </script>
 
-<div on:mouseenter on:mouseleave bind:this={floating} class="leo-floating">
+<div on:mouseenter on:mouseleave bind:this={floating} class="leo-floating" style:position={positionStrategy}>
   <slot />
 </div>
 
 <style lang="scss">
   .leo-floating {
-    position: absolute;
     z-index: 999;
-    width: fit-content;
+    width: max-content;
   }
 </style>

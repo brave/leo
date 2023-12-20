@@ -12,7 +12,15 @@
   const handleAction = () => console.log('action')
 </script>
 
-<Meta title="Components/ButtonMenu" component={ButtonMenu} />
+<Meta
+  title="Components/ButtonMenu"
+  component={ButtonMenu}
+  argTypes={{
+    '--leo-menu-control-width': {
+      description: '(readonly): Computed width of menu control'
+    }
+  }}
+/>
 
 <Template let:args>
   <div class="container">
