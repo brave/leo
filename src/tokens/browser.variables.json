@@ -4,19 +4,19 @@
       "text": {
         "primary": {
           "type": "color",
-          "value": "#0d0f14"
+          "value": "#0d1214"
         },
         "secondary": {
           "type": "color",
-          "value": "#3f4855"
+          "value": "#3f4e55"
         },
         "tertiary": {
           "type": "color",
-          "value": "#687485"
+          "value": "#62757e"
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(33, 36, 42, 0.5000)"
+          "value": "rgba(33, 39, 42, 0.5000)"
         },
         "interactive": {
           "type": "color",
@@ -26,7 +26,7 @@
       "icon": {
         "default": {
           "type": "color",
-          "value": "#687485"
+          "value": "#62757e"
         },
         "disabled": {
           "type": "color",
@@ -40,7 +40,7 @@
       "browserbutton": {
         "background-hover": {
           "type": "color",
-          "value": "#edeef1"
+          "value": "#ebeef0"
         },
         "background-active-toolbar": {
           "type": "color",
@@ -48,7 +48,7 @@
         },
         "background-active-urlbar": {
           "type": "color",
-          "value": "#edeef1"
+          "value": "#ebeef0"
         }
       },
       "tabswitcher": {
@@ -58,7 +58,7 @@
         },
         "background": {
           "type": "color",
-          "value": "#f6f7f8"
+          "value": "#f3f5f7"
         }
       },
       "container": {
@@ -76,33 +76,33 @@
         },
         "scrim": {
           "type": "color",
-          "value": "rgba(13, 15, 20, 0.3500)"
+          "value": "rgba(13, 18, 20, 0.3500)"
         }
       },
       "chrome": {
         "background-desktop": {
           "type": "color",
-          "value": "#f6f7f8"
+          "value": "#f3f5f7"
         },
         "background-mobile": {
           "type": "color",
-          "value": "#f6f7f8"
+          "value": "#f3f5f7"
         }
       },
       "divider": {
         "subtle": {
           "type": "color",
-          "value": "rgba(161, 171, 186, 0.4000)"
+          "value": "rgba(161, 178, 186, 0.4000)"
         },
         "strong": {
           "type": "color",
-          "value": "rgba(104, 116, 133, 0.4000)"
+          "value": "rgba(104, 123, 133, 0.4000)"
         }
       },
       "tabbar": {
         "tabbar-background": {
           "type": "color",
-          "value": "#edeef1"
+          "value": "#ebeef0"
         },
         "tabactive-background": {
           "type": "color",
@@ -122,25 +122,31 @@
           "type": "color",
           "value": "rgba(18, 117, 55, 0.1500)"
         }
+      },
+      "url-bar": {
+        "shadow": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.1000)"
+        }
       }
     },
     "---dark": {
       "text": {
         "primary": {
           "type": "color",
-          "value": "#f6f7f8"
+          "value": "#f3f5f7"
         },
         "secondary": {
           "type": "color",
-          "value": "#c2c9d3"
+          "value": "#becad0"
         },
         "tertiary": {
           "type": "color",
-          "value": "#a1abba"
+          "value": "#a1b2ba"
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(237, 238, 241, 0.5000)"
+          "value": "rgba(235, 238, 240, 0.5000)"
         },
         "interactive": {
           "type": "color",
@@ -150,11 +156,11 @@
       "icon": {
         "default": {
           "type": "color",
-          "value": "#a1abba"
+          "value": "#a1b2ba"
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(161, 171, 186, 0.5000)"
+          "value": "rgba(161, 178, 186, 0.5000)"
         },
         "active": {
           "type": "color",
@@ -164,35 +170,35 @@
       "browserbutton": {
         "background-hover": {
           "type": "color",
-          "value": "#0d0f14"
+          "value": "#0d1214"
         },
         "background-active-toolbar": {
           "type": "color",
-          "value": "#30343d"
+          "value": "#30393d"
         },
         "background-active-urlbar": {
           "type": "color",
-          "value": "#30343d"
+          "value": "#30393d"
         }
       },
       "tabswitcher": {
         "button": {
           "type": "color",
-          "value": "#21242a"
+          "value": "#21272a"
         },
         "background": {
           "type": "color",
-          "value": "#30343d"
+          "value": "#30393d"
         }
       },
       "container": {
         "background-desktop": {
           "type": "color",
-          "value": "#0d0f14"
+          "value": "#0d1214"
         },
         "background-mobile": {
           "type": "color",
-          "value": "#21242a"
+          "value": "#21272a"
         },
         "interactive": {
           "type": "color",
@@ -200,37 +206,37 @@
         },
         "scrim": {
           "type": "color",
-          "value": "rgba(13, 15, 20, 0.7000)"
+          "value": "rgba(13, 18, 20, 0.7000)"
         }
       },
       "chrome": {
         "background-desktop": {
           "type": "color",
-          "value": "#21242a"
+          "value": "#21272a"
         },
         "background-mobile": {
           "type": "color",
-          "value": "#0d0f14"
+          "value": "#0d1214"
         }
       },
       "divider": {
         "subtle": {
           "type": "color",
-          "value": "rgba(104, 116, 133, 0.4000)"
+          "value": "rgba(104, 123, 133, 0.4000)"
         },
         "strong": {
           "type": "color",
-          "value": "rgba(161, 171, 186, 0.4000)"
+          "value": "rgba(161, 178, 186, 0.4000)"
         }
       },
       "tabbar": {
         "tabbar-background": {
           "type": "color",
-          "value": "#0d0f14"
+          "value": "#0d1214"
         },
         "tabactive-background": {
           "type": "color",
-          "value": "#30343d"
+          "value": "#30393d"
         }
       },
       "os-color": {
@@ -245,6 +251,12 @@
         "background": {
           "type": "color",
           "value": "rgba(116, 195, 142, 0.2500)"
+        }
+      },
+      "url-bar": {
+        "shadow": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.1500)"
         }
       }
     },
@@ -370,6 +382,12 @@
           "type": "color",
           "value": "rgba(116, 195, 142, 0.2500)"
         }
+      },
+      "url-bar": {
+        "shadow": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.1500)"
+        }
       }
     },
     "---tor-window": {
@@ -493,6 +511,12 @@
         "background": {
           "type": "color",
           "value": "rgba(116, 195, 142, 0.2500)"
+        }
+      },
+      "url-bar": {
+        "shadow": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.1500)"
         }
       }
     }
