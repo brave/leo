@@ -95,7 +95,7 @@
   .leo-toggle {
     --width: var(--leo-toggle-width, 52px);
     --height: var(--leo-toggle-height, 32px);
-    --padding: var(--leo-toggle-padding, 4px);
+    --padding: var(--leo-toggle-padding, var(--leo-spacing-s));
     --checked-color: var(
       --leo-toggle-checked-color,
       var(--leo-color-button-background)
