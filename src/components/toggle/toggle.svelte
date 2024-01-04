@@ -80,20 +80,7 @@
       style:--drag-offset="{dragOffsetX}px"
     >
       <div class="on-icon">
-        <slot name="on-icon">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.6461 4.00015C14.2516 3.69959 13.6882 3.77573 13.3876 4.17021L7.47971 11.9243L4.53279 8.9774C4.18211 8.62672 3.61356 8.62672 3.26288 8.9774C2.91221 9.32807 2.91221 9.89663 3.26288 10.2473L6.93634 13.9208C7.11956 14.104 7.37301 14.1991 7.63155 14.1817C7.89009 14.1643 8.12851 14.0361 8.28555 13.83L14.8161 5.25861C15.1167 4.86413 15.0406 4.3007 14.6461 4.00015Z"
-              fill="currentColor"
-            />
-          </svg>
-        </slot>
+        <slot name="on-icon"/>
       </div>
     </div>
   </button>
@@ -106,9 +93,9 @@
   }
 
   .leo-toggle {
-    --width: var(--leo-toggle-width, 56px);
+    --width: var(--leo-toggle-width, 52px);
     --height: var(--leo-toggle-height, 32px);
-    --padding: var(--leo-toggle-padding, 2px);
+    --padding: var(--leo-toggle-padding, var(--leo-spacing-s));
     --checked-color: var(
       --leo-toggle-checked-color,
       var(--leo-color-button-background)
@@ -184,7 +171,7 @@
 
     & .thumb {
       --unchecked-thumb-offset: 0px;
-      --checked-thumb-offset: calc(var(--width) - var(--height) + 0.25px);
+      --checked-thumb-offset: calc(var(--width) - var(--height));
       --thumb-offset: var(--unchecked-thumb-offset);
       --drag-offset: 0;
       --thumb-position: max(
