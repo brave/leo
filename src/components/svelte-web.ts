@@ -31,7 +31,7 @@ const createSlot = (name?: string) => {
     },
 
     // Props changed
-    p() {},
+    p() { },
 
     // Detach
     d(detaching) {
@@ -72,11 +72,8 @@ export default function registerWebComponent(
     return prev
   }, new Map<string, string>())
 
-  // Note attribute keys, so changes cause us to update our Svelte Component.
-  const attributes = Array.from(attributePropMap.keys())
-
   // We need to handle boolean attributes specially, as the presence/absence of the attribute indicates the value.
-  const boolProperties = new Set(
+  const boolProperties = new Set<string>(
     props.filter((p) => typeof c.$$.ctx[c.$$.props[p]] === 'boolean')
   )
 
@@ -105,9 +102,13 @@ export default function registerWebComponent(
       }
     }
 
-    static get observedAttributes() {
-      return attributes
-    }
+    // We store the Svelte props in a sub object. Static props are available
+    // directly on the element for ease of use, but they're getters/setters
+    // forwarded to this.
+    // We need this so we can proxy $$restProps to the Svelte element without
+    // forwarding every conceivable property on the HTMLElement to the Svelte
+    // component.
+    svelteProps: { [key: string]: any }
 
     constructor() {
       super()
@@ -213,6 +214,32 @@ export default function registerWebComponent(
       // Update slots on create.
       updateSlots()
 
+      const el = this;
+      this.svelteProps = new Proxy({}, {
+        get(target, prop) {
+          const contentIndex = el.component.$$.props[prop]
+          return el.component.$$.ctx[contentIndex] ?? target[prop]
+        },
+        set(target, prop, value) {
+          if (typeof prop === "symbol") throw new Error('Symbol properties are not supported')
+          target[prop] = value
+
+          if (reflectToAttributes.has(typeof value)) {
+            // Boolean attributes are special - presence/absence indicates
+            // value, rather than actual value.
+            if (boolProperties.has(prop)) {
+              if (value) el.setAttribute(prop, '')
+              else el.removeAttribute(prop)
+            } else el.setAttribute(prop, value)
+          }
+
+          // |.$set| updates the value of a prop. Note: This only works for
+          // props, not slotted content.
+          el.component.$set({ [prop]: value })
+          return true
+        }
+      })
+
       // For some reason setting this on |SvelteWrapper| doesn't work properly.
       for (const prop of props) {
         Object.defineProperty(this, prop, {
@@ -220,33 +247,43 @@ export default function registerWebComponent(
           get() {
             // $$.props is { [propertyName: string]: number } where the number
             // is the array index into $$.ctx that the value is stored in.
-            const contextIndex = this.component.$$.props[prop]
-            return this.component.$$.ctx[contextIndex]
+            return this.svelteProps[prop]
           },
           set(value) {
-            if (reflectToAttributes.has(typeof value)) {
-              // Boolean attributes are special - presence/absence indicates
-              // value, rather than actual value.
-              if (boolProperties.has(prop)) {
-                if (value) this.setAttribute(prop, '')
-                else this.removeAttribute(prop)
-              } else this.setAttribute(prop, value)
-            }
-
-            // |.$set| updates the value of a prop. Note: This only works for
-            // props, not slotted content.
-            this.component.$set({ [prop]: value })
+            this.svelteProps[prop] = value
           }
         })
       }
-    }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-      const prop = attributePropMap.get(name)
-      if (!prop) return
+      // Unfortunately we can't use observedAttributes, like normal citizens of
+      // the web because we need to support $$restProps, which are dynamic. Thus
+      // we end up in this weird situation where we need:
+      // 1. A MutationObserver to tell us when props change
+      // 2. To manually initialize the props from the attributes (as the
+      // MutationObserver) won't fire until we've connected.
+      const applyAttribute = (attr, value) => {
+        const prop = attributePropMap.get(attr) ?? attr
+        this.svelteProps[prop] = boolProperties.has(prop) ? value !== null : value
+      }
 
-      if (oldValue === newValue) return
-      this[prop] = boolProperties.has(prop) ? newValue !== null : newValue
+      new MutationObserver(m => {
+        for (const mutation of m) {
+          const value = this.getAttribute(mutation.attributeName)
+          if (value === mutation.oldValue) continue
+          applyAttribute(mutation.attributeName, value)
+        }
+      }).observe(this, {
+        childList: false,
+        attributes: true,
+        attributeOldValue: true,
+        subtree: false,
+        characterData: false,
+        characterDataOldValue: false
+      })
+
+      for (const attr of this.getAttributeNames()) {
+        applyAttribute(attr, this.getAttribute(attr))
+      }
     }
 
     addEventListener(event: string, callback: Callback) {
