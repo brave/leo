@@ -25,6 +25,7 @@ function App() {
           Edit the button text:
           <Input
             value={buttonText}
+            placeholder="Set button text"
             onInput={(e) => setButtonText(e.detail.value)}
           />
         </label>

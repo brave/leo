@@ -149,7 +149,7 @@ export default function SvelteWebComponentToReact<
         // behavior, and triggers a TrustedTypes error.
         for (const [key, value] of Object.entries(props)) {
           if (eventRegex.test(key) || key === 'children') continue
-          ;(component.current as any)[key] = value
+          ;(component.current as any).svelteProps[key] = value
         }
       }, [props])
 
