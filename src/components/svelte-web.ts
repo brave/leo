@@ -77,6 +77,13 @@ export default function registerWebComponent(
     props.filter((p) => typeof c.$$.ctx[c.$$.props[p]] === 'boolean')
   )
 
+  // Heuristics for determining if a property is a boolean.
+  const isBooleanProperty = (prop: string, value: any) => typeof value === "boolean"
+    || boolProperties.has(prop)
+    // This check is a bit scary - not sure if there's a better way of doing
+    // this though
+    || (value === '' && prop.startsWith('is'))
+
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
     // A map of event name to a map of an event listener to a function for
@@ -227,7 +234,7 @@ export default function registerWebComponent(
           if (reflectToAttributes.has(typeof value)) {
             // Boolean attributes are special - presence/absence indicates
             // value, rather than actual value.
-            if (boolProperties.has(prop)) {
+            if (isBooleanProperty(prop, value)) {
               if (value) el.setAttribute(prop, '')
               else el.removeAttribute(prop)
             } else el.setAttribute(prop, value)
@@ -263,7 +270,7 @@ export default function registerWebComponent(
       // MutationObserver) won't fire until we've connected.
       const applyAttribute = (attr, value) => {
         const prop = attributePropMap.get(attr) ?? attr
-        this.svelteProps[prop] = boolProperties.has(prop) ? value !== null : value
+        this.svelteProps[prop] = isBooleanProperty(prop, value) ? value !== null : value
       }
 
       new MutationObserver(m => {
