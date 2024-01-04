@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1701850130345,
+  "updatedAt": 1704355718017,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -216,7 +216,6 @@ const meta = {
     "brave-icon-release-color": "brave-icon-release-color",
     "brave-icon-search-color": "brave-icon-search-color",
     "brave-icon-search": "brave-icon-search",
-    "brave-player-filled": "brave-player-filled",
     "brave-player": "brave-player",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
@@ -810,6 +809,7 @@ const meta = {
     "eur": "eur",
     "evernote": "evernote",
     "evx-color": "evx-color",
+    "examplecom-color": "examplecom-color",
     "exmo-color": "exmo-color",
     "exp-color": "exp-color",
     "expand": "expand",
@@ -1184,6 +1184,7 @@ const meta = {
     "minus": "minus",
     "miota-color": "miota-color",
     "mir-color": "mir-color",
+    "mistral-color": "mistral-color",
     "mith-color": "mith-color",
     "mkr-color": "mkr-color",
     "mln-color": "mln-color",
@@ -1243,7 +1244,6 @@ const meta = {
     "news-business": "news-business",
     "news-car": "news-car",
     "news-culture": "news-culture",
-    "news-default": "news-default",
     "news-entertainment": "news-entertainment",
     "news-fashion": "news-fashion",
     "news-filmandtv": "news-filmandtv",
@@ -1459,6 +1459,8 @@ const meta = {
     "product-playlist-remove": "product-playlist-remove",
     "product-playlist": "product-playlist",
     "product-private-window": "product-private-window",
+    "product-shields": "product-shields",
+    "product-speedreader-lightning": "product-speedreader-lightning",
     "product-speedreader": "product-speedreader",
     "product-sync": "product-sync",
     "product-tor": "product-tor",
@@ -1889,6 +1891,7 @@ const meta = {
     "window-code": "window-code",
     "window-console": "window-console",
     "window-content": "window-content",
+    "window-crash": "window-crash",
     "window-creepy": "window-creepy",
     "window-cursor": "window-cursor",
     "window-edit": "window-edit",
