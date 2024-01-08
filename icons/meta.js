@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1704614905058,
+  "updatedAt": 1704750824991,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1071,6 +1071,8 @@ export default {
     "jpy-circle": "jpy-circle",
     "jpy-color": "jpy-color",
     "jpy": "jpy",
+    "junk-false": "junk-false",
+    "junk-true": "junk-true",
     "kadena-color": "kadena-color",
     "kava-color": "kava-color",
     "kcs-color": "kcs-color",
