@@ -93,7 +93,7 @@
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <svelte:component this={alert.component || Alert} {...alert} isToast>
+      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} isToast>
         <div slot="title">
           {alert.title}
         </div>
@@ -101,6 +101,7 @@
         <div slot="actions">
           {#each alert.actions as action}
             <Button
+              size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               on:click={() => action.action(alert)}
