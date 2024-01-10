@@ -19,6 +19,7 @@
   export let type: AlertType = 'error'
   export let mode: AlertMode = 'simple'
   export let isToast = false
+  export let hasActions = $$slots.actions
 
   $: currentType = type ?? 'error'
   $: currentMode = mode ?? 'simple'
@@ -39,16 +40,18 @@
     </slot>
   </div>
   <div class="content">
-    <div class="title">
-      {#if mode == 'full'}
+    {#if mode == 'full'}
+      <div class="title">
         <slot name="title" />
-      {/if}
-    </div>
+      </div>
+    {/if}
     <slot />
   </div>
-  <div class="actions">
-    <slot name="actions" />
-  </div>
+  {#if hasActions && $$slots.actions}
+    <div class="actions">
+      <slot name="actions" />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -68,21 +71,30 @@
       --leo-alert-background-color,
       var(--default-background)
     );
-    display: flex;
     color: var(--default-text-color, var(--leo-color-text-primary));
     padding: var(--leo-spacing-xl);
     border-radius: var(--leo-radius-m);
     gap: var(--leo-spacing-xl);
     font: var(--leo-font-default-regular);
 
+    display: grid;
+    grid-template-columns: min-content auto;
+
     & .icon {
       --leo-icon-size: var(--leo-icon-m);
       color: var(--leo-icon-color);
-      padding-top: var(--leo-spacing-xs);
     }
 
     & .title {
       font: var(--leo-font-heading-h4);
+    }
+
+    & .content {
+      grid-column: 2;
+    }
+
+    & .actions {
+      grid-column: 2;
     }
   }
 
@@ -104,29 +116,7 @@
     }
   }
 
-  .leo-alert.simple {
-    --leo-icon-size: 16px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    & .content {
-      flex: 1;
-    }
-  }
-
-  .leo-alert.full {
-    --leo-icon-size: 26px;
-    display: grid;
-    grid-template-columns: min-content auto;
-    grid-template-rows: auto min-content;
-
-    & .content {
-      grid-column: 2;
-    }
-
-    & .actions {
-      grid-column: 2;
-    }
+  .leo-alert.full .icon {
+    --leo-icon-size: var(--leo-icon-xl);
   }
 </style>

@@ -46,7 +46,7 @@
     types of Alert"
     >
       <Alert {...args}>
-        <Icon name="airplay" slot="icon" />
+        <Icon name="airplay-audio" slot="icon" />
         Some content
       </Alert>
     </Slot>
@@ -82,8 +82,11 @@
   title="Components/Alert"
   component={Alert}
   argTypes={{
+    modes: { table: { disable: true } },
     mode: { control: 'select', options: modes },
+    types: { table: { disable: true } },
     type: { control: 'select', options: types },
+    hasActions: { control: 'boolean' },
     '--leo-alert-center-width': {
       type: 'string',
       description: 'The width to apply to the alert center'
