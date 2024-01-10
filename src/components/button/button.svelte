@@ -378,6 +378,7 @@
     --bg-focus: var(--bg);
     --bg-disabled: var(--leo-color-button-disabled);
     --color: var(--leo-color-white);
+    --icon-color: var(--leo-color-white);
     --default-bg-opacity: 1;
 
     position: relative;
@@ -406,12 +407,7 @@
 
       &::after {
         z-index: -2;
-        background: linear-gradient(
-          101.5deg,
-          #770eaa 21.56%,
-          #b72070 74.97%,
-          #e6461e 104.58%
-        );
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(174deg, #F50 2.32%, #F5002D 93.33%);
       }
     }
 
