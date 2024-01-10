@@ -222,64 +222,76 @@
   // Size Variations
   .leoButton.isTiny {
     font: var(--leo-font-components-button-small);
-    --padding-y: 6px;
+    min-height: 28px;
+    --padding-y: var(--leo-spacing-s);
     --padding-x: var(--leo-spacing-m);
-    --radius: 14px;
-    --leo-icon-size: 16px;
-    --icon-gap: 8px;
+    --radius: var(--leo-radius-m);
+    --leo-icon-size: var(--leo-icon-xs);
+    --icon-gap: var(--leo-spacing-m);
 
     &.fab {
+      min-height: 0;
       --padding-x: 6px;
+      --padding-y: 6px;
     }
   }
   .leoButton.isSmall {
     font: var(--leo-font-components-button-small);
-    --padding-y: 8px;
-    --padding-x: 14px;
-    --radius: 18px;
-    --leo-icon-size: 18px;
-    --icon-gap: 8px;
+    min-height: 36px;
+    --padding-y: var(--leo-spacing-m);
+    --padding-x: var(--leo-spacing-l);
+    --radius: var(--leo-radius-m);
+    --leo-icon-size: var(--leo-icon-s);
+    --icon-gap: var(--leo-spacing-m);
 
     &.fab {
-      --padding-x: 8px;
+      min-height: 0;
+      --padding-x: var(--leo-spacing-m);
     }
   }
   .leoButton.isMedium {
     font: var(--leo-font-components-button-default);
-    --padding-y: 10px;
-    --padding-x: 16px;
-    --radius: 22px;
-    --leo-icon-size: 20px;
-    --icon-gap: 8px;
+    min-height: 44px;
+    --padding-y: var(--leo-spacing-l);
+    --padding-x: var(--leo-spacing-xl);
+    --radius: var(--leo-radius-l);
+    --leo-icon-size: var(--leo-icon-m);
+    --icon-gap: var(--leo-spacing-m);
 
     &.fab {
-      --padding-x: 12px;
-      --padding-y: 12px;
+      min-height: 0;
+      --padding-x: var(--leo-spacing-l);
+      --padding-y: var(--leo-spacing-l);
     }
   }
   .leoButton.isLarge {
     font: var(--leo-font-components-button-large);
-    --padding-y: 15px;
-    --padding-x: 30px;
-    --radius: 26px;
-    --leo-icon-size: 20px;
+    min-height: 52px;
+    --padding-y: var(--leo-spacing-l);
+    --padding-x: var(--leo-spacing-xl);
+    --radius: var(--leo-radius-xl);
+    --leo-icon-size: var(--leo-icon-m);
     --icon-gap: 10px;
 
     &.fab {
-      --padding-x: 15px;
-      --padding-y: 15px;
+      min-height: 0;
+      --padding-x: var(--leo-spacing-xl);
+      --padding-y: var(--leo-spacing-xl);
     }
   }
   .leoButton.isJumbo {
     font: var(--leo-font-components-button-jumbo);
-    --padding-y: 18px;
-    --padding-x: 26px;
-    --radius: 30px;
-    --leo-icon-size: 24px;
-    --icon-gap: 12px;
+    min-height: 60px;
+    --padding-y: var(--leo-spacing-xl);
+    --padding-x: var(--leo-spacing-xl);
+    --radius: var(--leo-radius-xl);
+    --leo-icon-size: var(--leo-icon-l);
+    --icon-gap: var(--leo-spacing-l);
 
     &.fab {
+      min-height: 0;
       --padding-x: 18px;
+      --padding-y: 18px;
     }
   }
 
@@ -321,7 +333,6 @@
     --icon-color: var(--color);
   }
   .leoButton.isPlain {
-    --radius: 8px;
     --padding-x: 2px;
     --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
     --color: var(--mixed-primary-color);
@@ -341,7 +352,6 @@
     }
   }
   .leoButton.isPlainFaint {
-    --radius: 8px;
     --padding-x: 2px;
     --foreground: transparent;
     --primary-color: currentColor;
@@ -411,7 +421,6 @@
   }
 
   .leoButton.fab {
-    --radius: 10000px;
     aspect-ratio: 1 / 1;
   }
 </style>
