@@ -59,25 +59,49 @@
 
 <Template let:args>
   <Label {...args}>
-    {#if args.storyLeftIcon}
-      <Icon name={args.storyLeftIcon} />
-    {/if}
-    TEXT
-    {#if args.storyRightIcon}
-      <Icon name={args.storyRightIcon} />
-    {/if}
+    <svelte:fragment slot="icon-before">
+      {#if args.storyLeftIcon}
+        <Icon name={args.storyLeftIcon} />
+      {/if}
+    </svelte:fragment>
+    Text
+    <svelte:fragment slot="icon-after">
+      {#if args.storyRightIcon}
+        <Icon name={args.storyRightIcon} />
+      {/if}
+    </svelte:fragment>
   </Label>
 </Template>
 
 <Story name="Slots" let:args>
-  <SlotInfo description="The label has single slot for it's content">
+  <SlotInfo description="The label has three slots for content and icons.">
     <Slot
       name="default"
       explanation="The content of the label. Can be any HTML"
     >
       <div>
         <Label {...args}>
-          Label content ==&gt; <Icon name="copy" />
+          Label content ==&gt; <Icon slot="icon-after" name="copy" />
+        </Label>
+      </div>
+    </Slot>
+    <Slot
+      name="icon-before"
+      explanation="The icon to be placed before the label content. Can be any HTML"
+    >
+      <div>
+        <Label {...args}>
+          <Icon slot="icon-before" name="copy" /> ==&gt; Label content
+        </Label>
+      </div>
+    </Slot>
+    <Slot
+      name="icon-after"
+      explanation="The icon to be placed after the label content. Can be any HTML"
+    >
+      <div>
+        <Label {...args}>
+          Label content ==&gt; <Icon slot="icon-after" name="copy" />
         </Label>
       </div>
     </Slot>
@@ -89,14 +113,18 @@
     {#each colors as color}
       {#each modes as mode}
         <Label {color} {mode}>
-          {#if args.storyLeftIcon}
-            <Icon name={args.storyLeftIcon} />
-          {/if}
+          <svelte:fragment slot="icon-before">
+            {#if args.storyLeftIcon}
+              <Icon name={args.storyLeftIcon} />
+            {/if}
+          </svelte:fragment>
           {mode}
           {color}
-          {#if args.storyRightIcon}
-            <Icon name={args.storyRightIcon} />
-          {/if}
+          <svelte:fragment slot="icon-after">
+            {#if args.storyRightIcon}
+              <Icon name={args.storyRightIcon} />
+            {/if}
+          </svelte:fragment>
         </Label>
       {/each}
     {/each}
