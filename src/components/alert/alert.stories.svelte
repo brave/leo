@@ -11,6 +11,7 @@
   let content = 'Hello World'
   let title = 'Title'
   let canDismiss = true
+  let hasAction = false
   let duration = 2000
 
   $: alertUser = (mode, type) =>
@@ -20,17 +21,16 @@
         title,
         mode: mode ?? 'simple',
         type: type ?? 'error',
-        actions: canDismiss
-          ? [
-              {
-                text: 'dismiss',
-                icon: 'check-normal',
-                action: (a) => a.dismiss()
-              }
-            ]
-          : []
+        actions: hasAction ? [
+          {
+            text: 'Retry',
+            kind: 'filled',
+            action: () => {}
+          }
+        ] : []
       },
-      duration
+      duration,
+      canDismiss
     )
 </script>
 
@@ -48,6 +48,14 @@
       <Alert {...args}>
         <Icon name="airplay-audio" slot="icon" />
         Some content
+      </Alert>
+    </Slot>
+    <Slot name="content-after" explanation="optional content after the main content of the alert">
+      <Alert {...args} mode="simple">
+        Some content
+        <Button kind='plain-faint' fab slot="content-after">
+          <Icon name="close" />
+        </Button>
       </Alert>
     </Slot>
     <Slot
@@ -143,6 +151,10 @@
   <label>
     Dismissable
     <input type="checkbox" bind:checked={canDismiss} />
+  </label>
+  <label>
+    Has action
+    <input type="checkbox" bind:checked={hasAction} />
   </label>
   <Button
     on:click={() => {

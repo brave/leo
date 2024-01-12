@@ -36,13 +36,15 @@
     actions: Action[] = []
 
     duration?: number
+    canDismiss?: boolean
     #timeout: NodeJS.Timeout
 
-    constructor(options: AlertOptions, duration?: number) {
+    constructor(options: AlertOptions, duration?: number, canDismiss?: boolean) {
       Object.assign(this, options)
       this.actions = this.actions ?? []
 
       this.duration = duration
+      this.canDismiss = canDismiss
       this.resumeDismiss()
     }
 
@@ -62,8 +64,8 @@
 
   const alerts = writable<AlertInfo[]>([])
 
-  export const showAlert = (options: AlertOptions, duration = 2000) => {
-    alerts.update((a) => [...a, new AlertInfo(options, duration)])
+  export const showAlert = (options: AlertOptions, duration = 2000, canDismiss = true) => {
+    alerts.update((a) => [...a, new AlertInfo(options, duration, canDismiss)])
   }
 
   const transitionOptions = { y: -64, duration: 120 }
@@ -93,10 +95,17 @@
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} isToast>
+      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} isToast>
         <div slot="title">
           {alert.title}
         </div>
+        <svelte:fragment slot='content-after'>
+          {#if alert.canDismiss}
+            <Button kind="plain-faint" fab on:click={() => alert.dismiss()}>
+              <Icon name="close" />
+            </Button>
+          {/if}
+        </svelte:fragment>
         {alert.content}
         <div slot="actions">
           {#each alert.actions as action}
