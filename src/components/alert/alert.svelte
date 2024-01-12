@@ -20,6 +20,7 @@
   export let mode: AlertMode = 'simple'
   export let isToast = false
   export let hasActions = $$slots.actions
+  export let hasContentAfter = $$slots['content-after']
 
   $: currentType = type ?? 'error'
   $: currentMode = mode ?? 'simple'
@@ -47,6 +48,11 @@
     {/if}
     <slot />
   </div>
+  {#if hasContentAfter && $$slots['content-after']}
+    <div class="content-after">
+      <slot name="content-after" />
+    </div>
+  {/if}
   {#if hasActions && $$slots.actions}
     <div class="actions">
       <slot name="actions" />
@@ -78,7 +84,11 @@
     font: var(--leo-font-default-regular);
 
     display: grid;
-    grid-template-columns: min-content auto;
+    grid-template-columns: min-content 1fr;
+
+    &:has(.content-after) {
+      grid-template-columns: min-content 1fr auto;
+    }
 
     & .icon {
       --leo-icon-size: var(--leo-icon-m);
@@ -91,6 +101,10 @@
 
     & .content {
       grid-column: 2;
+    }
+
+    & .content-after {
+      grid-column: 3;
     }
 
     & .actions {
