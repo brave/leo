@@ -74,17 +74,17 @@
   {...$$restProps}
 >
   {#if isLoading}
-    {#if $$slots.loading}
-      <slot name="loading" />
-    {:else if !fab}
-      <div>
+    <div class:content={!fab}>
+      {#if $$slots.loading}
+        <slot name="loading" />
+      {:else if !fab}
         <slot>Leo Button</slot>
-      </div>
-    {/if}
+      {/if}
+    </div>
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
-    <div>
+    <div class:content={!fab}>
       <slot>Leo Button</slot>
     </div>
     <slot name="icon-after" />
@@ -133,7 +133,6 @@
     --leo-progressring-color: var(--icon-color);
 
     display: flex;
-    gap: var(--icon-gap);
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -152,6 +151,10 @@
 
     &.fab {
       max-width: max-content;
+    }
+
+    .content {
+      padding: 0 var(--icon-gap);
     }
   }
 
