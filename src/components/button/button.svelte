@@ -328,13 +328,22 @@
     --icon-color: var(--color);
   }
   .leoButton.isPlain {
-    --padding-x: 2px;
     --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
+    --bg-hover-mix: 5%;
 
     @theme (dark) {
       --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-40));
+      --bg-hover-mix: 10%;
+    }
+
+    @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --bg-hover: color-mix(
+        in srgb,
+        var(--primary-color) var(--bg-hover-mix),
+        var(--background)
+      );
     }
 
     &:disabled:not(.isLoading) {
@@ -342,17 +351,23 @@
     }
 
     &.fab {
+      --radius: var(--leo-radius-m);
+      --bg-hover: transparent;
       --padding-y: 0;
       --padding-x: 0;
     }
   }
   .leoButton.isPlainFaint {
-    --padding-x: 2px;
     --foreground: transparent;
     --primary-color: currentColor;
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
     --icon-color: var(--mixed-primary-color);
+    --bg-hover-mix: 5%;
+
+    @theme (dark) {
+      --bg-hover-mix: 10%;
+    }
 
     @supports (color: color-mix(in srgb, transparent, transparent)) {
       --icon-color: color-mix(
@@ -360,9 +375,39 @@
         var(--primary-color),
         var(--background) 30%
       );
+
+      position: relative;
+      z-index: 0;
+
+      // This pseudo-element is frustratingly necessary due to transitions mysteriously not working with our use of currentColor.
+      &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: var(--radius);
+        background-color: color-mix(
+          in srgb,
+          var(--primary-color) var(--bg-hover-mix),
+          var(--foreground)
+        );
+        transition: var(--default-transition);
+        opacity: 0.01;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
     }
 
     &.fab {
+      --radius: var(--leo-radius-m);
+      --bg-hover: transparent;
       --padding-y: 0;
       --padding-x: 0;
     }
