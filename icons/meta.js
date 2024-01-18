@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1704750824991,
+  "updatedAt": 1705565315823,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1627,6 +1627,7 @@ export default {
     "siri-shorcut": "siri-shorcut",
     "sky-color": "sky-color",
     "slack-color": "slack-color",
+    "slash": "slash",
     "sleep-timer": "sleep-timer",
     "slr-color": "slr-color",
     "sls-color": "sls-color",
