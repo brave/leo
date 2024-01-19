@@ -104,7 +104,8 @@
     --bg: var(--leo-color-container-highlight);
     --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
-    --control-height: 48px;
+    --control-height: 44px;
+    --radius: var(--leo-radius-xl);
 
     --leo-control-item-padding: var(--leo-spacing-xl);
     --leo-control-item-icon-gap: var(--leo-spacing-m);
@@ -119,11 +120,12 @@
     padding: var(--control-padding);
     gap: var(--leo-segmented-control-gap, var(--gap));
     height: var(--leo-segmented-control-height, var(--control-height));
-    border-radius: var(--leo-segmented-control-height, var(--control-height));
+    border-radius: var(--leo-segmented-control-radius, var(--radius));
 
     &.size-small {
       --leo-icon-size: var(--leo-icon-s);
-      --control-height: 40px;
+      --control-height: 36px;
+      --radius: var(--leo-radius-xl);
       --leo-control-item-padding: var(--leo-spacing-l);
       --leo-control-item-font: var(--leo-font-components-button-small);
     }
@@ -133,6 +135,7 @@
       --control-padding: var(--leo-control-padding, var(--leo-spacing-xs));
       --gap: var(--leo-spacing-xs);
       --control-height: 28px;
+      --radius: var(--leo-radius-m);
       --leo-control-item-padding: var(--leo-spacing-m);
       --leo-control-item-font: var(--leo-font-components-button-small);
     }
@@ -142,7 +145,8 @@
       position: absolute;
       height: calc(100% - (var(--control-padding) * 2));
       min-width: var(--control-height);
-      border-radius: calc(var(--control-height) - var(--control-padding));
+      border-radius: calc(var(--radius) - var(--control-padding));
+      box-shadow: var(--leo-effect-elevation-01);
       transition:
         width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
         left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -153,16 +157,13 @@
       --leo-control-item-icon-color: var(--leo-color-icon-default);
       --leo-control-item-color: var(--leo-color-text-secondary);
       --leo-control-item-background: transparent;
-      --leo-control-item-radius: calc(
-        var(--control-height) - var(--control-padding)
-      );
+      --leo-control-item-radius: calc(var(--radius) - var(--control-padding));
     }
 
     :where(&:not(.transitioning)) > :global .leo-control-item:hover,
     :where(&:not(.transitioning)) > :global ::slotted(leo-controlitem:hover) {
       --leo-control-item-background: var(--leo-color-page-background);
       --leo-control-item-color: var(--leo-color-text-primary);
-      --leo-control-item-shadow: var(--leo-effect-elevation-01);
     }
 
     :where(&) > :global .leo-control-item:focus-visible,
