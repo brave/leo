@@ -33,17 +33,28 @@
       []
   ) as HTMLElement[]
 
+  function setPill(item: HTMLElement) {
+    pillWidth = item.getBoundingClientRect().width
+    pillPosition = item.offsetLeft
+  }
+
+  const itemResizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      setPill(entry.target as HTMLElement)
+    }
+  })
+
   $: {
     for (const controlItem of controlItems) {
       controlItem.setAttribute('role', 'option')
 
       if (value === getValue(controlItem)) {
         controlItem.setAttribute('aria-selected', '')
-        window.requestAnimationFrame(() => {
-          pillWidth = controlItem.getBoundingClientRect().width
-          pillPosition = controlItem.offsetLeft
-        })
-      } else controlItem.removeAttribute('aria-selected')
+        itemResizeObserver.observe(controlItem)
+      } else {
+        controlItem.removeAttribute('aria-selected')
+        itemResizeObserver.unobserve(controlItem)
+      }
     }
   }
 
