@@ -11,7 +11,7 @@ import {
 } from 'react'
 import type { SvelteComponent } from 'svelte'
 
-const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
+const eventRegex = /^on([A-Z]{1,}[a-zA-Z]*)$/
 
 export type IntrinsicProps =
   | 'className'

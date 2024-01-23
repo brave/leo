@@ -21,6 +21,7 @@
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
   import Menu from '../menu/menu.svelte'
+  import type { Strategy } from '@floating-ui/dom'
 
   export let placeholder = ''
   export let value: string | undefined = undefined
@@ -29,6 +30,7 @@
   export let required = false
   export let mode: Mode = 'outline'
   export let showErrors = false
+  export let positionStrategy: Strategy = 'absolute'
 
   let dispatch = createEventDispatcher<{
     change: { value: string }
@@ -42,7 +44,8 @@
     dispatch('change', e.detail)
   }
 
-  function onClick() {
+  function onClick(e) {
+    e.preventDefault()
     isOpen = !isOpen
   }
 </script>
@@ -85,6 +88,7 @@
   </div>
   <Menu
     target={dropdown}
+    {positionStrategy}
     bind:isOpen
     bind:currentValue={value}
     on:select-item={onItemSelect}
@@ -94,9 +98,9 @@
       // dropdown will instantly close and reopen.
       if (e.detail.originalEvent.composedPath().includes(dropdown)) {
         e.preventDefault()
-      } else {
-        // Focus the button when closing the dropdown, so keyboard users can
-        // reopen it.
+      } else if ('key' in e) {
+        // Focus the button when closing the dropdown via keyboard, so keyboard
+        // users can reopen it.
         button.focus()
       }
     }}
