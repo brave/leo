@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ChangeEventHandler, SvelteHTMLElements } from 'svelte/elements'
+  import type { SvelteHTMLElements } from 'svelte/elements'
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
