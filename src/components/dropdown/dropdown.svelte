@@ -100,6 +100,7 @@
         button.focus()
       }
     }}
+    on:close
   >
     <slot />
   </Menu>

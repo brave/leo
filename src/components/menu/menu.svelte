@@ -51,6 +51,7 @@
     // Allow event handlers to cancel closing the dropdown by calling
     // |preventDefault|.
     if (dispatch('close', { originalEvent, reason }, { cancelable: true })) {
+      console.trace("Closed!")
       isOpen = false
     }
   }
