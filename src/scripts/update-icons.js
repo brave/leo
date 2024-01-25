@@ -157,9 +157,9 @@ exporter
       duplicatesWarning += `Found icon with duplicated name '${name}'x${
         entries.length
       }
-      ${entries.map(
-        (e) => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}\n`
-      )}`
+${entries.map(
+  (e) => `- https://www.figma.com/file/${fileId}/?node-id=${e.id}\n`
+)}`
     }
 
     // Note: This string is used as the Github PR body, so it should be valid markdown.
