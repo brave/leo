@@ -374,7 +374,7 @@
             "fontSize": 52,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -396,7 +396,7 @@
             "fontSize": 36,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -418,7 +418,7 @@
             "fontSize": 32,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -440,7 +440,7 @@
             "fontSize": 28,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -462,7 +462,7 @@
             "fontSize": 22,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -850,7 +850,7 @@
             "fontSize": 32,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -872,7 +872,7 @@
             "fontSize": 28,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -894,7 +894,7 @@
             "fontSize": 28,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -916,7 +916,7 @@
             "fontSize": 22,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -938,7 +938,7 @@
             "fontSize": 18,
             "textDecoration": "none",
             "fontFamily": "Poppins",
-            "fontWeight": 500,
+            "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
@@ -1174,9 +1174,9 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 8,
-          "color": "#00000014",
+          "color": "#0000001a",
           "offsetX": 0,
-          "offsetY": 2,
+          "offsetY": 4,
           "spread": 0
         }
       },
@@ -1217,7 +1217,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 4,
-            "color": "#00000014",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 1,
             "spread": 0
@@ -1248,7 +1248,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 8,
-            "color": "#00000014",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 4,
             "spread": -1
@@ -1279,7 +1279,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 16,
-            "color": "#00000014",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 4,
             "spread": -2
@@ -1310,7 +1310,7 @@
           "value": {
             "shadowType": "dropShadow",
             "radius": 24,
-            "color": "#00000014",
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 4,
             "spread": -1
@@ -1340,8 +1340,8 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 48,
-            "color": "#00000014",
+            "radius": 36,
+            "color": "#0000001a",
             "offsetX": 0,
             "offsetY": 8,
             "spread": -2
@@ -1406,7 +1406,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -1452,7 +1452,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -1498,7 +1498,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -1544,7 +1544,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -1590,7 +1590,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -2386,7 +2386,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -2432,7 +2432,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -2478,7 +2478,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -2524,7 +2524,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
@@ -2570,7 +2570,7 @@
           },
           "fontWeight": {
             "type": "number",
-            "value": 500
+            "value": 600
           },
           "fontStyle": {
             "type": "string",
