@@ -12,12 +12,12 @@ module.exports = {
   parse: ({ filePath, contents }) => {
     // Replace emojies, e.g. '🌚 dark' :-)
     contents = contents
-    .replace(
-      /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
-      ''
+      .replace(
+        /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
+        ''
       )
       .replaceAll(/-{2,}/g, '')
-      contents = JSON.parse(contents)
+    contents = JSON.parse(contents)
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
@@ -26,8 +26,9 @@ module.exports = {
       contents.gradient = contents.gradient.gradient
 
     // Transforms an effect to use variable references, rather than a hardcoded color
-      const effectColors = Object.entries(variables.color['---light'].elevation)
-        .map(([key, value]) => [key, new TinyColor(value.value).toHex8String()])
+    const effectColors = Object.entries(
+      variables.color['---light'].elevation
+    ).map(([key, value]) => [key, new TinyColor(value.value).toHex8String()])
     const transformEffect = (effect) => {
       const value = Array.isArray(effect.value) ? effect.value : [effect.value]
       for (const entry of value) {
@@ -40,7 +41,6 @@ module.exports = {
       }
     }
     applyToTokens(contents.effect, 'custom-shadow', transformEffect)
-
 
     /**
      * Convert layers from multiple tokens to single token with array of values.
@@ -61,7 +61,11 @@ module.exports = {
          * Focus state is not as deeply nested, and is therefore tested
          * at this level.
          */
-        if (['focus state', 'notificationbackdrop'].includes(type) && typeValue && !typeValue.type) {
+        if (
+          ['focus state', 'notificationbackdrop'].includes(type) &&
+          typeValue &&
+          !typeValue.type
+        ) {
           contents[category][type] = groupValues(typeValue)
         }
 
@@ -89,7 +93,7 @@ module.exports = {
 
 function groupValues(tokenValue) {
   // Make sure we filter out null items, or we won't set the type properly.
-  const subitems = Object.values(tokenValue).filter(si => si)
+  const subitems = Object.values(tokenValue).filter((si) => si)
   tokenValue = {
     ...subitems[0],
     extensions: tokenValue.extensions

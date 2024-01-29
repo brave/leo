@@ -36,7 +36,7 @@ function removeKeyFromObject(contents, keyToRemove, recurse = true) {
  * @param {*} apply The applicator
  */
 function applyToTokens(root, type, apply) {
-  if (!root || typeof root !== "object") return
+  if (!root || typeof root !== 'object') return
 
   if (root.type === type) {
     apply(root)

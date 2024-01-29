@@ -1,33 +1,21 @@
-const TinyColor = require('@ctrl/tinycolor')
+const { formatColor } = require('./webColorRef')
 
 module.exports = {
   type: 'value',
-  matcher: function (token) {
+  matcher(token) {
     return token.type === 'custom-shadow' && token.value !== 0
   },
-  transformer: function ({ value }) {
+  transformer({ value }) {
     value = Array.isArray(value) ? value : [value]
     return value.map((v) => formatShadow(v)).join(', ')
   }
 }
 
-/**
- * 
- * @param {string} colorString 
- * @returns {string}
- */
-function formatColor(colorString) {
-  if (colorString.startsWith('$')) {
-    const name = '--leo-' + colorString.substring(1).split('.').join('-')
-    return `var(${name})`
-  }
-  return new TinyColor.TinyColor(colorString).toRgbString()
-} 
-
 function formatShadow(value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${
     value.offsetX
-  }px ${value.offsetY}px ${value.radius}px ${
-    value.spread
-  }px ${formatColor(value.color)}`
+  }px ${value.offsetY}px ${value.radius}px ${value.spread}px ${formatColor(
+    'leo',
+    value.color
+  )}`
 }
