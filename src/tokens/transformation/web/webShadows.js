@@ -11,10 +11,23 @@ module.exports = {
   }
 }
 
+/**
+ * 
+ * @param {string} colorString 
+ * @returns {string}
+ */
+function formatColor(colorString) {
+  if (colorString.startsWith('{') && colorString.endsWith('}')) {
+    const name = '--leo-' + colorString.substring(1, colorString.length - 2).split('.').join('-')
+    return `var(${name})`
+  }
+  return new TinyColor.TinyColor(colorString).toRgbString()
+} 
+
 function formatShadow(value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${
     value.offsetX
   }px ${value.offsetY}px ${value.radius}px ${
     value.spread
-  }px ${new TinyColor.TinyColor(value.color).toRgbString()}`
+  }px ${formatColor(value.color)}`
 }

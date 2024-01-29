@@ -155,7 +155,7 @@ module.exports = ({ dictionary }) => {
           .filter((v) => !['elevation', 'light', 'dark'].includes(v))
           .join('-')
           .replace(' ', '-'),
-        formatDropShadowVars(name, t.value.dropShadow.length, true, false)
+        formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true, false)
       )
     }
   })

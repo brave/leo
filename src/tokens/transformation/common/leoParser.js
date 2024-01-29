@@ -3,6 +3,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
 const { removeKeyFromObject } = require('../../utils')
+const fs = require('fs')
+const variables = require('../../universal.variables.json')
+const { TinyColor } = require('@ctrl/tinycolor')
 
 module.exports = {
   pattern: /\.json$/,
@@ -21,6 +24,21 @@ module.exports = {
     // end up deleting everything under gradient).
     if (contents.gradient?.gradient)
       contents.gradient = contents.gradient.gradient
+
+    // Transforms an effect to use variable references, rather than a hardcoded color
+      const effectColors = Object.entries(variables.color['---light'].elevation)
+        .map(([key, value]) => [key, new TinyColor(value.value).toHex8String()])
+    const transformEffect = (effect) => {
+      const value = Array.isArray(effect.value) ? effect.value : [effect.value]
+      for (const entry of value) {
+        if (!entry) continue
+        const color = new TinyColor(entry.color).toHex8String()
+        const match = effectColors.find(([key, value]) => value === color)
+        if (match) {
+          entry.value = `{color.light.elevation.${match[0]}}`
+        }
+      }
+    }
 
     /**
      * Convert layers from multiple tokens to single token with array of values.
@@ -59,6 +77,10 @@ module.exports = {
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
             contents[category][type][item] = groupValues(itemValue)
           }
+        }
+
+        if (category === 'effect') {
+          transformEffect(contents[category][type])
         }
       }
     }
