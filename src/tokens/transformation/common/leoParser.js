@@ -25,18 +25,29 @@ module.exports = {
     if (contents.gradient?.gradient)
       contents.gradient = contents.gradient.gradient
 
-    // Transforms an effect to use variable references, rather than a hardcoded color
-    const effectColors = Object.entries(
-      variables.color['---light'].elevation
-    ).map(([key, value]) => [key, new TinyColor(value.value).toHex8String()])
+    // Transforms an effect to use variable references, rather than a hardcoded
+    // color. Unfortunately we need to do this because style-dictionary won't
+    // export variable references in effects.
+    // At the moment, we just whitelist a few color groups.
+    const allowedGroups = ['elevation', 'primary', 'secondary']
+    const effectColors = allowedGroups
+      .map((g) =>
+        Object.entries(variables.color['---light'][g]).map(([key, value]) => [
+          `${g}.${key}`,
+          new TinyColor(value.value).toHex8String()
+        ])
+      )
+      .flat()
+
     const transformEffect = (effect) => {
       const value = Array.isArray(effect.value) ? effect.value : [effect.value]
       for (const entry of value) {
+        // Some entries are null in the style-dictionary export.
         if (!entry) continue
         const color = new TinyColor(entry.color).toHex8String()
         const match = effectColors.find(([key, value]) => value === color)
         if (match) {
-          entry.color = `$color.elevation.${match[0]}`
+          entry.color = `$color.${match[0]}`
         }
       }
     }
