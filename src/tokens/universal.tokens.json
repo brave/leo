@@ -14,7 +14,7 @@
             },
             {
               "position": 1,
-              "color": "#f5002dff"
+              "color": "#ff006bff"
             }
           ]
         },
@@ -62,11 +62,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#3006c9ff"
+              "color": "#4100c1ff"
             },
             {
               "position": 1,
-              "color": "#3f39e8ff"
+              "color": "#542fe5ff"
             }
           ]
         },
@@ -1142,7 +1142,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#3f39e8ff",
+          "color": "#542fe5ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 2
