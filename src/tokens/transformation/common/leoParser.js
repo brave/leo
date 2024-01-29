@@ -2,7 +2,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
-const { removeKeyFromObject } = require('../../utils')
+const { removeKeyFromObject, applyToTokens } = require('../../utils')
 const fs = require('fs')
 const variables = require('../../universal.variables.json')
 const { TinyColor } = require('@ctrl/tinycolor')
@@ -12,12 +12,12 @@ module.exports = {
   parse: ({ filePath, contents }) => {
     // Replace emojies, e.g. '🌚 dark' :-)
     contents = contents
-      .replace(
-        /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
-        ''
+    .replace(
+      /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
+      ''
       )
       .replaceAll(/-{2,}/g, '')
-    contents = JSON.parse(contents)
+      contents = JSON.parse(contents)
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
@@ -35,10 +35,12 @@ module.exports = {
         const color = new TinyColor(entry.color).toHex8String()
         const match = effectColors.find(([key, value]) => value === color)
         if (match) {
-          entry.value = `{color.light.elevation.${match[0]}}`
+          entry.color = `$color.elevation.${match[0]}`
         }
       }
     }
+    applyToTokens(contents.effect, 'custom-shadow', transformEffect)
+
 
     /**
      * Convert layers from multiple tokens to single token with array of values.
@@ -78,12 +80,9 @@ module.exports = {
             contents[category][type][item] = groupValues(itemValue)
           }
         }
-
-        if (category === 'effect') {
-          transformEffect(contents[category][type])
-        }
       }
     }
+
     return contents
   }
 }

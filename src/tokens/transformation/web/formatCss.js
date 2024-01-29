@@ -8,7 +8,8 @@ const {
 
 module.exports = ({ dictionary, options, file }) => {
   const opts = options ?? {}
-  const { outputReferences } = opts
+  // const { outputReferences } = opts
+  const outputReferences = true
   const groupedTokens = {
     // if you export the prefixes use token.path[0] instead of [1]
     light: filteredTokens(dictionary, (token) => matchLightThemeToken(token)),

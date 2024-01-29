@@ -29,6 +29,27 @@ function removeKeyFromObject(contents, keyToRemove, recurse = true) {
   return contents
 }
 
+/**
+ * Applies a function to all token nodes of a type
+ * @param {*} root The root node
+ * @param {*} type The type of node to apply the function to
+ * @param {*} apply The applicator
+ */
+function applyToTokens(root, type, apply) {
+  if (!root || typeof root !== "object") return
+
+  if (root.type === type) {
+    apply(root)
+    return
+  }
+
+  const children = Object.values(root)
+  for (const child of children) {
+    applyToTokens(child, type, apply)
+  }
+}
+
 module.exports = {
-  removeKeyFromObject
+  removeKeyFromObject,
+  applyToTokens
 }

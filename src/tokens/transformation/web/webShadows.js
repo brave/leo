@@ -17,8 +17,8 @@ module.exports = {
  * @returns {string}
  */
 function formatColor(colorString) {
-  if (colorString.startsWith('{') && colorString.endsWith('}')) {
-    const name = '--leo-' + colorString.substring(1, colorString.length - 2).split('.').join('-')
+  if (colorString.startsWith('$')) {
+    const name = '--leo-' + colorString.substring(1).split('.').join('-')
     return `var(${name})`
   }
   return new TinyColor.TinyColor(colorString).toRgbString()
