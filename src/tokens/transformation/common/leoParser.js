@@ -41,8 +41,16 @@ module.exports = {
          * Focus state is not as deeply nested, and is therefore tested
          * at this level.
          */
-        if (['focus state'].includes(type) && typeValue && !typeValue.type) {
+        if (['focus state', 'notificationbackdrop'].includes(type) && typeValue && !typeValue.type) {
           contents[category][type] = groupValues(typeValue)
+        }
+
+        if (['elevation'].includes(type)) {
+          for (const elevationToken in typeValue) {
+            contents[category][type][elevationToken] = groupValues(
+              typeValue[elevationToken]
+            )
+          }
         }
 
         for (const [item, itemValue] of items) {
@@ -50,15 +58,6 @@ module.exports = {
           // NOTE: ideal scenario here would be to programmatically determine if values should be grouped or not, instead of manually managing a list.
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
             contents[category][type][item] = groupValues(itemValue)
-          }
-
-          if (['elevation'].includes(type)) {
-            const theme = item
-            for (const elevationToken in itemValue) {
-              contents[category][type][theme][elevationToken] = groupValues(
-                itemValue[elevationToken]
-              )
-            }
           }
         }
       }
@@ -68,7 +67,8 @@ module.exports = {
 }
 
 function groupValues(tokenValue) {
-  const subitems = Object.values(tokenValue)
+  // Make sure we filter out null items, or we won't set the type properly.
+  const subitems = Object.values(tokenValue).filter(si => si)
   tokenValue = {
     ...subitems[0],
     extensions: tokenValue.extensions
