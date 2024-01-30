@@ -7,7 +7,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -29,7 +29,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -53,7 +53,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -75,7 +75,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -99,7 +99,7 @@
           "value": {
             "fontSize": 13,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -121,7 +121,7 @@
           "value": {
             "fontSize": 13,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -145,7 +145,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -167,7 +167,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -201,7 +201,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -247,7 +247,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -295,7 +295,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -341,7 +341,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -389,7 +389,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -435,7 +435,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -483,7 +483,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -529,7 +529,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",

@@ -1,4 +1,4 @@
-const TinyColor = require('@ctrl/tinycolor')
+const { formatColor } = require('../web/webColorRef')
 
 module.exports = {
   type: 'value',
@@ -17,15 +17,14 @@ module.exports = {
 function formatBoxShadow(value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${
     value.offsetX
-  }px ${value.offsetY}px ${value.radius}px ${
-    value.spread
-  }px ${new TinyColor.TinyColor(value.color).toRgbString()}`
+  }px ${value.offsetY}px ${value.radius}px ${value.spread}px ${formatColor(
+    'tw',
+    value.color
+  )}`
 }
 
 function formatDropShadow(value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${
     value.offsetX
-  }px ${value.offsetY}px ${value.radius}px ${new TinyColor.TinyColor(
-    value.color
-  ).toRgbString()}`
+  }px ${value.offsetY}px ${value.radius}px ${formatColor('tw', value.color)}`
 }

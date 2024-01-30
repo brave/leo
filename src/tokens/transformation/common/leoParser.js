@@ -2,7 +2,10 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
-const { removeKeyFromObject } = require('../../utils')
+const { removeKeyFromObject, applyToTokens } = require('../../utils')
+const fs = require('fs')
+const variables = require('../../universal.variables.json')
+const { TinyColor } = require('@ctrl/tinycolor')
 
 module.exports = {
   pattern: /\.json$/,
@@ -21,6 +24,34 @@ module.exports = {
     // end up deleting everything under gradient).
     if (contents.gradient?.gradient)
       contents.gradient = contents.gradient.gradient
+
+    // Transforms an effect to use variable references, rather than a hardcoded
+    // color. Unfortunately we need to do this because style-dictionary won't
+    // export variable references in effects.
+    // At the moment, we just whitelist a few color groups.
+    const allowedGroups = ['elevation', 'primary', 'secondary']
+    const effectColors = allowedGroups
+      .map((g) =>
+        Object.entries(variables.color['---light'][g]).map(([key, value]) => [
+          `${g}.${key}`,
+          new TinyColor(value.value).toHex8String()
+        ])
+      )
+      .flat()
+
+    const transformEffect = (effect) => {
+      const value = Array.isArray(effect.value) ? effect.value : [effect.value]
+      for (const entry of value) {
+        // Some entries are null in the style-dictionary export.
+        if (!entry) continue
+        const color = new TinyColor(entry.color).toHex8String()
+        const match = effectColors.find(([key, value]) => value === color)
+        if (match) {
+          entry.color = `$color.${match[0]}`
+        }
+      }
+    }
+    applyToTokens(contents.effect, 'custom-shadow', transformEffect)
 
     /**
      * Convert layers from multiple tokens to single token with array of values.
@@ -41,8 +72,20 @@ module.exports = {
          * Focus state is not as deeply nested, and is therefore tested
          * at this level.
          */
-        if (['focus state'].includes(type) && typeValue && !typeValue.type) {
+        if (
+          ['focus state', 'notificationbackdrop'].includes(type) &&
+          typeValue &&
+          !typeValue.type
+        ) {
           contents[category][type] = groupValues(typeValue)
+        }
+
+        if (['elevation'].includes(type)) {
+          for (const elevationToken in typeValue) {
+            contents[category][type][elevationToken] = groupValues(
+              typeValue[elevationToken]
+            )
+          }
         }
 
         for (const [item, itemValue] of items) {
@@ -51,24 +94,17 @@ module.exports = {
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
             contents[category][type][item] = groupValues(itemValue)
           }
-
-          if (['elevation'].includes(type)) {
-            const theme = item
-            for (const elevationToken in itemValue) {
-              contents[category][type][theme][elevationToken] = groupValues(
-                itemValue[elevationToken]
-              )
-            }
-          }
         }
       }
     }
+
     return contents
   }
 }
 
 function groupValues(tokenValue) {
-  const subitems = Object.values(tokenValue)
+  // Make sure we filter out null items, or we won't set the type properly.
+  const subitems = Object.values(tokenValue).filter((si) => si)
   tokenValue = {
     ...subitems[0],
     extensions: tokenValue.extensions
