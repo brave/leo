@@ -21,7 +21,7 @@ const filteredTokens = (dictionary, filterFn) => {
 function matchThemableToken(
   token,
   modifierPathSegment,
-  tokenPaths = ['color', 'effect']
+  tokenPaths = ['color']
 ) {
   const tokenPath = token.path.join('.').toLowerCase()
   return (
@@ -30,12 +30,12 @@ function matchThemableToken(
   )
 }
 
-function matchDarkThemeToken(token, tokenPaths) {
-  return matchThemableToken(token, 'dark', tokenPaths)
+function matchDarkThemeToken(token) {
+  return matchThemableToken(token, 'dark') || token.path.includes('effect')
 }
 
-function matchLightThemeToken(token, tokenPaths) {
-  return matchThemableToken(token, 'light', tokenPaths)
+function matchLightThemeToken(token) {
+  return matchThemableToken(token, 'light') || token.path.includes('effect')
 }
 
 module.exports = {
