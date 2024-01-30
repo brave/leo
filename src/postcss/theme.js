@@ -27,9 +27,11 @@ const splitRule = (rule, selectorToExtract) => {
   rule.selector = selectorToExtract
 }
 
+// Note: It's important that these selectors have a better than (0, 1, 0)
+// specificity, or they'll be overridden by the dark mode media query.
 const defaultOptions = {
-  darkSelector: '[data-theme=dark]',
-  lightSelector: '[data-theme=light]',
+  darkSelector: '[data-theme][data-theme=dark]',
+  lightSelector: '[data-theme][data-theme=light]',
   wrapSelector: (selector) => selector
 }
 
@@ -202,7 +204,12 @@ module.exports = (options) => {
         name: 'media',
         params: '(prefers-color-scheme: dark)',
         nodes: darkProperties.length
-          ? [new Rule({ selector: ':root', nodes: darkProperties })]
+          ? [
+              new Rule({
+                selector: options.wrapSelector(':root'),
+                nodes: darkProperties
+              })
+            ]
           : []
       })
 
