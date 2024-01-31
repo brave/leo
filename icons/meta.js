@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1705565315823,
+  "updatedAt": 1706688517162,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1867,6 +1867,8 @@ export default {
     "wan-color": "wan-color",
     "warning-circle-filled": "warning-circle-filled",
     "warning-circle-outline": "warning-circle-outline",
+    "warning-octagon-filled": "warning-octagon-filled",
+    "warning-octagon-outline": "warning-octagon-outline",
     "warning-triangle-filled": "warning-triangle-filled",
     "warning-triangle-outline": "warning-triangle-outline",
     "waves-color": "waves-color",
