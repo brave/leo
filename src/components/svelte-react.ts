@@ -9,7 +9,7 @@ import {
   useState,
   type DOMAttributes
 } from 'react'
-import type { SvelteComponentTyped } from 'svelte'
+import type { SvelteComponent } from 'svelte'
 
 const eventRegex = /on([A-Z]{1,}[a-zA-Z]*)/
 
@@ -21,27 +21,32 @@ export type IntrinsicProps =
   | 'style'
   | 'tabIndex'
 
-export type SvelteProps<T> = T extends SvelteComponentTyped<
-  infer Props,
-  any,
-  any
->
+export type SvelteProps<T> = T extends SvelteComponent<infer Props, any, any>
   ? Props
   : {}
-export type SvelteEvents<T> = T extends SvelteComponentTyped<
-  any,
-  infer Events,
-  any
->
+export type SvelteEvents<T> = T extends SvelteComponent<any, infer Events, any>
   ? Events
   : {}
+
+// We introduce a custom ref type as some of the Svelte type definitions don't
+// play nice with React.ForwardRef.
+type Ref<T> =
+  | ((ref: (Omit<HTMLElement, keyof T> & T) | null) => void)
+  | {
+      current:
+        | HTMLElement
+        | Partial<T>
+        | (Omit<HTMLElement, keyof T> & T)
+        | undefined
+        | null
+    }
 export type ReactProps<Props, Events> = Props & {
-  ref?: ForwardedRef<Partial<Props & HTMLElement> | undefined>
+  ref?: Ref<Props>
 } & {
   // Note: The div here isn't important because all props in intrinsicProps are
   // available on all elements. We just want to make sure we have the correct
   // React name/value for them.
-  [P in IntrinsicProps]?: JSX.IntrinsicElements['div'][P]
+  [P in IntrinsicProps]?: Omit<JSX.IntrinsicElements, 'ref'>['div'][P]
 }
 
 type EventPropsNames = keyof DOMAttributes<unknown>
