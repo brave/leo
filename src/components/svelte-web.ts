@@ -31,7 +31,7 @@ const createSlot = (name?: string) => {
     },
 
     // Props changed
-    p() { },
+    p() {},
 
     // Detach
     d(detaching) {
@@ -78,11 +78,12 @@ export default function registerWebComponent(
   )
 
   // Heuristics for determining if a property is a boolean.
-  const isBooleanProperty = (prop: string, value: any) => typeof value === "boolean"
-    || boolProperties.has(prop)
+  const isBooleanProperty = (prop: string, value: any) =>
+    typeof value === 'boolean' ||
+    boolProperties.has(prop) ||
     // This check is a bit scary - not sure if there's a better way of doing
     // this though
-    || (value === '' && prop.startsWith('is'))
+    (value === '' && prop.startsWith('is'))
 
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
@@ -221,31 +222,35 @@ export default function registerWebComponent(
       // Update slots on create.
       updateSlots()
 
-      const el = this;
-      this.svelteProps = new Proxy({}, {
-        get(target, prop) {
-          const contentIndex = el.component.$$.props[prop]
-          return el.component.$$.ctx[contentIndex] ?? target[prop]
-        },
-        set(target, prop, value) {
-          if (typeof prop === "symbol") throw new Error('Symbol properties are not supported')
-          target[prop] = value
+      const el = this
+      this.svelteProps = new Proxy(
+        {},
+        {
+          get(target, prop) {
+            const contentIndex = el.component.$$.props[prop]
+            return el.component.$$.ctx[contentIndex] ?? target[prop]
+          },
+          set(target, prop, value) {
+            if (typeof prop === 'symbol')
+              throw new Error('Symbol properties are not supported')
+            target[prop] = value
 
-          if (reflectToAttributes.has(typeof value)) {
-            // Boolean attributes are special - presence/absence indicates
-            // value, rather than actual value.
-            if (isBooleanProperty(prop, value)) {
-              if (value) el.setAttribute(prop, '')
-              else el.removeAttribute(prop)
-            } else el.setAttribute(prop, value)
+            if (reflectToAttributes.has(typeof value)) {
+              // Boolean attributes are special - presence/absence indicates
+              // value, rather than actual value.
+              if (isBooleanProperty(prop, value)) {
+                if (value) el.setAttribute(prop, '')
+                else el.removeAttribute(prop)
+              } else el.setAttribute(prop, value)
+            }
+
+            // |.$set| updates the value of a prop. Note: This only works for
+            // props, not slotted content.
+            el.component.$set({ [prop]: value })
+            return true
           }
-
-          // |.$set| updates the value of a prop. Note: This only works for
-          // props, not slotted content.
-          el.component.$set({ [prop]: value })
-          return true
         }
-      })
+      )
 
       // For some reason setting this on |SvelteWrapper| doesn't work properly.
       for (const prop of props) {
@@ -270,10 +275,12 @@ export default function registerWebComponent(
       // MutationObserver) won't fire until we've connected.
       const applyAttribute = (attr, value) => {
         const prop = attributePropMap.get(attr) ?? attr
-        this.svelteProps[prop] = isBooleanProperty(prop, value) ? value !== null : value
+        this.svelteProps[prop] = isBooleanProperty(prop, value)
+          ? value !== null
+          : value
       }
 
-      new MutationObserver(m => {
+      new MutationObserver((m) => {
         for (const mutation of m) {
           const value = this.getAttribute(mutation.attributeName)
           if (value === mutation.oldValue) continue
