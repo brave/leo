@@ -1,0 +1,135 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Web site created using HTML & Web Components" />
+  <link href="./css/variables.css" rel="stylesheet" />
+  <title>Web Components Perf</title>
+  <style>
+    body {
+      background: var(--leo-color-page-background);
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script type="module">
+    import './leo/button.js'
+
+    const container = document.querySelector('.container')
+
+    function createDestroy(n) {
+        for (let i = 0; i < n; ++i) {
+            const button = document.createElement('leo-button')
+            container.appendChild(button)
+        }
+
+        for (const button of container.querySelectorAll('leo-button')) {
+            button.remove()
+        }
+    }
+
+    function changeProps(n) {
+        const changes = [
+            { kind: 'small' },
+            { tabindex: -1 },
+            { size: 'large'},
+            { fab: true },
+            { href: 'https://brave.com' },
+            { href: undefined },
+            { disabled: true },
+            { disabled: null },
+            { formaction: 'POST' },
+            { type: 'button' },
+            { type: 'submit' }
+        ]
+
+        for (let i = 0; i< n; ++ i) {
+            const button = document.createElement('leo-button')
+            container.appendChild(button)
+
+            for (const change of changes) {
+                const [key, value] = Object.entries(change)[0]
+                button[key] = value
+            }
+        }
+    }
+
+    function changeAttributes(n) {
+        const changes = [
+            { kind: 'small' },
+            { tabindex: -1 },
+            { size: 'large'},
+            { fab: true },
+            { href: 'https://brave.com' },
+            { href: undefined },
+            { disabled: true },
+            { disabled: null },
+            { formaction: 'POST' },
+            { type: 'button' },
+            { type: 'submit' }
+        ]
+
+        for (let i = 0; i< n; ++ i) {
+            const button = document.createElement('leo-button')
+            container.appendChild(button)
+
+            for (const change of changes) {
+                const [key, value] = Object.entries(change)[0]
+                if (value !== null)
+                    button.setAttribute(key, value)
+                else
+                    button.removeAttribute(key)
+            }
+        }
+    }
+
+    function changeSlotted(n) {
+        for (let i = 0; i < n; ++i) {
+            const button = document.createElement('leo-button')
+            container.appendChild(button)
+
+            button.innerHTML = `<div>Hello World</div>`
+            button.innerHTML = ``
+
+            const span = document.createElement('span')
+            span.innerText = "Foo"
+            button.appendChild(span)
+
+            const icon = document.createElement('span')
+            icon.setAttribute('slot', 'icon-before')
+            icon.innerText = "Bar"
+            button.appendChild(icon)
+
+            icon.remove()
+            span.remove()
+        }
+    }
+
+    function time(name, func) {
+        container.innerHTML = ''
+
+        const start = performance.now()
+        func()
+        const end = performance.now()
+
+        console.log(name, "took", end - start)
+    }
+
+    const iterations = 100000
+    time("Create/Destroy", () => createDestroy(iterations))
+    time("Change Props", () => changeProps(iterations))
+    time("Change Attributes", () => changeAttributes(iterations))
+    time("Change Slots", () => changeSlotted(iterations))
+  </script>
+  <div class="container">
+    
+  </div>
+</body>
+
+</html>
