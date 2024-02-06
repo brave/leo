@@ -58,7 +58,7 @@ const getComponentGenerics = async (svelteFilePath, componentName) => {
     path.join('./types/src/components', relativePath) + '.d.ts'
   const typingsContents = await fs.readFile(typingsPath)
   const genericsMatcher = new RegExp(
-    `${componentName}<(.*)> extends SvelteComponentTyped`,
+    `${componentName}<(.*)> extends SvelteComponent`,
     'gm'
   )
 
