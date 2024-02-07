@@ -1,5 +1,5 @@
 const { fileHeader } = require('style-dictionary').formatHelpers
-const camelCase = require('../common/camelCaseHelper')
+const changeCase = require('change-case')
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
   1 + letterSpacing / fontSize
@@ -11,20 +11,16 @@ const printDescription = (description) =>
 
 module.exports = ({ dictionary, platform, options = {}, file }) => {
   const fontStyles = dictionary.allTokens
-    // remove underlined
-    .filter(
-      (compositeToken) =>
-        compositeToken.original.value.textDecoration !== 'underline'
-    )
+    .filter((compositeToken) => compositeToken.type === 'custom-fontStyle')
     // create style
     .map((compositeToken) => {
       return (
-        `  <style name="${camelCase(compositeToken.name)}">\n` +
+        `  <style name="${changeCase.pascalCase(compositeToken.name.replace("font_android_", ""))}">\n` +
         printDescription(compositeToken.description) +
         `    <item name="android:fontFamily">${
           options.fontFamilies[compositeToken.original.value.fontFamily]
         }</item>\n` +
-        `    <item name="android:textSize">@dimen/${compositeToken.name}</item>\n` +
+        `    <item name="android:textSize">@dimen/${changeCase.snakeCase(compositeToken.name.replace("font_android_", ""))}</item>\n` +
         `    <item name="android:lineHeight">${compositeToken.original.value.lineHeight}sp</item>\n` +
         `    <item name="android:letterSpacing">${letterSpacingToFloat(
           compositeToken.original.value.letterSpacing,

@@ -114,6 +114,19 @@ module.exports = {
         }
       ],
       actions: ['ios/colorSets']
+    },
+    android: {
+      transformGroup: 'android',
+      buildPath: 'tokens/android/',
+      files: [{
+        destination: 'values/styles.xml',
+        filter: (token) => token.attributes.category === 'font' && token.attributes.type === 'android',
+        format: 'android/fontStyle'
+      },{
+        destination: 'values/dimens.xml',
+        filter: (token) => token.attributes.category === 'font' && token.attributes.type === 'android',
+        format: 'android/dimenStyle'
+      }]
     }
   }
 }
