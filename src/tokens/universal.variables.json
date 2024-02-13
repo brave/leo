@@ -78,19 +78,19 @@
         },
         "70": {
           "type": "color",
-          "value": "#3006c9"
+          "value": "#3b08c2"
         },
         "80": {
           "type": "color",
-          "value": "#21168f"
+          "value": "#2a118e"
         },
         "90": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "100": {
           "type": "color",
-          "value": "#070732"
+          "value": "#0b0632"
         }
       },
       "secondary": {
@@ -112,7 +112,7 @@
         },
         "40": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "50": {
           "type": "color",
@@ -566,9 +566,17 @@
           "type": "color",
           "value": "#662d91"
         },
-        "bravelion": {
+        "rorange-1": {
           "type": "color",
-          "value": "#fe5907"
+          "value": "#ff5601"
+        },
+        "rorange-2": {
+          "type": "color",
+          "value": "#ff4000"
+        },
+        "rorange-3": {
+          "type": "color",
+          "value": "#ff1f01"
         }
       }
     },
@@ -812,11 +820,11 @@
         },
         "60": {
           "type": "color",
-          "value": "#3006c9"
+          "value": "#3b08c2"
         },
         "70": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         }
       },
       "secondary": {
@@ -830,7 +838,7 @@
         },
         "30": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "40": {
           "type": "color",
@@ -1208,7 +1216,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "disabled": {
           "type": "color",
@@ -1350,11 +1358,11 @@
       "primary": {
         "10": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "20": {
           "type": "color",
-          "value": "#21168f"
+          "value": "#2a118e"
         },
         "30": {
           "type": "color",
@@ -1396,7 +1404,7 @@
         },
         "50": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "60": {
           "type": "color",
