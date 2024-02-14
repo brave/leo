@@ -1386,6 +1386,44 @@
           }
         }
       }
+    },
+    "hard shadow": {
+      "01": {
+        "description": null,
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#7c91ffff",
+          "offsetX": 4,
+          "offsetY": 4,
+          "spread": 0
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:f30f702c98b25bebf389a5b28d08514526f310e0,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "02": {
+        "description": null,
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#7c91ffff",
+          "offsetX": 8,
+          "offsetY": 8,
+          "spread": 0
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:1a69c0c579dd32fc136ad762796993a99bddbbe6,",
+            "exportKey": "effect"
+          }
+        }
+      }
     }
   },
   "typography": {
