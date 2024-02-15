@@ -1139,7 +1139,7 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0.39,
-          "lineHeight": 21,
+          "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -1478,7 +1478,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#62757eff",
+          "color": "#7c91ffff",
           "offsetX": 4,
           "offsetY": 4,
           "spread": 0
@@ -1496,7 +1496,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#62757eff",
+          "color": "#7c91ffff",
           "offsetX": 8,
           "offsetY": 8,
           "spread": 0
@@ -3125,7 +3125,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 21
+          "value": 20
         },
         "paragraphIndent": {
           "type": "dimension",
