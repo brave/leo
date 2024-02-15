@@ -2,7 +2,7 @@
 
 ## Tokens
 
-The tokens part of this package is supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
+The 'tokens' which are part of this package are supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
 It transforms the exported design tokens using [Amazon style dictionary](https://amzn.github.io/style-dictionary/#/).
 Destination formats for these tokens include CSS variables, Tailwind configuration, C++ (skia variables), Java and Swift.
 The output files will be created at `/build` by running `npm run transform-tokens` which will also run upon install - regularly or when this package is used as a dependency.
