@@ -70,6 +70,11 @@
    */
   export let mode: Mode | undefined = undefined
 
+  /**
+   * Placeholder text for the input.
+   */
+  export let placeholder = ''
+
   type InputEventDetail = {
     innerEvent: Event & { target: HTMLInputElement }
     value: string
@@ -131,6 +136,7 @@
       {disabled}
       {type}
       {value}
+      {placeholder}
       bind:this={input}
       on:change={forwardEvent}
       on:input={onInput}
