@@ -1,6 +1,28 @@
 {
   "font": {
     "💻 browser": {
+      "sidebar product title": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 20,
+          "textDecoration": "none",
+          "fontFamily": "Poppins",
+          "fontWeight": 600,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": -0.2,
+          "lineHeight": 20,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "lowercase"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:ea61e9fc75571283b86a0ca8154dcfa91aa8c10b,",
+            "exportKey": "font"
+          }
+        }
+      },
       "large": {
         "regular": {
           "type": "custom-fontStyle",
@@ -187,8 +209,87 @@
       }
     }
   },
+  "effect": {
+    "url bar shadow": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 8,
+          "color": "#0000001a",
+          "offsetX": 0,
+          "offsetY": 4,
+          "spread": -2
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 2,
+          "color": "#0000001a",
+          "offsetX": 0,
+          "offsetY": 1,
+          "spread": -1
+        }
+      },
+      "description": null,
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:cb3492bd83632c0afe17119b674b570edf238a0e,",
+          "exportKey": "effect"
+        }
+      }
+    }
+  },
   "typography": {
     "💻 browser": {
+      "sidebar product title": {
+        "fontSize": {
+          "type": "dimension",
+          "value": 20
+        },
+        "textDecoration": {
+          "type": "string",
+          "value": "none"
+        },
+        "fontFamily": {
+          "type": "string",
+          "value": "Poppins"
+        },
+        "fontWeight": {
+          "type": "number",
+          "value": 600
+        },
+        "fontStyle": {
+          "type": "string",
+          "value": "normal"
+        },
+        "fontStretch": {
+          "type": "string",
+          "value": "normal"
+        },
+        "letterSpacing": {
+          "type": "dimension",
+          "value": -0.2
+        },
+        "lineHeight": {
+          "type": "dimension",
+          "value": 20
+        },
+        "paragraphIndent": {
+          "type": "dimension",
+          "value": 0
+        },
+        "paragraphSpacing": {
+          "type": "dimension",
+          "value": 0
+        },
+        "textCase": {
+          "type": "string",
+          "value": "lowercase"
+        }
+      },
       "large": {
         "regular": {
           "fontSize": {
