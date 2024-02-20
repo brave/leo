@@ -142,6 +142,7 @@
       on:input={onInput}
       on:input={forwardEvent}
       on:focus={forwardEvent}
+      on:paste={forwardEvent}
       on:blur={forwardEvent}
       on:keydown={forwardEvent}
       on:keypress={forwardEvent}
