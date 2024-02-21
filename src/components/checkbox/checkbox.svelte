@@ -22,6 +22,8 @@
   export let isDisabled = false
   export let size: Sizes = 'normal'
 
+  let input: HTMLElement | undefined
+
   const dispatch = createEventDispatcher<{
     change: { checked: boolean }
   }>()
@@ -30,6 +32,10 @@
     dispatch('change', {
       checked: e.target.checked
     })
+  }
+
+  export function focus(options?: FocusOptions) {
+    input?.focus(options)
   }
 </script>
 
@@ -41,6 +47,7 @@
 >
   <div class="check">
     <input
+      bind:this={input}
       disabled={isDisabled}
       type="checkbox"
       bind:checked
@@ -140,7 +147,8 @@
     }
 
     &:has(input:focus-visible) {
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      box-shadow:
+        0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
       border-radius: var(--focus-border-radius);
     }

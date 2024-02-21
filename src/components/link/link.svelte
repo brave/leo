@@ -9,9 +9,15 @@
 
   export let href: string
   export let isDisabled: boolean = false
+
+  let element: HTMLElement | undefined
+  export function focus(options?: FocusOptions) {
+    element?.focus(options)
+  }
 </script>
 
 <a
+  bind:this={element}
   rel="noopener"
   {...$$restProps}
   {href}

@@ -119,6 +119,10 @@
     value = e.currentTarget['value']
     hasErrorsInternal = (required && !value) || !input?.checkValidity()
   }
+
+  export function focus(options?: FocusOptions) {
+    input?.focus(options)
+  }
 </script>
 
 <FormItem

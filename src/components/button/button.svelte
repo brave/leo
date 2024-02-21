@@ -60,10 +60,16 @@
   function onClick(event) {
     dispatch('click', event)
   }
+
+  let element: HTMLElement
+  export function focus(options?: FocusOptions) {
+    element?.focus(options)
+  }
 </script>
 
 <svelte:element
   this={tag}
+  bind:this={element}
   href={href || undefined}
   class="leoButton"
   class:isFilled={kind === 'filled'}
@@ -294,7 +300,10 @@
   .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
-    --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
+    --primary-color: var(
+      --leo-button-color,
+      var(--leo-color-primitive-primary-60)
+    );
     --color: var(--mixed-primary-color);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
@@ -302,7 +311,10 @@
     --border-color-focus: var(--leo-color-divider-interactive);
 
     @theme (dark) {
-      --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-40));
+      --primary-color: var(
+        --leo-button-color,
+        var(--leo-color-primitive-primary-40)
+      );
       --border-color-hover: var(--leo-color-primitive-primary-60);
     }
 
@@ -323,12 +335,18 @@
   .leoButton.isPlain {
     --radius: 8px;
     --padding-x: 2px;
-    --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
+    --primary-color: var(
+      --leo-button-color,
+      var(--leo-color-primitive-primary-60)
+    );
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
 
     @theme (dark) {
-      --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-40));
+      --primary-color: var(
+        --leo-button-color,
+        var(--leo-color-primitive-primary-40)
+      );
     }
 
     &:disabled:not(.isLoading) {

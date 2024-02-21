@@ -45,6 +45,10 @@
   function onClick() {
     isOpen = !isOpen
   }
+
+  export function focus(options?: FocusOptions) {
+    button?.focus(options)
+  }
 </script>
 
 <div class="leo-dropdown">

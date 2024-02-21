@@ -13,6 +13,7 @@
   export let size: Sizes = 'medium'
 
   let thumb: HTMLElement
+  let button: HTMLElement
 
   let handledClick = false
   let dragStartX: number | undefined
@@ -26,6 +27,10 @@
     if (newValue === undefined) newValue = !checked
     checked = newValue
     dispatch('change', { checked })
+  }
+
+  export function focus(options?: FocusOptions) {
+    button?.focus(options)
   }
 </script>
 
@@ -54,6 +59,7 @@
 
 <label class={`leo-toggle size-${size}`}>
   <button
+    bind:this={button}
     on:mousedown={(e) => {
       if (disabled) return
 
@@ -80,7 +86,7 @@
       style:--drag-offset="{dragOffsetX}px"
     >
       <div class="on-icon">
-        <slot name="on-icon"/>
+        <slot name="on-icon" />
       </div>
     </div>
   </button>
@@ -157,7 +163,8 @@
     }
 
     &:focus-visible:not(:disabled) {
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      box-shadow:
+        0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
     }
 
@@ -186,12 +193,16 @@
       aspect-ratio: 1/1;
       background: white;
       border-radius: var(--leo-radius-full);
-      transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+      transition:
+        transform 0.2s ease-in-out,
+        color 0.2s ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
 
       &.dragging {
-        transition: transform 0s ease-in-out, color 0.2s ease-in-out;
+        transition:
+          transform 0s ease-in-out,
+          color 0.2s ease-in-out;
       }
 
       display: flex;
