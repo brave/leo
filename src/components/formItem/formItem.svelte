@@ -103,8 +103,8 @@
     --base: var(--leo-color-container-background);
     --primary: var(--leo-control-color, var(--base));
 
-    --radius: var(--leo-control-radius, var(--leo-spacing-m));
-    --padding: var(--leo-control-padding, 9px);
+    --radius: var(--leo-control-radius, var(--leo-radius-m));
+    --padding: var(--leo-control-padding, 10px 7px);
     --font: var(--leo-control-font, var(--leo-font-default-regular));
     --leo-icon-size: var(--leo-control-icon-size, 20px);
     --leo-icon-color: var(
@@ -168,13 +168,13 @@
   .leo-control.isSmall {
     --leo-icon-size: 16px;
     --font: var(--leo-control-font, var(--leo-font-small-regular));
-    --padding: var(--leo-control-padding, 8px);
+    --padding: var(--leo-control-padding, 7px);
     --gap: var(--leo-control-label-gap, 2px);
   }
 
   .leo-control.isLarge {
     --leo-icon-size: 22px;
-    --padding: var(--leo-control-padding, 14px 8px);
+    --padding: var(--leo-control-padding, 14px 11px);
     --gap: var(--leo-control-label-gap, 12px);
   }
 
