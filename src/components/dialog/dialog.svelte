@@ -28,13 +28,17 @@
   export let animate = true
 
   const dispatch = createEventDispatcher<{
+    show: undefined
     close: undefined
     back: undefined
   }>()
 
   let dialog: HTMLDialogElement
   $: {
-    if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.isConnected) {
+      dialog?.showModal()
+      dispatch('show')
+    }
   }
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
