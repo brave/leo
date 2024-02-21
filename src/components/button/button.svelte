@@ -136,6 +136,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
     transition:
       background 0.12s ease-in-out,
