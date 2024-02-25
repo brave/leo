@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1707492209367,
+  "updatedAt": 1708848456905,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -219,7 +219,6 @@ const meta = {
     "brave-player": "brave-player",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
-    "bridge": "bridge",
     "briefcase": "briefcase",
     "broom": "broom",
     "browser-add": "browser-add",
@@ -1383,6 +1382,7 @@ const meta = {
     "people-target": "people-target",
     "people-time": "people-time",
     "people": "people",
+    "percent": "percent",
     "phantom-color": "phantom-color",
     "phone-call-in": "phone-call-in",
     "phone-call-out": "phone-call-out",
@@ -1747,6 +1747,7 @@ const meta = {
     "telephone": "telephone",
     "ten-color": "ten-color",
     "terarium-color": "terarium-color",
+    "terminal": "terminal",
     "tern-color": "tern-color",
     "terra-color": "terra-color",
     "tether-color": "tether-color",
@@ -1780,6 +1781,7 @@ const meta = {
     "toggle-off": "toggle-off",
     "toggle-on": "toggle-on",
     "tomo-color": "tomo-color",
+    "tor-bridge": "tor-bridge",
     "tor-color": "tor-color",
     "tpay-color": "tpay-color",
     "tracker": "tracker",
@@ -1864,6 +1866,7 @@ const meta = {
     "wallet-ledger": "wallet-ledger",
     "wallet-status-color": "wallet-status-color",
     "wallet-trezor": "wallet-trezor",
+    "wallet-warning-color": "wallet-warning-color",
     "walletconnect-color": "walletconnect-color",
     "walmart-color": "walmart-color",
     "wan-color": "wan-color",
@@ -1878,6 +1881,7 @@ const meta = {
     "wazirx-color": "wazirx-color",
     "wbtc-color": "wbtc-color",
     "web3-blockexplorer": "web3-blockexplorer",
+    "web3-bridge": "web3-bridge",
     "web3": "web3",
     "weth-color": "weth-color",
     "wgr-color": "wgr-color",
