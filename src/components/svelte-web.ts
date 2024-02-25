@@ -117,7 +117,8 @@ export default function registerWebComponent(
       // especially when being rendered inside a Polymer dom-if. In this case,
       // we need to also clear the contents of the node, to ensure we don't
       // duplicate content.
-      const shadow = this.shadowRoot ?? this.attachShadow({ mode })
+      const shadow =
+        this.shadowRoot ?? this.attachShadow({ mode, delegatesFocus: true })
       shadow.replaceChildren()
 
       let lastSlots = new Set()
