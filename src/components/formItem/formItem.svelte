@@ -56,7 +56,7 @@
   export let showFocusOutline: boolean = false
   export let error = false
 
-  export let controlElement: HTMLDivElement = undefined;
+  export let controlElement: HTMLDivElement = undefined
 </script>
 
 <label
@@ -70,16 +70,15 @@
   aria-disabled={disabled}
 >
   <div class="label-row">
-    <slot name="label" />
-    {#if required}<span class="required-indicator">*</span>{/if}
+    <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
   </div>
   <div class="control" bind:this={controlElement}>
     <div class="container">
-      <div>
+      <div class="extra-content">
         <slot name="left-icon" />
       </div>
       <slot />
-      <div>
+      <div class="extra-content">
         <slot name="right-icon" />
       </div>
     </div>
@@ -135,10 +134,12 @@
 
       & .container:has(*:focus-visible),
       &.isFocused .container {
-        color: var(--color-focus);
-        background: var(--background-focus);
-        box-shadow: var(--shadow-focus);
-        border-color: var(--border-color-focus);
+        &:not(:has(.extra-content:focus-within)) {
+          color: var(--color-focus);
+          background: var(--background-focus);
+          box-shadow: var(--shadow-focus);
+          border-color: var(--border-color-focus);
+        }
       }
 
       &.error .container:hover:not(:has(*:focus-visible)) {
@@ -211,6 +212,10 @@
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-s);
+
+    &:empty {
+      display: none;
+    }
   }
 
   .leo-control .required-indicator {

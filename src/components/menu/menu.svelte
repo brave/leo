@@ -24,7 +24,7 @@
   import { createEventDispatcher } from 'svelte'
   import clickOutside from '../../svelteDirectives/clickOutside'
   import Floating from '../floating/floating.svelte'
-  import { size as sizeMiddleware } from '@floating-ui/dom'
+  import { size as sizeMiddleware, type Strategy } from '@floating-ui/dom'
 
   interface CloseEventDetail {
     originalEvent: Event
@@ -38,6 +38,7 @@
   export let isOpen = false
   export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
+  export let positionStrategy: Strategy = 'absolute'
 
   const dispatch = createEventDispatcher<{
     close: CloseEventDetail
@@ -173,16 +174,22 @@
     dispatchClose(e, 'blur')
   }
 
-  function applySizeMiddleware({rects, availableHeight}) {
-    popup.style.maxHeight = `calc(${availableHeight}px - var(--leo-spacing-xl))`;
+  function applySizeMiddleware({ rects, availableHeight }) {
+    popup.style.maxHeight = `calc(${availableHeight}px - var(--leo-spacing-xl))`
   }
 
-  let floatingMiddleware = [sizeMiddleware({apply: applySizeMiddleware })];
+  let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
 </script>
 
 <div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
   {#if isOpen}
-    <Floating {target} placement="bottom-start" autoUpdate middleware={floatingMiddleware}>
+    <Floating
+      {target}
+      placement="bottom-start"
+      autoUpdate
+      middleware={floatingMiddleware}
+      {positionStrategy}
+    >
       <div
         class="leo-menu-popup"
         id="menu"
@@ -283,7 +290,8 @@
   :global :where(.leo-menu-popup) ::slotted(leo-menu-item:focus-visible),
   :global :where(.leo-menu-popup) > leo-option:focus-visible,
   :global :where(.leo-menu-popup) > leo-menu-item:focus-visible {
-    box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+    box-shadow:
+      0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
   }
 </style>
