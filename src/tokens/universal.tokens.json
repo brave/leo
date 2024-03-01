@@ -1054,7 +1054,7 @@
           "lineHeight": 12,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
-          "textCase": "uppercase"
+          "textCase": "capitalize"
         },
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
@@ -2953,7 +2953,7 @@
         },
         "textCase": {
           "type": "string",
-          "value": "uppercase"
+          "value": "capitalize"
         }
       },
       "tableheader": {
