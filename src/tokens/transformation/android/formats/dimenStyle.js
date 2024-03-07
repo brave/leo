@@ -5,8 +5,9 @@ module.exports = ({ dictionary, platform, options = {}, file }) => {
   const fontStyles = dictionary.allTokens
     .filter((compositeToken) => compositeToken.type === 'custom-fontStyle')
     .map((compositeToken) => {
+      const dimenName = changeCase.snakeCase(compositeToken.name.replace("font_android_", ""))
       return (
-        ` <dimen name="${changeCase.snakeCase(compositeToken.name.replace("font_android_", ""))}">${compositeToken.original.value.fontSize}sp</dimen>`
+        ` <dimen name="${dimenName}">${compositeToken.value}</dimen>`
       )
     })
   return (

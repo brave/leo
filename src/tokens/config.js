@@ -118,14 +118,26 @@ module.exports = {
     android: {
       transformGroup: 'android',
       buildPath: 'tokens/android/',
-      files: [{
+      files: [
+      {
         destination: 'values/styles.xml',
-        filter: (token) => token.attributes.category === 'font' && token.attributes.type === 'android',
-        format: 'android/fontStyle'
-      },{
+        filter: 'android/filterFontStyle',
+        format: 'android/formatFontStyle'
+      },
+      {
         destination: 'values/dimens.xml',
-        filter: (token) => token.attributes.category === 'font' && token.attributes.type === 'android',
-        format: 'android/dimenStyle'
+        filter: 'android/filterFontStyle',
+        format: 'android/formatDimenStyle'
+      },
+      {
+        destination: 'values/colors.xml',
+        filter: 'android/filterLightColor',
+        format: 'android/formatColorStyle'
+      },
+      {
+        destination: 'values-night/colors.xml',
+        filter: 'android/filterDarkColor',
+        format: 'android/formatColorStyle'
       }]
     }
   }

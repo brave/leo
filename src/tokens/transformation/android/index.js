@@ -1,51 +1,53 @@
 const StyleDictionary = require('style-dictionary')
-const changeCase = require('change-case')
 
+// Transforms
 StyleDictionary.registerTransform({
-  name: 'android/color',
-  ...require('../common/colorToHex8')
-})
-
-StyleDictionary.registerTransform({
-  name: 'android/colorName',
+  name: 'android/transformColorName',
   ...require('./colorName')
 })
 
 StyleDictionary.registerTransform({
-  name: 'android/fontSize',
+  name: 'android/transformFontSizeToSp',
   ...require('./fontSizeToSp')
 })
 
-StyleDictionary.registerTransform({
-  name: 'android/pxToDp',
-  ...require('./pxToDp')
+// Formats
+StyleDictionary.registerFormat({
+  name: 'android/formatFontStyle',
+  formatter: require('./formats/fontStyle')
 })
 
 StyleDictionary.registerFormat({
-  name: 'android/fontStyle',
-  formatter: require('./formatFontStyle')
+  name: 'android/formatColorStyle',
+  formatter: require('./formats/colorStyle')
 })
 
 StyleDictionary.registerFormat({
-  name: 'android/dimenStyle',
-  formatter: require('./formatDimenStyle')
+  name: 'android/formatDimenStyle',
+  formatter: require('./formats/dimenStyle')
 })
 
-StyleDictionary.registerFormat({
-  name: 'android/resourcesSorted',
-  formatter: require('./formatResourcesSorted')
+// Filters
+StyleDictionary.registerFilter({
+  name: 'android/filterFontStyle',
+  matcher: require('./filters/fontStyle')
 })
 
-StyleDictionary.registerAction({
-  name: 'android/copy_fileOrFolder',
-  do: require('../common/copyFileOrFolder').do,
-  undo: require('../common/copyFileOrFolder').undo
+StyleDictionary.registerFilter({
+  name: 'android/filterDarkColor',
+  matcher: require('./filters/darkColor')
 })
 
+StyleDictionary.registerFilter({
+  name: 'android/filterLightColor',
+  matcher: require('./filters/lightColor')
+})
+
+// TransformGroup
 StyleDictionary.registerTransformGroup({
   name: 'android',
   transforms: StyleDictionary.transformGroup.android.concat([
-    'android/fontSize',
-    'android/pxToDp'
+    'android/transformColorName',
+    'android/transformFontSizeToSp'
   ])
 })

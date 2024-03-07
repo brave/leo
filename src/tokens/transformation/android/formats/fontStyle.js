@@ -17,9 +17,7 @@ module.exports = ({ dictionary, platform, options = {}, file }) => {
       return (
         `  <style name="${changeCase.pascalCase(compositeToken.name.replace("font_android_", ""))}">\n` +
         printDescription(compositeToken.description) +
-        `    <item name="android:fontFamily">${
-          options.fontFamilies[compositeToken.original.value.fontFamily]
-        }</item>\n` +
+        `    <item name="android:fontFamily">${compositeToken.original.value.fontFamily}</item>\n` +
         `    <item name="android:textSize">@dimen/${changeCase.snakeCase(compositeToken.name.replace("font_android_", ""))}</item>\n` +
         `    <item name="android:lineHeight">${compositeToken.original.value.lineHeight}sp</item>\n` +
         `    <item name="android:letterSpacing">${letterSpacingToFloat(
