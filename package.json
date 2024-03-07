@@ -54,6 +54,7 @@
     "svelte-check": "3.6.6",
     "svelte-loader": "3.1.9",
     "svelte2tsx": "0.7.3",
+    "svg2vectordrawable": "^2.9.1",
     "svgo": "3.0.2",
     "ts-jest": "29.0.5"
   },
@@ -79,6 +80,7 @@
     "skiafy-icons": "node ./src/scripts/gen-skia-icons.js",
     "check": "svelte-check --compiler-warnings a11y-click-events-have-key-events:ignore,a11y-no-static-element-interactions:ignore",
     "transform-tokens": "node ./src/tokens/transformTokens.js && tsc -p ./tsconfig-tokens.json",
+    "s2v": "mkdir -p ./tokens/android/drawable && npx s2v -f ./icons -o ./tokens/android/drawable",
     "test": "jest tests --coverage=false",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
