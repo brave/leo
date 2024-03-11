@@ -1,1 +1,2 @@
-module.exports = (token) => (token.attributes.category === 'font' && token.attributes.type === 'android')
+module.exports = (token) =>
+  token.attributes.category === 'font' && token.attributes.type === 'android'

@@ -119,26 +119,27 @@ module.exports = {
       transformGroup: 'android',
       buildPath: 'tokens/android/',
       files: [
-      {
-        destination: 'values/styles.xml',
-        filter: 'android/filterFontStyle',
-        format: 'android/formatFontStyle'
-      },
-      {
-        destination: 'values/dimens.xml',
-        filter: 'android/filterFontStyle',
-        format: 'android/formatDimenStyle'
-      },
-      {
-        destination: 'values/colors.xml',
-        filter: 'android/filterLightColor',
-        format: 'android/formatColorStyle'
-      },
-      {
-        destination: 'values-night/colors.xml',
-        filter: 'android/filterDarkColor',
-        format: 'android/formatColorStyle'
-      }]
+        {
+          destination: 'values/styles.xml',
+          filter: 'android/filterFontStyle',
+          format: 'android/formatFontStyle'
+        },
+        {
+          destination: 'values/dimens.xml',
+          filter: 'android/filterFontStyle',
+          format: 'android/formatDimenStyle'
+        },
+        {
+          destination: 'values/colors.xml',
+          filter: 'android/filterLightColor',
+          format: 'android/formatColorStyle'
+        },
+        {
+          destination: 'values-night/colors.xml',
+          filter: 'android/filterDarkColor',
+          format: 'android/formatColorStyle'
+        }
+      ]
     }
   }
 }

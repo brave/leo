@@ -1,5 +1,3 @@
-const {
-  matchDarkThemeToken
-} = require('../../common/tokenFilters')
+const { matchDarkThemeToken } = require('../../common/tokenFilters')
 
-module.exports = (token) =>matchDarkThemeToken(token)
+module.exports = (token) => matchDarkThemeToken(token)

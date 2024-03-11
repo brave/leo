@@ -5,9 +5,9 @@ module.exports = {
   },
   transformer: function (token) {
     return token.name
-    .replace('color_light_','')
-    .replace('color_dark_','')
-    .replace('color_legacy_light_','')
-    .replace('color_legacy_dark_','')
+      .replace('color_light_', '')
+      .replace('color_dark_', '')
+      .replace('color_legacy_light_', '')
+      .replace('color_legacy_dark_', '')
   }
 }
