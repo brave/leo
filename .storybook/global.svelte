@@ -16,7 +16,6 @@
 <div class="layout" data-theme={theme}>
   <div class="theme-toggle-container">
     <Toggle
-      size="small"
       checked={theme === 'light'}
       on:change={() => {
         theme = theme === 'light' ? 'dark' : 'light'
