@@ -93,6 +93,7 @@
   }
 
   .leo-toggle {
+    --icon-size: var(--leo-icon-size, 20px);
     --width: var(--leo-toggle-width, 52px);
     --height: var(--leo-toggle-height, 32px);
     --padding: var(--leo-toggle-padding, var(--leo-spacing-s));
@@ -120,6 +121,7 @@
     &.size-small {
       --width: 40px;
       --height: 24px;
+      --icon-size: var(--leo-icon-size, 12px);
     }
 
     @theme (dark) {
@@ -139,10 +141,12 @@
   }
 
   .leo-toggle button {
+    --leo-icon-size: var(--icon-size);
+
     all: unset;
     background: var(--unchecked-color);
-    width: var(--width);
-    height: var(--height);
+    width: calc(var(--width) - 2 * var(--padding));
+    height: calc(var(--height) - 2 * var(--padding));
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
     transition: background-color 0.2s ease-in-out;
