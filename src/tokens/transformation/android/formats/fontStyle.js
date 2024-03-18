@@ -33,11 +33,11 @@ module.exports = ({ dictionary, platform, options = {}, file }) => {
         '  </style>\n'
       )
     })
-  return (
-    '<?xml version="1.0" encoding="utf-8"?>\n' +
-    fileHeader({ file, commentStyle: 'xml' }) +
-    '\n<resources>\n' +
-    fontStyles.join('\n') +
-    '\n</resources>\n'
-  )
+  return `
+<?xml version="1.0" encoding="utf-8"?>
+${fileHeader({ file, commentStyle: 'xml' })}
+<resources>
+  ${fontStyles.join('\n')}
+</resources>
+`
 }
