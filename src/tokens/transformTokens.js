@@ -6,6 +6,7 @@ require('./transformation/web')
 require('./transformation/tailwind')
 require('./transformation/skia')
 require('./transformation/ios')
+require('./transformation/android')
 
 // Register Global transforms
 StyleDictionary.registerTransform({
