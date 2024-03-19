@@ -16,6 +16,9 @@ export default {
     '@storybook/preset-scss',
     '@storybook/addon-storysource'
   ],
+  core: {
+    disableTelemetry: true
+  },
   framework: { name: '@storybook/svelte-vite' },
   staticDirs: [
     {
