@@ -21,7 +21,7 @@ export default {
   },
   framework: { name: '@storybook/svelte-vite' },
   docs: {
-    autodocs: true,
+    autodocs: true
   },
   staticDirs: [
     {
