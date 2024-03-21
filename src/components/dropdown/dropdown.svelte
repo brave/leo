@@ -17,10 +17,9 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
-  import Menu from '../menu/menu.svelte'
+  import Menu, { type CloseEvent, type SelectItemEventDetail } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
 
   export let placeholder = ''
@@ -32,17 +31,12 @@
   export let showErrors = false
   export let positionStrategy: Strategy = 'absolute'
 
-  let dispatch = createEventDispatcher<{
-    change: { value: string }
-  }>()
+  export let onChange: (detail: SelectItemEventDetail) => void = undefined
+  export let onClose: CloseEvent = undefined
 
   let isOpen = false
   let button: HTMLButtonElement
   let dropdown: HTMLDivElement
-
-  function onItemSelect(e: CustomEvent) {
-    dispatch('change', e.detail)
-  }
 
   function onClick(e) {
     e.preventDefault()
@@ -91,13 +85,13 @@
     {positionStrategy}
     bind:isOpen
     bind:currentValue={value}
-    on:select-item={onItemSelect}
-    on:close={(e) => {
+    onSelectItem={onChange}
+    onClose={(e) => {
       // Note: We cancel the |close| event if it was the dropdown that we
       // clicked on, as that already toggles the dropdown. If we do both, the
       // dropdown will instantly close and reopen.
-      if (e.detail.originalEvent.composedPath().includes(dropdown)) {
-        e.preventDefault()
+      if (e.originalEvent.composedPath().includes(dropdown) || onClose?.(e) === false) {
+        return false
       } else if ('key' in e) {
         // Focus the button when closing the dropdown via keyboard, so keyboard
         // users can reopen it.

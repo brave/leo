@@ -6,11 +6,10 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
   export let checked: boolean = false
   export let disabled: boolean = false
   export let size: Sizes = 'medium'
+  export let onChange: (detail: { checked: boolean }) => void = undefined
 
   let thumb: HTMLElement
 
@@ -18,14 +17,10 @@
   let dragStartX: number | undefined
   let dragOffsetX: number = 0
 
-  const dispatch = createEventDispatcher<{
-    change: { checked: boolean }
-  }>()
-
-  const onChange = (newValue?: boolean) => {
+  const change = (newValue?: boolean) => {
     if (newValue === undefined) newValue = !checked
     checked = newValue
-    dispatch('change', { checked })
+    onChange?.({ checked: newValue })
   }
 </script>
 
@@ -36,10 +31,10 @@
 
     // If we didn't drag just toggle the state.
     if (dragOffsetX === 0) {
-      onChange()
+      change()
     } else {
-      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !checked) onChange(true)
-      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && checked) onChange(false)
+      if (dragOffsetX > DRAG_AMOUNT_TO_CHANGE && !checked) change(true)
+      if (dragOffsetX < -DRAG_AMOUNT_TO_CHANGE && checked) change(false)
     }
 
     // Reset the dragging attributes.
@@ -68,7 +63,7 @@
         return
       }
 
-      onChange()
+      change()
     }}
     {disabled}
     role="switch"
@@ -82,7 +77,7 @@
       style:--drag-offset="{dragOffsetX}px"
     >
       <div class="on-icon">
-        <slot name="on-icon"/>
+        <slot name="on-icon" />
       </div>
     </div>
   </button>
@@ -171,7 +166,8 @@
     }
 
     &:focus-visible:not(:disabled) {
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      box-shadow:
+        0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
     }
 
@@ -200,12 +196,16 @@
       aspect-ratio: 1/1;
       background: white;
       border-radius: var(--leo-radius-full);
-      transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+      transition:
+        transform 0.2s ease-in-out,
+        color 0.2s ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
 
       &.dragging {
-        transition: transform 0s ease-in-out, color 0.2s ease-in-out;
+        transition:
+          transform 0s ease-in-out,
+          color 0.2s ease-in-out;
       }
 
       display: flex;

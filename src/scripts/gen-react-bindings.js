@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
 const path = require('path')
-const { getSvelteFiles } = require('./common')
+const { getSvelteFiles, componentDetails } = require('./common')
 
 const REACT_BINDINGS_DIRECTORY = 'react/'
 fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
@@ -8,49 +8,7 @@ fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 const COMPONENT_PREFIX = 'leo'
 const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
-const getEventsTypeDefinition = (
-  componentName,
-  componentEventNames,
-  svelteFilePath
-) => `
-export type ${componentName}EventProps = EventProps<{
-${componentEventNames
-  .map(
-    ({ eventName, detailType }) =>
-      `  ${eventName}?: (event: ${detailType}) => void`
-  )
-  .join(';\n')}
-}>
-`
 
-const findEventsTypeDefinition = async (svelteFilePath, componentName) => {
-  const pathToType = path.join(
-    __dirname,
-    '../../',
-    'types',
-    path.relative('./', svelteFilePath + '.d.ts')
-  )
-  const fileContents = await fs.readFile(pathToType)
-
-  const typeRegex = /\s+([a-zA-Z0-9]+): (CustomEvent<((.|\n)*?)>)/gm
-
-  const componentEventNames = [
-    ...fileContents.toString().matchAll(typeRegex)
-  ].map((match) => ({
-    eventName: `on${match[1]}`,
-    detailType: match[2]
-  }))
-
-  if (componentEventNames.length > 0) {
-    return getEventsTypeDefinition(
-      componentName,
-      componentEventNames,
-      svelteFilePath
-    )
-  }
-
-  return ''
-}
 
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)
@@ -92,15 +50,7 @@ const getReactFileContents = async (svelteFilePath) => {
     path.resolve(svelteFilePath, '../')
   )
 
-  const fileName = path.basename(svelteFilePath)
-  const extension = path.extname(fileName)
-  const fileNameWithoutExtension = fileName.substring(
-    0,
-    fileName.length - extension.length
-  )
-  const componentName =
-    fileNameWithoutExtension[0].toUpperCase() +
-    fileNameWithoutExtension.substring(1)
+  const { componentName, fileNameWithoutExtension, fileName } = componentDetails(svelteFilePath)
   const generics = await getComponentGenerics(svelteFilePath, componentName)
   const eventTypeDefinition = await findEventsTypeDefinition(
     svelteFilePath,

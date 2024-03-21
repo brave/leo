@@ -12,8 +12,6 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
   import { fade } from 'svelte/transition'
 
   import Icon from '../icon/icon.svelte'
@@ -22,14 +20,10 @@
   export let isDisabled = false
   export let size: Sizes = 'normal'
 
-  const dispatch = createEventDispatcher<{
-    change: { checked: boolean }
-  }>()
+  export let onChange: (detail: { checked: boolean }) => void = undefined
 
   function change(e) {
-    dispatch('change', {
-      checked: e.target.checked
-    })
+    onChange?.(e.target.checked)
   }
 </script>
 
@@ -140,7 +134,8 @@
     }
 
     &:has(input:focus-visible) {
-      box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+      box-shadow:
+        0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
         0px 0px 4px 2px #423eee;
       border-radius: var(--focus-border-radius);
     }

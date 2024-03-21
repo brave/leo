@@ -14,22 +14,19 @@
 </script>
 
 <script lang="ts">
-  import Menu from '../menu/menu.svelte'
-  import { createEventDispatcher } from 'svelte'
+  import Menu, { type CloseEvent } from '../menu/menu.svelte'
 
   export let isOpen: boolean | undefined = undefined
+  export let onClose: CloseEvent = undefined
+  export let onChange: (e: { isOpen: boolean }) => void = undefined
 
   let anchor: HTMLElement
-
-  const dispatch = createEventDispatcher<{
-    change: { isOpen: boolean }
-  }>()
 
   $: controlled = isOpen !== undefined
 
   const toggle = () => {
     if (!controlled) isOpen = !isOpen
-    dispatch('change', { isOpen })
+    onChange?.({ isOpen })
   }
 </script>
 
@@ -46,7 +43,7 @@
     bind:isOpen
     target={anchor}
     on:click={toggle}
-    on:close
+    onClose={onClose}
   >
     <slot />
   </Menu>

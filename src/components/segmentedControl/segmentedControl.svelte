@@ -4,19 +4,18 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
 
   export let value: string | undefined = undefined
   export let size: Size = 'default'
+
+  export let onChange: (detail: { value: string | undefined }) => void =
+    undefined
 
   let segmentedControl: HTMLDivElement
 
   let pillWidth: number
   let pillPosition: number
-
-  const dispatch = createEventDispatcher<{
-    'change': { value: string | undefined }
-  }>()
 
   function getValue(e: Element) {
     // If the option element doesn't have a value, fallback to using the text
@@ -57,7 +56,7 @@
 
     value = getValue(item)
 
-    dispatch('change', { value })
+    onChange?.({ value })
   }
 
   let pill: HTMLDivElement
