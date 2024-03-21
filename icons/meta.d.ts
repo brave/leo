@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1709541422767,
+  "updatedAt": 1711008506229,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -217,6 +217,7 @@ const meta = {
     "brave-icon-search-color": "brave-icon-search-color",
     "brave-icon-search": "brave-icon-search",
     "brave-player": "brave-player",
+    "brave-search-big-color": "brave-search-big-color",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
     "briefcase": "briefcase",
@@ -733,6 +734,7 @@ const meta = {
     "download-item-downloaded": "download-item-downloaded",
     "download-off": "download-off",
     "download": "download",
+    "drag-alternative": "drag-alternative",
     "drag": "drag",
     "drgn-color": "drgn-color",
     "drop-color": "drop-color",
@@ -812,6 +814,7 @@ const meta = {
     "exmo-color": "exmo-color",
     "exp-color": "exp-color",
     "expand": "expand",
+    "eye-dropper": "eye-dropper",
     "eye-off": "eye-off",
     "eye-on": "eye-on",
     "face-happy": "face-happy",
@@ -1922,6 +1925,7 @@ const meta = {
     "window-tabs-horizontal": "window-tabs-horizontal",
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
     "window-tabs": "window-tabs",
+    "window-urlbar": "window-urlbar",
     "window-user": "window-user",
     "window": "window",
     "windows-open": "windows-open",
