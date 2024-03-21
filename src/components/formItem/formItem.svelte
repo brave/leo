@@ -42,6 +42,10 @@
     '--leo-control-label-gap': {
       description: 'The gap between the label and the control',
       type: 'string'
+    },
+    '--leo-control-focus-effect': {
+      description: 'The focus effect for the control',
+      type: 'string'
     }
   }
 </script>
@@ -109,8 +113,10 @@
 
     --shadow: ;
     --shadow-hover: var(--shadow);
-    --shadow-focus: 0px 0px 0px 2px #423eee,
-      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
+    --shadow-focus: var(
+      --leo-control-focus-effect,
+      var(--leo-effect-focus-state)
+    );
 
     --border-color: transparent;
     --border-color-hover: transparent;
