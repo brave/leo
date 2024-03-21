@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1709541422767,
+  "updatedAt": 1711008506229,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -215,6 +215,7 @@ export default {
     "brave-icon-search-color": "brave-icon-search-color",
     "brave-icon-search": "brave-icon-search",
     "brave-player": "brave-player",
+    "brave-search-big-color": "brave-search-big-color",
     "brave-wallet-add": "brave-wallet-add",
     "brd-color": "brd-color",
     "briefcase": "briefcase",
@@ -731,6 +732,7 @@ export default {
     "download-item-downloaded": "download-item-downloaded",
     "download-off": "download-off",
     "download": "download",
+    "drag-alternative": "drag-alternative",
     "drag": "drag",
     "drgn-color": "drgn-color",
     "drop-color": "drop-color",
@@ -810,6 +812,7 @@ export default {
     "exmo-color": "exmo-color",
     "exp-color": "exp-color",
     "expand": "expand",
+    "eye-dropper": "eye-dropper",
     "eye-off": "eye-off",
     "eye-on": "eye-on",
     "face-happy": "face-happy",
@@ -1920,6 +1923,7 @@ export default {
     "window-tabs-horizontal": "window-tabs-horizontal",
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
     "window-tabs": "window-tabs",
+    "window-urlbar": "window-urlbar",
     "window-user": "window-user",
     "window": "window",
     "windows-open": "windows-open",
