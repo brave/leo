@@ -1,5 +1,10 @@
 <script lang="ts">
-  import type { Middleware, Placement, Strategy } from '@floating-ui/dom'
+  import type {
+    Middleware,
+    MiddlewareData,
+    Placement,
+    Strategy
+  } from '@floating-ui/dom'
   import {
     computePosition,
     flip as flipMiddleWare,
@@ -7,19 +12,17 @@
     offset as offsetMiddleware,
     autoUpdate as createAutoUpdater
   } from '@floating-ui/dom'
-  import { createEventDispatcher } from 'svelte'
-
   /** The default placement of the floating element
    * https://floating-ui.com/docs/tutorial#placements */
   export let placement: Placement = 'top'
 
   /** The fallback placements of the floating element in case initial doesn't fit
    * https://floating-ui.com/docs/flip#fallbackplacements */
-   export let fallbackPlacements: Placement[] = undefined;
+  export let fallbackPlacements: Placement[] = undefined
 
-   /** The CSS position property to use for floating element
+  /** The CSS position property to use for floating element
    * https://floating-ui.com/docs/computeposition#strategy */
-   export let positionStrategy: Strategy = 'absolute';
+  export let positionStrategy: Strategy = 'absolute'
 
   /** Whether the element should flip to the opposite placement if it doesn't fit
    * https://floating-ui.com/docs/flip */
@@ -44,7 +47,16 @@
    */
   export let autoUpdate: boolean = false
 
-  let dispatch = createEventDispatcher()
+  /** Called when the position of the floating element has been recomputed */
+  export let onComputedPosition: (computed: {
+    x: number
+    y: number
+    middlewareData: MiddlewareData
+    placement: Placement
+  }) => void = undefined
+
+  export let onMouseEnter: (e: MouseEvent) => void = undefined
+  export let onMouseLeave: (e: MouseEvent) => void = undefined
 
   let floating: HTMLElement
 
@@ -97,7 +109,7 @@
         delete middlewareData.arrow
       }
 
-      dispatch('computedposition', {
+      onComputedPosition?.({
         x,
         y,
         middlewareData,
@@ -119,7 +131,13 @@
   }
 </script>
 
-<div on:mouseenter on:mouseleave bind:this={floating} class="leo-floating" style:position={positionStrategy}>
+<div
+  on:mouseenter={onMouseEnter}
+  on:mouseleave={onMouseLeave}
+  bind:this={floating}
+  class="leo-floating"
+  style:position={positionStrategy}
+>
   <slot />
 </div>
 

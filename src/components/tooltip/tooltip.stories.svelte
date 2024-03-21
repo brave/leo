@@ -87,7 +87,7 @@
           kind="plain-faint"
           fab
           size="tiny"
-          on:click={() => (showTooltip = false)}
+          onClick={() => (showTooltip = false)}
         >
           <Icon name="close" />
         </Button>

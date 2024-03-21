@@ -1,23 +1,18 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
   export let animateSlide: boolean = true
   export let dotCount: number
   export let activeDot: number = 0
   export let getDotLabel: (dot: number, isCurrent: boolean) => string = (dot) =>
     `Page ${dot + 1}`
   export let label: string = 'Pagination'
+  export let onChange: (detail: { activeDot: number }) => void
 
   let container: HTMLElement
   $: container?.setAttribute('style', `--current-dot: ${activeDot}`)
   $: dots = Array.from(Array(dotCount), (_, i) => i)
 
-  let dispatch = createEventDispatcher<{
-    change: { activeDot: number }
-  }>()
-
   function setActive(dot: number) {
-    dispatch('change', { activeDot: dot })
+    onChange?.({ activeDot: dot })
   }
 </script>
 
@@ -95,7 +90,8 @@
       }
 
       &:has(.dot.active:focus-visible) .active-dot {
-        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+        box-shadow:
+          0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
     }
@@ -109,8 +105,8 @@
       height: var(--dot-size);
       border-radius: var(--dot-size);
       background: var(--dot-color);
-      transition: background-color var(--transition-duration)
-          var(--transition-easing),
+      transition:
+        background-color var(--transition-duration) var(--transition-easing),
         box-shadow var(--transition-duration) var(--transition-easing);
 
       &:hover {
@@ -118,7 +114,8 @@
       }
 
       &:focus-visible:not(.active) {
-        box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
+        box-shadow:
+          0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
           0px 0px 4px 2px #423eee;
       }
     }
@@ -130,12 +127,14 @@
     .active-dot {
       cursor: pointer;
       position: absolute;
-      transition: transform var(--transition-duration) var(--transition-easing),
+      transition:
+        transform var(--transition-duration) var(--transition-easing),
         box-shadow var(--transition-duration) var(--transition-easing);
       transform: translate(
         calc(
-          (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
-            var(--dot-spacing) / 2
+          (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) - var(
+              --dot-spacing
+            ) / 2
         ),
         0
       );
