@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
   import type { IconName } from '../../../icons/meta'
   import Icon from '../icon/icon.svelte'
@@ -24,6 +24,7 @@
   type CommonProps = {
     outsideList?: boolean
     icon?: IconName
+    onClick?: () => void
   }
 
   type ButtonProps = CommonProps &
@@ -48,19 +49,13 @@
   export let isCurrent: boolean = window.location.pathname === href
   export let outsideList: boolean = false
 
+  export let onClick: () => void = undefined
+
   const checkIfCurrent = () => {
     isCurrent = window.location.pathname === href || window.location.hash === href;
   }
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
-
-  /**
-   * Optional click handler
-   */
-  const dispatch = createEventDispatcher()
-  function onClick(event) {
-    dispatch('click', event)
-  }
 
   onMount(() => {
     ;['pushState', 'replaceState'].forEach((name) => {

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
   import type * as Props from './props'
   import ProgressRing from '../progress/progressRing.svelte'
@@ -25,6 +24,7 @@
     kind?: Props.ButtonKind
     size?: Props.ButtonSize
     fab?: boolean
+    onClick?: () => void
   }
 
   type ButtonProps = CommonProps &
@@ -48,18 +48,9 @@
   export let href: Href = undefined
   export let fab = false
 
+  export let onClick: () => void = undefined
+
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
-
-  const dispatch = createEventDispatcher<{
-    click: {}
-  }>()
-
-  /**
-   * Optional click handler
-   */
-  function onClick(event) {
-    dispatch('click', event)
-  }
 </script>
 
 <svelte:element

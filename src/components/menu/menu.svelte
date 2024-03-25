@@ -18,40 +18,36 @@
       }
     }
   }
-</script>
 
-<script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-  import clickOutside from '../../svelteDirectives/clickOutside'
-  import Floating from '../floating/floating.svelte'
-  import { size as sizeMiddleware, type Strategy } from '@floating-ui/dom'
-
-  interface CloseEventDetail {
+  export interface CloseEventDetail {
     originalEvent: Event
     reason: 'select' | 'blur' | 'cancel'
   }
 
-  interface SelectItemEventDetail {
+  export interface SelectItemEventDetail {
     value: string | undefined
   }
+</script>
+
+<script lang="ts">
+  import clickOutside from '../../svelteDirectives/clickOutside'
+  import Floating from '../floating/floating.svelte'
+  import { size as sizeMiddleware, type Strategy } from '@floating-ui/dom'
 
   export let isOpen = false
   export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
   export let positionStrategy: Strategy = 'absolute'
-
-  const dispatch = createEventDispatcher<{
-    close: CloseEventDetail
-    'select-item': SelectItemEventDetail
-  }>()
+  export let onClose: (detail: CloseEventDetail) => boolean | undefined | void =
+    undefined
+  export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
 
   function dispatchClose(
     originalEvent: Event,
     reason: CloseEventDetail['reason']
   ) {
-    // Allow event handlers to cancel closing the dropdown by calling
-    // |preventDefault|.
-    if (dispatch('close', { originalEvent, reason }, { cancelable: true })) {
+    // Allow event handlers to cancel closing the dropdown by returning false
+    if (onClose?.({ originalEvent, reason }) !== false) {
       isOpen = false
     }
   }
@@ -122,7 +118,7 @@
     if (item.tagName === 'LEO-OPTION') {
       currentValue = getValue(item)
 
-      dispatch('select-item', {
+      onSelectItem?.({
         value: currentValue
       })
     }
