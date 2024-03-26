@@ -44,6 +44,14 @@
 </nav>
 
 <style lang="scss">
+  :global(:root) {
+    --leo-direction: 1;
+  }
+
+  :global(:root[dir=rtl]) {
+    --leo-direction: -1;
+  }
+
   :host {
     display: block;
   }
@@ -134,8 +142,8 @@
         box-shadow var(--transition-duration) var(--transition-easing);
       transform: translate(
         calc(
-          (var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
-            var(--dot-spacing) / 2
+          ((var(--dot-size) + var(--dot-spacing)) * var(--current-dot) -
+            var(--dot-spacing) / 2) * var(--leo-direction)
         ),
         0
       );

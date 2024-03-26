@@ -49,6 +49,8 @@
   on:mousemove={(e) => {
     if (dragStartX === undefined) return
     dragOffsetX = e.clientX - dragStartX
+
+    if (document.documentElement.dir === 'rtl') dragOffsetX = -dragOffsetX
   }}
 />
 
@@ -88,6 +90,14 @@
 </label>
 
 <style lang="scss">
+  :global(:root) {
+    --leo-direction: 1;
+  }
+
+  :global(:root[dir=rtl]) {
+    --leo-direction: -1;
+  }
+
   :host {
     display: inline-block;
   }
@@ -178,13 +188,13 @@
       --checked-thumb-offset: calc(var(--width) - var(--height));
       --thumb-offset: var(--unchecked-thumb-offset);
       --drag-offset: 0;
-      --thumb-position: max(
+      --thumb-position: calc(max(
         min(
           var(--checked-thumb-offset),
           calc(var(--thumb-offset) + var(--drag-offset))
         ),
         var(--unchecked-thumb-offset)
-      );
+      ) * var(--leo-direction));
 
       height: 100%;
       aspect-ratio: 1/1;
