@@ -39,6 +39,11 @@
       description: 'The icon color used by the control',
       control: 'color'
     },
+    '--leo-control-color': {
+      description:
+        'The color of the control, which other colors are derived from',
+      control: 'color'
+    },
     '--leo-control-label-gap': {
       description: 'The gap between the label and the control',
       type: 'string'
@@ -73,9 +78,11 @@
   class:error
   aria-disabled={disabled}
 >
-  <div class="label-row">
-    <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
-  </div>
+  {#if $$slots.label}
+    <div class="label-row">
+      <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
+    </div>
+  {/if}
   <div class="control" bind:this={controlElement}>
     <div class="container">
       <div class="extra-content">
@@ -92,6 +99,10 @@
 
 <style lang="scss">
   .leo-control {
+    --foreground: var(--leo-color-text-primary);
+    --base: var(--leo-color-container-background);
+    --primary: var(--leo-control-color, var(--base));
+
     --radius: var(--leo-control-radius, var(--leo-spacing-m));
     --padding: var(--leo-control-padding, 9px);
     --font: var(--leo-control-font, var(--leo-font-default-regular));
@@ -107,7 +118,7 @@
     --color-hover: var(--color);
     --color-focus: var(--color);
 
-    --background: var(--leo-color-container-background);
+    --background: var(--primary);
     --background-hover: var(--background);
     --background-focus: var(--background);
 
@@ -172,14 +183,31 @@
     --shadow-hover: var(--leo-effect-elevation-01);
     --border-color: transparent;
     --border-color-hover: var(--leo-color-divider-subtle);
+
+    @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --background: color-mix(in srgb, var(--primary), var(--foreground) 10%);
+      --border-color-hover: color-mix(
+        in srgb,
+        var(--primary),
+        var(--foreground) 20%
+      );
+    }
   }
 
   .leo-control.isOutline {
-    --background: var(--leo-color-container-background);
-    --background-hover: var();
+    --background: var(--primary);
     --border-color: var(--leo-color-divider-strong);
     --border-color-hover: var(--leo-color-gray-30);
     --shadow-hover: var(--leo-effect-elevation-01);
+
+    @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --border-color: color-mix(in srgb, var(--primary), var(--foreground) 25%);
+      --border-color-hover: color-mix(
+        in srgb,
+        var(--primary),
+        var(--foreground) 40%
+      );
+    }
   }
 
   .leo-control.error {
@@ -219,7 +247,7 @@
     flex-direction: row;
     gap: var(--leo-spacing-s);
 
-    &:empty {
+    &:empty, &:has(slot:empty) {
       display: none;
     }
   }
