@@ -182,7 +182,7 @@
 
   .leo-dialog .close-button {
     position: absolute;
-    right: var(--leo-spacing-xl);
+    inset-inline-end: var(--leo-spacing-xl);
     top: var(--leo-spacing-xl);
   }
 
