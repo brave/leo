@@ -1077,7 +1077,7 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0.39,
-          "lineHeight": 21,
+          "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -2865,7 +2865,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 21
+          "value": 20
         },
         "paragraphIndent": {
           "type": "dimension",
