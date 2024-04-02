@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   export type InputEventDetail = {
     innerEvent: Event & { target: HTMLInputElement }
-    value?: string | number | boolean
+    value: string
     valueAsNumber: number
     valueAsDate: Date | null
   }
@@ -39,6 +39,16 @@
     size?: Size
     showErrors?: boolean
     mode?: Mode | undefined
+    onChange?: InputEvent
+    onInput?: InputEvent
+    onFocus?: InputEvent
+    onPaste?: InputEvent
+    onBlur?: InputEvent
+    onKeyDown?: InputEvent
+    onKeyPress?: InputEvent
+    onKeyUp?: InputEvent
+    onFocusIn?: InputEvent
+    onFocusOut?: InputEvent
   }
 
   /**
@@ -103,7 +113,7 @@
     return (e: Event) => {
       const event = e as Event & { target: HTMLInputElement }
       handler?.({
-        value: value,
+        value: value?.toString() ?? '',
         valueAsDate: event.target.valueAsDate,
         valueAsNumber: event.target.valueAsNumber,
         innerEvent: event

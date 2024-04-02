@@ -25,7 +25,7 @@ function App() {
           Edit the button text:
           <Input
             value={buttonText}
-            onInput={(e) => setButtonText(e.detail.value)}
+            onInput={(e) => setButtonText(e.value)}
           />
         </label>
         {buttonText && (

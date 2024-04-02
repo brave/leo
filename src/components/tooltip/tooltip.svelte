@@ -31,7 +31,7 @@
   export let fadeDuration: number = 0
 
   /** Called when the visibility of the tooltip is changed */
-  export let onVisibilityChange: (detail: { visible: boolean }) => void
+  export let onVisibilityChange: (detail: { visible: boolean }) => void = undefined
 
   // Note: This is separate from the |visible| flag because we want to handle
   // controlled and uncontrolled states for this component.

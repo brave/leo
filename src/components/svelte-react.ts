@@ -86,6 +86,7 @@ const useEventHandlers = (props: any) => {
         // Cleanup
         for (const [event, listener] of Object.entries(lastValue.current)) {
           oldValue.removeEventListener(event, listener)
+          delete lastValue.current[event]
         }
       }
       return el
