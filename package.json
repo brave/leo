@@ -79,7 +79,7 @@
     "update-icons": "node ./src/scripts/update-icons.js",
     "skiafy-icons": "node ./src/scripts/gen-skia-icons.js",
     "android-icons": "node ./src/scripts/gen-android-icons.js",
-    "check": "svelte-check --compiler-warnings a11y-click-events-have-key-events:ignore,a11y-no-static-element-interactions:ignore",
+    "check": "svelte-check --compiler-warnings a11y-click-events-have-key-events:ignore,a11y-no-static-element-interactions:ignore && node ./src/scripts/audit-events.js",
     "transform-tokens": "node ./src/tokens/transformTokens.js && tsc -p ./tsconfig-tokens.json",
     "test": "jest tests --coverage=false",
     "storybook": "storybook dev -p 6006",
