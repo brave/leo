@@ -28,8 +28,13 @@ async function* walk(dir, skip) {
 function componentDetails(svelteComponentPath) {
   const fileName = path.basename(svelteComponentPath)
   const extension = path.extname(svelteComponentPath)
-  const fileNameWithoutExtension = fileName.substring(0, fileName.length - extension.length)
-  const componentName = fileNameWithoutExtension[0].toUpperCase() + fileNameWithoutExtension.substring(1)
+  const fileNameWithoutExtension = fileName.substring(
+    0,
+    fileName.length - extension.length
+  )
+  const componentName =
+    fileNameWithoutExtension[0].toUpperCase() +
+    fileNameWithoutExtension.substring(1)
 
   return {
     fileName,

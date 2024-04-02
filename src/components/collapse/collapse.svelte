@@ -8,7 +8,7 @@
   // normally. However, if they didn't pass anything in, we just emit an event
   // and let the parent handle toggling the flag.
   export let isOpen: boolean | undefined
-  export let onToggle: (detail: { open: boolean }) => void
+  export let onToggle: (detail: { open: boolean }) => void = undefined
   $: isOpenInternal = isOpen ?? false
 
   const toggle = (e: Event) => {

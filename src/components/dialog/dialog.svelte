@@ -15,6 +15,8 @@
     escapeCloses?: boolean
     backdropClickCloses?: boolean
     animate?: boolean
+    onClose?: () => void
+    onBack?: () => void
   }
 
   export let isOpen = false

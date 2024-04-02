@@ -6,7 +6,7 @@ import {
   useCallback,
   type ForwardedRef,
   type PropsWithChildren,
-  useState,
+  useState
 } from 'react'
 import type { SvelteComponent } from 'svelte'
 

@@ -6,7 +6,7 @@ interface Options {
 }
 
 // Regex for testing if a prop is an event
-const eventRegex =  /^on[A-Z]/
+const eventRegex = /^on[A-Z]/
 
 // Properties with these types should be reflected to attributes.
 const reflectToAttributes = new Set(['string', 'number', 'boolean'])
@@ -70,8 +70,12 @@ export default function registerWebComponent(
 
   // All the event names in our Svelte component. Maps the HTMLEventType string
   // to the Svelte prop (i.e. click: onClick).
-  const events = props.filter(c => eventRegex.test(c))
-    .reduce((prev, next) => ({ ...prev, [next.substring(2).toLowerCase()]: next }), {})
+  const events = props
+    .filter((c) => eventRegex.test(c))
+    .reduce(
+      (prev, next) => ({ ...prev, [next.substring(2).toLowerCase()]: next }),
+      {}
+    )
 
   // A mapping of 'attributename' to 'propertyName', as attributes are
   // lowercase, while Svelte components are generally 'camelCase'.
@@ -248,7 +252,11 @@ export default function registerWebComponent(
       this[prop] = boolProperties.has(prop) ? newValue !== null : newValue
     }
 
-    addEventListener(event: string, callback: Callback, options?: boolean | AddEventListenerOptions) {
+    addEventListener(
+      event: string,
+      callback: Callback,
+      options?: boolean | AddEventListenerOptions
+    ) {
       const svelteEvent = events[event]
       if (svelteEvent) {
         this[svelteEvent] = callback
@@ -258,7 +266,11 @@ export default function registerWebComponent(
       super.addEventListener(event, callback, options)
     }
 
-    removeEventListener(event: string, callback: Callback, options?: boolean | EventListenerOptions) {
+    removeEventListener(
+      event: string,
+      callback: Callback,
+      options?: boolean | EventListenerOptions
+    ) {
       const svelteEvent = events[event]
       if (svelteEvent && this[svelteEvent] === callback) {
         this[svelteEvent] = undefined

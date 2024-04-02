@@ -8,8 +8,6 @@ fs.mkdir(REACT_BINDINGS_DIRECTORY, { recursive: true })
 const COMPONENT_PREFIX = 'leo'
 const SVELTE_REACT_WRAPPER_PATH = '../shared/svelte-react.js'
 
-
-
 const getComponentGenerics = async (svelteFilePath, componentName) => {
   const relativePath = path.relative('./src/components', svelteFilePath)
   const typingsPath =
@@ -50,7 +48,8 @@ const getReactFileContents = async (svelteFilePath) => {
     path.resolve(svelteFilePath, '../')
   )
 
-  const { componentName, fileNameWithoutExtension, fileName } = componentDetails(svelteFilePath)
+  const { componentName, fileNameWithoutExtension, fileName } =
+    componentDetails(svelteFilePath)
   const generics = await getComponentGenerics(svelteFilePath, componentName)
   const hasGenerics = !!generics.length
   const funcConstraints = hasGenerics
