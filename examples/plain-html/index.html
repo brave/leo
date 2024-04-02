@@ -103,9 +103,9 @@
 
     function updateSelectedOption(e) {
       for (const radio of radios)
-        radio.currentValue = e.detail.value
-      dropdown.value = e.detail.value
-      dropdownSelected.innerText = countries[e.detail.value]
+        radio.currentValue = e.value
+      dropdown.value = e.value
+      dropdownSelected.innerText = countries[e.value]
     }
     dropdown.addEventListener('change', updateSelectedOption)
     for (const radio of radios)
@@ -144,7 +144,7 @@
     toggleButton.addEventListener('click', toggled)
     collapse.addEventListener('toggle', toggled)
     input.addEventListener('input', e => {
-      toggleButton.textContent = e.detail.value
+      toggleButton.textContent = e.value
     })
 
     dialogButton.addEventListener('click', () => {
@@ -157,13 +157,13 @@
     const searchDropdown = document.querySelector('#searchPicker')
     searchDropdown.addEventListener('change', e => {
       const valueIcon = searchDropdown.querySelector('[slot=value] leo-icon')
-      const icon = searchDropdown.querySelector(`leo-option[value=${e.detail.value}] leo-icon`)
+      const icon = searchDropdown.querySelector(`leo-option[value=${e.value}] leo-icon`)
 
       valueIcon.name = icon.name
     })
 
     segmentedControl.addEventListener('change', (e) => {
-      document.querySelector('leo-alert').mode = e.detail.value;
+      document.querySelector('leo-alert').mode = e.value;
     })
   </script>
   <div class="component-container">
