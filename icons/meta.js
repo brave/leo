@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1711008506229,
+  "updatedAt": 1712131741592,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -52,7 +52,7 @@ export default {
     "anchorprotocol-color": "anchorprotocol-color",
     "ankr-color": "ankr-color",
     "ant-color": "ant-color",
-    "antena": "antena",
+    "antenna": "antenna",
     "anthropic-color": "anthropic-color",
     "apenft-color": "apenft-color",
     "apex-color": "apex-color",
@@ -1791,6 +1791,7 @@ export default {
     "trash": "trash",
     "trezor-color": "trezor-color",
     "trig-color": "trig-color",
+    "tripadvisor-color": "tripadvisor-color",
     "tron-color": "tron-color",
     "trophy": "trophy",
     "trtl-color": "trtl-color",
