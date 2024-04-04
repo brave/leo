@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
   import { scale } from 'svelte/transition'
   import Button from '../button/button.svelte'
@@ -16,6 +15,8 @@
     escapeCloses?: boolean
     backdropClickCloses?: boolean
     animate?: boolean
+    onClose?: () => void
+    onBack?: () => void
   }
 
   export let isOpen = false
@@ -27,10 +28,8 @@
   export let backdropClickCloses = true
   export let animate = true
 
-  const dispatch = createEventDispatcher<{
-    close: undefined
-    back: undefined
-  }>()
+  export let onClose: () => void = undefined
+  export let onBack: () => void = undefined
 
   let dialog: HTMLDialogElement
   $: {
@@ -41,7 +40,7 @@
 
   const close = () => {
     isOpen = false
-    dispatch('close')
+    onClose?.()
   }
 </script>
 
@@ -77,7 +76,7 @@
           <div class="title-row">
             {#if showBack}
               <div class="back-button">
-                <Button kind="plain-faint" on:click={() => dispatch('back')}>
+                <Button kind="plain-faint" on:click={onBack}>
                   <Icon name="arrow-left" />
                 </Button>
               </div>

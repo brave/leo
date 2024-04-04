@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
   import Icon from '../icon/icon.svelte'
 
   export let title = ''
@@ -9,11 +8,8 @@
   // normally. However, if they didn't pass anything in, we just emit an event
   // and let the parent handle toggling the flag.
   export let isOpen: boolean | undefined
+  export let onToggle: (detail: { open: boolean }) => void = undefined
   $: isOpenInternal = isOpen ?? false
-
-  const dispatcher = createEventDispatcher<{
-    toggle: { open: boolean }
-  }>()
 
   const toggle = (e: Event) => {
     e.preventDefault()
@@ -21,7 +17,7 @@
     // We only support toggling if this component isn't being 'controlled'
     const toggleTo = !isOpenInternal
     if (isOpen === undefined) isOpenInternal = toggleTo
-    dispatcher('toggle', { open: toggleTo })
+    onToggle?.({ open: toggleTo })
   }
 </script>
 
@@ -111,7 +107,8 @@
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     border: 1px solid var(--border-color);
-    transition: box-shadow var(--transition-duration) ease-in-out,
+    transition:
+      box-shadow var(--transition-duration) ease-in-out,
       background-color var(--transition-duration) ease-in-out;
 
     &:has(summary:hover) {
@@ -175,7 +172,8 @@
 
   .arrow {
     color: var(--icon-color);
-    transition: transform var(--transition-duration) ease-in-out,
+    transition:
+      transform var(--transition-duration) ease-in-out,
       color var(--transition-duration) ease-in-out;
     transform: rotate(360deg);
   }

@@ -6,7 +6,6 @@
 <script lang="ts">
   import type { MiddlewareData, Placement, Strategy } from '@floating-ui/dom'
   import { arrow as arrowMiddleware } from '@floating-ui/dom'
-  import { createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
   import Floating from '../floating/floating.svelte'
 
@@ -31,13 +30,12 @@
    * after the users mouse leaves the trigger or tooltip*/
   export let fadeDuration: number = 0
 
+  /** Called when the visibility of the tooltip is changed */
+  export let onVisibilityChange: (detail: { visible: boolean }) => void = undefined
+
   // Note: This is separate from the |visible| flag because we want to handle
   // controlled and uncontrolled states for this component.
   $: visibleInternal = visible ?? false
-
-  const dispatch = createEventDispatcher<{
-    visibilitychange: { visible: boolean }
-  }>()
 
   let tooltip: HTMLElement
   let arrow: HTMLElement
@@ -45,18 +43,18 @@
 
   let arrowPlacement: string | undefined = undefined
 
-  function positionArrow(
-    e: CustomEvent<{ middlewareData: MiddlewareData; placement: Placement }>
-  ) {
+  function positionArrow(e: {
+    middlewareData: MiddlewareData
+    placement: Placement
+  }) {
+    if (!e.middlewareData.arrow) return
 
-    if(!e.detail.middlewareData.arrow) return
-
-    const { x: arrowX, y: arrowY } = e.detail.middlewareData.arrow as {
+    const { x: arrowX, y: arrowY } = e.middlewareData.arrow as {
       x?: number
       y?: number
     }
 
-    arrowPlacement = e.detail.placement.split('-')[0]
+    arrowPlacement = e.placement.split('-')[0]
 
     const staticSide =
       {
@@ -112,7 +110,7 @@
     if (newVisible === visible) return
 
     if (visible === undefined) visibleInternal = newVisible
-    dispatch('visibilitychange', { visible: newVisible })
+    onVisibilityChange?.({ visible: newVisible })
   }
 </script>
 
@@ -127,10 +125,10 @@
       {positionStrategy}
       {shift}
       autoUpdate
-      on:mouseleave={handleTooltipMouseleave}
-      on:mouseenter={() => (tooltipHovered = true)}
+      onMouseLeave={handleTooltipMouseleave}
+      onMouseEnter={() => (tooltipHovered = true)}
       middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
-      on:computedposition={positionArrow}
+      onComputedPosition={positionArrow}
     >
       <div
         class="tooltip"

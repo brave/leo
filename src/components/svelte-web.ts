@@ -5,6 +5,9 @@ interface Options {
   name: string
 }
 
+// Regex for testing if a prop is an event
+const eventRegex = /^on[A-Z]/
+
 // Properties with these types should be reflected to attributes.
 const reflectToAttributes = new Set(['string', 'number', 'boolean'])
 
@@ -65,6 +68,15 @@ export default function registerWebComponent(
   // The names of all properties on our Svelte component.
   const props = Object.keys(c.$$.props)
 
+  // All the event names in our Svelte component. Maps the HTMLEventType string
+  // to the Svelte prop (i.e. click: onClick).
+  const events = props
+    .filter((c) => eventRegex.test(c))
+    .reduce(
+      (prev, next) => ({ ...prev, [next.substring(2).toLowerCase()]: next }),
+      {}
+    )
+
   // A mapping of 'attributename' to 'propertyName', as attributes are
   // lowercase, while Svelte components are generally 'camelCase'.
   const attributePropMap = props.reduce((prev, next) => {
@@ -82,31 +94,21 @@ export default function registerWebComponent(
 
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
-    // A map of event name to a map of an event listener to a function for
-    // removing that listener.
-    // For example
-    // this.listenerRemovers.get('click').get(myCallback)() will remove
-    // |myCallback| from the click event.
-    listenerRemovers = new Map<string, Map<Callback, Callback>>()
     #component: SvelteComponent
     get component() {
       return this.#component
     }
 
     set component(value) {
-      // We need to make sure that when we recreate the component (as in the
-      // case of slots changing) that we copy over all of the event listeners.
       this.#component = value
-      for (const [event, listeners] of this.listenerRemovers.entries()) {
-        for (const [callback, remover] of listeners.entries()) {
-          remover()
-          this.addEventListener(event, callback)
-        }
-      }
     }
 
     static get observedAttributes() {
       return attributes
+    }
+
+    static get events() {
+      return Object.keys(events)
     }
 
     constructor() {
@@ -250,27 +252,32 @@ export default function registerWebComponent(
       this[prop] = boolProperties.has(prop) ? newValue !== null : newValue
     }
 
-    addEventListener(event: string, callback: Callback) {
-      if (!this.listenerRemovers.has(event)) {
-        this.listenerRemovers.set(event, new Map())
+    addEventListener(
+      event: string,
+      callback: Callback,
+      options?: boolean | AddEventListenerOptions
+    ) {
+      const svelteEvent = events[event]
+      if (svelteEvent) {
+        this[svelteEvent] = callback
+        return
       }
 
-      // Note: $on(<event>, callback) returns a function which removes the
-      // callback from the event.
-      const remover = this.component.$on(event, callback)
-
-      // We store the remover so we can look it up in |removeEventListener|.
-      this.listenerRemovers.get(event).set(callback, remover)
-
-      // TODO: We could do this but we don't know if the event is handled
-      // by the component or not so we could end up triggering the event
-      // twice (i.e. in the case of 'click')
-      // super.addEventListener(event, callback, options)
+      super.addEventListener(event, callback, options)
     }
 
-    removeEventListener(event: string, callback: Callback) {
-      this.listenerRemovers.get(event)?.get(callback)?.()
-      this.listenerRemovers.get(event)?.delete(callback)
+    removeEventListener(
+      event: string,
+      callback: Callback,
+      options?: boolean | EventListenerOptions
+    ) {
+      const svelteEvent = events[event]
+      if (svelteEvent && this[svelteEvent] === callback) {
+        this[svelteEvent] = undefined
+        return
+      }
+
+      super.removeEventListener(event, callback, options)
     }
   }
 

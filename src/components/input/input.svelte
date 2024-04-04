@@ -1,9 +1,19 @@
+<script lang="ts" context="module">
+  export type InputEventDetail = {
+    innerEvent: Event & { target: HTMLInputElement }
+    value: string
+    valueAsNumber: number
+    valueAsDate: Date | null
+  }
+
+  export type InputEvent = (detail: InputEventDetail) => void
+</script>
+
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
-  import { createEventDispatcher } from 'svelte'
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
   type LeoInputTypeAttribute =
@@ -29,6 +39,16 @@
     size?: Size
     showErrors?: boolean
     mode?: Mode | undefined
+    onChange?: InputEvent
+    onInput?: InputEvent
+    onFocus?: InputEvent
+    onPaste?: InputEvent
+    onBlur?: InputEvent
+    onKeyDown?: InputEvent
+    onKeyPress?: InputEvent
+    onKeyUp?: InputEvent
+    onFocusIn?: InputEvent
+    onFocusOut?: InputEvent
   }
 
   /**
@@ -75,36 +95,30 @@
    */
   export let placeholder = ''
 
-  type InputEventDetail = {
-    innerEvent: Event & { target: HTMLInputElement }
-    value: string
-    valueAsNumber: number
-    valueAsDate: number
-  }
-
   // Unfortunately, e.target isn't typed properly by Svelte's type definitions
   // in web components. This means we need to forward all the events we're
   // interested in manually, inside our own wrapper.
-  const dispatch = createEventDispatcher<{
-    change: InputEventDetail
-    input: InputEventDetail
-    focus: InputEventDetail
-    blur: InputEventDetail
-    keydown: InputEventDetail
-    keyup: InputEventDetail
-    keypress: InputEventDetail
-    focusin: InputEventDetail
-    focusout: InputEventDetail
-  }>()
+  export let onChange: InputEvent = undefined
+  export let onInput: InputEvent = undefined
+  export let onFocus: InputEvent = undefined
+  export let onBlur: InputEvent = undefined
+  export let onPaste: InputEvent = undefined
+  export let onKeyDown: InputEvent = undefined
+  export let onKeyUp: InputEvent = undefined
+  export let onKeyPress: InputEvent = undefined
+  export let onFocusIn: InputEvent = undefined
+  export let onFocusOut: InputEvent = undefined
 
-  function forwardEvent(e: Event) {
-    const event = e as Event & { target: HTMLInputElement }
-    dispatch(e.type as any, {
-      value,
-      valueAsDate: event.target.valueAsDate,
-      valueAsNumber: event.target.valueAsNumber,
-      innerEvent: event
-    })
+  function forward(handler: InputEvent) {
+    return (e: Event) => {
+      const event = e as Event & { target: HTMLInputElement }
+      handler?.({
+        value: value?.toString() ?? '',
+        valueAsDate: event.target.valueAsDate,
+        valueAsNumber: event.target.valueAsNumber,
+        innerEvent: event
+      })
+    }
   }
 
   const pickerIcons = {
@@ -115,7 +129,7 @@
   let input: HTMLInputElement | undefined = undefined
   let hasErrorsInternal = false
 
-  function onInput(e: Event & { currentTarget: HTMLInputElement }) {
+  function handleInput(e: Event & { currentTarget: HTMLInputElement }) {
     value = e.currentTarget['value']
     hasErrorsInternal = (required && !value) || !input?.checkValidity()
   }
@@ -138,17 +152,17 @@
       {value}
       {placeholder}
       bind:this={input}
-      on:change={forwardEvent}
-      on:input={onInput}
-      on:input={forwardEvent}
-      on:focus={forwardEvent}
-      on:paste={forwardEvent}
-      on:blur={forwardEvent}
-      on:keydown={forwardEvent}
-      on:keypress={forwardEvent}
-      on:keyup={forwardEvent}
-      on:focusin={forwardEvent}
-      on:focusout={forwardEvent}
+      on:input={handleInput}
+      on:change={forward(onChange)}
+      on:input={forward(onInput)}
+      on:focus={forward(onFocus)}
+      on:paste={forward(onPaste)}
+      on:blur={forward(onBlur)}
+      on:keydown={forward(onKeyDown)}
+      on:keypress={forward(onKeyPress)}
+      on:keyup={forward(onKeyUp)}
+      on:focusin={forward(onFocusIn)}
+      on:focusout={forward(onFocusOut)}
     />
     <div class="extra">
       <slot name="extra" />
