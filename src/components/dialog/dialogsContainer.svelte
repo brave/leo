@@ -5,7 +5,7 @@
 </script>
 
 {#each $dialogs as dialog}
-  <Dialog modal isOpen on:close={() => dialog.resolve()}>
+  <Dialog modal isOpen onClose={() => dialog.resolve()}>
     <div slot="title">{dialog.title}</div>
     {#if dialog.body}
       <div>{dialog.body}</div>
@@ -14,7 +14,7 @@
       {#each dialog.actions as action}
         <Button
           kind={action.kind}
-          on:click={() => dialog.resolve(action.result)}
+          onClick={() => dialog.resolve(action.result)}
         >
           {action.text}
         </Button>

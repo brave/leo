@@ -65,7 +65,7 @@
   >
     {#if showClose}
       <div class="close-button">
-        <Button kind="plain-faint" on:click={close}>
+        <Button kind="plain-faint" onClick={close}>
           <Icon name="close" />
         </Button>
       </div>
@@ -76,7 +76,7 @@
           <div class="title-row">
             {#if showBack}
               <div class="back-button">
-                <Button kind="plain-faint" on:click={onBack}>
+                <Button kind="plain-faint" onClick={onBack}>
                   <Icon name="arrow-left" />
                 </Button>
               </div>
