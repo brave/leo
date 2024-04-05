@@ -101,7 +101,7 @@
         </div>
         <svelte:fragment slot='content-after'>
           {#if alert.canDismiss}
-            <Button kind="plain-faint" fab on:click={() => alert.dismiss()}>
+            <Button kind="plain-faint" fab onClick={() => alert.dismiss()}>
               <Icon name="close" />
             </Button>
           {/if}
@@ -113,7 +113,7 @@
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
-              on:click={() => action.action(alert)}
+              onClick={() => action.action(alert)}
             >
               {#if action.icon && !action.text}
                 <Icon name={action.icon} />

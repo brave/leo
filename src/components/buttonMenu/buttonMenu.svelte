@@ -42,7 +42,6 @@
   <Menu
     bind:isOpen
     target={anchor}
-    on:click={toggle}
     onClose={onClose}
   >
     <slot />

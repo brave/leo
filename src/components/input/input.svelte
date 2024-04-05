@@ -170,7 +170,7 @@
   </div>
   <slot name="right-icon" slot="right-icon">
     {#if pickerIcons[type]}
-      <Button kind="plain-faint" on:click={() => input?.showPicker()}>
+      <Button kind="plain-faint" onClick={() => input?.showPicker()}>
         <Icon name={pickerIcons[type]} />
       </Button>
     {/if}

@@ -63,7 +63,7 @@
 />
 
 <Template let:args>
-  <NavDots {activeDot} on:change={handleChange} {...args} />
+  <NavDots {activeDot} onChange={handleChange} {...args} />
 </Template>
 
 <Story name="Slots">

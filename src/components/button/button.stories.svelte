@@ -37,7 +37,7 @@
 />
 
 <Template let:args>
-  <Button {...args} on:click={handleClick}>
+  <Button {...args} onClick={handleClick}>
     You clicked: {count}
   </Button>
 </Template>

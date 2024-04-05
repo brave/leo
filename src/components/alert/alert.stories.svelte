@@ -157,7 +157,7 @@
     <input type="checkbox" bind:checked={hasAction} />
   </label>
   <Button
-    on:click={() => {
+    onClick={() => {
       alertUser(args.mode, args.type)
     }}>Show Alert</Button
   >
