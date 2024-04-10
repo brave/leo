@@ -5,6 +5,7 @@ const {
   matchDarkThemeToken,
   matchLightThemeToken
 } = require('../common/tokenFilters')
+const { stripTokenPrefix, varDefFormat } = require('../../utils')
 
 module.exports = ({ dictionary, options, file }) => {
   const opts = options ?? {}
@@ -23,46 +24,42 @@ module.exports = ({ dictionary, options, file }) => {
     )
   }
 
-  // Note: replace strips out '-light-' and '-dark-' inside media queries
-  // Remove "desktop" for typography (which only appears in the :root non-media-query section)
-  return (
-    fileHeader({ file }) +
-    ':root {\n' +
+  const defaultVars = stripTokenPrefix(
     formattedVariables({
       format: 'css',
       dictionary: groupedTokens.rest,
       outputReferences
-    }).replace(/desktop-/gm, '') +
-    '\n}\n\n' +
-    '@media (prefers-color-scheme: light) {\n' +
-    ' :root {\n' +
-    formattedVariables({
-      format: 'css',
-      dictionary: groupedTokens.light,
-      outputReferences
-    }).replace(/-light-/gm, '-') +
-    '\n }\n}\n\n' +
-    '@media (prefers-color-scheme: dark) {\n' +
-    ' :root {\n' +
-    formattedVariables({
-      format: 'css',
-      dictionary: groupedTokens.dark,
-      outputReferences
-    }).replace(/-dark-/gm, '-') +
-    '\n }\n}\n\n' +
-    '[data-theme="light"] {\n' +
-    formattedVariables({
-      format: 'css',
-      dictionary: groupedTokens.light,
-      outputReferences
-    }).replace(/-light-/gm, '-') +
-    '\n}\n\n' +
-    '[data-theme="dark"] {\n' +
-    formattedVariables({
-      format: 'css',
-      dictionary: groupedTokens.dark,
-      outputReferences
-    }).replace(/-dark-/gm, '-') +
-    '\n}\n'
+    })
+  )
+
+  const lightVars = formattedVariables({
+    format: 'css',
+    dictionary: groupedTokens.light,
+    outputReferences
+  }).replace(/-light-/gm, '-')
+
+  const darkVars = formattedVariables({
+    format: 'css',
+    dictionary: groupedTokens.dark,
+    outputReferences
+  }).replace(/-dark-/gm, '-')
+
+  // prettier-ignore
+  return (
+    fileHeader({ file }) +
+    [
+      defaultVars && varDefFormat`:root {${defaultVars}}`,
+      lightVars && varDefFormat`@media (prefers-color-scheme: light) {
+ :root {${lightVars} }
+}`,
+      darkVars && varDefFormat`@media (prefers-color-scheme: dark) {
+ :root {${darkVars} }
+}`,
+      lightVars && varDefFormat`[data-theme="light"] {${lightVars}}`,
+      lightVars && varDefFormat`[data-theme="dark"] {${darkVars}}`,
+    ]
+      .filter((v) => !!v)
+      .join('\n\n') +
+    '\n'
   )
 }

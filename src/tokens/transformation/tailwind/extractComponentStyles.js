@@ -22,7 +22,7 @@ ${fnName}(${JSON.stringify(contents, null, 2)});
     )
   } catch (e) {
     if (e.code === 'ENOENT') {
-      await mkdir(dir)
+      await mkdir(dir, { recursive: true })
       await writePlugin(contents, name, dir)
     } else {
       console.error(e)

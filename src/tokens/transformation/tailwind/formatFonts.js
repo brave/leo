@@ -1,3 +1,5 @@
+const { stripTokenPrefix } = require('../../utils')
+
 module.exports = ({ dictionary }) => {
   const fontClasses = new Map()
 
@@ -14,8 +16,8 @@ module.exports = ({ dictionary }) => {
       fontClass += `-${t.attributes.state}`
     }
 
-    // Remove "desktop" for typography
-    fontClass = fontClass.replace(/desktop-/gm, '')
+    // Remove "desktop" and "browser" for typography
+    fontClass = stripTokenPrefix(fontClass)
 
     fontClasses.set(fontClass, t.value)
   })

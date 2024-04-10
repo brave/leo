@@ -6,11 +6,12 @@ const staticFiles = readdirSync(staticFilesPath)
 
 module.exports = {
   do: function (dictionary, config) {
-    cpSync(staticFilesPath, config.buildPath, { recursive: true })
+    const targetDir = join(config.buildPath, config.preset)
+    cpSync(staticFilesPath, targetDir, { recursive: true })
   },
   undo: function (dictionary, config) {
     staticFiles.forEach((file) => {
-      const target = join(config.buildPath, file)
+      const target = join(config.buildPath, config.preset, file)
 
       if (statSync(target).isDirectory()) {
         rmdir(target)

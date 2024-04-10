@@ -6,7 +6,7 @@ const { walk } = require('./common')
 
 const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
 const ROOT_FOLDER = path.join(__dirname, '..', '..')
-const CSS_VARIABLES = path.join(ROOT_FOLDER, 'tokens', 'css', 'variables.css')
+const CSS_VARIABLES_FOLDER = path.join(ROOT_FOLDER, 'tokens', 'css')
 const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
 const DEFAULT_EXTENSIONS_TO_CHECK = [
   '.css',
@@ -92,7 +92,7 @@ const getAvailableTokens = async () => {
   ]
 
   // Include all variables from out tokens file
-  for (const v of await extractTokensFromFile(CSS_VARIABLES))
+  for (const v of await extractTokensFromFolder(CSS_VARIABLES_FOLDER, ['.css']))
     available.add(v.token)
 
   // Include all variables used to customize components

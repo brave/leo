@@ -47,10 +47,17 @@ jobs:
       - name: Diff Tokens
         id: diff-tokens
         run: |
-          curl -fsSL -o ./tokens/css/variables.old.css https://nala.bravesoftware.com/css/variables.css
-          # Note: Diff has exit code 1 for differences, and there are always
-          # some differences because the file contains a timestamp.
-          diff -u ./tokens/css/variables.old.css ./tokens/css/variables.css > ./tokens/css/variables.diff || :
+          for filePath in ./tokens/css/variables*.css; do
+            fileName=${filePath/.\/tokens\/css\//}
+            reqStatus=$(curl -sL --write-out "%{http_code}" -o ./tokens/css/${fileName/%.css/.old.css} https://nala.bravesoftware.com/css/$fileName)
+            # Note: Diff has exit code 1 for differences, and there are always
+            # some differences because the file contains a timestamp.
+            if [ "$reqStatus" -eq 200 ]; then
+              diff -u ./tokens/css/${fileName/%.css/.old.css} ./tokens/css/$fileName >> ./tokens/css/${fileName/%.css/.diff} || :
+            else
+              diff -u /dev/null ./tokens/css/$fileName >> ./tokens/css/${fileName/%.css/.diff} || :
+            fi
+          done
 
       - name: Check Types
         id: check-types
@@ -76,4 +83,5 @@ jobs:
           if-no-files-found: error
           path: |
             ./storybook-static
-            ./tokens/css/variables.diff
+            ./tokens/css/variables*.diff
+            ./tokens/css/file-sizes.diff
