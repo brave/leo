@@ -1,4 +1,5 @@
 const merge = require('lodash.merge')
+const { readdirSync } = require('fs')
 
 /**
  * Removes a key and puts the children of that key in the key's parent
@@ -49,7 +50,34 @@ function applyToTokens(root, type, apply) {
   }
 }
 
+/**
+ * Removes layer prefixes from token paths
+ * @param {string} tokenPath
+ */
+function stripTokenPrefix(tokenPath) {
+  const tokenPrefixes = ['desktop', 'browser']
+  const pattern = new RegExp(`(${tokenPrefixes.join('|')})-`, 'gmi')
+  return tokenPath.replace(pattern, '')
+}
+
+/**
+ * This is a tagged template literal to format variable
+ * definitions, like:
+ * @media (prefers-color-scheme: light) {
+ *   :root {
+ *     --leo-elevation-xl: 36px;
+ *     --leo-elevation-l: 24px;
+ *    ...
+ *   }
+ * }
+ */
+function varDefFormat(strings, vars) {
+  return [strings[0], vars, strings[1]].join('\n')
+}
+
 module.exports = {
   removeKeyFromObject,
-  applyToTokens
+  applyToTokens,
+  stripTokenPrefix,
+  varDefFormat
 }

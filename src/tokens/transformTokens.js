@@ -1,5 +1,5 @@
 const StyleDictionary = require('style-dictionary')
-const baseConfig = require('./config')
+const getConfig = require('./config')
 
 // Register transforms
 require('./transformation/web')
@@ -20,6 +20,27 @@ StyleDictionary.registerTransform({
   }
 })
 
-const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
+/**
+ * Some platforms don't have distinct layers, so we bundle
+ * all of the relevant tokens together in one.
+ */
+for (const platform of ['android', 'ios', 'skia']) {
+  const StyleDictionaryExtended = StyleDictionary.extend(
+    getConfig(['universal', platform])
+  )
+  StyleDictionaryExtended.buildPlatform(platform)
+}
 
-StyleDictionaryExtended.buildAllPlatforms()
+/**
+ * The remaining platforms have distinct layers so we build
+ * them individually so that consuming applications can
+ * cascade them as appropriate.
+ */
+const layers = ['universal', 'browser']
+for (const layer of layers) {
+  const StyleDictionaryExtended = StyleDictionary.extend(getConfig([layer]))
+
+  StyleDictionaryExtended.buildPlatform('css')
+  StyleDictionaryExtended.buildPlatform('json-flat')
+  StyleDictionaryExtended.buildPlatform('tailwind')
+}

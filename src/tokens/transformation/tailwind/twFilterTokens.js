@@ -7,9 +7,5 @@ const acceptedTypes = [
   'custom-spacing',
   'number'
 ]
-const disallowedPathParts = ['android', 'ios']
 
-module.exports = (token) =>
-  acceptedTypes.includes(token.type) &&
-  !token.path.toString().includes('android') &&
-  !token.path.toString().match(new RegExp(`(${disallowedPathParts.join('|')})`))
+module.exports = (token) => acceptedTypes.includes(token.type)

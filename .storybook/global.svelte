@@ -4,6 +4,7 @@
   import Icon from '../src/components/icon/icon.svelte'
   import SegmentedControl from '../src/components/segmentedControl/segmentedControl.svelte'
   import '../tokens/css/variables.css'
+  import '../tokens/css/variables-browser.css'
 
   // Note: We set the data-theme attribute on the body and on our layout element
   // so that the theme is correctly set whether there are multiple stories on

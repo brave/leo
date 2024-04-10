@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf'
-  import { color as allColors } from '../../tokens/css'
+  import { color as allColors } from '../../tokens/css/variables'
   import ColorTokenSwatchGroup from '../storyHelpers/ColorTokenSwatchGroup.svelte'
 
   const {
@@ -43,7 +43,7 @@
   }
 </script>
 
-<Meta title="Tokens/Colors" />
+<Meta title="Tokens/Universal/Colors" />
 
 <Story name="All Colors">
   <ColorTokenSwatchGroup tokens={allColorsForDisplay} />

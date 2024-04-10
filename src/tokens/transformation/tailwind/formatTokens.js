@@ -147,14 +147,14 @@ module.exports = ({ dictionary }) => {
         pathParts
           .filter((v) => !['elevation', 'light', 'dark'].includes(v))
           .join('-')
-          .replace(' ', '-'),
+          .replaceAll(' ', '-'),
         formatBoxShadowVar(name, false)
       )
       dropShadows.set(
         pathParts
           .filter((v) => !['elevation', 'light', 'dark'].includes(v))
           .join('-')
-          .replace(' ', '-'),
+          .replaceAll(' ', '-'),
         formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true, false)
       )
     }
