@@ -52,9 +52,15 @@ jobs:
             reqStatus=$(curl -sL --write-out "%{http_code}" -o ./tokens/css/${fileName/%.css/.old.css} https://nala.bravesoftware.com/css/$fileName)
             # Note: Diff has exit code 1 for differences, and there are always
             # some differences because the file contains a timestamp.
+            if [ -s ./tokens/css/file-sizes.diff ]; then
+              echo "---" >> ./tokens/css/file-sizes.diff
+            fi
             if [ "$reqStatus" -eq 200 ]; then
+              echo "- $(stat -c "%n: %s bytes" ./tokens/css/${fileName/%.css/.old.css})" >> ./tokens/css/file-sizes.diff
+              echo "+ $(stat -c "%n: %s bytes" ./tokens/css/$fileName)" >> ./tokens/css/file-sizes.diff
               diff -u ./tokens/css/${fileName/%.css/.old.css} ./tokens/css/$fileName >> ./tokens/css/${fileName/%.css/.diff} || :
             else
+              echo "+ $(stat -c "%n: %s bytes" ./tokens/css/$fileName)" >> ./tokens/css/file-sizes.diff
               diff -u /dev/null ./tokens/css/$fileName >> ./tokens/css/${fileName/%.css/.diff} || :
             fi
           done
