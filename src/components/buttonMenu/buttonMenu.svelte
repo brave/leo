@@ -41,7 +41,7 @@
     <slot name="anchor-content">Click</slot>
   </div>
   <Menu
-    bind:isOpen
+    bind:isOpenInternal
     target={anchor}
     onClose={onClose}
   >
