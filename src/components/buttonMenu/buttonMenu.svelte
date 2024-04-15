@@ -22,11 +22,12 @@
 
   let anchor: HTMLElement
 
-  $: controlled = isOpen !== undefined
+  $: isOpenInternal = isOpen ?? false
 
   const toggle = () => {
-    if (!controlled) isOpen = !isOpen
-    onChange?.({ isOpen })
+    const toggleTo = !isOpenInternal
+    if (isOpen === undefined) isOpenInternal = toggleTo
+    onChange?.({ isOpen: toggleTo })
   }
 </script>
 
