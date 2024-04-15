@@ -20,6 +20,9 @@ export default {
     disableTelemetry: true
   },
   framework: { name: '@storybook/svelte-vite' },
+  docs: {
+    autodocs: true
+  },
   staticDirs: [
     {
       from: '../icons',
