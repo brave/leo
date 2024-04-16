@@ -173,7 +173,7 @@
   }
 
   function applySizeMiddleware({ rects, availableHeight }) {
-    popup.style.maxHeight = `calc(${availableHeight}px - var(--leo-spacing-xl))`
+    popup.style.maxHeight = `var(--leo-menu-max-height, calc(${availableHeight}px - var(--leo-spacing-xl)))`
   }
 
   let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
