@@ -16,7 +16,7 @@
     "@floating-ui/dom": "1.6.3",
     "@fontsource-variable/inter": "5.0.17",
     "@fontsource/manrope": "5.0.19",
-    "@fontsource/poppins": "5.0.12",
+    "@fontsource/poppins": "5.0.13",
     "@fontsource/roboto-flex": "5.0.14",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-typescript": "11.0.0",
