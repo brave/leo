@@ -51,7 +51,7 @@
     "storybook": "7.5.3",
     "style-dictionary": "3.7.2",
     "style-loader": "3.3.4",
-    "svelte-check": "3.6.8",
+    "svelte-check": "3.6.9",
     "svelte-loader": "3.1.9",
     "svelte2tsx": "0.7.6",
     "svg2vectordrawable": "2.9.1",
