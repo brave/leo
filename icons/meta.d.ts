@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1712682399121,
+  "updatedAt": 1713427765377,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -229,6 +229,8 @@ const meta = {
     "browser-bookmark-checked": "browser-bookmark-checked",
     "browser-bookmark-normal": "browser-bookmark-normal",
     "browser-bookmark-plural": "browser-bookmark-plural",
+    "browser-extensions-check": "browser-extensions-check",
+    "browser-extensions-remove": "browser-extensions-remove",
     "browser-extensions": "browser-extensions",
     "browser-forward": "browser-forward",
     "browser-home": "browser-home",
@@ -249,6 +251,9 @@ const meta = {
     "browser-refresh": "browser-refresh",
     "browser-sidebar-right": "browser-sidebar-right",
     "browser-sidebar": "browser-sidebar",
+    "browser-split-view-left": "browser-split-view-left",
+    "browser-split-view-right": "browser-split-view-right",
+    "browser-split-view-unsplit": "browser-split-view-unsplit",
     "browser-split-view": "browser-split-view",
     "brz-color": "brz-color",
     "bsd-color": "bsd-color",
@@ -1621,6 +1626,7 @@ const meta = {
     "shopping-tag": "shopping-tag",
     "shred-data-exclude": "shred-data-exclude",
     "shred-data-include": "shred-data-include",
+    "shred-data-protect": "shred-data-protect",
     "shred-data": "shred-data",
     "shuffle-off": "shuffle-off",
     "shuffle-on": "shuffle-on",
