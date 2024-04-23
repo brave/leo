@@ -21,10 +21,9 @@ function App() {
     <div className={styles['App']} data-theme="dark">
       <header className={styles['App-header']}>
         <h1>A React App</h1>
-        <label>
+        <Input value={buttonText} onInput={(e: any) => setButtonText(e.value)}>
           Edit the button text:
-          <Input value={buttonText} onInput={(e) => setButtonText(e.value)} />
-        </label>
+        </Input>
         {buttonText && (
           <LeoButton
             className={spinning ? 'spin' : ''}
