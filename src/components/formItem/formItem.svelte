@@ -247,7 +247,7 @@
     flex-direction: row;
     gap: var(--leo-spacing-s);
 
-    &:empty, &:has(slot:empty) {
+    &:empty, &:has(::slotted(*):empty) {
       display: none;
     }
   }
