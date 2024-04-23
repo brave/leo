@@ -54,10 +54,10 @@ jobs:
           aws configure set default.s3.max_concurrent_requests 200
           aws configure set default.s3.max_queue_size 10000
           if [[ -z ${PR_NUMBER} ]]; then # non PR
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*'
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*' --exclude '*.old.css' --exclude '*.diff'
           else
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/commit-${HEAD_SHA}/" --delete
-            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/" --delete --exclude 'commit-*/*'
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/commit-${HEAD_SHA}/" --delete --exclude '*.old.css' --exclude '*.diff'
+            aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/" --delete --exclude 'commit-*/*' --exclude '*.old.css' --exclude '*.diff'
           fi
           echo "::endgroup::"
 
