@@ -254,16 +254,20 @@ export default function registerWebComponent(
 
     addEventListener(
       event: string,
-      callback: Callback,
+      eventHandler: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions
     ) {
       const svelteEvent = events[event]
       if (svelteEvent) {
+        const callback =
+          'handleEvent' in eventHandler
+            ? eventHandler.handleEvent.bind(eventHandler)
+            : eventHandler
         this[svelteEvent] = callback
         return
       }
 
-      super.addEventListener(event, callback, options)
+      super.addEventListener(event, eventHandler, options)
     }
 
     removeEventListener(
