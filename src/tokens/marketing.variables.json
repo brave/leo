@@ -1,0 +1,318 @@
+{
+  "---desktop": {
+    "font-size": {
+      "primary": {
+        "hero": {
+          "type": "number",
+          "value": 120
+        },
+        "h1": {
+          "type": "number",
+          "value": 80
+        },
+        "h2": {
+          "type": "number",
+          "value": 70
+        },
+        "h3": {
+          "type": "number",
+          "value": 40
+        },
+        "h4": {
+          "type": "number",
+          "value": 30
+        },
+        "h5": {
+          "type": "number",
+          "value": 24
+        },
+        "default": {
+          "type": "number",
+          "value": 20
+        },
+        "small": {
+          "type": "number",
+          "value": 15
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      },
+      "secondary": {
+        "hero": {
+          "type": "number",
+          "value": 120
+        },
+        "h1": {
+          "type": "number",
+          "value": 100
+        },
+        "h2": {
+          "type": "number",
+          "value": 80
+        },
+        "h3": {
+          "type": "number",
+          "value": 70
+        },
+        "h4": {
+          "type": "number",
+          "value": 40
+        },
+        "h5": {
+          "type": "number",
+          "value": 30
+        },
+        "default": {
+          "type": "number",
+          "value": 20
+        },
+        "small": {
+          "type": "number",
+          "value": 15
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      }
+    },
+    "line-height": {
+      "primary": {
+        "hero": {
+          "type": "number",
+          "value": 130
+        },
+        "h1": {
+          "type": "number",
+          "value": 100
+        },
+        "h2": {
+          "type": "number",
+          "value": 90
+        },
+        "h3": {
+          "type": "number",
+          "value": 44
+        },
+        "h4": {
+          "type": "number",
+          "value": 40
+        },
+        "h5": {
+          "type": "number",
+          "value": 30
+        },
+        "default": {
+          "type": "number",
+          "value": 30
+        },
+        "small": {
+          "type": "number",
+          "value": 20
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 30
+        }
+      },
+      "secondary": {
+        "hero": {
+          "type": "number",
+          "value": 103
+        },
+        "h1": {
+          "type": "number",
+          "value": 95
+        },
+        "h2": {
+          "type": "number",
+          "value": 75
+        },
+        "h3": {
+          "type": "number",
+          "value": 75
+        },
+        "h4": {
+          "type": "number",
+          "value": 45
+        },
+        "h5": {
+          "type": "number",
+          "value": 40
+        },
+        "default": {
+          "type": "number",
+          "value": 20
+        },
+        "small": {
+          "type": "number",
+          "value": 15
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      }
+    }
+  },
+  "---mobile": {
+    "font-size": {
+      "primary": {
+        "hero": {
+          "type": "number",
+          "value": 54
+        },
+        "h1": {
+          "type": "number",
+          "value": 36
+        },
+        "h2": {
+          "type": "number",
+          "value": 30
+        },
+        "h3": {
+          "type": "number",
+          "value": 24
+        },
+        "h4": {
+          "type": "number",
+          "value": 20
+        },
+        "h5": {
+          "type": "number",
+          "value": 18
+        },
+        "default": {
+          "type": "number",
+          "value": 18
+        },
+        "small": {
+          "type": "number",
+          "value": 18
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      },
+      "secondary": {
+        "hero": {
+          "type": "number",
+          "value": 54
+        },
+        "h1": {
+          "type": "number",
+          "value": 36
+        },
+        "h2": {
+          "type": "number",
+          "value": 36
+        },
+        "h3": {
+          "type": "number",
+          "value": 30
+        },
+        "h4": {
+          "type": "number",
+          "value": 24
+        },
+        "h5": {
+          "type": "number",
+          "value": 20
+        },
+        "default": {
+          "type": "number",
+          "value": 18
+        },
+        "small": {
+          "type": "number",
+          "value": 18
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      }
+    },
+    "line-height": {
+      "primary": {
+        "hero": {
+          "type": "number",
+          "value": 65
+        },
+        "h1": {
+          "type": "number",
+          "value": 45
+        },
+        "h2": {
+          "type": "number",
+          "value": 40
+        },
+        "h3": {
+          "type": "number",
+          "value": 35
+        },
+        "h4": {
+          "type": "number",
+          "value": 25
+        },
+        "h5": {
+          "type": "number",
+          "value": 20
+        },
+        "default": {
+          "type": "number",
+          "value": 28
+        },
+        "small": {
+          "type": "number",
+          "value": 20
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 28
+        }
+      },
+      "secondary": {
+        "hero": {
+          "type": "number",
+          "value": 50
+        },
+        "h1": {
+          "type": "number",
+          "value": 45
+        },
+        "h2": {
+          "type": "number",
+          "value": 40
+        },
+        "h3": {
+          "type": "number",
+          "value": 30
+        },
+        "h4": {
+          "type": "number",
+          "value": 30
+        },
+        "h5": {
+          "type": "number",
+          "value": 25
+        },
+        "default": {
+          "type": "number",
+          "value": 18
+        },
+        "small": {
+          "type": "number",
+          "value": 18
+        },
+        "blockquote": {
+          "type": "number",
+          "value": 20
+        }
+      }
+    }
+  }
+}
