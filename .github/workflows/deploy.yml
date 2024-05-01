@@ -97,5 +97,5 @@ jobs:
             ${diff}
             \`\`\`
 
-            </details>`)}`
+            </details>`).join('\n')}`
             })
