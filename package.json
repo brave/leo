@@ -19,7 +19,7 @@
     "@fontsource/poppins": "5.0.14",
     "@fontsource/roboto-flex": "5.0.15",
     "@rollup/plugin-node-resolve": "15.0.1",
-    "@rollup/plugin-typescript": "11.0.0",
+    "@rollup/plugin-typescript": "11.1.6",
     "@storybook/addon-actions": "7.5.3",
     "@storybook/addon-essentials": "7.5.3",
     "@storybook/addon-interactions": "7.5.3",
