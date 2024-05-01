@@ -67,12 +67,14 @@ jobs:
         with:
           script: |
             const fs = require('fs/promises')
-            const fileSizes = await fs.readFile('./artifact/tokens/css/file-sizes.diff', 'utf-8')
-            const diffFilePaths = (await fs.readdir('./artifact/tokens/css')).filter(f => f.startsWith('variables') && f.endsWith('.diff'))
+            const path = require('path')
+            const cssDiffDir = './artifact/tokens/css'
+            const fileSizes = await fs.readFile(path.join(cssDiffDir, 'file-sizes.diff'), 'utf-8')
+            const diffFilePaths = (await fs.readdir(cssDiffDir)).filter(f => f.startsWith('variables') && f.endsWith('.diff'))
             const diffs = await Promise.all(diffFilePaths.map(async f => {
               return {
                 file: f,
-                diff: await fs.readFile(f, 'utf-8')
+                diff: await fs.readFile(path.join(cssDiffDir, f), 'utf-8')
               }
             }))
             await github.rest.issues.createComment({
