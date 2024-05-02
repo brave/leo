@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1713427765377,
+  "updatedAt": 1714637320375,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -63,6 +63,7 @@ const meta = {
     "appcoins-color": "appcoins-color",
     "appearance": "appearance",
     "apple-color": "apple-color",
+    "arb-color": "arb-color",
     "ardr-color": "ardr-color",
     "arg-color": "arg-color",
     "ark-color": "ark-color",
@@ -865,6 +866,7 @@ const meta = {
     "files-few": "files-few",
     "files-many": "files-many",
     "filter-settings": "filter-settings",
+    "filter": "filter",
     "finger-double-tap": "finger-double-tap",
     "finger-drag": "finger-drag",
     "finger-pointer": "finger-pointer",
@@ -936,7 +938,6 @@ const meta = {
     "fullscreen-off": "fullscreen-off",
     "fullscreen-on": "fullscreen-on",
     "fun-color": "fun-color",
-    "funnel": "funnel",
     "gala-color": "gala-color",
     "game-color": "game-color",
     "gas-color": "gas-color",
@@ -1238,6 +1239,7 @@ const meta = {
     "nebl-color": "nebl-color",
     "nem-color": "nem-color",
     "neo-color": "neo-color",
+    "neon-color": "neon-color",
     "neos-color": "neos-color",
     "nervos-color": "nervos-color",
     "network-laptop": "network-laptop",
