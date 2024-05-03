@@ -17,7 +17,7 @@
   <span class="copy"><Icon name="copy" /></span>
   <span class="copied">
     <Label color="green" mode="loud">
-      <Icon name="check-circle-filled" />
+      <Icon name="check-circle-filled" slot="icon-after" />
       Copied!
     </Label>
   </span>
