@@ -31,7 +31,8 @@
   export let fadeDuration: number = 0
 
   /** Called when the visibility of the tooltip is changed */
-  export let onVisibilityChange: (detail: { visible: boolean }) => void = undefined
+  export let onVisibilityChange: (detail: { visible: boolean }) => void =
+    undefined
 
   // Note: This is separate from the |visible| flag because we want to handle
   // controlled and uncontrolled states for this component.
@@ -130,21 +131,23 @@
       middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
       onComputedPosition={positionArrow}
     >
-      <div
-        class="tooltip"
-        class:hero={mode === 'hero'}
-        class:info={mode === 'info'}
-        class:mini={mode === 'mini'}
-        transition:fade={{ duration: fadeDuration }}
-        class:default={mode === 'default' || !mode}
-        hidden={!visibleInternal}
-        bind:this={tooltip}
-      >
-        <slot name="content">
-          {text}
-        </slot>
-        <div class={`arrow ${arrowPlacement}`} bind:this={arrow} />
-      </div>
+      {#if $$slots.content || text}
+        <div
+          class="tooltip"
+          class:hero={mode === 'hero'}
+          class:info={mode === 'info'}
+          class:mini={mode === 'mini'}
+          transition:fade={{ duration: fadeDuration }}
+          class:default={mode === 'default' || !mode}
+          hidden={!visibleInternal}
+          bind:this={tooltip}
+        >
+          <slot name="content">
+            {text}
+          </slot>
+          <div class={`arrow ${arrowPlacement}`} bind:this={arrow} />
+        </div>
+      {/if}
     </Floating>
   {/key}
 
