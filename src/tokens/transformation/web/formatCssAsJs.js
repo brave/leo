@@ -2,6 +2,7 @@ const camelCase = require('lodash.camelcase')
 const fileHeader = require('../web/fileHeader')
 const { createPropertyNameFormatter } = require('./createPropertyFormatter')
 const { TinyColor } = require('@ctrl/tinycolor')
+const { tokenPrefixesToStrip } = require('../../utils')
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
@@ -109,10 +110,9 @@ module.exports = ({ dictionary, file }) => {
   // The `desktop` and `browser` segments are ignored in our property names, so make sure we
   // remove it from the properties, or this won't match up with the actual CSS
   // variables.
-  const properties = removeSegmentFromNameInAllTokens(
-    removeSegmentFromNameInAllTokens(dictionary.properties, 'desktop'),
-    'browser'
-  )
+  const properties = tokenPrefixesToStrip.reduce((allTokens, nameSegment) => {
+    return removeSegmentFromNameInAllTokens(allTokens, nameSegment)
+  }, dictionary.properties)
   const themeObject = formattedVariables(properties)
 
   // Separate out each main property, to allow for tree shaking and easy type-to-complete

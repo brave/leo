@@ -54,9 +54,9 @@ function applyToTokens(root, type, apply) {
  * Removes layer prefixes from token paths
  * @param {string} tokenPath
  */
+const tokenPrefixesToStrip = ['desktop', 'browser']
 function stripTokenPrefix(tokenPath) {
-  const tokenPrefixes = ['desktop', 'browser']
-  const pattern = new RegExp(`(${tokenPrefixes.join('|')})-`, 'gmi')
+  const pattern = new RegExp(`(${tokenPrefixesToStrip.join('|')})-`, 'gmi')
   return tokenPath.replace(pattern, '')
 }
 
@@ -79,5 +79,6 @@ module.exports = {
   removeKeyFromObject,
   applyToTokens,
   stripTokenPrefix,
+  tokenPrefixesToStrip,
   varDefFormat
 }
