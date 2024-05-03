@@ -19,15 +19,19 @@ module.exports = ({ dictionary, platform, options = {}, file }) => {
           compositeToken.name.replace('font_android_', '')
         )}">\n` +
         printDescription(compositeToken.description) +
-        `    <item name="android:fontFamily">${compositeToken.original.value.fontFamily}</item>\n` +
+        `    <item name="android:fontFamily">@font/${changeCase.snakeCase(
+          compositeToken.original.value.fontFamily
+        )}</item>\n` +
         `    <item name="android:textSize">@dimen/${changeCase.snakeCase(
           compositeToken.name.replace('font_android_', '')
         )}</item>\n` +
-        `    <item name="android:lineHeight">${compositeToken.original.value.lineHeight}sp</item>\n` +
-        `    <item name="android:letterSpacing">${letterSpacingToFloat(
-          compositeToken.original.value.letterSpacing,
-          compositeToken.original.value.fontSize
-        )}</item>\n` +
+        // for android:lineHeight requires API level 28 and current api is 26
+        `    <item name="lineHeight">${compositeToken.original.value.lineHeight}sp</item>\n` +
+        // Commenting the changes, we need to fix the conversion
+        // `    <item name="android:letterSpacing">${letterSpacingToFloat(
+        //   compositeToken.original.value.letterSpacing,
+        //   compositeToken.original.value.fontSize
+        // )}</item>\n` +
         `    <item name="fontStyle">${compositeToken.original.value.fontStyle}</item>\n` +
         `    <item name="fontWeight">${compositeToken.original.value.fontWeight}</item>\n` +
         '  </style>\n'
