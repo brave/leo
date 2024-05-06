@@ -171,7 +171,7 @@
     );
     --text: var(--leo-tooltip-text-color, var(--leo-color-text-primary));
     --shadow: var(--leo-tooltip-shadow, var(--leo-effect-elevation-03));
-    --padding: var(--leo-tooltip-padding, var(--leo-spacing-2xl));
+    --padding: var(--leo-tooltip-padding, var(--leo-spacing-xl));
     --radius: var(--leo-radius-m);
     --border-color: transparent;
     --border-width: 0px;
