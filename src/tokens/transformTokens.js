@@ -44,7 +44,8 @@ const layers = [
   'marketing',
   'search',
   'news',
-  'newtab'
+  'newtab',
+  'web3'
 ]
 for (const layer of layers) {
   const StyleDictionaryExtended = StyleDictionary.extend(getConfig([layer]))
