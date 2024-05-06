@@ -36,7 +36,7 @@ for (const platform of ['android', 'ios', 'skia']) {
  * them individually so that consuming applications can
  * cascade them as appropriate.
  */
-const layers = ['universal', 'browser', 'android', 'ios', 'marketing', 'search']
+const layers = ['universal', 'browser', 'android', 'ios', 'marketing', 'search', 'news']
 for (const layer of layers) {
   const StyleDictionaryExtended = StyleDictionary.extend(getConfig([layer]))
 
