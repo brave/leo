@@ -1,5 +1,6 @@
 <script>
   import Copiable from './Copiable.svelte'
+  import ConditionalSwatchGroup from './ConditionalSwatchGroup.svelte'
 
   export let level = 1
   export let name = ''
@@ -27,26 +28,25 @@
     </svelte:element>
   {/if}
 
-  {#if typeof filteredTokens[0][1] === 'string'}
-    <div class="color-swatch-group" style={`--swatch-size: ${swatchSize}px`}>
-      {#each filteredTokens as [name, token]}
-        <Copiable text={token}>
-          <div class="color-swatch" style="--swatch-bg:{token}">
-            <span class="sample" />
-            {name}
-          </div>
-        </Copiable>
-      {/each}
-    </div>
-  {:else}
-    {#each filteredTokens as [name, tokens]}
-      {#if typeof tokens !== 'string'}
-        <svelte:self {name} {tokens} level={level + 1} />
-      {:else if ['white', 'black'].includes(name)}
-        <svelte:self {name} tokens={{ [name]: tokens }} level={level + 1} />
+  <ConditionalSwatchGroup
+    {swatchSize}
+    shouldWrap={filteredTokens.every((t) => typeof t[1] === 'string')}
+  >
+    {#each filteredTokens as [name, token]}
+      {#if typeof token === 'string'}
+        <ConditionalSwatchGroup {swatchSize} shouldWrap={level === 1}>
+          <Copiable text={token}>
+            <div class="color-swatch" style="--swatch-bg:{token}">
+              <span class="sample" />
+              {name}
+            </div>
+          </Copiable>
+        </ConditionalSwatchGroup>
+      {:else}
+        <svelte:self {name} {swatchSize} tokens={token} level={level + 1} />
       {/if}
     {/each}
-  {/if}
+  </ConditionalSwatchGroup>
 </svelte:element>
 
 <style>
@@ -64,13 +64,6 @@
 
   .group-heading {
     text-transform: capitalize;
-  }
-
-  .color-swatch-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, var(--swatch-size)));
-    gap: 1rem;
-    padding-bottom: 1rem;
   }
 
   .color-swatch {
