@@ -73,7 +73,12 @@ module.exports = {
          * at this level.
          */
         if (
-          ['focus state', 'notificationbackdrop'].includes(type) &&
+          [
+            'focus state',
+            'notificationbackdrop',
+            'url bar shadow',
+            'active tab shadow'
+          ].includes(type) &&
           typeValue &&
           !typeValue.type
         ) {
