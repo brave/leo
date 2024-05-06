@@ -21,10 +21,6 @@
   export let size: Sizes = 'normal'
 
   export let onChange: (detail: { checked: boolean }) => void = undefined
-
-  function change(e) {
-    onChange?.(e.target.checked)
-  }
 </script>
 
 <label
@@ -38,7 +34,7 @@
       disabled={isDisabled}
       type="checkbox"
       bind:checked
-      on:change={change}
+      on:change={(e) => onChange?.({ checked: e.currentTarget.checked })}
     />
     {#if checked}
       <div transition:fade={fadeTransition}>
