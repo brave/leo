@@ -126,7 +126,7 @@ module.exports = {
         }
 
         // Remove token types which shouldn't be included in final names
-        const tokenPrefixesToStrip = ['desktop', 'browser']
+        const tokenPrefixesToStrip = ['desktop', 'browser', 'marketing']
         if (tokenPrefixesToStrip.includes(type)) {
           contents[category] = removeKeyFromObject(contents[category], type)
         }
