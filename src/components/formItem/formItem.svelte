@@ -65,6 +65,10 @@
   export let showFocusOutline: boolean = false
   export let error = false
 
+  // Unfortunately, we can't conditionally render slots in Svelte, so we provide
+  // a flag so the consumer can let us know if they're actually setting a label.
+  export let renderLabel: boolean
+
   export let controlElement: HTMLDivElement = undefined
 </script>
 
@@ -78,7 +82,7 @@
   class:error
   aria-disabled={disabled}
 >
-  {#if $$slots.label}
+  {#if $$slots.label && renderLabel}
     <div class="label-row">
       <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
     </div>
@@ -246,10 +250,6 @@
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-s);
-
-    &:empty, &:has(::slotted(*):empty) {
-      display: none;
-    }
   }
 
   .leo-control .required-indicator {

@@ -51,6 +51,7 @@
       bind:required
       bind:size
       bind:controlElement={dropdown}
+      renderLabel={$$slots.default}
       {mode}
       showFocusOutline={isOpen}
       error={showErrors && $$slots.errors}
