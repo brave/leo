@@ -138,6 +138,7 @@
 <FormItem
   bind:required
   bind:disabled
+  renderLabel={$$slots.default}
   {size}
   {mode}
   error={($$slots.errors || hasErrorsInternal) && showErrors}
