@@ -358,7 +358,7 @@
     }
   }
   .leoButton.isPlainFaint {
-    --foreground: transparent;
+    --foreground: var(--leo-color-black);
     --primary-color: currentColor;
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
@@ -366,6 +366,7 @@
     --bg-hover-mix: 5%;
 
     @theme (dark) {
+      --foreground: var(--leo-color-white);
       --bg-hover-mix: 10%;
     }
 
@@ -374,6 +375,12 @@
         in srgb,
         var(--primary-color),
         var(--background) 30%
+      );
+
+      --icon-hover-color: color-mix(
+        in srgb,
+        var(--icon-color),
+        var(--foreground) 20%
       );
 
       position: relative;
@@ -394,10 +401,10 @@
         background-color: color-mix(
           in srgb,
           var(--primary-color) var(--bg-hover-mix),
-          var(--foreground)
+          transparent
         );
         transition: var(--default-transition);
-        opacity: 0.01;
+        opacity: 0.001;
       }
 
       &:hover::before {
@@ -410,6 +417,10 @@
       --bg-hover: transparent;
       --padding-y: 0;
       --padding-x: 0;
+
+      &::before {
+        content: unset;
+      }
     }
   }
   .leoButton.isHero {
