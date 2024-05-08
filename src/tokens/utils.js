@@ -1,5 +1,4 @@
 const merge = require('lodash.merge')
-const { readdirSync } = require('fs')
 
 /**
  * Removes a key and puts the children of that key in the key's parent
