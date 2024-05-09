@@ -48,6 +48,10 @@ function formattedVariables({
 
   const { lineSeparator } = Object.assign({}, defaultFormatting, formatting)
 
+  // Sort alphabetically first, we'll sort by references later. This makes
+  // output more stable.
+  allTokens = [...allTokens].sort((a, b) => b.name.localeCompare(a.name))
+
   // Some languages are imperative, meaning a variable has to be defined
   // before it is used. If `outputReferences` is true, check if the token
   // has a reference, and if it does send it to the end of the array.
