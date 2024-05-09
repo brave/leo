@@ -1,4 +1,5 @@
 import Layout from './global.svelte'
+import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import { getNonStyleArgs, getStyleFromArgs } from './argHelper'
 
 import '@fontsource/poppins/500.css'
@@ -24,6 +25,15 @@ export const decorators = [
     context.canvasElement.style = style
     return story()
   },
-  () => Layout
+  () => Layout,
+  withThemeByDataAttribute({
+    themes: {
+      system: 'system',
+      light: 'light',
+      dark: 'dark'
+    },
+    defaultTheme: 'system',
+    attributeName: 'data-theme'
+  })
 ]
 export const tags = ['autodocs']

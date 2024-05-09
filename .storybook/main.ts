@@ -11,7 +11,8 @@ export default {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/preset-scss',
-    '@storybook/addon-storysource'
+    '@storybook/addon-storysource',
+    '@storybook/addon-themes'
   ],
   core: {
     disableTelemetry: true
