@@ -6,7 +6,6 @@ import '@fontsource/poppins/600.css'
 import '@fontsource-variable/inter'
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     expanded: true,
     matchers: {
@@ -27,3 +26,4 @@ export const decorators = [
   },
   () => Layout
 ]
+export const tags = ['autodocs']

@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci --ignore-scripts
+          npm explore esbuild -- npm run postinstall
           # Please check with Brave's security team prior to adding any packages to this list.
 
       - run: npm rebuild style-dictionary-create-react-app
