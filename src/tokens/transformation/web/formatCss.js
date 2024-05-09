@@ -5,7 +5,7 @@ const {
   matchDarkThemeToken,
   matchLightThemeToken
 } = require('../common/tokenFilters')
-const { stripTokenPrefix, varDefFormat } = require('../../utils')
+const { varDefFormat } = require('../../utils')
 
 module.exports = ({ dictionary, options, file }) => {
   const opts = options ?? {}
@@ -24,13 +24,11 @@ module.exports = ({ dictionary, options, file }) => {
     )
   }
 
-  const defaultVars = stripTokenPrefix(
-    formattedVariables({
-      format: 'css',
-      dictionary: groupedTokens.rest,
-      outputReferences
-    })
-  )
+  const defaultVars = formattedVariables({
+    format: 'css',
+    dictionary: groupedTokens.rest,
+    outputReferences
+  })
 
   const lightVars = formattedVariables({
     format: 'css',

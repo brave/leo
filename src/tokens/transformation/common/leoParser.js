@@ -2,7 +2,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
-const { applyToTokens } = require('../../utils')
+const { applyToTokens, removeKeyFromObject } = require('../../utils')
 const universalVariables = require('../../universal.variables.json')
 const { TinyColor } = require('@ctrl/tinycolor')
 
@@ -100,7 +100,8 @@ module.exports = {
             'focus state',
             'notificationbackdrop',
             'url bar shadow',
-            'active tab shadow'
+            'active tab shadow',
+            'stroke+shadow'
           ].includes(type) &&
           typeValue &&
           !typeValue.type
@@ -122,6 +123,12 @@ module.exports = {
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
             contents[category][type][item] = groupValues(itemValue)
           }
+        }
+
+        // Remove token types which shouldn't be included in final names
+        const tokenPrefixesToStrip = ['desktop', 'browser']
+        if (tokenPrefixesToStrip.includes(type)) {
+          contents[category] = removeKeyFromObject(contents[category], type)
         }
       }
     }
