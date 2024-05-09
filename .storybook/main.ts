@@ -1,6 +1,3 @@
-import path from 'path'
-import sveltePreprocess from 'svelte-preprocess'
-
 export default {
   stories: [
     '../src/tokens/**/*.stories.svelte',
@@ -20,9 +17,6 @@ export default {
     disableTelemetry: true
   },
   framework: { name: '@storybook/svelte-vite' },
-  docs: {
-    autodocs: true
-  },
   staticDirs: [
     {
       from: '../icons',

@@ -71,12 +71,12 @@
       description: 'The size of the control'
     },
     value: {
-      control: 'none',
+      control: null,
       description:
         'This is the value |currentValue| will be when the radio is selected'
     },
     currentValue: {
-      control: 'none',
+      control: null,
       description:
         'The current value of the control. In Svelte, this can be bound. WebComponents can also manage it automatically. The checked event is fired with the new value when the current value changes.'
     }

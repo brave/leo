@@ -53,7 +53,7 @@
       description: 'The color of the thumb when the control is disabled'
     },
     '--leo-toggle-label-gap': {
-      control: 'The space between the label and the toggle (in CSS units)'
+      description: 'The space between the label and the toggle (in CSS units)'
     },
     '--leo-toggle-label-flex-direction': {
       control: 'select',
