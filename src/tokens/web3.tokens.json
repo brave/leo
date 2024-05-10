@@ -1,0 +1,40 @@
+{
+  "effect": {
+    "navigation-shadow": {
+      "description": null,
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 16,
+        "color": "#0000000a",
+        "offsetX": 0,
+        "offsetY": -8,
+        "spread": 0
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:5e1be3bbc2690b869c2f798682dc7f843ab2e629,",
+          "exportKey": "effect"
+        }
+      }
+    },
+    "actions-shadow": {
+      "description": null,
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 8,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": -1,
+        "spread": 0
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:044d31aa0074aada7dc470d158f8b70e5a09493a,",
+          "exportKey": "effect"
+        }
+      }
+    }
+  }
+}

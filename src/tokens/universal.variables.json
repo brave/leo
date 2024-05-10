@@ -1,4 +1,140 @@
 {
+  "radius": {
+    "2xs": {
+      "type": "number",
+      "value": 1
+    },
+    "xs": {
+      "type": "number",
+      "value": 2
+    },
+    "s": {
+      "type": "number",
+      "value": 4
+    },
+    "m": {
+      "type": "number",
+      "value": 8
+    },
+    "l": {
+      "type": "number",
+      "value": 12
+    },
+    "xl": {
+      "type": "number",
+      "value": 16
+    },
+    "full": {
+      "type": "number",
+      "value": 1000
+    }
+  },
+  "spacing": {
+    "none": {
+      "type": "number",
+      "value": 0
+    },
+    "xs": {
+      "type": "number",
+      "value": 2
+    },
+    "s": {
+      "type": "number",
+      "value": 4
+    },
+    "m": {
+      "type": "number",
+      "value": 8
+    },
+    "l": {
+      "type": "number",
+      "value": 12
+    },
+    "xl": {
+      "type": "number",
+      "value": 16
+    },
+    "2xl": {
+      "type": "number",
+      "value": 24
+    },
+    "3xl": {
+      "type": "number",
+      "value": 32
+    },
+    "4xl": {
+      "type": "number",
+      "value": 40
+    },
+    "5xl": {
+      "type": "number",
+      "value": 48
+    },
+    "6xl": {
+      "type": "number",
+      "value": 64
+    },
+    "7xl": {
+      "type": "number",
+      "value": 80
+    },
+    "8xl": {
+      "type": "number",
+      "value": 96
+    },
+    "9xl": {
+      "type": "number",
+      "value": 160
+    }
+  },
+  "icon": {
+    "xs": {
+      "type": "number",
+      "value": 16
+    },
+    "s": {
+      "type": "number",
+      "value": 18
+    },
+    "m": {
+      "type": "number",
+      "value": 20
+    },
+    "l": {
+      "type": "number",
+      "value": 24
+    },
+    "xl": {
+      "type": "number",
+      "value": 32
+    }
+  },
+  "elevation": {
+    "xxs": {
+      "type": "number",
+      "value": 1
+    },
+    "xs": {
+      "type": "number",
+      "value": 4
+    },
+    "s": {
+      "type": "number",
+      "value": 8
+    },
+    "m": {
+      "type": "number",
+      "value": 16
+    },
+    "l": {
+      "type": "number",
+      "value": 24
+    },
+    "xl": {
+      "type": "number",
+      "value": 36
+    }
+  },
   "color": {
     "primitive": {
       "gray": {
@@ -78,19 +214,19 @@
         },
         "70": {
           "type": "color",
-          "value": "#3006c9"
+          "value": "#3b08c2"
         },
         "80": {
           "type": "color",
-          "value": "#21168f"
+          "value": "#2a118e"
         },
         "90": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "100": {
           "type": "color",
-          "value": "#070732"
+          "value": "#0b0632"
         }
       },
       "secondary": {
@@ -112,7 +248,7 @@
         },
         "40": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "50": {
           "type": "color",
@@ -566,9 +702,17 @@
           "type": "color",
           "value": "#662d91"
         },
-        "bravelion": {
+        "rorange-1": {
           "type": "color",
-          "value": "#fe5907"
+          "value": "#ff5601"
+        },
+        "rorange-2": {
+          "type": "color",
+          "value": "#ff4000"
+        },
+        "rorange-3": {
+          "type": "color",
+          "value": "#ff1f01"
         }
       }
     },
@@ -759,10 +903,44 @@
           "value": "rgba(0, 0, 0, 0.1000)"
         }
       },
+      "material": {
+        "thick": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.9100)"
+        },
+        "regular": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.7300)"
+        },
+        "thin": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.5500)"
+        },
+        "ultrathin": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.3200)"
+        },
+        "blur-thick": {
+          "type": "number",
+          "value": 30
+        },
+        "blur-regular": {
+          "type": "number",
+          "value": 35
+        },
+        "blur-thin": {
+          "type": "number",
+          "value": 30
+        },
+        "blur-ultrathin": {
+          "type": "number",
+          "value": 30
+        }
+      },
       "gray": {
         "10": {
           "type": "color",
-          "value": "#f3f5f7"
+          "value": "#ebeef0"
         },
         "20": {
           "type": "color",
@@ -792,7 +970,7 @@
       "primary": {
         "10": {
           "type": "color",
-          "value": "#f2f5ff"
+          "value": "#e9eeff"
         },
         "20": {
           "type": "color",
@@ -812,17 +990,17 @@
         },
         "60": {
           "type": "color",
-          "value": "#3006c9"
+          "value": "#3b08c2"
         },
         "70": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         }
       },
       "secondary": {
         "10": {
           "type": "color",
-          "value": "#fff2ee"
+          "value": "#ffe9e1"
         },
         "20": {
           "type": "color",
@@ -830,7 +1008,7 @@
         },
         "30": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "40": {
           "type": "color",
@@ -852,7 +1030,7 @@
       "red": {
         "10": {
           "type": "color",
-          "value": "#fff1f1"
+          "value": "#ffe8e7"
         },
         "20": {
           "type": "color",
@@ -882,7 +1060,7 @@
       "yellow": {
         "10": {
           "type": "color",
-          "value": "#fef9ec"
+          "value": "#fcf3d9"
         },
         "20": {
           "type": "color",
@@ -912,7 +1090,7 @@
       "green": {
         "10": {
           "type": "color",
-          "value": "#f1fff0"
+          "value": "#e0fcde"
         },
         "20": {
           "type": "color",
@@ -942,7 +1120,7 @@
       "teal": {
         "10": {
           "type": "color",
-          "value": "#f0fdff"
+          "value": "#ddf9fe"
         },
         "20": {
           "type": "color",
@@ -972,7 +1150,7 @@
       "blue": {
         "10": {
           "type": "color",
-          "value": "#eef6ff"
+          "value": "#e2f0ff"
         },
         "20": {
           "type": "color",
@@ -1002,7 +1180,7 @@
       "purple": {
         "10": {
           "type": "color",
-          "value": "#f4f4ff"
+          "value": "#ececfe"
         },
         "20": {
           "type": "color",
@@ -1032,7 +1210,7 @@
       "pink": {
         "10": {
           "type": "color",
-          "value": "#fff1f6"
+          "value": "#ffe7ef"
         },
         "20": {
           "type": "color",
@@ -1062,7 +1240,7 @@
       "private-window": {
         "10": {
           "type": "color",
-          "value": "#f5f3ff"
+          "value": "#eeebff"
         },
         "20": {
           "type": "color",
@@ -1092,7 +1270,7 @@
       "tor-window": {
         "10": {
           "type": "color",
-          "value": "#faf2ff"
+          "value": "#f6e8ff"
         },
         "20": {
           "type": "color",
@@ -1117,24 +1295,6 @@
         "70": {
           "type": "color",
           "value": "#350b49"
-        }
-      },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.9500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.7300)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.5600)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(255, 255, 255, 0.3200)"
         }
       }
     },
@@ -1208,7 +1368,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "disabled": {
           "type": "color",
@@ -1317,6 +1477,40 @@
           "value": "rgba(0, 0, 0, 0.8000)"
         }
       },
+      "material": {
+        "thick": {
+          "type": "color",
+          "value": "rgba(37, 37, 37, 0.9000)"
+        },
+        "regular": {
+          "type": "color",
+          "value": "rgba(37, 37, 37, 0.7500)"
+        },
+        "thin": {
+          "type": "color",
+          "value": "rgba(37, 37, 37, 0.5800)"
+        },
+        "ultrathin": {
+          "type": "color",
+          "value": "rgba(37, 37, 37, 0.3900)"
+        },
+        "blur-thick": {
+          "type": "number",
+          "value": 100
+        },
+        "blur-regular": {
+          "type": "number",
+          "value": 100
+        },
+        "blur-thin": {
+          "type": "number",
+          "value": 100
+        },
+        "blur-ultrathin": {
+          "type": "number",
+          "value": 100
+        }
+      },
       "gray": {
         "10": {
           "type": "color",
@@ -1350,11 +1544,11 @@
       "primary": {
         "10": {
           "type": "color",
-          "value": "#161065"
+          "value": "#1c0d64"
         },
         "20": {
           "type": "color",
-          "value": "#21168f"
+          "value": "#2a118e"
         },
         "30": {
           "type": "color",
@@ -1396,7 +1590,7 @@
         },
         "50": {
           "type": "color",
-          "value": "#ff6022"
+          "value": "#ff5601"
         },
         "60": {
           "type": "color",
@@ -1676,161 +1870,647 @@
           "type": "color",
           "value": "#f6e8ff"
         }
-      },
-      "material": {
-        "thick": {
-          "type": "color",
-          "value": "rgba(13, 18, 20, 0.8500)"
-        },
-        "regular": {
-          "type": "color",
-          "value": "rgba(13, 18, 20, 0.6900)"
-        },
-        "thin": {
-          "type": "color",
-          "value": "rgba(13, 18, 20, 0.5100)"
-        },
-        "ultrathin": {
-          "type": "color",
-          "value": "rgba(13, 18, 20, 0.3500)"
-        }
       }
     }
   },
-  "radius": {
-    "2xs": {
-      "type": "number",
-      "value": 1
+  "---desktop": {
+    "size": {
+      "large": {
+        "type": "number",
+        "value": 16
+      },
+      "default": {
+        "type": "number",
+        "value": 14
+      },
+      "small": {
+        "type": "number",
+        "value": 12
+      },
+      "x-small": {
+        "type": "number",
+        "value": 11
+      },
+      "display1": {
+        "type": "number",
+        "value": 46
+      },
+      "display2": {
+        "type": "number",
+        "value": 40
+      },
+      "display3": {
+        "type": "number",
+        "value": 34
+      },
+      "h1": {
+        "type": "number",
+        "value": 32
+      },
+      "h2": {
+        "type": "number",
+        "value": 28
+      },
+      "h3": {
+        "type": "number",
+        "value": 22
+      },
+      "h4": {
+        "type": "number",
+        "value": 16
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 13
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 14
+      },
+      "button-small": {
+        "type": "number",
+        "value": 12
+      },
+      "button-default": {
+        "type": "number",
+        "value": 13
+      },
+      "button-large": {
+        "type": "number",
+        "value": 15
+      },
+      "numbers": {
+        "type": "number",
+        "value": 36
+      }
     },
-    "xs": {
-      "type": "number",
-      "value": 2
+    "line-height": {
+      "large": {
+        "type": "number",
+        "value": 24
+      },
+      "default": {
+        "type": "number",
+        "value": 22
+      },
+      "small": {
+        "type": "number",
+        "value": 18
+      },
+      "x-small": {
+        "type": "number",
+        "value": 16
+      },
+      "display1": {
+        "type": "number",
+        "value": 54
+      },
+      "display2": {
+        "type": "number",
+        "value": 48
+      },
+      "display3": {
+        "type": "number",
+        "value": 40
+      },
+      "h1": {
+        "type": "number",
+        "value": 42
+      },
+      "h2": {
+        "type": "number",
+        "value": 36
+      },
+      "h3": {
+        "type": "number",
+        "value": 28
+      },
+      "h4": {
+        "type": "number",
+        "value": 26
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 16
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 22
+      },
+      "button-small": {
+        "type": "number",
+        "value": 20
+      },
+      "button-default": {
+        "type": "number",
+        "value": 20
+      },
+      "button-large": {
+        "type": "number",
+        "value": 22
+      },
+      "numbers": {
+        "type": "number",
+        "value": 46
+      }
     },
-    "s": {
-      "type": "number",
-      "value": 4
-    },
-    "m": {
-      "type": "number",
-      "value": 8
-    },
-    "l": {
-      "type": "number",
-      "value": 12
-    },
-    "xl": {
-      "type": "number",
-      "value": 16
-    },
-    "full": {
-      "type": "number",
-      "value": 1000
+    "letter-spacing": {
+      "button": {
+        "type": "number",
+        "value": 0.10000000149011612
+      },
+      "headings": {
+        "type": "number",
+        "value": -0.5
+      }
     }
   },
-  "spacing": {
-    "none": {
-      "type": "number",
-      "value": 0
+  "---mobile": {
+    "size": {
+      "large": {
+        "type": "number",
+        "value": 16
+      },
+      "default": {
+        "type": "number",
+        "value": 14
+      },
+      "small": {
+        "type": "number",
+        "value": 12
+      },
+      "x-small": {
+        "type": "number",
+        "value": 11
+      },
+      "display1": {
+        "type": "number",
+        "value": 36
+      },
+      "display2": {
+        "type": "number",
+        "value": 32
+      },
+      "display3": {
+        "type": "number",
+        "value": 28
+      },
+      "h1": {
+        "type": "number",
+        "value": 28
+      },
+      "h2": {
+        "type": "number",
+        "value": 22
+      },
+      "h3": {
+        "type": "number",
+        "value": 18
+      },
+      "h4": {
+        "type": "number",
+        "value": 16
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 13
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 14
+      },
+      "button-small": {
+        "type": "number",
+        "value": 12
+      },
+      "button-default": {
+        "type": "number",
+        "value": 13
+      },
+      "button-large": {
+        "type": "number",
+        "value": 15
+      },
+      "numbers": {
+        "type": "number",
+        "value": 32
+      }
     },
-    "xs": {
-      "type": "number",
-      "value": 2
+    "line-height": {
+      "large": {
+        "type": "number",
+        "value": 24
+      },
+      "default": {
+        "type": "number",
+        "value": 22
+      },
+      "small": {
+        "type": "number",
+        "value": 18
+      },
+      "x-small": {
+        "type": "number",
+        "value": 16
+      },
+      "display1": {
+        "type": "number",
+        "value": 44
+      },
+      "display2": {
+        "type": "number",
+        "value": 42
+      },
+      "display3": {
+        "type": "number",
+        "value": 36
+      },
+      "h1": {
+        "type": "number",
+        "value": 36
+      },
+      "h2": {
+        "type": "number",
+        "value": 28
+      },
+      "h3": {
+        "type": "number",
+        "value": 26
+      },
+      "h4": {
+        "type": "number",
+        "value": 26
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 16
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 22
+      },
+      "button-small": {
+        "type": "number",
+        "value": 18
+      },
+      "button-default": {
+        "type": "number",
+        "value": 20
+      },
+      "button-large": {
+        "type": "number",
+        "value": 22
+      },
+      "numbers": {
+        "type": "number",
+        "value": 40
+      }
     },
-    "s": {
-      "type": "number",
-      "value": 4
-    },
-    "m": {
-      "type": "number",
-      "value": 8
-    },
-    "l": {
-      "type": "number",
-      "value": 12
-    },
-    "xl": {
-      "type": "number",
-      "value": 16
-    },
-    "2xl": {
-      "type": "number",
-      "value": 24
-    },
-    "3xl": {
-      "type": "number",
-      "value": 32
-    },
-    "4xl": {
-      "type": "number",
-      "value": 40
-    },
-    "5xl": {
-      "type": "number",
-      "value": 48
-    },
-    "6xl": {
-      "type": "number",
-      "value": 64
-    },
-    "7xl": {
-      "type": "number",
-      "value": 80
-    },
-    "8xl": {
-      "type": "number",
-      "value": 96
-    },
-    "9xl": {
-      "type": "number",
-      "value": 160
+    "letter-spacing": {
+      "button": {
+        "type": "number",
+        "value": 0.10000000149011612
+      },
+      "headings": {
+        "type": "number",
+        "value": -0.5
+      }
     }
   },
-  "icon": {
-    "xs": {
-      "type": "number",
-      "value": 16
+  "---ios": {
+    "size": {
+      "large": {
+        "type": "number",
+        "value": 17
+      },
+      "default": {
+        "type": "number",
+        "value": 15
+      },
+      "small": {
+        "type": "number",
+        "value": 13
+      },
+      "x-small": {
+        "type": "number",
+        "value": 11
+      },
+      "display1": {
+        "type": "number",
+        "value": 44
+      },
+      "display2": {
+        "type": "number",
+        "value": 36
+      },
+      "display3": {
+        "type": "number",
+        "value": 28
+      },
+      "h1": {
+        "type": "number",
+        "value": 32
+      },
+      "h2": {
+        "type": "number",
+        "value": 28
+      },
+      "h3": {
+        "type": "number",
+        "value": 22
+      },
+      "h4": {
+        "type": "number",
+        "value": 16
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 13
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 14
+      },
+      "button-small": {
+        "type": "number",
+        "value": 13
+      },
+      "button-default": {
+        "type": "number",
+        "value": 15
+      },
+      "button-large": {
+        "type": "number",
+        "value": 17
+      },
+      "numbers": {
+        "type": "number",
+        "value": 32
+      }
     },
-    "s": {
-      "type": "number",
-      "value": 18
+    "line-height": {
+      "large": {
+        "type": "number",
+        "value": 24
+      },
+      "default": {
+        "type": "number",
+        "value": 22
+      },
+      "small": {
+        "type": "number",
+        "value": 18
+      },
+      "x-small": {
+        "type": "number",
+        "value": 16
+      },
+      "display1": {
+        "type": "number",
+        "value": 52
+      },
+      "display2": {
+        "type": "number",
+        "value": 44
+      },
+      "display3": {
+        "type": "number",
+        "value": 40
+      },
+      "h1": {
+        "type": "number",
+        "value": 40
+      },
+      "h2": {
+        "type": "number",
+        "value": 34
+      },
+      "h3": {
+        "type": "number",
+        "value": 28
+      },
+      "h4": {
+        "type": "number",
+        "value": 22
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 16
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 22
+      },
+      "button-small": {
+        "type": "number",
+        "value": 20
+      },
+      "button-default": {
+        "type": "number",
+        "value": 20
+      },
+      "button-large": {
+        "type": "number",
+        "value": 22
+      },
+      "numbers": {
+        "type": "number",
+        "value": 40
+      }
     },
-    "m": {
-      "type": "number",
-      "value": 20
-    },
-    "l": {
-      "type": "number",
-      "value": 24
-    },
-    "xl": {
-      "type": "number",
-      "value": 32
+    "letter-spacing": {
+      "button": {
+        "type": "number",
+        "value": -0.4000000059604645
+      },
+      "headings": {
+        "type": "number",
+        "value": -0.4000000059604645
+      }
     }
   },
-  "elevation": {
-    "xxs": {
-      "type": "number",
-      "value": 1
+  "---android": {
+    "size": {
+      "large": {
+        "type": "number",
+        "value": 16
+      },
+      "default": {
+        "type": "number",
+        "value": 14
+      },
+      "small": {
+        "type": "number",
+        "value": 12
+      },
+      "x-small": {
+        "type": "number",
+        "value": 11
+      },
+      "display1": {
+        "type": "number",
+        "value": 45
+      },
+      "display2": {
+        "type": "number",
+        "value": 36
+      },
+      "display3": {
+        "type": "number",
+        "value": 28
+      },
+      "h1": {
+        "type": "number",
+        "value": 32
+      },
+      "h2": {
+        "type": "number",
+        "value": 28
+      },
+      "h3": {
+        "type": "number",
+        "value": 22
+      },
+      "h4": {
+        "type": "number",
+        "value": 16
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 12
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 14
+      },
+      "button-small": {
+        "type": "number",
+        "value": 12
+      },
+      "button-default": {
+        "type": "number",
+        "value": 14
+      },
+      "button-large": {
+        "type": "number",
+        "value": 16
+      },
+      "numbers": {
+        "type": "number",
+        "value": 32
+      }
     },
-    "xs": {
-      "type": "number",
-      "value": 4
+    "line-height": {
+      "large": {
+        "type": "number",
+        "value": 24
+      },
+      "default": {
+        "type": "number",
+        "value": 22
+      },
+      "small": {
+        "type": "number",
+        "value": 18
+      },
+      "x-small": {
+        "type": "number",
+        "value": 16
+      },
+      "display1": {
+        "type": "number",
+        "value": 52
+      },
+      "display2": {
+        "type": "number",
+        "value": 44
+      },
+      "display3": {
+        "type": "number",
+        "value": 40
+      },
+      "h1": {
+        "type": "number",
+        "value": 40
+      },
+      "h2": {
+        "type": "number",
+        "value": 36
+      },
+      "h3": {
+        "type": "number",
+        "value": 28
+      },
+      "h4": {
+        "type": "number",
+        "value": 24
+      },
+      "label": {
+        "type": "number",
+        "value": 10
+      },
+      "tableheader": {
+        "type": "number",
+        "value": 16
+      },
+      "navbutton": {
+        "type": "number",
+        "value": 22
+      },
+      "button-small": {
+        "type": "number",
+        "value": 20
+      },
+      "button-default": {
+        "type": "number",
+        "value": 20
+      },
+      "button-large": {
+        "type": "number",
+        "value": 22
+      },
+      "numbers": {
+        "type": "number",
+        "value": 40
+      }
     },
-    "s": {
-      "type": "number",
-      "value": 8
-    },
-    "m": {
-      "type": "number",
-      "value": 16
-    },
-    "l": {
-      "type": "number",
-      "value": 24
-    },
-    "xl": {
-      "type": "number",
-      "value": 36
+    "letter-spacing": {
+      "button": {
+        "type": "number",
+        "value": 0.10000000149011612
+      },
+      "headings": {
+        "type": "number",
+        "value": -0.4000000059604645
+      }
     }
   }
 }

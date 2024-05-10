@@ -1,0 +1,70 @@
+{
+  "gradient": {
+    "stroke gradient": {
+      "dark": {
+        "description": "",
+        "type": "custom-gradient",
+        "value": {
+          "gradientType": "linear",
+          "rotation": 155.40180080220492,
+          "stops": [
+            {
+              "position": 0,
+              "color": "#ffffff26"
+            },
+            {
+              "position": 0.41,
+              "color": "#ffffff26"
+            },
+            {
+              "position": 0.57,
+              "color": "#ffffff00"
+            },
+            {
+              "position": 1,
+              "color": "#ffffff0d"
+            }
+          ]
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:3f4bd82bab3e42cef3ec99fefa762a2d5d27d402,",
+            "exportKey": "gradient"
+          }
+        }
+      },
+      "light": {
+        "description": "",
+        "type": "custom-gradient",
+        "value": {
+          "gradientType": "linear",
+          "rotation": 155.40180080220492,
+          "stops": [
+            {
+              "position": 0,
+              "color": "#0000000d"
+            },
+            {
+              "position": 0.41,
+              "color": "#00000000"
+            },
+            {
+              "position": 0.57,
+              "color": "#00000000"
+            },
+            {
+              "position": 1,
+              "color": "#00000026"
+            }
+          ]
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:10bfbb9f6e87323c5c501dc97261b024bef3578d,",
+            "exportKey": "gradient"
+          }
+        }
+      }
+    }
+  }
+}
