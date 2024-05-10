@@ -26,7 +26,7 @@ StyleDictionary.registerTransform({
  */
 for (const platform of ['android', 'ios', 'skia']) {
   const StyleDictionaryExtended = StyleDictionary.extend(
-    getConfig(['universal', platform])
+    getConfig(['universal', platform, 'browser'])
   )
   StyleDictionaryExtended.buildPlatform(platform)
 }
@@ -36,7 +36,17 @@ for (const platform of ['android', 'ios', 'skia']) {
  * them individually so that consuming applications can
  * cascade them as appropriate.
  */
-const layers = ['universal', 'browser']
+const layers = [
+  'universal',
+  'browser',
+  'android',
+  'ios',
+  'marketing',
+  'search',
+  'news',
+  'newtab',
+  'web3'
+]
 for (const layer of layers) {
   const StyleDictionaryExtended = StyleDictionary.extend(getConfig([layer]))
 

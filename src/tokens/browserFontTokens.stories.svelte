@@ -2,6 +2,7 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css/variables-browser'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
+  import '../../tokens/css/variables-browser.css'
 </script>
 
 <Meta title="Tokens/Browser/Fonts" />
