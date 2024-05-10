@@ -26,7 +26,7 @@ StyleDictionary.registerTransform({
  */
 for (const platform of ['android', 'ios', 'skia']) {
   const StyleDictionaryExtended = StyleDictionary.extend(
-    getConfig(['universal', platform])
+    getConfig(['universal', platform, 'browser'])
   )
   StyleDictionaryExtended.buildPlatform(platform)
 }
