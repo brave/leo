@@ -23,7 +23,11 @@
   interface CommonProps {
     kind?: Props.ButtonKind
     size?: Props.ButtonSize
+    /**
+     * @deprecated Use `iconOnly` instead.
+     */
     fab?: boolean
+    iconOnly?: boolean
     onClick?: () => void
   }
 
@@ -46,7 +50,13 @@
   export let isLoading: boolean = false
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
+
+  /**
+   * @deprecated Use `iconOnly` instead.
+   */
   export let fab = false
+  export let iconOnly: boolean = false
+  $: iconOnly = iconOnly || fab
 
   export let onClick: () => void = undefined
 
@@ -67,24 +77,24 @@
   class:isMedium={size === 'medium'}
   class:isSmall={size === 'small'}
   class:isTiny={size === 'tiny'}
-  class:fab
+  class:iconOnly
   class:isLoading
   disabled={isLoading || isDisabled || undefined}
   on:click={onClick}
   {...$$restProps}
 >
   {#if isLoading}
-    <div class:content={!fab}>
+    <div class:content={!iconOnly}>
       {#if $$slots.loading}
         <slot name="loading" />
-      {:else if !fab}
+      {:else if !iconOnly}
         <slot>Leo Button</slot>
       {/if}
     </div>
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
-    <div class:content={!fab}>
+    <div class:content={!iconOnly}>
       <slot>Leo Button</slot>
     </div>
     <slot name="icon-after" />
@@ -150,7 +160,7 @@
     padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
     max-height: max-content;
 
-    &.fab {
+    &.iconOnly {
       max-width: max-content;
     }
 
@@ -224,7 +234,7 @@
     --leo-icon-size: var(--leo-icon-xs);
     --icon-gap: var(--leo-spacing-m);
 
-    &.fab {
+    &.iconOnly {
       min-height: 0;
       --padding-x: 6px;
       --padding-y: 6px;
@@ -239,7 +249,7 @@
     --leo-icon-size: var(--leo-icon-s);
     --icon-gap: var(--leo-spacing-m);
 
-    &.fab {
+    &.iconOnly {
       min-height: 0;
       --padding-x: var(--leo-spacing-m);
     }
@@ -253,7 +263,7 @@
     --leo-icon-size: var(--leo-icon-m);
     --icon-gap: var(--leo-spacing-m);
 
-    &.fab {
+    &.iconOnly {
       min-height: 0;
       --padding-x: var(--leo-spacing-l);
       --padding-y: var(--leo-spacing-l);
@@ -268,7 +278,7 @@
     --leo-icon-size: var(--leo-icon-m);
     --icon-gap: 10px;
 
-    &.fab {
+    &.iconOnly {
       min-height: 0;
       --padding-x: var(--leo-spacing-xl);
       --padding-y: var(--leo-spacing-xl);
@@ -283,7 +293,7 @@
     --leo-icon-size: var(--leo-icon-l);
     --icon-gap: var(--leo-spacing-l);
 
-    &.fab {
+    &.iconOnly {
       min-height: 0;
       --padding-x: 18px;
       --padding-y: 18px;
@@ -350,7 +360,7 @@
       --color: var(--leo-color-text-primary);
     }
 
-    &.fab {
+    &.iconOnly {
       --radius: var(--leo-radius-m);
       --bg-hover: transparent;
       --padding-y: 0;
@@ -412,7 +422,7 @@
       }
     }
 
-    &.fab {
+    &.iconOnly {
       --radius: var(--leo-radius-m);
       --bg-hover: transparent;
       --padding-y: 0;
@@ -467,7 +477,7 @@
     }
   }
 
-  .leoButton.fab {
+  .leoButton.iconOnly {
     aspect-ratio: 1 / 1;
   }
 </style>

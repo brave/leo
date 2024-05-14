@@ -32,7 +32,8 @@
     },
     kind: { control: 'select', options: buttonKinds },
     size: { control: 'select', options: buttonSizes },
-    isDisabled: { control: 'boolean' }
+    isDisabled: { control: 'boolean' },
+    fab: { table: { disable: true } }
   }}
 />
 
@@ -91,20 +92,20 @@
 
 <Story name="Plain Faint" source args={{ kind: 'plain-faint' }} />
 
-<Story name="FAB" let:args>
-  <Button {...args} fab>
+<Story name="Icon Only" let:args>
+  <Button {...args} iconOnly>
     <Icon name="check-circle-outline" />
   </Button>
 </Story>
 
 <Story name="All" let:args>
-  {#each [false, true] as fab}
+  {#each [false, true] as iconOnly}
     {#each buttonSizes as size}
       <h2 class="label capitalize">{size}</h2>
       <div class="button-group">
         {#each buttonKinds as kind}
-          <Button {kind} {size} {fab} {...args}>
-            {#if !fab}
+          <Button {kind} {size} {iconOnly} {...args}>
+            {#if !iconOnly}
               <span class="capitalize">{kind}</span>
             {:else}
               <Icon name="check-circle-outline" />
