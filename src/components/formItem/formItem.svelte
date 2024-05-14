@@ -44,6 +44,10 @@
         'The color of the control, which other colors are derived from',
       control: 'color'
     },
+    '--leo-control-text-color': {
+      description: 'The color of the text in the control',
+      control: 'color'
+    },
     '--leo-control-label-gap': {
       description: 'The gap between the label and the control',
       type: 'string'
@@ -118,7 +122,7 @@
     --gap: var(--leo-control-label-gap, var(--leo-spacing-s));
     --direction: var(--leo-control-label-direction, column);
 
-    --color: var(--leo-color-text-primary);
+    --color: var(--leo-control-text-color, var(--leo-color-text-primary));
     --color-hover: var(--color);
     --color-focus: var(--color);
 
