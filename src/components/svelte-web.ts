@@ -128,9 +128,10 @@ export default function registerWebComponent(
         const slotsNames = Array.from(this.children).map((c) =>
           c.getAttribute('slot')
         )
-        // Add default slot
-        if (this.childNodes.length) slotsNames.push(undefined)
+        // Add default slot if there are nodes without a slot name.
+        if (this.childNodes.length > slotsNames.length) slotsNames.push(null)
 
+        const distinctSlots = new Set(lastSlots)
         // Slots didn't change, so nothing to do here.
         // The component needs to get created, at least once
         if (
@@ -138,14 +139,14 @@ export default function registerWebComponent(
           // If the size is the same, and every one of our last slots
           // is present, then nothing has changed, and we don't need
           // to do anything here.
-          lastSlots.size === slotsNames.length &&
+          lastSlots.size === distinctSlots.size &&
           slotsNames.every((s) => lastSlots.has(s))
         ) {
           return
         }
 
         // Update the last slots we have, so if they change we know to update them.
-        lastSlots = new Set(slotsNames)
+        lastSlots = distinctSlots
 
         // Create a dictionary of the slotName: <slot name={slotName}/>
         const slots = slotsNames.reduce(
