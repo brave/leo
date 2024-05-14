@@ -18,7 +18,6 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
           .basename(icon, '.svg')
           .replaceAll('-', '_')}.xml`
         fs.writeFile(path.join(OUTPUT_FOLDER, outputFileName), vectorContent)
-        console.log(outputFileName)
       })
     })
   )
