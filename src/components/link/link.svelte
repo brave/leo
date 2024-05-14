@@ -42,22 +42,22 @@
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
 
-    &:hover {
+    &:where(:hover) {
       color: var(--hover-color);
     }
 
-    &:visited:not(:hover) {
+    &:where(:visited:not(:hover)) {
       color: var(--visited-color);
     }
 
-    &:focus-visible:not(.disabled) {
+    &:where(:focus-visible:not(.disabled)) {
       color: var(--focus-color);
       outline: none;
       box-shadow: var(--focus-shadow);
       border-radius: var(--leo-radius-xs);
     }
 
-    &.disabled {
+    &:where(.disabled) {
       color: var(--disabled-color);
       pointer-events: none;
     }
