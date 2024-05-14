@@ -142,7 +142,7 @@
       background 0.12s ease-in-out,
       var(--default-transition);
     box-shadow: none;
-    border: solid var(--border-width, 0px) var(--border-color, transparent);
+    border: solid var(--border-width, 1px) var(--border-color, transparent);
     border-radius: var(--leo-button-radius, var(--radius));
     background: var(--bg);
     color: var(--color);
