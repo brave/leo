@@ -147,7 +147,7 @@
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
-    padding: var(--leo-button-padding, var(--padding-y) var(--padding-x));
+    padding: var(--leo-button-padding, calc(var(--padding-y) - var(--border-width)) var(--padding-x));
     max-height: max-content;
 
     &.fab {
