@@ -157,6 +157,15 @@
     .content {
       padding: 0 var(--icon-gap);
     }
+
+    /*
+     * Should only be necessary for Tailwind consumers where there's
+     * no guarantee that the button will contain a child element.
+     */
+    &:not(:has(> *)) {
+      padding-left: var(--leo-button-padding, calc(var(--padding-x) + var(--icon-gap)));
+      padding-right: var(--leo-button-padding, calc(var(--padding-x) + var(--icon-gap)));
+    }
   }
 
   .leoButton:not(:disabled) {
