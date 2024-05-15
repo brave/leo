@@ -126,7 +126,6 @@
     &:focus-within:has(summary:focus-visible) {
       box-shadow: var(--shadow-focus);
     }
-  }
 
   summary {
     display: flex;
@@ -185,4 +184,5 @@
   details[open] .arrow {
     transform: rotate(180deg);
   }
+}
 </style>
