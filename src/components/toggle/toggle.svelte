@@ -22,10 +22,8 @@
     checked = newValue
     onChange?.({ checked: newValue })
   }
-</script>
 
-<svelte:window
-  on:mouseup={() => {
+  function finishDrag() {
     // If we didn't receive a mouse down, there's nothing to do.
     if (dragStartX === undefined) return
 
@@ -40,19 +38,28 @@
     // Reset the dragging attributes.
     dragStartX = undefined
     dragOffsetX = 0
-  }}
+  }
+</script>
+
+<svelte:window
+  on:mouseup={finishDrag}
   on:mousemove={(e) => {
     if (dragStartX === undefined) return
     dragOffsetX = e.clientX - dragStartX
 
     if (document.documentElement.dir === 'rtl') dragOffsetX = -dragOffsetX
+
+    // The mouse was released but we didn't get a mouseup event
+    if (e.buttons === 0) {
+      finishDrag()
+    }
   }}
 />
 
 <label class={`leo-toggle size-${size}`}>
   <button
     on:mousedown={(e) => {
-      if (disabled) return
+      if (disabled || e.button !== 0) return
 
       handledClick = true
       dragStartX = e.clientX
