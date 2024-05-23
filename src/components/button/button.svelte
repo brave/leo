@@ -27,19 +27,19 @@
     onClick?: () => void
   }
 
-  type ButtonProps = CommonProps &
+  type NalaButtonProps = CommonProps &
     Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
       isDisabled?: Disabled
       isLoading?: boolean
       href?: never
     }
 
-  type LinkProps = CommonProps &
+  type NalaLinkProps = CommonProps &
     Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
       href: Href
     }
 
-  type $$Props = LinkProps | ButtonProps
+  type $$Props = NalaLinkProps | NalaButtonProps
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
