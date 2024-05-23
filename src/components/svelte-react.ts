@@ -38,6 +38,7 @@ type Ref<T> =
     }
 export type ReactProps<Props> = Props & {
   ref?: Ref<Props>
+  slot?: string
 } & {
   // Note: The div here isn't important because all props in intrinsicProps are
   // available on all elements. We just want to make sure we have the correct
