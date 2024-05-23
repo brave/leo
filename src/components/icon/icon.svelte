@@ -34,7 +34,7 @@
 </script>
 
 <script lang="ts">
-  import type { IconName } from '../../../icons/meta'
+  import type { IconName } from '@brave/leo/icons/meta'
   export let name: IconName = undefined
   export let forceColor: boolean = false
   export let title: string = undefined

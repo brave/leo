@@ -1,13 +1,13 @@
 import * as React from 'react'
-import '../../../tokens/css/variables.css'
-import LeoButton from '../../../react/button'
-import Tooltip from '../../../react/tooltip'
+import '@brave/leo/tokens/css/variables.css'
+import LeoButton from '@brave/leo/react/button'
+import Tooltip from '@brave/leo/react/tooltip'
+import Input from '@brave/leo/react/input'
+import Dropdown from '@brave/leo/react/dropdown'
+import ButtonMenu from '@brave/leo/react/buttonMenu'
+import Toggle from '@brave/leo/react/toggle'
+import Icon from '@brave/leo/react/icon'
 import styles from './App.module.css'
-import Input from '../../../react/input'
-import Dropdown from '../../../react/dropdown'
-import ButtonMenu from '../../../react/buttonMenu'
-import Toggle from '../../../react/toggle'
-import Icon from '../../../react/icon'
 
 function App() {
   // Verify that we can change props and children (slots)
