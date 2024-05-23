@@ -74,7 +74,7 @@ import type * as React from 'react'
 import type { ReactProps } from '../src/components/svelte-react'
 import type { ${componentName}Props as SvelteProps } from '../types/src/components/${containingFolder}/${fileName}';
 export type ${componentName}Props${funcConstraints} = ReactProps<SvelteProps${propParams}>;
-export default function ${componentName}React${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
+export default function ${componentName}${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
 
 // As we don't currently have type definitions for the web components, export
 // the Type Definitions from the Svelte component.
