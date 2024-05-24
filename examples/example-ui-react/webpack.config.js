@@ -92,8 +92,9 @@ module.exports = function (argv) {
       alias: {
         svelte: path.resolve('node_modules', 'svelte'),
         react: path.resolve('node_modules', 'react'),
-        ['react-dom']: path.resolve('node_modules', 'react-dom'),
-        ['react-router']: path.resolve('node_modules', 'react-router')
+        'react-dom': path.resolve('node_modules', 'react-dom'),
+        'react-router': path.resolve('node_modules', 'react-router'),
+        '@brave/leo': path.resolve(__dirname, '../../')
       }
     }
   }

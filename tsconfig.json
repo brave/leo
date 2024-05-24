@@ -4,6 +4,11 @@
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
   "compilerOptions": {
     "strictNullChecks": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "paths": {
+      // Sometimes we want to preserve @brave/leo for complex paths when providing
+      // typescript types for the consumer.
+      "@brave/leo/*": ["./*"]
+    }
   }
 }
