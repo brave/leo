@@ -10,6 +10,10 @@
   title="Components/Toggle"
   component={Toggle}
   argTypes={{
+    '--leo-toggle-transition-duration': {
+      type: 'string',
+      description: 'The duration of the change animation'
+    },
     '--leo-toggle-width': {
       type: 'string',
       description: 'The width of the toggle (in CSS units)'

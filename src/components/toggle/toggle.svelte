@@ -96,7 +96,7 @@
     --leo-direction: 1;
   }
 
-  :global(:root[dir=rtl]) {
+  :global(:root[dir='rtl']) {
     --leo-direction: -1;
   }
 
@@ -105,6 +105,11 @@
   }
 
   .leo-toggle {
+    --duration: var(--leo-toggle-transition-duration, 0.12s);
+    @media (prefers-reduced-motion) {
+      --duration: 0;
+    }
+
     --icon-size: var(--leo-icon-size, 20px);
     --width: var(--leo-toggle-width, 52px);
     --height: var(--leo-toggle-height, 32px);
@@ -161,7 +166,7 @@
     height: calc(var(--height) - 2 * var(--padding));
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color var(--duration) ease-in-out;
     flex-shrink: 0;
 
     &:disabled {
@@ -170,12 +175,6 @@
       > .thumb {
         background: var(--thumb-disabled-color);
       }
-    }
-
-    &:focus-visible:not(:disabled) {
-      box-shadow:
-        0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
-        0px 0px 4px 2px #423eee;
     }
 
     &:hover:not(:disabled) {
@@ -191,38 +190,38 @@
       --checked-thumb-offset: calc(var(--width) - var(--height));
       --thumb-offset: var(--unchecked-thumb-offset);
       --drag-offset: 0;
-      --thumb-position: calc(max(
-        min(
-          var(--checked-thumb-offset),
-          calc(var(--thumb-offset) + var(--drag-offset))
-        ),
-        var(--unchecked-thumb-offset)
-      ) * var(--leo-direction));
+      --thumb-position: calc(
+        max(
+            min(
+              var(--checked-thumb-offset),
+              calc(var(--thumb-offset) + var(--drag-offset))
+            ),
+            var(--unchecked-thumb-offset)
+          ) * var(--leo-direction)
+      );
 
       height: 100%;
       aspect-ratio: 1/1;
       background: white;
       border-radius: var(--leo-radius-full);
       transition:
-        transform 0.2s ease-in-out,
-        color 0.2s ease-in-out;
+        transform var(--duration) ease-in-out,
+        color var(--duration) ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
 
       &.dragging {
         transition:
           transform 0s ease-in-out,
-          color 0.2s ease-in-out;
+          color var(--duration) ease-in-out;
       }
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      box-shadow: var(--leo-effect-elevation-02);
-
       .on-icon {
-        transition: opacity 0.2s ease-in-out;
+        transition: opacity var(--duration) ease-in-out;
         display: flex;
         opacity: 0;
       }
