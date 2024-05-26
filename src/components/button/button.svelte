@@ -51,6 +51,7 @@
   export let onClick: () => void = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
+  $: disabled = !!(isDisabled || (isDisabled as any) === '')
 </script>
 
 <svelte:element
@@ -69,7 +70,7 @@
   class:isTiny={size === 'tiny'}
   class:fab
   class:isLoading
-  disabled={isLoading || isDisabled || undefined}
+  disabled={isLoading || disabled || undefined}
   on:click={onClick}
   {...$$restProps}
 >
