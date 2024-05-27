@@ -193,6 +193,11 @@
     flex: 1;
   }
 
+  .leo-input::placeholder {
+    color: currentColor;
+    opacity: 0.6;
+  }
+
   .input-container {
     flex: 1;
 
