@@ -46,6 +46,11 @@
       description:
         'The current text color (this is used for the icon if --leo-icon-color is not set)',
       type: 'string'
+    },
+    library: {
+      control:'text',
+      description: 'The library this icon belongs to',
+      type: 'string'
     }
   }}
   args={{

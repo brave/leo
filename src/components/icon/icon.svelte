@@ -3,12 +3,22 @@
   import { writable } from 'svelte/store'
 
   let lastIconBasePath = '/icons'
-  let iconBasePath = writable(lastIconBasePath)
+  let iconBasePath = writable<{
+    [key: string]: string
+  }>({
+    '': lastIconBasePath
+  })
 
   export const setIconBasePath = (basePath: string) => {
     lastIconBasePath = basePath
-    iconBasePath.set(basePath)
+    addLibrary('', basePath)
   }
+
+  export const addLibrary = (library: string, basePath: string) =>
+    iconBasePath.update((prev) => ({
+      ...prev,
+      [library]: basePath
+    }))
 
   const getIconUrl = (basePath: string, name: string) =>
     `${basePath}/${name}.svg`
@@ -38,8 +48,11 @@
   export let name: IconName = undefined
   export let forceColor: boolean = false
   export let title: string = undefined
+  export let library: string = ''
+
   $: hasColor =
     name?.endsWith('-color') || name?.startsWith('country-') || forceColor
+  $: basePath = $iconBasePath[library || ''] ?? ''
 </script>
 
 <div class="leoIcon" {title}>
@@ -48,7 +61,7 @@
       <div
         class="icon"
         class:color={hasColor}
-        style:--icon-url={`url('${getIconUrl($iconBasePath, name)}')`}
+        style:--icon-url={`url('${getIconUrl(basePath, name)}')`}
       />
     {/if}
   </slot>
