@@ -148,7 +148,10 @@
     background: var(--bg);
     color: var(--color);
     text-decoration: none;
-    padding: var(--leo-button-padding, calc(var(--padding-y) - var(--border-width)) var(--padding-x));
+    padding: var(
+      --leo-button-padding,
+      calc(var(--padding-y) - var(--border-width)) var(--padding-x)
+    );
     max-height: max-content;
 
     &.fab {
@@ -164,8 +167,14 @@
      * no guarantee that the button will contain a child element.
      */
     &:not(:has(> *)) {
-      padding-left: var(--leo-button-padding, calc(var(--padding-x) + var(--icon-gap)));
-      padding-right: var(--leo-button-padding, calc(var(--padding-x) + var(--icon-gap)));
+      padding-left: var(
+        --leo-button-padding,
+        calc(var(--padding-x) + var(--icon-gap))
+      );
+      padding-right: var(
+        --leo-button-padding,
+        calc(var(--padding-x) + var(--icon-gap))
+      );
     }
   }
 
@@ -311,7 +320,10 @@
   .leoButton.isOutline {
     --bg: transparent;
     --bg-active: --leo-color-gray-20;
-    --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
+    --primary-color: var(
+      --leo-button-color,
+      var(--leo-color-primitive-primary-60)
+    );
     --color: var(--mixed-primary-color);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
@@ -319,7 +331,10 @@
     --border-color-focus: var(--leo-color-divider-interactive);
 
     @theme (dark) {
-      --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-40));
+      --primary-color: var(
+        --leo-button-color,
+        var(--leo-color-primitive-primary-40)
+      );
       --border-color-hover: var(--leo-color-primitive-primary-60);
     }
 
@@ -338,13 +353,19 @@
     --icon-color: var(--color);
   }
   .leoButton.isPlain {
-    --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-60));
+    --primary-color: var(
+      --leo-button-color,
+      var(--leo-color-primitive-primary-60)
+    );
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
     --bg-hover-mix: 5%;
 
     @theme (dark) {
-      --primary-color: var(--leo-button-color, var(--leo-color-primitive-primary-40));
+      --primary-color: var(
+        --leo-button-color,
+        var(--leo-color-primitive-primary-40)
+      );
       --bg-hover-mix: 10%;
     }
 
@@ -468,7 +489,12 @@
 
       &::after {
         z-index: -2;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(174deg, #F50 2.32%, #F5002D 93.33%);
+        background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.2) 100%
+          ),
+          linear-gradient(174deg, #f50 2.32%, #f5002d 93.33%);
       }
     }
 
