@@ -124,13 +124,13 @@
     );
     --unchecked-color: var(
       --leo-toggle-unchecked-color,
-      var(--leo-color-gray-30)
+      var(--leo-color-neutral-30)
     );
     --unchecked-color-hover: var(
       --leo-toggle-unchecked-color-hover,
-      var(--leo-color-gray-40)
+      var(--leo-color-neutral-40)
     );
-    --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
+    --thumb-color: var(--leo-toggle-thumb-color, white);
     --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
     --label-gap: var(--leo-toggle-label-gap, var(--leo-spacing-s));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
