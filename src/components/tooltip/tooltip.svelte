@@ -244,9 +244,9 @@
   }
 
   .leo-tooltip .tooltip.mini {
-    --background: var(--leo-color-gray-10);
+    --background: var(--leo-color-neutral-10);
     @theme dark {
-      --background: var(--leo-color-gray-20);
+      --background: var(--leo-color-neutral-20);
     }
 
     --text: var(--leo-color-text-primary);

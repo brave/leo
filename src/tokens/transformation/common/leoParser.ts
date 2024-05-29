@@ -6,6 +6,7 @@ import { applyToTokens, removeKeyFromObject } from '../../utils'
 import universalVariables from '../../universal.variables.json'
 import { TinyColor } from '@ctrl/tinycolor'
 import { DesignToken, DesignTokens, Parser } from 'style-dictionary'
+import flattenMaterialTheme from './flattenMaterialTheme'
 
 /**
  * Transforms an effect to use variable references, rather than a hardcoded
@@ -38,7 +39,7 @@ export default {
     let layerVariables = {}
     try {
       layerVariables = require(`${filePath.split('.')[0]}.variables.json`)
-    } catch {}
+    } catch { }
 
     // Replace emojies, e.g. '🌚 dark' :-)
     stringContents = stringContents
@@ -81,6 +82,15 @@ export default {
     applyToTokens(contents.effect, 'custom-shadow', transformEffect)
 
     /**
+     * In Figma, our Material theme has two "modes":
+     * 1. Static: the default values
+     * 2. Dynamic: An example dynamic theme
+     * we need to remove the dynamic theme, and just use the defaults. When
+     * overriding people will just change the value of the variables.
+     */
+    flattenMaterialTheme(contents)
+
+    /**
      * Convert layers from multiple tokens to single token with array of values.
      *
      * Figma exports named gradients (e.g. gradient-gradient-04) with
@@ -88,6 +98,7 @@ export default {
      * gradient-gradient-02, etc.). This parser converts those layers to an
      * array of values within the parent token (gradient-gradient-04).
      */
+
     const categories = Object.entries(contents)
     for (const [category, categoryValue] of categories) {
       const types = Object.entries(categoryValue)

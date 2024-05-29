@@ -20,7 +20,12 @@ const DEFAULT_EXTENSIONS_TO_CHECK = [
   '.lss',
   '.svelte'
 ]
-const IGNORE = ['node_modules', 'audit-tokens.js']
+const IGNORE = [
+  'node_modules',
+  'audit-tokens.js',
+  'applyTheme.ts',
+  'applyTheme.js'
+]
 
 /**
  * Extracts all Leo tokens from a piece of text

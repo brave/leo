@@ -36,8 +36,8 @@ StyleDictionary.registerTransform({
   ...require('./webGradient')
 })
 StyleDictionary.registerTransform({
-  name: 'color/hex8ToRgba',
-  ...require('../common/colorToRgbaString')
+  name: 'web/color',
+  ...require('./color')
 })
 
 StyleDictionary.registerTransformGroup({
@@ -50,7 +50,7 @@ StyleDictionary.registerTransformGroup({
     'web/size',
     'web/font',
     'web/gradient',
-    'color/hex8ToRgba'
+    'web/color'
   ])
 })
 

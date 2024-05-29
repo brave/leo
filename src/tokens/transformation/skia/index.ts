@@ -2,6 +2,7 @@ import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
 import _template from 'lodash/template'
 import fs from 'fs'
 import colorToSkiaString from './colorToSkiaString'
+import { transformName } from './name'
 
 StyleDictionary.registerTransform({
   name: 'color/hex8ToSkiaString',
@@ -14,15 +15,6 @@ StyleDictionary.registerTransformGroup({
     'color/hex8ToSkiaString'
   ])
 })
-
-// convert to chromium's pascalCase convention
-const transformName = (token: TransformedToken) =>
-  `k${token.name
-    .split(/,|\-/)
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join('')
-    .replace('Light', '')
-    .replace('Dark', '')}`
 
 const transformValue = (token: TransformedToken) => {
   if (token.type === 'color') {
@@ -40,6 +32,20 @@ const transformValue = (token: TransformedToken) => {
   throw new Error(`Unsupported token type ${token.type}`)
 }
 
+const sortOrder = ['Primitive', 'Scheme', 'Neutral', 'Primary']
+
+const getSortKey = ({ name, value }) => {
+  const specialIndex = sortOrder.findIndex((i) => name.includes(i))
+  if (specialIndex !== -1) {
+    return specialIndex
+  }
+
+  // If its a color, it should sort later
+  if (value.toString().startsWith('kColor')) sortOrder.length + 1
+
+  // Its a color, but not a primitive
+  return sortOrder.length
+}
 const filteredTokens = (
   dictionary: Dictionary,
   filterFn: (value: TransformedToken) => boolean
@@ -49,11 +55,23 @@ const filteredTokens = (
     filtered = dictionary.allTokens.filter((token) => filterFn(token))
   }
 
-  filtered = filtered.map((token) => ({
-    ...token,
-    name: transformName(token),
-    value: transformValue(token)
-  }))
+  filtered = filtered
+    .map((token) => ({
+      ...token,
+      name: transformName(token),
+      value: transformValue(token)
+    }))
+    .sort((a, b) => {
+      // Make sure tokens which depend on others sort after those they depend on
+      const aKey = getSortKey(a)
+      const bKey = getSortKey(b)
+
+      if (aKey !== bKey) {
+        return aKey - bKey
+      }
+
+      return a.name.localeCompare(b.name)
+    })
 
   return {
     ...dictionary,

@@ -7,6 +7,14 @@
 
 #include "third_party/skia/include/core/SkColor.h"
 
+namespace leo {
+
+<%= groupedTokens.rest.allTokens.map(prop => {
+  return `constexpr SkColor ${prop.name} = ${prop.value};`;
+}).join('\n') %>
+
+} // namespace leo
+
 namespace leo::light {
 <%= groupedTokens.light.allTokens.map(prop => {
   return `constexpr SkColor ${prop.name} = ${prop.value};`;
@@ -20,10 +28,6 @@ namespace leo::dark {
 } // namespace leo::dark
 
 namespace leo {
-
-<%= groupedTokens.rest.allTokens.map(prop => {
-  return `constexpr SkColor ${prop.name} = ${prop.value};`;
-}).join('\n') %>
 
 enum class Theme {
   kLight,

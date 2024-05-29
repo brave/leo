@@ -205,7 +205,7 @@
   .leo-control.isOutline {
     --background: var(--primary);
     --border-color: var(--leo-color-divider-strong);
-    --border-color-hover: var(--leo-color-gray-30);
+    --border-color-hover: var(--leo-color-neutral-30);
     --shadow-hover: var(--leo-effect-elevation-01);
 
     @supports (color: color-mix(in srgb, transparent, transparent)) {
