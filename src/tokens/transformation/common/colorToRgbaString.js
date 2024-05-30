@@ -7,8 +7,8 @@ module.exports = {
   },
   transformer: function ({ value, original }) {
     if (original.value.startsWith('$')) {
-      const name = original.value.substring(1).replaceAll('.', '-');
-      return `var(--leo-color-${name})` 
+      const name = original.value.substring(1).replaceAll('.', '-')
+      return `var(--leo-color-${name})`
     }
     return `${new TinyColor.TinyColor(value).toRgbString()}`
   }

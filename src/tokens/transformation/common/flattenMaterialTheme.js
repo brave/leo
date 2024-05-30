@@ -5,22 +5,22 @@ const defaultsName = 'static'
  * To work better in Figma, we have a default value for the MUI tokens in `Static`
  * and an example 'Dynamic' override in the `Dynamic` property. To make this work
  * in Nala we remove the dynamic value and convert
- * 
+ *
  * static.primitive.X
- * to 
+ * to
  * color.primitive.X
- * 
+ *
  * When consumers override the theme, they will be doing it by directly setting
  * the primitive colors.
- * @param {*} contents The contents of the tokens JSON 
+ * @param {*} contents The contents of the tokens JSON
  */
 module.exports = function (contents) {
-    const defaults = { ...contents[defaultsName] }
+  const defaults = { ...contents[defaultsName] }
 
-    delete contents[dynamicName]
-    delete contents[defaultsName]
+  delete contents[dynamicName]
+  delete contents[defaultsName]
 
-    for (const [color, value] of Object.entries(defaults)) {
-        contents.color[color] = value
-    }
+  for (const [color, value] of Object.entries(defaults)) {
+    contents.color[color] = value
+  }
 }

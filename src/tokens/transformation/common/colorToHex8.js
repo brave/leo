@@ -7,8 +7,8 @@ module.exports = {
   },
   transformer: function ({ value }) {
     if (value.startsWith('$')) {
-      console.log("Oh no!")
-      throw "Oh no!"
+      console.log('Oh no!')
+      throw 'Oh no!'
     }
     return `${new TinyColor.TinyColor(value).toHex8String()}`
   }
