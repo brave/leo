@@ -19,7 +19,7 @@
 
 <div class="layout" data-theme={theme}>
   <div class="theme-toggle-container">
-    <SegmentedControl size='tiny' bind:value={theme}>
+    <SegmentedControl size="tiny" bind:value={theme}>
       <ControlItem value="light">
         <Icon name="theme-light" />
       </ControlItem>
