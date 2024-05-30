@@ -4,6 +4,9 @@
   import Icon from '../src/components/icon/icon.svelte'
   import SegmentedControl from '../src/components/segmentedControl/segmentedControl.svelte'
   import '../tokens/css/variables.css'
+  import { applyTheme } from '../src/theming/applyTheme.mjs'
+  import Input from '../src/components/input/input.svelte'
+  import Button from '../src/components/button/button.svelte'
 
   // Note: We set the data-theme attribute on the body and on our layout element
   // so that the theme is correctly set whether there are multiple stories on
@@ -13,6 +16,8 @@
     localStorage.setItem('theme', theme)
     document.body.setAttribute('data-theme', theme)
   }
+
+  let primaryColor: string = ''
 </script>
 
 <AlertCenter />
@@ -30,6 +35,12 @@
         <Icon name="theme-system" />
       </ControlItem>
     </SegmentedControl>
+  </div>
+  <div class="accent-row">
+    <Input placeholder="#00FF00" bind:value={primaryColor} size='small' />
+    <Button onClick={() => applyTheme(primaryColor)} size='small'>
+      Update primary color
+    </Button>
   </div>
   <slot />
 </div>
@@ -51,5 +62,10 @@
     flex-direction: column;
     align-items: end;
     margin-bottom: var(--leo-spacing-m);
+  }
+
+  .accent-row {
+    display: flex;
+    gap: 8px;
   }
 </style>

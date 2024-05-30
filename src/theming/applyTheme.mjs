@@ -1,9 +1,5 @@
 import { themeFromSourceColor, argbFromHex, hexFromArgb } from '@material/material-color-utilities'
 
-const theme = themeFromSourceColor(argbFromHex(`#d43785`), [
-
-])
-
 const copyOver = [
     'primary',
     'secondary',
@@ -36,9 +32,31 @@ const tones = [
 
 const formatColor = (name, tone, value) => `--leo-color-primitive-${name}-${tone}: ${hexFromArgb(value)};`
 
-for (const colorName of copyOver) {
-    const color = theme.palettes[colorName]
-    for (const tone of tones) {
-        console.log(formatColor(colorName, tone, color.tone(tone)))
+
+const sheet = new CSSStyleSheet()
+export const applyTheme = (primaryColor) => {
+    const theme = themeFromSourceColor(argbFromHex(primaryColor), [
+
+    ])
+
+    const variables = []
+
+    for (const colorName of copyOver) {
+        const color = theme.palettes[colorName]
+        for (const tone of tones) {
+            variables.push(formatColor(colorName, tone, color.tone(tone)))
+        }
+    }
+
+    sheet.replaceSync(`:root {
+        ${variables.join('\n')}
+    }`)
+
+    console.log(sheet)
+
+    if (!document.adoptedStyleSheets.includes(sheet)) {
+        document.adoptedStyleSheets.push(sheet)
     }
 }
+
+window['applyTheme'] = applyTheme
