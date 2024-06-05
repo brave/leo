@@ -1,3 +1,22 @@
+<script context="module" lang="ts">
+  export function scopedApplyLayer(name: string) {
+    let ss: CSSStyleSheet
+    fetch(`/css/${name}.css`)
+      .then((r) => r.text())
+      .then((css) => {
+        ss = new CSSStyleSheet()
+        ss.replaceSync(css)
+        document.adoptedStyleSheets.push(ss)
+      })
+
+    return () => {
+      document.adoptedStyleSheets = document.adoptedStyleSheets.filter(
+        (s) => s !== ss
+      )
+    }
+  }
+</script>
+
 <script lang="ts">
   import AlertCenter from '../src/components/alert/alertCenter.svelte'
   import ControlItem from '../src/components/controlItem/controlItem.svelte'
@@ -19,7 +38,7 @@
 
 <div class="layout" data-theme={theme}>
   <div class="theme-toggle-container">
-    <SegmentedControl size='tiny' bind:value={theme}>
+    <SegmentedControl size="tiny" bind:value={theme}>
       <ControlItem value="light">
         <Icon name="theme-light" />
       </ControlItem>

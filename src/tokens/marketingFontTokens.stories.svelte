@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css/variables-marketing'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
-  import '../../tokens/css/variables-marketing.css'
+  import { scopedApplyLayer } from '../../.storybook/global.svelte'
+
+  onMount(() => scopedApplyLayer("variables-marketing"))
 
   const { mobile, desktop } = allFonts
 </script>
