@@ -34,7 +34,7 @@
     "@tsconfig/svelte": "5.0.4",
     "@types/jest": "29.5.12",
     "babel-loader": "9.1.3",
-    "css-loader": "6.7.3",
+    "css-loader": "6.11.0",
     "css-tree": "2.3.1",
     "figma-api-exporter": "github:brave/figma-api-exporter#c70ac90",
     "jsdom": "21.1.2",
