@@ -3,16 +3,9 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { gradient as allGradients } from '../../tokens/css/variables-news'
   import ColorTokenSwatchGroup from '../storyHelpers/ColorTokenSwatchGroup.svelte'
-  // @ts-ignore
-  import styles from '../../tokens/css/variables-news.css?raw'
+  import { scopedApplyLayer } from '../../.storybook/global.svelte'
 
-  onMount(() => {
-    const stylesheet = new CSSStyleSheet();
-    stylesheet.replaceSync(styles);
-    document.adoptedStyleSheets = [stylesheet];
-
-    return () => document.adoptedStyleSheets = [];
-  })
+  onMount(() => scopedApplyLayer("variables-news"))
 </script>
 
 <Meta title="Tokens/News/Gradients" />

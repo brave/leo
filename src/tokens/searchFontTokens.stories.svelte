@@ -3,16 +3,9 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css/variables-search'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
-  // @ts-ignore
-  import styles from '../../tokens/css/variables-search.css?raw'
+  import { scopedApplyLayer } from '../../.storybook/global.svelte'
 
-  onMount(() => {
-    const stylesheet = new CSSStyleSheet();
-    stylesheet.replaceSync(styles);
-    document.adoptedStyleSheets = [stylesheet];
-
-    return () => document.adoptedStyleSheets = [];
-  })
+  onMount(() => scopedApplyLayer("variables-search"))
 </script>
 
 <Meta title="Tokens/Search/Fonts" />
