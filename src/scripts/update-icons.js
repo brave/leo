@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const { JSDOM } = require('jsdom')
 const { optimize } = require('svgo')
+const { TinyColor } = require('@ctrl/tinycolor')
 
 const RAW_FOLDER = './icons-raw'
 const FINAL_FOLDER = './icons'
@@ -19,6 +20,22 @@ if (!process.env.FIGMA_API_TOKEN) {
   )
 }
 
+/**
+ * Determines whether a color is allowed in monochrome icons. All other colors
+ * will be replaced with our Perfect Gray :D
+ * @param {string} color The color currently being used
+ * @returns {boolean} whether the color is allowed
+ */
+const isAllowedColor = (color) => {
+  const allowedColors = ['FFFFFF', '000000', 'none', 'transparent']
+
+  if (allowedColors.includes(color)) return true
+  if (allowedColors.includes(new TinyColor(color).toHex().toUpperCase()))
+    return true
+
+  return false
+}
+
 const getFlag = (iconName) => {
   const regionRegex = /Country=Region - ((\w|\s)+).svg/
   let match = regionRegex.exec(iconName)
@@ -32,6 +49,14 @@ const getFlag = (iconName) => {
 
   return match[1]?.toUpperCase()
 }
+
+/**
+ * Determines whether an icon is probably color, based on its name
+ * @param {string} name
+ * @returns {boolean} Whether the icon is probably color
+ */
+const isProbablyColor = (name) =>
+  name.endsWith('-color.svg') || getFlag(name) || name.startsWith('social')
 
 const getMutatedIconName = (iconName) => {
   const flag = getFlag(iconName)
@@ -55,6 +80,22 @@ const mutateIcon = (iconName) => {
   if (!svg) {
     console.error(`Icon ${iconName} has no SVG element`)
     return
+  }
+
+  // Sometimes, we change the default icon color in Figma - we don't really want
+  // that to trigger an update of all our icons though, so we just always use
+  // this nice gray.
+  if (!isProbablyColor(iconName)) {
+    const idealColor = '#62757E'
+    for (const filled of document.querySelectorAll('[fill]')) {
+      if (isAllowedColor(filled.getAttribute('fill'))) continue
+      filled.setAttribute('fill', idealColor)
+    }
+
+    for (const stroked of document.querySelectorAll('[stroke]')) {
+      if (isAllowedColor(stroked.getAttribute('stroke'))) continue
+      stroked.setAttribute('stroke', idealColor)
+    }
   }
 
   const outputName = getMutatedIconName(iconName)
