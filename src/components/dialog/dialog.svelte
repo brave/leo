@@ -130,6 +130,12 @@
     );
     --color: var(--leo-dialog-color, var(--leo-color-text-primary));
 
+    --backdrop-background: var(
+      --leo-dialog-backdrop-background,
+      rgba(0, 0, 0, 0.1)
+    );
+    --backdrop-filter: var(--leo-dialog-backdrop-filter);
+
     position: fixed;
     margin: auto;
     border: none;
@@ -144,6 +150,11 @@
 
     padding: 0;
     background: transparent;
+
+    &::backdrop {
+      background: var(--backdrop-background);
+      backdrop-filter: var(--backdrop-filter);
+    }
   }
 
   .leo-dialog.hasHeader {
