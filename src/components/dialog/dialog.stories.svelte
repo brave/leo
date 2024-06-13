@@ -38,6 +38,16 @@
       control: 'color',
       description: 'The default text color of the dialog'
     },
+    '--leo-dialog-backdrop-background': {
+      type: 'string',
+      control: 'color',
+      description: 'The color of the backdrop behind a modal dialog'
+    },
+    '--leo-dialog-backdrop-filter': {
+      type: 'string',
+      control: 'text',
+      description: 'The filter to apply to the backdrop'
+    },
     isOpen: {
       control: 'none'
     },
