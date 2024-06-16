@@ -200,6 +200,8 @@
     .close-button,
     .back-button {
       --leo-button-padding: var(--leo-spacing-s);
+
+      flex: 0;
     }
   }
 
@@ -257,7 +259,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: stretch;
     gap: var(--leo-spacing-l);
   }
 </style>
