@@ -20,9 +20,8 @@ export type IntrinsicProps =
   | 'style'
   | 'tabIndex'
 
-export type SvelteProps<T> = T extends SvelteComponent<infer Props, any, any>
-  ? Props
-  : {}
+export type SvelteProps<T> =
+  T extends SvelteComponent<infer Props, any, any> ? Props : {}
 
 // We introduce a custom ref type as some of the Svelte type definitions don't
 // play nice with React.ForwardRef.
