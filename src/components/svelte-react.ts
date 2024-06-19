@@ -20,31 +20,30 @@ export type IntrinsicProps =
   | 'style'
   | 'tabIndex'
 
-export type SvelteProps<T> = T extends SvelteComponent<infer Props, any, any>
-  ? Props
-  : {}
+export type SvelteProps<T> =
+  T extends SvelteComponent<infer Props, any, any> ? Props : {}
 
 // We introduce a custom ref type as some of the Svelte type definitions don't
 // play nice with React.ForwardRef.
 type Ref<T> =
   | ((ref: (Omit<HTMLElement, keyof T> & T) | null) => void)
   | {
-    current:
-    | HTMLElement
-    | Partial<T>
-    | (Omit<HTMLElement, keyof T> & T)
-    | undefined
-    | null
-  }
+      current:
+        | HTMLElement
+        | Partial<T>
+        | (Omit<HTMLElement, keyof T> & T)
+        | undefined
+        | null
+    }
 export type ReactProps<Props> = Props & {
   ref?: Ref<Props>
   slot?: string
 } & {
-    // Note: The div here isn't important because all props in intrinsicProps are
-    // available on all elements. We just want to make sure we have the correct
-    // React name/value for them.
-    [P in IntrinsicProps]?: Omit<JSX.IntrinsicElements, 'ref'>['div'][P]
-  }
+  // Note: The div here isn't important because all props in intrinsicProps are
+  // available on all elements. We just want to make sure we have the correct
+  // React name/value for them.
+  [P in IntrinsicProps]?: Omit<JSX.IntrinsicElements, 'ref'>['div'][P]
+}
 
 const useEventHandlers = (props: any) => {
   const [el, setEl] = useState<HTMLElement>()
@@ -140,7 +139,7 @@ export default function SvelteWebComponentToReact<
         // behavior, and triggers a TrustedTypes error.
         for (const [key, value] of Object.entries(props)) {
           if (eventRegex.test(key) || key === 'children') continue
-            ; (component.current as any)[key] = value
+          ;(component.current as any)[key] = value
         }
       }, [props])
 
