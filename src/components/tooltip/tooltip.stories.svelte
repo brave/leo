@@ -85,7 +85,7 @@
       <div class="close">
         <Button
           kind="plain-faint"
-          fab
+          iconOnly
           size="tiny"
           onClick={() => (showTooltip = false)}
         >

@@ -53,7 +53,7 @@
     <Slot name="content-after" explanation="optional content after the main content of the alert">
       <Alert {...args} mode="simple">
         Some content
-        <Button kind='plain-faint' fab slot="content-after">
+        <Button kind='plain-faint' iconOnly slot="content-after">
           <Icon name="close" />
         </Button>
       </Alert>

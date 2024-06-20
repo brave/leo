@@ -45,7 +45,7 @@ function App() {
           </Dropdown>
         </div>
         <ButtonMenu>
-          <LeoButton fab kind="plain-faint" slot="anchor-content">
+          <LeoButton iconOnly kind="plain-faint" slot="anchor-content">
             <Icon name="more-horizontal" />
           </LeoButton>
           <leo-menu-item onClick={handleAction}>Llama2-13b</leo-menu-item>
