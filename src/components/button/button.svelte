@@ -24,7 +24,7 @@
     kind?: Props.ButtonKind
     size?: Props.ButtonSize
     fab?: boolean
-    onClick?: () => void
+    onClick?: (e: MouseEvent) => void
   }
 
   type NalaButtonProps = CommonProps &
@@ -48,7 +48,7 @@
   export let href: Href = undefined
   export let fab = false
 
-  export let onClick: () => void = undefined
+  export let onClick: (e: MouseEvent) => void = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
   $: disabled = !!(isDisabled || (isDisabled as any) === '')
