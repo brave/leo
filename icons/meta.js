@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1719389359154,
+  "updatedAt": 1719475764550,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -249,6 +249,7 @@ export default {
     "browser-notification": "browser-notification",
     "browser-ntp-widget": "browser-ntp-widget",
     "browser-refresh": "browser-refresh",
+    "browser-sidebar-off": "browser-sidebar-off",
     "browser-sidebar-right": "browser-sidebar-right",
     "browser-sidebar": "browser-sidebar",
     "browser-split-view-horizontal": "browser-split-view-horizontal",
@@ -1600,6 +1601,7 @@ export default {
     "search": "search",
     "secret-color": "secret-color",
     "sek-color": "sek-color",
+    "send-filled": "send-filled",
     "send-money": "send-money",
     "send": "send",
     "settings": "settings",
