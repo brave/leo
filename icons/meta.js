@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1719475764550,
+  "updatedAt": 1719907768673,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1588,6 +1588,7 @@ export default {
     "search-money": "search-money",
     "search-movie": "search-movie",
     "search-news": "search-news",
+    "search-off": "search-off",
     "search-phone-call": "search-phone-call",
     "search-phone": "search-phone",
     "search-restaurant-menu": "search-restaurant-menu",
