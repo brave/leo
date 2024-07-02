@@ -23,7 +23,9 @@ function App() {
         <h1>A React App</h1>
         <Input value={buttonText} onInput={(e: any) => setButtonText(e.value)}>
           Edit the button text:
-          {buttonText.length % 2 === 0 && <Icon name='loading-spinner' slot="left-icon"/>}
+          {buttonText.length % 2 === 0 && (
+            <Icon name="loading-spinner" slot="left-icon" />
+          )}
         </Input>
         {buttonText && (
           <LeoButton

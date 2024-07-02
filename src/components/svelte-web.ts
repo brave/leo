@@ -55,7 +55,11 @@ const createSlot = (name?: string) => {
 const generateSelector = (el: Element) => {
   if (!el) return null
   if (el.id) return `#${el.id}`
-  return el.className.split(' ').filter(c => c).map(c => `.${c}`).join('')
+  return el.className
+    .split(' ')
+    .filter((c) => c)
+    .map((c) => `.${c}`)
+    .join('')
 }
 
 export default function registerWebComponent(
@@ -183,7 +187,7 @@ export default function registerWebComponent(
         // If there's focus within the element, get a selector to the
         // activeElement - we'll restore it after creating/destroying the
         // element.
-        const restoreFocus = generateSelector(this.shadowRoot?.activeElement);
+        const restoreFocus = generateSelector(this.shadowRoot?.activeElement)
 
         // If the component already exists, destroy it. This is,
         // unfortunately, necessary as there is no way to update slotted
@@ -216,8 +220,8 @@ export default function registerWebComponent(
         })
 
         if (restoreFocus) {
-          const restoreTo = this.shadowRoot.querySelector(restoreFocus);
-          (restoreTo as HTMLElement)?.focus?.();
+          const restoreTo = this.shadowRoot.querySelector(restoreFocus)
+          ;(restoreTo as HTMLElement)?.focus?.()
         }
       }
 
