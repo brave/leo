@@ -164,6 +164,15 @@
 </div>
 
 <style lang="scss">
+  :host {
+    display: inline-block;
+    width: fit-content;
+
+    & > .leo-tooltip {
+      width: 100%;
+    }
+  }
+
   .leo-tooltip {
     --background: var(
       --leo-tooltip-background,
@@ -175,6 +184,8 @@
     --radius: var(--leo-radius-m);
     --border-color: transparent;
     --border-width: 0px;
+
+    width: fit-content;
   }
 
   .leo-tooltip .tooltip {
@@ -249,9 +260,5 @@
   .leo-tooltip .tooltip.default {
     --border-color: var(--leo-color-divider-subtle);
     --border-width: 1px;
-  }
-
-  .leo-tooltip .trigger {
-    width: fit-content;
   }
 </style>
