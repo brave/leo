@@ -45,6 +45,23 @@ const createSlot = (name?: string) => {
   }
 }
 
+/**
+ * Generate a selector for an element - note: This is pretty limited at the
+ * moment and will only work if the element has a unique id/class. However, for
+ * now this works well enough, and we can improve it easily.
+ * @param el The element to generate the selector for
+ * @returns A selector for the element: Note: This relies on the element having a unique Id or class
+ */
+const generateSelector = (el: Element) => {
+  if (!el) return null
+  if (el.id) return `#${el.id}`
+  return el.className
+    .split(' ')
+    .filter((c) => c)
+    .map((c) => `.${c}`)
+    .join('')
+}
+
 export default function registerWebComponent(
   component: any,
   { name, mode }: Options
@@ -167,6 +184,11 @@ export default function registerWebComponent(
           .map((k) => [k, this[k]])
           .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {})
 
+        // If there's focus within the element, get a selector to the
+        // activeElement - we'll restore it after creating/destroying the
+        // element.
+        const restoreFocus = generateSelector(this.shadowRoot?.activeElement)
+
         // If the component already exists, destroy it. This is,
         // unfortunately, necessary as there is no way to update slotted
         // content in the output Svelte compiles to. This is a problem
@@ -196,6 +218,11 @@ export default function registerWebComponent(
             $$scope: { ctx: [] }
           }
         })
+
+        if (restoreFocus) {
+          const restoreTo = this.shadowRoot.querySelector(restoreFocus)
+          ;(restoreTo as HTMLElement)?.focus?.()
+        }
       }
 
       // Unfortunately we need a DOMMutationObserver to let us know when
