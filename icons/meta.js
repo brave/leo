@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1719475764550,
+  "updatedAt": 1720512551316,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -13,6 +13,7 @@ export default {
     "aave-color": "aave-color",
     "abbc-color": "abbc-color",
     "abt-color": "abt-color",
+    "academic": "academic",
     "acalanetwork-color": "acalanetwork-color",
     "accessibility": "accessibility",
     "achain-color": "achain-color",
@@ -1493,6 +1494,7 @@ export default {
     "prqboost-color": "prqboost-color",
     "pungo-color": "pungo-color",
     "pura-color": "pura-color",
+    "pwa-brave-install-color": "pwa-brave-install-color",
     "pwa-install": "pwa-install",
     "qash-color": "qash-color",
     "qiwi-color": "qiwi-color",
@@ -1588,6 +1590,7 @@ export default {
     "search-money": "search-money",
     "search-movie": "search-movie",
     "search-news": "search-news",
+    "search-off": "search-off",
     "search-phone-call": "search-phone-call",
     "search-phone": "search-phone",
     "search-restaurant-menu": "search-restaurant-menu",
@@ -1688,6 +1691,7 @@ export default {
     "social-facebook": "social-facebook",
     "social-github": "social-github",
     "social-instagram": "social-instagram",
+    "social-leo-favicon-fullheight-color": "social-leo-favicon-fullheight-color",
     "social-linkedin": "social-linkedin",
     "social-medium": "social-medium",
     "social-patreon": "social-patreon",
