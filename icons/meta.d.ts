@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1719475764550,
+  "updatedAt": 1720512551316,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -15,6 +15,7 @@ const meta = {
     "aave-color": "aave-color",
     "abbc-color": "abbc-color",
     "abt-color": "abt-color",
+    "academic": "academic",
     "acalanetwork-color": "acalanetwork-color",
     "accessibility": "accessibility",
     "achain-color": "achain-color",
@@ -1495,6 +1496,7 @@ const meta = {
     "prqboost-color": "prqboost-color",
     "pungo-color": "pungo-color",
     "pura-color": "pura-color",
+    "pwa-brave-install-color": "pwa-brave-install-color",
     "pwa-install": "pwa-install",
     "qash-color": "qash-color",
     "qiwi-color": "qiwi-color",
@@ -1590,6 +1592,7 @@ const meta = {
     "search-money": "search-money",
     "search-movie": "search-movie",
     "search-news": "search-news",
+    "search-off": "search-off",
     "search-phone-call": "search-phone-call",
     "search-phone": "search-phone",
     "search-restaurant-menu": "search-restaurant-menu",
@@ -1690,6 +1693,7 @@ const meta = {
     "social-facebook": "social-facebook",
     "social-github": "social-github",
     "social-instagram": "social-instagram",
+    "social-leo-favicon-fullheight-color": "social-leo-favicon-fullheight-color",
     "social-linkedin": "social-linkedin",
     "social-medium": "social-medium",
     "social-patreon": "social-patreon",
