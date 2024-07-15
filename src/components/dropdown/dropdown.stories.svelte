@@ -207,7 +207,7 @@
   .country {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: var(--leo-spacing-xl);
     align-items: center;
   }
 

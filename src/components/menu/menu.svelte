@@ -231,7 +231,6 @@
     // overflow: 'auto' (or anything but 'visible') helps clip the content
     // to the border-radius.
     overflow: auto;
-
     border: 1px solid var(--leo-color-divider-subtle);
     border-radius: var(--leo-radius-m);
     min-width: var(--leo-menu-control-width);
@@ -243,8 +242,9 @@
   :global .leo-menu-popup ::slotted(*),
   :global .leo-menu-popup > * {
     --leo-menu-item-margin: var(--leo-spacing-s);
-    --leo-menu-item-padding: var(--leo-spacing-xl);
-    --leo-menu-item-border-radius: var(--leo-spacing-m);
+    --leo-menu-item-padding-horizontal: var(--leo-spacing-xl);
+    --leo-menu-item-padding-vertical: var(--leo-spacing-m);
+    --leo-menu-item-border-radius: var(--leo-spacing-s);
   }
 
   /**
@@ -261,7 +261,7 @@
     cursor: pointer;
     margin: var(--leo-menu-item-margin);
     border-radius: var(--leo-menu-item-border-radius);
-    padding: var(--leo-menu-item-padding);
+    padding: var(--leo-menu-item-padding-vertical) var(--leo-menu-item-padding-horizontal);
     display: revert;
   }
 
