@@ -1,10 +1,11 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1720512551316,
+  "updatedAt": 1721117418087,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
+    "1.2x": "1.2x",
     "1.5x": "1.5x",
     "1inch-color": "1inch-color",
     "1password-color": "1password-color",
@@ -318,6 +319,8 @@ const meta = {
     "cent": "cent",
     "centrifuge-color": "centrifuge-color",
     "cenz-color": "cenz-color",
+    "certificate-invalid": "certificate-invalid",
+    "certificate-valid": "certificate-valid",
     "cex-color": "cex-color",
     "chain-color": "chain-color",
     "chainlink-color": "chainlink-color",
@@ -705,6 +708,8 @@ const meta = {
     "cvc-color": "cvc-color",
     "d-color": "d-color",
     "dai-color": "dai-color",
+    "dangerous-filled": "dangerous-filled",
+    "dangerous-outline": "dangerous-outline",
     "dash-color": "dash-color",
     "dat-color": "dat-color",
     "data-color": "data-color",
@@ -1136,9 +1141,11 @@ const meta = {
     "litecoin-color": "litecoin-color",
     "livepeer-color": "livepeer-color",
     "lkk-color": "lkk-color",
+    "lmstudio-color": "lmstudio-color",
     "loading-spinner": "loading-spinner",
     "location-off": "location-off",
     "location-on": "location-on",
+    "lock-disabled": "lock-disabled",
     "lock-dots": "lock-dots",
     "lock-open": "lock-open",
     "lock-orientation": "lock-orientation",
