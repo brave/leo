@@ -152,6 +152,7 @@
       {type}
       {value}
       {placeholder}
+      tabindex={1}
       bind:this={input}
       on:input={handleInput}
       on:change={forward(onChange)}
