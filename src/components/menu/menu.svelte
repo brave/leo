@@ -242,8 +242,7 @@
   :global .leo-menu-popup ::slotted(*),
   :global .leo-menu-popup > * {
     --leo-menu-item-margin: var(--leo-spacing-s);
-    --leo-menu-item-padding-horizontal: var(--leo-spacing-xl);
-    --leo-menu-item-padding-vertical: var(--leo-spacing-m);
+    --leo-menu-item-padding:  var(--leo-spacing-m) var(--leo-spacing-xl);
     --leo-menu-item-border-radius: var(--leo-spacing-s);
   }
 
