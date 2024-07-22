@@ -261,7 +261,7 @@
     cursor: pointer;
     margin: var(--leo-menu-item-margin);
     border-radius: var(--leo-menu-item-border-radius);
-    padding: var(--leo-menu-item-padding-vertical) var(--leo-menu-item-padding-horizontal);
+    padding: var(--leo-menu-item-padding)
     display: revert;
   }
 
