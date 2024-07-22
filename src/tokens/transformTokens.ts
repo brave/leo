@@ -1,12 +1,12 @@
-const StyleDictionary = require('style-dictionary')
-const getConfig = require('./config')
+import StyleDictionary from 'style-dictionary'
+import getConfig from './config'
 
 // Register transforms
-require('./transformation/web')
-require('./transformation/tailwind')
-require('./transformation/skia')
-require('./transformation/ios')
-require('./transformation/android')
+import './transformation/web'
+import './transformation/tailwind'
+import './transformation/skia'
+import './transformation/ios'
+import './transformation/android'
 
 // Register Global transforms
 StyleDictionary.registerTransform({

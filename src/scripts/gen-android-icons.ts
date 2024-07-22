@@ -1,6 +1,6 @@
-const fs = require('fs/promises')
-const path = require('path')
-const svg2vectordrawable = require('svg2vectordrawable')
+import fs from 'fs/promises'
+import path from 'path'
+import svg2vectordrawable from 'svg2vectordrawable'
 
 const ICONS_FOLDER = 'icons/'
 const OUTPUT_FOLDER = './tokens/android/drawable/'

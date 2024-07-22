@@ -1,6 +1,6 @@
-const fs = require('fs/promises')
-const path = require('path')
-const skiafy = require('./icons/skiafy')
+import fs from 'fs/promises'
+import path from 'path'
+import skiafy from './icons/skiafy.js'
 
 const ICONS_FOLDER = 'icons/'
 const OUTPUT_FOLDER = 'icons-skia/'
