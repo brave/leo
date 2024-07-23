@@ -2,9 +2,10 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
-const { applyToTokens, removeKeyFromObject } = require('../../utils')
-const universalVariables = require('../../universal.variables.json')
-const { TinyColor } = require('@ctrl/tinycolor')
+import { applyToTokens, removeKeyFromObject } from '../../utils'
+import universalVariables from '../../universal.variables.json'
+import { TinyColor } from '@ctrl/tinycolor'
+import { DesignToken, DesignTokens, Parser } from 'style-dictionary'
 
 /**
  * Transforms an effect to use variable references, rather than a hardcoded
@@ -14,36 +15,39 @@ const { TinyColor } = require('@ctrl/tinycolor')
  * @param {*} layerVariables
  * @returns {Array}
  */
-function getEffectColorsFromLayer(layerVariables) {
+function getEffectColorsFromLayer(layerVariables: DesignTokens) {
   const allowedGroups = ['elevation', 'primary', 'secondary']
   return allowedGroups
     .map((g) =>
-      Object.entries(layerVariables.color?.['---light']?.[g] || {}).map(
-        ([key, value]) => [
-          `${g}.${key}`,
-          new TinyColor(value.value).toHex8String()
-        ]
-      )
+      (
+        Object.entries(layerVariables.color?.['---light']?.[g] || {}) as [
+          string,
+          DesignToken
+        ][]
+      ).map(([key, value]) => [
+        `${g}.${key}`,
+        new TinyColor(value.value).toHex8String()
+      ])
     )
     .flat()
 }
 
-module.exports = {
+export default {
   pattern: /\.json$/,
-  parse: ({ filePath, contents }) => {
+  parse: ({ filePath, contents: stringContents }) => {
     let layerVariables = {}
     try {
       layerVariables = require(`${filePath.split('.')[0]}.variables.json`)
     } catch {}
 
     // Replace emojies, e.g. '🌚 dark' :-)
-    contents = contents
+    stringContents = stringContents
       .replace(
         /([\uE000-\uF8FF]|\uD83C|[\uDC00-\uDFFF]|\uD83D|[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E|[\uDD10-\uDDFF]|\uFE0F|\u20E3)\s?/gm,
         ''
       )
       .replaceAll(/-{2,}/g, '')
-    contents = JSON.parse(contents)
+    const contents = JSON.parse(stringContents) as DesignTokens
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
@@ -117,7 +121,7 @@ module.exports = {
           }
         }
 
-        for (const [item, itemValue] of items) {
+        for (const [item, itemValue] of items as [string, DesignToken][]) {
           // Combine items where figma splits a single-value to multiple values
           // NOTE: ideal scenario here would be to programmatically determine if values should be grouped or not, instead of manually managing a list.
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
@@ -135,9 +139,9 @@ module.exports = {
 
     return contents
   }
-}
+} as Parser
 
-function groupValues(tokenValue) {
+function groupValues(tokenValue: DesignToken) {
   // Make sure we filter out null items, or we won't set the type properly.
   const subitems = Object.values(tokenValue).filter((si) => si)
   tokenValue = {

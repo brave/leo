@@ -1,6 +1,7 @@
-const { TinyColor } = require('@ctrl/tinycolor')
+import { TinyColor } from '@ctrl/tinycolor'
+import { Transform } from 'style-dictionary'
 
-module.exports = {
+export default {
   type: 'value',
   matcher: ({ type }) => type === 'color',
   transformer: ({ value }) => {
@@ -12,4 +13,4 @@ module.exports = {
     const func = parts.length === 3 ? 'SkColorSetRGB' : 'SkColorSetARGB'
     return `${func}(${parts.join(', ')})`
   }
-}
+} as Transform

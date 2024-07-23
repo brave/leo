@@ -1,13 +1,19 @@
-function formatLayerPathPart(layers, { prefix, suffix } = {}) {
+import { Config } from 'style-dictionary'
+import leoParser from './transformation/common/leoParser'
+
+function formatLayerPathPart(
+  layers: string[],
+  { prefix, suffix }: { prefix?: string; suffix?: string } = {}
+) {
   if (layers.length === 1 && layers.at(0) !== 'universal') {
     return [prefix, layers, suffix].join('')
   } else return ''
 }
 
-module.exports = function getConfig(layers) {
+export default function getConfig(layers: string[]) {
   return {
     source: layers.map((layer) => `src/tokens/${layer}*.json`),
-    parsers: [require('./transformation/common/leoParser')],
+    parsers: [leoParser],
     platforms: {
       tailwind: {
         transformGroup: 'tailwind/css',
@@ -162,5 +168,5 @@ module.exports = function getConfig(layers) {
         ]
       }
     }
-  }
+  } as Config
 }

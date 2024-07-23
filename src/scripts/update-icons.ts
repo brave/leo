@@ -1,9 +1,9 @@
-const figmaApiExporter = require('figma-api-exporter').default
-const fs = require('fs')
-const path = require('path')
-const { JSDOM } = require('jsdom')
-const { optimize } = require('svgo')
-const { TinyColor } = require('@ctrl/tinycolor')
+import figmaApiExporter from 'figma-api-exporter'
+import fs from 'fs'
+import path from 'path'
+import { JSDOM } from 'jsdom'
+import { optimize } from 'svgo'
+import { TinyColor } from '@ctrl/tinycolor'
 
 const RAW_FOLDER = './icons-raw'
 const FINAL_FOLDER = './icons'
@@ -26,7 +26,7 @@ if (!process.env.FIGMA_API_TOKEN) {
  * @param {string} color The color currently being used
  * @returns {boolean} whether the color is allowed
  */
-const isAllowedColor = (color) => {
+const isAllowedColor = (color: string) => {
   const allowedColors = ['FFFFFF', '000000', 'none', 'transparent']
 
   if (allowedColors.includes(color)) return true
@@ -88,12 +88,12 @@ const mutateIcon = (iconName) => {
   if (!isProbablyColor(iconName)) {
     const idealColor = '#62757E'
     for (const filled of document.querySelectorAll('[fill]')) {
-      if (isAllowedColor(filled.getAttribute('fill'))) continue
+      if (isAllowedColor(filled.getAttribute('fill')!)) continue
       filled.setAttribute('fill', idealColor)
     }
 
     for (const stroked of document.querySelectorAll('[stroke]')) {
-      if (isAllowedColor(stroked.getAttribute('stroke'))) continue
+      if (isAllowedColor(stroked.getAttribute('stroke')!)) continue
       stroked.setAttribute('stroke', idealColor)
     }
   }

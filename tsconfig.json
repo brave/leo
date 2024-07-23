@@ -5,6 +5,7 @@
   "compilerOptions": {
     "strictNullChecks": false,
     "noImplicitAny": false,
+    "lib": ["ES2022"],
     "paths": {
       // Sometimes we want to preserve @brave/leo for complex paths when providing
       // typescript types for the consumer.

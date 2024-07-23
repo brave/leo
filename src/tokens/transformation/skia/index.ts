@@ -1,10 +1,11 @@
-const StyleDictionary = require('style-dictionary')
-const _template = require('lodash/template')
-const fs = require('fs')
+import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
+import _template from 'lodash/template'
+import fs from 'fs'
+import colorToSkiaString from './colorToSkiaString'
 
 StyleDictionary.registerTransform({
   name: 'color/hex8ToSkiaString',
-  ...require('./colorToSkiaString')
+  ...colorToSkiaString
 })
 
 StyleDictionary.registerTransformGroup({
@@ -15,7 +16,7 @@ StyleDictionary.registerTransformGroup({
 })
 
 // convert to chromium's pascalCase convention
-const transformName = (token) =>
+const transformName = (token: TransformedToken) =>
   `k${token.name
     .split(/,|\-/)
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -23,7 +24,7 @@ const transformName = (token) =>
     .replace('Light', '')
     .replace('Dark', '')}`
 
-const transformValue = (token) => {
+const transformValue = (token: TransformedToken) => {
   if (token.type === 'color') {
     // The value is already in a format Skia can use.
     return token.value
@@ -39,7 +40,10 @@ const transformValue = (token) => {
   throw new Error(`Unsupported token type ${token.type}`)
 }
 
-const filteredTokens = (dictionary, filterFn) => {
+const filteredTokens = (
+  dictionary: Dictionary,
+  filterFn: (value: TransformedToken) => boolean
+) => {
   let filtered = dictionary.allTokens
   if (typeof filterFn === 'function') {
     filtered = dictionary.allTokens.filter((token) => filterFn(token))
@@ -64,7 +68,7 @@ StyleDictionary.registerFormat({
   name: 'skia/colors.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/colors.h.template')
+      fs.readFileSync(__dirname + '/templates/colors.h.template', 'utf-8')
     )
 
     const groupedTokens = {
@@ -88,7 +92,7 @@ StyleDictionary.registerFormat({
   name: 'skia/spacing.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/spacing.h.template')
+      fs.readFileSync(__dirname + '/templates/spacing.h.template', 'utf-8')
     )
     return template({
       tokens: filteredTokens(dictionary, (token) =>
@@ -104,7 +108,7 @@ StyleDictionary.registerFormat({
   name: 'skia/radius.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/radius.h.template')
+      fs.readFileSync(__dirname + '/templates/radius.h.template', 'utf-8')
     )
     return template({
       tokens: filteredTokens(dictionary, (token) =>
