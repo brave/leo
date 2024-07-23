@@ -150,6 +150,7 @@
 
     padding: 0;
     background: transparent;
+    box-shadow: var(--leo-effect-elevation-05);
 
     &::backdrop {
       background: var(--backdrop-background);
@@ -176,6 +177,7 @@
 
   .leo-dialog:not(.modal) {
     box-shadow: var(--leo-effect-elevation-04);
+    border: 1px solid var(--leo-color-divider-subtle);
     &::backdrop {
       display: none;
     }
