@@ -240,6 +240,8 @@
     background: var(--background);
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
 
     cursor: pointer;
   }
