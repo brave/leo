@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1721117418087,
+  "updatedAt": 1721722254066,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1189,6 +1189,7 @@ const meta = {
     "message-bubble-ask": "message-bubble-ask",
     "message-bubble-chat": "message-bubble-chat",
     "message-bubble-comments": "message-bubble-comments",
+    "message-bubble-create": "message-bubble-create",
     "message-bubble-hashtag": "message-bubble-hashtag",
     "message-bubble-heart": "message-bubble-heart",
     "message-bubble-like": "message-bubble-like",
@@ -1788,7 +1789,6 @@ const meta = {
     "tether-color": "tether-color",
     "tethergold-color": "tethergold-color",
     "text-color": "text-color",
-    "text-input": "text-input",
     "tezos-color": "tezos-color",
     "tgch-color": "tgch-color",
     "theme-dark": "theme-dark",
