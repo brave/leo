@@ -1,6 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import { Transform } from 'style-dictionary'
 import { transformName } from './name'
+import referenceToName from '../common/referenceToName'
 
 export default {
   type: 'value',
@@ -8,7 +9,7 @@ export default {
   transformer: ({ value, referencedVariable }) => {
     if (referencedVariable) {
       return transformName({
-        name: ('color.' + referencedVariable.substring(1)).split('.').join('-')
+        name: referenceToName(referencedVariable)
       })
     }
 

@@ -39,7 +39,7 @@ export default {
     let layerVariables = {}
     try {
       layerVariables = require(`${filePath.split('.')[0]}.variables.json`)
-    } catch { }
+    } catch {}
 
     // Replace emojies, e.g. '🌚 dark' :-)
     stringContents = stringContents

@@ -1,4 +1,4 @@
-import { TransformedTokens } from "style-dictionary"
+import { TransformedTokens } from 'style-dictionary'
 
 const dynamicName = 'dynamic'
 const defaultsName = 'static'

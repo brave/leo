@@ -1,4 +1,5 @@
 const TinyColor = require('@ctrl/tinycolor')
+const { default: referenceToName } = require('../common/referenceToName')
 
 module.exports = {
   type: 'value',
@@ -7,8 +8,7 @@ module.exports = {
   },
   transformer({ value, referencedVariable }) {
     if (referencedVariable) {
-      const name = referencedVariable.substring(1).replaceAll('.', '-')
-      return `var(--leo-color-${name})`
+      return `var(--leo-${referenceToName(referencedVariable)})`
     }
     const color = new TinyColor.TinyColor(value)
     if (color.getAlpha() === 1) {
