@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   export const colors = [
-    'gray',
+    'neutral',
     'secondary',
     'primary',
     'red',
@@ -19,7 +19,7 @@
 
 <script lang="ts">
   export let mode: Mode = 'default'
-  export let color: Color = 'gray'
+  export let color: Color = 'neutral'
 
   $: background =
     mode === 'default'

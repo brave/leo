@@ -64,7 +64,7 @@
     );
     --checked-color-hover: var(
       --leo-checkbox-checked-color-hover,
-      var(--leo-color-primary-50)
+      var(--leo-color-primary-70)
     );
     --unchecked-color: var(
       --leo-checkbox-unchecked-color,
@@ -72,7 +72,7 @@
     );
     --unchecked-color-hover: var(
       --leo-checkbox-unchecked-color-hover,
-      var(--leo-color-gray-50)
+      var(--leo-color-neutral-70)
     );
     --disabled-color: var(
       --leo-checkbox-disabled-color,

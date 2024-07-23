@@ -105,6 +105,8 @@
   }
 
   .leo-toggle {
+    --foreground-color: black;
+
     --duration: var(--leo-toggle-transition-duration, 0.12s);
     @media (prefers-reduced-motion) {
       --duration: 0;
@@ -116,21 +118,16 @@
     --padding: var(--leo-toggle-padding, var(--leo-spacing-s));
     --checked-color: var(
       --leo-toggle-checked-color,
-      var(--leo-color-button-background)
-    );
-    --checked-color-hover: var(
-      --leo-toggle-checked-color-hover,
-      var(--leo-color-primary-60)
+      var(--leo-color-schemes-primary)
     );
     --unchecked-color: var(
       --leo-toggle-unchecked-color,
-      var(--leo-color-gray-30)
+      var(--leo-color-neutral-30)
     );
-    --unchecked-color-hover: var(
-      --leo-toggle-unchecked-color-hover,
-      var(--leo-color-gray-40)
+    --thumb-color: var(
+      --leo-toggle-thumb-color,
+      var(--leo-color-schemes-on-primary)
     );
-    --thumb-color: var(--leo-toggle-thumb-color, var(--leo-color-white));
     --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
     --label-gap: var(--leo-toggle-label-gap, var(--leo-spacing-s));
     --label-flex-direction: var(--leo-toggle-label-flex-direction, row);
@@ -142,11 +139,7 @@
     }
 
     @theme (dark) {
-      --checked-color-hover: var(
-        --leo-toggle-checked-color-hover,
-        var(--leo-color-primary-40)
-      );
-      --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, black);
+      --foreground-color: white;
     }
 
     display: flex;
@@ -178,11 +171,21 @@
     }
 
     &:hover:not(:disabled) {
-      background-color: var(--unchecked-color-hover);
+      --hover-bg: var(--unchecked-color);
 
       &[aria-checked='true'] {
-        background-color: var(--checked-color-hover);
+        --hover-bg: var(--checked-color);
       }
+
+      background: color-mix(
+        in srgb,
+        var(--hover-bg) 80%,
+        var(--foreground-color)
+      );
+    }
+
+    &[aria-checked="false"] .thumb {
+      opacity: 0.5;
     }
 
     & .thumb {
@@ -202,11 +205,12 @@
 
       height: 100%;
       aspect-ratio: 1/1;
-      background: white;
+      background: var(--thumb-color);
       border-radius: var(--leo-radius-full);
       transition:
         transform var(--duration) ease-in-out,
-        color var(--duration) ease-in-out;
+        color var(--duration) ease-in-out,
+        opacity var(--duration) ease-in-out;
 
       transform: translate(var(--thumb-position), 0);
 

@@ -183,7 +183,8 @@
 
     :where(&) > :global .leo-control-item[aria-selected],
     :where(&) > :global ::slotted(leo-controlitem[aria-selected]) {
-      --leo-control-item-color: var(--leo-color-text-primary);
+      --leo-control-item-color: var(--leo-color-text-interactive);
+      --leo-icon-color: var(--leo-color-icon-interactive);
     }
 
     :where(&.transitioning) > :global .leo-control-item[aria-selected],

@@ -19,6 +19,7 @@
     "@fontsource/manrope": "5.0.20",
     "@fontsource/poppins": "5.0.14",
     "@fontsource/roboto-flex": "5.0.15",
+    "@material/material-color-utilities": "0.2.7",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
     "@storybook/addon-actions": "8.1.11",
@@ -62,10 +63,14 @@
     "tsx": "4.16.2"
   },
   "peerDependencies": {
+    "@material/material-color-utilities": ">= 0.2.7",
     "react": ">= 16.0.0",
     "typescript": ">= 4.7.0"
   },
   "peerDependenciesMeta": {
+    "@material/material-color-utilities": {
+      "optional": true
+    },
     "typescript": {
       "optional": true
     },

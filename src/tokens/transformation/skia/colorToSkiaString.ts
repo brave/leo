@@ -1,10 +1,18 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import { Transform } from 'style-dictionary'
+import { transformName } from './name'
+import referenceToName from '../common/referenceToName'
 
 export default {
   type: 'value',
   matcher: ({ type }) => type === 'color',
-  transformer: ({ value }) => {
+  transformer: ({ value, referencedVariable }) => {
+    if (referencedVariable) {
+      return transformName({
+        name: referenceToName(referencedVariable)
+      })
+    }
+
     const { r, g, b, a } = new TinyColor(value).toRgb()
     const parts = [a !== 1 && Math.round(a * 255), r, g, b]
       .filter((c) => c !== false)
