@@ -1,4 +1,6 @@
-module.exports = {
+import { Transform } from 'style-dictionary'
+
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'custom-spacing'
@@ -9,4 +11,4 @@ module.exports = {
     }
     return `${top}px ${right}px ${bottom}px ${left}px`
   }
-}
+} as Transform

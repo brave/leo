@@ -1,9 +1,11 @@
-module.exports = {
+import { Transform } from 'style-dictionary'
+
+export default {
   type: 'value',
-  matcher: function (token) {
+  matcher(token) {
     return token.type === 'custom-fontStyle'
   },
-  transformer: function ({ value: font }, { options }) {
+  transformer({ value: font }) {
     return {
       fontSize: `${font.fontSize}px`,
       lineHeight: `${font.lineHeight}px`,
@@ -12,4 +14,4 @@ module.exports = {
       fontFamily: font.fontFamily
     }
   }
-}
+} as Transform

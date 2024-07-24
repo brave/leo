@@ -1,6 +1,7 @@
-const { formatColor } = require('./webColorRef')
+import { Transform } from 'style-dictionary'
+import { formatColor } from './webColorRef'
 
-module.exports = {
+export default {
   type: 'value',
   matcher(token) {
     return token.type === 'custom-shadow' && token.value !== 0
@@ -9,7 +10,7 @@ module.exports = {
     value = Array.isArray(value) ? value : [value]
     return value.map((v) => formatShadow(v)).join(', ')
   }
-}
+} as Transform
 
 function formatShadow(value) {
   return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${

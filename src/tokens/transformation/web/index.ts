@@ -1,43 +1,56 @@
-const StyleDictionary = require('style-dictionary')
+import StyleDictionary from 'style-dictionary'
+
+import filterWeb from './filterWeb'
+import sizePx from './sizePx'
+import webShadows from './webShadows'
+import webRadius from './webRadius'
+import webSize from './webSize'
+import webPadding from './webPadding'
+import webGradient from './webGradient'
+import webFont from './webFont'
+import webColor from './color'
+
+import formatCss from './formatCss'
+import formatCssAsJs from './formatCssAsJs'
 
 // Filters
 StyleDictionary.registerFilter({
   name: 'filterWeb',
-  matcher: require('./filterWeb')
+  matcher: filterWeb
 })
 
 // Transforms
 StyleDictionary.registerTransform({
   name: 'size/px',
-  ...require('./sizePx')
+  ...sizePx
 })
 StyleDictionary.registerTransform({
   name: 'web/shadow',
-  ...require('./webShadows')
+  ...webShadows
 })
 StyleDictionary.registerTransform({
   name: 'web/radius',
-  ...require('./webRadius')
+  ...webRadius
 })
 StyleDictionary.registerTransform({
   name: 'web/size',
-  ...require('./webSize')
+  ...webSize
 })
 StyleDictionary.registerTransform({
   name: 'web/padding',
-  ...require('./webPadding')
+  ...webPadding
 })
 StyleDictionary.registerTransform({
   name: 'web/font',
-  ...require('./webFont')
+  ...webFont
 })
 StyleDictionary.registerTransform({
   name: 'web/gradient',
-  ...require('./webGradient')
+  ...webGradient
 })
 StyleDictionary.registerTransform({
   name: 'web/color',
-  ...require('./color')
+  ...webColor
 })
 
 StyleDictionary.registerTransformGroup({
@@ -57,10 +70,10 @@ StyleDictionary.registerTransformGroup({
 // Formats
 StyleDictionary.registerFormat({
   name: 'custom/css',
-  formatter: require('./formatCss')
+  formatter: formatCss
 })
 
 StyleDictionary.registerFormat({
   name: 'custom/cssJS',
-  formatter: require('./formatCssAsJs')
+  formatter: formatCssAsJs
 })

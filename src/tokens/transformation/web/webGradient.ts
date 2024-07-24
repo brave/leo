@@ -1,6 +1,7 @@
-const TinyColor = require('@ctrl/tinycolor')
+import { TinyColor } from '@ctrl/tinycolor'
+import { Transform } from 'style-dictionary'
 
-module.exports = {
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'custom-gradient'
@@ -9,12 +10,12 @@ module.exports = {
     value = Array.isArray(value) ? value : [value]
     return value.map((v) => formatGradient(v)).join(', ')
   }
-}
+} as Transform
 
 function formatGradient(value) {
   const stopsString = value.stops
     .map((stop) => {
-      return `${new TinyColor.TinyColor(stop.color).toRgbString()} ${
+      return `${new TinyColor(stop.color).toRgbString()} ${
         stop.position * 100
       }%`
     })

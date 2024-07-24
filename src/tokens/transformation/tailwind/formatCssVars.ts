@@ -1,13 +1,15 @@
-const formattedVariables = require('../web/formattedVariables')
-const fileHeader = require('../web/fileHeader')
-const {
+import formattedVariables from '../web/formattedVariables'
+import fileHeader from '../web/fileHeader'
+
+import {
   filteredTokens,
   matchDarkThemeToken,
   matchLightThemeToken
-} = require('../common/tokenFilters')
-const { varDefFormat } = require('../../utils')
+} from '../common/tokenFilters'
+import { varDefFormat } from '../../utils'
+import { Formatter } from 'style-dictionary'
 
-module.exports = ({ dictionary, options, file }) => {
+export default (({ dictionary, options, file }) => {
   const opts = options ?? {}
   const { outputReferences } = opts
   const groupedTokens = {
@@ -25,7 +27,8 @@ module.exports = ({ dictionary, options, file }) => {
   const defaultVars = formattedVariables({
     format: 'tailwind',
     dictionary: groupedTokens.rest,
-    outputReferences
+    outputReferences: !!outputReferences,
+    formatting: 'tailwind'
   })
 
   const lightVars = formattedVariables({
@@ -58,4 +61,4 @@ module.exports = ({ dictionary, options, file }) => {
       .join('\n\n') +
     '\n'
   )
-}
+}) as Formatter

@@ -1,7 +1,8 @@
-const TinyColor = require('@ctrl/tinycolor')
-const { default: referenceToName } = require('../common/referenceToName')
+import { TinyColor } from '@ctrl/tinycolor'
+import referenceToName from '../common/referenceToName'
+import { Transform } from 'style-dictionary'
 
-module.exports = {
+export default {
   type: 'value',
   matcher(token) {
     return token.type === 'color'
@@ -10,11 +11,11 @@ module.exports = {
     if (referencedVariable) {
       return `var(--leo-${referenceToName(referencedVariable)})`
     }
-    const color = new TinyColor.TinyColor(value)
+    const color = new TinyColor(value)
     if (color.getAlpha() === 1) {
       return color.toHexString(true)
     }
 
     return color.toRgbString()
   }
-}
+} as Transform

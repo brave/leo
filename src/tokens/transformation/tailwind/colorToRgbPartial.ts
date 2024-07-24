@@ -1,6 +1,7 @@
-const TinyColor = require('@ctrl/tinycolor')
+import { TinyColor } from '@ctrl/tinycolor'
+import { Transform } from 'style-dictionary'
 
-module.exports = {
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'color'
@@ -8,10 +9,10 @@ module.exports = {
   transformer: function ({ value, ...token }) {
     const fullColorValue = ['elevation']
     if (token.name.match(new RegExp(`(${fullColorValue.join('|')})`))) {
-      return new TinyColor.TinyColor(value).toRgbString()
+      return new TinyColor(value).toRgbString()
     } else {
-      const { r, g, b, a } = new TinyColor.TinyColor(value).toRgb()
+      const { r, g, b } = new TinyColor(value).toRgb()
       return `${r}, ${g}, ${b}`
     }
   }
-}
+} as Transform

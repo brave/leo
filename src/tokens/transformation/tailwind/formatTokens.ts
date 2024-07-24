@@ -1,25 +1,30 @@
-const merge = require('lodash.merge')
+import merge from 'lodash.merge'
+import { Formatter } from 'style-dictionary'
 
 const themes = ['light', 'dark']
 
-const formatColorVar = (name, isStatic = true) => {
+const formatColorVar = (name: string, isStatic = true) => {
   name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
   return `rgba(var(--tw-${name}), <alpha-value>)`
 }
 
-const formatBoxShadowVar = (name, isStatic = true) => {
+const formatBoxShadowVar = (name: string, isStatic = true) => {
   name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
   return `var(--tw-${name})`
 }
 
-const formatDropShadowVars = (name, shadowCount, isStatic = true) => {
+const formatDropShadowVars = (
+  name: string,
+  shadowCount: number,
+  isStatic = true
+) => {
   name = isStatic ? name : name.replace('-dark-', '-').replace('-light-', '-')
   return [...new Array(shadowCount)].map((v, i) => {
     return `var(--tw-${name}-drop-shadow-${i + 1})`
   })
 }
 
-const kebabCase = (str) => str && str.toLowerCase().replaceAll(' ', '-')
+const kebabCase = (str: string) => str && str.toLowerCase().replaceAll(' ', '-')
 
 /**
  * This function transforms tokens into a nested object
@@ -119,25 +124,28 @@ function createDynamicColorTokens(tokens) {
   return createColorTokensFromGroup(tokens, false)
 }
 
-module.exports = ({ dictionary }) => {
+export default (({ dictionary }) => {
   const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
-  const borderRadii = new Map([['none', 0]])
-  const spacing = new Map([[0, 0]]) // Initialize with option for 0 spacing
+  const borderRadii = new Map([['none', '0']])
+  const spacing = new Map<string | number, string | number>([[0, 0]]) // Initialize with option for 0 spacing
   const gradients = new Map()
   const boxShadows = new Map([['none', 'none']])
-  const dropShadows = new Map([['none', '0 0 #0000']])
+  const dropShadows = new Map<string, string | string[]>([
+    ['none', '0 0 #0000']
+  ])
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    if (t.attributes.category === 'radius') {
-      if (t.attributes.type === 'full') {
-        borderRadii.set(t.attributes.type, '9999px')
+    const attributes = t.attributes!
+    if (attributes.category === 'radius') {
+      if (attributes.type === 'full') {
+        borderRadii.set(attributes.type, '9999px')
       } else {
-        borderRadii.set(t.attributes.type, t.value)
+        borderRadii.set(attributes.type!, t.value)
       }
-    } else if (t.attributes.category === 'spacing') {
-      spacing.set(t.attributes.type, t.value)
+    } else if (attributes.category === 'spacing') {
+      spacing.set(attributes.type!, t.value)
     } else if (type === 'custom-gradient') {
       const [, ...pathParts] = t.path
       gradients.set(pathParts.join('-'), t.value)
@@ -155,7 +163,7 @@ module.exports = ({ dictionary }) => {
           .filter((v) => !['elevation', 'light', 'dark'].includes(v))
           .join('-')
           .replaceAll(' ', '-'),
-        formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true, false)
+        formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true)
       )
     }
   })
@@ -173,4 +181,4 @@ module.exports = ({ dictionary }) => {
     null,
     ' '.repeat(2)
   )}`
-}
+}) as Formatter
