@@ -386,7 +386,7 @@
     }
   }
   .leoButton.isPlainFaint {
-    --foreground: var(black);
+    --foreground: black;
     --primary-color: currentColor;
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
