@@ -21,7 +21,9 @@ export default {
  */
 const formatColorForTw = (colorString: string) => {
   const formattedColor = formatColor('tw', colorString)
-  return colorString.startsWith('$')
+  return colorString.startsWith('$') &&
+    !formattedColor.includes('elevation') &&
+    !formattedColor.startsWith('rgb')
     ? `rgba(${formattedColor}, 1)`
     : formattedColor
 }
