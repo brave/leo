@@ -1,4 +1,4 @@
-import { Transform } from "style-dictionary"
+import { Transform } from 'style-dictionary'
 
 export default {
   type: 'value',

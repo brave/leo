@@ -1,4 +1,4 @@
-import { Transform } from "style-dictionary"
+import { Transform } from 'style-dictionary'
 import { formatColor } from './webColorRef'
 
 export default {
@@ -13,9 +13,10 @@ export default {
 } as Transform
 
 function formatShadow(value) {
-  return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${value.offsetX
-    }px ${value.offsetY}px ${value.radius}px ${value.spread}px ${formatColor(
-      'leo',
-      value.color
-    )}`
+  return `${value.shadowType === 'innerShadow' ? 'inset ' : ''}${
+    value.offsetX
+  }px ${value.offsetY}px ${value.radius}px ${value.spread}px ${formatColor(
+    'leo',
+    value.color
+  )}`
 }

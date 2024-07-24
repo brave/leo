@@ -1,9 +1,12 @@
-import { Transform } from "style-dictionary"
+import { Transform } from 'style-dictionary'
 
 const notDefault = (value, defaultValue) =>
   value !== defaultValue ? value : ''
 
-const fontFamily = ({ fontFamily }, { fontFamilies }: { fontFamilies?: { [key: string]: string } } = {}) =>
+const fontFamily = (
+  { fontFamily },
+  { fontFamilies }: { fontFamilies?: { [key: string]: string } } = {}
+) =>
   fontFamilies && fontFamilies[fontFamily]
     ? fontFamilies[fontFamily]
     : fontFamily
@@ -14,7 +17,6 @@ export default {
     return token.type === 'custom-fontStyle'
   },
   transformer: function ({ value: font }, platform) {
-
     // font: font-style font-variant font-weight font-size/line-height font-family;
     return `${notDefault(font.fontStretch, 'normal')} ${notDefault(
       font.fontStyle,

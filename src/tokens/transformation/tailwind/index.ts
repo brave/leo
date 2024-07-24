@@ -1,48 +1,67 @@
-const StyleDictionary = require('style-dictionary')
+import StyleDictionary from 'style-dictionary'
+
+import twFilterTokens from './twFilterTokens'
+import twFilterFonts from './twFilterFonts'
+
+import sizePx from '../web/sizePx'
+import twShadows from './twShadows'
+import webRadius from '../web/webRadius'
+import webSize from '../web/webSize'
+import webPadding from '../web/webPadding'
+import twFont from './twFont'
+import webGradient from '../web/webGradient'
+import colorToRgbPartial from './colorToRgbPartial'
+import formatCssVars from './formatCssVars'
+import formatTokens from './formatTokens'
+import formatFonts from './formatFonts'
+
+import copyStaticFiles from './copyStaticFiles'
+import convertCssToJs from './convertCssToJs'
+import extractComponentStyles from './extractComponentStyles'
 
 // Filters
 StyleDictionary.registerFilter({
   name: 'tw/filterTokens',
-  matcher: require('./twFilterTokens')
+  matcher: twFilterTokens
 })
 
 StyleDictionary.registerFilter({
   name: 'tw/filterFonts',
-  matcher: require('./twFilterFonts')
+  matcher: twFilterFonts
 })
 
 // Transforms
 StyleDictionary.registerTransform({
   name: 'size/px',
-  ...require('../web/sizePx')
+  ...sizePx
 })
 StyleDictionary.registerTransform({
   name: 'tw/shadow',
-  ...require('./twShadows')
+  ...twShadows
 })
 StyleDictionary.registerTransform({
   name: 'web/radius',
-  ...require('../web/webRadius')
+  ...webRadius
 })
 StyleDictionary.registerTransform({
   name: 'web/size',
-  ...require('../web/webSize')
+  ...webSize
 })
 StyleDictionary.registerTransform({
   name: 'web/padding',
-  ...require('../web/webPadding')
+  ...webPadding
 })
 StyleDictionary.registerTransform({
   name: 'tw/font',
-  ...require('./twFont')
+  ...twFont
 })
 StyleDictionary.registerTransform({
   name: 'web/gradient',
-  ...require('../web/webGradient')
+  ...webGradient
 })
 StyleDictionary.registerTransform({
   name: 'color/hex8ToRgbPartial',
-  ...require('./colorToRgbPartial')
+  ...colorToRgbPartial
 })
 
 StyleDictionary.registerTransformGroup({
@@ -62,34 +81,34 @@ StyleDictionary.registerTransformGroup({
 // Formats
 StyleDictionary.registerFormat({
   name: 'tailwind/css',
-  formatter: require('./formatCssVars')
+  formatter: formatCssVars
 })
 
 StyleDictionary.registerFormat({
   name: 'tailwind/tokens',
-  formatter: require('./formatTokens')
+  formatter: formatTokens
 })
 
 StyleDictionary.registerFormat({
   name: 'tailwind/fonts',
-  formatter: require('./formatFonts')
+  formatter: formatFonts
 })
 
 // Actions
 StyleDictionary.registerAction({
   name: 'tailwind/copy_static_files',
-  do: require('./copyStaticFiles').do,
-  undo: require('./copyStaticFiles').undo
+  do: copyStaticFiles.do,
+  undo: copyStaticFiles.undo
 })
 
 StyleDictionary.registerAction({
   name: 'tailwind/convert_css_to_js',
-  do: require('./convertCssToJs').do,
-  undo: require('./convertCssToJs').undo
+  do: convertCssToJs.do,
+  undo: convertCssToJs.undo
 })
 
 StyleDictionary.registerAction({
   name: 'tailwind/extract_component_styles',
-  do: require('./extractComponentStyles').do,
-  undo: require('./extractComponentStyles').undo
+  do: extractComponentStyles.do,
+  undo: extractComponentStyles.undo
 })

@@ -15,8 +15,9 @@ export default {
 function formatGradient(value) {
   const stopsString = value.stops
     .map((stop) => {
-      return `${new TinyColor(stop.color).toRgbString()} ${stop.position * 100
-        }%`
+      return `${new TinyColor(stop.color).toRgbString()} ${
+        stop.position * 100
+      }%`
     })
     .join(', ')
   if (value.gradientType === 'linear') {

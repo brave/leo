@@ -1,3 +1,5 @@
+import { TransformedToken } from 'style-dictionary'
+
 const acceptedTypes = [
   'color',
   'dimension',
@@ -8,4 +10,4 @@ const acceptedTypes = [
   'number'
 ]
 
-module.exports = (token) => acceptedTypes.includes(token.type)
+export default (token: TransformedToken) => acceptedTypes.includes(token.type)

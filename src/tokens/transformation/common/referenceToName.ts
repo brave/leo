@@ -3,5 +3,5 @@
  * $primary.10 ==> color-primary-10
  */
 export default function referenceToName(reference: string) {
-    return `color.${reference.substring(1)}`.split('.').join('-')
+  return `color.${reference.substring(1)}`.split('.').join('-')
 }

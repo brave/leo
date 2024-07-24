@@ -1,6 +1,7 @@
-const { formatColor } = require('../web/webColorRef')
+import { Transform } from 'style-dictionary'
+import { formatColor } from '../web/webColorRef'
 
-module.exports = {
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'custom-shadow' && token.value !== 0
@@ -12,13 +13,13 @@ module.exports = {
       dropShadow: value.map((v) => formatDropShadow(v))
     }
   }
-}
+} as Transform
 
 /**
  * @param {string} colorString
  * @returns {string}
  */
-const formatColorForTw = (colorString) => {
+const formatColorForTw = (colorString: string) => {
   const formattedColor = formatColor('tw', colorString)
   return colorString.startsWith('$')
     ? `rgba(${formattedColor}, 1)`

@@ -1,17 +1,20 @@
-module.exports = ({ dictionary }) => {
+import { Formatter } from 'style-dictionary'
+
+export default (({ dictionary }) => {
   const fontClasses = new Map()
 
   // Format all other tokens
   dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    let fontClass = `.text-${t.attributes.type}-${t.attributes.item}`
+    const attributes = t.attributes!
+    let fontClass = `.text-${attributes.type}-${attributes.item}`
 
-    if (t.attributes.subitem) {
-      fontClass += `-${t.attributes.subitem}`
+    if (attributes.subitem) {
+      fontClass += `-${attributes.subitem}`
     }
 
     // Ensure we don't lose modifiers like "default", "regular", "semibold", etc.
-    if (t.attributes.state) {
-      fontClass += `-${t.attributes.state}`
+    if (attributes.state) {
+      fontClass += `-${attributes.state}`
     }
 
     fontClasses.set(fontClass, t.value)
@@ -30,4 +33,4 @@ module.exports = plugin(function ({ addComponents }) {
     },
   }
 })`
-}
+}) as Formatter

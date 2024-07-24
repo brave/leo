@@ -22,11 +22,11 @@ const defaultFormatting = {
  *
  * This is used to create lists of variables like Sass variables or CSS custom properties
  * @memberof module:formatHelpers
- * @param {Object} options
+ * @param {Object?} options
  * @param {String} options.format - What type of variables to output. Options are: css, sass, less, and stylus
  * @param {Object} options.dictionary - The dictionary object that gets passed to the formatter method.
- * @param {Boolean} options.outputReferences - Whether or not to output references
- * @param {Object} options.formatting - Custom formatting properties that define parts of a declaration line in code. This will get passed to `formatHelpers.createPropertyFormatter` and used for the `lineSeparator` between lines of code.
+ * @param {Boolean?} options.outputReferences - Whether or not to output references
+ * @param {Object?} options.formatting - Custom formatting properties that define parts of a declaration line in code. This will get passed to `formatHelpers.createPropertyFormatter` and used for the `lineSeparator` between lines of code.
  * @returns {String}
  * @example
  * ```js
