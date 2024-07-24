@@ -1,4 +1,6 @@
-module.exports = {
+import { Transform } from "style-dictionary"
+
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'dimension' && token.value !== 0
@@ -6,4 +8,4 @@ module.exports = {
   transformer: function (token) {
     return `${token.value}px`
   }
-}
+} as Transform

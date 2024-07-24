@@ -1,4 +1,6 @@
-module.exports = {
+import { Transform } from "style-dictionary"
+
+export default {
   type: 'value',
   matcher: function (token) {
     return token.type === 'custom-radius'
@@ -13,4 +15,4 @@ module.exports = {
     }
     return `${value.topLeft}px ${value.topRight}px ${value.bottomLeft}px ${value.bottomRight}px`
   }
-}
+} as Transform
