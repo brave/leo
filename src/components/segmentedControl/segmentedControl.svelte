@@ -111,7 +111,7 @@
 
   .leo-segmented-control {
     --leo-icon-size: var(--leo-icon-m);
-    --bg: var(--leo-color-gray-10);
+    --bg: var(--leo-color-neutral-10);
     --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
     --control-height: 44px;
