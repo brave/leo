@@ -284,20 +284,6 @@
 <Story name="Primary" let:args />
 
 <style lang="scss">
-  :global(html),
-  :global(body),
-  :global(#storybook-root),
-  :global(.layout) {
-    background: var(--leo-color-page-background) !important;
-    align-items: stretch;
-    flex-direction: column;
-    height: -webkit-fill-available;
-  }
-
-  :global(.layout) {
-    display: flex;
-  }
-
   .container {
     border-radius: var(--leo-radius-m);
     background: var(--leo-color-container-background);
