@@ -111,7 +111,7 @@
 
   .leo-segmented-control {
     --leo-icon-size: var(--leo-icon-m);
-    --bg: var(--leo-color-container-highlight);
+    --bg: var(--leo-color-gray-10);
     --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
     --control-height: 44px;
@@ -172,7 +172,7 @@
 
     :where(&:not(.transitioning)) > :global .leo-control-item:hover,
     :where(&:not(.transitioning)) > :global ::slotted(leo-controlitem:hover) {
-      --leo-control-item-background: var(--leo-color-page-background);
+      --leo-control-item-background: var(--leo-color-container-highlight);
       --leo-control-item-color: var(--leo-color-text-primary);
     }
 
