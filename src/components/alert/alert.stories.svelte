@@ -102,6 +102,10 @@
     '--leo-alert-center-position': {
       type: 'string',
       description: 'The position of the alert center'
+    },
+    '--leo-alert-padding': {
+      type: 'string',
+      description: 'The css padding for the alert'
     }
   }}
 />

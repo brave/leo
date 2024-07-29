@@ -21,6 +21,7 @@
   export let isToast = false
   export let hasActions = $$slots.actions
   export let hasContentAfter = $$slots['content-after']
+  export let hideIcon = false
 
   $: currentType = type ?? 'error'
   $: currentMode = mode ?? 'simple'
@@ -35,13 +36,15 @@
   style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
   style:--default-text-color={`var(--leo-color-systemfeedback-${currentType}-text)`}
 >
+  {#if !hideIcon}
   <div class="icon">
     <slot name="icon">
       <Icon name={defaultIcons[currentType]} />
     </slot>
   </div>
+  {/if}
   <div class="content">
-    {#if mode == 'full'}
+    {#if mode === 'full' && $$slots.title}
       <div class="title">
         <slot name="title" />
       </div>
@@ -78,9 +81,9 @@
       var(--default-background)
     );
     color: var(--default-text-color, var(--leo-color-text-primary));
-    padding: var(--leo-spacing-xl);
+    padding: var(--leo-alert-padding, var(--leo-spacing-xl));
     border-radius: var(--leo-radius-m);
-    gap: var(--leo-spacing-xl);
+    gap: var(--leo-spacing-xl) 0;
     font: var(--leo-font-default-regular);
 
     display: grid;
@@ -93,6 +96,8 @@
     & .icon {
       --leo-icon-size: var(--leo-icon-m);
       color: var(--leo-icon-color);
+
+      margin-right: var(--leo-spacing-xl);
     }
 
     & .title {
@@ -101,10 +106,12 @@
 
     & .content {
       grid-column: 2;
+      align-content: center;
     }
 
     & .content-after {
       grid-column: 3;
+      margin-left: var(--leo-spacing-xl);
     }
 
     & .actions {
