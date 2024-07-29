@@ -95,8 +95,8 @@
 
     & .icon {
       --leo-icon-size: var(--leo-icon-m);
-      color: var(--leo-icon-color);
 
+      color: var(--leo-icon-color);
       margin-right: var(--leo-spacing-xl);
     }
 
