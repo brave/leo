@@ -1256,12 +1256,12 @@
       "text": {
         "primary": {
           "type": "color",
-          "value": "#1b1b1f",
+          "value": "#e3e3e8",
           "referencedVariable": "$schemes.on-surface"
         },
         "secondary": {
           "type": "color",
-          "value": "#46464a",
+          "value": "#c7c7cc",
           "referencedVariable": "$schemes.on-surface-variant"
         },
         "tertiary": {
@@ -1271,12 +1271,12 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#c1c4ff",
           "referencedVariable": "$schemes.primary"
         },
         "interactive-visited": {
           "type": "color",
-          "value": "#a3005b",
+          "value": "#ffb0ca",
           "referencedVariable": "$schemes.tertiary"
         },
         "disabled": {
@@ -1287,12 +1287,12 @@
       "icon": {
         "default": {
           "type": "color",
-          "value": "#46464a",
+          "value": "#c7c7cc",
           "referencedVariable": "$schemes.on-surface-variant"
         },
         "interactive": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#c1c4ff",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
@@ -1320,7 +1320,7 @@
       "container": {
         "background": {
           "type": "color",
-          "value": "#fafafb",
+          "value": "#111114",
           "referencedVariable": "$schemes.surface"
         },
         "highlight": {
@@ -1349,7 +1349,7 @@
       "button": {
         "background": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#c1c4ff",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
@@ -1448,12 +1448,12 @@
         },
         "focus-default": {
           "type": "color",
-          "value": "#8283ff",
+          "value": "#4a46e0",
           "referencedVariable": "$primary.30"
         },
         "focus-button-special": {
           "type": "color",
-          "value": "#0f0663",
+          "value": "#efefff",
           "referencedVariable": "$primary.70"
         }
       },
