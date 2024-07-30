@@ -5,7 +5,14 @@
 
 #pragma once
 
+#if !defined(NALA_COLORS_START)
+#error "NALA_COLORS_START must be defined to ensure our color ids don't overlap. For example #define NALA_COLORS_START ui::kChromeColorsEnd"
+#endif
+
 #include "third_party/skia/include/core/SkColor.h"
+#include "ui/color/color_mixer.h"
+#include "ui/color/color_provider.h"
+#include "ui/color/color_provider_key.h"
 
 namespace leo {
 
@@ -34,9 +41,13 @@ enum class Theme {
   kDark
 };
 
-enum class Color {
+enum Color : ui::ColorId {
+  kNalaColorsStart = NALA_COLORS_START,
+
 <%= groupedTokens.light.allTokens.map(p => `  ${p.name}`).join(',\n') %>,
-<%= groupedTokens.rest.allTokens.map(p => `  ${p.name}`).join(',\n') %>
+<%= groupedTokens.rest.allTokens.map(p => `  ${p.name}`).join(',\n') %>,
+
+  kNalaColorsEnd
 };
 
 constexpr SkColor GetColor(Color color, Theme theme) {
@@ -49,6 +60,24 @@ constexpr SkColor GetColor(Color color, Theme theme) {
       return ${prop.name};`).join('\n') %>
     default:
       return SK_ColorRED;
+  }
+}
+
+void AddLeoColorMixer(ui::ColorProvider* provider,
+                       const ui::ColorProviderKey& key) {
+  ui::ColorMixer& mixer = provider->AddMixer();
+  const bool is_dark = key.color_mode == ui::ColorProviderKey::ColorMode::kDark;
+
+  // Dynamic primitives, controlled by the Chromium palette
+<%= groupedTokens.rest.allTokens.filter(t => t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {provider->GetColor(ui::${t.dynamicRef})};`).join('\n') %>
+
+  // Static primitives (hard coded)
+<%= groupedTokens.rest.allTokens.filter(t => !t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {${t.value}};`).join('\n') %>
+
+  if (is_dark) {
+<%= groupedTokens.dark.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
+  } else {
+<%= groupedTokens.light.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
   }
 }
 

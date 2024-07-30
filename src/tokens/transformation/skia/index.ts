@@ -46,6 +46,23 @@ const getSortKey = ({ name, value }) => {
   // Its a color, but not a primitive
   return sortOrder.length
 }
+
+const dynamicPalettePrimitives = ['primary', 'secondary', 'tertiary', 'neutral', 'neutralVariant', 'error']
+const maybeDynamicProps = (token: TransformedToken) => {
+  if (!token.name.includes('primitive')) return
+  const type = dynamicPalettePrimitives.find(p => token.name.includes(p))
+  if (!type) return
+
+  const tone = parseInt(token.name.split('-').slice(-1)[0])
+  if (isNaN(tone)) return
+
+  return {
+    dynamicPrimitive: type,
+    tone: token.name.split('-').slice(-1),
+    dynamicRef: `kColorRef${type[0].toUpperCase() + type.slice(1)}${tone}`
+  }
+}
+
 const filteredTokens = (
   dictionary: Dictionary,
   filterFn: (value: TransformedToken) => boolean
@@ -59,7 +76,8 @@ const filteredTokens = (
     .map((token) => ({
       ...token,
       name: transformName(token),
-      value: transformValue(token)
+      value: transformValue(token),
+      ...maybeDynamicProps(token),
     }))
     .sort((a, b) => {
       // Make sure tokens which depend on others sort after those they depend on
