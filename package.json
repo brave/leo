@@ -12,7 +12,7 @@
     "tslib": "2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.7",
+    "@babel/core": "7.24.9",
     "@ctrl/tinycolor": "3.6.1",
     "@floating-ui/dom": "1.6.7",
     "@fontsource-variable/inter": "5.0.19",
