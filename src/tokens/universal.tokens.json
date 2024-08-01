@@ -1013,6 +1013,24 @@
         }
       }
     },
+    "focus state": {
+      "description": null,
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "innerShadow",
+        "radius": 0,
+        "color": "#8283ffff",
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 2
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:f949f0a23002305ca5b8d88374d6ce28390f7d43,",
+          "exportKey": "effect"
+        }
+      }
+    },
     "elevation": {
       "01": {
         "0": {
