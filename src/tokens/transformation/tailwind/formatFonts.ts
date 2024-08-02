@@ -28,7 +28,7 @@ module.exports = plugin(function ({ addComponents }) {
 }, {
   theme: {
     fontFamily: {
-      body: ['Inter', ...defaultTheme.fontFamily.sans],
+      body: ['Inter Variable', ...defaultTheme.fontFamily.sans],
       display: ['Poppins', ...defaultTheme.fontFamily.sans]
     },
   }
