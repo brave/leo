@@ -62,11 +62,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#3b08c2ff"
+              "color": "#4641eeff"
             },
             {
               "position": 1,
-              "color": "#3f39e8ff"
+              "color": "#6261ffff"
             }
           ]
         },
@@ -86,11 +86,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#3f39e8ff"
+              "color": "#4641eeff"
             },
             {
               "position": 1,
-              "color": "#8724a8ff"
+              "color": "#7267dcff"
             }
           ]
         },
@@ -110,11 +110,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#3f39e8ff"
+              "color": "#007ad0ff"
             },
             {
               "position": 1,
-              "color": "#00bad6ff"
+              "color": "#2794f3ff"
             }
           ]
         },
@@ -291,78 +291,8 @@
       }
     }
   },
-  "grid": {
-    "0-560 breakpoint": {
-      "description": null,
-      "type": "custom-grid",
-      "value": {
-        "pattern": "columns",
-        "gutterSize": 16,
-        "alignment": "stretch",
-        "count": 6,
-        "offset": 0
-      },
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:9f7c284bba26e41ac5f456903e2333329fd92be7,",
-          "exportKey": "grid"
-        }
-      }
-    },
-    "561-820 breakpoint": {
-      "description": null,
-      "type": "custom-grid",
-      "value": {
-        "pattern": "columns",
-        "gutterSize": 16,
-        "alignment": "stretch",
-        "count": 8,
-        "offset": 16
-      },
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:861b61c970d81b715a25a5b3895ff2cc4235ab6e,",
-          "exportKey": "grid"
-        }
-      }
-    },
-    "821-1140 breakpoint": {
-      "description": null,
-      "type": "custom-grid",
-      "value": {
-        "pattern": "columns",
-        "gutterSize": 16,
-        "alignment": "stretch",
-        "count": 12,
-        "offset": 16
-      },
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:f308ec306ffd726a9a871fc9e65de815c47cff6f,",
-          "exportKey": "grid"
-        }
-      }
-    },
-    "1141 + breakpoint": {
-      "description": null,
-      "type": "custom-grid",
-      "value": {
-        "pattern": "columns",
-        "gutterSize": 24,
-        "alignment": "stretch",
-        "count": 12,
-        "offset": 24
-      },
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:d23fde71f96a1d4b77d1d95966db9811fd6d2bfd,",
-          "exportKey": "grid"
-        }
-      }
-    }
-  },
   "font": {
-    "🖥 desktop": {
+    "🔠 desktop": {
       "heading": {
         "display1": {
           "type": "custom-fontStyle",
@@ -373,7 +303,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.92,
+            "letterSpacing": -0.5,
             "lineHeight": 54,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -395,7 +325,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.8,
+            "letterSpacing": -0.5,
             "lineHeight": 48,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -417,7 +347,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.68,
+            "letterSpacing": -0.5,
             "lineHeight": 40,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -439,7 +369,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.5,
             "lineHeight": 42,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -461,7 +391,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.5,
             "lineHeight": 36,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -483,7 +413,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.5,
             "lineHeight": 28,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
@@ -529,10 +459,10 @@
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.2,
-            "lineHeight": 26,
+            "letterSpacing": 0,
+            "lineHeight": 24,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -551,10 +481,10 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.2,
-            "lineHeight": 26,
+            "letterSpacing": 0.08,
+            "lineHeight": 24,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -569,14 +499,14 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "underline",
-            "fontFamily": "Inter",
+            "fontFamily": "Inter Variable",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.2,
-            "lineHeight": 26,
+            "letterSpacing": 0,
+            "lineHeight": 24,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -597,10 +527,10 @@
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.1,
+            "letterSpacing": 0,
             "lineHeight": 22,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -619,10 +549,10 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.1,
+            "letterSpacing": 0.07,
             "lineHeight": 22,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -641,10 +571,10 @@
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": -0.1,
+            "letterSpacing": 0,
             "lineHeight": 22,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -666,9 +596,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 18,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -687,10 +617,10 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 20,
+            "letterSpacing": 0.06,
+            "lineHeight": 18,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -710,9 +640,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 18,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -734,9 +664,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 18,
+            "lineHeight": 16,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -755,10 +685,10 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 18,
+            "letterSpacing": 0.055,
+            "lineHeight": 16,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -778,9 +708,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 18,
+            "lineHeight": 16,
             "paragraphIndent": 0,
-            "paragraphSpacing": 0,
+            "paragraphSpacing": 8,
             "textCase": "none"
           },
           "extensions": {
@@ -802,7 +732,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 26,
+            "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -846,7 +776,7 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 20,
+            "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -854,164 +784,6 @@
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "styleId": "S:6c4a21c76825a289a19994f0566b4e4628a2a81e,",
-              "exportKey": "font"
-            }
-          }
-        }
-      }
-    },
-    "📱 mobile": {
-      "heading": {
-        "display1": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 36,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": -0.72,
-            "lineHeight": 44,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:f516f29f987b6c61fc02bd959e830abb8e79c050,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "display2": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 32,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": -0.64,
-            "lineHeight": 42,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:27dbd9990c81d0276cb56a0678c3c6127f97a098,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "display3": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 28,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": -0.56,
-            "lineHeight": 36,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:c27e43fcea09fbfc203ae8c7a3aa4e0e703ae85a,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "h1": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 28,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 36,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:e6b345473cb11b491f8cfc2184c3cf1f6e75cf8b,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "h2": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 22,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 28,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:01a7f5960d6c89af7f7f5c919fbd50ccbdd789dd,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "h3": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 18,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 26,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:5a261d8dfa0cb8b6171e8030b3b47df443f197db,",
-              "exportKey": "font"
-            }
-          }
-        },
-        "h4": {
-          "type": "custom-fontStyle",
-          "value": {
-            "fontSize": 16,
-            "textDecoration": "none",
-            "fontFamily": "Poppins",
-            "fontWeight": 600,
-            "fontStyle": "normal",
-            "fontStretch": "normal",
-            "letterSpacing": 0,
-            "lineHeight": 26,
-            "paragraphIndent": 0,
-            "paragraphSpacing": 0,
-            "textCase": "none"
-          },
-          "extensions": {
-            "org.lukasoppermann.figmaDesignTokens": {
-              "styleId": "S:b42b9537a24922ee4b450982a3e3bf77eaf7b8e3,",
               "exportKey": "font"
             }
           }
@@ -1029,7 +801,7 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
-          "lineHeight": 12,
+          "lineHeight": 10,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "uppercase"
@@ -1047,11 +819,11 @@
           "fontSize": 13,
           "textDecoration": "none",
           "fontFamily": "Inter Variable",
-          "fontWeight": 500,
+          "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": -0.1,
-          "lineHeight": 15.6,
+          "lineHeight": 16,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -1094,7 +866,7 @@
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.36,
+          "letterSpacing": 0.1,
           "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -1116,7 +888,7 @@
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.39,
+          "letterSpacing": 0.1,
           "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -1132,13 +904,13 @@
       "button-large": {
         "type": "custom-fontStyle",
         "value": {
-          "fontSize": 14,
+          "fontSize": 15,
           "textDecoration": "none",
           "fontFamily": "Poppins",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.28,
+          "letterSpacing": 0.1,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -1154,13 +926,13 @@
       "button-jumbo": {
         "type": "custom-fontStyle",
         "value": {
-          "fontSize": 16,
+          "fontSize": 15,
           "textDecoration": "none",
           "fontFamily": "Poppins",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.16,
+          "letterSpacing": 0.1,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -1198,37 +970,6 @@
     }
   },
   "effect": {
-    "focus state": {
-      "0": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#3f39e8ff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 2
-        }
-      },
-      "1": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#ffffff4d",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 1
-        }
-      },
-      "description": null,
-      "extensions": {
-        "org.lukasoppermann.figmaDesignTokens": {
-          "styleId": "S:22fda2ded2e93539a5c19420c4b4ecb80c078aef,",
-          "exportKey": "effect"
-        }
-      }
-    },
     "notificationbackdrop": {
       "0": null,
       "1": {
@@ -1268,6 +1009,24 @@
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
           "styleId": "S:d81083965d9d9ba9b075f1bb50b7bc1ad6f48847,",
+          "exportKey": "effect"
+        }
+      }
+    },
+    "focus state": {
+      "description": null,
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "innerShadow",
+        "radius": 0,
+        "color": "#8283ffff",
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 2
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:f949f0a23002305ca5b8d88374d6ce28390f7d43,",
           "exportKey": "effect"
         }
       }
@@ -1456,7 +1215,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#7c91ffff",
+          "color": "#6261ffff",
           "offsetX": 4,
           "offsetY": 4,
           "spread": 0
@@ -1474,7 +1233,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#7c91ffff",
+          "color": "#6261ffff",
           "offsetX": 8,
           "offsetY": 8,
           "spread": 0
@@ -1486,10 +1245,132 @@
           }
         }
       }
+    },
+    "material": {
+      "thick": {
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:5e2141f9caa22d1eb4279c3815c2fcd5eed51eae,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "thick-shadow": {
+        "0": null,
+        "1": {
+          "type": "custom-shadow",
+          "value": {
+            "shadowType": "dropShadow",
+            "radius": 16,
+            "color": "#00000026",
+            "offsetX": 0,
+            "offsetY": 0,
+            "spread": 0
+          }
+        },
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:d60d5a077e5506ec9399fd34c82e71265a2d57c7,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "regular": {
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:1c4805b58ddccd2b79326dc5b49f5bd22f432993,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "regular-shadow": {
+        "0": null,
+        "1": {
+          "type": "custom-shadow",
+          "value": {
+            "shadowType": "dropShadow",
+            "radius": 16,
+            "color": "#00000026",
+            "offsetX": 0,
+            "offsetY": 0,
+            "spread": 0
+          }
+        },
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:c6c71e5d9e41bd2e6a47ccd966fc802942c5aae5,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "thin": {
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:de4ace23a9cce76ee801184dc2764177bc4b5caf,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "thin-shadow": {
+        "0": null,
+        "1": {
+          "type": "custom-shadow",
+          "value": {
+            "shadowType": "dropShadow",
+            "radius": 16,
+            "color": "#00000026",
+            "offsetX": 0,
+            "offsetY": 0,
+            "spread": 0
+          }
+        },
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:6d4157535e7778bed4668bb7125a517039c42ce4,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "ultrathin": {
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:1d7c8979a007123bc855a0215193314b8662f967,",
+            "exportKey": "effect"
+          }
+        }
+      },
+      "ultrathin-shadow": {
+        "0": null,
+        "1": {
+          "type": "custom-shadow",
+          "value": {
+            "shadowType": "dropShadow",
+            "radius": 16,
+            "color": "#00000026",
+            "offsetX": 0,
+            "offsetY": 0,
+            "spread": 0
+          }
+        },
+        "description": null,
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:91720a8e0b8c7dd27236f6391dcf437679aaa67f,",
+            "exportKey": "effect"
+          }
+        }
+      }
     }
   },
   "typography": {
-    "🖥 desktop": {
+    "🔠 desktop": {
       "heading": {
         "display1": {
           "fontSize": {
@@ -1518,7 +1399,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.92
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1564,7 +1445,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.8
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1610,7 +1491,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.68
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1656,7 +1537,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1702,7 +1583,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1748,7 +1629,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.5
           },
           "lineHeight": {
             "type": "dimension",
@@ -1842,11 +1723,11 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.2
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 26
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1854,7 +1735,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -1888,11 +1769,11 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.2
+            "value": 0.08
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 26
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1900,7 +1781,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -1918,7 +1799,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter"
+            "value": "Inter Variable"
           },
           "fontWeight": {
             "type": "number",
@@ -1934,11 +1815,11 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.2
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 26
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1946,7 +1827,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -1982,7 +1863,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.1
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -1994,7 +1875,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2028,7 +1909,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.1
+            "value": 0.07
           },
           "lineHeight": {
             "type": "dimension",
@@ -2040,7 +1921,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2074,7 +1955,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": -0.1
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -2086,7 +1967,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2126,7 +2007,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 18
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2134,7 +2015,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2168,11 +2049,11 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 0.06
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 18
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2180,7 +2061,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2218,7 +2099,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
+            "value": 18
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2226,7 +2107,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2266,7 +2147,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 18
+            "value": 16
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2274,7 +2155,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2308,11 +2189,11 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 0.055
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 18
+            "value": 16
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2320,7 +2201,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2358,7 +2239,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 18
+            "value": 16
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2366,7 +2247,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": 8
           },
           "textCase": {
             "type": "string",
@@ -2406,7 +2287,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 26
+            "value": 24
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2498,333 +2379,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 20
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        }
-      }
-    },
-    "📱 mobile": {
-      "heading": {
-        "display1": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 36
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.72
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 44
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "display2": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 32
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.64
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 42
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "display3": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 28
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": -0.56
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 36
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "h1": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 28
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 36
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "h2": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 22
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 28
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "h3": {
-          "fontSize": {
-            "type": "dimension",
             "value": 18
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 26
-          },
-          "paragraphIndent": {
-            "type": "dimension",
-            "value": 0
-          },
-          "paragraphSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "textCase": {
-            "type": "string",
-            "value": "none"
-          }
-        },
-        "h4": {
-          "fontSize": {
-            "type": "dimension",
-            "value": 16
-          },
-          "textDecoration": {
-            "type": "string",
-            "value": "none"
-          },
-          "fontFamily": {
-            "type": "string",
-            "value": "Poppins"
-          },
-          "fontWeight": {
-            "type": "number",
-            "value": 600
-          },
-          "fontStyle": {
-            "type": "string",
-            "value": "normal"
-          },
-          "fontStretch": {
-            "type": "string",
-            "value": "normal"
-          },
-          "letterSpacing": {
-            "type": "dimension",
-            "value": 0
-          },
-          "lineHeight": {
-            "type": "dimension",
-            "value": 26
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2873,7 +2428,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 12
+          "value": 10
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -2903,7 +2458,7 @@
         },
         "fontWeight": {
           "type": "number",
-          "value": 500
+          "value": 600
         },
         "fontStyle": {
           "type": "string",
@@ -2919,7 +2474,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 15.6
+          "value": 16
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -3007,7 +2562,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.36
+          "value": 0.1
         },
         "lineHeight": {
           "type": "dimension",
@@ -3053,7 +2608,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.39
+          "value": 0.1
         },
         "lineHeight": {
           "type": "dimension",
@@ -3075,7 +2630,7 @@
       "button-large": {
         "fontSize": {
           "type": "dimension",
-          "value": 14
+          "value": 15
         },
         "textDecoration": {
           "type": "string",
@@ -3099,7 +2654,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.28
+          "value": 0.1
         },
         "lineHeight": {
           "type": "dimension",
@@ -3121,7 +2676,7 @@
       "button-jumbo": {
         "fontSize": {
           "type": "dimension",
-          "value": 16
+          "value": 15
         },
         "textDecoration": {
           "type": "string",
@@ -3145,7 +2700,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.16
+          "value": 0.1
         },
         "lineHeight": {
           "type": "dimension",
