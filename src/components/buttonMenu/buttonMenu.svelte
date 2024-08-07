@@ -40,7 +40,7 @@
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div bind:this={anchor} on:click|stopPropagation={toggle}>
-    <slot name="anchor-content">Click</slot>
+    <slot name="anchor-content"/>
   </div>
   <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} {onClose}>
     <slot />
