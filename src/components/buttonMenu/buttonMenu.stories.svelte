@@ -19,7 +19,7 @@
     '--leo-menu-control-width': {
       description: '(readonly): Computed width of menu control'
     },
-    '--leo-menu-max-height' : {
+    '--leo-menu-max-height': {
       description: 'user controlled max height'
     }
   }}
@@ -28,6 +28,7 @@
 <Template let:args>
   <div class="container">
     <ButtonMenu>
+      <span slot="anchor-content">Click Me!</span>
       <!-- svelte-ignore a11y-click-events-have-key-events leo-menu-item peovides key events -->
       <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
       <leo-menu-item> Share </leo-menu-item>
