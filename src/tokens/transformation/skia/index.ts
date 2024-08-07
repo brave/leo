@@ -100,29 +100,32 @@ const filteredTokens = (
   }
 }
 
-StyleDictionary.registerFormat({
-  name: 'skia/colors.h',
-  formatter: ({ dictionary, options, file }) => {
-    const template = _template(
-      fs.readFileSync(__dirname + '/templates/colors.h.template', 'utf-8')
-    )
-
-    const groupedTokens = {
-      // Note: Here we check includes because the light/dark part of the token
-      // could be 2nd (for normal colors) or 3rd (for legacy colors).
-      light: filteredTokens(dictionary, (token) =>
-        token.path.includes('light')
-      ),
-      dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
-      rest: filteredTokens(
-        dictionary,
-        (token) => !token.path.includes('light') && !token.path.includes('dark')
+const templates = ['nala_color_id.h', 'nala_color_mixer.h', 'nala_color_mixer.cc']
+for (const templateName of templates) {
+  StyleDictionary.registerFormat({
+    name: `skia/${templateName}`,
+    formatter: ({ dictionary, options, file }) => {
+      const template = _template(
+        fs.readFileSync(__dirname + `/templates/${templateName}.template`, 'utf-8')
       )
+  
+      const groupedTokens = {
+        // Note: Here we check includes because the light/dark part of the token
+        // could be 2nd (for normal colors) or 3rd (for legacy colors).
+        light: filteredTokens(dictionary, (token) =>
+          token.path.includes('light')
+        ),
+        dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
+        rest: filteredTokens(
+          dictionary,
+          (token) => !token.path.includes('light') && !token.path.includes('dark')
+        )
+      }
+  
+      return template({ groupedTokens, options, file })
     }
-
-    return template({ groupedTokens, options, file })
-  }
-})
+  })
+}
 
 StyleDictionary.registerFormat({
   name: 'skia/spacing.h',
