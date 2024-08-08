@@ -12,7 +12,7 @@ struct ColorProviderKey;
 
 namespace nala {
 
-void AddLeoColorMixer(ui::ColorProvider* provider,
+void AddNalaColorMixer(ui::ColorProvider* provider,
                       const ui::ColorProviderKey& key);
 
 }  // namespace nala

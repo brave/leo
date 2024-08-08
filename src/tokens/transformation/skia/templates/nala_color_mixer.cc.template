@@ -15,7 +15,7 @@
 
 namespace nala {
 
-void AddLeoColorMixer(ui::ColorProvider* provider,
+void AddNalaColorMixer(ui::ColorProvider* provider,
                        const ui::ColorProviderKey& key) {
   ui::ColorMixer& mixer = provider->AddMixer();
   const bool is_dark = key.color_mode == ui::ColorProviderKey::ColorMode::kDark;

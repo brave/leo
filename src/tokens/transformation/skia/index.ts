@@ -47,10 +47,17 @@ const getSortKey = ({ name, value }) => {
   return sortOrder.length
 }
 
-const dynamicPalettePrimitives = ['primary', 'secondary', 'tertiary', 'neutral', 'neutralVariant', 'error']
+const dynamicPalettePrimitives = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'neutral',
+  'neutralVariant',
+  'error'
+]
 const maybeDynamicProps = (token: TransformedToken) => {
   if (!token.name.includes('primitive')) return
-  const type = dynamicPalettePrimitives.find(p => token.name.includes(p))
+  const type = dynamicPalettePrimitives.find((p) => token.name.includes(p))
   if (!type) return
 
   const tone = parseInt(token.name.split('-').slice(-1)[0])
@@ -77,7 +84,7 @@ const filteredTokens = (
       ...token,
       name: transformName(token),
       value: transformValue(token),
-      ...maybeDynamicProps(token),
+      ...maybeDynamicProps(token)
     }))
     .sort((a, b) => {
       // Make sure tokens which depend on others sort after those they depend on
@@ -100,28 +107,38 @@ const filteredTokens = (
   }
 }
 
-const templates = ['nala_color_id.h', 'nala_color_mixer.h', 'nala_color_mixer.cc']
+const templates = [
+  'nala_color_id.h',
+  'nala_color_mixer.h',
+  'nala_color_mixer.cc'
+]
 for (const templateName of templates) {
   StyleDictionary.registerFormat({
     name: `skia/${templateName}`,
     formatter: ({ dictionary, options, file }) => {
       const template = _template(
-        fs.readFileSync(__dirname + `/templates/${templateName}.template`, 'utf-8')
+        fs.readFileSync(
+          __dirname + `/templates/${templateName}.template`,
+          'utf-8'
+        )
       )
-  
+
       const groupedTokens = {
         // Note: Here we check includes because the light/dark part of the token
         // could be 2nd (for normal colors) or 3rd (for legacy colors).
         light: filteredTokens(dictionary, (token) =>
           token.path.includes('light')
         ),
-        dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
+        dark: filteredTokens(dictionary, (token) =>
+          token.path.includes('dark')
+        ),
         rest: filteredTokens(
           dictionary,
-          (token) => !token.path.includes('light') && !token.path.includes('dark')
+          (token) =>
+            !token.path.includes('light') && !token.path.includes('dark')
         )
       }
-  
+
       return template({ groupedTokens, options, file })
     }
   })
