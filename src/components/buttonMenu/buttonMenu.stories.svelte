@@ -16,11 +16,13 @@
   title="Components/ButtonMenu"
   component={ButtonMenu}
   argTypes={{
-    '--leo-menu-control-width': {
-      description: '(readonly): Computed width of menu control'
+    '--leo-menu-control-min-width': {
+      control: 'text',
+      description: 'The user provided min width for the menu. The menu may be wider than this value depending on its contents'
     },
     '--leo-menu-max-height': {
-      description: 'user controlled max height'
+      description: 'user controlled max height',
+      control: 'text'
     }
   }}
 />
