@@ -35,6 +35,7 @@
   const handleClose = (e: CloseEventDetail) => {
     if (isOpen === undefined) isOpenInternal = false
     onClose?.(e)
+    onChange?.({ isOpen: false })
   }
 </script>
 
