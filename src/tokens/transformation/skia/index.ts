@@ -51,11 +51,17 @@ const dynamicPalettePrimitives = [
   'primary',
   'secondary',
   'tertiary',
+  'neutral-variant',
   'neutral',
-  'neutralVariant',
   'error'
 ]
-const maybeDynamicProps = (token: TransformedToken) => {
+
+// Colors in the material palette need to know that they should point to the
+// equivalent color ref from the Chromium color mixer, so that when the theme
+// in Chromium changes they follow suit.
+const maybeMaterialColorProps = (token: TransformedToken) => {
+  // Skip non-primitive tokens - only our primitives are set from the Material
+  // palette, everything else is defined in terms of them.
   if (!token.name.includes('primitive')) return
   const type = dynamicPalettePrimitives.find((p) => token.name.includes(p))
   if (!type) return
@@ -63,10 +69,15 @@ const maybeDynamicProps = (token: TransformedToken) => {
   const tone = parseInt(token.name.split('-').slice(-1)[0])
   if (isNaN(tone)) return
 
+  const transformedType = type
+    .split('-')
+    .map((t) => t[0].toUpperCase() + t.slice(1))
+    .join('')
+
   return {
     dynamicPrimitive: type,
     tone: token.name.split('-').slice(-1),
-    dynamicRef: `kColorRef${type[0].toUpperCase() + type.slice(1)}${tone}`
+    dynamicRef: `kColorRef${transformedType}${tone}`
   }
 }
 
@@ -84,7 +95,7 @@ const filteredTokens = (
       ...token,
       name: transformName(token),
       value: transformValue(token),
-      ...maybeDynamicProps(token)
+      ...maybeMaterialColorProps(token)
     }))
     .sort((a, b) => {
       // Make sure tokens which depend on others sort after those they depend on
