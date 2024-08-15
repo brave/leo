@@ -46,6 +46,41 @@ const getSortKey = ({ name, value }) => {
   // Its a color, but not a primitive
   return sortOrder.length
 }
+
+const dynamicPalettePrimitives = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'neutral-variant',
+  'neutral',
+  'error'
+]
+
+// Colors in the material palette need to know that they should point to the
+// equivalent color ref from the Chromium color mixer, so that when the theme
+// in Chromium changes they follow suit.
+const maybeMaterialColorProps = (token: TransformedToken) => {
+  // Skip non-primitive tokens - only our primitives are set from the Material
+  // palette, everything else is defined in terms of them.
+  if (!token.name.includes('primitive')) return
+  const type = dynamicPalettePrimitives.find((p) => token.name.includes(p))
+  if (!type) return
+
+  const tone = parseInt(token.name.split('-').slice(-1)[0])
+  if (isNaN(tone)) return
+
+  const transformedType = type
+    .split('-')
+    .map((t) => t[0].toUpperCase() + t.slice(1))
+    .join('')
+
+  return {
+    dynamicPrimitive: type,
+    tone: token.name.split('-').slice(-1),
+    dynamicRef: `kColorRef${transformedType}${tone}`
+  }
+}
+
 const filteredTokens = (
   dictionary: Dictionary,
   filterFn: (value: TransformedToken) => boolean
@@ -59,7 +94,8 @@ const filteredTokens = (
     .map((token) => ({
       ...token,
       name: transformName(token),
-      value: transformValue(token)
+      value: transformValue(token),
+      ...maybeMaterialColorProps(token)
     }))
     .sort((a, b) => {
       // Make sure tokens which depend on others sort after those they depend on
@@ -82,29 +118,42 @@ const filteredTokens = (
   }
 }
 
-StyleDictionary.registerFormat({
-  name: 'skia/colors.h',
-  formatter: ({ dictionary, options, file }) => {
-    const template = _template(
-      fs.readFileSync(__dirname + '/templates/colors.h.template', 'utf-8')
-    )
-
-    const groupedTokens = {
-      // Note: Here we check includes because the light/dark part of the token
-      // could be 2nd (for normal colors) or 3rd (for legacy colors).
-      light: filteredTokens(dictionary, (token) =>
-        token.path.includes('light')
-      ),
-      dark: filteredTokens(dictionary, (token) => token.path.includes('dark')),
-      rest: filteredTokens(
-        dictionary,
-        (token) => !token.path.includes('light') && !token.path.includes('dark')
+const templates = [
+  'nala_color_id.h',
+  'nala_color_mixer.h',
+  'nala_color_mixer.cc'
+]
+for (const templateName of templates) {
+  StyleDictionary.registerFormat({
+    name: `skia/${templateName}`,
+    formatter: ({ dictionary, options, file }) => {
+      const template = _template(
+        fs.readFileSync(
+          __dirname + `/templates/${templateName}.template`,
+          'utf-8'
+        )
       )
-    }
 
-    return template({ groupedTokens, options, file })
-  }
-})
+      const groupedTokens = {
+        // Note: Here we check includes because the light/dark part of the token
+        // could be 2nd (for normal colors) or 3rd (for legacy colors).
+        light: filteredTokens(dictionary, (token) =>
+          token.path.includes('light')
+        ),
+        dark: filteredTokens(dictionary, (token) =>
+          token.path.includes('dark')
+        ),
+        rest: filteredTokens(
+          dictionary,
+          (token) =>
+            !token.path.includes('light') && !token.path.includes('dark')
+        )
+      }
+
+      return template({ groupedTokens, options, file })
+    }
+  })
+}
 
 StyleDictionary.registerFormat({
   name: 'skia/spacing.h',

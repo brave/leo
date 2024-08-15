@@ -98,8 +98,22 @@ export default function getConfig(layers: string[]) {
         buildPath: 'tokens/skia/',
         files: [
           {
-            destination: 'colors.h',
-            format: 'skia/colors.h',
+            destination: 'nala_color_id.h',
+            format: 'skia/nala_color_id.h',
+            filter: {
+              type: 'color'
+            }
+          },
+          {
+            destination: 'nala_color_mixer.h',
+            format: 'skia/nala_color_mixer.h',
+            filter: {
+              type: 'color'
+            }
+          },
+          {
+            destination: 'nala_color_mixer.cc',
+            format: 'skia/nala_color_mixer.cc',
             filter: {
               type: 'color'
             }

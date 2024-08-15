@@ -1,0 +1,36 @@
+// Copyright (c) 2024 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// You can obtain one at https://mozilla.org/MPL/2.0/.
+
+#include "nala_color_mixer.h"
+
+#include "nala_color_id.h"
+#include "third_party/skia/include/core/SkColor.h"
+#include "ui/color/color_mixer.h"
+#include "ui/color/color_provider.h"
+#include "ui/color/color_provider_key.h"
+#include "ui/color/color_recipe.h"
+#include "ui/color/color_transform.h"
+
+namespace nala {
+
+void AddNalaColorMixer(ui::ColorProvider* provider,
+                       const ui::ColorProviderKey& key) {
+  ui::ColorMixer& mixer = provider->AddMixer();
+  const bool is_dark = key.color_mode == ui::ColorProviderKey::ColorMode::kDark;
+
+  // Dynamic primitives, controlled by the Chromium palette
+<%= groupedTokens.rest.allTokens.filter(t => t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {provider->GetColor(ui::${t.dynamicRef})};`).join('\n') %>
+
+  // Static primitives (hard coded)
+<%= groupedTokens.rest.allTokens.filter(t => !t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {${t.value}};`).join('\n') %>
+
+  if (is_dark) {
+<%= groupedTokens.dark.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
+  } else {
+<%= groupedTokens.light.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
+  }
+}
+
+} // namespace nala
