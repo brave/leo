@@ -62,6 +62,19 @@ module.exports = {
         if (rawCSS) {
           const css = rawCSS.replace(/\.REMOVE_ME/g, '')
           const root = postcss.parse(css)
+
+          // Remove disallowed selectors/rules
+          const disallowedSelectors = [':host']
+          root.walkRules((rule) => {
+            if (!disallowedSelectors.some((ds) => rule.selector.includes(ds))) {
+              return
+            }
+            rule.selectors = rule.selectors.filter(
+              (s) => !disallowedSelectors.some((ds) => s.includes(ds))
+            )
+            if (!rule.selector) rule.remove()
+          })
+
           const cssAsJs = postcssJs.objectify(root)
           const pluginDir = join(config.buildPath, 'plugins/components')
 
