@@ -1,8 +1,11 @@
 # An HTML + JS example application using Leo components
 
-To run
+To run:
 
-    npx serve
+```bash
+npx serve
+```
 
-Note: the `css` and `leo` folders here are symlinks to the build output from
+> [!NOTE]
+> The `css` and `leo` folders here are symlinks to the build output from
 Leo, so we have all the files we need.
