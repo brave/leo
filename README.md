@@ -71,7 +71,7 @@ The relevant light or dark version is selected by:
 </div>
 ```
 
-All Web Components and css variables aim to use the color theme according to the nearest ancestor which defines an override using a `data-theme="[dark|light]" attribute
+All Web Components and css variables aim to use the color theme according to the nearest ancestor which defines an override using a `data-theme="[dark|light]"` attribute
 
 ## Tailwind
 
