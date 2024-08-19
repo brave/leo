@@ -14,15 +14,34 @@
       ? Object.entries(obj).filter((i) => i[0] !== 'toString')
       : obj.filter((i) => i[0] !== 'toString')
 
-  const filteredTokens = getTokens(tokens)
+  const filteredTokens = getTokens(tokens).map(([groupName, tokens]) => {
+    if (!Object.values(tokens)?.every((t) => typeof t === 'string')) {
+      const baseTokens = {}
+      const subGroups = {}
+      for (let k in tokens) {
+        if (typeof tokens[k] === 'string') {
+          baseTokens[k] = tokens[k]
+        } else if (k !== "toString") {
+          subGroups[k] = tokens[k];
+        }
+      }
+      if (Object.entries(baseTokens).length) {
+        tokens = {
+          base: baseTokens,
+          ...subGroups
+        }
+      }
+    }
+    return [groupName, tokens];
+  })
 </script>
 
 <svelte:element
-  this={name ? 'section' : 'div'}
+  this={name && name !== 'base' ? 'section' : 'div'}
   id={name}
   class="section section-{level}"
 >
-  {#if name}
+  {#if name && name !== 'base'}
     <svelte:element this={headingTag} class="group-heading">
       {name}
     </svelte:element>

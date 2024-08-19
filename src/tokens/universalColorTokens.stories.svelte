@@ -20,7 +20,7 @@
   } = allColors
 
   const reversedThemeable = Object.entries(themeable).reverse()
-  const reversedPrimitive = Object.entries(themeable).reverse()
+  const reversedPrimitive = Object.entries(primitive).reverse()
 
   const semantic = {
     page,
