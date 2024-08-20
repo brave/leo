@@ -2,17 +2,18 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import Button from '../button/button.svelte'
 
-  import Alert, { modes, types } from './alert.svelte'
-  import { showAlert } from './alertCenter.svelte'
-  import Icon from '../icon/icon.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Icon from '../icon/icon.svelte'
+  import Alert, { modes, types } from './alert.svelte'
+  import { showAlert } from './alertCenter.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
   let canDismiss = true
   let hasAction = false
   let duration = 2000
+  let actionHasDelay = true
 
   $: alertUser = (mode, type) =>
     showAlert(
@@ -25,7 +26,14 @@
           {
             text: 'Retry',
             kind: 'filled',
-            action: () => {}
+            delay: 3000,
+            delayCb: function (timeElapsed, setText) {
+              const secsRemaining = Math.ceil(
+                Math.abs(timeElapsed - this.delay) / 1000
+              )
+              setText(`${this.text} in ${secsRemaining}`)
+            },
+            action: () => { alertUser(mode, type) }
           }
         ] : []
       },
@@ -159,6 +167,10 @@
   <label>
     Has action
     <input type="checkbox" bind:checked={hasAction} />
+  </label>
+  <label>
+    Action has delay
+    <input type="checkbox" bind:checked={actionHasDelay} />
   </label>
   <Button
     onClick={() => {

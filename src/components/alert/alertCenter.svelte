@@ -1,10 +1,15 @@
 <script lang="ts" context="module">
-  import type { AlertMode, AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'
+  import type { AlertMode, AlertType } from './alert.svelte'
+
+  const actionDelayProgress = writable(new Map())
+  const actionDelayText = writable(new Map())
 
   type Action = {
     kind?: ButtonKind
     action: (alert: AlertInfo) => void
+    delay?: number
+    delayCb?: (timeElapsed: number, setText: (text: string) => void) => void
   } & ({
     text: string
     icon?: IconName
@@ -46,6 +51,47 @@
       this.duration = duration
       this.canDismiss = canDismiss
       this.resumeDismiss()
+
+      this.actions.forEach((action) => {
+        if (action.delay) {
+          actionDelayProgress.update((states) => {
+            states.set(action.action, 0)
+            return states
+          })
+
+          actionDelayText.update((states) => {
+            states.set(action.action, action.text)
+            return states
+          })
+
+          let start: number
+          function incrementProgress(timeStamp) {
+            if (start === undefined) {
+              start = timeStamp
+            }
+
+            const elapsed = timeStamp - start
+            const progress = (1 / action.delay) * elapsed
+
+            actionDelayProgress.update((states) => {
+              states.set(action.action, progress)
+              return states
+            })
+
+            action.delayCb(elapsed, (text) => {
+              actionDelayText.update((states) => {
+                states.set(action.action, text)
+                return states
+              })
+            })
+
+            if (elapsed < action.delay) {
+              requestAnimationFrame(incrementProgress)
+            }
+          }
+          requestAnimationFrame(incrementProgress)
+        }
+      })
     }
 
     pauseDismiss() {
@@ -53,7 +99,7 @@
     }
 
     resumeDismiss() {
-      if (!this.duration) return
+      if (!this.duration || this.actions.length) return
       this.#timeout = setTimeout(() => this.dismiss(), this.duration)
     }
 
@@ -72,13 +118,14 @@
 </script>
 
 <script lang="ts">
-  import Alert from './alert.svelte'
+  import type { ComponentType, SvelteComponent } from 'svelte'
+  import { fly } from 'svelte/transition'
+  import type { IconName } from '../../../icons/meta'
   import Button from '../button/button.svelte'
   import type { ButtonKind } from '../button/props'
-  import { fly } from 'svelte/transition'
-  import type { ComponentType, SvelteComponent } from 'svelte'
-  import type { IconName } from '../../../icons/meta'
   import Icon from '../icon/icon.svelte'
+  import ProgressRing from '../progress/progressRing.svelte'
+  import Alert from './alert.svelte'
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
     'top-center'
@@ -109,19 +156,28 @@
         {alert.content}
         <div slot="actions">
           {#each alert.actions as action}
+            {@const delayProgress = $actionDelayProgress.get(action.action)}
+            {@const isDelayed = delayProgress < 1}
+            {@const text =
+              (isDelayed && $actionDelayText.get(action.action)) || action.text}
             <Button
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               onClick={() => action.action(alert)}
+              isDisabled={action.delay && isDelayed}
             >
               {#if action.icon && !action.text}
                 <Icon name={action.icon} />
               {:else}
-                {action.text}
+                {text}
               {/if}
-              <div slot="icon-after" hidden={!action.text || !action.icon}>
-                <Icon name={action.icon} />
+              <div slot="icon-after" hidden={!action.delay && (!action.text || !action.icon)}>
+                {#if action.delay && isDelayed}
+                  <ProgressRing mode="determinate" progress={delayProgress} />
+                {:else if action.icon}
+                  <Icon name={action.icon} />
+                {/if}
               </div>
             </Button>
           {/each}
