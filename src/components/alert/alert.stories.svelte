@@ -13,25 +13,38 @@
   let canDismiss = true
   let hasAction = false
   let duration = 2000
+  let actionLoadFor = 500
 
-  $: alertUser = (mode, type) =>
-    showAlert(
+  $: alertUser = (mode, type) => {
+    const alert = showAlert(
       {
         content,
         title,
         mode: mode ?? 'simple',
         type: type ?? 'error',
-        actions: hasAction ? [
-          {
-            text: 'Retry',
-            kind: 'filled',
-            action: () => {}
-          }
-        ] : []
+        actions: hasAction
+          ? [
+              {
+                text: 'Retry',
+                kind: 'filled',
+                isLoading: !!actionLoadFor,
+                action: () => {}
+              }
+            ]
+          : []
       },
       duration,
       canDismiss
     )
+
+    // Once our action finishes loading, set isLoading to false
+    if (actionLoadFor)
+      setTimeout(() => {
+        alert.updateAlert({
+          actions: alert.actions.map((a) => ({ ...a, isLoading: false }))
+        })
+      }, actionLoadFor)
+  }
 </script>
 
 <Story name="Slots" let:args>
@@ -50,10 +63,13 @@
         Some content
       </Alert>
     </Slot>
-    <Slot name="content-after" explanation="optional content after the main content of the alert">
+    <Slot
+      name="content-after"
+      explanation="optional content after the main content of the alert"
+    >
       <Alert {...args} mode="simple">
         Some content
-        <Button kind='plain-faint' fab slot="content-after">
+        <Button kind="plain-faint" fab slot="content-after">
           <Icon name="close" />
         </Button>
       </Alert>
@@ -160,6 +176,12 @@
     Has action
     <input type="checkbox" bind:checked={hasAction} />
   </label>
+  {#if hasAction}
+    <label>
+      Action Load For
+      <input type="text" bind:value={actionLoadFor} />
+    </label>
+  {/if}
   <Button
     onClick={() => {
       alertUser(args.mode, args.type)
