@@ -4,6 +4,8 @@
 
   type Action = {
     kind?: ButtonKind
+    isDisabled?: boolean,
+    isLoading?: boolean,
     action: (alert: AlertInfo) => void
   } & ({
     text: string
@@ -60,12 +62,21 @@
     dismiss() {
       alerts.update((a) => a.filter((a) => a !== this))
     }
+
+    updateAlert(update: Partial<AlertOptions>) {
+      Object.assign(this, update)
+
+      // Trigger a rerender
+      alerts.update(a => [...a])
+    }
   }
 
   const alerts = writable<AlertInfo[]>([])
 
   export const showAlert = (options: AlertOptions, duration = 2000, canDismiss = true) => {
-    alerts.update((a) => [...a, new AlertInfo(options, duration, canDismiss)])
+    const info = new AlertInfo(options, duration, canDismiss)
+    alerts.update((a) => [...a, info])
+    return info
   }
 
   const transitionOptions = { y: -64, duration: 120 }
@@ -113,6 +124,8 @@
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
+              isDisabled={action.isDisabled}
+              isLoading={action.isLoading}
               onClick={() => action.action(alert)}
             >
               {#if action.icon && !action.text}
