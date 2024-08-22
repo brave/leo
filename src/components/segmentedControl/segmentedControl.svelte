@@ -121,8 +121,9 @@
     --leo-control-item-icon-gap: var(--leo-spacing-m);
     --leo-control-item-font: var(--leo-font-components-button-default);
 
-    display: flex;
-    max-width: max-content;
+    display: grid;
+    grid-auto-flow: column;
+    max-width: var(--leo-segmented-control-max-w, max-content);
     align-items: center;
     position: relative;
 

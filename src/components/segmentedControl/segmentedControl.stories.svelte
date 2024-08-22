@@ -16,6 +16,11 @@
   title="Components/SegmentedControl"
   component={SegmentedControl}
   argTypes={{
+    '--leo-segmented-control-max-w': {
+      control: 'text',
+      type: 'string',
+      description: 'The max width for the entire control.'
+    },
     '--leo-control-padding': {
       control: 'text',
       type: 'string',

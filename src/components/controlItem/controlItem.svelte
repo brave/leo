@@ -23,6 +23,7 @@
     all: unset;
     display: flex;
     align-items: center;
+    justify-content: center;
     box-sizing: border-box;
     height: 100%;
     border-radius: var(--leo-control-item-radius);
