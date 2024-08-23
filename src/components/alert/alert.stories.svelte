@@ -7,13 +7,14 @@
   import Icon from '../icon/icon.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import ButtonWithProgress from '../../storyHelpers/ButtonWithProgress.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
   let canDismiss = true
   let hasAction = false
   let duration = 2000
-  let actionLoadFor = 500
+  let customButton = false;
 
   $: alertUser = (mode, type) => {
     const alert = showAlert(
@@ -27,7 +28,7 @@
               {
                 text: 'Retry',
                 kind: 'filled',
-                isLoading: !!actionLoadFor,
+                component: customButton && ButtonWithProgress,
                 action: () => {}
               }
             ]
@@ -36,14 +37,6 @@
       duration,
       canDismiss
     )
-
-    // Once our action finishes loading, set isLoading to false
-    if (actionLoadFor)
-      setTimeout(() => {
-        alert.updateAlert({
-          actions: alert.actions.map((a) => ({ ...a, isLoading: false }))
-        })
-      }, actionLoadFor)
   }
 </script>
 
@@ -176,12 +169,10 @@
     Has action
     <input type="checkbox" bind:checked={hasAction} />
   </label>
-  {#if hasAction}
-    <label>
-      Action Load For
-      <input type="text" bind:value={actionLoadFor} />
-    </label>
-  {/if}
+  <label>
+    Use custom button
+    <input type="checkbox" bind:checked={customButton} />
+  </label>
   <Button
     onClick={() => {
       alertUser(args.mode, args.type)

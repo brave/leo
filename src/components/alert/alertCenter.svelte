@@ -6,6 +6,7 @@
     kind?: ButtonKind
     isDisabled?: boolean,
     isLoading?: boolean,
+    component?: ComponentType<SvelteComponent>,
     action: (alert: AlertInfo) => void
   } & ({
     text: string
@@ -55,7 +56,7 @@
     }
 
     resumeDismiss() {
-      if (!this.duration) return
+      if (!this.duration || this.actions.length) return
       this.#timeout = setTimeout(() => this.dismiss(), this.duration)
     }
 
@@ -120,13 +121,15 @@
         {alert.content}
         <div slot="actions">
           {#each alert.actions as action}
-            <Button
+            <svelte:component
+              this={action.component || Button}
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               isDisabled={action.isDisabled}
               isLoading={action.isLoading}
               onClick={() => action.action(alert)}
+              {...action}
             >
               {#if action.icon && !action.text}
                 <Icon name={action.icon} />
@@ -136,7 +139,7 @@
               <div slot="icon-after" hidden={!action.text || !action.icon}>
                 <Icon name={action.icon} />
               </div>
-            </Button>
+            </svelte:component>
           {/each}
         </div>
       </svelte:component>
