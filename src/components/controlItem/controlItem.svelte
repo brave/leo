@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1 0 0;
     box-sizing: border-box;
     height: 100%;
     border-radius: var(--leo-control-item-radius);
