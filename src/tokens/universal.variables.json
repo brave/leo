@@ -2789,16 +2789,6 @@
           "type": "color",
           "value": "#ffedec",
           "referencedVariable": "$primitive.red.95"
-        },
-        "focus-default": {
-          "type": "color",
-          "value": "#8283ff",
-          "referencedVariable": "$primary.30"
-        },
-        "focus-button-special": {
-          "type": "color",
-          "value": "#0f0663",
-          "referencedVariable": "$primary.70"
         }
       },
       "elevation": {
@@ -3791,13 +3781,18 @@
           },
           "background-active": {
             "type": "color",
-            "value": "#ffffff",
-            "referencedVariable": "$primitive.neutral.100"
+            "value": "#fafafb",
+            "referencedVariable": "$primitive.neutral.98"
           },
           "background-selected-item": {
             "type": "color",
             "value": "#f0f0f4",
             "referencedVariable": "$primitive.neutral.95"
+          },
+          "background-hover-item": {
+            "type": "color",
+            "value": "#ffffff",
+            "referencedVariable": "$primitive.neutral.100"
           },
           "split-view-icon-background": {
             "type": "color",
@@ -3808,6 +3803,11 @@
             "type": "color",
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
+          },
+          "divider": {
+            "type": "color",
+            "value": "#e3e3e8",
+            "referencedVariable": "$primitive.neutral.90"
           },
           "button": {
             "hover": {
@@ -3820,11 +3820,6 @@
               "value": "#fcfcfe",
               "referencedVariable": "$primitive.neutral.99"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#e3e3e8",
-            "referencedVariable": "$primitive.neutral.90"
           }
         },
         "toolbar": {
@@ -4041,16 +4036,6 @@
           "type": "color",
           "value": "#54000e",
           "referencedVariable": "$primitive.red.15"
-        },
-        "focus-default": {
-          "type": "color",
-          "value": "#4a46e0",
-          "referencedVariable": "$primary.30"
-        },
-        "focus-button-special": {
-          "type": "color",
-          "value": "#efefff",
-          "referencedVariable": "$primary.70"
         }
       },
       "elevation": {
@@ -5048,6 +5033,11 @@
           },
           "background-selected-item": {
             "type": "color",
+            "value": "#1b1b1f",
+            "referencedVariable": "$primitive.neutral.10"
+          },
+          "background-hover-item": {
+            "type": "color",
             "value": "#252529",
             "referencedVariable": "$primitive.neutral.15"
           },
@@ -5061,6 +5051,11 @@
             "value": "#252529",
             "referencedVariable": "$primitive.neutral.15"
           },
+          "divider": {
+            "type": "color",
+            "value": "#1b1b1f",
+            "referencedVariable": "$primitive.neutral.10"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5072,11 +5067,6 @@
               "value": "#111114",
               "referencedVariable": "$primitive.neutral.5"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
           }
         },
         "toolbar": {
@@ -5260,6 +5250,18 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0
+        },
+        "default": {
+          "type": "number",
+          "value": 0
+        },
+        "small": {
+          "type": "number",
+          "value": 0
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
@@ -5434,6 +5436,18 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0
+        },
+        "default": {
+          "type": "number",
+          "value": 0
+        },
+        "small": {
+          "type": "number",
+          "value": 0
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
@@ -5494,7 +5508,7 @@
         },
         "h4": {
           "type": "number",
-          "value": 16
+          "value": 17
         },
         "label": {
           "type": "number",
@@ -5608,13 +5622,25 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": -0.4300000071525574
+        },
+        "default": {
+          "type": "number",
+          "value": -0.23000000417232513
+        },
+        "small": {
+          "type": "number",
+          "value": -0.07999999821186066
+        },
         "button": {
           "type": "number",
           "value": -0.4000000059604645
         },
         "headings": {
           "type": "number",
-          "value": -0.4000000059604645
+          "value": -0.25999999046325684
         }
       },
       "paragraph-spacing": {
@@ -5782,13 +5808,25 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0.5
+        },
+        "default": {
+          "type": "number",
+          "value": 0.20000000298023224
+        },
+        "small": {
+          "type": "number",
+          "value": 0.4000000059604645
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
         },
         "headings": {
           "type": "number",
-          "value": -0.4000000059604645
+          "value": 0.10000000149011612
         }
       },
       "paragraph-spacing": {
