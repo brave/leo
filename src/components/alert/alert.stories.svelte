@@ -17,7 +17,7 @@
   let customButton = false;
 
   $: alertUser = (mode, type) => {
-    const alert = showAlert(
+    showAlert(
       {
         content,
         title,
@@ -161,18 +161,22 @@
     Duration
     <input type="text" bind:value={duration} />
   </label>
-  <label>
-    Dismissable
-    <input type="checkbox" bind:checked={canDismiss} />
-  </label>
-  <label>
-    Has action
-    <input type="checkbox" bind:checked={hasAction} />
-  </label>
-  <label>
-    Use custom button
-    <input type="checkbox" bind:checked={customButton} />
-  </label>
+  <div class="options">
+    <label>
+      Dismissable
+      <input type="checkbox" bind:checked={canDismiss} />
+    </label>
+    <label>
+      Has action
+      <input type="checkbox" bind:checked={hasAction} />
+    </label>
+    {#if hasAction}
+      <label>
+        Use custom button
+        <input type="checkbox" bind:checked={customButton} />
+      </label>
+    {/if}
+  </div>
   <Button
     onClick={() => {
       alertUser(args.mode, args.type)
@@ -186,6 +190,14 @@
     flex-direction: column;
     gap: 16px;
     max-width: 500px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
   }
 
   /* Note: in the real world we don't need this to reverse the button order (as

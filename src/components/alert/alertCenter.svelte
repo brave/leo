@@ -2,6 +2,13 @@
   import type { AlertMode, AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'
 
+  /**
+   * This is a workaround for TS since we don't know what props Action may have.
+   * Additionally, Button has two generic type params, which also seems to
+   * contribute to the TS error.
+   */
+  const ButtonComponent: ComponentType<SvelteComponent> = Button;
+
   type Action = {
     kind?: ButtonKind
     isDisabled?: boolean,
@@ -122,12 +129,10 @@
         <div slot="actions">
           {#each alert.actions as action}
             <svelte:component
-              this={action.component || Button}
+              this={action.component || ButtonComponent}
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
-              isDisabled={action.isDisabled}
-              isLoading={action.isLoading}
               onClick={() => action.action(alert)}
               {...action}
             >
