@@ -63,7 +63,7 @@
     }
 
     resumeDismiss() {
-      if (!this.duration || this.actions.length) return
+      if (!this.duration) return
       this.#timeout = setTimeout(() => this.dismiss(), this.duration)
     }
 
