@@ -2,8 +2,18 @@
   import type { AlertMode, AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'
 
+  /**
+   * This is a workaround for TS since we don't know what props Action may have.
+   * Additionally, Button has two generic type params, which also seems to
+   * contribute to the TS error.
+   */
+  const ButtonComponent: ComponentType<SvelteComponent> = Button;
+
   type Action = {
     kind?: ButtonKind
+    isDisabled?: boolean,
+    isLoading?: boolean,
+    component?: ComponentType<SvelteComponent>,
     action: (alert: AlertInfo) => void
   } & ({
     text: string
@@ -60,12 +70,21 @@
     dismiss() {
       alerts.update((a) => a.filter((a) => a !== this))
     }
+
+    updateAlert(update: Partial<AlertOptions>) {
+      Object.assign(this, update)
+
+      // Trigger a rerender
+      alerts.update(a => [...a])
+    }
   }
 
   const alerts = writable<AlertInfo[]>([])
 
   export const showAlert = (options: AlertOptions, duration = 2000, canDismiss = true) => {
-    alerts.update((a) => [...a, new AlertInfo(options, duration, canDismiss)])
+    const info = new AlertInfo(options, duration, canDismiss)
+    alerts.update((a) => [...a, info])
+    return info
   }
 
   const transitionOptions = { y: -64, duration: 120 }
@@ -109,11 +128,13 @@
         {alert.content}
         <div slot="actions">
           {#each alert.actions as action}
-            <Button
+            <svelte:component
+              this={action.component || ButtonComponent}
               size={alert.mode === "full" ? "medium" : "small"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               onClick={() => action.action(alert)}
+              {...action}
             >
               {#if action.icon && !action.text}
                 <Icon name={action.icon} />
@@ -123,7 +144,7 @@
               <div slot="icon-after" hidden={!action.text || !action.icon}>
                 <Icon name={action.icon} />
               </div>
-            </Button>
+            </svelte:component>
           {/each}
         </div>
       </svelte:component>

@@ -7,12 +7,14 @@
   import Icon from '../icon/icon.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import ButtonWithProgress from '../../storyHelpers/ButtonWithProgress.svelte'
 
   let content = 'Hello World'
   let title = 'Title'
   let canDismiss = true
   let hasAction = false
   let duration = 2000
+  let customButton = false
 
   $: alertUser = (mode, type) =>
     showAlert(
@@ -21,13 +23,16 @@
         title,
         mode: mode ?? 'simple',
         type: type ?? 'error',
-        actions: hasAction ? [
-          {
-            text: 'Retry',
-            kind: 'filled',
-            action: () => {}
-          }
-        ] : []
+        actions: hasAction
+          ? [
+              {
+                text: 'Retry',
+                kind: 'filled',
+                component: customButton && ButtonWithProgress,
+                action: () => {}
+              }
+            ]
+          : []
       },
       duration,
       canDismiss
@@ -50,10 +55,13 @@
         Some content
       </Alert>
     </Slot>
-    <Slot name="content-after" explanation="optional content after the main content of the alert">
+    <Slot
+      name="content-after"
+      explanation="optional content after the main content of the alert"
+    >
       <Alert {...args} mode="simple">
         Some content
-        <Button kind='plain-faint' fab slot="content-after">
+        <Button kind="plain-faint" fab slot="content-after">
           <Icon name="close" />
         </Button>
       </Alert>
@@ -152,14 +160,22 @@
     Duration
     <input type="text" bind:value={duration} />
   </label>
-  <label>
-    Dismissable
-    <input type="checkbox" bind:checked={canDismiss} />
-  </label>
-  <label>
-    Has action
-    <input type="checkbox" bind:checked={hasAction} />
-  </label>
+  <div class="options">
+    <label>
+      Dismissable
+      <input type="checkbox" bind:checked={canDismiss} />
+    </label>
+    <label>
+      Has action
+      <input type="checkbox" bind:checked={hasAction} />
+    </label>
+    {#if hasAction}
+      <label>
+        Use custom button
+        <input type="checkbox" bind:checked={customButton} />
+      </label>
+    {/if}
+  </div>
   <Button
     onClick={() => {
       alertUser(args.mode, args.type)
@@ -173,6 +189,14 @@
     flex-direction: column;
     gap: 16px;
     max-width: 500px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
   }
 
   /* Note: in the real world we don't need this to reverse the button order (as
