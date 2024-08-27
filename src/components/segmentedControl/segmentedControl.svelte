@@ -107,6 +107,11 @@
   :host {
     display: flex;
     position: relative;
+    width: var(--leo-segmented-control-width, fit-content);
+
+    & .leo-segmented-control {
+        width: 100%;
+    }
   }
 
   .leo-segmented-control {
@@ -122,7 +127,8 @@
     --leo-control-item-font: var(--leo-font-components-button-default);
 
     display: flex;
-    max-width: max-content;
+    min-width: max-content;
+    width: var(--leo-segmented-control-width, fit-content);
     align-items: center;
     position: relative;
 

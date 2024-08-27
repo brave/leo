@@ -16,6 +16,11 @@
   title="Components/SegmentedControl"
   component={SegmentedControl}
   argTypes={{
+    '--leo-segmented-control-width': {
+      control: 'text',
+      type: 'string',
+      description: 'The width for the entire control (defaults to `fit-content`).'
+    },
     '--leo-control-padding': {
       control: 'text',
       type: 'string',
