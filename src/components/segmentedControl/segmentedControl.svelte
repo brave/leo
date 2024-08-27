@@ -127,6 +127,7 @@
     --leo-control-item-font: var(--leo-font-components-button-default);
 
     display: flex;
+    min-width: max-content;
     width: var(--leo-segmented-control-width, fit-content);
     align-items: center;
     position: relative;
