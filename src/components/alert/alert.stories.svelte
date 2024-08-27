@@ -14,9 +14,9 @@
   let canDismiss = true
   let hasAction = false
   let duration = 2000
-  let customButton = false;
+  let customButton = false
 
-  $: alertUser = (mode, type) => {
+  $: alertUser = (mode, type) =>
     showAlert(
       {
         content,
@@ -37,7 +37,6 @@
       duration,
       canDismiss
     )
-  }
 </script>
 
 <Story name="Slots" let:args>
