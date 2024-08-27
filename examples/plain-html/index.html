@@ -12,6 +12,7 @@
   <style>
     body {
       background: var(--leo-color-page-background);
+      color: var(--leo-color-text-primary);
     }
 
     .component-container {
@@ -49,6 +50,10 @@
 
     .navigation-action-items {
       padding-top: var(--leo-spacing-m);
+    }
+
+    .segmented-control-full {
+      --leo-segmented-control-width: 100%;
     }
   </style>
 </head>
@@ -99,7 +104,9 @@
     const dropdown = document.querySelector('leo-dropdown')
     const dropdownSelected = document.querySelector('leo-dropdown [slot="value"]')
     const input = document.querySelector('leo-input')
-    const segmentedControl = document.querySelector('leo-segmentedcontrol');
+    const segmentedControlExample = document.querySelector('#example-segmented-control');
+    const segmentedControlToggle = segmentedControlExample.querySelector('leo-toggle');
+    const segmentedControl = segmentedControlExample.querySelector('leo-segmentedcontrol');
 
     function updateSelectedOption(e) {
       for (const radio of radios)
@@ -145,6 +152,10 @@
     collapse.addEventListener('toggle', toggled)
     input.addEventListener('input', e => {
       toggleButton.textContent = e.value
+    })
+
+    segmentedControlToggle.addEventListener('change', () => {
+      segmentedControl.classList.toggle('segmented-control-full')
     })
 
     dialogButton.addEventListener('click', () => {
@@ -245,16 +256,19 @@
         <leo-button kind="filled">Primary</leo-button>
       </div>
     </leo-dialog>
-    <leo-segmentedcontrol value="full">
-      <leo-controlitem value="full">
-        Full
-        <leo-icon slot="icon-after" name="fullscreen-on"></leo-icon>
-      </leo-controlitem>
-      <leo-controlitem value="simple">
-        Simple
-        <leo-icon slot="icon-after" name="fullscreen-off"></leo-icon>
-      </leo-controlitem>
-    </leo-segmentedcontrol>
+    <div id="example-segmented-control">
+      <leo-toggle>Toggle segmented control from automatic to parent's width</leo-toggle>
+      <leo-segmentedcontrol value="full">
+        <leo-controlitem value="full">
+          Full
+          <leo-icon slot="icon-after" name="fullscreen-on"></leo-icon>
+        </leo-controlitem>
+        <leo-controlitem value="simple">
+          Simple
+          <leo-icon slot="icon-after" name="fullscreen-off"></leo-icon>
+        </leo-controlitem>
+      </leo-segmentedcontrol>
+    </div>
 
     <div class="navigation-container">
       <leo-navigation>

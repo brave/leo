@@ -107,6 +107,11 @@
   :host {
     display: flex;
     position: relative;
+    width: var(--leo-segmented-control-width, fit-content);
+
+    & .leo-segmented-control {
+        width: 100%;
+    }
   }
 
   .leo-segmented-control {

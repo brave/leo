@@ -18,6 +18,7 @@
   :host {
     display: flex;
     height: 100%;
+    flex: 1 0 0;
   }
   .leo-control-item {
     all: unset;
