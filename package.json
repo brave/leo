@@ -6,7 +6,7 @@
   "type": "module",
   "dependencies": {
     "@storybook/test": "8.1.11",
-    "svelte": "4.2.18",
+    "svelte": "4.2.19",
     "svelte-preprocess": "5.1.4",
     "tailwindcss": "3.2.6",
     "tslib": "2.5.0"
