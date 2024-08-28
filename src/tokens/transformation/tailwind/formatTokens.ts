@@ -24,7 +24,8 @@ const formatDropShadowVars = (
   })
 }
 
-const kebabCase = (str: string) => str && str.toLowerCase().replaceAll(' ', '-')
+const kebabCase = (str: string) =>
+  str && str.toLowerCase().replace(/\s/g, '-').replace(/-{2,}/g, '-')
 
 /**
  * This function transforms tokens into a nested object
@@ -151,18 +152,14 @@ export default (({ dictionary }) => {
       gradients.set(pathParts.join('-'), t.value)
     } else if (type === 'custom-shadow') {
       const [, ...pathParts] = t.path
-      boxShadows.set(
+      const shadowName = kebabCase(
         pathParts
           .filter((v) => !['elevation', 'light', 'dark'].includes(v))
           .join('-')
-          .replaceAll(' ', '-'),
-        formatBoxShadowVar(name, false)
       )
+      boxShadows.set(shadowName, formatBoxShadowVar(name, false))
       dropShadows.set(
-        pathParts
-          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
-          .join('-')
-          .replaceAll(' ', '-'),
+        shadowName,
         formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true)
       )
     }

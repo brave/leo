@@ -107,12 +107,13 @@ export default {
         const items = Object.entries(typeValue)
 
         /**
-         * Focus state is not as deeply nested, and is therefore tested
-         * at this level.
+         * These shadows are not as deeply nested,
+         * and are therefore tested at this level.
          */
         if (
           [
             'focus state',
+            'focus state - offset',
             'notificationbackdrop',
             'url bar shadow',
             'active tab shadow',
