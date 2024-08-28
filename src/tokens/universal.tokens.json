@@ -481,7 +481,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0.08,
+            "letterSpacing": 0,
             "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -549,7 +549,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0.07,
+            "letterSpacing": 0,
             "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -617,7 +617,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0.06,
+            "letterSpacing": 0,
             "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -685,7 +685,7 @@
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0.055,
+            "letterSpacing": 0,
             "lineHeight": 16,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -822,7 +822,7 @@
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": -0.1,
+          "letterSpacing": 0,
           "lineHeight": 16,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -844,7 +844,7 @@
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": 0.1,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -1017,9 +1017,9 @@
       "description": null,
       "type": "custom-shadow",
       "value": {
-        "shadowType": "innerShadow",
+        "shadowType": "dropShadow",
         "radius": 0,
-        "color": "#8283ffff",
+        "color": "#6261ffff",
         "offsetX": 0,
         "offsetY": 0,
         "spread": 2
@@ -1027,6 +1027,37 @@
       "extensions": {
         "org.lukasoppermann.figmaDesignTokens": {
           "styleId": "S:f949f0a23002305ca5b8d88374d6ce28390f7d43,",
+          "exportKey": "effect"
+        }
+      }
+    },
+    "focus state - offset": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#6261ffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 3
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#efefffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 1
+        }
+      },
+      "description": null,
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:7f366c275bcd1830520e48ff1fc033ca51258368,",
           "exportKey": "effect"
         }
       }
@@ -1769,7 +1800,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0.08
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -1909,7 +1940,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0.07
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -2049,7 +2080,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0.06
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -2189,7 +2220,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0.055
+            "value": 0
           },
           "lineHeight": {
             "type": "dimension",
@@ -2470,7 +2501,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": -0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
@@ -2516,7 +2547,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": 0.1
         },
         "lineHeight": {
           "type": "dimension",
