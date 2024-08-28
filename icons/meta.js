@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1723795826594,
+  "updatedAt": 1724832593157,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -792,6 +792,7 @@ export default {
     "email-reply": "email-reply",
     "email-search": "email-search",
     "email-send": "email-send",
+    "email-shield": "email-shield",
     "email-star": "email-star",
     "email": "email",
     "emc-color": "emc-color",
