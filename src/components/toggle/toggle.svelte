@@ -159,7 +159,7 @@
     height: calc(var(--height) - 2 * var(--padding));
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
-    transition: background-color var(--duration) ease-in-out;
+    transition: background-color var(--duration) ease-in-out, box-shadow var(--duration) ease-in-out;
     flex-shrink: 0;
 
     &:disabled {
@@ -168,6 +168,10 @@
       > .thumb {
         background: var(--thumb-disabled-color);
       }
+    }
+
+    &:focus-visible {
+      box-shadow: var(--leo-effect-focus-state-offset);
     }
 
     &:hover:not(:disabled) {
