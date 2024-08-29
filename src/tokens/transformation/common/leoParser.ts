@@ -21,7 +21,7 @@ function getEffectColorsFromLayer(layerVariables: DesignTokens) {
   return allowedGroups
     .map((g) =>
       (
-        Object.entries(layerVariables.color?.['---light']?.[g] || {}) as [
+        Object.entries(layerVariables.color?.light?.[g] || {}) as [
           string,
           DesignToken
         ][]
