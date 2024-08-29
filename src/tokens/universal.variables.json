@@ -2789,16 +2789,6 @@
           "type": "color",
           "value": "#ffedec",
           "referencedVariable": "$primitive.red.95"
-        },
-        "focus-default": {
-          "type": "color",
-          "value": "#8283ff",
-          "referencedVariable": "$primary.30"
-        },
-        "focus-button-special": {
-          "type": "color",
-          "value": "#0f0663",
-          "referencedVariable": "$primary.70"
         }
       },
       "elevation": {
@@ -3728,13 +3718,25 @@
       "desktopbrowser": {
         "chrome-background-desktop": {
           "type": "color",
-          "value": "#fafafb",
-          "referencedVariable": "$primitive.neutral.98"
+          "value": "#ffffff",
+          "referencedVariable": "$primitive.neutral.100"
         },
-        "chrome-menu-background": {
-          "type": "color",
-          "value": "#fcfcfe",
-          "referencedVariable": "$primitive.neutral.99"
+        "menu": {
+          "background": {
+            "type": "color",
+            "value": "#ffffff",
+            "referencedVariable": "$primitive.neutral.100"
+          },
+          "background-hover": {
+            "type": "color",
+            "value": "#f0f0f4",
+            "referencedVariable": "$primitive.neutral.95"
+          },
+          "divider": {
+            "type": "color",
+            "value": "#e3e3e8",
+            "referencedVariable": "$primitive.neutral.90"
+          }
         },
         "tabbar": {
           "background": {
@@ -3752,32 +3754,37 @@
             "value": "#e3e3e8",
             "referencedVariable": "$primitive.neutral.90"
           },
-          "hover-tab-background": {
-            "type": "color",
-            "value": "#f0f0f4",
-            "referencedVariable": "$primitive.neutral.95"
-          },
           "active-button-background": {
             "type": "color",
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
-          "active-tab-vertical": {
+          "hover-tab-horizontal": {
             "type": "color",
-            "value": "#f0f0f4",
-            "referencedVariable": "$primitive.neutral.95"
+            "value": "#e3e3e8",
+            "referencedVariable": "$primitive.neutral.90"
+          },
+          "hover-tab-vertical": {
+            "type": "color",
+            "value": "#fafafb",
+            "referencedVariable": "$primitive.neutral.98"
           },
           "active-tab-horizontal": {
             "type": "color",
             "value": "#fafafb",
             "referencedVariable": "$primitive.neutral.98"
           },
-          "split-view-horizontal": {
+          "active-tab-vertical": {
+            "type": "color",
+            "value": "#f0f0f4",
+            "referencedVariable": "$primitive.neutral.95"
+          },
+          "split-view-background-horizontal": {
             "type": "color",
             "value": "#c7c7cc",
             "referencedVariable": "$primitive.neutral.80"
           },
-          "split-view-vertical": {
+          "split-view-background-vertical": {
             "type": "color",
             "value": "#e3e3e8",
             "referencedVariable": "$primitive.neutral.90"
@@ -3799,6 +3806,11 @@
             "value": "#f0f0f4",
             "referencedVariable": "$primitive.neutral.95"
           },
+          "background-hover-item": {
+            "type": "color",
+            "value": "#f0f0f4",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "split-view-icon-background": {
             "type": "color",
             "value": "#e3e3e8",
@@ -3812,19 +3824,19 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#fafafb",
-              "referencedVariable": "$primitive.neutral.98"
+              "value": "#e3e3e8",
+              "referencedVariable": "$primitive.neutral.90"
             },
             "active": {
               "type": "color",
-              "value": "#fcfcfe",
-              "referencedVariable": "$primitive.neutral.99"
+              "value": "#fafafb",
+              "referencedVariable": "$primitive.neutral.98"
             }
           },
           "divider": {
             "type": "color",
-            "value": "#e3e3e8",
-            "referencedVariable": "$primitive.neutral.90"
+            "value": "#f0f0f4",
+            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -3836,8 +3848,8 @@
             },
             "active": {
               "type": "color",
-              "value": "#ffffff",
-              "referencedVariable": "$primitive.neutral.100"
+              "value": "#e3e3e8",
+              "referencedVariable": "$primitive.neutral.90"
             },
             "outline": {
               "type": "color",
@@ -4041,16 +4053,6 @@
           "type": "color",
           "value": "#54000e",
           "referencedVariable": "$primitive.red.15"
-        },
-        "focus-default": {
-          "type": "color",
-          "value": "#4a46e0",
-          "referencedVariable": "$primary.30"
-        },
-        "focus-button-special": {
-          "type": "color",
-          "value": "#efefff",
-          "referencedVariable": "$primary.70"
         }
       },
       "elevation": {
@@ -4983,10 +4985,22 @@
           "value": "#303034",
           "referencedVariable": "$primitive.neutral.20"
         },
-        "chrome-menu-background": {
-          "type": "color",
-          "value": "#252529",
-          "referencedVariable": "$primitive.neutral.15"
+        "menu": {
+          "background": {
+            "type": "color",
+            "value": "#1b1b1f",
+            "referencedVariable": "$primitive.neutral.10"
+          },
+          "background-hover": {
+            "type": "color",
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
+          },
+          "divider": {
+            "type": "color",
+            "value": "#3b3b3f",
+            "referencedVariable": "$primitive.neutral.25"
+          }
         },
         "tabbar": {
           "background": {
@@ -5004,32 +5018,37 @@
             "value": "#46464a",
             "referencedVariable": "$primitive.neutral.30"
           },
-          "hover-tab-background": {
-            "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
-          },
           "active-button-background": {
             "type": "color",
             "value": "#000000",
             "referencedVariable": "$primitive.neutral.0"
           },
-          "active-tab-vertical": {
+          "hover-tab-horizontal": {
             "type": "color",
-            "value": "#46464a",
-            "referencedVariable": "$primitive.neutral.30"
+            "value": "#252529",
+            "referencedVariable": "$primitive.neutral.15"
+          },
+          "hover-tab-vertical": {
+            "type": "color",
+            "value": "#3b3b3f",
+            "referencedVariable": "$primitive.neutral.25"
           },
           "active-tab-horizontal": {
             "type": "color",
             "value": "#303034",
             "referencedVariable": "$primitive.neutral.20"
           },
-          "split-view-horizontal": {
+          "active-tab-vertical": {
+            "type": "color",
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
+          },
+          "split-view-background-horizontal": {
             "type": "color",
             "value": "#000000",
             "referencedVariable": "$primitive.neutral.0"
           },
-          "split-view-vertical": {
+          "split-view-background-vertical": {
             "type": "color",
             "value": "#1b1b1f",
             "referencedVariable": "$primitive.neutral.10"
@@ -5048,8 +5067,13 @@
           },
           "background-selected-item": {
             "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
+          },
+          "background-hover-item": {
+            "type": "color",
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
           },
           "split-view-icon-background": {
             "type": "color",
@@ -5064,32 +5088,32 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#1b1b1f",
-              "referencedVariable": "$primitive.neutral.10"
+              "value": "#3b3b3f",
+              "referencedVariable": "$primitive.neutral.25"
             },
             "active": {
               "type": "color",
-              "value": "#111114",
-              "referencedVariable": "$primitive.neutral.5"
+              "value": "#303034",
+              "referencedVariable": "$primitive.neutral.20"
             }
           },
           "divider": {
             "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#252529",
+            "referencedVariable": "$primitive.neutral.15"
           }
         },
         "toolbar": {
           "button": {
             "hover": {
               "type": "color",
-              "value": "#252529",
-              "referencedVariable": "$primitive.neutral.15"
+              "value": "#46464a",
+              "referencedVariable": "$primitive.neutral.30"
             },
             "active": {
               "type": "color",
-              "value": "#111114",
-              "referencedVariable": "$primitive.neutral.5"
+              "value": "#5e5e62",
+              "referencedVariable": "$primitive.neutral.40"
             },
             "outline": {
               "type": "color",
@@ -5260,6 +5284,18 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0
+        },
+        "default": {
+          "type": "number",
+          "value": 0
+        },
+        "small": {
+          "type": "number",
+          "value": 0
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
@@ -5434,6 +5470,18 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0
+        },
+        "default": {
+          "type": "number",
+          "value": 0
+        },
+        "small": {
+          "type": "number",
+          "value": 0
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
@@ -5494,7 +5542,7 @@
         },
         "h4": {
           "type": "number",
-          "value": 16
+          "value": 17
         },
         "label": {
           "type": "number",
@@ -5608,13 +5656,25 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": -0.4300000071525574
+        },
+        "default": {
+          "type": "number",
+          "value": -0.23000000417232513
+        },
+        "small": {
+          "type": "number",
+          "value": -0.07999999821186066
+        },
         "button": {
           "type": "number",
           "value": -0.4000000059604645
         },
         "headings": {
           "type": "number",
-          "value": -0.4000000059604645
+          "value": -0.25999999046325684
         }
       },
       "paragraph-spacing": {
@@ -5782,13 +5842,25 @@
         }
       },
       "letter-spacing": {
+        "large": {
+          "type": "number",
+          "value": 0.10000000149011612
+        },
+        "default": {
+          "type": "number",
+          "value": 0.10000000149011612
+        },
+        "small": {
+          "type": "number",
+          "value": 0.10000000149011612
+        },
         "button": {
           "type": "number",
           "value": 0.10000000149011612
         },
         "headings": {
           "type": "number",
-          "value": -0.4000000059604645
+          "value": 0.10000000149011612
         }
       },
       "paragraph-spacing": {
