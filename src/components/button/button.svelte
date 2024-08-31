@@ -125,7 +125,7 @@
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
-    --box-shadow-hover: var(--leo-effect-elevation-02);
+    --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
     --radius: 0;
     --border-color: transparent;
@@ -196,7 +196,7 @@
       }
 
       background: var(--bg-hover, var(--bg));
-      color: var(--color-hover, var(--color));
+      color: var(--color-hover, var(--mixed-primary-color));
       box-shadow: var(--box-shadow-hover);
       border-color: var(--border-color-hover, var(--border-color));
     }
@@ -212,7 +212,6 @@
       color: var(--color-focus, var(--color));
       box-shadow: var(--box-shadow-focus);
       background: var(--bg-focus, var(--bg));
-      border-color: var(--border-color-focus, var(--border-color));
     }
   }
 
@@ -315,10 +314,13 @@
     --bg: var(--mixed-primary-color);
     --bg-disabled: var(--leo-color-button-disabled);
     --color: var(--leo-color-schemes-on-primary);
+    --color-hover: var(--leo-color-schemes-on-primary);
+    --box-shadow-focus: var(--leo-effect-focus-state-offset);
     --icon-color: var(--color);
 
     @container style(--leo-button-color) {
       --color: white;
+      --color-hover: white;
     }
   }
 
@@ -328,15 +330,14 @@
     --color: var(--leo-color-text-interactive);
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
-    --border-color-hover: var(--leo-color-primary-40);
-    --border-color-focus: var(--leo-color-divider-interactive);
+    --border-color-hover: var(--leo-color-primitive-primary-70);
 
     @container style(--leo-button-color) {
       --color: var(--mixed-primary-color);
     }
 
     @theme (dark) {
-      --border-color-hover: var(--leo-color-primitive-primary-60);
+      --border-color-hover: var(--leo-color-primitive-primary-35);
     }
 
     /** If we support color mix, infer border colors from primary color */
@@ -344,14 +345,14 @@
       --border-color: color-mix(
         in srgb,
         var(--primary-color),
-        var(--background) 50%
+        var(--background) 70%
       );
-      --border-color-hover: var(--primary-color);
+      --border-color-hover: color-mix(
+        in srgb,
+        var(--mixed-primary-color),
+        var(--background) 70%
+      );
     }
-
-    --box-shadow-focus: 0px 0px 0px 2px #423eee,
-      0px 0px 0px 1px rgba(255, 255, 255, 0.3);
-    --icon-color: var(--color);
   }
   .leoButton.isPlain {
     --color: var(--leo-color-text-interactive);
@@ -457,6 +458,8 @@
     --bg-focus: var(--bg);
     --bg-disabled: var(--leo-color-button-disabled);
     --color: white;
+    --color-hover: white;
+    --box-shadow-focus: var(--leo-effect-focus-state-offset);
     --icon-color: white;
     --default-bg-opacity: 1;
 
