@@ -114,7 +114,7 @@
       position: relative;
       text-decoration: none;
 
-      font: var(--leo-font-components-button-default);
+      font: var(--leo-font-components-navbutton);
       color: var(--nav-item-color);
 
       &:hover {
