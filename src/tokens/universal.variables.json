@@ -4982,8 +4982,8 @@
       "desktopbrowser": {
         "chrome-background-desktop": {
           "type": "color",
-          "value": "#303034",
-          "referencedVariable": "$primitive.neutral.20"
+          "value": "#252529",
+          "referencedVariable": "$primitive.neutral.15"
         },
         "menu": {
           "background": {
@@ -4993,8 +4993,8 @@
           },
           "background-hover": {
             "type": "color",
-            "value": "#46464a",
-            "referencedVariable": "$primitive.neutral.30"
+            "value": "#303034",
+            "referencedVariable": "$primitive.neutral.20"
           },
           "divider": {
             "type": "color",
@@ -5005,8 +5005,8 @@
         "tabbar": {
           "background": {
             "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#111114",
+            "referencedVariable": "$primitive.neutral.5"
           },
           "pinned-tab-outline-horizontal": {
             "type": "color",
@@ -5050,30 +5050,30 @@
           },
           "split-view-background-vertical": {
             "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#111114",
+            "referencedVariable": "$primitive.neutral.5"
           }
         },
         "omnibar": {
           "background-desktop": {
             "type": "color",
+            "value": "#111114",
+            "referencedVariable": "$primitive.neutral.5"
+          },
+          "background-active": {
+            "type": "color",
             "value": "#252529",
             "referencedVariable": "$primitive.neutral.15"
           },
-          "background-active": {
+          "background-selected-item": {
             "type": "color",
             "value": "#303034",
             "referencedVariable": "$primitive.neutral.20"
           },
-          "background-selected-item": {
-            "type": "color",
-            "value": "#46464a",
-            "referencedVariable": "$primitive.neutral.30"
-          },
           "background-hover-item": {
             "type": "color",
-            "value": "#46464a",
-            "referencedVariable": "$primitive.neutral.30"
+            "value": "#303034",
+            "referencedVariable": "$primitive.neutral.20"
           },
           "split-view-icon-background": {
             "type": "color",
@@ -5088,8 +5088,8 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#3b3b3f",
-              "referencedVariable": "$primitive.neutral.25"
+              "value": "#252529",
+              "referencedVariable": "$primitive.neutral.15"
             },
             "active": {
               "type": "color",
@@ -5107,18 +5107,18 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#46464a",
-              "referencedVariable": "$primitive.neutral.30"
+              "value": "#1b1b1f",
+              "referencedVariable": "$primitive.neutral.10"
             },
             "active": {
               "type": "color",
-              "value": "#5e5e62",
-              "referencedVariable": "$primitive.neutral.40"
+              "value": "#111114",
+              "referencedVariable": "$primitive.neutral.5"
             },
             "outline": {
               "type": "color",
-              "value": "#46464a",
-              "referencedVariable": "$primitive.neutral.30"
+              "value": "#3b3b3f",
+              "referencedVariable": "$primitive.neutral.25"
             }
           }
         }
