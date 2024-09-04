@@ -98,6 +98,6 @@
   },
   "license": "MIT",
   "overrides": {
-    "axios": "1.7.5"
+    "axios": "1.7.6"
   }
 }
