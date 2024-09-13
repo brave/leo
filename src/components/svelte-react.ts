@@ -6,7 +6,8 @@ import {
   useCallback,
   type ForwardedRef,
   type PropsWithChildren,
-  useState
+  useState,
+  type PropsWithoutRef
 } from 'react'
 import type { SvelteComponent } from 'svelte'
 
@@ -108,7 +109,10 @@ export default function SvelteWebComponentToReact<
   T extends Record<string, any>
 >(tag: string, component: typeof HTMLElement) {
   return forwardRef(
-    (props: PropsWithChildren<T>, forwardedRef: ForwardedRef<HTMLElement>) => {
+    (
+      props: PropsWithoutRef<PropsWithChildren<T>>,
+      forwardedRef: ForwardedRef<HTMLElement>
+    ) => {
       const component = useRef<HTMLElement>()
       const { setElement } = useEventHandlers(props)
 
