@@ -21,7 +21,7 @@
   export let size: Sizes = 'normal'
   export let isDisabled = false
 
-  export let onChange: (detail: { value: string | number | any }) => void
+  export let onChange: (detail: { value: string | number | any }) => void = () => {}
 
   const tagName = 'leo-radiobutton'
 
