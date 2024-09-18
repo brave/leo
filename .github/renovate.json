@@ -13,6 +13,11 @@
       "automerge": true
     },
     {
+      "matchUpdateTypes": ["digest"],
+      "matchRepositories": ["^brave/.*$"],
+      "automerge": true
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "automerge": true
     }
