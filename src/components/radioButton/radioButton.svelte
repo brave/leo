@@ -134,6 +134,8 @@
   .leo-radiobutton .check {
     --leo-icon-size: var(--radiobutton-size);
 
+    flex-shrink: 0;
+
     position: relative;
     width: var(--radiobutton-size);
     height: var(--radiobutton-size);
