@@ -19,7 +19,7 @@
     "@fontsource/manrope": "5.0.21",
     "@fontsource/poppins": "5.0.15",
     "@fontsource/roboto-flex": "5.0.16",
-    "@material/material-color-utilities": "0.2.7",
+    "@material/material-color-utilities": "0.3.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
     "@storybook/addon-actions": "8.1.11",
