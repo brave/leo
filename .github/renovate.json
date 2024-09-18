@@ -7,7 +7,16 @@
     {
       "matchDepTypes": ["peerDependencies"],
       "enabled": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
     }
   ],
-  "schedule": ["at 10:00am on Sunday"]
+  "schedule": ["at 10:00am on Sunday"],
+  "platformAutomerge": true
 }
