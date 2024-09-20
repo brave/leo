@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1724832593157,
+  "updatedAt": 1726819834962,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -958,6 +958,7 @@ export default {
     "gbx-color": "gbx-color",
     "gbyte-color": "gbyte-color",
     "gemini-color": "gemini-color",
+    "geminiai-color": "geminiai-color",
     "gemma-color": "gemma-color",
     "generic-color": "generic-color",
     "gift": "gift",
