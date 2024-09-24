@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1726819834962,
+  "updatedAt": 1727165463610,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -711,6 +711,9 @@ export default {
     "dash-color": "dash-color",
     "dat-color": "dat-color",
     "data-color": "data-color",
+    "database-delete": "database-delete",
+    "database-off": "database-off",
+    "database": "database",
     "dbc-color": "dbc-color",
     "dcn-color": "dcn-color",
     "dcr-color": "dcr-color",
@@ -1424,6 +1427,7 @@ export default {
     "phone-shake": "phone-shake",
     "photo-album": "photo-album",
     "photos": "photos",
+    "picture-in-picture-off": "picture-in-picture-off",
     "picture-in-picture-return": "picture-in-picture-return",
     "picture-in-picture": "picture-in-picture",
     "pie-chart-1": "pie-chart-1",
@@ -2016,6 +2020,8 @@ export default {
     "zil-color": "zil-color",
     "zilla-color": "zilla-color",
     "zilliqa-color": "zilliqa-color",
+    "zoom-scroll-off": "zoom-scroll-off",
+    "zoom-scroll": "zoom-scroll",
     "zrx-color": "zrx-color"
   }
 }
