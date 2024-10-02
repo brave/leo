@@ -51,12 +51,26 @@
 
   export let onClick: () => void = undefined
 
+  let el: HTMLElement
+
   const checkIfCurrent = () => {
     isCurrent =
       window.location.pathname === href || window.location.hash === href
   }
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
+
+  // Handle updating data-selected attribute in web-components land -
+  // unfortunately we need to do this because changing isCurrent internally
+  // won't notify the webcomponent something has changed.
+  $: {
+    // Note: We read isCurrent & el here so the Svelte tracking works properly
+    const selected = isCurrent
+    const host = (el?.getRootNode() as ShadowRoot)?.host as HTMLElement
+    if (host) {
+      host.dataset.selected = selected.toString()
+    }
+  }
 
   onMount(() => {
     ;['pushState', 'replaceState'].forEach((name) => {
@@ -74,6 +88,7 @@
 <!-- Note that this doesn't currently work properly in WC land due to the nested dynamic elements -->
 <svelte:element
   this={outsideList ? 'div' : 'li'}
+  bind:this={el}
   class="leo-navigation-item"
   data-selected={isCurrent}
 >
@@ -96,8 +111,9 @@
 </svelte:element>
 
 <style lang="scss">
-  :host {
-    position: relative;
+  :global(leo-navigationitem[data-selected='true']),
+  .leo-navigation-item[data-selected='true'] {
+    anchor-name: --active-indicator;
   }
 
   .leo-navigation-item {
@@ -110,7 +126,6 @@
     &[data-selected='true'] {
       --nav-item-color: var(--leo-color-text-interactive);
       --leo-icon-color: var(--leo-color-icon-interactive);
-      anchor-name: --active-indicator;
 
       // Fallback active indicator for when the browser doesn't support anchor positioning
       @supports (not (anchor-name: --active-indicator)) {
