@@ -52,7 +52,8 @@
   export let onClick: () => void = undefined
 
   const checkIfCurrent = () => {
-    isCurrent = window.location.pathname === href || window.location.hash === href;
+    isCurrent =
+      window.location.pathname === href || window.location.hash === href
   }
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
@@ -71,14 +72,17 @@
 <svelte:window on:popstate={checkIfCurrent} on:hashchange={checkIfCurrent} />
 
 <!-- Note that this doesn't currently work properly in WC land due to the nested dynamic elements -->
-<svelte:element this={outsideList ? 'div' : 'li'} class="leo-navigation-item">
+<svelte:element
+  this={outsideList ? 'div' : 'li'}
+  class="leo-navigation-item"
+  data-selected={isCurrent}
+>
   <svelte:element
     this={tag}
     href={href || undefined}
     disabled={isLoading || isDisabled || undefined}
     on:click={onClick}
     {...$$restProps}
-    class:isCurrent
   >
     {#if icon}
       <Icon name={icon} />
@@ -92,10 +96,28 @@
 </svelte:element>
 
 <style lang="scss">
+  :host {
+    position: relative;
+  }
+
   .leo-navigation-item {
     --nav-item-color: var(--leo-color-text-secondary);
     --leo-icon-color: var(--leo-color-icon-default);
-    --leo-icon-size: var(--leo-icon-s);
+
+    position: relative;
+
+    // When this item is selected, set it as the active indicator
+    &[data-selected='true'] {
+    --nav-item-color: var(--leo-color-text-interactive);
+    --leo-icon-color: var(--leo-color-icon-interactive);
+      anchor-name: --active-indicator;
+    }
+
+    // If a parent is selected, change the nav item color to unselected
+    [data-selected='true'] & {
+      --nav-item-color: var(--leo-color-text-secondary);
+      --leo-icon-color: var(--leo-color-icon-default);
+    }
 
     a,
     button {
@@ -111,7 +133,6 @@
       padding-right: var(--leo-spacing-m);
       border-radius: 0;
       outline: none;
-      position: relative;
       text-decoration: none;
 
       font: var(--leo-font-components-navbutton);
@@ -123,24 +144,6 @@
 
       &:focus-visible {
         box-shadow: var(--leo-effect-focus-state);
-      }
-
-      &.isCurrent {
-        --nav-item-color: var(--leo-color-text-interactive);
-        --leo-icon-color: var(--leo-color-icon-interactive);
-
-        &::before {
-          content: '';
-          width: 4px;
-          height: 76%;
-          border-top-right-radius: var(--leo-radius-xs);
-          border-bottom-right-radius: var(--leo-radius-xs);
-          background: var(--leo-color-text-interactive);
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
       }
     }
   }
