@@ -52,7 +52,8 @@
   export let onClick: () => void = undefined
 
   const checkIfCurrent = () => {
-    isCurrent = window.location.pathname === href || window.location.hash === href;
+    isCurrent =
+      window.location.pathname === href || window.location.hash === href
   }
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
@@ -80,9 +81,11 @@
     {...$$restProps}
     class:isCurrent
   >
-    {#if icon}
-      <Icon name={icon} />
-    {/if}
+    <slot name="icon">
+      {#if icon}
+        <Icon name={icon} />
+      {/if}
+    </slot>
     <slot />
   </svelte:element>
 
