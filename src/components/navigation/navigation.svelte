@@ -22,6 +22,7 @@
   .leo-navigation {
     --nav-direction: row;
     --leo-icon-size: var(--leo-icon-s);
+    --anchor-padding: var(--leo-spacing-m);
 
     position: relative;
 
@@ -33,10 +34,10 @@
       --nav-direction: column;
     }
 
+    // Anchor positioned active indicator - we have a fallback in navigationItem
+    // for when this isn't supported.
     @supports (anchor-name: --active-indicator) {
       &:has([data-selected='true']) .active-indicator {
-        --anchor-padding: var(--leo-spacing-m);
-
         position-anchor: --active-indicator;
 
         transition:
