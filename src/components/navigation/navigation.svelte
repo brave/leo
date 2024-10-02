@@ -15,7 +15,7 @@
     <slot name="actions" />
   {/if}
 
-  <div class="active-indicator"/>
+  <div class="active-indicator" />
 </div>
 
 <style lang="scss">
@@ -33,23 +33,28 @@
       --nav-direction: column;
     }
 
-    &:has([data-selected="true"]) .active-indicator {
-      --anchor-padding: var(--leo-padding-m);
+    @supports (anchor-name: --active-indicator) {
+      &:has([data-selected='true']) .active-indicator {
+        --anchor-padding: var(--leo-spacing-m);
 
-      position-anchor: --active-indicator;
+        position-anchor: --active-indicator;
 
-      transition: top 0.12s ease-in-out, bottom 0.12s ease-in-out, left 0.12s ease-in;
+        transition:
+          top 0.12s ease-in-out,
+          bottom 0.12s ease-in-out,
+          left 0.12s ease-in;
 
-      content: '';
-      width: 4px;
-      border-top-right-radius: var(--leo-radius-xs);
-      border-bottom-right-radius: var(--leo-radius-xs);
-      background: var(--leo-color-text-interactive);
-      position: absolute;
-      left: anchor(left);
-      top: anchor(top);
-      bottom: anchor(bottom);
-      z-index: 1;
+        content: '';
+        width: 4px;
+        border-top-right-radius: var(--leo-radius-xs);
+        border-bottom-right-radius: var(--leo-radius-xs);
+        background: var(--leo-color-text-interactive);
+        position: absolute;
+        left: anchor(left);
+        top: calc(anchor(top) + var(--anchor-padding));
+        bottom: calc(anchor(bottom) + var(--anchor-padding));
+        z-index: 1;
+      }
     }
   }
 </style>
