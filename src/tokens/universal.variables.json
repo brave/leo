@@ -5518,11 +5518,11 @@
         },
         "button-default": {
           "type": "number",
-          "value": 22
+          "value": 20
         },
         "button-large": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "button-jumbo": {
           "type": "number",
@@ -5704,11 +5704,11 @@
         },
         "button-default": {
           "type": "number",
-          "value": 22
+          "value": 20
         },
         "button-large": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "button-jumbo": {
           "type": "number",
