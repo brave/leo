@@ -2936,8 +2936,8 @@
       "neutral": {
         "5": {
           "type": "color",
-          "value": "#f0f0f4",
-          "referencedVariable": "$primitive.neutral.95"
+          "value": "#fafafb",
+          "referencedVariable": "$primitive.neutral.98"
         },
         "10": {
           "type": "color",
