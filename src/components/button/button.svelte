@@ -70,9 +70,9 @@
   class:isTiny={size === 'tiny'}
   class:fab
   class:isLoading
-  disabled={isLoading || disabled || undefined}
   on:click={onClick}
   {...$$restProps}
+  disabled={isLoading || disabled || undefined}
 >
   {#if isLoading}
     <div class:content={!fab}>
