@@ -840,11 +840,11 @@
         "value": {
           "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.1,
+          "letterSpacing": 0,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -862,12 +862,12 @@
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.1,
-          "lineHeight": 20,
+          "letterSpacing": 0,
+          "lineHeight": 18,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -882,14 +882,14 @@
       "button-default": {
         "type": "custom-fontStyle",
         "value": {
-          "fontSize": 13,
+          "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.1,
-          "lineHeight": 20,
+          "letterSpacing": 0,
+          "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -904,14 +904,14 @@
       "button-large": {
         "type": "custom-fontStyle",
         "value": {
-          "fontSize": 15,
+          "fontSize": 16,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.1,
-          "lineHeight": 22,
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -926,14 +926,14 @@
       "button-jumbo": {
         "type": "custom-fontStyle",
         "value": {
-          "fontSize": 15,
+          "fontSize": 18,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0.1,
-          "lineHeight": 22,
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -2531,7 +2531,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2547,7 +2547,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
@@ -2577,7 +2577,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2593,11 +2593,11 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 20
+          "value": 18
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -2615,7 +2615,7 @@
       "button-default": {
         "fontSize": {
           "type": "dimension",
-          "value": 13
+          "value": 14
         },
         "textDecoration": {
           "type": "string",
@@ -2623,7 +2623,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2639,11 +2639,11 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 20
+          "value": 22
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -2661,7 +2661,7 @@
       "button-large": {
         "fontSize": {
           "type": "dimension",
-          "value": 15
+          "value": 16
         },
         "textDecoration": {
           "type": "string",
@@ -2669,7 +2669,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2685,11 +2685,11 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 22
+          "value": 24
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -2707,7 +2707,7 @@
       "button-jumbo": {
         "fontSize": {
           "type": "dimension",
-          "value": 15
+          "value": 18
         },
         "textDecoration": {
           "type": "string",
@@ -2715,7 +2715,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -2731,11 +2731,11 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0.1
+          "value": 0
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 22
+          "value": 24
         },
         "paragraphIndent": {
           "type": "dimension",

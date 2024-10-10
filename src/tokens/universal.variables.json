@@ -2934,6 +2934,11 @@
         "referencedVariable": "$black"
       },
       "neutral": {
+        "5": {
+          "type": "color",
+          "value": "#fafafb",
+          "referencedVariable": "$primitive.neutral.98"
+        },
         "10": {
           "type": "color",
           "value": "#f0f0f4",
@@ -2971,6 +2976,11 @@
         }
       },
       "primary": {
+        "5": {
+          "type": "color",
+          "value": "#f8f8ff",
+          "referencedVariable": "$primitive.primary.98"
+        },
         "10": {
           "type": "color",
           "value": "#efefff",
@@ -3008,6 +3018,11 @@
         }
       },
       "secondary": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f6",
+          "referencedVariable": "$primitive.secondary.98"
+        },
         "10": {
           "type": "color",
           "value": "#f2efff",
@@ -3045,6 +3060,11 @@
         }
       },
       "tertiary": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f8",
+          "referencedVariable": "$primitive.tertiary.98"
+        },
         "10": {
           "type": "color",
           "value": "#ffecf0",
@@ -3082,6 +3102,11 @@
         }
       },
       "red": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f7",
+          "referencedVariable": "$primitive.red.98"
+        },
         "10": {
           "type": "color",
           "value": "#ffedec",
@@ -3119,6 +3144,11 @@
         }
       },
       "orange": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f6",
+          "referencedVariable": "$primitive.orange.98"
+        },
         "10": {
           "type": "color",
           "value": "#ffede8",
@@ -3156,6 +3186,11 @@
         }
       },
       "yellow": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f1",
+          "referencedVariable": "$primitive.yellow.98"
+        },
         "10": {
           "type": "color",
           "value": "#ffefce",
@@ -3193,6 +3228,11 @@
         }
       },
       "green": {
+        "5": {
+          "type": "color",
+          "value": "#ecffe3",
+          "referencedVariable": "$primitive.green.98"
+        },
         "10": {
           "type": "color",
           "value": "#cbfbc0",
@@ -3230,6 +3270,11 @@
         }
       },
       "teal": {
+        "5": {
+          "type": "color",
+          "value": "#edfcff",
+          "referencedVariable": "$primitive.teal.98"
+        },
         "10": {
           "type": "color",
           "value": "#d1f7ff",
@@ -3267,6 +3312,11 @@
         }
       },
       "blue": {
+        "5": {
+          "type": "color",
+          "value": "#f8f9ff",
+          "referencedVariable": "$primitive.blue.98"
+        },
         "10": {
           "type": "color",
           "value": "#eaf1ff",
@@ -3304,6 +3354,11 @@
         }
       },
       "blurple": {
+        "5": {
+          "type": "color",
+          "value": "#f8f8ff",
+          "referencedVariable": "$primitive.blurple.98"
+        },
         "10": {
           "type": "color",
           "value": "#efefff",
@@ -3341,6 +3396,11 @@
         }
       },
       "purple": {
+        "5": {
+          "type": "color",
+          "value": "#fcf8ff",
+          "referencedVariable": "$primitive.purple.98"
+        },
         "10": {
           "type": "color",
           "value": "#f3eeff",
@@ -3378,6 +3438,11 @@
         }
       },
       "pink": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f8",
+          "referencedVariable": "$primitive.pink.98"
+        },
         "10": {
           "type": "color",
           "value": "#ffecf0",
@@ -3415,6 +3480,11 @@
         }
       },
       "private-window": {
+        "5": {
+          "type": "color",
+          "value": "#fdf7ff",
+          "referencedVariable": "$primitive.private-window.98"
+        },
         "10": {
           "type": "color",
           "value": "#f6eeff",
@@ -3452,6 +3522,11 @@
         }
       },
       "tor-window": {
+        "5": {
+          "type": "color",
+          "value": "#fff7fc",
+          "referencedVariable": "$primitive.tor-window.98"
+        },
         "10": {
           "type": "color",
           "value": "#fdebff",
@@ -3489,6 +3564,11 @@
         }
       },
       "neutral-variant": {
+        "5": {
+          "type": "color",
+          "value": "#fcf8ff",
+          "referencedVariable": "$primitive.neutral-variant.98"
+        },
         "10": {
           "type": "color",
           "value": "#f2effa",
@@ -4203,6 +4283,11 @@
         "referencedVariable": "$white"
       },
       "neutral": {
+        "5": {
+          "type": "color",
+          "value": "#111114",
+          "referencedVariable": "$primitive.neutral.5"
+        },
         "10": {
           "type": "color",
           "value": "#252529",
@@ -4240,6 +4325,11 @@
         }
       },
       "primary": {
+        "5": {
+          "type": "color",
+          "value": "#05004c",
+          "referencedVariable": "$primitive.primary.5"
+        },
         "10": {
           "type": "color",
           "value": "#190b7d",
@@ -4277,6 +4367,11 @@
         }
       },
       "secondary": {
+        "5": {
+          "type": "color",
+          "value": "#0d0d2c",
+          "referencedVariable": "$primitive.secondary.5"
+        },
         "10": {
           "type": "color",
           "value": "#222242",
@@ -4314,6 +4409,11 @@
         }
       },
       "tertiary": {
+        "5": {
+          "type": "color",
+          "value": "#29001e",
+          "referencedVariable": "$primitive.tertiary.5"
+        },
         "10": {
           "type": "color",
           "value": "#441235",
@@ -4351,6 +4451,11 @@
         }
       },
       "red": {
+        "5": {
+          "type": "color",
+          "value": "#2c0004",
+          "referencedVariable": "$primitive.red.5"
+        },
         "10": {
           "type": "color",
           "value": "#54000e",
@@ -4388,6 +4493,11 @@
         }
       },
       "orange": {
+        "5": {
+          "type": "color",
+          "value": "#260600",
+          "referencedVariable": "$primitive.orange.5"
+        },
         "10": {
           "type": "color",
           "value": "#4a1300",
@@ -4425,6 +4535,11 @@
         }
       },
       "yellow": {
+        "5": {
+          "type": "color",
+          "value": "#171000",
+          "referencedVariable": "$primitive.yellow.5"
+        },
         "10": {
           "type": "color",
           "value": "#302400",
@@ -4462,6 +4577,11 @@
         }
       },
       "green": {
+        "5": {
+          "type": "color",
+          "value": "#001501",
+          "referencedVariable": "$primitive.green.5"
+        },
         "10": {
           "type": "color",
           "value": "#002d03",
@@ -4499,6 +4619,11 @@
         }
       },
       "teal": {
+        "5": {
+          "type": "color",
+          "value": "#001417",
+          "referencedVariable": "$primitive.teal.5"
+        },
         "10": {
           "type": "color",
           "value": "#002a30",
@@ -4536,6 +4661,11 @@
         }
       },
       "blue": {
+        "5": {
+          "type": "color",
+          "value": "#001225",
+          "referencedVariable": "$primitive.blue.5"
+        },
         "10": {
           "type": "color",
           "value": "#002748",
@@ -4573,6 +4703,11 @@
         }
       },
       "blurple": {
+        "5": {
+          "type": "color",
+          "value": "#05004c",
+          "referencedVariable": "$primitive.blurple.5"
+        },
         "10": {
           "type": "color",
           "value": "#190b7d",
@@ -4610,6 +4745,11 @@
         }
       },
       "purple": {
+        "5": {
+          "type": "color",
+          "value": "#0c0048",
+          "referencedVariable": "$primitive.purple.5"
+        },
         "10": {
           "type": "color",
           "value": "#1e0083",
@@ -4647,6 +4787,11 @@
         }
       },
       "pink": {
+        "5": {
+          "type": "color",
+          "value": "#2a0015",
+          "referencedVariable": "$primitive.pink.5"
+        },
         "10": {
           "type": "color",
           "value": "#50002d",
@@ -4684,6 +4829,11 @@
         }
       },
       "private-window": {
+        "5": {
+          "type": "color",
+          "value": "#160041",
+          "referencedVariable": "$primitive.private-window.5"
+        },
         "10": {
           "type": "color",
           "value": "#2e0077",
@@ -4721,6 +4871,11 @@
         }
       },
       "tor-window": {
+        "5": {
+          "type": "color",
+          "value": "#210033",
+          "referencedVariable": "$primitive.tor-window.5"
+        },
         "10": {
           "type": "color",
           "value": "#40005e",
@@ -4758,6 +4913,11 @@
         }
       },
       "neutral-variant": {
+        "5": {
+          "type": "color",
+          "value": "#101018",
+          "referencedVariable": "$primitive.neutral-variant.5"
+        },
         "10": {
           "type": "color",
           "value": "#25252d",
@@ -5280,15 +5440,15 @@
         },
         "button-default": {
           "type": "number",
-          "value": 13
+          "value": 14
         },
         "button-large": {
           "type": "number",
-          "value": 15
+          "value": 16
         },
         "button-jumbo": {
           "type": "number",
-          "value": 16
+          "value": 18
         },
         "numbers": {
           "type": "number",
@@ -5354,7 +5514,7 @@
         },
         "button-small": {
           "type": "number",
-          "value": 20
+          "value": 18
         },
         "button-default": {
           "type": "number",
@@ -5366,7 +5526,7 @@
         },
         "button-jumbo": {
           "type": "number",
-          "value": 22
+          "value": 24
         },
         "numbers": {
           "type": "number",
@@ -5388,7 +5548,7 @@
         },
         "button": {
           "type": "number",
-          "value": 0.10000000149011612
+          "value": 0
         },
         "headings": {
           "type": "number",
@@ -5466,15 +5626,15 @@
         },
         "button-default": {
           "type": "number",
-          "value": 13
+          "value": 14
         },
         "button-large": {
           "type": "number",
-          "value": 15
+          "value": 16
         },
         "button-jumbo": {
           "type": "number",
-          "value": 16
+          "value": 18
         },
         "numbers": {
           "type": "number",
@@ -5552,7 +5712,7 @@
         },
         "button-jumbo": {
           "type": "number",
-          "value": 22
+          "value": 24
         },
         "numbers": {
           "type": "number",
@@ -5574,7 +5734,7 @@
         },
         "button": {
           "type": "number",
-          "value": 0.10000000149011612
+          "value": 0
         },
         "headings": {
           "type": "number",
