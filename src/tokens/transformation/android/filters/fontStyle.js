@@ -1,2 +1,1 @@
-module.exports = (token) =>
-  token.attributes.category === 'font'
+module.exports = (token) => token.attributes.category === 'font'
