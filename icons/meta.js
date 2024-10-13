@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1727165463610,
+  "updatedAt": 1728806992564,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -201,6 +201,7 @@ export default {
     "bold": "bold",
     "bonfida-color": "bonfida-color",
     "book-bookmark": "book-bookmark",
+    "book-closed": "book-closed",
     "book-open-pages": "book-open-pages",
     "bookmark-added": "bookmark-added",
     "booty-color": "booty-color",
