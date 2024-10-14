@@ -27,6 +27,10 @@
       description: 'The padding of the control',
       type: 'string'
     },
+    '--leo-control-border': {
+      description: 'The border color of the control',
+      type: 'string'
+    },
     '--leo-control-font': {
       description: 'The font used by the control',
       type: 'string'
@@ -137,11 +141,11 @@
       var(--leo-effect-focus-state)
     );
 
-    --border-color: transparent;
-    --border-color-hover: transparent;
-    --border-color-focus: transparent;
-    --border-color-error: var(--leo-color-systemfeedback-error-icon);
-    --border-color-error-hover: var(--leo-color-red-50);
+    --border-color: var(--leo-control-border-color, transparent);
+    --border-color-hover: var(--leo-control-border-color, transparent);
+    --border-color-focus: var(--leo-control-border-color, transparent);
+    --border-color-error: var(--leo-control-border-color, var(--leo-color-systemfeedback-error-icon));
+    --border-color-error-hover: var(--leo-control-border-color, var(--leo-color-red-50));
 
     display: flex;
     flex-direction: var(--direction);
