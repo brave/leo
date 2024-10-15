@@ -22,7 +22,7 @@ for await (const file of getSvelteFiles(COMPONENTS_FOLDER, false)) {
 inputs.push('./src/components/svelte-react.ts')
 inputs.push('./src/components/svelte-web.ts')
 inputs.push('./src/components/applyTheme.ts')
-inputs.push('./src/components/dialog/dialogHelpers.ts')
+inputs.push('./src/components/dialogHelpers.ts')
 
 export default {
   input: inputs,
@@ -50,7 +50,7 @@ export default {
       declaration: true,
       emitDeclarationOnly: true,
       declarationDir: './shared',
-      include: ['src/components/*.ts']
+      include: ['src/components/**/*.ts']
     }),
     svelte({
       include: 'src/components/**/*.svelte',

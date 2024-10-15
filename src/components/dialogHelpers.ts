@@ -1,5 +1,5 @@
-import type { ButtonKind } from '../button/props'
-import DialogHelper from './dialogsContainer.svelte'
+import type { ButtonKind } from './button/props'
+import DialogHelper from './dialog/dialogsContainer.svelte'
 import { writable } from 'svelte/store'
 
 let helper: DialogHelper | undefined
@@ -37,7 +37,7 @@ export const dialogs = writable<AlertInfo[]>([])
 export const dialog = <T>(options: AlertOptions) => {
   ensureDialogHelper()
 
-  const promise = new Promise((accept) => {
+  const promise = new Promise<T>((accept) => {
     const info = {
       title: options.title,
       body: options.body,
@@ -89,7 +89,19 @@ export const confirm = (message: string, options: ConfirmDialogOptions) =>
     ]
   }).then((r) => !!r)
 
-const leo = (window as any)?.leo ?? ((window as any).leo = {})
-leo.alert = alert
-leo.confirm = confirm
-leo.dialog = dialog
+// Add helper methods to Window
+declare global {
+  interface Window {
+    leo: {
+      alert: typeof alert
+      confirm: typeof confirm
+      dialog: typeof dialog
+    }
+  }
+}
+
+window.leo = {
+  alert,
+  confirm,
+  dialog
+}

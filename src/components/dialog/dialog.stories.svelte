@@ -4,7 +4,7 @@
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
   import Alert from '../alert/alert.svelte'
-  import './dialogHelpers'
+  import '../dialogHelpers'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
 
