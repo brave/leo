@@ -1,7 +1,7 @@
 <script lang="ts">
   import Dialog from './dialog.svelte'
   import Button from '../button/button.svelte'
-  import { dialogs } from './dialogHelpers'
+  import { dialogs } from '../dialogHelpers'
 </script>
 
 {#each $dialogs as dialog}

@@ -1,5 +1,5 @@
-import type { ButtonKind } from '../button/props'
-import DialogHelper from './dialogsContainer.svelte'
+import type { ButtonKind } from './button/props'
+import DialogHelper from './dialog/dialogsContainer.svelte'
 import { writable } from 'svelte/store'
 
 let helper: DialogHelper | undefined
