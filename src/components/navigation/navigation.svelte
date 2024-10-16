@@ -25,8 +25,6 @@
   }
 
   :global(leo-navigation::before), .active-indicator {
-    // Anchor positioned active indicator - we have a fallback in navigationItem
-    // for when this isn't supported.
     @supports (anchor-name: --active-indicator) {
       position-anchor: --active-indicator;
 
@@ -44,6 +42,23 @@
       left: anchor(left);
       top: calc(anchor(top) + var(--anchor-padding));
       bottom: calc(anchor(bottom) + var(--anchor-padding));
+      z-index: 1;
+    }
+  }
+
+  // Fallback active indicator for when the browser doesn't support anchor positioning
+  @supports (not (anchor-name: --active-indicator)) {
+    :global(leo-navigation [data-selected=true]::before), .leo-navigation [data-selected=true]::before {
+      content: '';
+      width: 4px;
+      height: calc(100% - var(--anchor-padding) * 2);
+      border-top-right-radius: var(--leo-radius-xs);
+      border-bottom-right-radius: var(--leo-radius-xs);
+      background: var(--leo-color-text-interactive);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 1;
     }
   }

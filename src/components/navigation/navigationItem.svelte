@@ -116,6 +116,10 @@
     anchor-name: --active-indicator;
   }
 
+  :host {
+    position: relative;
+  }
+
   .leo-navigation-item {
     --nav-item-color: var(--leo-color-text-secondary);
     --leo-icon-color: var(--leo-color-icon-default);
@@ -126,22 +130,6 @@
     &[data-selected='true'] {
       --nav-item-color: var(--leo-color-text-interactive);
       --leo-icon-color: var(--leo-color-icon-interactive);
-
-      // Fallback active indicator for when the browser doesn't support anchor positioning
-      @supports (not (anchor-name: --active-indicator)) {
-        &::before {
-          content: '';
-          width: 4px;
-          height: calc(100% - var(--anchor-padding) * 2);
-          border-top-right-radius: var(--leo-radius-xs);
-          border-bottom-right-radius: var(--leo-radius-xs);
-          background: var(--leo-color-text-interactive);
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-      }
     }
 
     // If a parent is selected, change the nav item color to unselected
