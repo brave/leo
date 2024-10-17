@@ -238,10 +238,10 @@
     font: var(--leo-font-components-button-small);
     min-height: 28px;
     --padding-y: var(--leo-spacing-s);
-    --padding-x: var(--leo-spacing-m);
+    --padding-x: var(--leo-spacing-s);
     --radius: var(--leo-radius-m);
     --leo-icon-size: var(--leo-icon-xs);
-    --icon-gap: var(--leo-spacing-m);
+    --icon-gap: var(--leo-spacing-s);
 
     &.fab {
       min-height: 0;
@@ -253,10 +253,10 @@
     font: var(--leo-font-components-button-small);
     min-height: 36px;
     --padding-y: var(--leo-spacing-m);
-    --padding-x: var(--leo-spacing-l);
+    --padding-x: var(--leo-spacing-m);
     --radius: var(--leo-radius-m);
     --leo-icon-size: var(--leo-icon-s);
-    --icon-gap: var(--leo-spacing-m);
+    --icon-gap: var(--leo-spacing-s);
 
     &.fab {
       min-height: 0;
@@ -270,7 +270,7 @@
     --padding-x: var(--leo-spacing-xl);
     --radius: var(--leo-radius-l);
     --leo-icon-size: var(--leo-icon-m);
-    --icon-gap: var(--leo-spacing-m);
+    --icon-gap: var(--leo-spacing-s);
 
     &.fab {
       min-height: 0;
@@ -285,7 +285,7 @@
     --padding-x: var(--leo-spacing-xl);
     --radius: var(--leo-radius-xl);
     --leo-icon-size: var(--leo-icon-m);
-    --icon-gap: 10px;
+    --icon-gap: var(--leo-spacing-s);
 
     &.fab {
       min-height: 0;
@@ -300,7 +300,7 @@
     --padding-x: var(--leo-spacing-xl);
     --radius: var(--leo-radius-xl);
     --leo-icon-size: var(--leo-icon-l);
-    --icon-gap: var(--leo-spacing-l);
+    --icon-gap: var(--leo-spacing-m);
 
     &.fab {
       min-height: 0;

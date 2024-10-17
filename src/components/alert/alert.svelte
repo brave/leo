@@ -72,7 +72,7 @@
   .leo-alert .actions ::slotted(*) {
     display: flex;
     flex-direction: row;
-    gap: var(--leo-spacing-xl);
+    gap: var(--leo-spacing-s);
   }
   .leo-alert {
     --leo-icon-color: var(--leo-alert-icon-color, var(--default-icon-color));
