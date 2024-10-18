@@ -108,6 +108,14 @@
     const segmentedControlToggle = segmentedControlExample.querySelector('leo-toggle');
     const segmentedControl = segmentedControlExample.querySelector('leo-segmentedcontrol');
 
+    for (const navItem of document.querySelectorAll('leo-navigationitem')) {
+      navItem.addEventListener('click', e => {
+        const href = navItem.getAttribute('href')
+        if (!href) return
+        window.location = new URL(href, window.location)
+      })
+    }
+
     function updateSelectedOption(e) {
       for (const radio of radios)
         radio.currentValue = e.value
@@ -282,7 +290,7 @@
 
           <leo-navigationitem icon="discover" href="#explore">Explore</leo-navigationitem>
 
-          <leo-navigationitem icon="discover" href="#explore">
+          <leo-navigationitem icon="discover" href="#settings">
             Settings
 
             <leo-navigationmenu slot="subnav">
