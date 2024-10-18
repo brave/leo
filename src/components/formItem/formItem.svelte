@@ -27,6 +27,10 @@
       description: 'The padding of the control',
       type: 'string'
     },
+    '--leo-control-border-color': {
+      description: 'The border color of the control',
+      type: 'string'
+    },
     '--leo-control-font': {
       description: 'The font used by the control',
       type: 'string'
@@ -137,11 +141,17 @@
       var(--leo-effect-focus-state)
     );
 
-    --border-color: transparent;
-    --border-color-hover: transparent;
-    --border-color-focus: transparent;
-    --border-color-error: var(--leo-color-systemfeedback-error-icon);
-    --border-color-error-hover: var(--leo-color-red-50);
+    --border-color: var(--leo-control-border-color, transparent);
+    --border-color-hover: var(--leo-control-border-color, transparent);
+    --border-color-focus: var(--leo-control-border-color, transparent);
+    --border-color-error: var(
+      --leo-control-border-color,
+      var(--leo-color-systemfeedback-error-icon)
+    );
+    --border-color-error-hover: var(
+      --leo-control-border-color,
+      var(--leo-color-red-50)
+    );
 
     display: flex;
     flex-direction: var(--direction);
@@ -194,26 +204,33 @@
 
     @supports (color: color-mix(in srgb, transparent, transparent)) {
       --background: color-mix(in srgb, var(--primary), var(--foreground) 10%);
-      --border-color-hover: color-mix(
-        in srgb,
-        var(--primary),
-        var(--foreground) 20%
+      --border-color-hover: var(
+        --leo-control-border-color,
+        color-mix(in srgb, var(--primary), var(--foreground) 20%)
       );
     }
   }
 
   .leo-control.isOutline {
     --background: var(--primary);
-    --border-color: var(--leo-color-divider-strong);
-    --border-color-hover: var(--leo-color-neutral-30);
+    --border-color: var(
+      --leo-control-border-color,
+      var(--leo-color-divider-strong)
+    );
+    --border-color-hover: var(
+      --leo-control-border-color,
+      var(--leo-color-neutral-30)
+    );
     --shadow-hover: var(--leo-effect-elevation-01);
 
     @supports (color: color-mix(in srgb, transparent, transparent)) {
-      --border-color: color-mix(in srgb, var(--primary), var(--foreground) 25%);
-      --border-color-hover: color-mix(
-        in srgb,
-        var(--primary),
-        var(--foreground) 40%
+      --border-color: var(
+        --leo-control-border-color,
+        color-mix(in srgb, var(--primary), var(--foreground) 25%)
+      );
+      --border-color-hover: var(
+        --leo-control-border-color,
+        color-mix(in srgb, var(--primary), var(--foreground) 40%)
       );
     }
   }
@@ -240,8 +257,9 @@
     background: var(--background);
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
-    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-
+    transition:
+      box-shadow 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
 
     cursor: pointer;
   }
