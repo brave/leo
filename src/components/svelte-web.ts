@@ -128,6 +128,90 @@ export default function registerWebComponent(
       return Object.keys(events)
     }
 
+    #propsCache = {}
+    #lastSlots = new Set()
+    updateSlots = () => {
+      const slotsNames = Array.from(this.children).map((c) =>
+        c.getAttribute('slot')
+      )
+      // Add default slot if there are nodes without a slot name.
+      if (this.childNodes.length > slotsNames.length) slotsNames.push(null)
+
+      const distinctSlots = new Set(this.#lastSlots)
+      // Slots didn't change, so nothing to do here.
+      // The component needs to get created, at least once
+      if (
+        this.component &&
+        // If the size is the same, and every one of our last slots
+        // is present, then nothing has changed, and we don't need
+        // to do anything here.
+        this.#lastSlots.size === distinctSlots.size &&
+        slotsNames.every((s) => this.#lastSlots.has(s))
+      ) {
+        return
+      }
+
+      // Update the last slots we have, so if they change we know to update them.
+      this.#lastSlots = distinctSlots
+
+      // Create a dictionary of the slotName: <slot name={slotName}/>
+      const slots = slotsNames.reduce(
+        (prev, next) => ({
+          ...prev,
+          [next ?? 'default']: [() => createSlot(next)]
+        }),
+        {}
+      )
+
+      // If we've already created the component, we might have some
+      // existing props. We need to create a snapshot of the component
+      // so we can recreate it as faithfully as possible.
+      // Note: We might be able to do some additional hackery here
+      // to copy over even more information from $$.ctx and exactly
+      // maintain the component state!
+      const existingProps = props
+        .map((k) => [k, this.#propsCache[k]])
+        .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {})
+
+      // If there's focus within the element, get a selector to the
+      // activeElement - we'll restore it after creating/destroying the
+      // element.
+      const restoreFocus = generateSelector(this.shadowRoot?.activeElement)
+
+      // If the component already exists, destroy it. This is,
+      // unfortunately, necessary as there is no way to update slotted
+      // content in the output Svelte compiles to. This is a problem
+      // even when not doing crazy things:
+      // https://github.com/sveltejs/svelte/issues/5312
+      this.component?.$destroy()
+
+      // Finally, we actually create the component
+      this.component = new component({
+        // Target this shadowDOM, so we get nicely encapsulated
+        // styles
+        target: this.shadowRoot,
+        props: {
+          // Copy over existing props (there might be none, if
+          // this is our first render).
+          ...existingProps,
+          // Create WebComponent slots for each Svelte slot we
+          // have content for. This has to be done at render or
+          // Svelte won't support fallback content.
+          $$slots: slots,
+          // Not sure what this is needed for but Svelte crashes
+          // without it. I think this might be related to slot
+          // props:
+          // https://svelte.dev/tutorial/slot-props
+          $$scope: { ctx: [] }
+        }
+      })
+
+      if (restoreFocus) {
+        const restoreTo = this.shadowRoot.querySelector(restoreFocus)
+        ;(restoreTo as HTMLElement)?.focus?.()
+      }
+    }
+
     constructor() {
       super()
 
@@ -140,91 +224,6 @@ export default function registerWebComponent(
         this.shadowRoot ?? this.attachShadow({ mode, delegatesFocus: true })
       shadow.replaceChildren()
 
-      let lastSlots = new Set()
-      const updateSlots = () => {
-        const slotsNames = Array.from(this.children).map((c) =>
-          c.getAttribute('slot')
-        )
-        // Add default slot if there are nodes without a slot name.
-        if (this.childNodes.length > slotsNames.length) slotsNames.push(null)
-
-        const distinctSlots = new Set(lastSlots)
-        // Slots didn't change, so nothing to do here.
-        // The component needs to get created, at least once
-        if (
-          this.component &&
-          // If the size is the same, and every one of our last slots
-          // is present, then nothing has changed, and we don't need
-          // to do anything here.
-          lastSlots.size === distinctSlots.size &&
-          slotsNames.every((s) => lastSlots.has(s))
-        ) {
-          return
-        }
-
-        // Update the last slots we have, so if they change we know to update them.
-        lastSlots = distinctSlots
-
-        // Create a dictionary of the slotName: <slot name={slotName}/>
-        const slots = slotsNames.reduce(
-          (prev, next) => ({
-            ...prev,
-            [next ?? 'default']: [() => createSlot(next)]
-          }),
-          {}
-        )
-
-        // If we've already created the component, we might have some
-        // existing props. We need to create a snapshot of the component
-        // so we can recreate it as faithfully as possible.
-        // Note: We might be able to do some additional hackery here
-        // to copy over even more information from $$.ctx and exactly
-        // maintain the component state!
-        const existingProps = Object.keys(this.component?.$$.props ?? {})
-          .map((k) => [k, this[k]])
-          .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {})
-
-        // If there's focus within the element, get a selector to the
-        // activeElement - we'll restore it after creating/destroying the
-        // element.
-        const restoreFocus = generateSelector(this.shadowRoot?.activeElement)
-
-        // If the component already exists, destroy it. This is,
-        // unfortunately, necessary as there is no way to update slotted
-        // content in the output Svelte compiles to. This is a problem
-        // even when not doing crazy things:
-        // https://github.com/sveltejs/svelte/issues/5312
-        if (this.component) {
-          this.component.$destroy()
-        }
-
-        // Finally, we actually create the component
-        this.component = new component({
-          // Target this shadowDOM, so we get nicely encapsulated
-          // styles
-          target: shadow,
-          props: {
-            // Copy over existing props (there might be none, if
-            // this is our first render).
-            ...existingProps,
-            // Create WebComponent slots for each Svelte slot we
-            // have content for. This has to be done at render or
-            // Svelte won't support fallback content.
-            $$slots: slots,
-            // Not sure what this is needed for but Svelte crashes
-            // without it. I think this might be related to slot
-            // props:
-            // https://svelte.dev/tutorial/slot-props
-            $$scope: { ctx: [] }
-          }
-        })
-
-        if (restoreFocus) {
-          const restoreTo = this.shadowRoot.querySelector(restoreFocus)
-          ;(restoreTo as HTMLElement)?.focus?.()
-        }
-      }
-
       // Unfortunately we need a DOMMutationObserver to let us know when
       // slotted content changes because we dynamically create & remove
       // slots. This is for two reasons:
@@ -232,7 +231,7 @@ export default function registerWebComponent(
       // 2) Even if we did, if we generated all of the slots at mount time
       //    then Svelte would never render any of the fallback content,
       //    event if the slot was empty.
-      new MutationObserver(updateSlots).observe(this, {
+      new MutationObserver(this.updateSlots).observe(this, {
         childList: true,
         attributes: false,
         attributeOldValue: false,
@@ -241,9 +240,6 @@ export default function registerWebComponent(
         characterDataOldValue: false
       })
 
-      // Update slots on create.
-      updateSlots()
-
       // For some reason setting this on |SvelteWrapper| doesn't work properly.
       for (const prop of props) {
         Object.defineProperty(this, prop, {
@@ -251,8 +247,8 @@ export default function registerWebComponent(
           get() {
             // $$.props is { [propertyName: string]: number } where the number
             // is the array index into $$.ctx that the value is stored in.
-            const contextIndex = this.component.$$.props[prop]
-            return this.component.$$.ctx[contextIndex]
+            const contextIndex = this.component?.$$.props[prop]
+            return this.component?.$$.ctx[contextIndex]
           },
           set(value) {
             if (reflectToAttributes.has(typeof value)) {
@@ -264,12 +260,27 @@ export default function registerWebComponent(
               } else this.setAttribute(prop, value)
             }
 
+            // Cache the prop, so when we recreate the component we restore it
+            // with the right props.
+            this.#propsCache[prop] = value
+
             // |.$set| updates the value of a prop. Note: This only works for
             // props, not slotted content.
-            this.component.$set({ [prop]: value })
+            this.component?.$set({ [prop]: value })
           }
         })
       }
+    }
+
+    // Update slots on connect.
+    connectedCallback() {
+      this.updateSlots()
+    }
+
+    disconnectedCallback() {
+      this.#lastSlots = new Set()
+      this.component?.$destroy()
+      this.#component = null
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
