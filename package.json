@@ -51,7 +51,7 @@
     "rollup": "3.29.5",
     "rollup-plugin-svelte": "7.2.2",
     "sass": "1.80.2",
-    "sass-loader": "13.2.0",
+    "sass-loader": "13.3.3",
     "storybook": "8.3.5",
     "style-dictionary": "3.7.2",
     "style-loader": "3.3.4",
