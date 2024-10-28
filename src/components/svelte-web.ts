@@ -134,8 +134,11 @@ export default function registerWebComponent(
       const slotsNames = Array.from(this.children).map((c) =>
         c.getAttribute('slot')
       )
-      // Add default slot if there are nodes without a slot name.
-      if (this.childNodes.length > slotsNames.length) slotsNames.push(null)
+      // Add default slot if there are non-empty nodes without a slot name.
+      const nonEmptyNodes = Array.from(this.childNodes).filter(
+        (c) => c.nodeName !== '#text' || c.textContent.trim().length
+      )
+      if (nonEmptyNodes.length > slotsNames.length) slotsNames.push(null)
 
       const distinctSlots = new Set(this.#lastSlots)
       // Slots didn't change, so nothing to do here.
