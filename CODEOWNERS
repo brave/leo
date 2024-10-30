@@ -1,1 +1,5 @@
 * @fallaciousreasoning @petemill @alanbreck
+
+# We don't specify a CODEOWNER for these files, so automerge works for dependabot
+package.json
+package-lock.json
