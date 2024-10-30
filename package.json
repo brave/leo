@@ -53,7 +53,7 @@
     "sass": "1.80.2",
     "sass-loader": "13.3.3",
     "storybook": "8.3.6",
-    "style-dictionary": "3.7.2",
+    "style-dictionary": "3.9.2",
     "style-loader": "3.3.4",
     "svelte-check": "3.6.9",
     "svelte-loader": "3.1.9",
