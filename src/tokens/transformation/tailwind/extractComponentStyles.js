@@ -52,6 +52,9 @@ module.exports = {
           }
         )
 
+        // TODO: Beg Jacob for help
+        return;
+
         const {
           css: { code: rawCSS }
         } = svelte.compile(Component, {
