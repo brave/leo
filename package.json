@@ -50,7 +50,7 @@
     "prettier-plugin-svelte": "3.2.7",
     "rollup": "3.29.5",
     "rollup-plugin-svelte": "7.2.2",
-    "sass": "1.80.2",
+    "sass": "1.80.4",
     "sass-loader": "13.3.3",
     "storybook": "8.3.6",
     "style-dictionary": "3.9.2",
