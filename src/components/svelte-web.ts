@@ -1,4 +1,5 @@
 import type { SvelteComponent } from 'svelte'
+import { mount, unmount } from 'svelte';
 
 interface Options {
   mode: 'open' | 'closed'
@@ -10,40 +11,6 @@ const eventRegex = /^on[A-Z]/
 
 // Properties with these types should be reflected to attributes.
 const reflectToAttributes = new Set(['string', 'number', 'boolean'])
-
-/**
- * This function creates a faux Svelte component which forwards WebComponent
- * slots into a Svelte slot.
- * @param name The name of the slot
- * @returns A Svelte "component" representing the slot.
- */
-const createSlot = (name?: string) => {
-  let slot: HTMLElement
-  return {
-    // Create
-    c() {
-      slot = document.createElement('slot')
-      if (name) {
-        slot.setAttribute('name', name)
-      }
-    },
-
-    // Mount
-    m(target, anchor) {
-      target.insertBefore(slot, anchor || null)
-    },
-
-    // Props changed
-    p() {},
-
-    // Detach
-    d(detaching) {
-      if (detaching && slot.parentNode) {
-        slot.parentNode.removeChild(slot)
-      }
-    }
-  }
-}
 
 /**
  * Generate a selector for an element - note: This is pretty limited at the
@@ -80,10 +47,10 @@ export default function registerWebComponent(
 
   // Create & mount a dummy component. We use this to work out what props are
   // available and generate a list of available properties.
-  const c = new component({ target: document.createElement('div') })
+  const c = mount(component, { target: document.createElement('div') })
 
   // The names of all properties on our Svelte component.
-  const props = Object.keys(c.$$.props)
+  const props = Object.keys(c)
 
   // All the event names in our Svelte component. Maps the HTMLEventType string
   // to the Svelte prop (i.e. click: onClick).
@@ -106,7 +73,7 @@ export default function registerWebComponent(
 
   // We need to handle boolean attributes specially, as the presence/absence of the attribute indicates the value.
   const boolProperties = new Set(
-    props.filter((p) => typeof c.$$.ctx[c.$$.props[p]] === 'boolean')
+    props.filter((p) => typeof c[p] === 'boolean')
   )
 
   type Callback = (...args: any[]) => void
@@ -161,7 +128,12 @@ export default function registerWebComponent(
       const slots = slotsNames.reduce(
         (prev, next) => ({
           ...prev,
-          [next ?? 'default']: [() => createSlot(next)]
+          [next ?? 'default']: ($$anchor) => {
+            const slot = document.createElement('slot')
+            if (next) slot.setAttribute('name', next)
+
+            $$anchor?.before(slot)
+          }
         }),
         {}
       )
@@ -186,10 +158,10 @@ export default function registerWebComponent(
       // content in the output Svelte compiles to. This is a problem
       // even when not doing crazy things:
       // https://github.com/sveltejs/svelte/issues/5312
-      this.component?.$destroy()
+      if (this.component) unmount(this.component)
 
       // Finally, we actually create the component
-      this.component = new component({
+      this.component = mount(component, {
         // Target this shadowDOM, so we get nicely encapsulated
         // styles
         target: this.shadowRoot,
@@ -211,7 +183,7 @@ export default function registerWebComponent(
 
       if (restoreFocus) {
         const restoreTo = this.shadowRoot.querySelector(restoreFocus)
-        ;(restoreTo as HTMLElement)?.focus?.()
+          ; (restoreTo as HTMLElement)?.focus?.()
       }
     }
 
@@ -248,10 +220,7 @@ export default function registerWebComponent(
         Object.defineProperty(this, prop, {
           enumerable: true,
           get() {
-            // $$.props is { [propertyName: string]: number } where the number
-            // is the array index into $$.ctx that the value is stored in.
-            const contextIndex = this.component?.$$.props[prop]
-            return this.component?.$$.ctx[contextIndex]
+            return this.component?.[prop] ?? this.#propsCache[prop]
           },
           set(value) {
             if (reflectToAttributes.has(typeof value)) {
@@ -269,7 +238,7 @@ export default function registerWebComponent(
 
             // |.$set| updates the value of a prop. Note: This only works for
             // props, not slotted content.
-            this.component?.$set({ [prop]: value })
+            if (this.component) this.component[prop] = value
           }
         })
       }
