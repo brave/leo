@@ -66,7 +66,9 @@ export default {
       // Don't emit CSS - it doesn't work properly with Web Components.
       emitCss: false,
       compilerOptions: {
-        customElement: false
+        customElement: false,
+        css: 'injected',
+        accessors: true,
       },
       onwarn
     }),
