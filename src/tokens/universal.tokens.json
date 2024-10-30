@@ -889,7 +889,7 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
-          "lineHeight": 22,
+          "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -911,7 +911,7 @@
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
-          "lineHeight": 24,
+          "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
           "textCase": "none"
@@ -2643,7 +2643,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 22
+          "value": 20
         },
         "paragraphIndent": {
           "type": "dimension",
@@ -2689,7 +2689,7 @@
         },
         "lineHeight": {
           "type": "dimension",
-          "value": 24
+          "value": 22
         },
         "paragraphIndent": {
           "type": "dimension",
