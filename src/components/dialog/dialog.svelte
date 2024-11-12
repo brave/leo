@@ -162,11 +162,11 @@
     grid-template-rows: auto 1fr;
   }
 
-  .leo-dialog.hasActions {
+  .leo-dialog.hasActions:not(:has(.actions:empty)) {
     grid-template-rows: 1fr auto;
   }
 
-  .leo-dialog.hasHeader.hasActions {
+  .leo-dialog.hasHeader.hasActions:not(:has(.actions:empty)) {
     grid-template-rows: auto 1fr auto;
   }
 
@@ -224,7 +224,7 @@
     padding-top: 0;
   }
 
-  .leo-dialog.hasActions .body {
+  .leo-dialog.hasActions:not(:has(.actions:empty)) .body {
     padding-bottom: 0;
   }
 
