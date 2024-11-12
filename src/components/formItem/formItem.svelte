@@ -158,6 +158,8 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
+    transition:
+      color 0.2s ease-in-out;
 
     &:not([aria-disabled='true']) {
       & .container:hover {
@@ -175,6 +177,10 @@
           box-shadow: var(--shadow-focus);
           border-color: var(--border-color-focus);
         }
+      }
+
+      &.error {
+        color: var(--leo-color-systemfeedback-error-icon);
       }
 
       &.error .container:hover:not(:has(*:focus-visible)) {
