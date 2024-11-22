@@ -1,15 +1,18 @@
 <script lang="ts" context="module">
-  export const types = ['info', 'warning', 'error', 'success'] as const
+  import type { IconName } from '@brave/leo/icons/meta'
+
+  export const types = ['info', 'warning', 'error', 'success', 'notice'] as const
   export type AlertType = (typeof types)[number]
 
   export const modes = ['simple', 'full'] as const
   export type AlertMode = (typeof modes)[number]
 
-  const defaultIcons: { [P in AlertType]: string } = {
+  const defaultIcons: { [P in AlertType]: IconName } = {
     'info': 'info-filled',
     'error': 'warning-circle-filled',
     'warning': 'warning-triangle-filled',
-    'success': 'check-circle-filled'
+    'success': 'check-circle-filled',
+    'notice': 'info-outline'
   }
 </script>
 
@@ -33,9 +36,6 @@
   class:toast={isToast}
   class:simple={currentMode === 'simple'}
   class:full={currentMode === 'full'}
-  style:--default-background={`var(--leo-color-systemfeedback-${currentType}-background)`}
-  style:--default-icon-color={`var(--leo-color-systemfeedback-${currentType}-icon)`}
-  style:--default-text-color={`var(--leo-color-systemfeedback-${currentType}-text)`}
 >
   {#if !hideIcon}
   <div class="icon">
@@ -84,11 +84,43 @@
     color: var(--default-text-color, var(--leo-color-text-primary));
     padding: var(--leo-alert-padding, var(--leo-spacing-xl));
     border-radius: var(--leo-radius-m);
+    border: var(--leo-alert-border-width, var(--default-border-width)) solid
+      var(--leo-alert-border-color, var(--default-border-color));
     gap: var(--leo-spacing-xl) 0;
-    font: var(--leo-font-default-regular);
+    font: var(--default-font, var(--leo-font-default-regular));
 
     display: grid;
     grid-template-columns: min-content 1fr;
+
+    &.notice {
+      --default-background: transparent;
+      --default-icon-color: var(--leo-color-text-tertiary);
+      --default-text-color: var(--leo-alert-text-color, var(--leo-color-text-tertiary));
+      --default-border-width: 1px;
+      --default-border-color: var(--leo-color-divider-subtle);
+      --default-title-font: var(--leo-font-default-semibold);
+      --default-font: var(--leo-font-small-regular);
+    }
+    &.success {
+      --default-background: var(--leo-color-systemfeedback-success-background);
+      --default-icon-color: var(--leo-color-systemfeedback-success-icon);
+      --default-text-color: var(--leo-color-systemfeedback-success-text);
+    }
+    &.info {
+      --default-background: var(--leo-color-systemfeedback-info-background);
+      --default-icon-color: var(--leo-color-systemfeedback-info-icon);
+      --default-text-color: var(--leo-color-systemfeedback-info-text);
+    }
+    &.error {
+      --default-background: var(--leo-color-systemfeedback-error-background);
+      --default-icon-color: var(--leo-color-systemfeedback-error-icon);
+      --default-text-color: var(--leo-color-systemfeedback-error-text);
+    }
+    &.warning {
+      --default-background: var(--leo-color-systemfeedback-warning-background);
+      --default-icon-color: var(--leo-color-systemfeedback-warning-icon);
+      --default-text-color: var(--leo-color-systemfeedback-warning-text);
+    }
 
     &:has(.content-after) {
       grid-template-columns: min-content 1fr auto;
@@ -100,9 +132,13 @@
       color: var(--leo-icon-color);
       margin-right: var(--leo-spacing-xl);
     }
+    &.notice .icon {
+      --leo-icon-size: var(--leo-icon-s);
+      margin-right: var(--leo-spacing-l);
+    }
 
     & .title {
-      font: var(--leo-font-heading-h4);
+      font: var(--default-title-font, var(--leo-font-heading-h4));
     }
 
     & .content {
@@ -140,5 +176,8 @@
 
   .leo-alert.full .icon {
     --leo-icon-size: var(--leo-icon-xl);
+  }
+  .leo-alert.notice.full .icon {
+    --leo-icon-size: var(--leo-icon-l);
   }
 </style>
