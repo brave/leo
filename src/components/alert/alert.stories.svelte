@@ -72,8 +72,8 @@
       This can be used to override the default icon for the different types of
       Alert"
     >
-      <Alert {...args} mode="full">
-        <div slot="title">Title</div>
+      <Alert {...args} mode="full" hasTitle={!!args.title.length}>
+        <div slot="title">{args.title}</div>
         Some content
       </Alert>
     </Slot>
@@ -103,6 +103,7 @@
     types: { table: { disable: true } },
     type: { control: 'select', options: types },
     hasActions: { control: 'boolean' },
+    title: { type: 'string', defaultValue: 'Title' },
     '--leo-alert-center-width': {
       type: 'string',
       description: 'The width to apply to the alert center'
@@ -116,11 +117,14 @@
       description: 'The css padding for the alert'
     }
   }}
+  args={{
+    title: 'Arg Title',
+  }}
 />
 
 <Template let:args>
-  <Alert {...args}>
-    <div slot="title">Title</div>
+  <Alert {...args} hasTitle={!!args.title.length}>
+    <div slot="title">{args.title}</div>
     Alert content
     <div slot="actions" class:reverse={args.mode === 'full'}>
       <Button kind="plain-faint">Secondary</Button>
@@ -134,8 +138,8 @@
   <div class="container">
     {#each modes as mode}
       {#each types as type}
-        <Alert {mode} {type} {...args}>
-          <div slot="title">Title</div>
+        <Alert {mode} {type} {...args} hasTitle={mode === 'full' && !!args.title.length}>
+          <div slot="title">{args.title}</div>
           Alert content
           <div slot="actions" class="actions" class:reverse={mode === 'full'}>
             <Button kind="plain-faint">Secondary</Button>

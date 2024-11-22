@@ -21,10 +21,11 @@
   export let isToast = false
   export let hasActions = $$slots.actions
   export let hasContentAfter = $$slots['content-after']
+  export let hasTitle = $$slots.title
   export let hideIcon = false
 
   $: currentType = type ?? 'error'
-  $: currentMode = mode ?? 'simple'
+  $: currentMode = hasTitle ? 'full' : mode ?? 'simple'
 </script>
 
 <div
@@ -44,7 +45,7 @@
   </div>
   {/if}
   <div class="content">
-    {#if mode === 'full' && $$slots.title}
+    {#if hasTitle && $$slots.title}
       <div class="title">
         <slot name="title" />
       </div>
