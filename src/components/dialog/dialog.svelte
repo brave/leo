@@ -162,11 +162,17 @@
     grid-template-rows: auto 1fr;
   }
 
-  .leo-dialog.hasActions {
+  /** Since Svelte 4 doesn't support conditional slots in the consumer,
+   * we only want to account for actions if there's actually content in the slot
+   * however for webcomponents, we don't need to check for this, so we special
+   * case the selector with :host. */
+  :host .leo-dialog.hasActions,
+  .leo-dialog.hasActions:has([slot='actions']:not(:empty)) {
     grid-template-rows: 1fr auto;
   }
 
-  .leo-dialog.hasHeader.hasActions {
+  :host .leo-dialog.hasHeader.hasActions,
+  .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
     grid-template-rows: auto 1fr auto;
   }
 
@@ -224,11 +230,13 @@
     padding-top: 0;
   }
 
-  .leo-dialog.hasActions .body {
+  :host .leo-dialog .actions .body,
+  .leo-dialog.hasActions:has([slot='actions']:not(:empty)) .body {
     padding-bottom: 0;
   }
 
-  .leo-dialog .actions {
+  :host .leo-dialog .actions,
+  .leo-dialog .actions:has([slot='actions']:not(:empty)) {
     background: var(--background);
     padding: var(--padding);
   }
@@ -237,19 +245,19 @@
     * at compile time (as the slotted content is put in via the parent).
     * Note: We have to handle the case where we're in a web component (via the
     * ::slotted selector) and the case where we're in a Svelte component (via
-    * the div[slot='actions'] selector).
+    * the [slot='actions'] selector).
     *
     * The :global selector doesn't seem to be able to handle nesting, so we have
     * two separate selectors for mobile & non-mobile layouts */
   :global .leo-dialog.mobile .actions ::slotted(*),
-  :global .leo-dialog.mobile .actions div[slot='actions'] {
+  :global .leo-dialog.mobile .actions [slot='actions']:not(:empty) {
     flex-direction: column;
     align-items: stretch;
     justify-content: end;
   }
 
   :global .leo-dialog .actions ::slotted(*),
-  :global .leo-dialog div[slot='actions'] {
+  :global .leo-dialog [slot='actions']:not(:empty) {
     display: flex;
     flex-direction: row;
     align-items: center;
