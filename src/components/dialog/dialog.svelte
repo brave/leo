@@ -4,14 +4,11 @@
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
 
-  type DialogSizes = 'mobile' | 'normal'
-
   type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open'> & {
     isOpen?: boolean
     modal?: boolean
     showClose?: boolean
     showBack?: boolean
-    size?: DialogSizes
     escapeCloses?: boolean
     backdropClickCloses?: boolean
     animate?: boolean
@@ -23,7 +20,6 @@
   export let modal = true
   export let showClose = false
   export let showBack = false
-  export let size: DialogSizes = 'normal'
   export let escapeCloses = true
   export let backdropClickCloses = true
   export let animate = true
@@ -49,7 +45,6 @@
     transition:scale={{ duration: animate ? 60 : 0, start: 0.8 }}
     {...$$restProps}
     class="leo-dialog"
-    class:mobile={size === 'mobile'}
     class:modal
     class:hasHeader
     class:hasActions={$$slots.actions}
@@ -122,7 +117,7 @@
 
 <style lang="scss">
   .leo-dialog {
-    --padding: var(--leo-dialog-padding, var(--leo-spacing-4xl));
+    --padding: var(--leo-dialog-padding, var(--leo-spacing-2xl));
     --border-radius: var(--leo-dialog-border-radius, var(--leo-radius-xl));
     --background: var(
       --leo-dialog-background,
@@ -141,8 +136,8 @@
     border: none;
     display: grid;
 
-    width: var(--leo-dialog-width, 500px);
-    max-width: calc(100% - var(--leo-spacing-m) * 2);
+    width: calc(100% - var(--leo-spacing-m) * 2);
+    max-width: var(--leo-dialog-width, 374px);
 
     border-radius: var(--border-radius);
 
@@ -174,11 +169,6 @@
   :host .leo-dialog.hasHeader.hasActions,
   .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
     grid-template-rows: auto 1fr auto;
-  }
-
-  .leo-dialog.mobile {
-    --padding: var(--leo-dialog-padding, var(--leo-spacing-2xl));
-    width: var(--leo-dialog-width, 374px);
   }
 
   .leo-dialog:not(.modal) {
@@ -249,20 +239,21 @@
     *
     * The :global selector doesn't seem to be able to handle nesting, so we have
     * two separate selectors for mobile & non-mobile layouts */
-  :global .leo-dialog.mobile .actions ::slotted(*),
-  :global .leo-dialog.mobile .actions [slot='actions']:not(:empty) {
+  :global .leo-dialog .actions ::slotted(*),
+  :global .leo-dialog .actions [slot='actions']:not(:empty) {
+    display: flex;
+    gap: var(--leo-spacing-xl);
     flex-direction: column;
     align-items: stretch;
     justify-content: end;
   }
 
-  :global .leo-dialog .actions ::slotted(*),
-  :global .leo-dialog [slot='actions']:not(:empty) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: var(--leo-spacing-xl);
+  @media (orientation: portrait) {
+    :global .leo-dialog .actions ::slotted(*),
+    :global .leo-dialog .actions div[slot='actions'] {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 
   .leo-dialog .title-row {
@@ -271,5 +262,25 @@
     align-items: center;
     justify-content: stretch;
     gap: var(--leo-spacing-l);
+  }
+
+  @media (min-width: 375px) and (min-height: 375px) {
+    .leo-dialog {
+      --padding: var(--leo-dialog-padding, var(--leo-spacing-4xl));
+      max-width: var(--leo-dialog-width, 500px);
+    }
+
+    :global .leo-dialog .actions ::slotted(*),
+    :global .leo-dialog [slot='actions']:not(:empty) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: end;
+    }
+  }
+
+  @media (orientation: landscape) {
+    .leo-dialog {
+      max-width: var(--leo-dialog-width, 520px);
+    }
   }
 </style>
