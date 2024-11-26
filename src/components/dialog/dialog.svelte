@@ -261,7 +261,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: stretch;
+    justify-content: end;
     gap: var(--leo-spacing-xl);
   }
 
