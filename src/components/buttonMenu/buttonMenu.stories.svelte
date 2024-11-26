@@ -6,8 +6,10 @@
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import Toggle from '../toggle/toggle.svelte'
+  import Checkbox from '../checkbox/checkbox.svelte'
 
-  export let toggleIsChecked = false
+  let toggleIsChecked = false
+  let controlledMenuOpen = false
 
   const handleAction = () => console.log('action')
 </script>
@@ -108,6 +110,24 @@
       </ButtonMenu>
     </Slot>
   </SlotInfo>
+</Story>
+
+<Story name="Controlled" let:args>
+  <Checkbox bind:checked={controlledMenuOpen}>Open</Checkbox>
+  **Note:** Clicking the checkbox will not close the menu.
+  <ButtonMenu {...args} isOpen={controlledMenuOpen} onClose={() => (controlledMenuOpen = false)} onChange={e => (controlledMenuOpen = e.isOpen)}>
+    <div slot="anchor-content">
+      <Icon name="more-horizontal" />
+    </div>
+    <leo-menu-item> Copy </leo-menu-item>
+    <leo-menu-item> Share </leo-menu-item>
+    <leo-menu-item>
+      <div class="item">
+        <div>New Chat</div>
+        <Icon name="plus-add" />
+      </div>
+    </leo-menu-item>
+  </ButtonMenu>
 </Story>
 
 <style>
