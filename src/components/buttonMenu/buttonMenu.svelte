@@ -14,7 +14,7 @@
 </script>
 
 <script lang="ts">
-  import Menu, { type CloseEvent } from '../menu/menu.svelte'
+  import Menu, { type CloseEvent, type CloseEventDetail } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
 
   export let isOpen: boolean | undefined = undefined
@@ -31,6 +31,12 @@
     if (isOpen === undefined) isOpenInternal = toggleTo
     onChange?.({ isOpen: toggleTo })
   }
+
+  const handleClose = (e: CloseEventDetail) => {
+    if (isOpen === undefined) isOpenInternal = false
+    onClose?.(e)
+    onChange?.({ isOpen: false })
+  }
 </script>
 
 <div class="leo-button-menu">
@@ -42,7 +48,7 @@
   <div bind:this={anchor} on:click|stopPropagation={toggle}>
     <slot name="anchor-content"/>
   </div>
-  <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} {onClose}>
+  <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} onClose={handleClose}>
     <slot />
   </Menu>
 </div>
