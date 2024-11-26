@@ -122,7 +122,7 @@
     );
     --unchecked-color: var(
       --leo-toggle-unchecked-color,
-      var(--leo-color-schemes-surface-container-highest)
+      var(--leo-color-schemes-outline-variant)
     );
     --thumb-color: var(
       --leo-toggle-thumb-color,
