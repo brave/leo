@@ -23,16 +23,16 @@
 
   $: background =
     mode === 'default'
-      ? `var(--leo-color-${color}-20)`
+      ? `var(--leo-color-${color}-10)`
       : mode === 'loud'
-        ? `var(--leo-color-${color}-50)`
+        ? `var(--leo-color-${color}-40)`
         : 'transparent'
 
   $: text =
     mode === 'default'
-      ? `var(--leo-color-${color}-50)`
+      ? `var(--leo-color-${color}-60)`
       : mode === 'loud'
-        ? `var(--leo-color-${color}-10)`
+        ? `var(--leo-color-white)`
         : `var(--leo-color-${color}-50)`
 
   $: border = mode === 'outline' ? `var(--leo-color-${color}-50)` : `transparent`

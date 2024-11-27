@@ -2,7 +2,7 @@
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
   import Button from '../button/button.svelte'
 
-  import Alert, { modes, types } from './alert.svelte'
+  import Alert, { types } from './alert.svelte'
   import { showAlert } from './alertCenter.svelte'
   import Icon from '../icon/icon.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
@@ -16,12 +16,11 @@
   let duration = 2000
   let customButton = false
 
-  $: alertUser = (mode, type) =>
+  $: alertUser = (type) =>
     showAlert(
       {
         content,
         title,
-        mode: mode ?? 'simple',
         type: type ?? 'error',
         actions: hasAction
           ? [
@@ -59,7 +58,7 @@
       name="content-after"
       explanation="optional content after the main content of the alert"
     >
-      <Alert {...args} mode="simple">
+      <Alert {...args}>
         Some content
         <Button kind="plain-faint" fab slot="content-after">
           <Icon name="close" />
@@ -72,8 +71,8 @@
       This can be used to override the default icon for the different types of
       Alert"
     >
-      <Alert {...args} mode="full">
-        <div slot="title">Title</div>
+      <Alert {...args}>
+        <div slot="title">{args.title}</div>
         Some content
       </Alert>
     </Slot>
@@ -98,11 +97,10 @@
   title="Components/Alert"
   component={Alert}
   argTypes={{
-    modes: { table: { disable: true } },
-    mode: { control: 'select', options: modes },
     types: { table: { disable: true } },
     type: { control: 'select', options: types },
     hasActions: { control: 'boolean' },
+    title: { type: 'string', defaultValue: 'Title' },
     '--leo-alert-center-width': {
       type: 'string',
       description: 'The width to apply to the alert center'
@@ -116,13 +114,16 @@
       description: 'The css padding for the alert'
     }
   }}
+  args={{
+    title: 'Alert title',
+  }}
 />
 
 <Template let:args>
   <Alert {...args}>
-    <div slot="title">Title</div>
+    <div slot="title">{args.title}</div>
     Alert content
-    <div slot="actions" class:reverse={args.mode === 'full'}>
+    <div slot="actions">
       <Button kind="plain-faint">Secondary</Button>
       <Button kind="filled">Primary</Button>
     </div>
@@ -132,14 +133,14 @@
 <Story name="Alert" />
 <Story name="All" let:args>
   <div class="container">
-    {#each modes as mode}
+    {#each [true, false] as hasTitle}
       {#each types as type}
-        <Alert {mode} {type} {...args}>
-          <div slot="title">Title</div>
+        <Alert {type} {...args}>
+          <div slot="title">{#if hasTitle}{args.title}{/if}</div>
           Alert content
-          <div slot="actions" class="actions" class:reverse={mode === 'full'}>
-            <Button kind="plain-faint">Secondary</Button>
+          <div slot="actions" class="actions">
             <Button kind="filled">Primary</Button>
+            <Button kind="plain-faint">Secondary</Button>
           </div>
         </Alert>
       {/each}
@@ -178,7 +179,7 @@
   </div>
   <Button
     onClick={() => {
-      alertUser(args.mode, args.type)
+      alertUser(args.type)
     }}>Show Alert</Button
   >
 </Story>

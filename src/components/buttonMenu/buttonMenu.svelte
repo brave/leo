@@ -31,6 +31,11 @@
     if (isOpen === undefined) isOpenInternal = toggleTo
     onChange?.({ isOpen: toggleTo })
   }
+
+  const close: CloseEvent = (e) => {
+    if (isOpen === undefined) isOpenInternal = false
+    onClose?.(e)
+  }
 </script>
 
 <div class="leo-button-menu">
@@ -42,7 +47,7 @@
   <div bind:this={anchor} on:click|stopPropagation={toggle}>
     <slot name="anchor-content"/>
   </div>
-  <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} {onClose}>
+  <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} onClose={close}>
     <slot />
   </Menu>
 </div>

@@ -119,7 +119,7 @@
     --bg: var(--leo-color-neutral-10);
     --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
-    --control-height: 36px;
+    --control-height: 44px;
     --radius: var(--leo-radius-xl);
 
     --leo-control-item-padding: var(--leo-spacing-l);
@@ -131,6 +131,7 @@
     width: var(--leo-segmented-control-width, fit-content);
     align-items: center;
     position: relative;
+    box-sizing: border-box;
 
     background: var(--leo-segmented-control-bg, var(--bg));
     padding: var(--control-padding);
