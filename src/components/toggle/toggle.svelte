@@ -241,7 +241,7 @@
       .thumb {
         --thumb-offset: var(--checked-thumb-offset);
         color: var(--checked-color);
-        --thumb-disabled-color: var(--leo-color-schemes-on-primary);
+        --thumb-disabled-color: var(--leo-toggle-thumb-disabled-color, white);
 
         .on-icon {
           opacity: 1;
