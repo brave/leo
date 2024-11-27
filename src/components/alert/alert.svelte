@@ -4,9 +4,6 @@
   export const types = ['info', 'warning', 'error', 'success', 'notice'] as const
   export type AlertType = (typeof types)[number]
 
-  export const modes = ['simple', 'full'] as const
-  export type AlertMode = (typeof modes)[number]
-
   const defaultIcons: { [P in AlertType]: IconName } = {
     'info': 'info-filled',
     'error': 'warning-circle-filled',
@@ -20,22 +17,19 @@
   import Icon from '../icon/icon.svelte'
 
   export let type: AlertType = 'error'
-  export let mode: AlertMode = 'simple'
   export let isToast = false
-  export let hasActions = $$slots.actions
-  export let hasContentAfter = $$slots['content-after']
-  export let hasTitle = $$slots.title
   export let hideIcon = false
 
+  // TODO: Remove when only supporting svelte >5 which can render slotted content conditionally
+  export let hasActions = $$slots.actions
+  export let hasContentAfter = $$slots['content-after']
+
   $: currentType = type ?? 'error'
-  $: currentMode = hasTitle ? 'full' : mode ?? 'simple'
 </script>
 
 <div
   class="leo-alert {currentType}"
   class:toast={isToast}
-  class:simple={currentMode === 'simple'}
-  class:full={currentMode === 'full'}
 >
   {#if !hideIcon}
   <div class="icon">
@@ -45,7 +39,7 @@
   </div>
   {/if}
   <div class="content">
-    {#if hasTitle && $$slots.title}
+    {#if $$slots.title}
       <div class="title">
         <slot name="title" />
       </div>
@@ -87,7 +81,7 @@
     border: var(--leo-alert-border-width, var(--default-border-width)) solid
       var(--leo-alert-border-color, var(--default-border-color));
     gap: var(--leo-spacing-xl) 0;
-    font: var(--default-font, var(--leo-font-default-regular));
+    font: var(--leo-font-default-regular);
 
     display: grid;
     grid-template-columns: min-content 1fr;
@@ -98,8 +92,6 @@
       --default-text-color: var(--leo-alert-text-color, var(--leo-color-text-tertiary));
       --default-border-width: 1px;
       --default-border-color: var(--leo-color-divider-subtle);
-      --default-title-font: var(--leo-font-default-semibold);
-      --default-font: var(--leo-font-small-regular);
     }
     &.success {
       --default-background: var(--leo-color-systemfeedback-success-background);
@@ -132,13 +124,9 @@
       color: var(--leo-icon-color);
       margin-right: var(--leo-spacing-xl);
     }
-    &.notice .icon {
-      --leo-icon-size: var(--leo-icon-s);
-      margin-right: var(--leo-spacing-l);
-    }
 
     & .title {
-      font: var(--default-title-font, var(--leo-font-heading-h4));
+      font: var(--leo-font-heading-h4);
     }
 
     & .content {
@@ -172,12 +160,5 @@
     &.success {
       background: var(--leo-color-green-20);
     }
-  }
-
-  .leo-alert.full .icon {
-    --leo-icon-size: var(--leo-icon-xl);
-  }
-  .leo-alert.notice.full .icon {
-    --leo-icon-size: var(--leo-icon-l);
   }
 </style>

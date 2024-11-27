@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import type { AlertMode, AlertType } from './alert.svelte'
+  import type { AlertType } from './alert.svelte'
   import { writable } from 'svelte/store'
 
   /**
@@ -24,7 +24,6 @@
   })
 
   export interface AlertOptions {
-    mode: AlertMode
     type: AlertType
     content: string
     title?: string
@@ -37,7 +36,6 @@
   class AlertInfo {
     id = ++nextId
 
-    mode: AlertMode
     type: AlertType
     content: string
     title?: string
@@ -130,7 +128,7 @@
           {#each alert.actions as action}
             <svelte:component
               this={action.component || ButtonComponent}
-              size={alert.mode === "full" ? "medium" : "small"}
+              size="small"
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               onClick={() => action.action(alert)}
