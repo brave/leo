@@ -122,7 +122,7 @@
     );
     --unchecked-color: var(
       --leo-toggle-unchecked-color,
-      var(--leo-color-neutral-30)
+      var(--leo-color-schemes-outline-variant)
     );
     --thumb-color: var(
       --leo-toggle-thumb-color,
@@ -189,7 +189,7 @@
     }
 
     &[aria-checked="false"] .thumb {
-      opacity: 0.5;
+      --thumb-color: var(--leo-color-white);
     }
 
     & .thumb {
@@ -241,6 +241,7 @@
       .thumb {
         --thumb-offset: var(--checked-thumb-offset);
         color: var(--checked-color);
+        --thumb-disabled-color: var(--thumb-color);
 
         .on-icon {
           opacity: 1;
