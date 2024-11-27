@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1731620217536,
+  "updatedAt": 1732695090585,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1649,6 +1649,8 @@ const meta = {
     "shield-plus": "shield-plus",
     "shield-refresh-filled": "shield-refresh-filled",
     "shield-refresh": "shield-refresh",
+    "shield-settings-filled": "shield-settings-filled",
+    "shield-settings": "shield-settings",
     "shield-star-filled": "shield-star-filled",
     "shield-star": "shield-star",
     "shield": "shield",
@@ -1703,6 +1705,7 @@ const meta = {
     "snx-color": "snx-color",
     "soc-color": "soc-color",
     "social-bat-favicon-fullheight-color": "social-bat-favicon-fullheight-color",
+    "social-bluesky": "social-bluesky",
     "social-brave-beta-favicon-fullheight-color": "social-brave-beta-favicon-fullheight-color",
     "social-brave-dev-favicon-fullheight-color": "social-brave-dev-favicon-fullheight-color",
     "social-brave-nightly-favicon-fullheight-color": "social-brave-nightly-favicon-fullheight-color",
@@ -1715,6 +1718,7 @@ const meta = {
     "social-instagram": "social-instagram",
     "social-leo-favicon-fullheight-color": "social-leo-favicon-fullheight-color",
     "social-linkedin": "social-linkedin",
+    "social-mastodon": "social-mastodon",
     "social-medium": "social-medium",
     "social-patreon": "social-patreon",
     "social-paypal-color": "social-paypal-color",
@@ -1823,10 +1827,9 @@ const meta = {
     "tnb-color": "tnb-color",
     "tnc-color": "tnc-color",
     "tnt-color": "tnt-color",
-    "toggle-android": "toggle-android",
-    "toggle-ios": "toggle-ios",
     "toggle-off": "toggle-off",
     "toggle-on": "toggle-on",
+    "toggles": "toggles",
     "tomo-color": "tomo-color",
     "tor-bridge": "tor-bridge",
     "tor-color": "tor-color",
