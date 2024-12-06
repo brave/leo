@@ -12,7 +12,7 @@
  */
 
 /**
- * @typedef {'M' | 'm' | 'L' | 'l' | 'C' | 'c' | 'S' | 's' | 'H' | 'h' | 'V' | 'v' | 'A' | 'a'} CommandLetter
+ * @typedef {'M' | 'm' | 'L' | 'l' | 'C' | 'c' | 'S' | 's' | 'H' | 'h' | 'V' | 'v' | 'A' | 'a' | 'Q' | 'q' | | 'T' |' t'} CommandLetter
  */
 
 const { JSDOM } = require('jsdom')
@@ -118,11 +118,20 @@ function ToCommand(letter, commandIndex) {
     case 'c':
     case 's':
       return 'R_CUBIC_TO'
+    case 'Q':
+      return 'QUADRATIC_TO'
+    case 'q':
+      return 'R_QUADRATIC_TO'
+    case 'T':
+      return 'QUADRATIC_TO_SHORTHAND'
+    case 't':
+      return 'R_QUADRATIC_TO_SHORTHAND'
     case 'Z':
     case 'z':
       return 'CLOSE'
   }
-  return '~UNKNOWN~'
+
+  throw new Error(`Encountered unknown instruction "${letter}"`)
 }
 
 /**
@@ -136,6 +145,8 @@ function LengthForSvgDirective(letter) {
     case 's':
       return 6
     case 'S':
+    case 'Q':
+    case 'q':
       return 4
     case 'L':
     case 'l':
@@ -145,6 +156,8 @@ function LengthForSvgDirective(letter) {
     case 'v':
     case 'm':
     case 'M':
+    case 'T':
+    case 't':
       return 2
     case 'A':
     case 'a':
