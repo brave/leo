@@ -154,7 +154,7 @@
   }
 
   .leo-dialog.hasHeader {
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto;
   }
 
   /** Since Svelte 4 doesn't support conditional slots in the consumer,
@@ -163,12 +163,12 @@
    * case the selector with :host. */
   :host .leo-dialog.hasActions,
   .leo-dialog.hasActions:has([slot='actions']:not(:empty)) {
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
   .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
   }
 
   .leo-dialog:not(.modal) {
@@ -209,7 +209,6 @@
   }
 
   .leo-dialog .body {
-    overflow-y: auto;
     background: var(--background);
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-default-regular);
