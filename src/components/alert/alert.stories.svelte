@@ -20,7 +20,7 @@
     showAlert(
       {
         content,
-        title,
+        title: title || undefined,
         type: type ?? 'error',
         actions: hasAction
           ? [
