@@ -114,7 +114,7 @@
     >
       <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} isToast>
         <div slot="title">
-          {alert.title}
+          {alert.title ?? ""}
         </div>
         <svelte:fragment slot='content-after'>
           {#if alert.canDismiss}
