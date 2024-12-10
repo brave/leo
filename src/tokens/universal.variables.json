@@ -606,11 +606,11 @@
         },
         "70": {
           "type": "color",
-          "value": "#38c43b"
+          "value": "#3bc13e"
         },
         "80": {
           "type": "color",
-          "value": "#58e155"
+          "value": "#5fda5c"
         },
         "90": {
           "type": "color",
@@ -618,7 +618,7 @@
         },
         "95": {
           "type": "color",
-          "value": "#cbfbc0"
+          "value": "#d5facc"
         },
         "98": {
           "type": "color",
@@ -2016,11 +2016,11 @@
         },
         "70": {
           "type": "color",
-          "value": "#38c43b"
+          "value": "#3bc13e"
         },
         "80": {
           "type": "color",
-          "value": "#58e155"
+          "value": "#5fda5c"
         },
         "90": {
           "type": "color",
@@ -2028,7 +2028,7 @@
         },
         "95": {
           "type": "color",
-          "value": "#cbfbc0"
+          "value": "#d5facc"
         },
         "98": {
           "type": "color",
@@ -2094,7 +2094,7 @@
         },
         "80": {
           "type": "color",
-          "value": "#52d7ec"
+          "value": "#57d3e7"
         },
         "90": {
           "type": "color",
@@ -2822,8 +2822,8 @@
         },
         "info-icon": {
           "type": "color",
-          "value": "#007ad0",
-          "referencedVariable": "$primitive.blue.50"
+          "value": "#0061a6",
+          "referencedVariable": "$primitive.blue.40"
         },
         "info-background": {
           "type": "color",
@@ -2837,12 +2837,12 @@
         },
         "success-icon": {
           "type": "color",
-          "value": "#008b18",
-          "referencedVariable": "$primitive.green.50"
+          "value": "#006e11",
+          "referencedVariable": "$primitive.green.40"
         },
         "success-background": {
           "type": "color",
-          "value": "#cbfbc0",
+          "value": "#d5facc",
           "referencedVariable": "$primitive.green.95"
         },
         "warning-text": {
@@ -2852,8 +2852,8 @@
         },
         "warning-icon": {
           "type": "color",
-          "value": "#927300",
-          "referencedVariable": "$primitive.yellow.50"
+          "value": "#745b00",
+          "referencedVariable": "$primitive.yellow.40"
         },
         "warning-background": {
           "type": "color",
@@ -2867,8 +2867,8 @@
         },
         "error-icon": {
           "type": "color",
-          "value": "#e62440",
-          "referencedVariable": "$primitive.red.50"
+          "value": "#bf002c",
+          "referencedVariable": "$primitive.red.40"
         },
         "error-background": {
           "type": "color",
@@ -3235,7 +3235,7 @@
         },
         "10": {
           "type": "color",
-          "value": "#cbfbc0",
+          "value": "#d5facc",
           "referencedVariable": "$primitive.green.95"
         },
         "20": {
@@ -3926,8 +3926,8 @@
           },
           "hover-tab-horizontal": {
             "type": "color",
-            "value": "#e3e3e8",
-            "referencedVariable": "$primitive.neutral.90"
+            "value": "#ededf2",
+            "referencedVariable": "$primitive.neutral.94"
           },
           "hover-tab-vertical": {
             "type": "color",
@@ -3949,6 +3949,11 @@
             "value": "#c7c7cc",
             "referencedVariable": "$primitive.neutral.80"
           },
+          "split-view-divider": {
+            "type": "color",
+            "value": "#e3e3e8",
+            "referencedVariable": "$primitive.neutral.90"
+          },
           "split-view-background-vertical": {
             "type": "color",
             "value": "#e3e3e8",
@@ -3958,8 +3963,8 @@
         "omnibar": {
           "background-desktop": {
             "type": "color",
-            "value": "#f0f0f4",
-            "referencedVariable": "$primitive.neutral.95"
+            "value": "#ededf2",
+            "referencedVariable": "$primitive.neutral.94"
           },
           "background-active": {
             "type": "color",
@@ -3986,6 +3991,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f0f0f4",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -3997,11 +4007,6 @@
               "value": "#fafafb",
               "referencedVariable": "$primitive.neutral.98"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f0f0f4",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -4148,7 +4153,7 @@
       "dialogs": {
         "scrim-background": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.5000)"
+          "value": "rgba(0, 0, 0, 0.7500)"
         },
         "divider": {
           "type": "color",
@@ -4171,8 +4176,8 @@
         },
         "info-icon": {
           "type": "color",
-          "value": "#2794f3",
-          "referencedVariable": "$primitive.blue.60"
+          "value": "#67afff",
+          "referencedVariable": "$primitive.blue.70"
         },
         "info-background": {
           "type": "color",
@@ -4181,13 +4186,13 @@
         },
         "success-text": {
           "type": "color",
-          "value": "#38c43b",
+          "value": "#3bc13e",
           "referencedVariable": "$primitive.green.70"
         },
         "success-icon": {
           "type": "color",
-          "value": "#02a820",
-          "referencedVariable": "$primitive.green.60"
+          "value": "#3bc13e",
+          "referencedVariable": "$primitive.green.70"
         },
         "success-background": {
           "type": "color",
@@ -4201,13 +4206,13 @@
         },
         "warning-icon": {
           "type": "color",
-          "value": "#b18c00",
-          "referencedVariable": "$primitive.yellow.60"
+          "value": "#d1a600",
+          "referencedVariable": "$primitive.yellow.70"
         },
         "warning-background": {
           "type": "color",
-          "value": "#241a00",
-          "referencedVariable": "$primitive.yellow.10"
+          "value": "#302400",
+          "referencedVariable": "$primitive.yellow.15"
         },
         "error-text": {
           "type": "color",
@@ -4216,8 +4221,8 @@
         },
         "error-icon": {
           "type": "color",
-          "value": "#ff525e",
-          "referencedVariable": "$primitive.red.60"
+          "value": "#ff888a",
+          "referencedVariable": "$primitive.red.70"
         },
         "error-background": {
           "type": "color",
@@ -4609,12 +4614,12 @@
         },
         "60": {
           "type": "color",
-          "value": "#58e155",
+          "value": "#5fda5c",
           "referencedVariable": "$primitive.green.80"
         },
         "70": {
           "type": "color",
-          "value": "#cbfbc0",
+          "value": "#d5facc",
           "referencedVariable": "$primitive.green.95"
         }
       },
@@ -4651,7 +4656,7 @@
         },
         "60": {
           "type": "color",
-          "value": "#52d7ec",
+          "value": "#57d3e7",
           "referencedVariable": "$primitive.teal.80"
         },
         "70": {
@@ -5232,8 +5237,8 @@
       "desktopbrowser": {
         "chrome-background-desktop": {
           "type": "color",
-          "value": "#252529",
-          "referencedVariable": "$primitive.neutral.15"
+          "value": "#303034",
+          "referencedVariable": "$primitive.neutral.20"
         },
         "menu": {
           "background": {
@@ -5295,13 +5300,18 @@
           },
           "split-view-background-horizontal": {
             "type": "color",
-            "value": "#000000",
-            "referencedVariable": "$primitive.neutral.0"
+            "value": "#1b1b1f",
+            "referencedVariable": "$primitive.neutral.10"
+          },
+          "split-view-divider": {
+            "type": "color",
+            "value": "#303034",
+            "referencedVariable": "$primitive.neutral.20"
           },
           "split-view-background-vertical": {
             "type": "color",
-            "value": "#111114",
-            "referencedVariable": "$primitive.neutral.5"
+            "value": "#1b1b1f",
+            "referencedVariable": "$primitive.neutral.10"
           }
         },
         "omnibar": {
@@ -5335,6 +5345,11 @@
             "value": "#252529",
             "referencedVariable": "$primitive.neutral.15"
           },
+          "divider": {
+            "type": "color",
+            "value": "#252529",
+            "referencedVariable": "$primitive.neutral.15"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5346,11 +5361,6 @@
               "value": "#303034",
               "referencedVariable": "$primitive.neutral.20"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
           }
         },
         "toolbar": {
@@ -5498,7 +5508,7 @@
         },
         "h4": {
           "type": "number",
-          "value": 26
+          "value": 24
         },
         "label": {
           "type": "number",
@@ -5684,7 +5694,7 @@
         },
         "h4": {
           "type": "number",
-          "value": 26
+          "value": 24
         },
         "label": {
           "type": "number",
