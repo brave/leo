@@ -27,7 +27,7 @@
     "@storybook/addon-interactions": "8.4.6",
     "@storybook/addon-links": "8.4.6",
     "@storybook/addon-storysource": "8.4.6",
-    "@storybook/addon-svelte-csf": "4.1.7",
+    "@storybook/addon-svelte-csf": "4.2.0",
     "@storybook/addon-themes": "8.4.6",
     "@storybook/preset-scss": "1.0.3",
     "@storybook/svelte": "8.4.6",
