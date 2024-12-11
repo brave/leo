@@ -34,6 +34,7 @@
 
   const close: CloseEvent = (e) => {
     if (isOpen === undefined) isOpenInternal = false
+    onChange?.({ isOpen: false })
     onClose?.(e)
   }
 </script>
@@ -44,7 +45,7 @@
     firing a `click` event. This may be triggered with a keypress or click.
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div bind:this={anchor} on:click|stopPropagation={toggle}>
+  <div bind:this={anchor} on:click={toggle}>
     <slot name="anchor-content"/>
   </div>
   <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} onClose={close}>
