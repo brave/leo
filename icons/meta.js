@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1732695090585,
+  "updatedAt": 1733991100544,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -236,6 +236,7 @@ export default {
     "browser-extensions-remove": "browser-extensions-remove",
     "browser-extensions": "browser-extensions",
     "browser-forward": "browser-forward",
+    "browser-group": "browser-group",
     "browser-home": "browser-home",
     "browser-menu": "browser-menu",
     "browser-mobile-bottom-tab-groups": "browser-mobile-bottom-tab-groups",
@@ -1488,6 +1489,8 @@ export default {
     "product-bat-outline": "product-bat-outline",
     "product-bookmarks": "product-bookmarks",
     "product-brave-leo": "product-brave-leo",
+    "product-brave-news-add-source": "product-brave-news-add-source",
+    "product-brave-news-remove-source": "product-brave-news-remove-source",
     "product-brave-news": "product-brave-news",
     "product-brave-talk": "product-brave-talk",
     "product-brave-wallet": "product-brave-wallet",
