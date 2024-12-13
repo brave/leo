@@ -45,7 +45,7 @@
     firing a `click` event. This may be triggered with a keypress or click.
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div bind:this={anchor} on:click={toggle}>
+  <div bind:this={anchor} on:click|preventDefault|stopPropagation={toggle}>
     <slot name="anchor-content"/>
   </div>
   <Menu {positionStrategy} isOpen={isOpenInternal} target={anchor} onClose={close}>
