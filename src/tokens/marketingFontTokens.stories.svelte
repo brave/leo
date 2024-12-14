@@ -1,6 +1,11 @@
+<script context="module">
+  export const meta = {
+    title: 'Tokens/Marketing/Fonts'
+  }
+</script>
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { Meta, Story } from '@storybook/addon-svelte-csf'
+  import { Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css/variables-marketing'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
   import { scopedApplyLayer } from '../../.storybook/global.svelte'
@@ -9,8 +14,6 @@
 
   const { mobile, desktop } = allFonts
 </script>
-
-<Meta title="Tokens/Marketing/Fonts" />
 
 <Story name="Desktop/Tablet">
   <FontTokenSwatchGroup tokens={desktop} />

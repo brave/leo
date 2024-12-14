@@ -1,18 +1,5 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module" lang="ts">
   import Navigation from './navigation.svelte'
-  import NavigationItem from './navigationItem.svelte'
-  import NavigationHeader from './navigationHeader.svelte'
-  import NavigationActions from './navigationActions.svelte'
-  import Hr from '../hr/hr.svelte'
-  import NavigationMenu from './navigationMenu.svelte'
-  import Icon from '../icon/icon.svelte'
-  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
-  import Slot from '../../storyHelpers/Slot.svelte'
-  import SegmentedControl from '../segmentedControl/segmentedControl.svelte'
-  import ControlItem from '../controlItem/controlItem.svelte'
-  import type { IconName } from '../../../icons/meta'
 
   type MenuItem = {
     icon: IconName
@@ -82,27 +69,43 @@
 
   const allUrls = getUrls(menuItems)
 
-  let theme = 'light'
+  export const meta = {
+    title: 'Components/Navigation',
+    component: Navigation,
+    argTypes: {
+      current: {
+        control: 'select',
+        options: allUrls
+      },
+      kind: {
+        table: {
+          disable: true
+        }
+      }
+    },
+    args: {
+      current: allUrls[0]
+    }
+  }
 </script>
 
-<Meta
-  title="Components/Navigation"
-  component={Navigation}
-  argTypes={{
-    current: {
-      control: 'select',
-      options: allUrls
-    },
-    kind: {
-      table: {
-        disable: true
-      }
-    }
-  }}
-  args={{
-    current: allUrls[0]
-  }}
-/>
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
+  import NavigationItem from './navigationItem.svelte'
+  import NavigationHeader from './navigationHeader.svelte'
+  import NavigationActions from './navigationActions.svelte'
+  import Hr from '../hr/hr.svelte'
+  import NavigationMenu from './navigationMenu.svelte'
+  import Icon from '../icon/icon.svelte'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import SegmentedControl from '../segmentedControl/segmentedControl.svelte'
+  import ControlItem from '../controlItem/controlItem.svelte'
+  import type { IconName } from '../../../icons/meta'
+
+  let theme = 'light'
+</script>
 
 <Template let:args>
   <div class="container">

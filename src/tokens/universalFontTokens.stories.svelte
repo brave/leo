@@ -1,12 +1,15 @@
+<script context="module">
+  export const meta = {
+    title: 'Tokens/Universal/Fonts'
+  }
+</script>
 <script lang="ts">
-  import { Meta, Story } from '@storybook/addon-svelte-csf'
+  import { Story } from '@storybook/addon-svelte-csf'
   import { font as allFonts } from '../../tokens/css/variables'
   import FontTokenSwatchGroup from '../storyHelpers/FontTokenSwatchGroup.svelte'
 
   const { monospace, ...sansMonospace } = allFonts
 </script>
-
-<Meta title="Tokens/Universal/Fonts" />
 
 <Story name="All Fonts">
   <FontTokenSwatchGroup tokens={sansMonospace} />

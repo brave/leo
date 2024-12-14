@@ -1,7 +1,22 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module">
   import ButtonMenu from './buttonMenu.svelte'
+
+  export const meta = {
+    title: 'Components/ButtonMenu',
+    component: ButtonMenu,
+    argTypes: {
+      '--leo-menu-control-width': {
+        description: '(readonly): Computed width of menu control'
+      },
+      '--leo-menu-max-height': {
+        description: 'user controlled max height'
+      }
+    }
+  }
+</script>
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
   import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
@@ -13,19 +28,6 @@
 
   const handleAction = () => console.log('action')
 </script>
-
-<Meta
-  title="Components/ButtonMenu"
-  component={ButtonMenu}
-  argTypes={{
-    '--leo-menu-control-width': {
-      description: '(readonly): Computed width of menu control'
-    },
-    '--leo-menu-max-height': {
-      description: 'user controlled max height'
-    }
-  }}
-/>
 
 <Template let:args>
   <div class="container">

@@ -1,59 +1,64 @@
-<script>
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import meta from '../../../icons/meta'
+<script context="module">
   import Icon from './icon.svelte'
+  import resources from '../../../icons/meta'
+
+  export const meta = {
+    title: 'Components/Icon',
+    component: Icon,
+    argTypes: {
+      '--leo-icon-color': {
+        control: 'color',
+        description: 'The color to use for the icon',
+        type: 'string'
+      },
+      '--leo-icon-size': {
+        control: 'text',
+        description: 'The size of the icon (defaults to 24px if not set)',
+        type: 'string'
+      },
+      '--leo-icon-height': {
+        control: 'text',
+        description:
+          'For irregular icon aspect ratios, you can set the height of the icon (defaults to 24px if not set)',
+        type: 'string'
+      },
+      '--leo-icon-width': {
+        control: 'text',
+        description:
+          'For irregular icon aspect ratios, you can set the width of the icon (defaults to 24px if not set)',
+        type: 'string'
+      },
+      name: {
+        control: 'select',
+        options: Object.values(resources.icons),
+        description: 'The name of the icon to use',
+        type: 'string'
+      },
+      color: {
+        control: 'color',
+        description:
+          'The current text color (this is used for the icon if --leo-icon-color is not set)',
+        type: 'string'
+      }
+    },
+    args: {
+      color: 'var(--leo-color-icon-default)',
+      name: 'shield-alert-filled',
+      '--leo-icon-size': '24px'
+    }
+  }
+</script>
+
+<script>
+  import { Story, Template } from '@storybook/addon-svelte-csf'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
   let filter = ''
-  $: filteredIcons = Object.values(meta.icons).filter((i) =>
+  $: filteredIcons = Object.values(resources.icons).filter((i) =>
     i.toLowerCase().includes(filter.toLowerCase())
   )
 </script>
-
-<Meta
-  title="Components/Icon"
-  component={Icon}
-  argTypes={{
-    '--leo-icon-color': {
-      control: 'color',
-      description: 'The color to use for the icon',
-      type: 'string'
-    },
-    '--leo-icon-size': {
-      control: 'text',
-      description: 'The size of the icon (defaults to 24px if not set)',
-      type: 'string'
-    },
-    '--leo-icon-height': {
-      control: 'text',
-      description: 'For irregular icon aspect ratios, you can set the height of the icon (defaults to 24px if not set)',
-      type: 'string'
-    },
-    '--leo-icon-width': {
-      control: 'text',
-      description: 'For irregular icon aspect ratios, you can set the width of the icon (defaults to 24px if not set)',
-      type: 'string'
-    },
-    name: {
-      control: 'select',
-      options: Object.values(meta.icons),
-      description: 'The name of the icon to use',
-      type: 'string'
-    },
-    color: {
-      control: 'color',
-      description:
-        'The current text color (this is used for the icon if --leo-icon-color is not set)',
-      type: 'string'
-    }
-  }}
-  args={{
-    color: 'var(--leo-color-icon-default)',
-    name: 'shield-alert-filled',
-    '--leo-icon-size': '24px'
-  }}
-/>
 
 <Template let:args>
   <div style={`color: ${args.color}`}>

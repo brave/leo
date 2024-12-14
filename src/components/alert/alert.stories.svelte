@@ -1,8 +1,37 @@
+<script context="module">
+  import Alert, { types } from './alert.svelte'
+
+  export const meta = {
+    title: "Components/Alert",
+    component: Alert,
+    argTypes: {
+      types: { table: { disable: true } },
+      type: { control: 'select', options: types },
+      hasActions: { control: 'boolean' },
+      title: { type: 'string', defaultValue: 'Title' },
+      '--leo-alert-center-width': {
+        type: 'string',
+        description: 'The width to apply to the alert center'
+      },
+      '--leo-alert-center-position': {
+        type: 'string',
+        description: 'The position of the alert center'
+      },
+      '--leo-alert-padding': {
+        type: 'string',
+        description: 'The css padding for the alert'
+      }
+    },
+    args: {
+      title: 'Alert title'
+    }
+  }
+
+</script>
 <script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+  import { Story, Template } from '@storybook/addon-svelte-csf'
   import Button from '../button/button.svelte'
 
-  import Alert, { types } from './alert.svelte'
   import { showAlert } from './alertCenter.svelte'
   import Icon from '../icon/icon.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
@@ -93,32 +122,6 @@
   </SlotInfo>
 </Story>
 
-<Meta
-  title="Components/Alert"
-  component={Alert}
-  argTypes={{
-    types: { table: { disable: true } },
-    type: { control: 'select', options: types },
-    hasActions: { control: 'boolean' },
-    title: { type: 'string', defaultValue: 'Title' },
-    '--leo-alert-center-width': {
-      type: 'string',
-      description: 'The width to apply to the alert center'
-    },
-    '--leo-alert-center-position': {
-      type: 'string',
-      description: 'The position of the alert center'
-    },
-    '--leo-alert-padding': {
-      type: 'string',
-      description: 'The css padding for the alert'
-    }
-  }}
-  args={{
-    title: 'Alert title',
-  }}
-/>
-
 <Template let:args>
   <Alert {...args}>
     <div slot="title">{args.title}</div>
@@ -130,7 +133,7 @@
   </Alert>
 </Template>
 
-<Story name="Alert" />
+<Story name="Default Alert" />
 <Story name="All" let:args>
   <div class="container">
     {#each [true, false] as hasTitle}
