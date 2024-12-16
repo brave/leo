@@ -224,7 +224,8 @@ export default function registerWebComponent(
       // we need to also clear the contents of the node, to ensure we don't
       // duplicate content.
       const shadow =
-        this.shadowRoot ?? this.attachShadow({ mode, delegatesFocus: true })
+        this.shadowRoot ??
+        this.attachShadow({ mode, serializable: true, delegatesFocus: true })
       shadow.replaceChildren()
 
       // Unfortunately we need a DOMMutationObserver to let us know when

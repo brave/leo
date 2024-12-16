@@ -66,11 +66,15 @@
   },
   "peerDependencies": {
     "@material/material-color-utilities": ">= 0.2.7",
+    "happy-dom": ">= 15.11.7",
     "react": ">= 16.0.0",
     "typescript": ">= 4.7.0"
   },
   "peerDependenciesMeta": {
     "@material/material-color-utilities": {
+      "optional": true
+    },
+    "happy-dom": {
       "optional": true
     },
     "typescript": {
