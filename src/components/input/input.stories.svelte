@@ -1,46 +1,47 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module">
   import Input from './input.svelte'
-  import Icon from '../icon/icon.svelte'
   import { cssProperties, modes, sizes } from '../formItem/formItem.svelte'
+
+  export const meta = {
+    title: 'Components/Input',
+    component: Input,
+    argTypes: {
+      ...cssProperties,
+      placeholder: {
+        type: 'string',
+        description: 'The placeholder'
+      },
+      label: {
+        type: 'string',
+        description: 'This is not a real prop of the component, it is just useful for configuring the storybook'
+      },
+      type: {
+        control: 'select',
+        options: ['text', 'password', 'date', 'time', 'color', 'number']
+      },
+      size: {
+        control: 'select',
+        options: sizes
+      },
+      mode: {
+        control: 'select',
+        options: modes
+      }
+    },
+    args: {
+      label: 'Label'
+    }
+  }
+</script>
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
+  import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
 
   let characterCountValue = ''
 </script>
-
-<Meta
-  title="Components/Input"
-  component={Input}
-  argTypes={{
-    ...cssProperties,
-    placeholder: {
-      type: 'string',
-      description: 'The placeholder'
-    },
-    label: {
-      type: 'string',
-      description:
-        "This isn't a real prop of the component, it's just useful for configuring the storybook"
-    },
-    type: {
-      control: 'select',
-      options: ['text', 'password', 'date', 'time', 'color', 'number']
-    },
-    size: {
-      control: 'select',
-      options: sizes
-    },
-    mode: {
-      control: 'select',
-      options: modes
-    }
-  }}
-  args={{
-    label: 'Label'
-  }}
-/>
 
 <Template let:args>
   <Input {...args}>

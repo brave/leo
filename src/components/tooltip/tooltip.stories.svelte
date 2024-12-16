@@ -1,53 +1,56 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
-  import Slot from '../../storyHelpers/Slot.svelte'
+<script context="module">
   import Tooltip, { modes } from './tooltip.svelte'
-  import Button from '../button/button.svelte'
-  import Checkbox from '../checkbox/checkbox.svelte'
-  import Icon from '../icon/icon.svelte'
 
   const strategies = ['absolute', 'fixed']
   const sides = ['top', 'bottom', 'left', 'right']
   const positions = ['', '-start', '-end']
   const placements = positions.flatMap((p) => sides.map((s) => `${s}${p}`))
 
-  let showTooltip = true
+  export const meta = {
+    title: 'Components/Tooltip',
+    component: Tooltip,
+    argTypes: {
+      '--leo-tooltip-padding': {
+        type: 'string',
+        description: 'The internal padding on the tooltip'
+      },
+      '--leo-tooltip-text-color': {
+        type: 'string',
+        control: 'color',
+        description: 'The text color for the tooltip'
+      },
+      '--leo-tooltip-background': {
+        type: 'string',
+        control: 'color',
+        description: 'The background color of the tooltip'
+      },
+      '--leo-tooltip-shadow': {
+        type: 'string',
+        description: 'The shadow effect for the tooltip'
+      },
+      text: { control: 'text' },
+      mode: { control: 'select', options: modes },
+      placement: { control: 'select', options: placements },
+      fallbackPlacements: { control: 'multi-select', options: placements },
+      positionStrategy: { control: 'select', options: strategies }
+    },
+    args: {
+      text: 'A helpful hint',
+      mode: 'default'
+    }
+  }
 </script>
 
-<Meta
-  title="Components/Tooltip"
-  component={Tooltip}
-  argTypes={{
-    '--leo-tooltip-padding': {
-      type: 'string',
-      description: 'The internal padding on the tooltip'
-    },
-    '--leo-tooltip-text-color': {
-      type: 'string',
-      control: 'color',
-      description: 'The text color for the tooltip'
-    },
-    '--leo-tooltip-background': {
-      type: 'string',
-      control: 'color',
-      description: 'The background color of the tooltip'
-    },
-    '--leo-tooltip-shadow': {
-      type: 'string',
-      description: 'The shadow effect for the tooltip'
-    },
-    text: { control: 'text' },
-    mode: { control: 'select', options: modes },
-    placement: { control: 'select', options: placements },
-    fallbackPlacements: { control: 'multi-select', options: placements },
-    positionStrategy: { control: 'select', options: strategies }
-  }}
-  args={{
-    text: 'A helpful hint',
-    mode: 'default'
-  }}
-/>
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+  import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
+  import Slot from '../../storyHelpers/Slot.svelte'
+  import Button from '../button/button.svelte'
+  import Checkbox from '../checkbox/checkbox.svelte'
+  import Icon from '../icon/icon.svelte'
+
+  let showTooltip = true
+</script>
 
 <Template let:args>
   <Tooltip {...args}>

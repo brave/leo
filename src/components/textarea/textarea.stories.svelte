@@ -1,38 +1,41 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module">
   import TextArea from './textarea.svelte'
+  import { cssProperties, modes } from '../formItem/formItem.svelte'
+
+  export const meta = {
+    title: 'Components/TextArea',
+    component: TextArea,
+    argTypes: {
+      ...cssProperties,
+      placeholder: {
+        type: 'string',
+        description: 'The placeholder'
+      },
+      label: {
+        type: 'string',
+        description:
+          "This isn't a real prop of the component, it's just useful for configuring the storybook"
+      },
+      mode: {
+        control: 'select',
+        options: modes
+      }
+    },
+    args: {
+      label: 'Label'
+    }
+  }
+</script>
+
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
   import Icon from '../icon/icon.svelte'
-  import { cssProperties, modes, sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
 
   let characterCountValue = ''
 </script>
-
-<Meta
-  title="Components/TextArea"
-  component={TextArea}
-  argTypes={{
-    ...cssProperties,
-    placeholder: {
-      type: 'string',
-      description: 'The placeholder'
-    },
-    label: {
-      type: 'string',
-      description:
-        "This isn't a real prop of the component, it's just useful for configuring the storybook"
-    },
-    mode: {
-      control: 'select',
-      options: modes
-    }
-  }}
-  args={{
-    label: 'Label'
-  }}
-/>
 
 <Template let:args>
   <TextArea {...args}>
@@ -49,7 +52,7 @@
 </Story>
 
 <Story name="minRows/maxRows" let:args>
-  <TextArea {...args} minRows=1 maxRows=3>
+  <TextArea {...args} minRows="1" maxRows="3">
     {args.label}
   </TextArea>
 </Story>

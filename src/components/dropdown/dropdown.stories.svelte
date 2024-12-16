@@ -1,12 +1,36 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module">
   import Dropdown from './dropdown.svelte'
+  import { modes, sizes } from '../formItem/formItem.svelte'
+
+  export const meta = {
+    title: 'Components/Dropdown',
+    component: Dropdown,
+    argTypes: {
+      '--leo-menu-control-width': {
+        description: '(readonly): Computed width of menu control'
+      },
+      size: {
+        control: 'select',
+        options: sizes
+      },
+      mode: {
+        control: 'select',
+        options: modes
+      }
+    },
+    args: {
+      label: 'Label',
+      placeholder: 'select...'
+    }
+  }
+</script>
+
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
   import Icon from '../icon/icon.svelte'
-  import { cssProperties, sizes } from '../formItem/formItem.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
-  import { modes } from '../formItem/formItem.svelte'
 
   const countries = {
     'nz': 'New Zealand',
@@ -15,29 +39,6 @@
     'ca': 'Canada'
   }
 </script>
-
-<Meta
-  title="Components/Dropdown"
-  component={Dropdown}
-  argTypes={{
-    ...cssProperties,
-    '--leo-menu-control-width': {
-      description: '(readonly): Computed width of menu control'
-    },
-    size: {
-      control: 'select',
-      options: sizes
-    },
-    mode: {
-      control: 'select',
-      options: modes
-    }
-  }}
-  args={{
-    label: 'Label',
-    placeholder: 'select...'
-  }}
-/>
 
 <Template let:args>
   <div class="container">

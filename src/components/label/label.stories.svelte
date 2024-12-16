@@ -1,61 +1,65 @@
+<script context="module">
+  import Label from './label.svelte'
+
+  export const meta = {
+    title: 'Components/Label',
+    component: Label,
+    argTypes: {
+      color: {
+        control: 'select',
+        description: 'The color to use for the icon',
+        options: colors
+      },
+      mode: {
+        control: 'select',
+        options: modes,
+        description: 'The mode of the label'
+      },
+      storyLeftIcon: {
+        control: 'text',
+        description:
+          'Icon to the left of the label. This is only used for demonstration purposes',
+        type: 'text'
+      },
+      storyRightIcon: {
+        control: 'text',
+        description:
+          'Icon to the right of the label. This is only used for demonstration purposes',
+        type: 'text'
+      },
+      '--leo-label-icon-size': {
+        control: 'text',
+        description: 'The size of the icons (if any) inside the label',
+        type: 'number'
+      },
+      '--leo-label-font-text': {
+        control: 'text',
+        description: 'The font used for the label text',
+        type: 'text'
+      },
+      '--leo-label-padding': {
+        control: 'text',
+        description: 'The internal padding of the label',
+        type: 'text'
+      }
+    },
+    args: {
+      storyRightIcon: 'check-circle-outline',
+      storyLeftIcon: 'check-circle-outline',
+      mode: 'loud',
+      color: 'teal'
+    }
+  }
+</script>
+
 <script>
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
+  import { Story, Template } from '@storybook/addon-svelte-csf'
   import Icon from '../icon/icon.svelte'
 
-  import Label, { colors, modes } from './label.svelte'
+  import { colors, modes } from './label.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 </script>
-
-<Meta
-  title="Components/Label"
-  component={Label}
-  argTypes={{
-    color: {
-      control: 'select',
-      description: 'The color to use for the icon',
-      options: colors
-    },
-    mode: {
-      control: 'select',
-      options: modes,
-      description: 'The mode of the label'
-    },
-    storyLeftIcon: {
-      control: 'text',
-      description:
-        'Icon to the left of the label. This is only used for demonstration purposes',
-      type: 'text'
-    },
-    storyRightIcon: {
-      control: 'text',
-      description:
-        'Icon to the right of the label. This is only used for demonstration purposes',
-      type: 'text'
-    },
-    '--leo-label-icon-size': {
-      control: 'text',
-      description: 'The size of the icons (if any) inside the label',
-      type: 'number'
-    },
-    '--leo-label-font-text': {
-      control: 'text',
-      description: 'The font used for the label text',
-      type: 'text'
-    },
-    '--leo-label-padding': {
-      control: 'text',
-      description: 'The internal padding of the label',
-      type: 'text'
-    }
-  }}
-  args={{
-    storyRightIcon: 'check-circle-outline',
-    storyLeftIcon: 'check-circle-outline',
-    mode: 'loud',
-    color: 'teal'
-  }}
-/>
 
 <Template let:args>
   <Label {...args}>

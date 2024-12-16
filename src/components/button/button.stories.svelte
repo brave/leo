@@ -1,8 +1,33 @@
-<script lang="ts">
-  import { Meta, Story, Template } from '@storybook/addon-svelte-csf'
-
+<script context="module">
   import Button from './button.svelte'
   import { buttonKinds, buttonSizes } from './props'
+
+  export const meta = {
+    title: "Components/Button",
+    component: Button,
+    argTypes: {
+      '--leo-button-color': {
+        control: 'color'
+      },
+      '--leo-button-padding': {
+        control: 'text',
+        type: 'string',
+        description: 'The padding to apply to the button content'
+      },
+      '--leo-button-radius': {
+        control: 'text',
+        type: 'string',
+        description: 'The border-radius of the button'
+      },
+      kind: { control: 'select', options: buttonKinds },
+      size: { control: 'select', options: buttonSizes },
+      isDisabled: { control: 'boolean' }
+    }
+  }
+</script>
+<script lang="ts">
+  import { Story, Template } from '@storybook/addon-svelte-csf'
+
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import Icon from '../icon/icon.svelte'
@@ -12,29 +37,6 @@
     count += 1
   }
 </script>
-
-<Meta
-  title="Components/Button"
-  component={Button}
-  argTypes={{
-    '--leo-button-color': {
-      control: 'color'
-    },
-    '--leo-button-padding': {
-      control: 'text',
-      type: 'string',
-      description: 'The padding to apply to the button content'
-    },
-    '--leo-button-radius': {
-      control: 'text',
-      type: 'string',
-      description: 'The border-radius of the button'
-    },
-    kind: { control: 'select', options: buttonKinds },
-    size: { control: 'select', options: buttonSizes },
-    isDisabled: { control: 'boolean' }
-  }}
-/>
 
 <Template let:args>
   <Button {...args} onClick={handleClick}>
