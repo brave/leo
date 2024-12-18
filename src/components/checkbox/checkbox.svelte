@@ -4,16 +4,12 @@
   export const sizes = ['small', 'normal'] as const
   export type Sizes = (typeof sizes)[number]
 
-  const fadeTransition = { duration: 120 }
-
   // Preload the SVGs we need for the component.
   preloadIcon('checkbox-checked')
   preloadIcon('checkbox-unchecked')
 </script>
 
 <script lang="ts">
-  import { fade } from 'svelte/transition'
-
   import Icon from '../icon/icon.svelte'
 
   export let checked: boolean
@@ -36,15 +32,12 @@
       bind:checked
       on:change={(e) => onChange?.({ checked: e.currentTarget.checked })}
     />
-    {#if checked}
-      <div transition:fade={fadeTransition}>
-        <Icon name="checkbox-checked" />
-      </div>
-    {:else}
-      <div transition:fade={fadeTransition}>
-        <Icon name="checkbox-unchecked" />
-      </div>
-    {/if}
+    <div class="check-mark checked">
+      <Icon name="checkbox-checked" />
+    </div>
+    <div class="check-mark unchecked">
+      <Icon name="checkbox-unchecked" />
+    </div>
   </div>
   <slot />
 </label>
@@ -125,8 +118,28 @@
       right: 0;
     }
 
+    & .check-mark {
+      transition: opacity 120ms ease-in-out;
+    }
+
+    & .checked {
+      opacity: 0;
+    }
+
+    & .unchecked {
+      opacity: 1;
+    }
+
     &:has(input:checked) {
       color: var(--checked-color);
+
+      & .checked {
+        opacity: 1;
+      }
+
+      & .unchecked {
+        opacity: 0;
+      }
     }
 
     &:has(input:focus-visible) {
