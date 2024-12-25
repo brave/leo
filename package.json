@@ -20,7 +20,7 @@
     "@fontsource/poppins": "5.0.15",
     "@fontsource/roboto-flex": "5.0.16",
     "@material/material-color-utilities": "0.3.0",
-    "@rollup/plugin-node-resolve": "15.3.0",
+    "@rollup/plugin-node-resolve": "15.3.1",
     "@rollup/plugin-typescript": "11.1.6",
     "@storybook/addon-actions": "8.4.6",
     "@storybook/addon-essentials": "8.4.6",
