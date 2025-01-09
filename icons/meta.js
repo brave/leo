@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1733991100544,
+  "updatedAt": 1736383876123,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -704,6 +704,7 @@ export default {
     "ctxc-color": "ctxc-color",
     "currency-exchange": "currency-exchange",
     "currencycom-color": "currencycom-color",
+    "cursor": "cursor",
     "curve-color": "curve-color",
     "cusdt-color": "cusdt-color",
     "cut": "cut",
@@ -733,6 +734,7 @@ export default {
     "dew-color": "dew-color",
     "dgb-color": "dgb-color",
     "dgd-color": "dgd-color",
+    "diamond-filled": "diamond-filled",
     "diamond": "diamond",
     "digibyte-color": "digibyte-color",
     "digifinex-color": "digifinex-color",
@@ -1742,6 +1744,7 @@ export default {
     "solana-on": "solana-on",
     "sort-asc": "sort-asc",
     "sort-desc": "sort-desc",
+    "sort-settings": "sort-settings",
     "sos": "sos",
     "spank-color": "spank-color",
     "sparkles-off": "sparkles-off",
