@@ -78,6 +78,10 @@
     display: inline-block;
   }
 
+  :host > label {
+    width: 100%;
+  }
+
   .leo-radiobutton {
     --focus-border-radius: var(--leo-radiobutton-focus-border-radius, 2px);
     --label-gap: var(--leo-radiobutton-label-gap, var(--leo-spacing-m));
