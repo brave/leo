@@ -1252,7 +1252,7 @@
         },
         "primary-fixed": {
           "type": "color",
-          "value": "#4641ee"
+          "value": "#4a46e0"
         }
       }
     },
@@ -2662,7 +2662,7 @@
         },
         "primary-fixed": {
           "type": "color",
-          "value": "#4641ee"
+          "value": "#4a46e0"
         }
       }
     },
@@ -2695,7 +2695,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#4a46e0",
           "referencedVariable": "$schemes.primary"
         },
         "interactive-visited": {
@@ -2721,7 +2721,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#4a46e0",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
@@ -2778,22 +2778,32 @@
       "button": {
         "background": {
           "type": "color",
-          "value": "#3e37d4",
+          "value": "#4a46e0",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
           "type": "color",
           "value": "rgba(70, 70, 74, 0.2000)"
         },
+        "error-text": {
+          "type": "color",
+          "value": "#ffffff",
+          "referencedVariable": "$primitive.red.100"
+        },
         "error-background": {
           "type": "color",
-          "value": "#e62440",
-          "referencedVariable": "$primitive.red.50"
+          "value": "#bf002c",
+          "referencedVariable": "$primitive.red.40"
+        },
+        "success-text": {
+          "type": "color",
+          "value": "#ffffff",
+          "referencedVariable": "$primitive.green.100"
         },
         "success-background": {
           "type": "color",
-          "value": "#008b18",
-          "referencedVariable": "$primitive.green.50"
+          "value": "#006e11",
+          "referencedVariable": "$primitive.green.40"
         }
       },
       "dialogs": {
@@ -3613,8 +3623,8 @@
         },
         "primary": {
           "type": "color",
-          "value": "#3e37d4",
-          "referencedVariable": "$primitive.primary.35"
+          "value": "#4a46e0",
+          "referencedVariable": "$primitive.primary.40"
         },
         "on-primary": {
           "type": "color",
@@ -3843,13 +3853,13 @@
         },
         "surface-container-high": {
           "type": "color",
-          "value": "#e3e3e8",
-          "referencedVariable": "$primitive.neutral.90"
+          "value": "#e7e7ec",
+          "referencedVariable": "$primitive.neutral.92"
         },
         "surface-container-highest": {
           "type": "color",
-          "value": "#c7c7cc",
-          "referencedVariable": "$primitive.neutral.80"
+          "value": "#e3e3e8",
+          "referencedVariable": "$primitive.neutral.90"
         }
       },
       "ios": {
@@ -4096,8 +4106,8 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#372cbf",
-          "referencedVariable": "$primitive.primary.30"
+          "value": "#8283ff",
+          "referencedVariable": "$primitive.primary.60"
         }
       },
       "container": {
@@ -4139,15 +4149,25 @@
           "type": "color",
           "value": "rgba(235, 238, 240, 0.2000)"
         },
+        "error-text": {
+          "type": "color",
+          "value": "#680014",
+          "referencedVariable": "$primitive.red.20"
+        },
         "error-background": {
           "type": "color",
-          "value": "#e62440",
-          "referencedVariable": "$primitive.red.50"
+          "value": "#ffb3b2",
+          "referencedVariable": "$primitive.red.80"
+        },
+        "success-text": {
+          "type": "color",
+          "value": "#003a05",
+          "referencedVariable": "$primitive.green.20"
         },
         "success-background": {
           "type": "color",
-          "value": "#008b18",
-          "referencedVariable": "$primitive.green.50"
+          "value": "#5fda5c",
+          "referencedVariable": "$primitive.green.80"
         }
       },
       "dialogs": {
@@ -5172,8 +5192,8 @@
         },
         "surface-dim": {
           "type": "color",
-          "value": "#111114",
-          "referencedVariable": "$primitive.neutral.5"
+          "value": "#121316",
+          "referencedVariable": "$primitive.neutral.6"
         },
         "surface-bright": {
           "type": "color",
@@ -5182,28 +5202,28 @@
         },
         "surface-container-lowest": {
           "type": "color",
-          "value": "#000000",
-          "referencedVariable": "$primitive.neutral.0"
+          "value": "#0d0e11",
+          "referencedVariable": "$primitive.neutral.4"
         },
         "surface-container-low": {
-          "type": "color",
-          "value": "#111114",
-          "referencedVariable": "$primitive.neutral.5"
-        },
-        "surface-container": {
           "type": "color",
           "value": "#1b1b1f",
           "referencedVariable": "$primitive.neutral.10"
         },
+        "surface-container": {
+          "type": "color",
+          "value": "#1f1f23",
+          "referencedVariable": "$primitive.neutral.12"
+        },
         "surface-container-high": {
           "type": "color",
-          "value": "#252529",
-          "referencedVariable": "$primitive.neutral.15"
+          "value": "#29292d",
+          "referencedVariable": "$primitive.neutral.17"
         },
         "surface-container-highest": {
           "type": "color",
-          "value": "#303034",
-          "referencedVariable": "$primitive.neutral.20"
+          "value": "#343438",
+          "referencedVariable": "$primitive.neutral.22"
         }
       },
       "ios": {
@@ -5237,8 +5257,8 @@
       "desktopbrowser": {
         "chrome-background-desktop": {
           "type": "color",
-          "value": "#303034",
-          "referencedVariable": "$primitive.neutral.20"
+          "value": "#343438",
+          "referencedVariable": "$primitive.neutral.22"
         },
         "menu": {
           "background": {
@@ -5260,48 +5280,48 @@
         "tabbar": {
           "background": {
             "type": "color",
-            "value": "#111114",
-            "referencedVariable": "$primitive.neutral.5"
+            "value": "#1f1f23",
+            "referencedVariable": "$primitive.neutral.12"
           },
           "pinned-tab-outline-horizontal": {
-            "type": "color",
-            "value": "#303034",
-            "referencedVariable": "$primitive.neutral.20"
-          },
-          "pinned-tab-outline-vertical": {
             "type": "color",
             "value": "#46464a",
             "referencedVariable": "$primitive.neutral.30"
           },
+          "pinned-tab-outline-vertical": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "active-button-background": {
             "type": "color",
-            "value": "#000000",
-            "referencedVariable": "$primitive.neutral.0"
+            "value": "#5e5e62",
+            "referencedVariable": "$primitive.neutral.40"
           },
           "hover-tab-horizontal": {
-            "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
-          },
-          "hover-tab-vertical": {
             "type": "color",
             "value": "#3b3b3f",
             "referencedVariable": "$primitive.neutral.25"
           },
-          "active-tab-horizontal": {
-            "type": "color",
-            "value": "#303034",
-            "referencedVariable": "$primitive.neutral.20"
-          },
-          "active-tab-vertical": {
+          "hover-tab-vertical": {
             "type": "color",
             "value": "#46464a",
             "referencedVariable": "$primitive.neutral.30"
           },
+          "active-tab-horizontal": {
+            "type": "color",
+            "value": "#343438",
+            "referencedVariable": "$primitive.neutral.22"
+          },
+          "active-tab-vertical": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "split-view-background-horizontal": {
             "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#111114",
+            "referencedVariable": "$primitive.neutral.5"
           },
           "split-view-divider": {
             "type": "color",
@@ -5317,49 +5337,49 @@
         "omnibar": {
           "background-desktop": {
             "type": "color",
-            "value": "#111114",
-            "referencedVariable": "$primitive.neutral.5"
+            "value": "#252529",
+            "referencedVariable": "$primitive.neutral.15"
           },
           "background-active": {
             "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
+            "value": "#343438",
+            "referencedVariable": "$primitive.neutral.22"
           },
           "background-selected-item": {
             "type": "color",
-            "value": "#303034",
-            "referencedVariable": "$primitive.neutral.20"
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
           },
           "background-hover-item": {
             "type": "color",
-            "value": "#303034",
-            "referencedVariable": "$primitive.neutral.20"
+            "value": "#46464a",
+            "referencedVariable": "$primitive.neutral.30"
           },
           "split-view-icon-background": {
             "type": "color",
-            "value": "#1b1b1f",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#3b3b3f",
+            "referencedVariable": "$primitive.neutral.25"
           },
           "split-view-icon-active": {
             "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
           },
           "divider": {
             "type": "color",
-            "value": "#252529",
-            "referencedVariable": "$primitive.neutral.15"
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
           },
           "button": {
             "hover": {
               "type": "color",
-              "value": "#252529",
-              "referencedVariable": "$primitive.neutral.15"
+              "value": "#3b3b3f",
+              "referencedVariable": "$primitive.neutral.25"
             },
             "active": {
               "type": "color",
-              "value": "#303034",
-              "referencedVariable": "$primitive.neutral.20"
+              "value": "#525256",
+              "referencedVariable": "$primitive.neutral.35"
             }
           }
         },
@@ -5367,18 +5387,18 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#1b1b1f",
-              "referencedVariable": "$primitive.neutral.10"
+              "value": "#46464a",
+              "referencedVariable": "$primitive.neutral.30"
             },
             "active": {
               "type": "color",
-              "value": "#111114",
-              "referencedVariable": "$primitive.neutral.5"
+              "value": "#5e5e62",
+              "referencedVariable": "$primitive.neutral.40"
             },
             "outline": {
               "type": "color",
-              "value": "#3b3b3f",
-              "referencedVariable": "$primitive.neutral.25"
+              "value": "#525256",
+              "referencedVariable": "$primitive.neutral.35"
             }
           }
         }
@@ -5840,11 +5860,11 @@
       "line-height": {
         "large": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "default": {
           "type": "number",
-          "value": 22
+          "value": 20
         },
         "small": {
           "type": "number",
@@ -6030,11 +6050,11 @@
         },
         "default": {
           "type": "number",
-          "value": 22
+          "value": 20
         },
         "small": {
           "type": "number",
-          "value": 18
+          "value": 16
         },
         "x-small": {
           "type": "number",
