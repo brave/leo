@@ -345,12 +345,12 @@
       --border-color: color-mix(
         in srgb,
         var(--primary-color),
-        var(--background) 70%
+        var(--background) 30%
       );
       --border-color-hover: color-mix(
         in srgb,
         var(--mixed-primary-color),
-        var(--background) 70%
+        var(--background) 20%
       );
     }
   }
