@@ -2889,11 +2889,11 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0500)"
+          "value": "rgba(0, 0, 0, 0.0400)"
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.1000)"
+          "value": "rgba(0, 0, 0, 0.0800)"
         }
       },
       "material": {
@@ -4253,11 +4253,11 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.1000)"
+          "value": "rgba(255, 255, 255, 0.0800)"
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.6000)"
+          "value": "rgba(0, 0, 0, 0.3300)"
         }
       },
       "material": {
