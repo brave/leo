@@ -2754,13 +2754,13 @@
         },
         "highlight": {
           "type": "color",
-          "value": "#fafafb",
-          "referencedVariable": "$primitive.neutral.98"
+          "value": "#f3f3f7",
+          "referencedVariable": "$primitive.neutral.96"
         },
         "interactive": {
           "type": "color",
-          "value": "#f8f8ff",
-          "referencedVariable": "$primitive.primary.98"
+          "value": "#efefff",
+          "referencedVariable": "$primitive.primary.95"
         },
         "disabled": {
           "type": "color",
@@ -2771,8 +2771,8 @@
       "page": {
         "background": {
           "type": "color",
-          "value": "#f0f0f4",
-          "referencedVariable": "$primitive.neutral.95"
+          "value": "#fafafb",
+          "referencedVariable": "$primitive.neutral.98"
         }
       },
       "button": {
@@ -2889,11 +2889,11 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0500)"
+          "value": "rgba(0, 0, 0, 0.0400)"
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.1000)"
+          "value": "rgba(0, 0, 0, 0.0800)"
         }
       },
       "material": {
@@ -4113,18 +4113,18 @@
       "container": {
         "background": {
           "type": "color",
-          "value": "#111114",
-          "referencedVariable": "$primitive.neutral.5"
-        },
-        "highlight": {
-          "type": "color",
           "value": "#1b1b1f",
           "referencedVariable": "$primitive.neutral.10"
         },
+        "highlight": {
+          "type": "color",
+          "value": "#252529",
+          "referencedVariable": "$primitive.neutral.15"
+        },
         "interactive": {
           "type": "color",
-          "value": "#0f0663",
-          "referencedVariable": "$primitive.primary.10"
+          "value": "#190b7d",
+          "referencedVariable": "$primitive.primary.15"
         },
         "disabled": {
           "type": "color",
@@ -4135,8 +4135,8 @@
       "page": {
         "background": {
           "type": "color",
-          "value": "#000000",
-          "referencedVariable": "$primitive.neutral.0"
+          "value": "#111114",
+          "referencedVariable": "$primitive.neutral.5"
         }
       },
       "button": {
@@ -4253,11 +4253,11 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.1000)"
+          "value": "rgba(255, 255, 255, 0.0800)"
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.6000)"
+          "value": "rgba(0, 0, 0, 0.3300)"
         }
       },
       "material": {
