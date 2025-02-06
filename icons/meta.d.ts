@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1738051827634,
+  "updatedAt": 1738874915442,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -729,6 +729,7 @@ const meta = {
     "dcr-color": "dcr-color",
     "decentraland-color": "decentraland-color",
     "decred-color": "decred-color",
+    "deepseek-color": "deepseek-color",
     "deez-color": "deez-color",
     "delivery-box": "delivery-box",
     "dent-color": "dent-color",
@@ -998,6 +999,7 @@ const meta = {
     "gnt-color": "gnt-color",
     "gold-color": "gold-color",
     "google-calendar-color": "google-calendar-color",
+    "google-circled-color": "google-circled-color",
     "google-color": "google-color",
     "google-docs-color": "google-docs-color",
     "google-play-color": "google-play-color",
@@ -1014,6 +1016,10 @@ const meta = {
     "grid04": "grid04",
     "grid05": "grid05",
     "grin-color": "grin-color",
+    "group-close": "group-close",
+    "group-move-new-window": "group-move-new-window",
+    "group-new-tab": "group-new-tab",
+    "group-ungroup": "group-ungroup",
     "grs-color": "grs-color",
     "grt-color": "grt-color",
     "gsc-color": "gsc-color",
@@ -2025,6 +2031,7 @@ const meta = {
     "xvg-color": "xvg-color",
     "xzc-color": "xzc-color",
     "yahoo-color": "yahoo-color",
+    "yahoo-japan-boxed-color": "yahoo-japan-boxed-color",
     "yahoo-japan-color": "yahoo-japan-color",
     "yandex-color": "yandex-color",
     "yearn-color": "yearn-color",
