@@ -141,6 +141,7 @@
     max-width: var(--leo-dialog-width, 374px);
 
     border-radius: var(--border-radius);
+    outline: none;
 
     color: var(--color);
 
