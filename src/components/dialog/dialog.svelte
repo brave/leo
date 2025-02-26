@@ -136,6 +136,7 @@
     border: none;
     display: grid;
     align-content: center;
+    overflow: hidden;
 
     width: calc(100% - var(--leo-spacing-m) * 2);
     max-width: var(--leo-dialog-width, 374px);
