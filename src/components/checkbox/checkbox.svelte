@@ -47,6 +47,10 @@
     display: inline-block;
   }
 
+  :host .leo-checkbox {
+    width: 100%;
+  }
+
   .leo-checkbox {
     --focus-border-radius: var(--leo-checkbox-focus-border-radius, 2px);
     --label-gap: var(--leo-checkbox-label-gap, var(--leo-spacing-m));
