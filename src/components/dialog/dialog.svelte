@@ -239,8 +239,8 @@
     *
     * The :global selector doesn't seem to be able to handle nesting, so we have
     * two separate selectors for mobile & non-mobile layouts */
-  :global .leo-dialog .actions ::slotted(*),
-  :global .leo-dialog .actions [slot='actions']:not(:empty) {
+  :global(.leo-dialog .actions ::slotted(*)),
+  :global(.leo-dialog .actions [slot='actions']:not(:empty)) {
     display: flex;
     gap: var(--leo-spacing-xl);
     flex-direction: column;
@@ -249,8 +249,8 @@
   }
 
   @media (orientation: portrait) {
-    :global .leo-dialog .actions ::slotted(*),
-    :global .leo-dialog .actions div[slot='actions'] {
+    :global(.leo-dialog .actions ::slotted(*)),
+    :global(.leo-dialog .actions div[slot='actions']) {
       flex-direction: column;
       align-items: stretch;
     }
@@ -270,8 +270,8 @@
       max-width: var(--leo-dialog-width, 500px);
     }
 
-    :global .leo-dialog .actions ::slotted(*),
-    :global .leo-dialog [slot='actions']:not(:empty) {
+    :global(.leo-dialog .actions ::slotted(*)),
+    :global(.leo-dialog [slot='actions']:not(:empty)) {
       flex-direction: row;
       align-items: center;
       justify-content: end;

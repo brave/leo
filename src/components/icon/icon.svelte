@@ -65,7 +65,7 @@
     flex-shrink: 0;
 
     & .icon,
-    :global svg {
+    :global(svg) {
       width: 100%;
       height: 100%;
     }
