@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1740514152092,
+  "updatedAt": 1741421298742,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1768,6 +1768,8 @@ export default {
     "sort-desc": "sort-desc",
     "sort-settings": "sort-settings",
     "sos": "sos",
+    "spaces-isolate": "spaces-isolate",
+    "spaces-off": "spaces-off",
     "spaces": "spaces",
     "spank-color": "spank-color",
     "sparkles-off": "sparkles-off",
@@ -1863,6 +1865,7 @@ export default {
     "tor-color": "tor-color",
     "tpay-color": "tpay-color",
     "tracker": "tracker",
+    "traffic-control": "traffic-control",
     "trash-recycle": "trash-recycle",
     "trash": "trash",
     "trezor-color": "trezor-color",
