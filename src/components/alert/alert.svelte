@@ -63,7 +63,7 @@
     display: block;
   }
 
-  :global .leo-alert .actions > *,
+  :global(.leo-alert .actions > *),
   .leo-alert .actions ::slotted(*) {
     display: flex;
     flex-direction: row;

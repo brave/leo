@@ -239,8 +239,8 @@
   }
 
   /* custom items can fit in by making optional use of these variables */
-  :global .leo-menu-popup ::slotted(*),
-  :global .leo-menu-popup > * {
+  :global(.leo-menu-popup ::slotted(*)),
+  :global(.leo-menu-popup > *) {
     --leo-menu-item-margin: var(--leo-spacing-s);
     --leo-menu-item-padding:  var(--leo-spacing-m) var(--leo-spacing-xl);
     --leo-menu-item-border-radius: var(--leo-spacing-s);
@@ -252,10 +252,10 @@
    * Each pseudo element has two sets of selectors: One for when it's inside a Svelte component, and one for
    * inside a web component. This could be simplified if leo-menu-item becomes its own Component.
    */
-  :global :where(.leo-menu-popup) ::slotted(leo-menu-item),
-  :global :where(.leo-menu-popup) ::slotted(leo-option),
-  :global :where(.leo-menu-popup) > leo-menu-item,
-  :global :where(.leo-menu-popup) > leo-option {
+  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item)),
+  :global(:where(.leo-menu-popup) ::slotted(leo-option)),
+  :global(:where(.leo-menu-popup) > leo-menu-item),
+  :global(:where(.leo-menu-popup) > leo-option) {
     all: unset;
     cursor: pointer;
     margin: var(--leo-menu-item-margin);
@@ -264,29 +264,29 @@
     display: revert;
   }
 
-  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:hover),
-  :global :where(.leo-menu-popup) ::slotted(leo-option:hover),
-  :global :where(.leo-menu-popup) > leo-menu-item:hover,
-  :global :where(.leo-menu-popup) > leo-option:hover {
+  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:hover)),
+  :global(:where(.leo-menu-popup) ::slotted(leo-option:hover)),
+  :global(:where(.leo-menu-popup) > leo-menu-item:hover),
+  :global(:where(.leo-menu-popup) > leo-option:hover) {
     background: var(--leo-color-container-highlight);
   }
 
-  :global :where(.leo-menu-popup) ::slotted(leo-option[aria-selected]),
-  :global :where(.leo-menu-popup) ::slotted(leo-menu-item[aria-selected]),
-  :global :where(.leo-menu-popup) ::slotted(leo-option:active),
-  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:active),
-  :global :where(.leo-menu-popup) > leo-option[aria-selected],
-  :global :where(.leo-menu-popup) > leo-menu-item[aria-selected],
-  :global :where(.leo-menu-popup) > leo-option:active,
-  :global :where(.leo-menu-popup) > leo-menu-item:active {
+  :global(:where(.leo-menu-popup) ::slotted(leo-option[aria-selected])),
+  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item[aria-selected])),
+  :global(:where(.leo-menu-popup) ::slotted(leo-option:active)),
+  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:active)),
+  :global(:where(.leo-menu-popup) > leo-option[aria-selected]),
+  :global(:where(.leo-menu-popup) > leo-menu-item[aria-selected]),
+  :global(:where(.leo-menu-popup) > leo-option:active),
+  :global(:where(.leo-menu-popup) > leo-menu-item:active) {
     background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
 
-  :global :where(.leo-menu-popup) ::slotted(leo-option:focus-visible),
-  :global :where(.leo-menu-popup) ::slotted(leo-menu-item:focus-visible),
-  :global :where(.leo-menu-popup) > leo-option:focus-visible,
-  :global :where(.leo-menu-popup) > leo-menu-item:focus-visible {
+  :global(:where(.leo-menu-popup) ::slotted(leo-option:focus-visible)),
+  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:focus-visible)),
+  :global(:where(.leo-menu-popup) > leo-option:focus-visible),
+  :global(:where(.leo-menu-popup) > leo-menu-item:focus-visible) {
     box-shadow:
       0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;

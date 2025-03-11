@@ -169,35 +169,35 @@
         left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    :where(&) > :global .leo-control-item,
-    :where(&) > :global ::slotted(leo-controlitem) {
+    :where(&) > :global(.leo-control-item),
+    :where(&) > :global(::slotted(leo-controlitem)) {
       --leo-control-item-icon-color: var(--leo-color-icon-default);
       --leo-control-item-color: var(--leo-color-text-secondary);
       --leo-control-item-background: transparent;
       --leo-control-item-radius: calc(var(--radius) - var(--control-padding));
     }
 
-    :where(&:not(.transitioning)) > :global .leo-control-item:hover,
-    :where(&:not(.transitioning)) > :global ::slotted(leo-controlitem:hover) {
+    :where(&:not(.transitioning)) > :global(.leo-control-item:hover),
+    :where(&:not(.transitioning)) > :global(::slotted(leo-controlitem:hover)) {
       --leo-control-item-background: var(--leo-color-container-highlight);
       --leo-control-item-color: var(--leo-color-text-primary);
     }
 
-    :where(&) > :global .leo-control-item:focus-visible,
-    :where(&) > :global ::slotted(leo-controlitem:focus-visible) {
+    :where(&) > :global(.leo-control-item:focus-visible),
+    :where(&) > :global(::slotted(leo-controlitem:focus-visible)) {
       --leo-control-item-shadow: var(--leo-effect-focus-state);
     }
 
-    :where(&) > :global .leo-control-item[aria-selected],
-    :where(&) > :global ::slotted(leo-controlitem[aria-selected]) {
+    :where(&) > :global(.leo-control-item[aria-selected]),
+    :where(&) > :global(::slotted(leo-controlitem[aria-selected])) {
       --leo-control-item-color: var(--leo-color-text-interactive);
       --leo-icon-color: var(--leo-color-icon-interactive);
     }
 
-    :where(&.transitioning) > :global .leo-control-item[aria-selected],
-    :where(&.transitioning) > :global ::slotted(leo-controlitem[aria-selected]),
-    :where(&) > :global .leo-control-item[aria-selected]:hover,
-    :where(&) > :global ::slotted(leo-controlitem[aria-selected]:hover) {
+    :where(&.transitioning) > :global(.leo-control-item[aria-selected]),
+    :where(&.transitioning) > :global(::slotted(leo-controlitem[aria-selected])),
+    :where(&) > :global(.leo-control-item[aria-selected]:hover),
+    :where(&) > :global(::slotted(leo-controlitem[aria-selected]:hover)) {
       --leo-control-item-icon-color: currentColor;
       --leo-control-item-background: var(--leo-color-container-background);
     }
