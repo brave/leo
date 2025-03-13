@@ -40,7 +40,7 @@
     "babel-loader": "9.2.1",
     "css-loader": "6.11.0",
     "css-tree": "2.3.1",
-    "figma-api-exporter": "github:brave/figma-api-exporter#0411766",
+    "figma-api-exporter": "github:brave/figma-api-exporter#08ea66f0794fcb3fa0240692d9016a562b4fbcef",
     "jsdom": "21.1.2",
     "lodash.camelcase": "4.3.0",
     "lodash.merge": "4.6.2",
@@ -100,7 +100,6 @@
   },
   "license": "MIT",
   "overrides": {
-    "axios": "1.8.2",
     "vite": "5.4.14",
     "esbuild": "0.25.0"
   }
