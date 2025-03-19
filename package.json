@@ -58,7 +58,7 @@
     "style-loader": "3.3.4",
     "svelte-check": "3.8.6",
     "svelte-loader": "3.2.4",
-    "svelte2tsx": "0.7.34",
+    "svelte2tsx": "0.7.35",
     "svg2vectordrawable": "2.9.1",
     "svgo": "3.3.2",
     "ts-jest": "29.2.6",
