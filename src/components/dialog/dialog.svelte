@@ -101,7 +101,7 @@
 
 <svelte:window
   on:click|capture={(e) => {
-    if (!dialog || !isOpen || !backdropClickCloses) return
+    if (!dialog || !isOpen || !backdropClickCloses || !dialog.checkVisibility()) return
 
     const rect = dialog.getBoundingClientRect()
     const clickedOutside =
