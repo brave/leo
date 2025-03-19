@@ -1,3 +1,4 @@
+import '../utils/window.polyfill'
 import type { SvelteComponent } from 'svelte'
 
 interface Options {

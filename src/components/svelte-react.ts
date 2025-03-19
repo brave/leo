@@ -1,3 +1,4 @@
+import '../utils/window.polyfill'
 import {
   createElement,
   useRef,
