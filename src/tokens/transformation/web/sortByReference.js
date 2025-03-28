@@ -24,7 +24,7 @@
  * @param {Dictionary} dictionary
  * @returns {Function}
  */
-function sortByReference(dictionary) {
+export default function sortByReference(dictionary) {
   // The sorter function is recursive to account for multiple levels of nesting
   function sorter(a, b) {
     const aComesFirst = -1
@@ -67,5 +67,3 @@ function sortByReference(dictionary) {
 
   return sorter
 }
-
-module.exports = sortByReference

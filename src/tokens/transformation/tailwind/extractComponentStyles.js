@@ -1,19 +1,19 @@
-const svelte = require('svelte/compiler')
-const { writeFile, readFile, mkdir } = require('fs/promises')
-const { join, parse } = require('path')
-const preprocess = require('svelte-preprocess')
-const postcssJs = require('postcss-js')
-const postcss = require('postcss')
-const sortMediaQueries = require('postcss-sort-media-queries')()
-const theme = require('../../../postcss/theme')
-const { walk } = require('../../../scripts/common')
+import * as svelte from 'svelte/compiler'
+import { writeFile, readFile, mkdir } from 'fs/promises'
+import { join, parse } from 'path'
+import preprocess from 'svelte-preprocess'
+import postcssJs from 'postcss-js'
+import postcss from 'postcss'
+import sortMediaQueries from 'postcss-sort-media-queries'
+import theme from '../../../postcss/theme'
+import { walk } from '../../../scripts/common'
 
 const writePlugin = async (contents, name, dir) => {
   const fnName = name === 'link' ? 'addBase' : 'addComponents'
 
   try {
     await writeFile(
-      join(dir, `${name}Component.js`),
+      join(dir, `${name}Component.js`),l
       `const plugin = require("tailwindcss/plugin");
 
 module.exports = plugin(function ({ ${fnName}, theme }) {
@@ -30,7 +30,7 @@ ${fnName}(${JSON.stringify(contents, null, 2)});
   }
 }
 
-module.exports = {
+export default {
   do: async function (dictionary, config) {
     for await (const file of await walk(
       join(__dirname, '../../../components')
@@ -43,7 +43,7 @@ module.exports = {
           [
             preprocess({
               postcss: {
-                plugins: [theme, sortMediaQueries]
+                plugins: [theme, sortMediaQueries()]
               }
             })
           ],

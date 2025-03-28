@@ -1,4 +1,4 @@
-const merge = require('lodash.merge')
+import merge from 'lodash.merge'
 
 /**
  * Removes a key and puts the children of that key in the key's parent
@@ -6,7 +6,7 @@ const merge = require('lodash.merge')
  * Note: This cannot merge keys where a child has the same key as the parent,
  * e.g. we cannot remove the duplication of the path gradient|gradient|xyz.
  */
-function removeKeyFromObject(contents, keyToRemove, recurse = true) {
+export function removeKeyFromObject(contents, keyToRemove, recurse = true) {
   // Don't need to work on types without keys
   if (typeof contents !== 'object') {
     return contents
@@ -35,7 +35,7 @@ function removeKeyFromObject(contents, keyToRemove, recurse = true) {
  * @param {*} type The type of node to apply the function to
  * @param {*} apply The applicator
  */
-function applyToTokens(root, type, apply) {
+export function applyToTokens(root, type, apply) {
   if (!root || typeof root !== 'object') return
 
   if (root.type === type) {
@@ -60,12 +60,6 @@ function applyToTokens(root, type, apply) {
  *   }
  * }
  */
-function varDefFormat(strings, vars) {
+export function varDefFormat(strings, vars) {
   return [strings[0], vars, strings[1]].join('\n')
-}
-
-module.exports = {
-  removeKeyFromObject,
-  applyToTokens,
-  varDefFormat
 }

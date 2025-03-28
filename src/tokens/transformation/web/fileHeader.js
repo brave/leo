@@ -45,7 +45,7 @@ const defaultFormatting = {
  * });
  * ```
  */
-function fileHeader({ file = {}, commentStyle, formatting = {} }) {
+export default function fileHeader({ file = {}, commentStyle, formatting = {} }) {
   // showFileHeader is true by default
   let showFileHeader = true
   if (file.options && typeof file.options.showFileHeader !== 'undefined') {
@@ -86,5 +86,3 @@ function fileHeader({ file = {}, commentStyle, formatting = {} }) {
     .map((line) => `${prefix}${line}`)
     .join(lineSeparator)}${footer}`
 }
-
-module.exports = fileHeader

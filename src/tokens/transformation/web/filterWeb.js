@@ -10,4 +10,4 @@ const acceptedTypes = [
   'number'
 ]
 
-module.exports = (token) => acceptedTypes.includes(token.type)
+export default (token) => acceptedTypes.includes(token.type)

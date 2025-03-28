@@ -1,14 +1,14 @@
-const { join } = require('path')
-const { unlink, readFileSync, writeFileSync } = require('fs')
-const postcssJs = require('postcss-js')
-const postcss = require('postcss')
+import { join } from 'path'
+import { unlink, readFileSync, writeFileSync } from 'fs'
+import postcssJs from 'postcss-js'
+import postcss from 'postcss'
 
 const cssFiles = ['variables.css']
 
 const genPluginFilePath = (file, config) =>
   join(config.buildPath, config.preset, 'plugins', `_${file}.ts`)
 
-module.exports = {
+export default {
   do: function (dictionary, config) {
     cssFiles.forEach((file) => {
       const css = readFileSync(
