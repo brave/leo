@@ -1,6 +1,10 @@
-const { getSvelteFiles, componentDetails } = require('./common')
-const path = require('path')
-const fs = require('fs/promises')
+import { getSvelteFiles, componentDetails } from './common.js'
+import path from 'path'
+import fs from 'fs/promises'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const checkForEvents = async (sveltePath) => {
   const pathToType = path.join(
@@ -56,6 +60,12 @@ const auditComponents = async (rootDir) => {
   }
 }
 
-if (require.main == module) {
-  auditComponents('./src/components')
+// Check if this module is being run directly
+if (import.meta.url.startsWith('file:')) {
+  const modulePath = fileURLToPath(import.meta.url)
+  if (process.argv[1] === modulePath) {
+    auditComponents('./src/components')
+  }
 }
+
+export { auditComponents, checkForEvents, checkForInternalEvents }

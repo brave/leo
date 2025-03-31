@@ -1,19 +1,23 @@
-import * as svelte from 'svelte/compiler'
-import { writeFile, readFile, mkdir } from 'fs/promises'
-import { join, parse } from 'path'
-import preprocess from 'svelte-preprocess'
-import postcssJs from 'postcss-js'
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import { dirname, join, parse } from 'path'
 import postcss from 'postcss'
+import postcssJs from 'postcss-js'
 import sortMediaQueries from 'postcss-sort-media-queries'
+import preprocess from 'svelte-preprocess'
+import * as svelte from 'svelte/compiler'
+import { fileURLToPath } from 'url'
 import theme from '../../../postcss/theme'
 import { walk } from '../../../scripts/common'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const writePlugin = async (contents, name, dir) => {
   const fnName = name === 'link' ? 'addBase' : 'addComponents'
 
   try {
     await writeFile(
-      join(dir, `${name}Component.js`),l
+      join(dir, `${name}Component.js`),
       `const plugin = require("tailwindcss/plugin");
 
 module.exports = plugin(function ({ ${fnName}, theme }) {

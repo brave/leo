@@ -1,46 +1,54 @@
-const StyleDictionary = require('style-dictionary')
+import StyleDictionary from 'style-dictionary'
+import colorName from './colorName'
+import fontSizeToSp from './fontSizeToSp'
+import fontStyleFormatter from './formats/fontStyle'
+import colorStyleFormatter from './formats/colorStyle'
+import dimenStyleFormatter from './formats/dimenStyle'
+import fontStyleFilter from './filters/fontStyle'
+import darkColorFilter from './filters/darkColor'
+import lightColorFilter from './filters/lightColor'
 
 // Transforms
 StyleDictionary.registerTransform({
   name: 'android/transformColorName',
-  ...require('./colorName')
+  ...colorName
 })
 
 StyleDictionary.registerTransform({
   name: 'android/transformFontSizeToSp',
-  ...require('./fontSizeToSp')
+  ...fontSizeToSp
 })
 
 // Formats
 StyleDictionary.registerFormat({
   name: 'android/formatFontStyle',
-  formatter: require('./formats/fontStyle')
+  formatter: fontStyleFormatter
 })
 
 StyleDictionary.registerFormat({
   name: 'android/formatColorStyle',
-  formatter: require('./formats/colorStyle')
+  formatter: colorStyleFormatter
 })
 
 StyleDictionary.registerFormat({
   name: 'android/formatDimenStyle',
-  formatter: require('./formats/dimenStyle')
+  formatter: dimenStyleFormatter
 })
 
 // Filters
 StyleDictionary.registerFilter({
   name: 'android/filterFontStyle',
-  matcher: require('./filters/fontStyle')
+  matcher: fontStyleFilter
 })
 
 StyleDictionary.registerFilter({
   name: 'android/filterDarkColor',
-  matcher: require('./filters/darkColor')
+  matcher: darkColorFilter
 })
 
 StyleDictionary.registerFilter({
   name: 'android/filterLightColor',
-  matcher: require('./filters/lightColor')
+  matcher: lightColorFilter
 })
 
 // TransformGroup

@@ -1,14 +1,16 @@
-const StyleDictionary = require('style-dictionary')
-const _template = require('lodash/template')
-const fs = require('fs')
-const changeCase = require('change-case')
+import StyleDictionary from 'style-dictionary'
+import _template from 'lodash/template'
+import fs from 'fs'
+import changeCase from 'change-case'
+import colorsets from './colorsets.js'
+import fontStyles from './fontStyles.js'
 
-module.exports = {
+export default {
   transform: {},
   format: {},
   action: {
-    'ios/colorSets': require('./colorsets'),
-    'ios/fontStyles': require('./fontStyles')
+    'ios/colorSets': colorsets,
+    'ios/fontStyles': fontStyles
   }
 }
 
@@ -16,7 +18,9 @@ StyleDictionary.registerFormat({
   name: 'ios/gradients',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/Gradients.swift.template')
+      fs.readFileSync(
+        new URL('./templates/Gradients.swift.template', import.meta.url)
+      )
     )
 
     const gradients = {
@@ -40,7 +44,9 @@ StyleDictionary.registerFormat({
   name: 'ios/colorSetAccessors',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/ColorSetAccessors.swift.template')
+      fs.readFileSync(
+        new URL('./templates/ColorSetAccessors.swift.template', import.meta.url)
+      )
     )
 
     const colors = {}
@@ -66,6 +72,6 @@ StyleDictionary.registerFormat({
 
 StyleDictionary.registerAction({
   name: 'ios/colorSets',
-  do: require('./colorsets').do,
-  undo: require('./colorsets').undo
+  do: colorsets.do,
+  undo: colorsets.undo
 })

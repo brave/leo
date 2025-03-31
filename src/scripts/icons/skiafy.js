@@ -15,10 +15,10 @@
  * @typedef {'M' | 'm' | 'L' | 'l' | 'C' | 'c' | 'S' | 's' | 'H' | 'h' | 'V' | 'v' | 'A' | 'a' | 'Q' | 'q' | | 'T' |' t'} CommandLetter
  */
 
-const { JSDOM } = require('jsdom')
-const { TinyColor } = require('@ctrl/tinycolor')
+import { JSDOM } from 'jsdom'
+import { TinyColor } from '@ctrl/tinycolor'
 
-module.exports = function (
+export default function (
   svg,
   options = {
     translateX: 0,

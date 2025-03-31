@@ -1,6 +1,6 @@
-const fs = require('fs-extra')
+import fs from 'fs-extra'
 
-module.exports = {
+export default {
   do: function (dictionary, config) {
     config.options.copyFilesAction.forEach(({ destination, origin }) => {
       console.log(`Copying ${origin} to ${destination}`)

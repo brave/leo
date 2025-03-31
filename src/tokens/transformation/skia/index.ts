@@ -1,8 +1,13 @@
-import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
-import _template from 'lodash/template'
 import fs from 'fs'
+import _template from 'lodash/template'
+import path from 'path'
+import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
+import { fileURLToPath } from 'url'
 import colorToSkiaString from './colorToSkiaString'
 import { transformName } from './name'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 StyleDictionary.registerTransform({
   name: 'color/hex8ToSkiaString',

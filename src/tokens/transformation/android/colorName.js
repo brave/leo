@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   type: 'name',
   matcher: function (token) {
     return token.type === 'color'

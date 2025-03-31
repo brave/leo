@@ -1,1 +1,1 @@
-module.exports = (token) => token.attributes.category === 'font'
+export default (token) => token.attributes.category === 'font'

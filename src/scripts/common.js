@@ -1,6 +1,6 @@
-const { Dirent } = require('fs')
-const fs = require('fs/promises')
-const path = require('path')
+import { Dirent } from 'fs'
+import fs from 'fs/promises'
+import path from 'path'
 
 /**
  * Recursively walks all files in a folder
@@ -44,31 +44,27 @@ function componentDetails(svelteComponentPath) {
   }
 }
 
-module.exports = {
-  walk,
+/**
+ * Returns the paths to all Svelte files in a directory (and subdirectories).
+ * @param {string} root The root folder
+ * @param {boolean} includeDts Whether to include typescript definition files
+ * @param {boolean} includeStories Whether to include stories
+ */
+async function* getSvelteFiles(
+  root,
+  includeDts = true,
+  includeStories = false
+) {
+  for await (const file of await walk(root)) {
+    if (
+      !file.includes('.svelte') ||
+      (!includeStories && file.includes('.stories.svelte')) ||
+      (!includeDts && file.endsWith('.d.ts'))
+    )
+      continue
 
-  /**
-   * Returns the paths to all Svelte files in a directory (and subdirectories).
-   * @param {string} root The root folder
-   * @param {boolean} includeDts Whether to include typescript definition files
-   * @param {boolean} includeStories Whether to include stories
-   */
-  getSvelteFiles: async function* (
-    root,
-    includeDts = true,
-    includeStories = false
-  ) {
-    for await (const file of await walk(root)) {
-      if (
-        !file.includes('.svelte') ||
-        (!includeStories && file.includes('.stories.svelte')) ||
-        (!includeDts && file.endsWith('.d.ts'))
-      )
-        continue
-
-      yield file
-    }
-  },
-
-  componentDetails
+    yield file
+  }
 }
+
+export { walk, getSvelteFiles, componentDetails }

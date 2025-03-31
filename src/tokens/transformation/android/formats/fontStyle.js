@@ -1,5 +1,6 @@
-const { fileHeader } = require('style-dictionary').formatHelpers
-const changeCase = require('change-case')
+import StyleDictionary from 'style-dictionary'
+import { pascalCase, snakeCase } from 'change-case'
+const { fileHeader } = StyleDictionary.formatHelpers
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
   1 + letterSpacing / fontSize
@@ -9,20 +10,20 @@ const printDescription = (description) =>
     ? `    <!-- ${description} -->\n`
     : ''
 
-module.exports = ({ dictionary, platform, options = {}, file }) => {
+export default ({ dictionary, platform, options = {}, file }) => {
   const fontStyles = dictionary.allTokens
     .filter((compositeToken) => compositeToken.type === 'custom-fontStyle')
     // create style
     .map((compositeToken) => {
       return (
-        `  <style name="${changeCase.pascalCase(
+        `  <style name="${pascalCase(
           compositeToken.name.replace('font_android_', '')
         )}">\n` +
         printDescription(compositeToken.description) +
-        `    <item name="android:fontFamily">@font/${changeCase.snakeCase(
+        `    <item name="android:fontFamily">@font/${snakeCase(
           compositeToken.original.value.fontFamily
         )}</item>\n` +
-        `    <item name="android:textSize">@dimen/${changeCase.snakeCase(
+        `    <item name="android:textSize">@dimen/${snakeCase(
           compositeToken.name.replace('font_android_', '')
         )}</item>\n` +
         // for android:lineHeight requires API level 28 and current api is 26

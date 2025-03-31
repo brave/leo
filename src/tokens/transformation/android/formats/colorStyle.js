@@ -1,7 +1,8 @@
-const { fileHeader } = require('style-dictionary').formatHelpers
-const { TinyColor } = require('@ctrl/tinycolor')
+import StyleDictionary from 'style-dictionary'
+import { TinyColor } from '@ctrl/tinycolor'
+const { fileHeader } = StyleDictionary.formatHelpers
 
-module.exports = ({ dictionary, platform, options = {}, file }) => {
+export default ({ dictionary, platform, options = {}, file }) => {
   const colorStyles = dictionary.allTokens
     .filter((compositeToken) => compositeToken.type === 'color')
     .map((compositeToken) => {

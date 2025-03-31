@@ -45,7 +45,11 @@ const defaultFormatting = {
  * });
  * ```
  */
-export default function fileHeader({ file = {}, commentStyle, formatting = {} }) {
+export default function fileHeader({
+  file = {},
+  commentStyle,
+  formatting = {}
+}) {
   // showFileHeader is true by default
   let showFileHeader = true
   if (file.options && typeof file.options.showFileHeader !== 'undefined') {

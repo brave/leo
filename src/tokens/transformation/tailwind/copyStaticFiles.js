@@ -1,5 +1,9 @@
-import { join } from 'path'
-import { readdirSync, unlink, cpSync, rmdir, statSync } from 'fs'
+import { cpSync, readdirSync, rmdir, statSync, unlink } from 'fs'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const staticFilesPath = join(__dirname, './static')
 const staticFiles = readdirSync(staticFilesPath)

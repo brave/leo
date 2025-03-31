@@ -6,7 +6,7 @@ const dateNow = () => {
   })
 }
 
-module.exports = (style) => `
+export default (style) => `
 //
 //  ${style.filename}
 //
