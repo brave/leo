@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { componentDetails, getSvelteFiles } from './common.js'
+import { componentDetails, getSvelteFiles, isModuleMain } from './common.js'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
