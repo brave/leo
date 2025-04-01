@@ -1,5 +1,5 @@
 import sveltePreprocess from 'svelte-preprocess'
-import themePlugin from './src/postcss/theme.js'
+import themePlugin from './src/postcss/theme.cjs'
 
 const IGNORE_WARNINGS = [
   'a11y-no-static-element-interactions',

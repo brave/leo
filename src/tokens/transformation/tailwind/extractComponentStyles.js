@@ -6,7 +6,7 @@ import sortMediaQueries from 'postcss-sort-media-queries'
 import preprocess from 'svelte-preprocess'
 import * as svelte from 'svelte/compiler'
 import { fileURLToPath } from 'url'
-import theme from '../../../postcss/theme'
+import theme from '../../../postcss/theme.cjs'
 import { walk } from '../../../scripts/common'
 
 const __filename = fileURLToPath(import.meta.url)

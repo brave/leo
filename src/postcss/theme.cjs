@@ -1,4 +1,4 @@
-import { Declaration, AtRule, Rule } from 'postcss'
+const { Declaration, AtRule, Rule } = require('postcss')
 const supportedThemes = ['dark', 'light']
 
 const getPropertyName = (selector, decl) => {
@@ -42,7 +42,7 @@ const defaultOptions = {
  *  wrapSelector?: (selector: string) => string,
  * }} options The options for configuring the selectors for darkmode.
  */
-const theme = (options) => {
+module.exports = (options) => {
   options = { ...defaultOptions, ...options }
 
   let rules = {}
@@ -231,6 +231,5 @@ const theme = (options) => {
   }
 }
 
-theme.postcss = true
-
-export default theme
+module.exports.postcss = true
+module.exports.__esModule = true
