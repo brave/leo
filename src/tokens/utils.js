@@ -11,7 +11,7 @@ export function removeKeyFromObject(contents, keyToRemove, recurse = true) {
   if (typeof contents !== 'object') {
     return contents
   }
-  for (let key in contents) {
+  for (const key in contents) {
     if (key === keyToRemove) {
       // Put matching children in their parent
       // Parent may already have same key, so recursively merge
