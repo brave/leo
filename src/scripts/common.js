@@ -1,6 +1,7 @@
 import { Dirent } from 'fs'
 import fs from 'fs/promises'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 /**
  * Recursively walks all files in a folder
@@ -8,7 +9,7 @@ import path from 'path'
  * @param {((name: string, path: string, entry: Dirent) => boolean)?} skip A function for filtering out entries
  * @returns {Promise<AsyncIterable<string>}
  */
-async function* walk(dir, skip) {
+export async function* walk(dir, skip) {
   for await (const d of await fs.opendir(dir)) {
     const entry = path.join(dir, d.name)
 
@@ -25,7 +26,7 @@ async function* walk(dir, skip) {
  * @param {string} svelteComponentPath The path to the svelte component
  * @returns {{ fileName: string, fileNameWithoutExtension: string, componentName: string, extension: string }} The name of the component
  */
-function componentDetails(svelteComponentPath) {
+export function componentDetails(svelteComponentPath) {
   const fileName = path.basename(svelteComponentPath)
   const extension = path.extname(svelteComponentPath)
   const fileNameWithoutExtension = fileName.substring(
@@ -50,7 +51,7 @@ function componentDetails(svelteComponentPath) {
  * @param {boolean} includeDts Whether to include typescript definition files
  * @param {boolean} includeStories Whether to include stories
  */
-async function* getSvelteFiles(
+export async function* getSvelteFiles(
   root,
   includeDts = true,
   includeStories = false
@@ -67,4 +68,7 @@ async function* getSvelteFiles(
   }
 }
 
-export { walk, getSvelteFiles, componentDetails }
+export function isModuleMain(moduleUrl) {
+  const modulePath = fileURLToPath(moduleUrl)
+  return process.argv[1] === modulePath
+}

@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from 'fs/promises'
-import { dirname, join, parse } from 'path'
+import path from 'path'
 import postcss from 'postcss'
 import postcssJs from 'postcss-js'
 import sortMediaQueries from 'postcss-sort-media-queries'
@@ -9,15 +9,15 @@ import { fileURLToPath } from 'url'
 import theme from '../../../postcss/theme.js'
 import { walk } from '../../../scripts/common'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 const writePlugin = async (contents, name, dir) => {
   const fnName = name === 'link' ? 'addBase' : 'addComponents'
 
   try {
     await writeFile(
-      join(dir, `${name}Component.js`),
+      path.join(dir, `${name}Component.js`),
       `const plugin = require("tailwindcss/plugin");
 
 module.exports = plugin(function ({ ${fnName}, theme }) {
@@ -37,9 +37,9 @@ ${fnName}(${JSON.stringify(contents, null, 2)});
 export default {
   do: async function (dictionary, config) {
     for await (const file of await walk(
-      join(__dirname, '../../../components')
+      path.join(dirname, '../../../components')
     )) {
-      const fileParts = parse(file)
+      const fileParts = path.parse(file)
       if (!file.includes('.stories.') && fileParts.ext === '.svelte') {
         const componentFile = await readFile(file, 'utf-8')
         const { code: Component } = await svelte.preprocess(
@@ -80,7 +80,7 @@ export default {
           })
 
           const cssAsJs = postcssJs.objectify(root)
-          const pluginDir = join(config.buildPath, 'plugins/components')
+          const pluginDir = path.join(config.buildPath, 'plugins/components')
 
           await writePlugin(cssAsJs, fileParts.name, pluginDir)
         }

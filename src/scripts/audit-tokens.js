@@ -6,9 +6,9 @@ import { fileURLToPath } from 'url'
 import { walk } from './common.js'
 
 const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const ROOT_FOLDER = path.join(__dirname, '..', '..')
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+const ROOT_FOLDER = path.join(dirname, '..', '..')
 const CSS_VARIABLES_FOLDER = path.join(ROOT_FOLDER, 'tokens', 'css')
 const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
 const DEFAULT_EXTENSIONS_TO_CHECK = [

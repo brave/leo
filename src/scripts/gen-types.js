@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import svelte2tsx from 'svelte2tsx'
-import { fileURLToPath } from 'url'
+import { isModuleMain } from './common.js'
 
 const genTypes = async (options = {}) => {
   const { basePath = './', outputDir = './' } = options
@@ -18,12 +18,9 @@ const genTypes = async (options = {}) => {
 export default genTypes
 
 // Check if this module is being run directly
-if (import.meta.url.startsWith('file:')) {
-  const modulePath = fileURLToPath(import.meta.url)
-  if (process.argv[1] === modulePath) {
-    genTypes({
-      basePath: './',
-      outputDir: './types'
-    }).then(() => console.log('Done'))
-  }
+if (isModuleMain(import.meta.url)) {
+  genTypes({
+    basePath: './',
+    outputDir: './types'
+  }).then(() => console.log('Done'))
 }

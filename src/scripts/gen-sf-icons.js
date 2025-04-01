@@ -21,12 +21,12 @@ import paper from 'paper'
 const { CompoundPath } = paper
 paper.setup()
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
-const TEMPLATE_PATH = path.join(__dirname, 'icons', 'sf-icon.svg.tmpl')
+const TEMPLATE_PATH = path.join(dirname, 'icons', 'sf-icon.svg.tmpl')
 const ICONS_FOLDER =
-  process.env['ICONS_FOLDER'] || path.join(__dirname, '../../icons')
+  process.env['ICONS_FOLDER'] || path.join(dirname, '../../icons')
 const OUTPUT_FOLDER = process.env['OUTPUT_FOLDER'] || 'icons-sf'
 
 function processIcon(template, svgContents) {
