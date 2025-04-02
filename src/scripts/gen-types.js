@@ -1,5 +1,7 @@
-const svelte2tsx = require('svelte2tsx')
-const fs = require('fs/promises')
+import fs from 'fs/promises'
+import path from 'path'
+import svelte2tsx from 'svelte2tsx'
+import { isModuleMain } from './common.js'
 
 const genTypes = async (options = {}) => {
   const { basePath = './', outputDir = './' } = options
@@ -9,13 +11,14 @@ const genTypes = async (options = {}) => {
   await svelte2tsx.emitDts({
     libRoot: basePath,
     declarationDir: outputDir,
-    svelteShimsPath: require.resolve('svelte2tsx/svelte-shims.d.ts')
+    svelteShimsPath: path.resolve('svelte2tsx/svelte-shims.d.ts')
   })
 }
 
-module.exports = genTypes
+export default genTypes
 
-if (require.main == module) {
+// Check if this module is being run directly
+if (isModuleMain(import.meta.url)) {
   genTypes({
     basePath: './',
     outputDir: './types'

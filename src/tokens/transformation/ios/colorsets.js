@@ -1,6 +1,6 @@
-const TinyColor = require('@ctrl/tinycolor')
-const fs = require('fs-extra')
-const changeCase = require('change-case')
+import { TinyColor } from '@ctrl/tinycolor'
+import fs from 'fs-extra'
+import { snakeCase } from 'change-case'
 
 const contents = {
   info: {
@@ -16,7 +16,7 @@ const percentageToFloat = (percentageString) => {
 }
 
 const ratioRgb = (color) => {
-  const colorObj = new TinyColor.TinyColor(color)
+  const colorObj = new TinyColor(color)
   const percentages = colorObj.toPercentageRgb()
 
   return {
@@ -32,7 +32,7 @@ const ratioRgb = (color) => {
  * and for each one write a colorset with light and (optional) dark
  * mode versions.
  */
-module.exports = {
+export default {
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}/Colors.xcassets`
@@ -49,7 +49,7 @@ module.exports = {
           // The system already provides these and will conflict with the names
           return
         }
-        const colorsetPath = `${assetPath}/${changeCase.snakeCase(
+        const colorsetPath = `${assetPath}/${snakeCase(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'

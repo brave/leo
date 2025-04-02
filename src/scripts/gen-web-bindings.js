@@ -1,6 +1,6 @@
-const fs = require('fs/promises')
-const path = require('path')
-const { getSvelteFiles } = require('./common')
+import fs from 'fs/promises'
+import path from 'path'
+import { getSvelteFiles, isModuleMain } from './common.js'
 
 const WEB_BINDINGS_DIRECTORY = 'web-components/'
 fs.mkdir(WEB_BINDINGS_DIRECTORY, { recursive: true })
@@ -71,8 +71,9 @@ const createBindings = async (rootDir) => {
   }
 }
 
-module.exports = createBindings
+export default createBindings
 
-if (require.main == module) {
+// Check if this module is being run directly
+if (isModuleMain(import.meta.url)) {
   createBindings('./src/components')
 }

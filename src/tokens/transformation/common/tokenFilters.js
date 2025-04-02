@@ -1,4 +1,4 @@
-const filteredTokens = (dictionary, filterFn) => {
+export const filteredTokens = (dictionary, filterFn) => {
   let filtered = dictionary.allTokens
   if (typeof filterFn === 'function') {
     filtered = dictionary.allTokens.filter((token) => filterFn(token))
@@ -18,7 +18,7 @@ const filteredTokens = (dictionary, filterFn) => {
  * @param {string} modifierPathSegment path segment which represents a theme
  * @param {string[]} tokenPaths tokens starting with one of these prefixes (use `.` to join multiple path segments).
  **/
-function matchThemableToken(
+export function matchThemableToken(
   token,
   modifierPathSegment,
   tokenPaths = ['color']
@@ -30,17 +30,10 @@ function matchThemableToken(
   )
 }
 
-function matchDarkThemeToken(token) {
+export function matchDarkThemeToken(token) {
   return matchThemableToken(token, 'dark') || token.path.includes('effect')
 }
 
-function matchLightThemeToken(token) {
+export function matchLightThemeToken(token) {
   return matchThemableToken(token, 'light') || token.path.includes('effect')
-}
-
-module.exports = {
-  filteredTokens,
-  matchThemableToken,
-  matchDarkThemeToken,
-  matchLightThemeToken
 }

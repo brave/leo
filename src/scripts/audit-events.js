@@ -1,10 +1,14 @@
-const { getSvelteFiles, componentDetails } = require('./common')
-const path = require('path')
-const fs = require('fs/promises')
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { componentDetails, getSvelteFiles, isModuleMain } from './common.js'
 
-const checkForEvents = async (sveltePath) => {
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+export const checkForEvents = async (sveltePath) => {
   const pathToType = path.join(
-    __dirname,
+    dirname,
     '../../',
     'types',
     path.relative('./', sveltePath + '.d.ts')
@@ -28,7 +32,7 @@ Using on: prefixed events is deprecated and should be avoided. Instead, add a ca
   }
 }
 
-const checkForInternalEvents = async (sveltePath) => {
+export const checkForInternalEvents = async (sveltePath) => {
   const fileContents = await fs.readFile(sveltePath, 'utf8')
 
   const openTags = /<[A-Z]\w+ (.|\n)*?>/gm
@@ -48,7 +52,7 @@ const checkForInternalEvents = async (sveltePath) => {
   }
 }
 
-const auditComponents = async (rootDir) => {
+export const auditComponents = async (rootDir) => {
   for await (const sveltePath of getSvelteFiles(rootDir, false, true)) {
     if (!sveltePath.endsWith('.stories.svelte'))
       await checkForEvents(sveltePath)
@@ -56,6 +60,7 @@ const auditComponents = async (rootDir) => {
   }
 }
 
-if (require.main == module) {
+// Check if this module is being run directly
+if (isModuleMain(import.meta.url)) {
   auditComponents('./src/components')
 }

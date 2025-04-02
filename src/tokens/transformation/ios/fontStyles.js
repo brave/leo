@@ -1,6 +1,6 @@
-const fs = require('fs-extra')
-const camelCase = require('../common/camelCaseHelper')
-const fontStyleTemplate = require('./fontStyleTemplate')
+import fs from 'fs-extra'
+import camelCase from '../common/camelCaseHelper'
+import fontStyleTemplate from './fontStyleTemplate'
 
 const fontFile = ({ fontFamily, fontWeight }, fontOpts) => {
   return fontOpts && fontOpts[`${fontFamily}.${fontWeight}`]
@@ -13,7 +13,7 @@ const fontFile = ({ fontFamily, fontWeight }, fontOpts) => {
  * and for each one write a colorset with light and (optional) dark
  * mode versions.
  */
-module.exports = {
+export default {
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}`

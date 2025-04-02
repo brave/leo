@@ -1,3 +1,3 @@
-const { matchDarkThemeToken } = require('../../common/tokenFilters')
+import { matchDarkThemeToken } from '../../common/tokenFilters.js'
 
-module.exports = (token) => matchDarkThemeToken(token)
+export default (token) => matchDarkThemeToken(token)

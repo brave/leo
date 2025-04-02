@@ -19,7 +19,7 @@ const defaultFormatting = {
   suffix: ';'
 }
 
-function createPropertyNameFormatter(format, formatting = {}) {
+export function createPropertyNameFormatter(format, formatting = {}) {
   let { prefix, commentStyle, indentation, separator, suffix } = Object.assign(
     {},
     defaultFormatting,
@@ -97,7 +97,7 @@ function createPropertyNameFormatter(format, formatting = {}) {
  * @param {Object} options.formatting - Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: `${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}`
  * @returns {Function}
  */
-function createPropertyFormatter({
+export default function createPropertyFormatter({
   outputReferences,
   dictionary,
   format,
@@ -128,7 +128,7 @@ function createPropertyFormatter({
      * "value": {
      *    "size": "{size.border.width.value}",
      *    "style": "solid",
-     *    "color": "{color.border.primary.value"}
+     *    "color": "{color.border.primary.value}"
      * }
      * This will see if there are references and if there are, replace
      * the resolved value with the reference's name.
@@ -175,6 +175,3 @@ function createPropertyFormatter({
     return drop_shadow_props ? [to_ret_prop, ...drop_shadow_props] : to_ret_prop
   }
 }
-
-module.exports = createPropertyFormatter
-module.exports.createPropertyNameFormatter = createPropertyNameFormatter

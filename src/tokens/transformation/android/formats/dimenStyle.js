@@ -1,6 +1,7 @@
-const { fileHeader } = require('style-dictionary').formatHelpers
+import StyleDictionary from 'style-dictionary'
+const { fileHeader } = StyleDictionary.formatHelpers
 
-module.exports = ({ dictionary, platform, options = {}, file }) => {
+export default ({ dictionary, platform, options = {}, file }) => {
   const fontStyles = dictionary.allTokens
     .filter((compositeToken) => compositeToken.type === 'custom-fontStyle')
     .map((compositeToken) => {

@@ -1,19 +1,23 @@
-const svelte = require('svelte/compiler')
-const { writeFile, readFile, mkdir } = require('fs/promises')
-const { join, parse } = require('path')
-const preprocess = require('svelte-preprocess')
-const postcssJs = require('postcss-js')
-const postcss = require('postcss')
-const sortMediaQueries = require('postcss-sort-media-queries')()
-const theme = require('../../../postcss/theme')
-const { walk } = require('../../../scripts/common')
+import { mkdir, readFile, writeFile } from 'fs/promises'
+import path from 'path'
+import postcss from 'postcss'
+import postcssJs from 'postcss-js'
+import sortMediaQueries from 'postcss-sort-media-queries'
+import preprocess from 'svelte-preprocess'
+import * as svelte from 'svelte/compiler'
+import { fileURLToPath } from 'url'
+import theme from '../../../postcss/theme.js'
+import { walk } from '../../../scripts/common'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 const writePlugin = async (contents, name, dir) => {
   const fnName = name === 'link' ? 'addBase' : 'addComponents'
 
   try {
     await writeFile(
-      join(dir, `${name}Component.js`),
+      path.join(dir, `${name}Component.js`),
       `const plugin = require("tailwindcss/plugin");
 
 module.exports = plugin(function ({ ${fnName}, theme }) {
@@ -30,12 +34,12 @@ ${fnName}(${JSON.stringify(contents, null, 2)});
   }
 }
 
-module.exports = {
+export default {
   do: async function (dictionary, config) {
     for await (const file of await walk(
-      join(__dirname, '../../../components')
+      path.join(dirname, '../../../components')
     )) {
-      const fileParts = parse(file)
+      const fileParts = path.parse(file)
       if (!file.includes('.stories.') && fileParts.ext === '.svelte') {
         const componentFile = await readFile(file, 'utf-8')
         const { code: Component } = await svelte.preprocess(
@@ -43,7 +47,7 @@ module.exports = {
           [
             preprocess({
               postcss: {
-                plugins: [theme, sortMediaQueries]
+                plugins: [theme, sortMediaQueries()]
               }
             })
           ],
@@ -76,7 +80,7 @@ module.exports = {
           })
 
           const cssAsJs = postcssJs.objectify(root)
-          const pluginDir = join(config.buildPath, 'plugins/components')
+          const pluginDir = path.join(config.buildPath, 'plugins/components')
 
           await writePlugin(cssAsJs, fileParts.name, pluginDir)
         }

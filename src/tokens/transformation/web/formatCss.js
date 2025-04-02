@@ -1,13 +1,13 @@
-const formattedVariables = require('./formattedVariables')
-const fileHeader = require('./fileHeader')
-const {
+import formattedVariables from './formattedVariables'
+import fileHeader from './fileHeader'
+import {
   filteredTokens,
   matchDarkThemeToken,
   matchLightThemeToken
-} = require('../common/tokenFilters')
-const { varDefFormat } = require('../../utils')
+} from '../common/tokenFilters'
+import { varDefFormat } from '../../utils'
 
-module.exports = ({ dictionary, options, file }) => {
+export default ({ dictionary, options, file }) => {
   const opts = options ?? {}
   // const { outputReferences } = opts
   const outputReferences = true

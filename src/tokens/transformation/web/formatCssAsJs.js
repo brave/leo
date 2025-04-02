@@ -1,7 +1,7 @@
-const camelCase = require('lodash.camelcase')
-const fileHeader = require('../web/fileHeader')
-const { createPropertyNameFormatter } = require('./createPropertyFormatter')
-const { TinyColor } = require('@ctrl/tinycolor')
+import camelCase from 'lodash.camelcase'
+import fileHeader from '../web/fileHeader'
+import { createPropertyNameFormatter } from './createPropertyFormatter'
+import { TinyColor } from '@ctrl/tinycolor'
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
@@ -103,7 +103,7 @@ function formattedVariables(properties) {
   return result
 }
 
-module.exports = ({ dictionary, file }) => {
+export default function formatCssAsJs({ dictionary, file }) {
   let fileContents = fileHeader({ file }) + '\n'
 
   const themeObject = formattedVariables(dictionary.properties)

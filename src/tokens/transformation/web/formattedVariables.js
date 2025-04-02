@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 
-const createPropertyFormatter = require('./createPropertyFormatter')
-const sortByReference = require('./sortByReference')
+import createPropertyFormatter from './createPropertyFormatter'
+import sortByReference from './sortByReference'
 
 const defaultFormatting = {
   lineSeparator: '\n'
@@ -38,7 +38,7 @@ const defaultFormatting = {
  * });
  * ```
  */
-function formattedVariables({
+export default function formattedVariables({
   format,
   dictionary,
   outputReferences = false,
@@ -78,5 +78,3 @@ function formattedVariables({
     })
     .join(lineSeparator)
 }
-
-module.exports = formattedVariables

@@ -1,6 +1,7 @@
-const { Dirent } = require('fs')
-const fs = require('fs/promises')
-const path = require('path')
+import { Dirent } from 'fs'
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 /**
  * Recursively walks all files in a folder
@@ -8,7 +9,7 @@ const path = require('path')
  * @param {((name: string, path: string, entry: Dirent) => boolean)?} skip A function for filtering out entries
  * @returns {Promise<AsyncIterable<string>}
  */
-async function* walk(dir, skip) {
+export async function* walk(dir, skip) {
   for await (const d of await fs.opendir(dir)) {
     const entry = path.join(dir, d.name)
 
@@ -25,7 +26,7 @@ async function* walk(dir, skip) {
  * @param {string} svelteComponentPath The path to the svelte component
  * @returns {{ fileName: string, fileNameWithoutExtension: string, componentName: string, extension: string }} The name of the component
  */
-function componentDetails(svelteComponentPath) {
+export function componentDetails(svelteComponentPath) {
   const fileName = path.basename(svelteComponentPath)
   const extension = path.extname(svelteComponentPath)
   const fileNameWithoutExtension = fileName.substring(
@@ -44,31 +45,30 @@ function componentDetails(svelteComponentPath) {
   }
 }
 
-module.exports = {
-  walk,
+/**
+ * Returns the paths to all Svelte files in a directory (and subdirectories).
+ * @param {string} root The root folder
+ * @param {boolean} includeDts Whether to include typescript definition files
+ * @param {boolean} includeStories Whether to include stories
+ */
+export async function* getSvelteFiles(
+  root,
+  includeDts = true,
+  includeStories = false
+) {
+  for await (const file of await walk(root)) {
+    if (
+      !file.includes('.svelte') ||
+      (!includeStories && file.includes('.stories.svelte')) ||
+      (!includeDts && file.endsWith('.d.ts'))
+    )
+      continue
 
-  /**
-   * Returns the paths to all Svelte files in a directory (and subdirectories).
-   * @param {string} root The root folder
-   * @param {boolean} includeDts Whether to include typescript definition files
-   * @param {boolean} includeStories Whether to include stories
-   */
-  getSvelteFiles: async function* (
-    root,
-    includeDts = true,
-    includeStories = false
-  ) {
-    for await (const file of await walk(root)) {
-      if (
-        !file.includes('.svelte') ||
-        (!includeStories && file.includes('.stories.svelte')) ||
-        (!includeDts && file.endsWith('.d.ts'))
-      )
-        continue
+    yield file
+  }
+}
 
-      yield file
-    }
-  },
-
-  componentDetails
+export function isModuleMain(moduleUrl) {
+  const modulePath = fileURLToPath(moduleUrl)
+  return process.argv[1] === modulePath
 }

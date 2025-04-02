@@ -12,16 +12,21 @@
  * use it to build them yourself, and to make the leo-sf-symbols repository as
  * dumb as possible.
  */
-const fs = require('fs/promises')
-const path = require('path')
-const { JSDOM } = require('jsdom')
-const paper = require('paper')
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { JSDOM } from 'jsdom'
+import paper from 'paper'
+
 const { CompoundPath } = paper
 paper.setup()
 
-const TEMPLATE_PATH = path.join(__dirname, 'icons', 'sf-icon.svg.tmpl')
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+const TEMPLATE_PATH = path.join(dirname, 'icons', 'sf-icon.svg.tmpl')
 const ICONS_FOLDER =
-  process.env['ICONS_FOLDER'] || path.join(__dirname, '../../icons')
+  process.env['ICONS_FOLDER'] || path.join(dirname, '../../icons')
 const OUTPUT_FOLDER = process.env['OUTPUT_FOLDER'] || 'icons-sf'
 
 function processIcon(template, svgContents) {
@@ -69,4 +74,4 @@ fs.mkdir(OUTPUT_FOLDER, { recursive: true })
       })
   })
 
-module.exports.processIcon = processIcon
+export { processIcon }

@@ -1,8 +1,13 @@
-import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
-import _template from 'lodash/template'
 import fs from 'fs'
+import _template from 'lodash/template'
+import path from 'path'
+import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
+import { fileURLToPath } from 'url'
 import colorToSkiaString from './colorToSkiaString'
 import { transformName } from './name'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 StyleDictionary.registerTransform({
   name: 'color/hex8ToSkiaString',
@@ -129,7 +134,7 @@ for (const templateName of templates) {
     formatter: ({ dictionary, options, file }) => {
       const template = _template(
         fs.readFileSync(
-          __dirname + `/templates/${templateName}.template`,
+          dirname + `/templates/${templateName}.template`,
           'utf-8'
         )
       )
@@ -159,7 +164,7 @@ StyleDictionary.registerFormat({
   name: 'skia/spacing.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/spacing.h.template', 'utf-8')
+      fs.readFileSync(dirname + '/templates/spacing.h.template', 'utf-8')
     )
     return template({
       tokens: filteredTokens(dictionary, (token) =>
@@ -175,7 +180,7 @@ StyleDictionary.registerFormat({
   name: 'skia/radius.h',
   formatter: ({ dictionary, options, file }) => {
     const template = _template(
-      fs.readFileSync(__dirname + '/templates/radius.h.template', 'utf-8')
+      fs.readFileSync(dirname + '/templates/radius.h.template', 'utf-8')
     )
     return template({
       tokens: filteredTokens(dictionary, (token) =>

@@ -1,4 +1,3 @@
-const changeCase = require('change-case')
+import { camelCase, camelCaseTransformMerge } from 'change-case'
 
-module.exports = (name) =>
-  changeCase.camelCase(name, { transform: changeCase.camelCaseTransformMerge })
+export default (name) => camelCase(name, { transform: camelCaseTransformMerge })
