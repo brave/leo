@@ -1,7 +1,7 @@
-import camelCase from 'lodash.camelcase'
+import { TinyColor } from '@ctrl/tinycolor'
+import { camelCase } from 'change-case'
 import fileHeader from '../web/fileHeader'
 import { createPropertyNameFormatter } from './createPropertyFormatter'
-import { TinyColor } from '@ctrl/tinycolor'
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']

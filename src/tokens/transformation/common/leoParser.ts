@@ -5,7 +5,7 @@
 import { applyToTokens, removeKeyFromObject } from '../../utils'
 import universalVariables from '../../universal.variables.json'
 import { TinyColor } from '@ctrl/tinycolor'
-import { DesignToken, DesignTokens, Parser } from 'style-dictionary'
+import type { DesignToken, DesignTokens, Parser } from 'style-dictionary/types'
 import flattenMaterialTheme from './flattenMaterialTheme'
 
 /**
@@ -35,10 +35,10 @@ function getEffectColorsFromLayer(layerVariables: DesignTokens) {
 
 export default {
   pattern: /\.json$/,
-  parse: ({ filePath, contents: stringContents }) => {
+  parser: ({ filePath, contents: stringContents }) => {
     let layerVariables = {}
     try {
-      layerVariables = require(`${filePath.split('.')[0]}.variables.json`)
+      layerVariables = require(`${filePath?.split('.')[0]}.variables.json`)
     } catch {}
 
     // Replace emojies, e.g. '🌚 dark' :-)
