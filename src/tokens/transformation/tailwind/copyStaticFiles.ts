@@ -1,4 +1,4 @@
-import { cpSync, readdirSync, rmdir, statSync, unlink } from 'fs'
+import { cpSync, readdirSync, rmdirSync, statSync, unlinkSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -18,9 +18,9 @@ export default {
       const target = path.join(config.buildPath, config.preset, file)
 
       if (statSync(target).isDirectory()) {
-        rmdir(target)
+        rmdirSync(target)
       } else {
-        unlink(target)
+        unlinkSync(target)
       }
     })
   }

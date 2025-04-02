@@ -22,51 +22,27 @@ import extractComponentStyles from './extractComponentStyles'
 // Filters
 StyleDictionary.registerFilter({
   name: 'tw/filterTokens',
-  matcher: twFilterTokens
+  filter: twFilterTokens
 })
 
 StyleDictionary.registerFilter({
   name: 'tw/filterFonts',
-  matcher: twFilterFonts
+  filter: twFilterFonts
 })
 
 // Transforms
-StyleDictionary.registerTransform({
-  name: 'size/px',
-  ...sizePx
-})
-StyleDictionary.registerTransform({
-  name: 'tw/shadow',
-  ...twShadows
-})
-StyleDictionary.registerTransform({
-  name: 'web/radius',
-  ...webRadius
-})
-StyleDictionary.registerTransform({
-  name: 'web/size',
-  ...webSize
-})
-StyleDictionary.registerTransform({
-  name: 'web/padding',
-  ...webPadding
-})
-StyleDictionary.registerTransform({
-  name: 'tw/font',
-  ...twFont
-})
-StyleDictionary.registerTransform({
-  name: 'web/gradient',
-  ...webGradient
-})
-StyleDictionary.registerTransform({
-  name: 'color/hex8ToRgbPartial',
-  ...colorToRgbPartial
-})
+StyleDictionary.registerTransform(sizePx)
+StyleDictionary.registerTransform(twShadows)
+StyleDictionary.registerTransform(webRadius)
+StyleDictionary.registerTransform(webSize)
+StyleDictionary.registerTransform(webPadding)
+StyleDictionary.registerTransform(twFont)
+StyleDictionary.registerTransform(webGradient)
+StyleDictionary.registerTransform(colorToRgbPartial)
 
 StyleDictionary.registerTransformGroup({
   name: 'tailwind/css',
-  transforms: StyleDictionary.transformGroup.css.concat([
+  transforms: StyleDictionary.hooks.transformGroups.css.concat([
     'size/px',
     'tw/shadow',
     'web/radius',
@@ -81,17 +57,17 @@ StyleDictionary.registerTransformGroup({
 // Formats
 StyleDictionary.registerFormat({
   name: 'tailwind/css',
-  formatter: formatCssVars
+  format: formatCssVars
 })
 
 StyleDictionary.registerFormat({
   name: 'tailwind/tokens',
-  formatter: formatTokens
+  format: formatTokens
 })
 
 StyleDictionary.registerFormat({
   name: 'tailwind/fonts',
-  formatter: formatFonts
+  format: formatFonts
 })
 
 // Actions

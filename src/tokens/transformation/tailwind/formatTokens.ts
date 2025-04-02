@@ -1,5 +1,4 @@
 import merge from 'lodash.merge'
-import { Formatter } from 'style-dictionary'
 
 const themes = ['light', 'dark']
 
@@ -125,7 +124,7 @@ function createDynamicColorTokens(tokens) {
   return createColorTokensFromGroup(tokens, false)
 }
 
-export default (({ dictionary }) => {
+export default ({ dictionary }) => {
   const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
   const borderRadii = new Map([['none', '0']])
@@ -178,4 +177,4 @@ export default (({ dictionary }) => {
     null,
     ' '.repeat(2)
   )}`
-}) as Formatter
+}

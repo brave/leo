@@ -1,15 +1,14 @@
+import { fileHeader } from 'style-dictionary/utils'
 import formattedVariables from '../web/formattedVariables'
-import fileHeader from '../web/fileHeader'
 
+import { varDefFormat } from '../../utils'
 import {
   filteredTokens,
   matchDarkThemeToken,
   matchLightThemeToken
 } from '../common/tokenFilters'
-import { varDefFormat } from '../../utils'
-import { Formatter } from 'style-dictionary'
 
-export default (({ dictionary, options, file }) => {
+export default async ({ dictionary, options, file }) => {
   const opts = options ?? {}
   const { outputReferences } = opts
   const groupedTokens = {
@@ -45,7 +44,7 @@ export default (({ dictionary, options, file }) => {
 
   // prettier-ignore
   return (
-    fileHeader({ file }) +
+    await fileHeader({ file, ...options }) +
     [
       defaultVars && varDefFormat`:root {${defaultVars}}`,
       lightVars && varDefFormat`@media (prefers-color-scheme: light) {
@@ -61,4 +60,4 @@ export default (({ dictionary, options, file }) => {
       .join('\n\n') +
     '\n'
   )
-}) as Formatter
+}

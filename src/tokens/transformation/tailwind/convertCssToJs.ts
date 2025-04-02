@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { unlink, readFileSync, writeFileSync } from 'fs'
+import { unlinkSync, readFileSync, writeFileSync } from 'fs'
 import postcssJs from 'postcss-js'
 import postcss from 'postcss'
 
@@ -26,7 +26,7 @@ export default {
   },
   undo: function (dictionary, config) {
     cssFiles.forEach((file) => {
-      unlink(genPluginFilePath(file, config))
+      unlinkSync(genPluginFilePath(file, config))
     })
   }
 }

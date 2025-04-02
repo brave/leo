@@ -1,9 +1,12 @@
+import type { Transform } from 'style-dictionary/types'
+
 export default {
+  name: 'android/transformColorName',
   type: 'name',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'color'
   },
-  transformer: function (token) {
+  transform: function (token) {
     return token.name
       .replace('color_', '')
       .replace('light_', '')
@@ -11,4 +14,4 @@ export default {
       .replace('legacy_light_', '')
       .replace('legacy_dark_', '')
   }
-}
+} as Transform

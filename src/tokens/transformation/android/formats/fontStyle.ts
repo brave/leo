@@ -1,6 +1,5 @@
-import StyleDictionary from 'style-dictionary'
+import { fileHeader } from 'style-dictionary/utils'
 import { pascalCase, snakeCase } from 'change-case'
-const { fileHeader } = StyleDictionary.formatHelpers
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
   1 + letterSpacing / fontSize

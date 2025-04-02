@@ -1,6 +1,5 @@
-import StyleDictionary from 'style-dictionary'
 import { TinyColor } from '@ctrl/tinycolor'
-const { fileHeader } = StyleDictionary.formatHelpers
+import { fileHeader } from 'style-dictionary/utils'
 
 export default ({ dictionary, platform, options = {}, file }) => {
   const colorStyles = dictionary.allTokens

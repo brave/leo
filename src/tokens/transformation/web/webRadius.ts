@@ -1,11 +1,12 @@
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 
 export default {
+  name: 'web/radius',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'custom-radius'
   },
-  transformer: function ({ value }) {
+  transform: function ({ value }) {
     if (
       [value.topRight, value.bottomLeft, value.bottomRight].every(
         (v) => v === value.topLeft

@@ -1,11 +1,12 @@
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 
 export default {
+  name: 'web/padding',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'custom-spacing'
   },
-  transformer: ({ value: { top, left, bottom, right } }) => {
+  transform: ({ value: { top, left, bottom, right } }) => {
     if ([bottom, left, right].every((v) => v === top)) {
       return `${top}px`
     }

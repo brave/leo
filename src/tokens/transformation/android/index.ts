@@ -9,52 +9,46 @@ import darkColorFilter from './filters/darkColor'
 import lightColorFilter from './filters/lightColor'
 
 // Transforms
-StyleDictionary.registerTransform({
-  name: 'android/transformColorName',
-  ...colorName
-})
+StyleDictionary.registerTransform(colorName)
 
-StyleDictionary.registerTransform({
-  name: 'android/transformFontSizeToSp',
-  ...fontSizeToSp
-})
+StyleDictionary.registerTransform(fontSizeToSp)
 
 // Formats
 StyleDictionary.registerFormat({
   name: 'android/formatFontStyle',
-  formatter: fontStyleFormatter
+  format: fontStyleFormatter
 })
 
 StyleDictionary.registerFormat({
   name: 'android/formatColorStyle',
-  formatter: colorStyleFormatter
+  format: colorStyleFormatter
 })
 
 StyleDictionary.registerFormat({
   name: 'android/formatDimenStyle',
-  formatter: dimenStyleFormatter
+  format: dimenStyleFormatter
 })
 
 // Filters
 StyleDictionary.registerFilter({
   name: 'android/filterFontStyle',
-  matcher: fontStyleFilter
+  filter: fontStyleFilter
 })
 
 StyleDictionary.registerFilter({
   name: 'android/filterDarkColor',
-  matcher: darkColorFilter
+  filter: darkColorFilter
 })
 
 StyleDictionary.registerFilter({
   name: 'android/filterLightColor',
-  matcher: lightColorFilter
+  filter: lightColorFilter
 })
 
 // TransformGroup
 StyleDictionary.registerTransformGroup({
   name: 'android',
-  transforms: StyleDictionary.transformGroup.android.concat([
+  transforms: StyleDictionary.hooks.transformGroups.android.concat([
     'android/transformColorName',
     'android/transformFontSizeToSp'
   ])

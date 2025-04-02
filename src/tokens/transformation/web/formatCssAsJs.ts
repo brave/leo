@@ -1,7 +1,8 @@
-import camelCase from 'lodash.camelcase'
-import fileHeader from '../web/fileHeader'
-import { createPropertyNameFormatter } from './createPropertyFormatter'
 import { TinyColor } from '@ctrl/tinycolor'
+import { camelCase } from 'change-case'
+import type { FormatFn } from 'style-dictionary/types'
+import { fileHeader } from 'style-dictionary/utils'
+import { createPropertyNameFormatter } from './createPropertyFormatter'
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
 
 const THEMED_COLOR_GROUP_PARENT_KEYS = ['color', 'legacy', 'elevation']
@@ -55,7 +56,7 @@ function getLiteral(token) {
   return token.value
 }
 
-function formattedVariables(properties) {
+function formattedVariables(tokens) {
   const result = {
     // The nonsensical 'toString' property exists to force the category
     // objects to not be interpreted by styled-components as a CSSObject
@@ -65,8 +66,8 @@ function formattedVariables(properties) {
     // https://github.com/brave/leo/pull/187#issuecomment-1410907561
     [FAKE_PROPERTY_NAME]: ['']
   }
-  for (const key in properties) {
-    let value = properties[key]
+  for (const key in tokens) {
+    let value = tokens[key]
     if (!isToken(value)) {
       // If we are a collection of colors, which we have dark and light versions
       // we only want to export the themeless version
@@ -103,10 +104,10 @@ function formattedVariables(properties) {
   return result
 }
 
-export default function formatCssAsJs({ dictionary, file }) {
-  let fileContents = fileHeader({ file }) + '\n'
+const formatCssAsJs: FormatFn = async ({ dictionary, file, options }) => {
+  let fileContents = (await fileHeader({ file, ...options })) + '\n'
 
-  const themeObject = formattedVariables(dictionary.properties)
+  const themeObject = formattedVariables(dictionary.tokens)
 
   // Separate out each main property, to allow for tree shaking and easy type-to-complete
   // imports in code editors.
@@ -131,3 +132,5 @@ ${spacing}${name} "${variable}"`
     }
   )
 }
+
+export default formatCssAsJs

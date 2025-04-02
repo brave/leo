@@ -1,15 +1,13 @@
-import formattedVariables from './formattedVariables'
-import fileHeader from './fileHeader'
+import { fileHeader } from 'style-dictionary/utils'
+import { varDefFormat } from '../../utils'
 import {
   filteredTokens,
   matchDarkThemeToken,
   matchLightThemeToken
 } from '../common/tokenFilters'
-import { varDefFormat } from '../../utils'
+import formattedVariables from './formattedVariables'
 
-export default ({ dictionary, options, file }) => {
-  const opts = options ?? {}
-  // const { outputReferences } = opts
+export default async ({ dictionary, options, file }) => {
   const outputReferences = true
   const groupedTokens = {
     // if you export the prefixes use token.path[0] instead of [1]
@@ -44,7 +42,7 @@ export default ({ dictionary, options, file }) => {
 
   // prettier-ignore
   return (
-    fileHeader({ file }) +
+    await fileHeader({ file, ...options }) +
     [
       defaultVars && varDefFormat`:root {${defaultVars}}`,
       lightVars && varDefFormat`@media (prefers-color-scheme: light) {

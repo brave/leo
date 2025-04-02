@@ -1,13 +1,13 @@
+import type { Transform } from 'style-dictionary/types'
 import { TinyColor } from '@ctrl/tinycolor'
 import referenceToName from '../common/referenceToName'
-import { Transform } from 'style-dictionary'
-
 export default {
+  name: 'web/color',
   type: 'value',
-  matcher(token) {
+  filter(token) {
     return token.type === 'color'
   },
-  transformer({ value, referencedVariable }) {
+  transform({ value, referencedVariable }) {
     if (referencedVariable) {
       return `var(--leo-${referenceToName(referencedVariable)})`
     }

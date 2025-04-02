@@ -1,6 +1,4 @@
-import { Formatter } from 'style-dictionary'
-
-export default (({ dictionary }) => {
+export default ({ dictionary }) => {
   const fontClasses = new Map()
 
   // Format all other tokens
@@ -33,4 +31,4 @@ module.exports = plugin(function ({ addComponents }) {
     },
   }
 })`
-}) as Formatter
+}

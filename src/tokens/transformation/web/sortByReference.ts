@@ -1,3 +1,4 @@
+import { usesReferences, getReferences } from 'style-dictionary/utils'
 /*
  * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -32,11 +33,11 @@ export default function sortByReference(dictionary) {
 
     // If token a uses a reference and token b doesn't, b might come before a
     // read on..
-    if (a.original && dictionary.usesReference(a.original.value)) {
+    if (a.original && usesReferences(a.original.value, dictionary.tokens)) {
       // Both a and b have references, we need to see if the reference each other
-      if (b.original && dictionary.usesReference(b.original.value)) {
-        const aRefs = dictionary.getReferences(a.original.value)
-        const bRefs = dictionary.getReferences(b.original.value)
+      if (b.original && usesReferences(b.original.value, dictionary.tokens)) {
+        const aRefs = getReferences(a.original.value, dictionary.tokens)
+        const bRefs = getReferences(b.original.value, dictionary.tokens)
 
         aRefs.forEach((aRef) => {
           // a references b, we want b to come first

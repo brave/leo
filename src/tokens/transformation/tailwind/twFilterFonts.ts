@@ -1,4 +1,4 @@
-import { TransformedToken } from 'style-dictionary'
+import type { TransformedToken } from 'style-dictionary/types'
 
 const acceptedTypes = ['font', 'custom-fontStyle']
 

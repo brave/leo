@@ -24,7 +24,7 @@ module.exports = plugin(function ({ ${fnName}, theme }) {
 ${fnName}(${JSON.stringify(contents, null, 2)});
 });`
     )
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === 'ENOENT') {
       await mkdir(dir, { recursive: true })
       await writePlugin(contents, name, dir)
