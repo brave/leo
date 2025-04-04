@@ -80,21 +80,25 @@ const isFileTracked = (filepath: string) => {
     }
 }
 
-const getLineDateLookup = (filepath: string): number[] => {
-    const content = execSync(`git blame --line-porcelain -- ${filepath}`, { encoding: 'utf8' })
+const getLineDateLookup = (filepath: string): number[] | undefined => {
+    try {
+        const content = execSync(`git blame --line-porcelain -- ${filepath}`, { encoding: 'utf8' })
 
-    const lineDates: number[] = []
+        const lineDates: number[] = []
 
-    let lastTimeStamp = 0
-    for (const line of content.split('\n')) {
-        if (line.startsWith('author-time')) {
-            lastTimeStamp = parseInt(line.split(' ')[1])
-        } else if (line.startsWith('\t')) {
-            lineDates.push(lastTimeStamp)
+        let lastTimeStamp = 0
+        for (const line of content.split('\n')) {
+            if (line.startsWith('author-time')) {
+                lastTimeStamp = parseInt(line.split(' ')[1])
+            } else if (line.startsWith('\t')) {
+                lineDates.push(lastTimeStamp)
+            }
         }
-    }
 
-    return lineDates
+        return lineDates
+    } catch (e) {
+        return undefined
+    }
 }
 
 const walkAllowedFiles = () => walk(process.cwd(), (name, filepath, entry) => {
@@ -176,7 +180,7 @@ function* getMatchesFromFile(filepath: string, options: Options): IterableIterat
     }
 }
 
-async function main() {
+async function json() {
     console.log('[');
     for await (const filepath of await walkAllowedFiles()) {
         for (const match of getMatchesFromFile(filepath, { extractTimestamp: true })) {
@@ -186,4 +190,30 @@ async function main() {
     console.log(']');
 }
 
-main()
+async function csv() {
+    const maybeQuote = (v: any) => {
+        v = v.toString()
+        return v.includes(',') ? `"${v.toString().replaceAll('"', "'")}"` : v.replaceAll('"', "'")
+    }
+    console.log('type,property,value,isNala,file,line,column,timestamp,raw');
+    for await (const filepath of await walkAllowedFiles()) {
+        const relPath = path.relative(process.cwd(), filepath)
+        for (const match of getMatchesFromFile(filepath, { extractTimestamp: true })) {
+            const date = new Date(match.timestamp! * 1000)
+            console.log([
+                match.type,
+                match.property,
+                match.value,
+                match.isNala,
+                relPath,
+                match.line,
+                match.column,
+                `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`,
+                match.raw,
+            ]
+                .map(maybeQuote).join(','))
+        }
+    }
+}
+
+csv()
