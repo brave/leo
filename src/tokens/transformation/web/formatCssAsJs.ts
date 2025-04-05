@@ -105,7 +105,7 @@ function formattedVariables(tokens) {
 }
 
 const formatCssAsJs: FormatFn = ({ dictionary, file }) => {
-let fileContents = fileHeader({ file }) + '\n'
+  let fileContents = fileHeader({ file }) + '\n'
 
   const themeObject = formattedVariables(dictionary.tokens)
 
