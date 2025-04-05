@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'icons/**'
-      - 'src/scripts/gen-sf-icons.js'
+      - 'src/scripts/gen-sf-icons.ts'
     branches:
       - main
   workflow_dispatch:

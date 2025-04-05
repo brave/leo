@@ -1,4 +1,4 @@
-import { Config } from 'style-dictionary'
+import { Config } from 'style-dictionary/types'
 import leoParser from './transformation/common/leoParser'
 
 function formatLayerPathPart(
@@ -12,8 +12,13 @@ function formatLayerPathPart(
 
 export default function getConfig(layers: string[]) {
   return {
+    hooks: {
+      parsers: {
+        'leo-parser': leoParser
+      }
+    },
+    parsers: ['leo-parser'],
     source: layers.map((layer) => `src/tokens/${layer}*.json`),
-    parsers: [leoParser],
     platforms: {
       tailwind: {
         transformGroup: 'tailwind/css',

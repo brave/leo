@@ -7,7 +7,7 @@ import {
   matchLightThemeToken
 } from '../common/tokenFilters'
 import { varDefFormat } from '../../utils'
-import { Formatter } from 'style-dictionary'
+import { FormatFn } from 'style-dictionary'
 
 export default (({ dictionary, options, file }) => {
   const opts = options ?? {}

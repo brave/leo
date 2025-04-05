@@ -1,4 +1,4 @@
-import { Formatter } from 'style-dictionary'
+import { FormatFn } from 'style-dictionary'
 
 export default (({ dictionary }) => {
   const fontClasses = new Map()

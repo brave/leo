@@ -1,12 +1,13 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import { Transform } from 'style-dictionary'
-import { transformName } from './name'
+import { Transform } from 'style-dictionary/types'
 import referenceToName from '../common/referenceToName'
+import { transformName } from './name'
 
 export default {
+  name: 'color/hex8ToSkiaString',
   type: 'value',
-  matcher: ({ type }) => type === 'color',
-  transformer: ({ value, referencedVariable }) => {
+  filter: ({ type }) => type === 'color',
+  transform: ({ value, referencedVariable }) => {
     if (referencedVariable) {
       return transformName({
         name: referenceToName(referencedVariable)
