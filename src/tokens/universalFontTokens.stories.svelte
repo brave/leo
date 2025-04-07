@@ -23,10 +23,6 @@
   <FontTokenSwatchGroup tokens={allFonts.heading} />
 </Story>
 
-<Story name="Mobile">
-  <FontTokenSwatchGroup tokens={allFonts.mobile} />
-</Story>
-
 <Story name="Components">
   <FontTokenSwatchGroup tokens={allFonts.components} />
 </Story>
