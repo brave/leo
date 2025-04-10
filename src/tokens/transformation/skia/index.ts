@@ -129,7 +129,7 @@ const templates = [
 for (const templateName of templates) {
   StyleDictionary.registerFormat({
     name: `skia/${templateName}`,
-    format: async ({ dictionary, options, file }) => {
+    format: ({ dictionary, options, file }) => {
       const template = _template(
         fs.readFileSync(
           dirname + `/templates/${templateName}.template`,
@@ -160,7 +160,7 @@ for (const templateName of templates) {
 
 StyleDictionary.registerFormat({
   name: 'skia/spacing.h',
-  format: async ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(dirname + '/templates/spacing.h.template', 'utf-8')
     )
@@ -176,7 +176,7 @@ StyleDictionary.registerFormat({
 
 StyleDictionary.registerFormat({
   name: 'skia/radius.h',
-  format: async ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(dirname + '/templates/radius.h.template', 'utf-8')
     )

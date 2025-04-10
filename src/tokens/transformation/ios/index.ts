@@ -18,7 +18,7 @@ export default {
 
 StyleDictionary.registerFormat({
   name: 'ios/gradients',
-  format: async ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(
         new URL('./templates/Gradients.swift.template', import.meta.url)
@@ -44,7 +44,7 @@ StyleDictionary.registerFormat({
 
 StyleDictionary.registerFormat({
   name: 'ios/colorSetAccessors',
-  format: async ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(
         new URL('./templates/ColorSetAccessors.swift.template', import.meta.url)
