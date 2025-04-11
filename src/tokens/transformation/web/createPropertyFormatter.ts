@@ -1,3 +1,4 @@
+import { usesReferences, getReferences } from 'style-dictionary/utils'
 /*
  * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -133,11 +134,14 @@ export default function createPropertyFormatter({
      * This will see if there are references and if there are, replace
      * the resolved value with the reference's name.
      */
-    if (outputReferences && dictionary.usesReference(prop.original.value)) {
+    if (
+      outputReferences &&
+      usesReferences(prop.original.value, dictionary.tokens)
+    ) {
       // Formats that use this function expect `value` to be a string
       // or else you will get '[object Object]' in the output
       if (typeof value === 'string') {
-        const refs = dictionary.getReferences(prop.original.value)
+        const refs = getReferences(prop.original.value, dictionary.tokens)
         refs.forEach((ref) => {
           // value should be a string that contains the resolved reference
           // because Style Dictionary resolved this in the resolution step.

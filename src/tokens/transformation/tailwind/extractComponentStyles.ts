@@ -3,6 +3,7 @@ import path from 'path'
 import postcss from 'postcss'
 import postcssJs from 'postcss-js'
 import sortMediaQueries from 'postcss-sort-media-queries'
+import type { Action } from 'style-dictionary/types'
 import preprocess from 'svelte-preprocess'
 import * as svelte from 'svelte/compiler'
 import { fileURLToPath } from 'url'
@@ -24,7 +25,7 @@ module.exports = plugin(function ({ ${fnName}, theme }) {
 ${fnName}(${JSON.stringify(contents, null, 2)});
 });`
     )
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === 'ENOENT') {
       await mkdir(dir, { recursive: true })
       await writePlugin(contents, name, dir)
@@ -35,6 +36,7 @@ ${fnName}(${JSON.stringify(contents, null, 2)});
 }
 
 export default {
+  name: 'tailwind/extract_component_styles',
   do: async function (dictionary, config) {
     for await (const file of await walk(
       path.join(dirname, '../../../components')
@@ -88,4 +90,4 @@ export default {
     }
   },
   undo: function () {}
-}
+} as Action
