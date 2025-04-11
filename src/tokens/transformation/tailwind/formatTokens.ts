@@ -1,4 +1,5 @@
 import merge from 'lodash.merge'
+import type { Format } from 'style-dictionary/types'
 
 const themes = ['light', 'dark']
 
@@ -124,57 +125,60 @@ function createDynamicColorTokens(tokens) {
   return createColorTokensFromGroup(tokens, false)
 }
 
-export default ({ dictionary }) => {
-  const colorTokens = createDynamicColorTokens(dictionary.allTokens)
+export default {
+  name: 'tailwind/tokens',
+  format: ({ dictionary }) => {
+    const colorTokens = createDynamicColorTokens(dictionary.allTokens)
 
-  const borderRadii = new Map([['none', '0']])
-  const spacing = new Map<string | number, string | number>([[0, 0]]) // Initialize with option for 0 spacing
-  const gradients = new Map()
-  const boxShadows = new Map([['none', 'none']])
-  const dropShadows = new Map<string, string | string[]>([
-    ['none', '0 0 #0000']
-  ])
+    const borderRadii = new Map([['none', '0']])
+    const spacing = new Map<string | number, string | number>([[0, 0]]) // Initialize with option for 0 spacing
+    const gradients = new Map()
+    const boxShadows = new Map([['none', 'none']])
+    const dropShadows = new Map<string, string | string[]>([
+      ['none', '0 0 #0000']
+    ])
 
-  // Format all other tokens
-  dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    const attributes = t.attributes!
-    if (attributes.category === 'radius') {
-      if (attributes.type === 'full') {
-        borderRadii.set(attributes.type, '9999px')
-      } else {
-        borderRadii.set(attributes.type!, t.value)
+    // Format all other tokens
+    dictionary.allTokens.forEach(({ type, name, ...t }) => {
+      const attributes = t.attributes!
+      if (attributes.category === 'radius') {
+        if (attributes.type === 'full') {
+          borderRadii.set(attributes.type, '9999px')
+        } else {
+          borderRadii.set(attributes.type as string, t.value)
+        }
+      } else if (attributes.category === 'spacing') {
+        spacing.set(attributes.type as string, t.value)
+      } else if (type === 'custom-gradient') {
+        const [, ...pathParts] = t.path
+        gradients.set(pathParts.join('-'), t.value)
+      } else if (type === 'custom-shadow') {
+        const [, ...pathParts] = t.path
+        const shadowName = kebabCase(
+          pathParts
+            .filter((v) => !['elevation', 'light', 'dark'].includes(v))
+            .join('-')
+        )
+        boxShadows.set(shadowName, formatBoxShadowVar(name, false))
+        dropShadows.set(
+          shadowName,
+          formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true)
+        )
       }
-    } else if (attributes.category === 'spacing') {
-      spacing.set(attributes.type!, t.value)
-    } else if (type === 'custom-gradient') {
-      const [, ...pathParts] = t.path
-      gradients.set(pathParts.join('-'), t.value)
-    } else if (type === 'custom-shadow') {
-      const [, ...pathParts] = t.path
-      const shadowName = kebabCase(
-        pathParts
-          .filter((v) => !['elevation', 'light', 'dark'].includes(v))
-          .join('-')
-      )
-      boxShadows.set(shadowName, formatBoxShadowVar(name, false))
-      dropShadows.set(
-        shadowName,
-        formatDropShadowVars(name, t.value.dropShadow?.length ?? 0, true)
-      )
-    }
-  })
+    })
 
-  // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
-  return `module.exports = ${JSON.stringify(
-    {
-      colors: colorTokens,
-      spacing: Object.fromEntries(spacing),
-      borderRadius: Object.fromEntries(borderRadii),
-      boxShadow: Object.fromEntries(boxShadows),
-      dropShadow: Object.fromEntries(dropShadows),
-      gradients: Object.fromEntries(gradients)
-    },
-    null,
-    ' '.repeat(2)
-  )}`
-}
+    // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
+    return `module.exports = ${JSON.stringify(
+      {
+        colors: colorTokens,
+        spacing: Object.fromEntries(spacing),
+        borderRadius: Object.fromEntries(borderRadii),
+        boxShadow: Object.fromEntries(boxShadows),
+        dropShadow: Object.fromEntries(dropShadows),
+        gradients: Object.fromEntries(gradients)
+      },
+      null,
+      ' '.repeat(2)
+    )}`
+  }
+} as Format

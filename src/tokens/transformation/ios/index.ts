@@ -1,20 +1,8 @@
-import StyleDictionary from 'style-dictionary'
-import _template from 'lodash/template'
-import fs from 'fs'
 import { camelCase, snakeCase } from 'change-case'
+import fs from 'fs'
+import _template from 'lodash/template'
+import StyleDictionary from 'style-dictionary'
 import colorsets from './colorsets'
-import fontStyles from './fontStyles'
-
-export default {
-  hooks: {
-    actions: {
-      'ios/colorSets': colorsets,
-      'ios/fontStyles': fontStyles
-    },
-    formats: {},
-    transforms: {}
-  }
-}
 
 StyleDictionary.registerFormat({
   name: 'ios/gradients',
@@ -72,8 +60,4 @@ StyleDictionary.registerFormat({
   }
 })
 
-StyleDictionary.registerAction({
-  name: 'ios/colorSets',
-  do: colorsets.do,
-  undo: colorsets.undo
-})
+StyleDictionary.registerAction(colorsets)

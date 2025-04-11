@@ -1,25 +1,29 @@
-export default ({ dictionary }) => {
-  const fontClasses = new Map()
+import type { Format } from 'style-dictionary/types'
 
-  // Format all other tokens
-  dictionary.allTokens.forEach(({ type, name, ...t }) => {
-    const attributes = t.attributes!
-    let fontClass = `.text-${attributes.type}-${attributes.item}`
+export default {
+  name: 'tailwind/fonts',
+  format: ({ dictionary }) => {
+    const fontClasses = new Map()
 
-    if (attributes.subitem) {
-      fontClass += `-${attributes.subitem}`
-    }
+    // Format all other tokens
+    dictionary.allTokens.forEach(({ type, name, ...t }) => {
+      const attributes = t.attributes!
+      let fontClass = `.text-${attributes.type}-${attributes.item}`
 
-    // Ensure we don't lose modifiers like "default", "regular", "semibold", etc.
-    if (attributes.state) {
-      fontClass += `-${attributes.state}`
-    }
+      if (attributes.subitem) {
+        fontClass += `-${attributes.subitem}`
+      }
 
-    fontClasses.set(fontClass, t.value)
-  })
+      // Ensure we don't lose modifiers like "default", "regular", "semibold", etc.
+      if (attributes.state) {
+        fontClass += `-${attributes.state}`
+      }
 
-  // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
-  return `const plugin = require("tailwindcss/plugin")
+      fontClasses.set(fontClass, t.value)
+    })
+
+    // Note: replace strips out 'light-mode' and 'dark-mode' inside media queries
+    return `const plugin = require("tailwindcss/plugin")
 const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = plugin(function ({ addComponents }) {
   addComponents(${JSON.stringify(Object.fromEntries(fontClasses))});
@@ -31,4 +35,5 @@ module.exports = plugin(function ({ addComponents }) {
     },
   }
 })`
-}
+  }
+} as Format

@@ -14,10 +14,7 @@ import formatCss from './formatCss'
 import formatCssAsJs from './formatCssAsJs'
 
 // Filters
-StyleDictionary.registerFilter({
-  name: 'filterWeb',
-  filter: filterWeb
-})
+StyleDictionary.registerFilter(filterWeb)
 
 // Transforms
 StyleDictionary.registerTransform(sizePx)
@@ -44,12 +41,5 @@ StyleDictionary.registerTransformGroup({
 })
 
 // Formats
-StyleDictionary.registerFormat({
-  name: 'custom/css',
-  format: formatCss
-})
-
-StyleDictionary.registerFormat({
-  name: 'custom/cssJS',
-  format: formatCssAsJs
-})
+StyleDictionary.registerFormat(formatCss)
+StyleDictionary.registerFormat(formatCssAsJs)

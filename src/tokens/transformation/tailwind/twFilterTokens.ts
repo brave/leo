@@ -1,4 +1,4 @@
-import type { TransformedToken } from 'style-dictionary/types'
+import type { Filter, TransformedToken } from 'style-dictionary/types'
 
 const acceptedTypes = [
   'color',
@@ -10,4 +10,7 @@ const acceptedTypes = [
   'number'
 ]
 
-export default (token: TransformedToken) => acceptedTypes.includes(token.type)
+export default {
+  name: 'tw/filterTokens',
+  filter: (token: TransformedToken) => acceptedTypes.includes(token.type)
+} as Filter

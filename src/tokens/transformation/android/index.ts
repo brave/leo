@@ -10,40 +10,17 @@ import lightColorFilter from './filters/lightColor'
 
 // Transforms
 StyleDictionary.registerTransform(colorName)
-
 StyleDictionary.registerTransform(fontSizeToSp)
 
 // Formats
-StyleDictionary.registerFormat({
-  name: 'android/formatFontStyle',
-  format: fontStyleFormatter
-})
-
-StyleDictionary.registerFormat({
-  name: 'android/formatColorStyle',
-  format: colorStyleFormatter
-})
-
-StyleDictionary.registerFormat({
-  name: 'android/formatDimenStyle',
-  format: dimenStyleFormatter
-})
+StyleDictionary.registerFormat(fontStyleFormatter)
+StyleDictionary.registerFormat(colorStyleFormatter)
+StyleDictionary.registerFormat(dimenStyleFormatter)
 
 // Filters
-StyleDictionary.registerFilter({
-  name: 'android/filterFontStyle',
-  filter: fontStyleFilter
-})
-
-StyleDictionary.registerFilter({
-  name: 'android/filterDarkColor',
-  filter: darkColorFilter
-})
-
-StyleDictionary.registerFilter({
-  name: 'android/filterLightColor',
-  filter: lightColorFilter
-})
+StyleDictionary.registerFilter(fontStyleFilter)
+StyleDictionary.registerFilter(darkColorFilter)
+StyleDictionary.registerFilter(lightColorFilter)
 
 // TransformGroup
 StyleDictionary.registerTransformGroup({

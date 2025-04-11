@@ -20,15 +20,8 @@ import convertCssToJs from './convertCssToJs'
 import extractComponentStyles from './extractComponentStyles'
 
 // Filters
-StyleDictionary.registerFilter({
-  name: 'tw/filterTokens',
-  filter: twFilterTokens
-})
-
-StyleDictionary.registerFilter({
-  name: 'tw/filterFonts',
-  filter: twFilterFonts
-})
+StyleDictionary.registerFilter(twFilterTokens)
+StyleDictionary.registerFilter(twFilterFonts)
 
 // Transforms
 StyleDictionary.registerTransform(sizePx)
@@ -55,36 +48,11 @@ StyleDictionary.registerTransformGroup({
 })
 
 // Formats
-StyleDictionary.registerFormat({
-  name: 'tailwind/css',
-  format: formatCssVars
-})
-
-StyleDictionary.registerFormat({
-  name: 'tailwind/tokens',
-  format: formatTokens
-})
-
-StyleDictionary.registerFormat({
-  name: 'tailwind/fonts',
-  format: formatFonts
-})
+StyleDictionary.registerFormat(formatCssVars)
+StyleDictionary.registerFormat(formatTokens)
+StyleDictionary.registerFormat(formatFonts)
 
 // Actions
-StyleDictionary.registerAction({
-  name: 'tailwind/copy_static_files',
-  do: copyStaticFiles.do,
-  undo: copyStaticFiles.undo
-})
-
-StyleDictionary.registerAction({
-  name: 'tailwind/convert_css_to_js',
-  do: convertCssToJs.do,
-  undo: convertCssToJs.undo
-})
-
-StyleDictionary.registerAction({
-  name: 'tailwind/extract_component_styles',
-  do: extractComponentStyles.do,
-  undo: extractComponentStyles.undo
-})
+StyleDictionary.registerAction(copyStaticFiles)
+StyleDictionary.registerAction(convertCssToJs)
+StyleDictionary.registerAction(extractComponentStyles)

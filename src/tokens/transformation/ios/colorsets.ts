@@ -1,6 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import fs from 'fs-extra'
 import { snakeCase } from 'change-case'
+import fs from 'fs-extra'
+import type { Action } from 'style-dictionary/types'
 
 const contents = {
   info: {
@@ -50,6 +51,7 @@ type Color = {
  * mode versions.
  */
 export default {
+  name: 'ios/colorSets',
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}/Colors.xcassets`
@@ -110,4 +112,4 @@ export default {
   undo: function (dictionary, platform) {
     // no undo
   }
-}
+} as Action

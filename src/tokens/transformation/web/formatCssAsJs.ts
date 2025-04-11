@@ -1,6 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import { camelCase } from 'change-case'
-import type { FormatFn } from 'style-dictionary/types'
+import type { Format } from 'style-dictionary/types'
 import { fileHeader } from 'style-dictionary/utils'
 import { createPropertyNameFormatter } from './createPropertyFormatter'
 const { formatName } = createPropertyNameFormatter('css', { indentation: '' })
@@ -104,33 +104,34 @@ function formattedVariables(tokens) {
   return result
 }
 
-const formatCssAsJs: FormatFn = async ({ dictionary, file, options }) => {
-  let fileContents = (await fileHeader({ file, ...options })) + '\n'
+export default {
+  name: 'custom/cssJS',
+  format: async ({ dictionary, file, options }) => {
+    let fileContents = (await fileHeader({ file, ...options })) + '\n'
 
-  const themeObject = formattedVariables(dictionary.tokens)
+    const themeObject = formattedVariables(dictionary.tokens)
 
-  // Separate out each main property, to allow for tree shaking and easy type-to-complete
-  // imports in code editors.
-  for (const property in themeObject) {
-    if (property === FAKE_PROPERTY_NAME) {
-      continue
+    // Separate out each main property, to allow for tree shaking and easy type-to-complete
+    // imports in code editors.
+    for (const property in themeObject) {
+      if (property === FAKE_PROPERTY_NAME) {
+        continue
+      }
+      fileContents +=
+        `export const ${property} = ` +
+        JSON.stringify(themeObject[property], null, 2) +
+        ' as const \n'
     }
-    fileContents +=
-      `export const ${property} = ` +
-      JSON.stringify(themeObject[property], null, 2) +
-      ' as const \n'
+
+    // Add a comment above variables with the literal value of the variable.
+    const variableRegex = /\n(\s+)(".*":) "(var\([a-z0-9-]+\))"/gm
+    return fileContents.replace(
+      variableRegex,
+      (substring, spacing, name, variable) => {
+        return `
+  ${spacing}/** ${literals[variable]} */
+  ${spacing}${name} "${variable}"`
+      }
+    )
   }
-
-  // Add a comment above variables with the literal value of the variable.
-  const variableRegex = /\n(\s+)(".*":) "(var\([a-z0-9-]+\))"/gm
-  return fileContents.replace(
-    variableRegex,
-    (substring, spacing, name, variable) => {
-      return `
-${spacing}/** ${literals[variable]} */
-${spacing}${name} "${variable}"`
-    }
-  )
-}
-
-export default formatCssAsJs
+} as Format
