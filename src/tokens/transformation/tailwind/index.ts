@@ -20,53 +20,22 @@ import convertCssToJs from './convertCssToJs'
 import extractComponentStyles from './extractComponentStyles'
 
 // Filters
-StyleDictionary.registerFilter({
-  name: 'tw/filterTokens',
-  matcher: twFilterTokens
-})
-
-StyleDictionary.registerFilter({
-  name: 'tw/filterFonts',
-  matcher: twFilterFonts
-})
+StyleDictionary.registerFilter(twFilterTokens)
+StyleDictionary.registerFilter(twFilterFonts)
 
 // Transforms
-StyleDictionary.registerTransform({
-  name: 'size/px',
-  ...sizePx
-})
-StyleDictionary.registerTransform({
-  name: 'tw/shadow',
-  ...twShadows
-})
-StyleDictionary.registerTransform({
-  name: 'web/radius',
-  ...webRadius
-})
-StyleDictionary.registerTransform({
-  name: 'web/size',
-  ...webSize
-})
-StyleDictionary.registerTransform({
-  name: 'web/padding',
-  ...webPadding
-})
-StyleDictionary.registerTransform({
-  name: 'tw/font',
-  ...twFont
-})
-StyleDictionary.registerTransform({
-  name: 'web/gradient',
-  ...webGradient
-})
-StyleDictionary.registerTransform({
-  name: 'color/hex8ToRgbPartial',
-  ...colorToRgbPartial
-})
+StyleDictionary.registerTransform(sizePx)
+StyleDictionary.registerTransform(twShadows)
+StyleDictionary.registerTransform(webRadius)
+StyleDictionary.registerTransform(webSize)
+StyleDictionary.registerTransform(webPadding)
+StyleDictionary.registerTransform(twFont)
+StyleDictionary.registerTransform(webGradient)
+StyleDictionary.registerTransform(colorToRgbPartial)
 
 StyleDictionary.registerTransformGroup({
   name: 'tailwind/css',
-  transforms: StyleDictionary.transformGroup.css.concat([
+  transforms: StyleDictionary.hooks.transformGroups.css.concat([
     'size/px',
     'tw/shadow',
     'web/radius',
@@ -79,36 +48,11 @@ StyleDictionary.registerTransformGroup({
 })
 
 // Formats
-StyleDictionary.registerFormat({
-  name: 'tailwind/css',
-  formatter: formatCssVars
-})
-
-StyleDictionary.registerFormat({
-  name: 'tailwind/tokens',
-  formatter: formatTokens
-})
-
-StyleDictionary.registerFormat({
-  name: 'tailwind/fonts',
-  formatter: formatFonts
-})
+StyleDictionary.registerFormat(formatCssVars)
+StyleDictionary.registerFormat(formatTokens)
+StyleDictionary.registerFormat(formatFonts)
 
 // Actions
-StyleDictionary.registerAction({
-  name: 'tailwind/copy_static_files',
-  do: copyStaticFiles.do,
-  undo: copyStaticFiles.undo
-})
-
-StyleDictionary.registerAction({
-  name: 'tailwind/convert_css_to_js',
-  do: convertCssToJs.do,
-  undo: convertCssToJs.undo
-})
-
-StyleDictionary.registerAction({
-  name: 'tailwind/extract_component_styles',
-  do: extractComponentStyles.do,
-  undo: extractComponentStyles.undo
-})
+StyleDictionary.registerAction(copyStaticFiles)
+StyleDictionary.registerAction(convertCssToJs)
+StyleDictionary.registerAction(extractComponentStyles)

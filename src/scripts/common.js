@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 /**
  * Recursively walks all files in a folder
  * @param {string} dir The directory to walk
- * @param {((name: string, path: string, entry: Dirent) => boolean)?} skip A function for filtering out entries
+ * @param {((name: string, path: string, entry: Dirent) => boolean)} [skip] A function for filtering out entries
  * @returns {Promise<AsyncIterable<string>}
  */
 export async function* walk(dir, skip) {

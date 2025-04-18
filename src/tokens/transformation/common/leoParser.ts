@@ -5,26 +5,36 @@
 import { applyToTokens, removeKeyFromObject } from '../../utils'
 import universalVariables from '../../universal.variables.json'
 import { TinyColor } from '@ctrl/tinycolor'
-import { DesignToken, DesignTokens, Parser } from 'style-dictionary'
+import type { Parser } from 'style-dictionary/types'
 import flattenMaterialTheme from './flattenMaterialTheme'
+
+export interface RawToken {
+  type: string
+  value: any
+  extensions?: any
+}
+
+export interface RawTokens {
+  [key: string]: RawTokens | RawToken
+}
 
 /**
  * Transforms an effect to use variable references, rather than a hardcoded
  * color. Unfortunately we need to do this because style-dictionary won't
  * export variable references in effects.
  * At the moment, we just whitelist a few color groups.
- * @param {*} layerVariables
- * @returns {Array}
  */
-function getEffectColorsFromLayer(layerVariables: DesignTokens) {
+function getEffectColorsFromLayer(layerVariables: RawTokens) {
   const allowedGroups = ['elevation', 'primary', 'secondary']
   return allowedGroups
     .map((g) =>
       (
-        Object.entries(layerVariables.color?.light?.[g] || {}) as [
-          string,
-          DesignToken
-        ][]
+        Object.entries(
+          (layerVariables?.color &&
+            !('value' in layerVariables.color) &&
+            layerVariables.color?.light?.[g]) ||
+            {}
+        ) as [string, RawToken][]
       ).map(([key, value]) => [
         `${g}.${key}`,
         new TinyColor(value.value).toHex8String()
@@ -35,10 +45,10 @@ function getEffectColorsFromLayer(layerVariables: DesignTokens) {
 
 export default {
   pattern: /\.json$/,
-  parse: ({ filePath, contents: stringContents }) => {
+  parser: ({ filePath, contents: stringContents }) => {
     let layerVariables = {}
     try {
-      layerVariables = require(`${filePath.split('.')[0]}.variables.json`)
+      layerVariables = require(`${filePath?.split('.')[0]}.variables.json`)
     } catch {}
 
     // Replace emojies, e.g. '🌚 dark' :-)
@@ -48,12 +58,16 @@ export default {
         ''
       )
       .replaceAll(/-{2,}/g, '')
-    const contents = JSON.parse(stringContents) as DesignTokens
+    const contents = JSON.parse(stringContents) as RawTokens
 
     // Remove gradient|extended|gradient key repetition (do this before we remove 'extended'
     // since we would end up with the path gradient|gradient and `removeKeyFromObject` would
     // end up deleting everything under gradient).
-    if (contents.gradient?.gradient)
+    if (
+      contents?.gradient &&
+      !('value' in contents.gradient) &&
+      contents.gradient?.gradient
+    )
       contents.gradient = contents.gradient.gradient
 
     // Get variable references for effects, rather than hardcoded colors
@@ -133,7 +147,7 @@ export default {
           }
         }
 
-        for (const [item, itemValue] of items as [string, DesignToken][]) {
+        for (const [item, itemValue] of items as [string, RawToken][]) {
           // Combine items where figma splits a single-value to multiple values
           // NOTE: ideal scenario here would be to programmatically determine if values should be grouped or not, instead of manually managing a list.
           if (['gradient'].includes(type) && itemValue && !itemValue.type) {
@@ -153,7 +167,7 @@ export default {
   }
 } as Parser
 
-function groupValues(tokenValue: DesignToken) {
+function groupValues(tokenValue: RawToken) {
   // Make sure we filter out null items, or we won't set the type properly.
   const subitems = Object.values(tokenValue).filter((si) => si)
   tokenValue = {

@@ -1,12 +1,13 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 
 export default {
+  name: 'color/hex8ToRgbPartial',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'color'
   },
-  transformer: function ({ value, ...token }) {
+  transform: function ({ value, ...token }) {
     const fullColorValue = ['elevation']
     if (token.name.match(new RegExp(`(${fullColorValue.join('|')})`))) {
       return new TinyColor(value).toRgbString()

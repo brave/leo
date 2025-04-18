@@ -1,12 +1,12 @@
 import type { Transform } from 'style-dictionary/types'
 
 export default {
-  name: 'size/px',
+  name: 'android/transformFontSizeToSp',
   type: 'value',
   filter: function (token) {
-    return token.type === 'dimension' && token.value !== 0
+    return token.type === 'custom-fontStyle'
   },
   transform: function (token) {
-    return `${token.value}px`
+    return `${token.value.fontSize}sp`
   }
 } as Transform

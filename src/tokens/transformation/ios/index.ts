@@ -1,22 +1,12 @@
-import StyleDictionary from 'style-dictionary'
-import _template from 'lodash/template'
+import { camelCase, snakeCase } from 'change-case'
 import fs from 'fs'
-import changeCase from 'change-case'
-import colorsets from './colorsets.js'
-import fontStyles from './fontStyles.js'
-
-export default {
-  transform: {},
-  format: {},
-  action: {
-    'ios/colorSets': colorsets,
-    'ios/fontStyles': fontStyles
-  }
-}
+import _template from 'lodash/template'
+import StyleDictionary from 'style-dictionary'
+import colorsets from './colorsets'
 
 StyleDictionary.registerFormat({
   name: 'ios/gradients',
-  formatter: ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(
         new URL('./templates/Gradients.swift.template', import.meta.url)
@@ -31,7 +21,7 @@ StyleDictionary.registerFormat({
             token.value.gradientType === 'linear'
         )
         .map((token) => {
-          token.name = changeCase.camelCase(token.path.pop())
+          token.name = camelCase(token.path.pop() || '')
           return token
         })
     }
@@ -42,7 +32,7 @@ StyleDictionary.registerFormat({
 
 StyleDictionary.registerFormat({
   name: 'ios/colorSetAccessors',
-  formatter: ({ dictionary, options, file }) => {
+  format: ({ dictionary, options, file }) => {
     const template = _template(
       fs.readFileSync(
         new URL('./templates/ColorSetAccessors.swift.template', import.meta.url)
@@ -57,21 +47,17 @@ StyleDictionary.registerFormat({
           // The system already provides these and will conflict with the names
           return
         }
-        const name = changeCase.snakeCase(
+        const name = snakeCase(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'
             )
             .join(' ')
         )
-        colors[name] = changeCase.camelCase(name).replace('_', '') // Xcode 15 accessors generate without underscores
+        colors[name] = camelCase(name).replace('_', '') // Xcode 15 accessors generate without underscores
       })
     return template({ colors, options, file })
   }
 })
 
-StyleDictionary.registerAction({
-  name: 'ios/colorSets',
-  do: colorsets.do,
-  undo: colorsets.undo
-})
+StyleDictionary.registerAction(colorsets)

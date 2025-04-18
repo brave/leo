@@ -1,6 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import fs from 'fs-extra'
 import { snakeCase } from 'change-case'
+import fs from 'fs-extra'
+import type { Action } from 'style-dictionary/types'
 
 const contents = {
   info: {
@@ -27,12 +28,30 @@ const ratioRgb = (color) => {
   }
 }
 
+type Color = {
+  idiom: string
+  color: {
+    'color-space': string
+    components: {
+      red: string
+      green: string
+      blue: string
+      alpha: string
+    }
+  }
+  appearances?: Array<{
+    appearance: string
+    value: string
+  }>
+}
+
 /**
  * This action will iterate over all the colors in the Style Dictionary
  * and for each one write a colorset with light and (optional) dark
  * mode versions.
  */
 export default {
+  name: 'ios/colorSets',
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}/Colors.xcassets`
@@ -65,7 +84,7 @@ export default {
           ? fs.readJsonSync(`${colorsetPath}/Contents.json`)
           : { ...contents, colors: [] }
 
-        const color = {
+        const color: Color = {
           idiom: 'universal',
           color: {
             'color-space': 'srgb',
@@ -93,4 +112,4 @@ export default {
   undo: function (dictionary, platform) {
     // no undo
   }
-}
+} as Action
