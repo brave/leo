@@ -11,7 +11,7 @@ const genTypes = async (options = {}) => {
   await svelte2tsx.emitDts({
     libRoot: basePath,
     declarationDir: outputDir,
-    svelteShimsPath: path.resolve('svelte2tsx/svelte-shims.d.ts')
+    svelteShimsPath: path.resolve('node_modules/svelte2tsx/svelte-shims.d.ts')
   })
 }
 
