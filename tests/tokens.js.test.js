@@ -6,8 +6,8 @@ describe('JS tokens exist as CSS variables', () => {
 
   // Unfortunately because the variables JS is an ESModule we can't just
   // import it here.
-  const variables = fs.readFileSync('./tokens/css/index.js', 'utf-8')
-  const tokenRegex = /var\((.*)\)/gi
+  const variables = fs.readFileSync('./tokens/css/variables.ts', 'utf-8')
+  const tokenRegex = /var\((.*?)\)/gi
 
   const matches = variables.matchAll(tokenRegex)
 

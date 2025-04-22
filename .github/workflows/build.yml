@@ -45,6 +45,11 @@ jobs:
         run: |
           node ./src/scripts/audit-tokens.js
 
+      - name: Test
+        id: test-nala
+        run: |
+          npm run test
+
       - name: Diff Tokens
         id: diff-tokens
         run: |
