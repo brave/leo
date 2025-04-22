@@ -19,12 +19,12 @@ it('Can mix theme overrides', () =>
         background: black;
     }
   }`,
-    `:root, :root[data-theme=light], [data-theme=light] {
+    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
     --\\.component_background: white;
     --\\.component_color: black;
   }
 
-  :root[data-theme=dark], [data-theme=dark] {
+  :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
     --\\.component_background: black;
     --\\.component_color: white;
   }
@@ -68,7 +68,7 @@ it('Light & Dark mode can be specified for a property', () =>
       new-dark: dark;
     }
     }`,
-    `:root, :root[data-theme=light], [data-theme=light] {
+    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
       --\\.component_override-both: light;
       --\\.component_override-dark: light;
       --\\.component_new-dark: unset;
@@ -76,7 +76,7 @@ it('Light & Dark mode can be specified for a property', () =>
       --\\.component_new-light: light;
     }
 
-    :root[data-theme=dark], [data-theme=dark] {
+    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
       --\\.component_override-both: dark;
       --\\.component_override-dark: dark;
       --\\.component_new-dark: dark;
@@ -125,7 +125,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
       dark: dark;
     }
     }`,
-    `:root, :root[data-theme=light], [data-theme=light] {
+    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
       --\\.component_color: black;
       --\\.component_dark: unset;
       --\\.component_light: light;
@@ -138,7 +138,7 @@ it('Light & Dark mode work with weird class overlaps', () =>
       --\\.dark_dark: unset;
     }
 
-    :root[data-theme=dark], [data-theme=dark] {
+    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
       --\\.component_color: white;
       --\\.component_dark: dark;
       --\\.component_light: unset;
@@ -216,18 +216,18 @@ it('Handles wrapSelector', () =>
           background: black;
       }
     }`,
-    `:global(:root), :global(:root[data-theme=light]), :global([data-theme=light]) {
+    `:global(:root), :global(:root[data-theme][data-theme=light]), :global([data-theme][data-theme=light]) {
       --\\.component_background: white;
       --\\.component_color: black;
     }
   
-    :global(:root[data-theme=dark]), :global([data-theme=dark]) {
+    :global(:root[data-theme][data-theme=dark]), :global([data-theme][data-theme=dark]) {
       --\\.component_background: black;
       --\\.component_color: white;
     }
   
     @media (prefers-color-scheme: dark) {
-      :root {
+      :global(:root) {
           --\\.component_background: black;
           --\\.component_color: white;
       }
