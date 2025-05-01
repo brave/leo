@@ -1,5 +1,6 @@
 <script context="module">
   import Dialog from './dialog.svelte'
+  import Input from '../input/input.svelte'
 
   export const meta = {
     title: 'Components/Dialog',
@@ -84,6 +85,7 @@
       </div>
     </div>
     <div slot="actions">
+      <Input placeholder="This is an input field" />
       <Button kind="outline">Secondary</Button>
       <Button kind="filled">Primary</Button>
     </div>
@@ -144,6 +146,8 @@
 </Story>
 
 <Story name="Default" />
+
+<Story name="Show Close" args={{showClose: true}} />
 
 <style>
   .alert-container {
