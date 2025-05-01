@@ -138,7 +138,9 @@
   let tabindex : number;
   
   onMount(() => {
-    tabindex = input.getRootNode() === document ? $$restProps.tabindex : 1;
+    const inputRootNode = input.getRootNode() as ShadowRoot;
+
+    tabindex = inputRootNode.host?.tagName === 'LEO-INPUT' ? 1 : $$restProps.tabindex;
   });
 
 </script>
