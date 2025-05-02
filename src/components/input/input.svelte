@@ -14,6 +14,7 @@
   import Button from '../button/button.svelte'
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
+  import  { onMount } from 'svelte'
 
   type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
   type LeoInputTypeAttribute =
@@ -133,6 +134,15 @@
     value = e.currentTarget['value']
     hasErrorsInternal = (required && !value) || !input?.checkValidity()
   }
+
+  let tabindex : number;
+  
+  onMount(() => {
+    const inputRootNode = input.getRootNode() as ShadowRoot;
+
+    tabindex = inputRootNode.host?.tagName === 'LEO-INPUT' ? 1 : $$restProps.tabindex;
+  });
+
 </script>
 
 <FormItem
@@ -152,7 +162,7 @@
       {type}
       {value}
       {placeholder}
-      tabindex={1}
+      {tabindex}
       bind:this={input}
       on:input={handleInput}
       on:change={forward(onChange)}
