@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+        name="description"
+        content="Web site created using HTML & Web Components" />
+    <link href="./css/variables.css" rel="stylesheet" />
+    <title>Web Components</title>
+    <style>
+        body {
+            background: var(--leo-color-page-background);
+            color: var(--leo-color-text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    This demo is for testing thrashing the tree, as in React with
+    <pre>
+        function Component() {
+            return &lt;Dropdown key={Math.random()}&gt;...&lt;/Dropdown&gt;
+        }
+    </pre>
+
+    <div class="container"></div>
+    <script type="module">
+        import './leo/dropdown.js'
+
+        const container = document.querySelector('.container')
+
+        let currentValue = 1
+
+        function change({ value }) {
+            currentValue = value
+            makeDropdown()
+        }
+
+        const makeDropdown = () => {
+            const html = `<leo-dropdown id=${Math.random()} value="${currentValue}">
+                <leo-option value="1">One</leo-option>
+                <leo-option value="2">Two</leo-option>
+                <leo-option value="3">Three</leo-option>
+                <div slot="value">${currentValue} - is the current value</div>
+            </leo-dropdown>`
+
+            container.innerHTML = html
+            container.querySelector('leo-dropdown').addEventListener('change', change)
+        }
+
+        makeDropdown()
+    </script>
+</body>
+
+</html>
