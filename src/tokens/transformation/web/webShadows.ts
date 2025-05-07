@@ -1,12 +1,13 @@
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 import { formatColor } from './webColorRef'
 
 export default {
+  name: 'web/shadow',
   type: 'value',
-  matcher(token) {
+  filter(token) {
     return token.type === 'custom-shadow' && token.value !== 0
   },
-  transformer({ value }) {
+  transform({ value }) {
     value = Array.isArray(value) ? value : [value]
     return value.map((v) => formatShadow(v)).join(', ')
   }

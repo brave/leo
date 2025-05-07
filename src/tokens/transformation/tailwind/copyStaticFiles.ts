@@ -1,5 +1,6 @@
-import { cpSync, readdirSync, rmdir, statSync, unlink } from 'fs'
+import { cpSync, readdirSync, rmdirSync, statSync, unlinkSync } from 'fs'
 import path from 'path'
+import type { Action } from 'style-dictionary/types'
 import { fileURLToPath } from 'url'
 
 const filename = fileURLToPath(import.meta.url)
@@ -9,6 +10,7 @@ const staticFilesPath = path.join(dirname, './static')
 const staticFiles = readdirSync(staticFilesPath)
 
 export default {
+  name: 'tailwind/copy_static_files',
   do: function (dictionary, config) {
     const targetDir = path.join(config.buildPath, config.preset)
     cpSync(staticFilesPath, targetDir, { recursive: true })
@@ -18,10 +20,10 @@ export default {
       const target = path.join(config.buildPath, config.preset, file)
 
       if (statSync(target).isDirectory()) {
-        rmdir(target)
+        rmdirSync(target)
       } else {
-        unlink(target)
+        unlinkSync(target)
       }
     })
   }
-}
+} as Action

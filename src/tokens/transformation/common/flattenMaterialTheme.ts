@@ -1,4 +1,4 @@
-import { TransformedTokens } from 'style-dictionary'
+import type { RawTokens } from './leoParser'
 
 const dynamicName = 'dynamic'
 const defaultsName = 'static'
@@ -16,7 +16,7 @@ const defaultsName = 'static'
  * the primitive colors.
  * @param contents The contents of the tokens JSON
  */
-export default function (contents: TransformedTokens) {
+export default function (contents: RawTokens) {
   const defaults = { ...contents[defaultsName] }
 
   delete contents[dynamicName]

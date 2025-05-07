@@ -14,48 +14,21 @@ import formatCss from './formatCss'
 import formatCssAsJs from './formatCssAsJs'
 
 // Filters
-StyleDictionary.registerFilter({
-  name: 'filterWeb',
-  matcher: filterWeb
-})
+StyleDictionary.registerFilter(filterWeb)
 
 // Transforms
-StyleDictionary.registerTransform({
-  name: 'size/px',
-  ...sizePx
-})
-StyleDictionary.registerTransform({
-  name: 'web/shadow',
-  ...webShadows
-})
-StyleDictionary.registerTransform({
-  name: 'web/radius',
-  ...webRadius
-})
-StyleDictionary.registerTransform({
-  name: 'web/size',
-  ...webSize
-})
-StyleDictionary.registerTransform({
-  name: 'web/padding',
-  ...webPadding
-})
-StyleDictionary.registerTransform({
-  name: 'web/font',
-  ...webFont
-})
-StyleDictionary.registerTransform({
-  name: 'web/gradient',
-  ...webGradient
-})
-StyleDictionary.registerTransform({
-  name: 'web/color',
-  ...webColor
-})
+StyleDictionary.registerTransform(sizePx)
+StyleDictionary.registerTransform(webShadows)
+StyleDictionary.registerTransform(webRadius)
+StyleDictionary.registerTransform(webSize)
+StyleDictionary.registerTransform(webPadding)
+StyleDictionary.registerTransform(webFont)
+StyleDictionary.registerTransform(webGradient)
+StyleDictionary.registerTransform(webColor)
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css',
-  transforms: StyleDictionary.transformGroup.css.concat([
+  transforms: StyleDictionary.hooks.transformGroups.css.concat([
     'size/px',
     'web/shadow',
     'web/radius',
@@ -68,12 +41,5 @@ StyleDictionary.registerTransformGroup({
 })
 
 // Formats
-StyleDictionary.registerFormat({
-  name: 'custom/css',
-  formatter: formatCss
-})
-
-StyleDictionary.registerFormat({
-  name: 'custom/cssJS',
-  formatter: formatCssAsJs
-})
+StyleDictionary.registerFormat(formatCss)
+StyleDictionary.registerFormat(formatCssAsJs)
