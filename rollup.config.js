@@ -2,7 +2,7 @@
 import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
-import sveltePreprocess from 'svelte-preprocess'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import themePlugin from './src/postcss/theme.js'
 import path from 'path'
 import genTypes from './src/scripts/gen-types.js'
@@ -54,7 +54,8 @@ export default {
     }),
     svelte({
       include: 'src/components/**/*.svelte',
-      preprocess: sveltePreprocess({
+      preprocess: vitePreprocess({
+        script: true,
         postcss: {
           plugins: [
             themePlugin({
