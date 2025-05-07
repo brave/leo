@@ -4,6 +4,7 @@
   "labels": ["dependencies", "renovate"],
   "prConcurrentLimit": 4,
   "rangeStrategy": "pin",
+  "baseBranches": ["main", "svelte4-lts"],
   "packageRules": [
     {
       "matchDepTypes": ["peerDependencies"],
