@@ -6,7 +6,6 @@
 <script lang="ts">
   import type { MiddlewareData, Placement, Strategy } from '@floating-ui/dom'
   import { arrow as arrowMiddleware } from '@floating-ui/dom'
-  import { fade } from 'svelte/transition'
   import Floating from '../floating/floating.svelte'
 
   export let text: string | undefined = undefined
@@ -25,10 +24,6 @@
 
   /* Whether the tooltip is currently visible */
   export let visible: boolean | undefined = undefined
-
-  /** The length of time in ms the tooltip element takes to fade
-   * after the users mouse leaves the trigger or tooltip*/
-  export let fadeDuration: number = 0
 
   /** Called when the visibility of the tooltip is changed */
   export let onVisibilityChange: (detail: { visible: boolean }) => void =
@@ -137,7 +132,6 @@
           class:hero={mode === 'hero'}
           class:info={mode === 'info'}
           class:mini={mode === 'mini'}
-          transition:fade={{ duration: fadeDuration }}
           class:default={mode === 'default' || !mode}
           hidden={!visibleInternal}
           bind:this={tooltip}
