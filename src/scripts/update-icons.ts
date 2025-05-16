@@ -1,9 +1,13 @@
-import figmaApiExporter from 'figma-api-exporter'
+import { figmaApiExporter } from 'figma-api-exporter'
 import fs from 'fs'
 import path from 'path'
 import { JSDOM } from 'jsdom'
 import { optimize } from 'svgo'
 import { TinyColor } from '@ctrl/tinycolor'
+import { setGlobalDispatcher, Agent } from 'undici'
+
+// Set the timeout to be 10 minutes.
+setGlobalDispatcher(new Agent({ connect: { timeout: 600000 } }))
 
 const RAW_FOLDER = './icons-raw'
 const FINAL_FOLDER = './icons'
