@@ -12,10 +12,10 @@ import './transformation/android'
 StyleDictionary.registerTransform({
   name: 'size/percent',
   type: 'value',
-  matcher: (token) => {
+  filter: (token) => {
     return token.unit === 'percent' && token.value !== 0
   },
-  transformer: (token) => {
+  transform: (token) => {
     return `${token.value}%`
   }
 })
@@ -25,10 +25,11 @@ StyleDictionary.registerTransform({
  * all of the relevant tokens together in one.
  */
 for (const platform of ['android', 'ios', 'skia']) {
-  const StyleDictionaryExtended = StyleDictionary.extend(
+  const StyleDictionaryExtended = new StyleDictionary(
     getConfig(['universal', platform, 'browser'])
   )
-  StyleDictionaryExtended.buildPlatform(platform)
+  await StyleDictionaryExtended.hasInitialized
+  await StyleDictionaryExtended.buildPlatform(platform)
 }
 
 /**
@@ -48,9 +49,11 @@ const layers = [
   'web3'
 ]
 for (const layer of layers) {
-  const StyleDictionaryExtended = StyleDictionary.extend(getConfig([layer]))
+  const StyleDictionaryExtended = new StyleDictionary(getConfig([layer]))
 
-  StyleDictionaryExtended.buildPlatform('css')
-  StyleDictionaryExtended.buildPlatform('json-flat')
-  StyleDictionaryExtended.buildPlatform('tailwind')
+  await StyleDictionaryExtended.hasInitialized
+
+  await StyleDictionaryExtended.buildPlatform('css')
+  await StyleDictionaryExtended.buildPlatform('json-flat')
+  await StyleDictionaryExtended.buildPlatform('tailwind')
 }

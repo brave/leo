@@ -1,11 +1,12 @@
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 
 export default {
+  name: 'tw/font',
   type: 'value',
-  matcher(token) {
+  filter(token) {
     return token.type === 'custom-fontStyle'
   },
-  transformer({ value: font }) {
+  transform({ value: font }) {
     return {
       fontSize: `${font.fontSize}px`,
       lineHeight: `${font.lineHeight}px`,
