@@ -1,3 +1,5 @@
+import type { Filter } from 'style-dictionary/types'
+
 const acceptedTypes = [
   'color',
   'dimension',
@@ -10,4 +12,7 @@ const acceptedTypes = [
   'number'
 ]
 
-export default (token) => acceptedTypes.includes(token.type)
+export default {
+  name: 'filterWeb',
+  filter: (token) => acceptedTypes.includes(token.type)
+} as Filter

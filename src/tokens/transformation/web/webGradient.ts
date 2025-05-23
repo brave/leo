@@ -1,12 +1,12 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import { Transform } from 'style-dictionary'
-
+import type { Transform } from 'style-dictionary/types'
 export default {
+  name: 'web/gradient',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'custom-gradient'
   },
-  transformer: function ({ value }) {
+  transform: function ({ value }) {
     value = Array.isArray(value) ? value : [value]
     return value.map((v) => formatGradient(v)).join(', ')
   }

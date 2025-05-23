@@ -1,4 +1,4 @@
-import { Transform } from 'style-dictionary'
+import type { Transform } from 'style-dictionary/types'
 
 const notDefault = (value, defaultValue) =>
   value !== defaultValue ? value : ''
@@ -12,11 +12,12 @@ const fontFamily = (
     : fontFamily
 
 export default {
+  name: 'web/font',
   type: 'value',
-  matcher: function (token) {
+  filter: function (token) {
     return token.type === 'custom-fontStyle'
   },
-  transformer: function ({ value: font }, platform) {
+  transform: function ({ value: font }, platform) {
     // font: font-style font-variant font-weight font-size/line-height font-family;
     return `${notDefault(font.fontStretch, 'normal')} ${notDefault(
       font.fontStyle,

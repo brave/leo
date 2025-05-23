@@ -1,4 +1,4 @@
-import { Config } from 'style-dictionary'
+import type { Config } from 'style-dictionary/types'
 import leoParser from './transformation/common/leoParser'
 
 function formatLayerPathPart(
@@ -12,13 +12,23 @@ function formatLayerPathPart(
 
 export default function getConfig(layers: string[]) {
   return {
+    hooks: {
+      parsers: {
+        'leo-parser': leoParser
+      }
+    },
+    parsers: ['leo-parser'],
     source: layers.map((layer) => `src/tokens/${layer}*.json`),
-    parsers: [leoParser],
     platforms: {
       tailwind: {
         transformGroup: 'tailwind/css',
         buildPath: 'tokens/tailwind/',
         preset: formatLayerPathPart(layers),
+        options: {
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: `${formatLayerPathPart(layers, {
@@ -61,16 +71,19 @@ export default function getConfig(layers: string[]) {
       css: {
         transformGroup: 'custom/css',
         buildPath: 'tokens/css/',
+        options: {
+          showFileHeader: true,
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: `variables${formatLayerPathPart(layers, {
               prefix: '-'
             })}.css`,
             format: 'custom/css',
-            filter: 'filterWeb',
-            options: {
-              showFileHeader: true
-            }
+            filter: 'filterWeb'
           },
           {
             destination: `variables${formatLayerPathPart(layers, {
@@ -84,6 +97,11 @@ export default function getConfig(layers: string[]) {
       'json-flat': {
         transformGroup: 'js',
         buildPath: 'tokens/json/',
+        options: {
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: `styles${formatLayerPathPart(layers, {
@@ -96,6 +114,11 @@ export default function getConfig(layers: string[]) {
       skia: {
         transformGroup: 'skia',
         buildPath: 'tokens/skia/',
+        options: {
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: 'nala_color_id.h',
@@ -137,6 +160,11 @@ export default function getConfig(layers: string[]) {
       ios: {
         transformGroup: 'ios',
         buildPath: 'tokens/ios-swift/',
+        options: {
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: 'Gradients.swift',
@@ -158,6 +186,11 @@ export default function getConfig(layers: string[]) {
       android: {
         transformGroup: 'android',
         buildPath: 'tokens/android/',
+        options: {
+          formatting: {
+            fileHeaderTimestamp: true
+          }
+        },
         files: [
           {
             destination: 'values/styles.xml',

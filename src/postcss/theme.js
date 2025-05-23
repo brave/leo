@@ -37,8 +37,8 @@ const defaultOptions = {
 
 /**
  * @param {{
- *  darkSelector: string,
- *  lightSelector: string,
+ *  darkSelector?: string,
+ *  lightSelector?: string,
  *  wrapSelector?: (selector: string) => string,
  * }} options The options for configuring the selectors for darkmode.
  */

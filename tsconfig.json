@@ -1,6 +1,10 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["src/components/**/*", "src/svelteDirectives/**/*"],
+  "include": [
+    "src/components/**/*",
+    "src/svelteDirectives/**/*",
+    "src/tokens/**/*"
+  ],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
   "compilerOptions": {
     "strictNullChecks": false,
