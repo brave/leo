@@ -74,7 +74,6 @@
     padding: var(--padding);
     font: var(--font-text);
     height: var(--leo-icon-m);
-    text-transform: var(--leo-label-capitalization, uppercase);
   }
 
   .content {
