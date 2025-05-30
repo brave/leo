@@ -60,7 +60,7 @@
     --icon-size: var(--leo-label-icon-size, 14px);
     --font-text: var(--leo-label-font-text, var(--leo-font-components-label));
     --padding: var(--leo-label-padding, 0 var(--leo-spacing-s));
-    --radius: var(--leo-label-radius, var(--leo-radius-s));
+    --radius: var(--leo-label-radius, 6px);
 
     --leo-icon-size: var(--icon-size);
 
