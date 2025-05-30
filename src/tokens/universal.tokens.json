@@ -797,7 +797,7 @@
           "fontSize": 12,
           "textDecoration": "none",
           "fontFamily": "Inter Variable",
-          "fontWeight": 600,
+          "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
           "letterSpacing": 0,
@@ -2443,7 +2443,7 @@
         },
         "fontWeight": {
           "type": "number",
-          "value": 600
+          "value": 400
         },
         "fontStyle": {
           "type": "string",
