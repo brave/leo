@@ -138,7 +138,7 @@
   }
 
   .item {
-    --leo-icon-size: 18px;
+    --leo-icon-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -156,14 +156,8 @@
 
   .section {
     margin: var(--leo-menu-item-margin);
-    border-top: 1px solid rgba(128, 128, 128, 0.225);
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 12px;
-    color: grey;
-  }
-
-  .section:hover {
-    color: grey;
+    padding: var(--leo-menu-item-padding);
+    font: var(--leo-font-small-regular);
+    color: var(--leo-color-text-secondary);
   }
 </style>
