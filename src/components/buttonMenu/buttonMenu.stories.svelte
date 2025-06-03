@@ -27,17 +27,46 @@
   let controlledMenuOpen = false
 
   const handleAction = () => console.log('action')
+
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      handleAction()
+    }
+  }
+
+  function handleToggleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      handleAction()
+      toggleIsChecked = !toggleIsChecked
+    }
+  }
 </script>
 
 <Template let:args>
   <div class="container">
     <ButtonMenu>
       <span slot="anchor-content">Click Me!</span>
-      <!-- svelte-ignore a11y-click-events-have-key-events leo-menu-item peovides key events -->
-      <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
-      <leo-menu-item> Share </leo-menu-item>
+      <leo-menu-item 
+        role="menuitem"
+        on:click={handleAction}
+        on:keydown={handleKeydown}
+        tabindex="0"
+      > 
+        Copy 
+      </leo-menu-item>
+      <leo-menu-item 
+        role="menuitem"
+        tabindex="0"
+      > 
+        Share 
+      </leo-menu-item>
       <div class="section">Section</div>
-      <leo-menu-item>
+      <leo-menu-item 
+        role="menuitem"
+        tabindex="0"
+      >
         <div class="item">
           <div>New Chat</div>
           <Icon name="plus-add" />
@@ -47,14 +76,16 @@
         <div>Suggested questions</div>
         <Toggle bind:checked={toggleIsChecked} size="small" />
       </div>
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <leo-menu-item
         class="item"
+        role="menuitem"
         on:click={(e) => {
           handleAction()
           toggleIsChecked = !toggleIsChecked
         }}
+        on:keydown={handleToggleKeydown}
         data-is-interactive="true"
+        tabindex="0"
       >
         <div>Suggested questions</div>
         <Toggle bind:checked={toggleIsChecked} size="small" />
@@ -101,9 +132,22 @@
         <div slot="anchor-content">
           <Icon name="more-horizontal" />
         </div>
-        <leo-menu-item> Copy </leo-menu-item>
-        <leo-menu-item> Share </leo-menu-item>
-        <leo-menu-item>
+        <leo-menu-item 
+          role="menuitem"
+          tabindex="0"
+        > 
+          Copy 
+        </leo-menu-item>
+        <leo-menu-item 
+          role="menuitem"
+          tabindex="0"
+        > 
+          Share 
+        </leo-menu-item>
+        <leo-menu-item 
+          role="menuitem"
+          tabindex="0"
+        >
           <div class="item">
             <div>New Chat</div>
             <Icon name="plus-add" />
@@ -121,9 +165,22 @@
     <div slot="anchor-content">
       <Icon name="more-horizontal" />
     </div>
-    <leo-menu-item> Copy </leo-menu-item>
-    <leo-menu-item> Share </leo-menu-item>
-    <leo-menu-item>
+    <leo-menu-item 
+      role="menuitem"
+      tabindex="0"
+    > 
+      Copy 
+    </leo-menu-item>
+    <leo-menu-item 
+      role="menuitem"
+      tabindex="0"
+    > 
+      Share 
+    </leo-menu-item>
+    <leo-menu-item 
+      role="menuitem"
+      tabindex="0"
+    >
       <div class="item">
         <div>New Chat</div>
         <Icon name="plus-add" />

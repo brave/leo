@@ -46,7 +46,14 @@
     firing a `click` event. This may be triggered with a keypress or click.
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div bind:this={anchor} on:click|preventDefault|stopPropagation={toggle}>
+  <div 
+    bind:this={anchor} 
+    on:click|preventDefault|stopPropagation={toggle}
+    role="button"
+    aria-haspopup="menu"
+    aria-expanded={isOpenInternal}
+    tabindex="0"
+  >
     <slot name="anchor-content"/>
   </div>
   {#if isOpenInternal}
