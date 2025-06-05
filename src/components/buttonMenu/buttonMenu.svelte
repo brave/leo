@@ -16,7 +16,6 @@
 <script lang="ts">
   import Menu, { type CloseEvent } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
-  import { fade, scale } from 'svelte/transition'
 
   export let isOpen: boolean | undefined = undefined
   export let onClose: CloseEvent = undefined
@@ -57,16 +56,8 @@
     <slot name="anchor-content"/>
   </div>
   {#if isOpenInternal}
-    <div 
-      class="menu-wrapper"
-      in:fade={{ duration: 150 }}
-      out:fade={{ duration: 100 }}
-    >
-      <div 
-        class="menu-content"
-        in:scale={{ duration: 150, start: 0.95 }}
-        out:scale={{ duration: 100, start: 1 }}
-      >
+    <div class="menu-wrapper">
+      <div class="menu-content">
         <Menu 
           {positionStrategy} 
           isOpen={isOpenInternal} 
@@ -97,9 +88,31 @@
   .menu-wrapper {
     position: absolute;
     z-index: 1000;
+    animation: fadeIn 150ms ease-out;
   }
 
   .menu-content {
     transform-origin: top left;
+    animation: scaleIn 150ms ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 </style>
