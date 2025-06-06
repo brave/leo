@@ -48,25 +48,10 @@
   <div class="container">
     <ButtonMenu>
       <span slot="anchor-content">Click Me!</span>
-      <leo-menu-item 
-        role="menuitem"
-        on:click={handleAction}
-        on:keydown={handleKeydown}
-        tabindex="0"
-      > 
-        Copy 
-      </leo-menu-item>
-      <leo-menu-item 
-        role="menuitem"
-        tabindex="0"
-      > 
-        Share 
-      </leo-menu-item>
+      <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
+      <leo-menu-item> Share </leo-menu-item>
       <div class="section">Section</div>
-      <leo-menu-item 
-        role="menuitem"
-        tabindex="0"
-      >
+      <leo-menu-item>
         <div class="item">
           <div>New Chat</div>
           <Icon name="plus-add" />
@@ -78,14 +63,11 @@
       </div>
       <leo-menu-item
         class="item"
-        role="menuitem"
         on:click={(e) => {
           handleAction()
           toggleIsChecked = !toggleIsChecked
         }}
-        on:keydown={handleToggleKeydown}
         data-is-interactive="true"
-        tabindex="0"
       >
         <div>Suggested questions</div>
         <Toggle bind:checked={toggleIsChecked} size="small" />
@@ -132,22 +114,13 @@
         <div slot="anchor-content">
           <Icon name="more-horizontal" />
         </div>
-        <leo-menu-item 
-          role="menuitem"
-          tabindex="0"
-        > 
+        <leo-menu-item> 
           Copy 
         </leo-menu-item>
-        <leo-menu-item 
-          role="menuitem"
-          tabindex="0"
-        > 
+        <leo-menu-item> 
           Share 
         </leo-menu-item>
-        <leo-menu-item 
-          role="menuitem"
-          tabindex="0"
-        >
+        <leo-menu-item>
           <div class="item">
             <div>New Chat</div>
             <Icon name="plus-add" />
@@ -165,22 +138,13 @@
     <div slot="anchor-content">
       <Icon name="more-horizontal" />
     </div>
-    <leo-menu-item 
-      role="menuitem"
-      tabindex="0"
-    > 
+    <leo-menu-item> 
       Copy 
     </leo-menu-item>
-    <leo-menu-item 
-      role="menuitem"
-      tabindex="0"
-    > 
+    <leo-menu-item> 
       Share 
     </leo-menu-item>
-    <leo-menu-item 
-      role="menuitem"
-      tabindex="0"
-    >
+    <leo-menu-item>
       <div class="item">
         <div>New Chat</div>
         <Icon name="plus-add" />
