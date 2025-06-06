@@ -56,18 +56,14 @@
     <slot name="anchor-content"/>
   </div>
   {#if isOpenInternal}
-    <div class="menu-wrapper">
-      <div class="menu-content">
-        <Menu 
-          {positionStrategy} 
-          isOpen={isOpenInternal} 
-          target={anchor} 
-          onClose={close}
-        >
-          <slot />
-        </Menu>
-      </div>
-    </div>
+    <Menu 
+      {positionStrategy} 
+      isOpen={isOpenInternal} 
+      target={anchor} 
+      onClose={close}
+    >
+      <slot />
+    </Menu>
   {/if}
 </div>
 
@@ -82,37 +78,6 @@
 
     button {
       all: unset;
-    }
-  }
-
-  .menu-wrapper {
-    position: absolute;
-    z-index: 1000;
-    animation: fadeIn 150ms ease-out;
-  }
-
-  .menu-content {
-    transform-origin: top left;
-    animation: scaleIn 150ms ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
     }
   }
 </style>
