@@ -62,6 +62,7 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <script type="module">
     import './leo/button.js'
+    import './leo/link.js'
     import './leo/collapse.js'
     import './leo/toggle.js'
     import './leo/progressRing.js'
@@ -93,6 +94,7 @@
 
     let count = 10
     const clickable = document.getElementById('clickable')
+    const linkButton = document.querySelector('#link-button')
     const ring = document.querySelector('leo-progressring')
     const bar = document.querySelector('leo-progressbar')
     const toggle = document.querySelector('leo-toggle')
@@ -172,6 +174,12 @@
     })
     dialog.addEventListener('close', () => dialogButton.isDisabled = false)
 
+    linkButton.addEventListener('click', () => {
+      dialog.isOpen = true
+      linkButton.isDisabled = true
+    })
+    dialog.addEventListener('close', () => linkButton.isDisabled = false)
+
     const searchInput = document.querySelector('leo-input:has(#searchPicker)')
     const searchDropdown = document.querySelector('#searchPicker')
     searchDropdown.addEventListener('change', e => {
@@ -189,6 +197,8 @@
     <leo-alertcenter></leo-alertcenter>
     <leo-button id="clickable">Click Me</leo-button>
     <leo-button href="https://brave.com">External link</leo-button>
+    <leo-link href="https://brave.com">External link</leo-link>
+    <leo-link id="link-button">Link Button</leo-link>
     <leo-collapse title="Handy dandy title">
       Some content which is hidden by default
     </leo-collapse>
