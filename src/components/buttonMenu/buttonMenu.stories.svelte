@@ -28,20 +28,6 @@
 
   const handleAction = () => console.log('action')
 
-  function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      handleAction()
-    }
-  }
-
-  function handleToggleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      handleAction()
-      toggleIsChecked = !toggleIsChecked
-    }
-  }
 </script>
 
 <Template let:args>
