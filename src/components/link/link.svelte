@@ -1,32 +1,59 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
 
-  type ExcludedProps = 'class' | 'href' | 'aria-disabled'
-  type $$Props = Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
+  type Href = $$Generic<string | undefined>
+  type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang'
+
+  interface CommonNalaLinkProps {
     isDisabled?: boolean
-    href: string
   }
 
-  export let href: string
+  type ButtonProps = CommonNalaLinkProps &
+    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
+      href?: never
+      onClick?: (e: MouseEvent) => void
+    }
+
+  type AnchorProps = CommonNalaLinkProps &
+    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
+      href: Href
+      onClick?: never
+    }
+
+  type $$Props = AnchorProps | ButtonProps
+
+  export let href: Href = undefined
   export let isDisabled: boolean = false
+  export let onClick: (e: MouseEvent) => void = undefined
+
+  $: tag = href ? 'a' : ('button' as 'a' | 'button')
+  $: disabled = !!(isDisabled || (isDisabled as any) === '')
 </script>
 
-<a
-  rel="noopener"
+<svelte:element
+  this={tag}
   {...$$restProps}
-  {href}
-  class="leo-link"
-  class:disabled={isDisabled}
-  aria-disabled={isDisabled}
-  on:click={(e) => {
-    if (isDisabled) e.preventDefault()
-  }}
+  rel={href && 'noopener'}
+  href={href || undefined}
+  class="leoLink"
+  class:disabled
+  aria-disabled={disabled || undefined}
+  on:click={onClick ||
+    ((e) => {
+      if (disabled) e.preventDefault()
+    })}
+  disabled={disabled || undefined}
 >
   <slot />
-</a>
+</svelte:element>
 
 <style lang="scss">
-  a {
+  button:where(.leoLink) {
+    all: unset;
+  }
+
+  a,
+  .leoLink {
     --color: var(--leo-link-color, var(--leo-color-text-interactive));
     --hover-color: var(--leo-link-hover-color, var(--leo-color-primary-60));
     --visited-color: var(--leo-link-visited-color, var(--leo-color-pink-50));

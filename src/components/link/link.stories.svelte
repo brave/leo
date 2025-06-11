@@ -60,7 +60,7 @@
   }
 </script>
 
-<script>
+<script lang="ts">
   import { Story, Template } from '@storybook/addon-svelte-csf'
 
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
