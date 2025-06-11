@@ -225,6 +225,8 @@
   .leo-menu .leo-menu-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
+    transform-origin: top left;
+    animation: menuIn 150ms ease-out;
 
     // TODO(petemill): Make the "floating-ui" element be this popup element,
     // so that we get the correct thing scrolling when overflow happens. In the meantime,
@@ -236,6 +238,17 @@
     min-width: var(--leo-menu-control-width);
     display: flex;
     flex-direction: column;
+  }
+
+  @keyframes menuIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   /* custom items can fit in by making optional use of these variables */

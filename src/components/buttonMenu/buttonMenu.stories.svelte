@@ -27,13 +27,13 @@
   let controlledMenuOpen = false
 
   const handleAction = () => console.log('action')
+
 </script>
 
 <Template let:args>
   <div class="container">
     <ButtonMenu>
       <span slot="anchor-content">Click Me!</span>
-      <!-- svelte-ignore a11y-click-events-have-key-events leo-menu-item peovides key events -->
       <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
       <leo-menu-item> Share </leo-menu-item>
       <div class="section">Section</div>
@@ -47,7 +47,6 @@
         <div>Suggested questions</div>
         <Toggle bind:checked={toggleIsChecked} size="small" />
       </div>
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <leo-menu-item
         class="item"
         on:click={(e) => {
@@ -101,8 +100,12 @@
         <div slot="anchor-content">
           <Icon name="more-horizontal" />
         </div>
-        <leo-menu-item> Copy </leo-menu-item>
-        <leo-menu-item> Share </leo-menu-item>
+        <leo-menu-item> 
+          Copy 
+        </leo-menu-item>
+        <leo-menu-item> 
+          Share 
+        </leo-menu-item>
         <leo-menu-item>
           <div class="item">
             <div>New Chat</div>
@@ -121,8 +124,12 @@
     <div slot="anchor-content">
       <Icon name="more-horizontal" />
     </div>
-    <leo-menu-item> Copy </leo-menu-item>
-    <leo-menu-item> Share </leo-menu-item>
+    <leo-menu-item> 
+      Copy 
+    </leo-menu-item>
+    <leo-menu-item> 
+      Share 
+    </leo-menu-item>
     <leo-menu-item>
       <div class="item">
         <div>New Chat</div>
@@ -138,7 +145,7 @@
   }
 
   .item {
-    --leo-icon-size: 18px;
+    --leo-icon-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -156,14 +163,8 @@
 
   .section {
     margin: var(--leo-menu-item-margin);
-    border-top: 1px solid rgba(128, 128, 128, 0.225);
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 12px;
-    color: grey;
-  }
-
-  .section:hover {
-    color: grey;
+    padding: var(--leo-menu-item-padding);
+    font: var(--leo-font-small-regular);
+    color: var(--leo-color-text-secondary);
   }
 </style>
