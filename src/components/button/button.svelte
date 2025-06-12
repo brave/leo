@@ -109,7 +109,7 @@
      * button color palette.
      */
     --foreground: var(--leo-color-text-primary);
-    --background: var(--leo-color-container-background);
+    --background: transparent;
 
     --primary-color: var(
       --leo-button-color,
@@ -385,18 +385,6 @@
 
     &:disabled:not(.isLoading) {
       --color: var(--leo-color-text-primary);
-    }
-
-    &.fab {
-
-      
-      @supports (color: color-mix(in srgb, transparent, transparent)) {
-        --bg-hover: color-mix(
-          in srgb,
-          var(--primary-color) var(--bg-hover-mix),
-          var(--background)
-        );
-      }
     }
   }
   .leoButton.isPlainFaint {
