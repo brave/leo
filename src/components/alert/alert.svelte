@@ -77,7 +77,7 @@
     );
     color: var(--default-text-color, var(--leo-color-text-primary));
     padding: var(--leo-alert-padding, var(--leo-spacing-xl));
-    border-radius: var(--leo-radius-m);
+    border-radius: var(--leo-radius-l);
     border: var(--leo-alert-border-width, var(--default-border-width)) solid
       var(--leo-alert-border-color, var(--default-border-color));
     gap: var(--leo-spacing-xl) 0;
