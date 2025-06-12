@@ -127,7 +127,7 @@
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
-    --radius: 0;
+    --radius: var(--leo-radius-full);
     --border-color: transparent;
     --border-width: 0px;
     --leo-icon-color: var(--icon-color);
@@ -238,8 +238,7 @@
     font: var(--leo-font-components-button-small);
     min-height: 28px;
     --padding-y: var(--leo-spacing-s);
-    --padding-x: var(--leo-spacing-s);
-    --radius: var(--leo-radius-m);
+    --padding-x: var(--leo-spacing-m);
     --leo-icon-size: var(--leo-icon-xs);
     --icon-gap: var(--leo-spacing-s);
 
@@ -253,8 +252,7 @@
     font: var(--leo-font-components-button-small);
     min-height: 36px;
     --padding-y: var(--leo-spacing-m);
-    --padding-x: var(--leo-spacing-m);
-    --radius: var(--leo-radius-m);
+    --padding-x: var(--leo-spacing-l);
     --leo-icon-size: var(--leo-icon-s);
     --icon-gap: var(--leo-spacing-s);
 
@@ -267,8 +265,7 @@
     font: var(--leo-font-components-button-default);
     min-height: 44px;
     --padding-y: var(--leo-spacing-l);
-    --padding-x: var(--leo-spacing-xl);
-    --radius: var(--leo-radius-l);
+    --padding-x: var(--leo-spacing-l);
     --leo-icon-size: var(--leo-icon-m);
     --icon-gap: var(--leo-spacing-s);
 
@@ -283,8 +280,7 @@
     min-height: 52px;
     --padding-y: var(--leo-spacing-l);
     --padding-x: var(--leo-spacing-xl);
-    --radius: var(--leo-radius-xl);
-    --leo-icon-size: var(--leo-icon-m);
+    --leo-icon-size: var(--leo-icon-l);
     --icon-gap: var(--leo-spacing-s);
 
     &.fab {
@@ -298,8 +294,7 @@
     min-height: 60px;
     --padding-y: var(--leo-spacing-xl);
     --padding-x: var(--leo-spacing-xl);
-    --radius: var(--leo-radius-xl);
-    --leo-icon-size: var(--leo-icon-l);
+    --leo-icon-size: 28px;
     --icon-gap: var(--leo-spacing-m);
 
     &.fab {
@@ -310,6 +305,11 @@
   }
 
   // Kind Variations
+  .leoButton.isOutline,
+  .leoButton.isPlain {
+    --bg-hover-mix: 10%;
+  }
+
   .leoButton.isFilled {
     --bg: var(--mixed-primary-color);
     --bg-disabled: var(--leo-color-button-disabled);
@@ -331,6 +331,7 @@
     --border-width: 1px;
     --border-color: var(--leo-color-divider-interactive);
     --border-color-hover: var(--leo-color-primitive-primary-70);
+    --bg-hover: var(--leo-color-neutral-20);
 
     @container style(--leo-button-color) {
       --color: var(--mixed-primary-color);
@@ -338,6 +339,7 @@
 
     @theme (dark) {
       --border-color-hover: var(--leo-color-primitive-primary-35);
+      --bg-hover: var(--leo-color-neutral-30);
     }
 
     /** If we support color mix, infer border colors from primary color */
@@ -352,22 +354,28 @@
         var(--mixed-primary-color),
         var(--background) 20%
       );
+      --bg-hover: color-mix(
+        in srgb,
+        var(--primary-color) var(--bg-hover-mix),
+        var(--background)
+      );
     }
   }
   .leoButton.isPlain {
     --color: var(--leo-color-text-interactive);
     --box-shadow-hover: none;
-    --bg-hover-mix: 5%;
+    --bg-mix: 5%;
 
     @container style(--leo-button-color) {
       --color: var(--mixed-primary-color);
     }
 
-    @theme (dark) {
-      --bg-hover-mix: 10%;
-    }
-
     @supports (color: color-mix(in srgb, transparent, transparent)) {
+      --bg: color-mix(
+        in srgb,
+        var(--primary-color) var(--bg-mix),
+        var(--background)
+      );
       --bg-hover: color-mix(
         in srgb,
         var(--primary-color) var(--bg-hover-mix),
@@ -380,15 +388,25 @@
     }
 
     &.fab {
-      --radius: var(--leo-radius-m);
-      --bg-hover: transparent;
-      --padding-y: 0;
-      --padding-x: 0;
+
+      
+      @supports (color: color-mix(in srgb, transparent, transparent)) {
+        --bg: color-mix(
+          in srgb,
+          var(--primary-color) var(--bg-mix),
+          var(--background)
+        );
+        --bg-hover: color-mix(
+          in srgb,
+          var(--primary-color) var(--bg-hover-mix),
+          var(--background)
+        );
+      }
     }
   }
   .leoButton.isPlainFaint {
     --foreground: black;
-    --primary-color: currentColor;
+    --primary-color: var(--leo-button-color, currentColor);
     --color: var(--mixed-primary-color);
     --box-shadow-hover: none;
     --icon-color: var(--mixed-primary-color);
@@ -442,7 +460,6 @@
     }
 
     &.fab {
-      --radius: var(--leo-radius-m);
       --bg-hover: transparent;
       --padding-y: 0;
       --padding-x: 0;

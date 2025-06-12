@@ -120,7 +120,7 @@
     --control-padding: var(--leo-control-padding, var(--leo-spacing-s));
     --gap: var(--leo-spacing-s);
     --control-height: 44px;
-    --radius: var(--leo-radius-xl);
+    --radius: var(--leo-radius-full);
 
     --leo-control-item-padding: var(--leo-spacing-l);
     --leo-control-item-icon-gap: var(--leo-spacing-m);
@@ -141,8 +141,7 @@
 
     &.size-small {
       --leo-icon-size: var(--leo-icon-s);
-      --control-height: 28px;
-      --radius: var(--leo-radius-xl);
+      --control-height: 36px;
       --leo-control-item-padding: var(--leo-spacing-m);
       --leo-control-item-font: var(--leo-font-components-button-small);
     }
@@ -151,9 +150,8 @@
       --leo-icon-size: var(--leo-icon-xs);
       --control-padding: var(--leo-control-padding, var(--leo-spacing-xs));
       --gap: var(--leo-spacing-xs);
-      --control-height: 24px;
-      --radius: var(--leo-radius-m);
-      --leo-control-item-padding: var(--leo-spacing-s);
+      --control-height: 28px;
+      --leo-control-item-padding: var(--leo-spacing-m);
       --leo-control-item-font: var(--leo-font-components-button-small);
     }
 
