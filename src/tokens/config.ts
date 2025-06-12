@@ -58,6 +58,30 @@ export default function getConfig(layers: string[]) {
           'tailwind/extract_component_styles'
         ]
       },
+      'tailwind-email': {
+        transformGroup: 'tailwind/css',
+        buildPath: 'tokens/tailwind-email/',
+        preset: formatLayerPathPart(layers),
+        files: [
+          {
+            destination: 'tokens.js',
+            format: 'tailwind/tokens',
+            filter: 'tw/filterTokens',
+            options: {
+              showFileHeader: false
+            }
+          },
+          {
+            destination: 'plugins/typography.js',
+            format: 'tailwind/fonts',
+            filter: 'tw/filterFonts',
+            options: {
+              showFileHeader: false
+            }
+          }
+        ],
+        actions: ['tailwind/copy_static_files']
+      },
       css: {
         transformGroup: 'custom/css',
         buildPath: 'tokens/css/',
