@@ -391,11 +391,6 @@
 
       
       @supports (color: color-mix(in srgb, transparent, transparent)) {
-        --bg: color-mix(
-          in srgb,
-          var(--primary-color) var(--bg-mix),
-          var(--background)
-        );
         --bg-hover: color-mix(
           in srgb,
           var(--primary-color) var(--bg-hover-mix),
