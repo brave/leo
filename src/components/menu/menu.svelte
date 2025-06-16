@@ -34,12 +34,13 @@
 <script lang="ts">
   import clickOutside from '../../svelteDirectives/clickOutside'
   import Floating from '../floating/floating.svelte'
-  import { size as sizeMiddleware, type Strategy } from '@floating-ui/dom'
+  import { size as sizeMiddleware, type Placement, type Strategy } from '@floating-ui/dom'
 
   export let isOpen = false
   export let target: HTMLElement | undefined = undefined
   export let currentValue: string | undefined = undefined
   export let positionStrategy: Strategy = 'absolute'
+  export let placement: Placement = 'bottom-start'
   export let onClose: CloseEvent =
     undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
@@ -183,7 +184,7 @@
   {#if isOpen}
     <Floating
       {target}
-      placement="bottom-start"
+      {placement}
       autoUpdate
       middleware={floatingMiddleware}
       {positionStrategy}

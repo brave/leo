@@ -15,12 +15,13 @@
 
 <script lang="ts">
   import Menu, { type CloseEvent } from '../menu/menu.svelte'
-  import type { Strategy } from '@floating-ui/dom'
+  import type { Strategy, Placement } from '@floating-ui/dom'
 
   export let isOpen: boolean | undefined = undefined
   export let onClose: CloseEvent = undefined
   export let onChange: (e: { isOpen: boolean }) => void = undefined
   export let positionStrategy: Strategy = 'absolute'
+  export let placement: Placement = 'bottom-start'
 
   let anchor: HTMLElement
 
@@ -56,7 +57,8 @@
     <slot name="anchor-content"/>
   </div>
   {#if isOpenInternal}
-    <Menu 
+    <Menu
+      {placement}
       {positionStrategy} 
       isOpen={isOpenInternal} 
       target={anchor} 
