@@ -9,19 +9,23 @@
         "stops": [
           {
             "position": 0,
-            "color": "#00000080"
+            "color": "#00000033"
           },
           {
-            "position": 0.36,
+            "position": 0.25,
             "color": "#00000000"
           },
           {
-            "position": 0.8,
+            "position": 0.5,
+            "color": "#00000000"
+          },
+          {
+            "position": 0.75,
             "color": "#00000000"
           },
           {
             "position": 1,
-            "color": "#00000080"
+            "color": "#00000033"
           }
         ]
       },
@@ -40,7 +44,7 @@
         "value": {
           "fontSize": 40,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "SF Pro Display",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -62,7 +66,7 @@
         "value": {
           "fontSize": 20,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "SF Pro Display",
           "fontWeight": 500,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -85,14 +89,14 @@
         "progress": {
           "type": "custom-fontStyle",
           "value": {
-            "fontSize": 24,
+            "fontSize": 22,
             "textDecoration": "none",
-            "fontFamily": "Poppins",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 24,
+            "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 0,
             "textCase": "none"
@@ -109,7 +113,7 @@
           "value": {
             "fontSize": 36,
             "textDecoration": "none",
-            "fontFamily": "Poppins",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -142,7 +146,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "SF Pro Display"
         },
         "fontWeight": {
           "type": "number",
@@ -188,7 +192,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "SF Pro Display"
         },
         "fontWeight": {
           "type": "number",
@@ -229,7 +233,7 @@
         "progress": {
           "fontSize": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "textDecoration": {
             "type": "string",
@@ -237,7 +241,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Poppins"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -257,7 +261,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -283,7 +287,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Poppins"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",

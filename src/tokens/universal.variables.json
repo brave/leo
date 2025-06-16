@@ -1354,6 +1354,10 @@
     "browser-content": {
       "type": "number",
       "value": 6
+    },
+    "ios-modals": {
+      "type": "number",
+      "value": 38
     }
   },
   "spacing": {
@@ -5486,11 +5490,11 @@
         },
         "h1": {
           "type": "number",
-          "value": 30
+          "value": 28
         },
         "h2": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "h3": {
           "type": "number",
@@ -5564,11 +5568,11 @@
         },
         "h1": {
           "type": "number",
-          "value": 38
+          "value": 34
         },
         "h2": {
           "type": "number",
-          "value": 30
+          "value": 28
         },
         "h3": {
           "type": "number",
@@ -5614,19 +5618,19 @@
       "letter-spacing": {
         "large": {
           "type": "number",
-          "value": 0
+          "value": -0.23000000417232513
         },
         "default": {
           "type": "number",
-          "value": 0
+          "value": -0.23000000417232513
         },
         "small": {
           "type": "number",
-          "value": 0
+          "value": -0.07999999821186066
         },
         "button": {
           "type": "number",
-          "value": 0
+          "value": -0.4000000059604645
         },
         "headings": {
           "type": "number",
@@ -5640,7 +5644,7 @@
         }
       }
     },
-    "mobile": {
+    "search": {
       "size": {
         "large": {
           "type": "number",
@@ -5660,15 +5664,15 @@
         },
         "display1": {
           "type": "number",
-          "value": 36
+          "value": 46
         },
         "display2": {
           "type": "number",
-          "value": 32
+          "value": 40
         },
         "display3": {
           "type": "number",
-          "value": 28
+          "value": 34
         },
         "h1": {
           "type": "number",
@@ -5680,7 +5684,7 @@
         },
         "h3": {
           "type": "number",
-          "value": 18
+          "value": 20
         },
         "h4": {
           "type": "number",
@@ -5716,7 +5720,7 @@
         },
         "numbers": {
           "type": "number",
-          "value": 32
+          "value": 36
         }
       },
       "line-height": {
@@ -5738,19 +5742,19 @@
         },
         "display1": {
           "type": "number",
-          "value": 44
+          "value": 54
         },
         "display2": {
           "type": "number",
-          "value": 42
+          "value": 48
         },
         "display3": {
           "type": "number",
-          "value": 36
+          "value": 40
         },
         "h1": {
           "type": "number",
-          "value": 36
+          "value": 34
         },
         "h2": {
           "type": "number",
@@ -5794,25 +5798,25 @@
         },
         "numbers": {
           "type": "number",
-          "value": 40
+          "value": 46
         }
       },
       "letter-spacing": {
         "large": {
           "type": "number",
-          "value": 0
+          "value": -0.23000000417232513
         },
         "default": {
           "type": "number",
-          "value": 0
+          "value": -0.23000000417232513
         },
         "small": {
           "type": "number",
-          "value": 0
+          "value": -0.07999999821186066
         },
         "button": {
           "type": "number",
-          "value": 0
+          "value": -0.4000000059604645
         },
         "headings": {
           "type": "number",
@@ -5858,11 +5862,11 @@
         },
         "h1": {
           "type": "number",
-          "value": 30
+          "value": 28
         },
         "h2": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "h3": {
           "type": "number",
@@ -5936,11 +5940,11 @@
         },
         "h1": {
           "type": "number",
-          "value": 38
+          "value": 34
         },
         "h2": {
           "type": "number",
-          "value": 30
+          "value": 28
         },
         "h3": {
           "type": "number",
@@ -5986,7 +5990,7 @@
       "letter-spacing": {
         "large": {
           "type": "number",
-          "value": -0.4300000071525574
+          "value": -0.23000000417232513
         },
         "default": {
           "type": "number",
@@ -6044,11 +6048,11 @@
         },
         "h1": {
           "type": "number",
-          "value": 30
+          "value": 28
         },
         "h2": {
           "type": "number",
-          "value": 24
+          "value": 22
         },
         "h3": {
           "type": "number",
@@ -6122,7 +6126,7 @@
         },
         "h1": {
           "type": "number",
-          "value": 38
+          "value": 34
         },
         "h2": {
           "type": "number",
@@ -6172,11 +6176,11 @@
       "letter-spacing": {
         "large": {
           "type": "number",
-          "value": 0.10000000149011612
+          "value": 0
         },
         "default": {
           "type": "number",
-          "value": 0.10000000149011612
+          "value": 0
         },
         "small": {
           "type": "number",
@@ -6188,7 +6192,7 @@
         },
         "headings": {
           "type": "number",
-          "value": 0.10000000149011612
+          "value": 0
         }
       },
       "paragraph-spacing": {
