@@ -96,7 +96,7 @@
       name="anchor-content"
       explanation="A custom icon inside of anchor button"
     >
-      <ButtonMenu>
+      <ButtonMenu {...args}>
         <div slot="anchor-content">
           <Icon name="more-horizontal" />
         </div>
