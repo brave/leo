@@ -2,6 +2,10 @@ import Layout from './global.svelte'
 import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import { getNonStyleArgs, getStyleFromArgs } from './argHelper'
 
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource-variable/inter'
+
 export const parameters = {
   controls: {
     expanded: true,
