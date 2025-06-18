@@ -127,8 +127,8 @@
     <div slot="title">{args.title}</div>
     Alert content
     <div slot="actions">
-      <Button kind="plain-faint">Secondary</Button>
       <Button kind="filled">Primary</Button>
+      <Button kind="plain-faint">Secondary</Button>
     </div>
   </Alert>
 </Template>
