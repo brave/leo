@@ -221,7 +221,7 @@
     --background: var(--primary);
     --border-color: var(
       --leo-control-border-color,
-      var(--leo-color-divider-strong)
+      var(--leo-color-divider-subtle)
     );
     --border-color-hover: var(
       --leo-control-border-color,
@@ -230,13 +230,9 @@
     --shadow-hover: var(--leo-effect-elevation-01);
 
     @supports (color: color-mix(in srgb, transparent, transparent)) {
-      --border-color: var(
-        --leo-control-border-color,
-        color-mix(in srgb, var(--primary), var(--foreground) 25%)
-      );
       --border-color-hover: var(
         --leo-control-border-color,
-        color-mix(in srgb, var(--primary), var(--foreground) 40%)
+        color-mix(in srgb, var(--primary), var(--foreground) 20%)
       );
     }
   }
