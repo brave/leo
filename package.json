@@ -44,7 +44,7 @@
     "jsdom": "21.1.2",
     "lodash.camelcase": "4.3.0",
     "lodash.merge": "4.6.2",
-    "postcss": "8.5.4",
+    "postcss": "8.5.5",
     "postcss-js": "4.0.1",
     "postcss-sort-media-queries": "4.4.1",
     "prettier": "3.5.3",
