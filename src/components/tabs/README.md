@@ -13,8 +13,8 @@ The tabs component follows the same pattern as segmentedControl, using child slo
   let selectedTab = 'home'
 </script>
 
-<Tabs 
-  bind:value={selectedTab} 
+<Tabs
+  bind:value={selectedTab}
   size="large"
   onChange={(detail) => console.log('Tab changed:', detail.value)}
 >
@@ -42,4 +42,4 @@ The tabs component follows the same pattern as segmentedControl, using child slo
 
 - `value: string | undefined` - The currently selected tab value
 - `size: 'large' | 'medium' | 'small'` - The size of the tabs
-- `onChange: (detail: { value: string | undefined }) => void` - Callback fired when tab selection changes 
+- `onChange: (detail: { value: string | undefined }) => void` - Callback fired when tab selection changes
