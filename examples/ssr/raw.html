@@ -1,0 +1,31 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using HTML & Web Components"
+    />
+    <link href="variables.css" rel="stylesheet" />
+    <title>Web Components</title>
+    <style>
+      body {
+        background: var(--leo-color-page-background);
+        color: var(--leo-color-text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+          'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+          'Helvetica Neue', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <leo-button>Click Me</leo-button>
+    <leo-button href="https://brave.com" kind="outline"
+      >External link</leo-button
+    >
+    <leo-input placeholder="Input"> Custom Label for Input </leo-input>
+    <leo-checkbox checked>Checkbox</leo-checkbox>
+  </body>
+</html>
