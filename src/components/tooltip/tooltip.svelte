@@ -22,6 +22,12 @@
    * the trigger or tooltip */
   export let mouseleaveTimeout: number = 150
 
+  /**
+   * The delay in ms before the tooltip is opened after the mouse enters the
+   * anchor element.
+   */
+  export let mouseenterDelay: number = 0
+
   /* Whether the tooltip is currently visible */
   export let visible: boolean | undefined = undefined
 
@@ -73,10 +79,9 @@
 
   let tooltipHovered = false
   let triggerHovered = false
+  let timeout: NodeJS.Timeout
 
   const handleMouseleave = (() => {
-    let timeout: NodeJS.Timeout
-
     return () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
@@ -88,16 +93,28 @@
   })()
 
   const handleTriggerMouseenter = () => {
-    triggerHovered = true
-    setVisible(true)
+    clearTimeout(timeout)
+
+    const makeVisible = () => {
+      triggerHovered = true
+      setVisible(true)
+    }
+
+    if (mouseenterDelay > 0) {
+      timeout = setTimeout(makeVisible, mouseenterDelay)
+    } else {
+      makeVisible()
+    }
   }
 
   const handleTriggerMouseleave = () => {
+    clearTimeout(timeout)
     triggerHovered = false
     handleMouseleave()
   }
 
   const handleTooltipMouseleave = () => {
+    clearTimeout(timeout)
     tooltipHovered = false
     handleMouseleave()
   }
