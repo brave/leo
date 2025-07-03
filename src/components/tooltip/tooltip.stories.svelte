@@ -119,8 +119,8 @@
 
   .close {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 8px;
+    top: 8px;
   }
 
   .tooltip-content {
