@@ -278,6 +278,11 @@
       justify-content: end;
     }
   }
+  @media (max-width: 480px) {
+    .leo-dialog {
+      --padding: var(--leo-dialog-padding, var(--leo-spacing-2xl));
+    }
+  }
 
   @media (orientation: landscape) {
     .leo-dialog {
