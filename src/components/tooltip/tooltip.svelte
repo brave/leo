@@ -255,15 +255,12 @@
   }
 
   .leo-tooltip .tooltip.mini {
-    --background: var(--leo-color-neutral-10);
-    @theme dark {
-      --background: var(--leo-color-neutral-20);
-    }
+    --background: var(--leo-color-neutral-60);
 
-    --text: var(--leo-color-text-primary);
-    --padding: var(--leo-spacing-s) 6px;
+    --text: var(--leo-color-neutral-10);
+    --padding: var(--leo-spacing-m);
     --shadow: var(--leo-effect-elevation-01);
-    --radius: 2px;
+    --radius: var(--leo-radius-s);
 
     font: var(--leo-font-x-small-regular);
   }
