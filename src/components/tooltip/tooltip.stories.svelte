@@ -120,7 +120,7 @@
   .close {
     position: absolute;
     right: 8px;
-    top:8px;
+    top: 8px;
   }
 
   .tooltip-content {
