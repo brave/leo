@@ -265,7 +265,7 @@
     gap: var(--leo-spacing-l);
   }
 
-  @media (min-width: 375px) and (min-height: 375px) {
+  @media (min-width: 480px) and (min-height: 375px) {
     .leo-dialog {
       --padding: var(--leo-dialog-padding, var(--leo-spacing-4xl));
       max-width: var(--leo-dialog-width, 500px);
@@ -276,11 +276,6 @@
       flex-direction: row;
       align-items: center;
       justify-content: end;
-    }
-  }
-  @media (max-width: 480px) {
-    .leo-dialog {
-      --padding: var(--leo-dialog-padding, var(--leo-spacing-2xl));
     }
   }
 
