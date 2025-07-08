@@ -7,7 +7,10 @@ import Dropdown from '@brave/leo/react/dropdown'
 import ButtonMenu from '@brave/leo/react/buttonMenu'
 import Toggle from '@brave/leo/react/toggle'
 import Icon from '@brave/leo/react/icon'
-import styles from './App.module.css'
+
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource-variable/inter/index.css'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -18,9 +21,11 @@ function App() {
   const handleAction = () => console.log('action')
 
   return (
-    <div className={styles['App']} data-theme="dark">
-      <header className={styles['App-header']}>
+    <>
+      <header>
         <h1>A React App</h1>
+      </header>
+      <section>
         <Input value={buttonText} onInput={(e: any) => setButtonText(e.value)}>
           Edit the button text:
           {buttonText.length % 2 === 0 && (
@@ -79,8 +84,8 @@ function App() {
         <Tooltip text="Hello World">
           <LeoButton href="#foo">Link button!</LeoButton>
         </Tooltip>
-      </header>
-    </div>
+      </section>
+    </>
   )
 }
 
