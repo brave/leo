@@ -14,7 +14,7 @@
   "devDependencies": {
     "@babel/core": "7.28.0",
     "@ctrl/tinycolor": "3.6.1",
-    "@floating-ui/dom": "1.7.1",
+    "@floating-ui/dom": "1.7.2",
     "@fontsource-variable/inter": "5.2.6",
     "@fontsource/manrope": "5.2.6",
     "@fontsource/poppins": "5.2.6",
