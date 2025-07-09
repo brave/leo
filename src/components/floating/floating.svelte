@@ -30,11 +30,11 @@
 
   /** The shift padding to apply to the floating element. See
    * https://floating-ui.com/docs/shift for more details. */
-  export let shift: number | undefined = 8
+  export let shift: number | undefined = 2
 
   /** The gap between the target and the floating element:
    * https://floating-ui.com/docs/offset */
-  export let offset: number = 8
+  export let offset: number = 2
 
   /** Additional middleware to apply. */
   export let middleware: Middleware[] = []
