@@ -10,7 +10,7 @@
           "stops": [
             {
               "position": 0,
-              "color": "#ff4000ff"
+              "color": "#ff5601ff"
             },
             {
               "position": 1,
@@ -49,6 +49,30 @@
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:f9d7914820daceff30e6a62ebda005f46dee8d42,",
+            "exportKey": "gradient"
+          }
+        }
+      },
+      "primary-gradient": {
+        "description": "",
+        "type": "custom-gradient",
+        "value": {
+          "gradientType": "linear",
+          "rotation": 179.24640957924876,
+          "stops": [
+            {
+              "position": 0,
+              "color": "#434fcfff"
+            },
+            {
+              "position": 1,
+              "color": "#1824acff"
+            }
+          ]
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:165df63fb383dd1e8e195c7bd286f7649c815165,",
             "exportKey": "gradient"
           }
         }
@@ -299,7 +323,7 @@
           "value": {
             "fontSize": 46,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -321,7 +345,7 @@
           "value": {
             "fontSize": 40,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -343,7 +367,7 @@
           "value": {
             "fontSize": 34,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -363,14 +387,14 @@
         "h1": {
           "type": "custom-fontStyle",
           "value": {
-            "fontSize": 30,
+            "fontSize": 28,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.5,
-            "lineHeight": 38,
+            "lineHeight": 34,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
             "textCase": "none"
@@ -385,14 +409,14 @@
         "h2": {
           "type": "custom-fontStyle",
           "value": {
-            "fontSize": 24,
+            "fontSize": 22,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": -0.5,
-            "lineHeight": 30,
+            "lineHeight": 28,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
             "textCase": "none"
@@ -409,7 +433,7 @@
           "value": {
             "fontSize": 20,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -431,11 +455,11 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Display",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -455,11 +479,11 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -477,11 +501,11 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -499,11 +523,11 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "underline",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 24,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -523,11 +547,11 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -545,11 +569,11 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -567,11 +591,11 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "underline",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.23,
             "lineHeight": 22,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -591,11 +615,11 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -613,11 +637,11 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -635,11 +659,11 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "underline",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 18,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -659,11 +683,11 @@
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 16,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -681,11 +705,11 @@
           "value": {
             "fontSize": 11,
             "textDecoration": "none",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 600,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 16,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -703,11 +727,11 @@
           "value": {
             "fontSize": 11,
             "textDecoration": "underline",
-            "fontFamily": "Inter Variable",
+            "fontFamily": "SF Pro Text",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
-            "letterSpacing": 0,
+            "letterSpacing": -0.08,
             "lineHeight": 16,
             "paragraphIndent": 0,
             "paragraphSpacing": 8,
@@ -727,7 +751,7 @@
           "value": {
             "fontSize": 16,
             "textDecoration": "none",
-            "fontFamily": "DM Mono",
+            "fontFamily": "SF Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -749,7 +773,7 @@
           "value": {
             "fontSize": 14,
             "textDecoration": "none",
-            "fontFamily": "DM Mono",
+            "fontFamily": "SF Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -771,7 +795,7 @@
           "value": {
             "fontSize": 12,
             "textDecoration": "none",
-            "fontFamily": "DM Mono",
+            "fontFamily": "SF Mono",
             "fontWeight": 400,
             "fontStyle": "normal",
             "fontStretch": "normal",
@@ -796,11 +820,11 @@
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 400,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.08,
           "lineHeight": 12,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -818,11 +842,11 @@
         "value": {
           "fontSize": 13,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.08,
           "lineHeight": 16,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -840,11 +864,11 @@
         "value": {
           "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.4,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -862,11 +886,11 @@
         "value": {
           "fontSize": 12,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.4,
           "lineHeight": 18,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -884,11 +908,11 @@
         "value": {
           "fontSize": 14,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.4,
           "lineHeight": 20,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -906,11 +930,11 @@
         "value": {
           "fontSize": 16,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.4,
           "lineHeight": 22,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -928,11 +952,11 @@
         "value": {
           "fontSize": 18,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Text",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.4,
           "lineHeight": 24,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -950,7 +974,7 @@
         "value": {
           "fontSize": 36,
           "textDecoration": "none",
-          "fontFamily": "Inter Variable",
+          "fontFamily": "SF Pro Display",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
@@ -1398,6 +1422,26 @@
           }
         }
       }
+    },
+    "button": {
+      "inner shadow": {
+        "description": null,
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "innerShadow",
+          "radius": 1,
+          "color": "#ffffff80",
+          "offsetX": 0,
+          "offsetY": 3,
+          "spread": 0
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:452f4ab8385443bcf755369226d88b292ded1717,",
+            "exportKey": "effect"
+          }
+        }
+      }
     }
   },
   "typography": {
@@ -1414,7 +1458,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1460,7 +1504,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1506,7 +1550,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1544,7 +1588,7 @@
         "h1": {
           "fontSize": {
             "type": "dimension",
-            "value": 30
+            "value": 28
           },
           "textDecoration": {
             "type": "string",
@@ -1552,7 +1596,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1572,7 +1616,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 38
+            "value": 34
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1590,7 +1634,7 @@
         "h2": {
           "fontSize": {
             "type": "dimension",
-            "value": 24
+            "value": 22
           },
           "textDecoration": {
             "type": "string",
@@ -1598,7 +1642,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1618,7 +1662,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 30
+            "value": 28
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -1644,7 +1688,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1690,7 +1734,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Display"
           },
           "fontWeight": {
             "type": "number",
@@ -1706,7 +1750,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1738,7 +1782,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1754,7 +1798,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1784,7 +1828,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1800,7 +1844,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1830,7 +1874,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1846,7 +1890,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1878,7 +1922,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1894,7 +1938,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1924,7 +1968,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1940,7 +1984,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -1970,7 +2014,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -1986,7 +2030,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.23
           },
           "lineHeight": {
             "type": "dimension",
@@ -2018,7 +2062,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2034,7 +2078,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2064,7 +2108,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2080,7 +2124,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2110,7 +2154,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2126,7 +2170,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2158,7 +2202,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2174,7 +2218,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2204,7 +2248,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2220,7 +2264,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2250,7 +2294,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "Inter Variable"
+            "value": "SF Pro Text"
           },
           "fontWeight": {
             "type": "number",
@@ -2266,7 +2310,7 @@
           },
           "letterSpacing": {
             "type": "dimension",
-            "value": 0
+            "value": -0.08
           },
           "lineHeight": {
             "type": "dimension",
@@ -2298,7 +2342,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "DM Mono"
+            "value": "SF Mono"
           },
           "fontWeight": {
             "type": "number",
@@ -2344,7 +2388,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "DM Mono"
+            "value": "SF Mono"
           },
           "fontWeight": {
             "type": "number",
@@ -2390,7 +2434,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "value": "DM Mono"
+            "value": "SF Mono"
           },
           "fontWeight": {
             "type": "number",
@@ -2439,7 +2483,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2455,7 +2499,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.08
         },
         "lineHeight": {
           "type": "dimension",
@@ -2485,7 +2529,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2501,7 +2545,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.08
         },
         "lineHeight": {
           "type": "dimension",
@@ -2531,7 +2575,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2547,7 +2591,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.4
         },
         "lineHeight": {
           "type": "dimension",
@@ -2577,7 +2621,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2593,7 +2637,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.4
         },
         "lineHeight": {
           "type": "dimension",
@@ -2623,7 +2667,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2639,7 +2683,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.4
         },
         "lineHeight": {
           "type": "dimension",
@@ -2669,7 +2713,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2685,7 +2729,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.4
         },
         "lineHeight": {
           "type": "dimension",
@@ -2715,7 +2759,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Text"
         },
         "fontWeight": {
           "type": "number",
@@ -2731,7 +2775,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.4
         },
         "lineHeight": {
           "type": "dimension",
@@ -2761,7 +2805,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Inter Variable"
+          "value": "SF Pro Display"
         },
         "fontWeight": {
           "type": "number",
