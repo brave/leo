@@ -10,7 +10,7 @@
           "stops": [
             {
               "position": 0,
-              "color": "#ff4000ff"
+              "color": "#ff5601ff"
             },
             {
               "position": 1,
@@ -1418,6 +1418,26 @@
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:91720a8e0b8c7dd27236f6391dcf437679aaa67f,",
+            "exportKey": "effect"
+          }
+        }
+      }
+    },
+    "button": {
+      "inner shadow": {
+        "description": null,
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "innerShadow",
+          "radius": 1,
+          "color": "#ffffff80",
+          "offsetX": 0,
+          "offsetY": 3,
+          "spread": 0
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:452f4ab8385443bcf755369226d88b292ded1717,",
             "exportKey": "effect"
           }
         }
