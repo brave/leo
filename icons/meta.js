@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1751476218098,
+  "updatedAt": 1753085607922,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1186,8 +1186,6 @@ export default {
     "leo-cursor-filled": "leo-cursor-filled",
     "leo-cursor": "leo-cursor",
     "leo-project": "leo-project",
-    "leo-tasks-checked": "leo-tasks-checked",
-    "leo-tasks-edit": "leo-tasks-edit",
     "leo-tasks": "leo-tasks",
     "leo-voice-input": "leo-voice-input",
     "letter-spacing": "letter-spacing",
@@ -1876,6 +1874,7 @@ export default {
     "tablet-orientation-portrait": "tablet-orientation-portrait",
     "tablet-stylus": "tablet-stylus",
     "tablet": "tablet",
+    "tabs-vertical-tree": "tabs-vertical-tree",
     "target-color": "target-color",
     "tau-color": "tau-color",
     "tbx-color": "tbx-color",
