@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1753085607922,
+  "updatedAt": 1753517432199,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1038,6 +1038,7 @@ export default {
     "google-docs-color": "google-docs-color",
     "google-play-color": "google-play-color",
     "google-sheets-color": "google-sheets-color",
+    "googledrive-color": "googledrive-color",
     "graph-chart-down": "graph-chart-down",
     "graph-chart-up": "graph-chart-up",
     "graph-chart": "graph-chart",
@@ -1578,6 +1579,7 @@ export default {
     "product-vpn": "product-vpn",
     "protocol-handler-off": "protocol-handler-off",
     "protocol-handler": "protocol-handler",
+    "protondrive-color": "protondrive-color",
     "prq-color": "prq-color",
     "prqboost-color": "prqboost-color",
     "pungo-color": "pungo-color",
