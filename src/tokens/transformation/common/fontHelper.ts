@@ -1,7 +1,7 @@
-export const SYSTEM_UI_STACK =
+const SYSTEM_UI_STACK =
   "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
 
-export const isSFPro = (name: string) =>
+const isSFPro = (name: string) =>
   /^(SF Pro|SFPro|San Francisco|SF Pro Display|SF Pro Text|SF Pro Rounded)$/i.test(
     name
   )
