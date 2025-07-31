@@ -1,26 +1,8 @@
 import { Transform } from 'style-dictionary'
+import { fontFamily } from '../common/fontHelper'
 
 const notDefault = (value, defaultValue) =>
   value !== defaultValue ? value : ''
-
-const SYSTEM_UI_STACK =
-  "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-
-const isSFPro = (name: string) =>
-  /^(SF Pro|SFPro|San Francisco|SF Pro Display|SF Pro Text|SF Pro Rounded)$/i.test(
-    name
-  )
-
-const fontFamily = (
-  { fontFamily },
-  { fontFamilies }: { fontFamilies?: { [key: string]: string } } = {}
-) => {
-  const resolved =
-    fontFamilies && fontFamilies[fontFamily]
-      ? fontFamilies[fontFamily]
-      : fontFamily
-  return isSFPro(resolved) ? SYSTEM_UI_STACK : resolved
-}
 
 export default {
   type: 'value',
