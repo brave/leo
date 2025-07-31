@@ -1,0 +1,270 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Web site created using HTML & Web Components" />
+  <link href="./css/variables.css" rel="stylesheet" />
+  <title>Leo NTP</title>
+  <style>
+    body {
+      color: var(--leo-color-white);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      color-scheme: dark !important;
+    }
+    .background{
+      width: 100%;
+      height: 100vh;
+      background-image: url('images/leo-ntp.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--leo-spacing-2xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--leo-spacing-xl);
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .browse-with-me {
+      backdrop-filter: blur(50px);
+      background: var(--leo-color-material-thin);
+      display: flex;
+      flex-direction: row;
+      gap: var(--leo-spacing-m);
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--leo-spacing-m) var(--leo-spacing-l);
+      position: relative;
+      flex-shrink: 0;
+      font: var(--leo-font-default-semibold);
+      text-align: left;
+      white-space: nowrap;
+      letter-spacing: -0.23px;
+      border-radius: var(--leo-radius-full);
+      background: linear-gradient(var(--leo-color-material-regular), var(--leo-color-material-regular)) padding-box, linear-gradient(314deg, #FA7250 8.49%, #FF1893 43.72%, #A78AFF 99.51%) border-box;
+      border: 1px solid transparent;
+
+      --leo-icon-color: var(--Gradient-Icons-active);
+      --leo-icon-size: 20px;
+    }
+   
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--leo-spacing-l);
+      align-items: bottom;
+      justify-content: flex-start;
+      max-width: 940px;
+      width: 100%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .card {
+      backdrop-filter: blur(50px);
+      background: var(--leo-color-material-thin);
+      display: flex;
+      flex-direction: column;
+      gap: var(--leo-spacing-m);
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--leo-spacing-xl);
+      position: relative;
+      border-radius: var(--leo-radius-xl);
+      flex-shrink: 0;
+      flex: 1;
+      min-width: 270px;
+      min-height: 1px;
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: row;
+      gap: var(--leo-spacing-l);
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      flex-shrink: 0;
+      width: 100%;
+    }
+
+    .card-icon {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--leo-spacing-s);
+      position: relative;
+      border-radius: var(--leo-radius-m);
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+      border-radius: var(--leo-radius-m);
+      background: var(--Gradient-Icons-active, linear-gradient(314deg, #FA7250 8.49%, #FF1893 43.72%, #A78AFF 99.51%));
+      box-shadow: 0 1px 2px -1px var(--Semantic-Elevation-Secondary, rgba(0, 0, 0, 0.33)), 0 1px 3px 0 var(--Semantic-Elevation-Secondary, rgba(0, 0, 0, 0.33));
+
+      --leo-icon-color: var(--leo-color-white);
+      --leo-icon-size: 20px;
+    }
+
+    .card-title {
+      font: var(--leo-font-large-semibold);
+      text-align: left;
+      position: relative;
+      flex-shrink: 0;
+      flex: 1;
+    }
+
+    .card-description {
+      font: var(--leo-font-default-regular);
+      position: relative;
+      flex: 1;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .card-description a {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      text-decoration-style: solid;
+      text-underline-position: from-font;
+      color: var(--leo-color-white);
+    }
+
+    @media (max-width: 560px) {
+      .background{
+        background-image: url('images/leo-ntp-mobile.jpg');
+      }
+      .cards-container {
+        flex-direction: column;
+        height: auto;
+      }
+      
+      .card {
+        min-width: auto;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module">
+    import './leo/button.js'
+    import './leo/collapse.js'
+    import './leo/toggle.js'
+    import './leo/progressRing.js'
+    import './leo/progressBar.js'
+    import './leo/alert.js'
+    import { showAlert } from './leo/alertCenter.js'
+    import './leo/icon.js'
+    import './leo/radioButton.js'
+    import './leo/dialog.js'
+    import './shared/dialogHelpers.js'
+    import './leo/dropdown.js'
+    import './leo/input.js'
+    import './leo/tooltip.js'
+    import './leo/segmentedControl.js'
+    import './leo/controlItem.js'
+    import './leo/navigation.js'
+    import './leo/navigationHeader.js'
+    import './leo/navigationMenu.js'
+    import './leo/navigationItem.js'
+    import './leo/navigationActions.js'
+    import './leo/hr.js'
+</script>
+  <div class="container" data-theme="dark">
+    <div class="background"></div>
+    <div class="content">
+      <div class="header">
+        <div class="browse-with-me">
+          <leo-icon class="browse-with-me-icon" name="leo-cursor-filled"></leo-icon>
+          <div class="browse-text">
+            Browse with me
+          </div>
+        </div>
+      </div>
+      
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <leo-icon name="leo-cursor"></leo-icon>
+            </div>
+            <div class="card-title">
+              About the Leo profile
+            </div>
+          </div>
+          <div class="card-description">
+            This isolated Brave profile keeps your data separate from your main profile. Leo AI has extra permissions here to visit and interact with sites, so you can try giving it tasks and browsing together to boost productivity.
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <leo-icon name="key"></leo-icon>
+            </div>
+            <div class="card-title">
+              Your data and sessions
+            </div>
+          </div>
+          <div class="card-description">
+            When you log into a website using this profile, Leo can see the information on that site if it's open, either when it visits the site itself or when you ask it to do something there.
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <leo-icon name="product-brave-leo"></leo-icon>
+            </div>
+            <div class="card-title">
+              Switching back
+            </div>
+          </div>
+          <div class="card-description">
+            You can switch back to your regular profile at any time from the main menu, the Leo avatar in your toolbar, or clicking <a href="#">here</a>. The Browse with me feature will always open in this profile.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
