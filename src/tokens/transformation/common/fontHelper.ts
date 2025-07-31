@@ -10,9 +10,6 @@ export const fontFamily = (
   { fontFamily },
   { fontFamilies }: { fontFamilies?: { [key: string]: string } } = {}
 ) => {
-  const resolved =
-    fontFamilies && fontFamilies[fontFamily]
-      ? fontFamilies[fontFamily]
-      : fontFamily
+  const resolved = fontFamilies?.[fontFamily] ?? fontFamily
   return isSFPro(resolved) ? SYSTEM_UI_STACK : resolved
 }
