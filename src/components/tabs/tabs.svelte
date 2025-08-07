@@ -122,7 +122,6 @@
     display: flex;
     position: relative;
     border-bottom: 1px solid var(--leo-color-divider-subtle);
-    overflow-x: auto;
 
     &.size-medium {
       --indicator-height: 3px;
@@ -139,7 +138,7 @@
 
     .underline {
       position: absolute;
-      bottom: -1px;
+      bottom: 0;
       height: var(--indicator-height);
       background-color: var(--indicator-color);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -176,4 +175,4 @@
       --leo-tab-item-icon-color: var(--leo-color-blurple-60);
     }
   }
-</style> 
+</style>
