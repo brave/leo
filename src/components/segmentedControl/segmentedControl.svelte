@@ -27,8 +27,8 @@
   $: controlItems = Array.from(
     (segmentedControl?.querySelector('slot') as HTMLSlotElement)
       ?.assignedElements()
-      ?.filter((element) => element.tagName === 'LEO-CONTROLITEM') ??
-      segmentedControl?.querySelectorAll('.leo-control-item') ??
+      ?.filter((element) => element.tagName === 'LEO-SEGMENTEDCONTROLITEM') ??
+      segmentedControl?.querySelectorAll('.leo-segmented-control-item') ??
       []
   ) as HTMLElement[]
 
@@ -122,9 +122,9 @@
     --control-height: 44px;
     --radius: var(--leo-radius-full);
 
-    --leo-control-item-padding: var(--leo-spacing-l);
-    --leo-control-item-icon-gap: var(--leo-spacing-m);
-    --leo-control-item-font: var(--leo-font-components-button-default);
+    --leo-segmented-control-item-padding: var(--leo-spacing-l);
+    --leo-segmented-control-item-icon-gap: var(--leo-spacing-m);
+    --leo-segmented-control-item-font: var(--leo-font-components-button-default);
 
     display: flex;
     min-width: max-content;
@@ -142,8 +142,8 @@
     &.size-small {
       --leo-icon-size: var(--leo-icon-s);
       --control-height: 36px;
-      --leo-control-item-padding: var(--leo-spacing-m);
-      --leo-control-item-font: var(--leo-font-components-button-small);
+      --leo-segmented-control-item-padding: var(--leo-spacing-m);
+      --leo-segmented-control-item-font: var(--leo-font-components-button-small);
     }
 
     &.size-tiny {
@@ -151,8 +151,8 @@
       --control-padding: var(--leo-control-padding, var(--leo-spacing-xs));
       --gap: var(--leo-spacing-xs);
       --control-height: 28px;
-      --leo-control-item-padding: var(--leo-spacing-m);
-      --leo-control-item-font: var(--leo-font-components-button-small);
+      --leo-segmented-control-item-padding: var(--leo-spacing-m);
+      --leo-segmented-control-item-font: var(--leo-font-components-button-small);
     }
 
     .pill {
@@ -167,37 +167,37 @@
         left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    :where(&) > :global(.leo-control-item),
-    :where(&) > :global(::slotted(leo-controlitem)) {
-      --leo-control-item-icon-color: var(--leo-color-icon-default);
-      --leo-control-item-color: var(--leo-color-text-secondary);
-      --leo-control-item-background: transparent;
-      --leo-control-item-radius: calc(var(--radius) - var(--control-padding));
+    :where(&) > :global(.leo-segmented-control-item),
+    :where(&) > :global(::slotted(leo-segmented-controlitem)) {
+      --leo-segmented-control-item-icon-color: var(--leo-color-icon-default);
+      --leo-segmented-control-item-color: var(--leo-color-text-secondary);
+      --leo-segmented-control-item-background: transparent;
+      --leo-segmented-control-item-radius: calc(var(--radius) - var(--control-padding));
     }
 
-    :where(&:not(.transitioning)) > :global(.leo-control-item:hover),
-    :where(&:not(.transitioning)) > :global(::slotted(leo-controlitem:hover)) {
-      --leo-control-item-background: var(--leo-color-container-highlight);
-      --leo-control-item-color: var(--leo-color-text-primary);
+    :where(&:not(.transitioning)) > :global(.leo-segmented-control-item:hover),
+    :where(&:not(.transitioning)) > :global(::slotted(leo-segmented-controlitem:hover)) {
+      --leo-segmented-control-item-background: var(--leo-color-container-highlight);
+      --leo-segmented-control-item-color: var(--leo-color-text-primary);
     }
 
-    :where(&) > :global(.leo-control-item:focus-visible),
-    :where(&) > :global(::slotted(leo-controlitem:focus-visible)) {
-      --leo-control-item-shadow: var(--leo-effect-focus-state);
+    :where(&) > :global(.leo-segmented-control-item:focus-visible),
+    :where(&) > :global(::slotted(leo-segmented-controlitem:focus-visible)) {
+      --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
     }
 
-    :where(&) > :global(.leo-control-item[aria-selected]),
-    :where(&) > :global(::slotted(leo-controlitem[aria-selected])) {
-      --leo-control-item-color: var(--leo-color-text-interactive);
+    :where(&) > :global(.leo-segmented-control-item[aria-selected]),
+    :where(&) > :global(::slotted(leo-segmented-controlitem[aria-selected])) {
+      --leo-segmented-control-item-color: var(--leo-color-text-interactive);
       --leo-icon-color: var(--leo-color-icon-interactive);
     }
 
-    :where(&.transitioning) > :global(.leo-control-item[aria-selected]),
-    :where(&.transitioning) > :global(::slotted(leo-controlitem[aria-selected])),
-    :where(&) > :global(.leo-control-item[aria-selected]:hover),
-    :where(&) > :global(::slotted(leo-controlitem[aria-selected]:hover)) {
-      --leo-control-item-icon-color: currentColor;
-      --leo-control-item-background: var(--leo-color-container-background);
+    :where(&.transitioning) > :global(.leo-segmented-control-item[aria-selected]),
+    :where(&.transitioning) > :global(::slotted(leo-segmented-controlitem[aria-selected])),
+    :where(&) > :global(.leo-segmented-control-item[aria-selected]:hover),
+    :where(&) > :global(::slotted(leo-segmented-controlitem[aria-selected]:hover)) {
+      --leo-segmented-control-item-icon-color: currentColor;
+      --leo-segmented-control-item-background: var(--leo-color-container-background);
     }
   }
 </style>
