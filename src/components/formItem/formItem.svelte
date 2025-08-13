@@ -100,7 +100,9 @@
       <div class="extra-content">
         <slot name="left-icon" />
       </div>
-      <slot />
+      <div class="content">
+        <slot />
+      </div>
       <div class="extra-content">
         <slot name="right-icon" />
       </div>
@@ -116,7 +118,7 @@
     --primary: var(--leo-control-color, var(--base));
 
     --radius: var(--leo-control-radius, var(--leo-radius-m));
-    --padding: var(--leo-control-padding, 10px 7px);
+    --padding: var(--leo-control-padding, 11px var(--leo-spacing-m));
     --font: var(--leo-control-font, var(--leo-font-default-regular));
     --leo-icon-size: var(--leo-control-icon-size, 20px);
     --leo-icon-color: var(
@@ -161,6 +163,15 @@
     transition:
       color 0.2s ease-in-out;
 
+    .content {
+      padding: 0 var(--leo-spacing-s);
+      margin-inline-end: auto;
+    }
+
+    .extra-content:empty {
+      display: none;
+    }
+
     &:not([aria-disabled='true']) {
       & .container:hover {
         color: var(--color-hover);
@@ -192,13 +203,13 @@
   .leo-control.isSmall {
     --leo-icon-size: 16px;
     --font: var(--leo-control-font, var(--leo-font-small-regular));
-    --padding: var(--leo-control-padding, 7px);
+    --padding: var(--leo-control-padding, var(--leo-spacing-m));
     --gap: var(--leo-control-label-gap, 2px);
   }
 
   .leo-control.isLarge {
     --leo-icon-size: 22px;
-    --padding: var(--leo-control-padding, 14px 11px);
+    --padding: var(--leo-control-padding, 14px var(--leo-spacing-l));
     --gap: var(--leo-control-label-gap, 12px);
   }
 
