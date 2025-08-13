@@ -1,6 +1,8 @@
 import * as React from 'react'
 import '@brave/leo/tokens/css/variables.css'
 import LeoButton from '@brave/leo/react/button'
+import Tabs from '@brave/leo/react/tabs'
+import TabItem from '@brave/leo/react/tabItem'
 import Tooltip from '@brave/leo/react/tooltip'
 import Input from '@brave/leo/react/input'
 import Dropdown from '@brave/leo/react/dropdown'
@@ -81,6 +83,11 @@ function App() {
             <Toggle checked={isThing} />
           </leo-menu-item>
         </ButtonMenu>
+        <Tabs value="1">
+          <TabItem value="1">Tab 1</TabItem>
+          <TabItem value="2">Tab 2</TabItem>
+          <TabItem value="3">Tab 3</TabItem>
+        </Tabs>
         <Tooltip text="Hello World">
           <LeoButton href="#foo">Link button!</LeoButton>
         </Tooltip>

@@ -75,9 +75,11 @@
     import './shared/dialogHelpers.js'
     import './leo/dropdown.js'
     import './leo/input.js'
+    import './leo/tabs.js'
+    import './leo/tabItem.js'
     import './leo/tooltip.js'
     import './leo/segmentedControl.js'
-    import './leo/controlItem.js'
+    import './leo/segmentedControlItem.js'
     import './leo/navigation.js'
     import './leo/navigationHeader.js'
     import './leo/navigationMenu.js'
@@ -276,17 +278,22 @@
         <leo-button kind="filled">Primary</leo-button>
       </div>
     </leo-dialog>
+    <leo-tabs value="tab-2">
+      <leo-tabitem value="tab-1">Tab 1</leo-tabitem>
+      <leo-tabitem value="tab-2">Tab 2</leo-tabitem>
+      <leo-tabitem value="tab-3">Tab 3</leo-tabitem>
+    </leo-tabs>
     <div id="example-segmented-control">
-      <leo-toggle>Toggle segmented control from automatic to parent's width</leo-toggle>
+      <leo-toggle>Toggle segmented control and tabs from automatic to parent's width</leo-toggle>
       <leo-segmentedcontrol value="full">
-        <leo-controlitem value="full">
+        <leo-segmentedcontrolitem value="full">
           Full
           <leo-icon slot="icon-after" name="fullscreen-on"></leo-icon>
-        </leo-controlitem>
-        <leo-controlitem value="simple">
+        </leo-segmentedcontrolitem>
+        <leo-segmentedcontrolitem value="simple">
           Simple
           <leo-icon slot="icon-after" name="fullscreen-off"></leo-icon>
-        </leo-controlitem>
+        </leo-segmentedcontrolitem>
       </leo-segmentedcontrol>
     </div>
 
@@ -327,15 +334,15 @@
           <div class="navigation-theme-switcher">
             <span>Theme</span>
             <leo-segmentedcontrol size="tiny" value="light">
-              <leo-controlitem value="light">
+              <leo-segmentedcontrolitem value="light">
                 <leo-icon name="theme-light"></leo-icon>
-              </leo-controlitem>
-              <leo-controlitem value="dark">
+              </leo-segmentedcontrolitem>
+              <leo-segmentedcontrolitem value="dark">
                 <leo-icon name="theme-dark"></leo-icon>
-              </leo-controlitem>
-              <leo-controlitem value="system">
+              </leo-segmentedcontrolitem>
+              <leo-segmentedcontrolitem value="system">
                 <leo-icon name="theme-system"></leo-icon>
-              </leo-controlitem>
+              </leo-segmentedcontrolitem>
             </leo-segmentedcontrol>
           </div>
           <leo-hr></leo-hr>

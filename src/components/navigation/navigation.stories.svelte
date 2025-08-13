@@ -101,7 +101,7 @@
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import SegmentedControl from '../segmentedControl/segmentedControl.svelte'
-  import ControlItem from '../controlItem/controlItem.svelte'
+  import ControlItem from '../segmentedControl/segmentedControlItem.svelte'
   import type { IconName } from '../../../icons/meta'
 
   let theme = 'light'
