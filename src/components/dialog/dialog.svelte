@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
   import { scale } from 'svelte/transition'
+  import { onDestroy } from 'svelte'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
 
@@ -28,15 +29,50 @@
   export let onBack: () => void = undefined
 
   let dialog: HTMLDialogElement
+  let bodyElement: HTMLDivElement
+  let showTopIndicator = false
+  let showBottomIndicator = false
+  let resizeObserver: ResizeObserver
+
   $: {
     if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
+
+  $: if (bodyElement && isOpen) {
+    // Update scroll indicators after a brief delay to ensure content is rendered
+    setTimeout(updateScrollIndicators, 0)
+    
+    // Set up ResizeObserver to monitor content size changes
+    if (resizeObserver) {
+      resizeObserver.disconnect()
+    }
+    
+    resizeObserver = new ResizeObserver(() => {
+      updateScrollIndicators()
+    })
+    
+    resizeObserver.observe(bodyElement)
+  }
+
+  onDestroy(() => {
+    if (resizeObserver) {
+      resizeObserver.disconnect()
+    }
+  })
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
 
   const close = () => {
     isOpen = false
     onClose?.()
+  }
+
+  const updateScrollIndicators = () => {
+    if (!bodyElement) return
+    
+    const { scrollTop, scrollHeight, clientHeight } = bodyElement
+    showTopIndicator = scrollTop > 0
+    showBottomIndicator = scrollTop + clientHeight < scrollHeight
   }
 </script>
 
@@ -88,9 +124,16 @@
         {/if}
       </header>
     {/if}
-    <div class="body">
+    {#if showTopIndicator}
+        <div class="scroll-indicator scroll-indicator-top" />
+      {/if}
+    <div class="body" bind:this={bodyElement} on:scroll={updateScrollIndicators}>
       <slot />
+      
     </div>
+    {#if showBottomIndicator}
+        <div class="scroll-indicator scroll-indicator-bottom" />
+      {/if}
     {#if $$slots.actions}
       <div class="actions">
         <slot name="actions" />
@@ -135,10 +178,11 @@
     margin: auto;
     border: none;
     display: grid;
-    align-content: center;
+    align-content: start;
 
     width: calc(100% - var(--leo-spacing-m) * 2);
     max-width: var(--leo-dialog-width, 374px);
+    max-height: calc(100vh - var(--leo-spacing-m) * 2);
 
     border-radius: var(--border-radius);
     outline: none;
@@ -156,7 +200,7 @@
   }
 
   .leo-dialog.hasHeader {
-    grid-template-rows: auto auto;
+    grid-template-rows: auto 1fr;
   }
 
   /** Since Svelte 4 doesn't support conditional slots in the consumer,
@@ -165,12 +209,12 @@
    * case the selector with :host. */
   :host .leo-dialog.hasActions,
   .leo-dialog.hasActions:has([slot='actions']:not(:empty)) {
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
   .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
   }
 
   .leo-dialog:not(.modal) {
@@ -215,6 +259,29 @@
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-default-regular);
     padding: var(--padding);
+    min-height: 0;
+    overflow: auto;
+    position: relative;
+  }
+
+  .leo-dialog .scroll-indicator {
+    position: sticky;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--leo-color-divider-subtle);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .leo-dialog .scroll-indicator-top {
+    top: 0px;
+    background: var(--leo-color-divider-subtle);
+  }
+
+  .leo-dialog .scroll-indicator-bottom {
+    bottom: 0;
+    background: var(--leo-color-divider-subtle);
   }
 
   .leo-dialog.hasHeader .body {
