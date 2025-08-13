@@ -137,6 +137,8 @@
 
 <Story name="Default" />
 
+<Story name="Inline" args={{ mode: 'inline' }} />
+
 <Story name="Left Icon" let:args>
   <div class="container">
     <Dropdown {...args}>

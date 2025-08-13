@@ -2,7 +2,7 @@
   export let sizes = ['small', 'normal', 'large'] as const
   export type Size = (typeof sizes)[number]
 
-  export let modes = ['filled', 'outline'] as const
+  export let modes = ['filled', 'outline', 'inline'] as const
   export type Mode = (typeof modes)[number]
 
   export let cssProperties: {
@@ -85,7 +85,8 @@
   class:isSmall={size === 'small'}
   class:isLarge={size === 'large'}
   class:isFilled={mode === 'filled'}
-  class:isOutline={mode !== 'filled'}
+  class:isOutline={mode === 'outline'}
+  class:isInline={mode === 'inline'}
   class:isFocused={showFocusOutline}
   class:error
   aria-disabled={disabled}
@@ -246,6 +247,15 @@
         color-mix(in srgb, var(--primary), var(--foreground) 20%)
       );
     }
+  }
+
+  .leo-control.isInline {
+    --padding: none;
+    --border-color: transparent;
+    --border-color-hover: transparent;
+    --shadow-hover: none;
+
+    display: inline-flex;
   }
 
   .leo-control.error {

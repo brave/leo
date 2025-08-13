@@ -55,6 +55,8 @@
 
 <Story name="Default" />
 
+<Story name="Inline" args={{ mode: 'inline' }} />
+
 <Story name="Character Count" let:args>
   <Input {...args} bind:value={characterCountValue}>
     {args.label}
