@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
   import { scale } from 'svelte/transition'
-  import { onDestroy } from 'svelte'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
 
@@ -29,48 +28,16 @@
   export let onBack: () => void = undefined
 
   let dialog: HTMLDialogElement
-  let bodyElement: HTMLDivElement
-  let showTopScrollIndicator = false
-  let showBottomScrollIndicator = false
-  let resizeObserver: ResizeObserver
 
   $: {
     if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
-
-  $: if (bodyElement && isOpen) {
-    // Update scroll indicators after a brief delay to ensure content is rendered
-    requestAnimationFrame(updateScrollIndicators)
-    
-    // Set up ResizeObserver to monitor content size changes
-    if (resizeObserver) {
-      resizeObserver.disconnect()
-    }
-    
-    resizeObserver = new ResizeObserver(() => {
-      updateScrollIndicators()
-    })
-    
-    resizeObserver.observe(bodyElement)
-  }
-
-  onDestroy(() => {
-    resizeObserver?.disconnect()
-  })
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
 
   const close = () => {
     isOpen = false
     onClose?.()
-  }
-
-  const updateScrollIndicators = () => {
-    if (!bodyElement) return
-    
-    const { scrollTop, scrollHeight, clientHeight } = bodyElement
-    showTopScrollIndicator = scrollTop > 0
-    showBottomScrollIndicator = scrollTop + clientHeight < scrollHeight
   }
 </script>
 
@@ -122,7 +89,7 @@
         {/if}
       </header>
     {/if}
-    <div class="body" class:show-top-scroll-indicator={showTopScrollIndicator} class:show-bottom-scroll-indicator={showBottomScrollIndicator} bind:this={bodyElement} on:scroll={updateScrollIndicators}>
+    <div class="body">
       <slot />
     </div>
     {#if $$slots.actions}
@@ -222,6 +189,23 @@
     position: sticky;
     top: 0;
     z-index: 1;
+
+    border-bottom: 1px solid transparent;
+
+    animation-timeline: scroll();
+    animation-range: 0px var(--leo-spacing-xl);
+    animation-name: header-scroll-border;
+    animation-duration: 1ms;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes header-scroll-border {
+    from {
+      border-bottom-color: transparent;
+    }
+    to {
+      border-bottom-color: var(--leo-color-divider-subtle);
+    }
   }
 
   .leo-dialog .title {
@@ -252,22 +236,6 @@
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-default-regular);
     padding: var(--padding);
-
-    &.show-top-scroll-indicator,
-    &.show-bottom-scroll-indicator {
-      border-style: solid;
-      border-width: 1px;
-      border-color: transparent;
-      transition: border-color 120ms ease-in-out;
-    }
-
-    &.show-top-scroll-indicator {
-      border-top-color: var(--leo-color-divider-subtle);
-    }
-
-    &.show-bottom-scroll-indicator {
-      border-bottom-color: var(--leo-color-divider-subtle);
-    }
   }
 
   .leo-dialog.hasHeader .body {
