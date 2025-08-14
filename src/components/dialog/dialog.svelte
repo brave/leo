@@ -30,8 +30,8 @@
 
   let dialog: HTMLDialogElement
   let bodyElement: HTMLDivElement
-  let showTopIndicator = false
-  let showBottomIndicator = false
+  let showTopScrollIndicator = false
+  let showBottomScrollIndicator = false
   let resizeObserver: ResizeObserver
 
   $: {
@@ -40,7 +40,7 @@
 
   $: if (bodyElement && isOpen) {
     // Update scroll indicators after a brief delay to ensure content is rendered
-    setTimeout(updateScrollIndicators, 0)
+    requestAnimationFrame(updateScrollIndicators)
     
     // Set up ResizeObserver to monitor content size changes
     if (resizeObserver) {
@@ -55,9 +55,7 @@
   }
 
   onDestroy(() => {
-    if (resizeObserver) {
-      resizeObserver.disconnect()
-    }
+    resizeObserver?.disconnect()
   })
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
@@ -71,8 +69,8 @@
     if (!bodyElement) return
     
     const { scrollTop, scrollHeight, clientHeight } = bodyElement
-    showTopIndicator = scrollTop > 0
-    showBottomIndicator = scrollTop + clientHeight < scrollHeight
+    showTopScrollIndicator = scrollTop > 0
+    showBottomScrollIndicator = scrollTop + clientHeight < scrollHeight
   }
 </script>
 
@@ -124,16 +122,9 @@
         {/if}
       </header>
     {/if}
-    {#if showTopIndicator}
-        <div class="scroll-indicator scroll-indicator-top" />
-      {/if}
-    <div class="body" bind:this={bodyElement} on:scroll={updateScrollIndicators}>
+    <div class="body" class:show-top-scroll-indicator={showTopScrollIndicator} class:show-bottom-scroll-indicator={showBottomScrollIndicator} bind:this={bodyElement} on:scroll={updateScrollIndicators}>
       <slot />
-      
     </div>
-    {#if showBottomIndicator}
-        <div class="scroll-indicator scroll-indicator-bottom" />
-      {/if}
     {#if $$slots.actions}
       <div class="actions">
         <slot name="actions" />
@@ -200,7 +191,7 @@
   }
 
   .leo-dialog.hasHeader {
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto;
   }
 
   /** Since Svelte 4 doesn't support conditional slots in the consumer,
@@ -209,12 +200,12 @@
    * case the selector with :host. */
   :host .leo-dialog.hasActions,
   .leo-dialog.hasActions:has([slot='actions']:not(:empty)) {
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
   .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
   }
 
   .leo-dialog:not(.modal) {
@@ -228,6 +219,9 @@
   .leo-dialog header {
     background: var(--background);
     padding: var(--padding);
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   .leo-dialog .title {
@@ -250,7 +244,6 @@
   }
 
   .leo-dialog .subtitle {
-    margin-bottom: var(--leo-spacing-xl);
     font: var(--leo-font-heading-h4);
   }
 
@@ -259,29 +252,22 @@
     color: var(--leo-color-text-secondary);
     font: var(--leo-font-default-regular);
     padding: var(--padding);
-    min-height: 0;
-    overflow: auto;
-    position: relative;
-  }
 
-  .leo-dialog .scroll-indicator {
-    position: sticky;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--leo-color-divider-subtle);
-    pointer-events: none;
-    z-index: 1;
-  }
+    &.show-top-scroll-indicator,
+    &.show-bottom-scroll-indicator {
+      border-style: solid;
+      border-width: 1px;
+      border-color: transparent;
+      transition: border-color 120ms ease-in-out;
+    }
 
-  .leo-dialog .scroll-indicator-top {
-    top: 0px;
-    background: var(--leo-color-divider-subtle);
-  }
+    &.show-top-scroll-indicator {
+      border-top-color: var(--leo-color-divider-subtle);
+    }
 
-  .leo-dialog .scroll-indicator-bottom {
-    bottom: 0;
-    background: var(--leo-color-divider-subtle);
+    &.show-bottom-scroll-indicator {
+      border-bottom-color: var(--leo-color-divider-subtle);
+    }
   }
 
   .leo-dialog.hasHeader .body {
