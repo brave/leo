@@ -192,11 +192,13 @@
 
     border-bottom: 1px solid transparent;
 
-    animation-timeline: scroll();
-    animation-range: 0px var(--leo-spacing-xl);
-    animation-name: header-scroll-border;
-    animation-duration: 1ms;
-    animation-fill-mode: forwards;
+    @supports (animation-timeline: scroll()) {
+      animation-timeline: scroll();
+      animation-range: 0px var(--leo-spacing-6xl);
+      animation-name: header-scroll-border;
+      animation-duration: 1ms;
+      animation-fill-mode: forwards;
+    }
   }
 
   @keyframes header-scroll-border {
