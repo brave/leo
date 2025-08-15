@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1754467953754,
+  "updatedAt": 1755245542878,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -73,6 +73,7 @@ const meta = {
     "ampl-color": "ampl-color",
     "ampleforth-color": "ampleforth-color",
     "anchorprotocol-color": "anchorprotocol-color",
+    "android-color": "android-color",
     "ankr-color": "ankr-color",
     "ant-color": "ant-color",
     "antenna": "antenna",
@@ -1805,6 +1806,7 @@ const meta = {
     "social-bluesky": "social-bluesky",
     "social-brave-beta-favicon-fullheight-color": "social-brave-beta-favicon-fullheight-color",
     "social-brave-dev-favicon-fullheight-color": "social-brave-dev-favicon-fullheight-color",
+    "social-brave-newface-favicon-fullheight": "social-brave-newface-favicon-fullheight",
     "social-brave-nightly-favicon-fullheight-color": "social-brave-nightly-favicon-fullheight-color",
     "social-brave-outline-favicon-fullheight": "social-brave-outline-favicon-fullheight",
     "social-brave-release-favicon-fullheight-color": "social-brave-release-favicon-fullheight-color",
