@@ -28,6 +28,7 @@
   export let onBack: () => void = undefined
 
   let dialog: HTMLDialogElement
+
   $: {
     if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
@@ -135,10 +136,11 @@
     margin: auto;
     border: none;
     display: grid;
-    align-content: center;
+    align-content: start;
 
     width: calc(100% - var(--leo-spacing-m) * 2);
     max-width: var(--leo-dialog-width, 374px);
+    max-height: calc(100vh - var(--leo-spacing-m) * 2);
 
     border-radius: var(--border-radius);
     outline: none;
@@ -184,6 +186,28 @@
   .leo-dialog header {
     background: var(--background);
     padding: var(--padding);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    border-bottom: 1px solid transparent;
+
+    @supports (animation-timeline: scroll()) {
+      animation-timeline: scroll();
+      animation-range: 0px var(--leo-spacing-6xl);
+      animation-name: header-scroll-border;
+      animation-duration: 1ms;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  @keyframes header-scroll-border {
+    from {
+      border-bottom-color: transparent;
+    }
+    to {
+      border-bottom-color: var(--leo-color-divider-subtle);
+    }
   }
 
   .leo-dialog .title {
@@ -206,7 +230,6 @@
   }
 
   .leo-dialog .subtitle {
-    margin-bottom: var(--leo-spacing-xl);
     font: var(--leo-font-heading-h4);
   }
 
