@@ -31,6 +31,7 @@
   import Icon from '../icon/icon.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import Link from '../link/link.svelte'
 
   const countries = {
     'nz': 'New Zealand',
@@ -137,7 +138,20 @@
 
 <Story name="Default" />
 
-<Story name="Inline" args={{ mode: 'inline' }} />
+<Story name="Inline" let:args>
+  <Link>Footer link</Link>
+  <Link>Footer link</Link>
+  <Dropdown value={undefined} {...args} mode="inline">
+    <leo-option value="one">
+      <div>One</div>
+    </leo-option>
+    <leo-option value="two">Two</leo-option>
+    <leo-option>Three</leo-option>
+  </Dropdown>
+  <Link>Footer link</Link>
+  <Link>Footer link</Link>
+  <Link>Footer link</Link>
+</Story>
 
 <Story name="Left Icon" let:args>
   <div class="container">

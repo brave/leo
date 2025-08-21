@@ -44,7 +44,7 @@
   }
 </script>
 
-<div class="leo-dropdown">
+<div class="leo-dropdown" class:isInline={mode === 'inline'}>
   <div>
     <FormItem
       bind:disabled
@@ -115,6 +115,10 @@
   .leo-dropdown {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+
+    &.isInline {
+      display: inline-block;
+    }
 
     button {
       all: unset;
