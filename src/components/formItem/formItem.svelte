@@ -250,6 +250,7 @@
   }
 
   .leo-control.isInline {
+    --background: transparent;
     --padding: none;
     --border-color: transparent;
     --border-color-hover: transparent;
@@ -297,6 +298,10 @@
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-s);
+
+    &:empty {
+      display: none;
+    }
   }
 
   .leo-control .required-indicator {
