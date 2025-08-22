@@ -19,6 +19,10 @@
       control: 'select',
       options: ['column', 'column-reverse', 'row', 'row-reverse']
     },
+    '--leo-control-width': {
+      description: 'The width of the control',
+      type: 'string'
+    },
     '--leo-control-radius': {
       description: 'The border radius of the control',
       type: 'string'
@@ -161,6 +165,7 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
+    width: var(--leo-control-width);
     transition:
       color 0.2s ease-in-out;
 
