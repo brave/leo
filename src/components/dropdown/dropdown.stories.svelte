@@ -138,16 +138,19 @@
 
 <Story name="Default" />
 
-<Story name="Inline" let:args>
+<Story name="Plain" let:args>
   <Link>Footer link</Link>
   <Link>Footer link</Link>
-  <Dropdown value={undefined} {...args} mode="inline">
-    <leo-option value="one">
-      <div>One</div>
-    </leo-option>
-    <leo-option value="two">Two</leo-option>
-    <leo-option>Three</leo-option>
-  </Dropdown>
+  <div style="display: inline-block; vertical-align: middle;">
+    <Dropdown value={undefined} {...args} mode="plain">
+      <Icon name="country-us" slot="left-icon" />
+      <leo-option value="one">
+        <div>One</div>
+      </leo-option>
+      <leo-option value="two">Two</leo-option>
+      <leo-option>Three</leo-option>
+    </Dropdown>
+  </div>
   <Link>Footer link</Link>
   <Link>Footer link</Link>
   <Link>Footer link</Link>
