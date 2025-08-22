@@ -142,6 +142,7 @@
   <Link>Footer link</Link>
   <Link>Footer link</Link>
   <Dropdown value={undefined} {...args} mode="inline">
+    <Icon name="country-us" slot="left-icon" />
     <leo-option value="one">
       <div>One</div>
     </leo-option>

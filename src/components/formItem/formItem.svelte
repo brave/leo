@@ -255,6 +255,13 @@
     --border-color: transparent;
     --border-color-hover: transparent;
     --shadow-hover: none;
+    --font: inherit;
+    /**
+     * This magic number is meant to preserve the proportions
+     * between icon and text found the `normal` size:
+     * 20px ('normal' icon size) / 14px ('normal' font-size)
+     */
+    --leo-icon-size: 1.43em;
 
     display: inline-flex;
   }

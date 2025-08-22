@@ -45,42 +45,40 @@
 </script>
 
 <div class="leo-dropdown" class:isInline={mode === 'inline'}>
-  <div>
-    <FormItem
-      bind:disabled
-      bind:required
-      bind:size
-      bind:controlElement={dropdown}
-      renderLabel={$$slots.default}
-      {mode}
-      showFocusOutline={isOpen}
-      error={showErrors && $$slots.errors}
+  <FormItem
+    bind:disabled
+    bind:required
+    bind:size
+    bind:controlElement={dropdown}
+    renderLabel={$$slots.default}
+    {mode}
+    showFocusOutline={isOpen}
+    error={showErrors && $$slots.errors}
+  >
+    <slot name="label" slot="label" />
+    <slot name="left-icon" slot="left-icon" />
+    <button
+      bind:this={button}
+      class="click-target"
+      {disabled}
+      on:click|stopPropagation={onClick}
     >
-      <slot name="label" slot="label" />
-      <slot name="left-icon" slot="left-icon" />
-      <button
-        bind:this={button}
-        class="click-target"
-        {disabled}
-        on:click|stopPropagation={onClick}
-      >
-        {#if value !== undefined}
-          <slot name="value" {value}>
-            <span class="value">{value}</span>
-          </slot>
-        {:else}
-          <slot name="placeholder">
-            <span class="placeholder">{placeholder}</span>
-          </slot>
-        {/if}
-      </button>
-      <slot name="right-icon" slot="right-icon">
-        <div class="indicator" class:open={isOpen}>
-          <Icon name="arrow-small-down" />
-        </div>
-      </slot>
-    </FormItem>
-  </div>
+      {#if value !== undefined}
+        <slot name="value" {value}>
+          <span class="value">{value}</span>
+        </slot>
+      {:else}
+        <slot name="placeholder">
+          <span class="placeholder">{placeholder}</span>
+        </slot>
+      {/if}
+    </button>
+    <slot name="right-icon" slot="right-icon">
+      <div class="indicator" class:open={isOpen}>
+        <Icon name="arrow-small-down" />
+      </div>
+    </slot>
+  </FormItem>
   <Menu
     target={dropdown}
     {positionStrategy}
@@ -117,7 +115,8 @@
     -webkit-tap-highlight-color: transparent;
 
     &.isInline {
-      display: inline-block;
+      display: inline-flex;
+      vertical-align: middle;
     }
 
     button {
