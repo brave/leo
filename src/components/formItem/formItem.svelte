@@ -165,13 +165,8 @@
 
     .content {
       flex: 1;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: stretch;
+      width: 100%;
       padding: 0 var(--leo-spacing-s);
-
-      cursor: text;
     }
 
     .extra-content:empty {
