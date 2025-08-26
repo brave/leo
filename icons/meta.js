@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1755245542878,
+  "updatedAt": 1756109529546,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -282,9 +282,13 @@ export default {
     "browser-sidebar-off": "browser-sidebar-off",
     "browser-sidebar-right": "browser-sidebar-right",
     "browser-sidebar": "browser-sidebar",
+    "browser-split-close-left": "browser-split-close-left",
+    "browser-split-close-right": "browser-split-close-right",
     "browser-split-view-horizontal": "browser-split-view-horizontal",
     "browser-split-view-left": "browser-split-view-left",
     "browser-split-view-right": "browser-split-view-right",
+    "browser-split-view-swap-left": "browser-split-view-swap-left",
+    "browser-split-view-swap-right": "browser-split-view-swap-right",
     "browser-split-view-unsplit": "browser-split-view-unsplit",
     "browser-split-view-vertical": "browser-split-view-vertical",
     "brz-color": "brz-color",
@@ -2129,6 +2133,7 @@ export default {
     "yfi-color": "yfi-color",
     "yoyow-color": "yoyow-color",
     "yubico-color": "yubico-color",
+    "zai-color": "zai-color",
     "zapper-color": "zapper-color",
     "zb-color": "zb-color",
     "zcash-color": "zcash-color",
