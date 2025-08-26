@@ -2,7 +2,7 @@
   export let sizes = ['small', 'normal', 'large'] as const
   export type Size = (typeof sizes)[number]
 
-  export let modes = ['filled', 'outline', 'inline'] as const
+  export let modes = ['filled', 'outline', 'plain'] as const
   export type Mode = (typeof modes)[number]
 
   export let cssProperties: {
@@ -86,7 +86,7 @@
   class:isLarge={size === 'large'}
   class:isFilled={mode === 'filled'}
   class:isOutline={mode === 'outline'}
-  class:isInline={mode === 'inline'}
+  class:isPlain={mode === 'plain'}
   class:isFocused={showFocusOutline}
   class:error
   aria-disabled={disabled}
@@ -249,14 +249,19 @@
     }
   }
 
-  .leo-control.isInline {
+  .leo-control.isPlain {
     --background: transparent;
     --padding: none;
     --border-color: transparent;
     --border-color-hover: transparent;
     --shadow-hover: none;
-
-    display: inline-flex;
+    --font: inherit;
+    /**
+     * This magic number is meant to preserve the proportions
+     * between icon and text found the `normal` size:
+     * 20px ('normal' icon size) / 14px ('normal' font-size)
+     */
+    --leo-icon-size: 1.43em;
   }
 
   .leo-control.error {
