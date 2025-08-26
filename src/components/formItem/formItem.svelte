@@ -93,7 +93,9 @@
 >
   {#if $$slots.label && renderLabel}
     <div class="label-row">
-      <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
+      <slot name="label" />{#if required}<span class="required-indicator"
+          >*</span
+        >{/if}
     </div>
   {/if}
   <div class="control" bind:this={controlElement}>
@@ -161,12 +163,17 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
-    transition:
-      color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 
     .content {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
       padding: 0 var(--leo-spacing-s);
-      margin-inline-end: auto;
+
+      cursor: text;
     }
 
     .extra-content:empty {
