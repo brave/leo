@@ -161,12 +161,11 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
-    transition:
-      color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 
     .content {
+      flex: 1;
       padding: 0 var(--leo-spacing-s);
-      margin-inline-end: auto;
     }
 
     .extra-content:empty {
