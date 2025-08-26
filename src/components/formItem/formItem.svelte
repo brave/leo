@@ -93,9 +93,7 @@
 >
   {#if $$slots.label && renderLabel}
     <div class="label-row">
-      <slot name="label" />{#if required}<span class="required-indicator"
-          >*</span
-        >{/if}
+      <slot name="label" />{#if required}<span class="required-indicator">*</span>{/if}
     </div>
   {/if}
   <div class="control" bind:this={controlElement}>
