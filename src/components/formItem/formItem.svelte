@@ -165,7 +165,6 @@
 
     .content {
       flex: 1;
-      width: 100%;
       padding: 0 var(--leo-spacing-s);
     }
 
