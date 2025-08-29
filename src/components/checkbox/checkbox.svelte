@@ -24,6 +24,7 @@
   class:small={size === 'small'}
   class:normal={size !== 'small'}
   class:disabled={isDisabled}
+  class:isChecked={checked}
 >
   <div class="check">
     <input
@@ -88,6 +89,23 @@
     &.disabled {
       cursor: not-allowed;
     }
+
+    // Note: We need both of these because WebKit doesn't support the :has
+    // selector inside a shadowRoot. The &:has(input:checked) is so we work in
+    // Chromium/Firefox when JS is disabled.
+    &.isChecked, &:has(input:checked) {
+     & .check {
+      color: var(--checked-color);
+
+      & .checked {
+        opacity: 1;
+      }
+
+      & .unchecked {
+        opacity: 0;
+      }
+     } 
+    }
   }
 
   .leo-checkbox.disabled {
@@ -132,18 +150,6 @@
 
     & .unchecked {
       opacity: 1;
-    }
-
-    &:has(input:checked) {
-      color: var(--checked-color);
-
-      & .checked {
-        opacity: 1;
-      }
-
-      & .unchecked {
-        opacity: 0;
-      }
     }
 
     &:has(input:focus-visible) {
