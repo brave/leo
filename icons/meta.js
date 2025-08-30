@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1756109529546,
+  "updatedAt": 1756541352839,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1408,6 +1408,7 @@ export default {
     "nym-color": "nym-color",
     "oax-color": "oax-color",
     "ocean-color": "ocean-color",
+    "odysee-color": "odysee-color",
     "office-archive": "office-archive",
     "okcoin-color": "okcoin-color",
     "okex-color": "okex-color",
