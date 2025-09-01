@@ -19,28 +19,37 @@
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
   type Loading = $$Generic<undefined extends Href ? boolean : undefined>
-  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   interface CommonProps {
-    kind?: Props.ButtonKind
-    size?: Props.ButtonSize
-    fab?: boolean
-    onClick?: (e: MouseEvent) => void
+    kind?: Props.ButtonKind;
+    size?: Props.ButtonSize;
+    fab?: boolean;
+    onClick?: (e: MouseEvent) => void;
   }
 
-  type NalaButtonProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
-      isDisabled?: Disabled
-      isLoading?: Loading
-      href?: never
-    }
+  type ButtonHTMLAttributes = Pick<
+    SvelteHTMLElements['button'],
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'aria-label'
+  >;
 
-  type NalaLinkProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
-      href: Href
-    }
+  type LinkHTMLAttributes = Pick<
+    SvelteHTMLElements['a'],
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'aria-label'
+  >;
 
-  type $$Props = NalaLinkProps | NalaButtonProps
+  type NalaButtonProps = CommonProps & {
+    isDisabled?: Disabled
+    isLoading?: Loading
+    href?: never
+  } & Partial<ButtonHTMLAttributes>;
+
+  type NalaLinkProps = CommonProps & {
+    href: string | undefined;
+    isDisabled?: never;
+    isLoading?: never;
+  } & Partial<LinkHTMLAttributes>;
+
+  type $$Props = NalaButtonProps | NalaLinkProps;
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
