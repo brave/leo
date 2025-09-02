@@ -11,17 +11,17 @@
         "divider": {
           "subtle": {
             "type": "color",
-            "value": "#f0f0f4",
+            "value": "#f2f2f3",
             "referencedVariable": "$neutral.10"
           },
           "subtle-container-": {
             "type": "color",
-            "value": "#f0f0f4",
+            "value": "#f2f2f3",
             "referencedVariable": "$neutral.10"
           },
           "interactive": {
             "type": "color",
-            "value": "#bdc2ff",
+            "value": "#bcc6f3",
             "referencedVariable": "$divider.interactive"
           }
         },
@@ -38,17 +38,17 @@
           },
           "container-interactive-": {
             "type": "color",
-            "value": "#f1efff",
+            "value": "#f0f2fa",
             "referencedVariable": "$primary.10"
           },
           "highlight": {
             "type": "color",
-            "value": "#f0f0f4",
+            "value": "#f2f2f3",
             "referencedVariable": "$neutral.10"
           },
           "settings": {
             "type": "color",
-            "value": "#f0f0f4",
+            "value": "#f2f2f3",
             "referencedVariable": "$primitive.neutral.95"
           },
           "search-bar": {
@@ -88,7 +88,7 @@
             "outline": {
               "hover": {
                 "type": "color",
-                "value": "#f1efff",
+                "value": "#f0f2fa",
                 "referencedVariable": "$search.primary.10"
               }
             }
@@ -97,12 +97,12 @@
             "background": {
               "normal": {
                 "type": "color",
-                "value": "#f1efff",
+                "value": "#f0f2fa",
                 "referencedVariable": "$search.primary.10"
               },
               "hover": {
                 "type": "color",
-                "value": "#e0e0ff",
+                "value": "#dfe4f6",
                 "referencedVariable": "$primary.20"
               }
             }
@@ -116,7 +116,7 @@
               },
               "hover": {
                 "type": "color",
-                "value": "#5d69e9",
+                "value": "#5b67e8",
                 "referencedVariable": "$search.primary.40"
               }
             }
@@ -125,27 +125,27 @@
         "primary": {
           "5": {
             "type": "color",
-            "value": "#f8f9ff",
+            "value": "#f9fafd",
             "referencedVariable": "$primary.5"
           },
           "10": {
             "type": "color",
-            "value": "#f1efff",
+            "value": "#f0f2fa",
             "referencedVariable": "$primary.10"
           },
           "20": {
             "type": "color",
-            "value": "#e0e0ff",
+            "value": "#dfe4f6",
             "referencedVariable": "$primary.20"
           },
           "30": {
             "type": "color",
-            "value": "#7985ff",
+            "value": "#7686ec",
             "referencedVariable": "$primary.30"
           },
           "40": {
             "type": "color",
-            "value": "#5d69e9",
+            "value": "#5b67e8",
             "referencedVariable": "$primary.40"
           },
           "50": {
@@ -155,113 +155,113 @@
           },
           "60": {
             "type": "color",
-            "value": "#1824ac",
+            "value": "#271e93",
             "referencedVariable": "$primary.60"
           },
           "70": {
             "type": "color",
-            "value": "#000668",
+            "value": "#110c50",
             "referencedVariable": "$primary.70"
           }
         },
         "red": {
           "5": {
             "type": "color",
-            "value": "#fff8f7",
+            "value": "#fdf9f9",
             "referencedVariable": "$red.5"
           },
           "10": {
             "type": "color",
-            "value": "#ffedea",
+            "value": "#fcefee",
             "referencedVariable": "$red.10"
           },
           "20": {
             "type": "color",
-            "value": "#ffdad6",
+            "value": "#fbddd8",
             "referencedVariable": "$red.20"
           },
           "30": {
             "type": "color",
-            "value": "#ff5449",
+            "value": "#ff3c36",
             "referencedVariable": "$red.30"
           },
           "40": {
             "type": "color",
-            "value": "#db3a33",
+            "value": "#e20314",
             "referencedVariable": "$red.40"
           },
           "50": {
             "type": "color",
-            "value": "#b81f1e",
+            "value": "#b4020e",
             "referencedVariable": "$red.50"
           },
           "60": {
             "type": "color",
-            "value": "#7e0007",
+            "value": "#710005",
             "referencedVariable": "$red.60"
           },
           "70": {
             "type": "color",
-            "value": "#410002",
+            "value": "#3c0002",
             "referencedVariable": "$red.70"
           }
         },
         "green": {
           "5": {
             "type": "color",
-            "value": "#eaffea",
+            "value": "#f4fdf6",
             "referencedVariable": "$green.5"
           },
           "10": {
             "type": "color",
-            "value": "#d5fbdb",
+            "value": "#dffbe5",
             "referencedVariable": "$green.10"
           },
           "20": {
             "type": "color",
-            "value": "#acf1c0",
+            "value": "#b0f9c3",
             "referencedVariable": "$green.20"
           },
           "30": {
             "type": "color",
-            "value": "#00a656",
+            "value": "#2fab5f",
             "referencedVariable": "$green.30"
           },
           "40": {
             "type": "color",
-            "value": "#008946",
+            "value": "#268f4f",
             "referencedVariable": "$green.40"
           },
           "50": {
             "type": "color",
-            "value": "#006d36",
+            "value": "#1c713d",
             "referencedVariable": "$green.50"
           },
           "60": {
             "type": "color",
-            "value": "#004520",
+            "value": "#0d4523",
             "referencedVariable": "$green.60"
           },
           "70": {
             "type": "color",
-            "value": "#00210c",
+            "value": "#04220f",
             "referencedVariable": "$green.70"
           }
         },
         "yellow": {
           "5": {
             "type": "color",
-            "value": "#fff8f1",
+            "value": "#fdfaf0",
             "referencedVariable": "$yellow.5"
           },
           "10": {
             "type": "color",
-            "value": "#ffefcd",
+            "value": "#fcf2d4",
             "referencedVariable": "$yellow.10"
           },
           "20": {
             "type": "color",
-            "value": "#ffe08b",
+            "value": "#fce39d",
             "referencedVariable": "$yellow.20"
           },
           "30": {
@@ -271,17 +271,17 @@
           },
           "40": {
             "type": "color",
-            "value": "#927300",
+            "value": "#937502",
             "referencedVariable": "$yellow.40"
           },
           "50": {
             "type": "color",
-            "value": "#745b00",
+            "value": "#745c00",
             "referencedVariable": "$yellow.50"
           },
           "60": {
             "type": "color",
-            "value": "#4a3900",
+            "value": "#473701",
             "referencedVariable": "$yellow.60"
           },
           "70": {
@@ -293,42 +293,42 @@
         "blue": {
           "5": {
             "type": "color",
-            "value": "#f9f9ff",
+            "value": "#f8fafd",
             "referencedVariable": "$blue.5"
           },
           "10": {
             "type": "color",
-            "value": "#edf0ff",
+            "value": "#eef4fc",
             "referencedVariable": "$blue.10"
           },
           "20": {
             "type": "color",
-            "value": "#d8e2ff",
+            "value": "#d8e5fb",
             "referencedVariable": "$blue.20"
           },
           "30": {
             "type": "color",
-            "value": "#4b8eff",
+            "value": "#488cff",
             "referencedVariable": "$blue.30"
           },
           "40": {
             "type": "color",
-            "value": "#0072f0",
+            "value": "#066cff",
             "referencedVariable": "$blue.40"
           },
           "50": {
             "type": "color",
-            "value": "#005bc1",
+            "value": "#0154cc",
             "referencedVariable": "$blue.50"
           },
           "60": {
             "type": "color",
-            "value": "#00397e",
+            "value": "#003281",
             "referencedVariable": "$blue.60"
           },
           "70": {
             "type": "color",
-            "value": "#001a41",
+            "value": "#001845",
             "referencedVariable": "$blue.70"
           }
         }
@@ -345,12 +345,12 @@
         "divider": {
           "subtle": {
             "type": "color",
-            "value": "#303034",
+            "value": "#303032",
             "referencedVariable": "$primitive.neutral.20"
           },
           "subtle-container-": {
             "type": "color",
-            "value": "#e3e3e8",
+            "value": "#e4e4e5",
             "referencedVariable": "$neutral.20"
           },
           "interactive": {
@@ -361,12 +361,12 @@
         "background": {
           "page": {
             "type": "color",
-            "value": "#1b1b1f",
+            "value": "#1c1c1d",
             "referencedVariable": "$primitive.neutral.10"
           },
           "container": {
             "type": "color",
-            "value": "#f0f0f4",
+            "value": "#f2f2f3",
             "referencedVariable": "$schemes.surface-container"
           },
           "container-interactive-": {
@@ -375,17 +375,17 @@
           },
           "highlight": {
             "type": "color",
-            "value": "#e3e3e8",
+            "value": "#e4e4e5",
             "referencedVariable": "$neutral.20"
           },
           "settings": {
             "type": "color",
-            "value": "#252529",
+            "value": "#252527",
             "referencedVariable": "$primitive.neutral.15"
           },
           "search-bar": {
             "type": "color",
-            "value": "#e3e3e8",
+            "value": "#e4e4e5",
             "referencedVariable": "$schemes.surface-container-highest"
           },
           "landing-page": {
@@ -484,7 +484,7 @@
           },
           "70": {
             "type": "color",
-            "value": "#bdc2ff",
+            "value": "#bcc6f3",
             "referencedVariable": "$primitive.primary.80"
           }
         },
@@ -519,7 +519,7 @@
           },
           "70": {
             "type": "color",
-            "value": "#ffb4ab",
+            "value": "#fcb4aa",
             "referencedVariable": "$primitive.red.80"
           }
         },
@@ -554,7 +554,7 @@
           },
           "70": {
             "type": "color",
-            "value": "#92d5a5",
+            "value": "#54ea8b",
             "referencedVariable": "$primitive.green.80"
           }
         },
@@ -589,7 +589,7 @@
           },
           "70": {
             "type": "color",
-            "value": "#f1c100",
+            "value": "#f3c305",
             "referencedVariable": "$primitive.yellow.80"
           }
         },
@@ -624,7 +624,7 @@
           },
           "70": {
             "type": "color",
-            "value": "#adc6ff",
+            "value": "#accafc",
             "referencedVariable": "$primitive.blue.80"
           }
         }
