@@ -81,7 +81,7 @@
     }
 
     &__background {
-      filter: opacity(0.3);
+      stroke-opacity: 0.3;
       stroke: var(--background-color);
     }
 
