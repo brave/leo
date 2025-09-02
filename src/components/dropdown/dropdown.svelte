@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { HTMLAttributes } from '../types/attributes'
   declare global {
     namespace JSX {
       interface IntrinsicElements {
@@ -9,7 +9,7 @@
           key?: string | number | null
 
           value?: string
-          children?: any
+          children?: string | Element[]
         }
       }
     }
