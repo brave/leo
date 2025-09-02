@@ -62,11 +62,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#434fcfff"
+              "color": "#433ae4ff"
             },
             {
               "position": 1,
-              "color": "#1824acff"
+              "color": "#271e93ff"
             }
           ]
         },
@@ -134,11 +134,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#0072f0ff"
+              "color": "#066cffff"
             },
             {
               "position": 1,
-              "color": "#4b8effff"
+              "color": "#488cffff"
             }
           ]
         },
@@ -1043,7 +1043,7 @@
       "value": {
         "shadowType": "dropShadow",
         "radius": 0,
-        "color": "#5d69e9ff",
+        "color": "#5b67e8ff",
         "offsetX": 0,
         "offsetY": 0,
         "spread": 2
@@ -1061,7 +1061,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 3
@@ -1072,7 +1072,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#f1efffff",
+          "color": "#edf0f9ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 1
@@ -1270,7 +1270,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 4,
           "offsetY": 4,
           "spread": 0
@@ -1288,7 +1288,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 8,
           "offsetY": 8,
           "spread": 0
