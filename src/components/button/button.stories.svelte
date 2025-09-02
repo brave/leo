@@ -21,7 +21,8 @@
       },
       kind: { control: 'select', options: buttonKinds },
       size: { control: 'select', options: buttonSizes },
-      isDisabled: { control: 'boolean' }
+      isDisabled: { control: 'boolean' },
+      isLoading: { control: 'boolean' }
     }
   }
 </script>

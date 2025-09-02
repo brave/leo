@@ -2,7 +2,7 @@
   export let sizes = ['small', 'normal', 'large'] as const
   export type Size = (typeof sizes)[number]
 
-  export let modes = ['filled', 'outline'] as const
+  export let modes = ['filled', 'outline', 'plain'] as const
   export type Mode = (typeof modes)[number]
 
   export let cssProperties: {
@@ -85,7 +85,8 @@
   class:isSmall={size === 'small'}
   class:isLarge={size === 'large'}
   class:isFilled={mode === 'filled'}
-  class:isOutline={mode !== 'filled'}
+  class:isOutline={mode === 'outline'}
+  class:isPlain={mode === 'plain'}
   class:isFocused={showFocusOutline}
   class:error
   aria-disabled={disabled}
@@ -100,7 +101,9 @@
       <div class="extra-content">
         <slot name="left-icon" />
       </div>
-      <slot />
+      <div class="content">
+        <slot />
+      </div>
       <div class="extra-content">
         <slot name="right-icon" />
       </div>
@@ -116,7 +119,7 @@
     --primary: var(--leo-control-color, var(--base));
 
     --radius: var(--leo-control-radius, var(--leo-radius-m));
-    --padding: var(--leo-control-padding, 10px 7px);
+    --padding: var(--leo-control-padding, 11px var(--leo-spacing-m));
     --font: var(--leo-control-font, var(--leo-font-default-regular));
     --leo-icon-size: var(--leo-control-icon-size, 20px);
     --leo-icon-color: var(
@@ -158,8 +161,16 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
-    transition:
-      color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+
+    .content {
+      flex: 1;
+      padding: 0 var(--leo-spacing-s);
+    }
+
+    .extra-content:empty {
+      display: none;
+    }
 
     &:not([aria-disabled='true']) {
       & .container:hover {
@@ -192,13 +203,13 @@
   .leo-control.isSmall {
     --leo-icon-size: 16px;
     --font: var(--leo-control-font, var(--leo-font-small-regular));
-    --padding: var(--leo-control-padding, 7px);
+    --padding: var(--leo-control-padding, var(--leo-spacing-m));
     --gap: var(--leo-control-label-gap, 2px);
   }
 
   .leo-control.isLarge {
     --leo-icon-size: 22px;
-    --padding: var(--leo-control-padding, 14px 11px);
+    --padding: var(--leo-control-padding, 14px var(--leo-spacing-l));
     --gap: var(--leo-control-label-gap, 12px);
   }
 
@@ -235,6 +246,21 @@
         color-mix(in srgb, var(--primary), var(--foreground) 20%)
       );
     }
+  }
+
+  .leo-control.isPlain {
+    --background: transparent;
+    --padding: none;
+    --border-color: transparent;
+    --border-color-hover: transparent;
+    --shadow-hover: none;
+    --font: inherit;
+    /**
+     * This magic number is meant to preserve the proportions
+     * between icon and text found the `normal` size:
+     * 20px ('normal' icon size) / 14px ('normal' font-size)
+     */
+    --leo-icon-size: 1.43em;
   }
 
   .leo-control.error {
@@ -276,6 +302,10 @@
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-s);
+
+    &:empty {
+      display: none;
+    }
   }
 
   .leo-control .required-indicator {

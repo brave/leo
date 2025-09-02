@@ -239,6 +239,7 @@
     min-width: var(--leo-menu-control-width);
     display: flex;
     flex-direction: column;
+    gap: var(--leo-spacing-s);
   }
 
   @keyframes menuIn {
@@ -255,9 +256,29 @@
   /* custom items can fit in by making optional use of these variables */
   :global(.leo-menu-popup ::slotted(*)),
   :global(.leo-menu-popup > *) {
-    --leo-menu-item-margin: var(--leo-spacing-s);
+    --leo-menu-item-margin: 0 var(--leo-spacing-s);
     --leo-menu-item-padding:  var(--leo-spacing-m) var(--leo-spacing-xl);
     --leo-menu-item-border-radius: var(--leo-spacing-s);
+  }
+
+  :global(.leo-menu-popup ::slotted(leo-option:first-child)),
+  :global(.leo-menu-popup ::slotted(leo-menu-item:first-child)),
+  :global(.leo-menu-popup leo-option:first-child),
+  :global(.leo-menu-popup leo-menu-item:first-child) {
+    --leo-menu-item-margin: var(--leo-spacing-s) var(--leo-spacing-s) 0 var(--leo-spacing-s);
+  }
+  :global(.leo-menu-popup ::slotted(leo-option:last-child)),
+  :global(.leo-menu-popup ::slotted(leo-menu-item:last-child)),
+  :global(.leo-menu-popup leo-option:last-child),
+  :global(.leo-menu-popup leo-menu-item:last-child) {
+    --leo-menu-item-margin: 0 var(--leo-spacing-s) var(--leo-spacing-s) var(--leo-spacing-s);
+  }
+  :global(.leo-menu-popup ::slotted(leo-title)),
+  :global(.leo-menu-popup leo-title) {
+    padding: var(--leo-spacing-l);
+    background: var(--leo-color-page-background);
+    font: var(--leo-font-components-label);
+    color: var(--leo-color-text-secondary);
   }
 
   /**

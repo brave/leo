@@ -1,13 +1,18 @@
 import * as React from 'react'
 import '@brave/leo/tokens/css/variables.css'
 import LeoButton from '@brave/leo/react/button'
+import Tabs from '@brave/leo/react/tabs'
+import TabItem from '@brave/leo/react/tabItem'
 import Tooltip from '@brave/leo/react/tooltip'
 import Input from '@brave/leo/react/input'
 import Dropdown from '@brave/leo/react/dropdown'
 import ButtonMenu from '@brave/leo/react/buttonMenu'
 import Toggle from '@brave/leo/react/toggle'
 import Icon from '@brave/leo/react/icon'
-import styles from './App.module.css'
+
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource-variable/inter/index.css'
 
 function App() {
   // Verify that we can change props and children (slots)
@@ -18,9 +23,11 @@ function App() {
   const handleAction = () => console.log('action')
 
   return (
-    <div className={styles['App']} data-theme="dark">
-      <header className={styles['App-header']}>
+    <>
+      <header>
         <h1>A React App</h1>
+      </header>
+      <section>
         <Input value={buttonText} onInput={(e: any) => setButtonText(e.value)}>
           Edit the button text:
           {buttonText.length % 2 === 0 && (
@@ -76,11 +83,16 @@ function App() {
             <Toggle checked={isThing} />
           </leo-menu-item>
         </ButtonMenu>
+        <Tabs value="1">
+          <TabItem value="1">Tab 1</TabItem>
+          <TabItem value="2">Tab 2</TabItem>
+          <TabItem value="3">Tab 3</TabItem>
+        </Tabs>
         <Tooltip text="Hello World">
           <LeoButton href="#foo">Link button!</LeoButton>
         </Tooltip>
-      </header>
-    </div>
+      </section>
+    </>
   )
 }
 

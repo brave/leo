@@ -18,49 +18,49 @@
         type: 'string',
         description: 'The padding for the entire control.'
       },
-      '--leo-control-item-radius': {
+      '--leo-segmented-control-item-radius': {
         control: 'text',
         type: 'string',
         description: 'The radius for the individual control items.'
       },
-      '--leo-control-item-height': {
+      '--leo-segmented-control-item-height': {
         control: 'text',
         type: 'string',
         description: 'The height for the individual control items.'
       },
-      '--leo-control-item-padding': {
+      '--leo-segmented-control-item-padding': {
         control: 'text',
         type: 'string',
         description: 'The padding for the individual control items.'
       },
-      '--leo-control-item-color': {
+      '--leo-segmented-control-item-color': {
         control: 'text',
         type: 'string',
         description: 'The text color for the individual control items.'
       },
-      '--leo-control-item-font': {
+      '--leo-segmented-control-item-font': {
         control: 'text',
         type: 'string',
         description:
           'The font (shorthand CSS property) for the individual control items.'
       },
-      '--leo-control-item-background': {
+      '--leo-segmented-control-item-background': {
         control: 'text',
         type: 'string',
         description: 'The background color for the individual control items.'
       },
-      '--leo-control-item-shadow': {
+      '--leo-segmented-control-item-shadow': {
         control: 'text',
         type: 'string',
         description:
           "The box shadow for the individual control items' hover state."
       },
-      '--leo-control-item-icon-color': {
+      '--leo-segmented-control-item-icon-color': {
         control: 'text',
         type: 'string',
         description: 'The icon color for the individual control items.'
       },
-      '--leo-control-item-icon-gap': {
+      '--leo-segmented-control-item-icon-gap': {
         control: 'text',
         type: 'string',
         description:
@@ -90,7 +90,7 @@
 
   import Slot from '../../storyHelpers/Slot.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
-  import ControlItem from '../controlItem/controlItem.svelte'
+  import ControlItem from './segmentedControlItem.svelte'
   import Icon from '../icon/icon.svelte'
 
   let selected = 'full'

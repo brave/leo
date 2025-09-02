@@ -1,15 +1,8 @@
 import { Transform } from 'style-dictionary'
+import { fontFamily } from '../common/fontHelper'
 
 const notDefault = (value, defaultValue) =>
   value !== defaultValue ? value : ''
-
-const fontFamily = (
-  { fontFamily },
-  { fontFamilies }: { fontFamilies?: { [key: string]: string } } = {}
-) =>
-  fontFamilies && fontFamilies[fontFamily]
-    ? fontFamilies[fontFamily]
-    : fontFamily
 
 export default {
   type: 'value',

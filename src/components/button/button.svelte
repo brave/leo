@@ -18,6 +18,7 @@
   // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
+  type Loading = $$Generic<undefined extends Href ? boolean : undefined>
   type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   interface CommonProps {
@@ -30,7 +31,7 @@
   type NalaButtonProps = CommonProps &
     Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
       isDisabled?: Disabled
-      isLoading?: boolean
+      isLoading?: Loading
       href?: never
     }
 
@@ -43,7 +44,7 @@
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
-  export let isLoading: boolean = false
+  export let isLoading: Loading = undefined
   export let isDisabled: Disabled = undefined
   export let href: Href = undefined
   export let fab = false
@@ -123,7 +124,8 @@
   .leoButton:visited:not(:hover) {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
-    --default-transition: box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
+    --default-transition:
+      box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
       border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
@@ -489,11 +491,8 @@
 
       &::after {
         z-index: -2;
-        background: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.2) 100%
-          ),
+        background:
+          linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
           linear-gradient(174deg, #f50 2.32%, #f5002d 93.33%);
       }
     }
