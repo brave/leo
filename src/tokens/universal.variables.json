@@ -1577,7 +1577,7 @@
         },
         "40": {
           "type": "color",
-          "value": "#433ae4"
+          "value": "#434fcf"
         },
         "50": {
           "type": "color",
@@ -2713,7 +2713,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$schemes.primary"
         },
         "interactive-visited": {
@@ -2739,7 +2739,7 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
@@ -2796,7 +2796,7 @@
       "button": {
         "background": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$schemes.primary"
         },
         "disabled": {
@@ -3056,7 +3056,7 @@
         },
         "50": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.primary.40"
         },
         "60": {
@@ -3661,12 +3661,12 @@
       "schemes": {
         "surface-tint": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.primary.40"
         },
         "primary": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.primary.40"
         },
         "on-primary": {
@@ -4435,7 +4435,7 @@
         },
         "30": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.primary.40"
         },
         "40": {
@@ -5195,7 +5195,7 @@
         },
         "inverse-primary": {
           "type": "color",
-          "value": "#433ae4",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.primary.40"
         },
         "primary-fixed": {
