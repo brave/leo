@@ -1523,7 +1523,7 @@
         },
         "95": {
           "type": "color",
-          "value": "#eff0ef"
+          "value": "#efeff0"
         },
         "96": {
           "type": "color",
@@ -2772,8 +2772,8 @@
         },
         "highlight": {
           "type": "color",
-          "value": "#f4f4f6",
-          "referencedVariable": "$primitive.neutral.96"
+          "value": "#efeff0",
+          "referencedVariable": "$primitive.neutral.95"
         },
         "interactive": {
           "type": "color",
@@ -2859,7 +2859,8 @@
         },
         "info-vibrant": {
           "type": "color",
-          "value": "#3b83cf"
+          "value": "#066cff",
+          "referencedVariable": "$primitive.blue.50"
         },
         "info-background": {
           "type": "color",
@@ -2878,7 +2879,8 @@
         },
         "success-vibrant": {
           "type": "color",
-          "value": "#3c9555"
+          "value": "#268f4f",
+          "referencedVariable": "$primitive.green.50"
         },
         "success-background": {
           "type": "color",
@@ -2897,7 +2899,8 @@
         },
         "warning-vibrant": {
           "type": "color",
-          "value": "#f1d94b"
+          "value": "#f3c305",
+          "referencedVariable": "$primitive.yellow.80"
         },
         "warning-background": {
           "type": "color",
@@ -2916,7 +2919,8 @@
         },
         "error-vibrant": {
           "type": "color",
-          "value": "#e4302f"
+          "value": "#e20314",
+          "referencedVariable": "$primitive.red.50"
         },
         "error-background": {
           "type": "color",
@@ -2994,7 +2998,7 @@
         },
         "10": {
           "type": "color",
-          "value": "#eff0ef",
+          "value": "#efeff0",
           "referencedVariable": "$primitive.neutral.95"
         },
         "20": {
@@ -3801,7 +3805,7 @@
         },
         "inverse-on-surface": {
           "type": "color",
-          "value": "#eff0ef",
+          "value": "#efeff0",
           "referencedVariable": "$primitive.neutral.95"
         },
         "inverse-primary": {
@@ -3891,7 +3895,7 @@
         },
         "surface-container": {
           "type": "color",
-          "value": "#eff0ef",
+          "value": "#efeff0",
           "referencedVariable": "$primitive.neutral.95"
         },
         "surface-container-high": {
@@ -3909,7 +3913,7 @@
         "browser": {
           "chrome-background-ios": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "omnibar-background": {
@@ -3919,7 +3923,7 @@
           },
           "background-ios": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "elevated-ios": {
@@ -3947,7 +3951,7 @@
           },
           "background-hover": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "divider": {
@@ -3979,7 +3983,7 @@
           },
           "hover-tab-horizontal": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "hover-tab-vertical": {
@@ -3994,7 +3998,7 @@
           },
           "active-tab-vertical": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "split-view-background-horizontal": {
@@ -4016,7 +4020,7 @@
         "omnibar": {
           "background-desktop": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "background-active": {
@@ -4026,12 +4030,12 @@
           },
           "background-selected-item": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "background-hover-item": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           },
           "split-view-icon-background": {
@@ -4058,7 +4062,7 @@
           },
           "divider": {
             "type": "color",
-            "value": "#eff0ef",
+            "value": "#efeff0",
             "referencedVariable": "$primitive.neutral.95"
           }
         },
@@ -4066,7 +4070,7 @@
           "button": {
             "hover": {
               "type": "color",
-              "value": "#eff0ef",
+              "value": "#efeff0",
               "referencedVariable": "$primitive.neutral.95"
             },
             "active": {
@@ -4248,7 +4252,8 @@
         },
         "info-vibrant": {
           "type": "color",
-          "value": "#3b83cf"
+          "value": "#066cff",
+          "referencedVariable": "$primitive.blue.50"
         },
         "info-background": {
           "type": "color",
@@ -4267,7 +4272,8 @@
         },
         "success-vibrant": {
           "type": "color",
-          "value": "#3c9555"
+          "value": "#268f4f",
+          "referencedVariable": "$primitive.green.50"
         },
         "success-background": {
           "type": "color",
@@ -4286,7 +4292,8 @@
         },
         "warning-vibrant": {
           "type": "color",
-          "value": "#f1d94b"
+          "value": "#f3c305",
+          "referencedVariable": "$primitive.yellow.80"
         },
         "warning-background": {
           "type": "color",
@@ -4305,7 +4312,8 @@
         },
         "error-vibrant": {
           "type": "color",
-          "value": "#e4302f"
+          "value": "#e20314",
+          "referencedVariable": "$primitive.red.50"
         },
         "error-background": {
           "type": "color",
@@ -4413,7 +4421,7 @@
         },
         "70": {
           "type": "color",
-          "value": "#eff0ef",
+          "value": "#efeff0",
           "referencedVariable": "$primitive.neutral.95"
         }
       },
