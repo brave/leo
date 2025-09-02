@@ -816,7 +816,7 @@
         },
         "40": {
           "type": "color",
-          "value": "#4912ff"
+          "value": "#434fcf"
         },
         "50": {
           "type": "color",
@@ -1252,7 +1252,7 @@
         },
         "primary-fixed": {
           "type": "color",
-          "value": "#4912ff",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.blurple.40"
         }
       }
@@ -2243,7 +2243,7 @@
         },
         "40": {
           "type": "color",
-          "value": "#4912ff"
+          "value": "#434fcf"
         },
         "50": {
           "type": "color",
@@ -2679,7 +2679,7 @@
         },
         "primary-fixed": {
           "type": "color",
-          "value": "#4912ff",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.blurple.40"
         }
       }
@@ -3434,7 +3434,7 @@
         },
         "50": {
           "type": "color",
-          "value": "#4912ff",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.blurple.40"
         },
         "60": {
@@ -4813,7 +4813,7 @@
         },
         "30": {
           "type": "color",
-          "value": "#4912ff",
+          "value": "#434fcf",
           "referencedVariable": "$primitive.blurple.40"
         },
         "40": {
