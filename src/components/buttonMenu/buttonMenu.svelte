@@ -22,6 +22,7 @@
   export let onChange: (e: { isOpen: boolean }) => void = undefined
   export let positionStrategy: Strategy = 'absolute'
   export let placement: Placement = 'bottom-start'
+  export let flip: boolean = true
 
   let anchor: HTMLElement
 
@@ -59,7 +60,8 @@
   {#if isOpenInternal}
     <Menu
       {placement}
-      {positionStrategy} 
+      {positionStrategy}
+      {flip}
       isOpen={isOpenInternal} 
       target={anchor} 
       onClose={close}
