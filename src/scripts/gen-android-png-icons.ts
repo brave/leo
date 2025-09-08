@@ -4,7 +4,11 @@ import sharp from 'sharp'
 
 const ICONS_FOLDER = 'icons/'
 
-async function svgToAndroidDrawablePngs(svgFileName, newColor) {
+async function svgToAndroidDrawablePngs(
+  svgFileName,
+  newColor,
+  newFileBaseName
+) {
   const densities = {
     mdpi: 24,
     hdpi: 36,
@@ -16,7 +20,9 @@ async function svgToAndroidDrawablePngs(svgFileName, newColor) {
   for (const [bucket, size] of Object.entries(densities)) {
     await fs.mkdir(`./tokens/android/drawable-${bucket}/`, { recursive: true })
 
-    const outputFileName = svgFileName.replaceAll('-', '_') + '.png'
+    const outputFileName = newFileBaseName
+      ? newFileBaseName
+      : svgFileName.replaceAll('-', '_') + '.png'
 
     let svgContent = await fs.readFile(
       path.join(ICONS_FOLDER, svgFileName + '.svg'),
@@ -41,7 +47,7 @@ async function svgToAndroidDrawablePngs(svgFileName, newColor) {
 
 if (process.argv.length < 3) {
   console.error(
-    'Usage: npm run android-png-icons -- <icon_name.svg> [new_color]'
+    'Usage: npm run android-png-icons -- <icon_name.svg> [new_color] [new_file_base_name]'
   )
 } else {
   let svgFileName = process.argv[2]
@@ -49,5 +55,6 @@ if (process.argv.length < 3) {
     svgFileName = svgFileName.substring(0, svgFileName.length - 4)
   }
   const newColor = process.argv.length >= 3 ? process.argv[3] : undefined
-  await svgToAndroidDrawablePngs(svgFileName, newColor)
+  const newFileBaseName = process.argv.length >= 4 ? process.argv[4] : undefined
+  await svgToAndroidDrawablePngs(svgFileName, newColor, newFileBaseName)
 }
