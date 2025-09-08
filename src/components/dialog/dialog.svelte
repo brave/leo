@@ -140,7 +140,6 @@
 
     width: calc(100% - var(--leo-spacing-m) * 2);
     max-width: var(--leo-dialog-width, 374px);
-    max-height: calc(100vh - var(--leo-spacing-m) * 2);
 
     border-radius: var(--border-radius);
     outline: none;
