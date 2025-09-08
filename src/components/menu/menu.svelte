@@ -41,6 +41,7 @@
   export let currentValue: string | undefined = undefined
   export let positionStrategy: Strategy = 'absolute'
   export let placement: Placement = 'bottom-start'
+  export let flip: boolean = true
   export let onClose: CloseEvent =
     undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
@@ -185,6 +186,7 @@
     <Floating
       {target}
       {placement}
+      {flip}
       autoUpdate
       middleware={floatingMiddleware}
       {positionStrategy}
