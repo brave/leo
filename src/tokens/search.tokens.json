@@ -154,11 +154,11 @@
         "value": {
           "fontSize": 20,
           "textDecoration": "none",
-          "fontFamily": "Poppins",
+          "fontFamily": "Inter Variable",
           "fontWeight": 600,
           "fontStyle": "normal",
           "fontStretch": "normal",
-          "letterSpacing": 0,
+          "letterSpacing": -0.5,
           "lineHeight": 26,
           "paragraphIndent": 0,
           "paragraphSpacing": 0,
@@ -350,7 +350,7 @@
         },
         "fontFamily": {
           "type": "string",
-          "value": "Poppins"
+          "value": "Inter Variable"
         },
         "fontWeight": {
           "type": "number",
@@ -366,7 +366,7 @@
         },
         "letterSpacing": {
           "type": "dimension",
-          "value": 0
+          "value": -0.5
         },
         "lineHeight": {
           "type": "dimension",

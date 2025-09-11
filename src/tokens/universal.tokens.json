@@ -66,7 +66,7 @@
             },
             {
               "position": 1,
-              "color": "#1824acff"
+              "color": "#271e93ff"
             }
           ]
         },
@@ -134,11 +134,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#0072f0ff"
+              "color": "#066cffff"
             },
             {
               "position": 1,
-              "color": "#4b8effff"
+              "color": "#488cffff"
             }
           ]
         },
@@ -1043,7 +1043,7 @@
       "value": {
         "shadowType": "dropShadow",
         "radius": 0,
-        "color": "#5d69e9ff",
+        "color": "#5b67e8ff",
         "offsetX": 0,
         "offsetY": 0,
         "spread": 2
@@ -1061,7 +1061,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 3
@@ -1072,7 +1072,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#f1efffff",
+          "color": "#edf0f9ff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 1
@@ -1092,7 +1092,7 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 4,
+            "radius": 3,
             "color": "#00000014",
             "offsetX": 0,
             "offsetY": 1,
@@ -1103,11 +1103,11 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 0,
-            "color": "#0000000a",
+            "radius": 2,
+            "color": "#00000014",
             "offsetX": 0,
             "offsetY": 1,
-            "spread": 0
+            "spread": -1
           }
         },
         "description": "- Card backgrounds\n- Button hover effects\n- Input fields hover state",
@@ -1123,7 +1123,7 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 8,
+            "radius": 6,
             "color": "#00000014",
             "offsetX": 0,
             "offsetY": 4,
@@ -1134,11 +1134,11 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 0,
-            "color": "#0000000a",
+            "radius": 4,
+            "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 1,
-            "spread": 0
+            "offsetY": 2,
+            "spread": -2
           }
         },
         "description": "- Hover effects on cards",
@@ -1154,22 +1154,22 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 16,
+            "radius": 15,
             "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 4,
-            "spread": -2
+            "offsetY": 10,
+            "spread": -3
           }
         },
         "1": {
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 0,
-            "color": "#0000000a",
+            "radius": 6,
+            "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 1,
-            "spread": 0
+            "offsetY": 4,
+            "spread": -4
           }
         },
         "description": "- Mini dialogs \n- Popups\n- Tooltips",
@@ -1185,22 +1185,22 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 24,
+            "radius": 25,
             "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 4,
-            "spread": -1
+            "offsetY": 20,
+            "spread": -5
           }
         },
         "1": {
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 0,
-            "color": "#0000000a",
+            "radius": 10,
+            "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 1,
-            "spread": 0
+            "offsetY": 8,
+            "spread": -6
           }
         },
         "description": "- Toast alerts\n- Dialogs",
@@ -1216,22 +1216,22 @@
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 36,
+            "radius": 50,
             "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 8,
-            "spread": -2
+            "offsetY": 25,
+            "spread": -12
           }
         },
         "1": {
           "type": "custom-shadow",
           "value": {
             "shadowType": "dropShadow",
-            "radius": 0,
-            "color": "#0000000a",
+            "radius": 10,
+            "color": "#00000014",
             "offsetX": 0,
-            "offsetY": 1,
-            "spread": 0
+            "offsetY": 8,
+            "spread": -6
           }
         },
         "description": "- Modals",
@@ -1270,7 +1270,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 4,
           "offsetY": 4,
           "spread": 0
@@ -1288,7 +1288,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#5d69e9ff",
+          "color": "#5b67e8ff",
           "offsetX": 8,
           "offsetY": 8,
           "spread": 0
