@@ -34,7 +34,7 @@
     "@tsconfig/svelte": "5.0.5",
     "@types/jest": "29.5.14",
     "@types/jsdom": "21.1.7",
-    "@types/react": "18.3.23",
+    "@types/react": "18.3.24",
     "babel-loader": "9.2.1",
     "css-loader": "6.11.0",
     "css-tree": "2.3.1",
@@ -49,7 +49,7 @@
     "prettier-plugin-svelte": "3.4.0",
     "rollup": "3.29.5",
     "rollup-plugin-svelte": "7.2.3",
-    "sass": "1.89.2",
+    "sass": "1.92.0",
     "sass-loader": "13.3.3",
     "storybook": "8.6.14",
     "style-dictionary": "3.9.2",
@@ -59,8 +59,8 @@
     "svelte2tsx": "0.7.42",
     "svg2vectordrawable": "2.9.1",
     "svgo": "3.3.2",
-    "ts-jest": "29.4.1",
-    "tsx": "4.20.3",
+    "ts-jest": "^29.4.1",
+    "tsx": "4.20.5",
     "undici": "7.15.0"
   },
   "peerDependencies": {
@@ -99,7 +99,7 @@
   },
   "license": "MIT",
   "overrides": {
-    "esbuild": "0.25.9",
+    "esbuild": "0.25.6",
     "vite": "5.4.20"
   }
 }
