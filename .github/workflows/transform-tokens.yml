@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # this lets us work in the actual repository
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       # if the folder named "tokens" does not exist, create it
       - name: mkdir "tokens" directory
         # change tokens here (and in line 32) if you want to use a differently named folder
@@ -32,10 +32,10 @@ jobs:
           dir: 'tokens'
       # we now initialize node to run amazon style dictionary to compile the tokens
       - name: Use Node.js 14.x
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           # we use version 14.x of node
-          node-version: 22.17.1
+          node-version: 22.19.0
       # We now run npm i to install all dependencies and run the "transfrom" script that is defined in the package.json (change this if you need to)
       - name: Transform design tokens
         run: 'npm i && npm run transform-tokens'
