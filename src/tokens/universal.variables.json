@@ -1347,17 +1347,13 @@
       "type": "number",
       "value": 1000
     },
-    "android-dialog": {
-      "type": "number",
-      "value": 28
-    },
     "android-list-group": {
       "type": "number",
       "value": 20
     },
-    "browser-content": {
+    "android-dialog": {
       "type": "number",
-      "value": 6
+      "value": 28
     },
     "ios-modals": {
       "type": "number",
@@ -1366,6 +1362,30 @@
     "ios-settings-groups": {
       "type": "number",
       "value": 26
+    },
+    "browserwindow-macos26": {
+      "type": "number",
+      "value": 26
+    },
+    "browsercontent-macos26": {
+      "type": "number",
+      "value": 18
+    },
+    "browserwindow-macoslegacy": {
+      "type": "number",
+      "value": 10
+    },
+    "browsercontent-macoslegacy": {
+      "type": "number",
+      "value": 2
+    },
+    "browserwindow-windows": {
+      "type": "number",
+      "value": 8
+    },
+    "browsercontent-windows": {
+      "type": "number",
+      "value": 2
     }
   },
   "spacing": {
@@ -4048,6 +4068,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -4059,29 +4084,24 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
           "button": {
             "hover": {
               "type": "color",
-              "value": "#f2f2f3",
-              "referencedVariable": "$primitive.neutral.95"
+              "value": "#fafafb",
+              "referencedVariable": "$primitive.neutral.98"
             },
             "active": {
               "type": "color",
-              "value": "#e4e4e5",
-              "referencedVariable": "$primitive.neutral.90"
+              "value": "#f2f2f3",
+              "referencedVariable": "$primitive.neutral.95"
             },
             "outline": {
               "type": "color",
-              "value": "#e4e4e5",
-              "referencedVariable": "$primitive.neutral.90"
+              "value": "#f2f2f3",
+              "referencedVariable": "$primitive.neutral.95"
             }
           }
         }
@@ -5441,6 +5461,11 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5452,29 +5477,24 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
           "button": {
             "hover": {
               "type": "color",
-              "value": "#464649",
-              "referencedVariable": "$primitive.neutral.30"
+              "value": "#39393b",
+              "referencedVariable": "$primitive.neutral.25"
             },
             "active": {
               "type": "color",
-              "value": "#5e5e62",
-              "referencedVariable": "$primitive.neutral.40"
+              "value": "#464649",
+              "referencedVariable": "$primitive.neutral.30"
             },
             "outline": {
               "type": "color",
-              "value": "#525256",
-              "referencedVariable": "$primitive.neutral.35"
+              "value": "#464649",
+              "referencedVariable": "$primitive.neutral.30"
             }
           }
         }
