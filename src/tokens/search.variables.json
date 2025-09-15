@@ -14,7 +14,7 @@
             "value": "#f2f2f3",
             "referencedVariable": "$neutral.10"
           },
-          "subtle-container-": {
+          "subtle-container": {
             "type": "color",
             "value": "#f2f2f3",
             "referencedVariable": "$neutral.10"
@@ -36,7 +36,7 @@
             "value": "#ffffff",
             "referencedVariable": "$schemes.surface-container-lowest"
           },
-          "container-interactive-": {
+          "container-interactive": {
             "type": "color",
             "value": "#f0f2fa",
             "referencedVariable": "$primary.10"
@@ -348,7 +348,7 @@
             "value": "#303032",
             "referencedVariable": "$primitive.neutral.20"
           },
-          "subtle-container-": {
+          "subtle-container": {
             "type": "color",
             "value": "#e4e4e5",
             "referencedVariable": "$neutral.20"
@@ -369,7 +369,7 @@
             "value": "#f2f2f3",
             "referencedVariable": "$schemes.surface-container"
           },
-          "container-interactive-": {
+          "container-interactive": {
             "type": "color",
             "value": "rgba(124, 145, 255, 0.2000)"
           },
