@@ -1,5 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
+import program from 'commander'
 import sharp from 'sharp'
 
 const ICONS_FOLDER = 'icons/'
@@ -7,7 +8,8 @@ const ICONS_FOLDER = 'icons/'
 async function svgToAndroidDrawablePngs(
   svgFileName,
   newColor,
-  newFileBaseName
+  newFileBaseName,
+  targetDirectory
 ) {
   const densities = {
     mdpi: 24,
@@ -18,7 +20,9 @@ async function svgToAndroidDrawablePngs(
   }
 
   for (const [bucket, size] of Object.entries(densities)) {
-    await fs.mkdir(`./tokens/android/drawable-${bucket}/`, { recursive: true })
+    await fs.mkdir(`${targetDirectory}/drawable-${bucket}/`, {
+      recursive: true
+    })
 
     const outputFileName = newFileBaseName
       ? newFileBaseName
@@ -41,20 +45,28 @@ async function svgToAndroidDrawablePngs(
     await sharp(Buffer.from(svgContent, 'utf-8'))
       .resize(size, size)
       .png()
-      .toFile(`./tokens/android/drawable-${bucket}/${outputFileName}`)
+      .toFile(`${targetDirectory}/drawable-${bucket}/${outputFileName}`)
   }
 }
 
-if (process.argv.length < 3) {
-  console.error(
-    'Usage: npm run android-png-icons -- <icon_name.svg> [new_color] [new_file_base_name]'
-  )
-} else {
-  let svgFileName = process.argv[2]
-  if (svgFileName.endsWith('.svg')) {
-    svgFileName = svgFileName.substring(0, svgFileName.length - 4)
-  }
-  const newColor = process.argv.length >= 3 ? process.argv[3] : undefined
-  const newFileBaseName = process.argv.length >= 4 ? process.argv[4] : undefined
-  await svgToAndroidDrawablePngs(svgFileName, newColor, newFileBaseName)
+program.requiredOption('--svg-icon-name <source_icon.svg>', 'svg icon name')
+program.option('--new-color <new_color_hex>', 'new icon color')
+program.option('--new-file-base-name <target_icon.png>', 'new file base name')
+program.option(
+  '--target-directory <target_directory>',
+  'path to a directory where drawable-*dpi folders will be created'
+)
+
+program.parse(process.argv)
+const options = program.opts()
+
+let svgFileName = options.svgIconName
+if (svgFileName.endsWith('.svg')) {
+  svgFileName = svgFileName.substring(0, svgFileName.length - 4)
 }
+await svgToAndroidDrawablePngs(
+  svgFileName,
+  options.newColor,
+  options.newFileBaseName,
+  options.targetDirectory
+)
