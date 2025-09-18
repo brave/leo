@@ -64,7 +64,11 @@ module.exports = (options) => {
         // .foo, .bar { background: red; }
         if (rule.selectors.length !== 1) splitRule(rule, baseSelector)
 
-        rules[baseSelector].base = rule
+        if (!rules[baseSelector].base) {
+          rules[baseSelector].base = rule.clone()
+        } else {
+          rules[baseSelector].base.append(rule.clone())
+        }
         break
       }
     })
