@@ -82,7 +82,9 @@ module.exports = (options) => {
               existingDecl.value = decl.value
             } else {
               // Add new declaration to base rule
-              rules[baseSelector].base.append(decl.clone())
+              const newDecl = decl.clone()
+              rules[baseSelector].base.append(newDecl)
+              nodesToDelete.add(newDecl)
             }
           })
         } else {
