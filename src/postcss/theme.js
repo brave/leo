@@ -64,10 +64,30 @@ module.exports = (options) => {
         // .foo, .bar { background: red; }
         if (rule.selectors.length !== 1) splitRule(rule, baseSelector)
 
-        if (!rules[baseSelector].base) {
-          rules[baseSelector].base = rule.clone()
+        // Merge with existing base rule or create new one
+        if (rules[baseSelector].base) {
+          // Merge declarations from this rule into the existing base rule
+          rule.each((decl) => {
+            // Check if property already exists in base rule
+            let existingDecl = null
+            rules[baseSelector].base.each((baseDecl) => {
+              if (baseDecl.prop === decl.prop) {
+                existingDecl = baseDecl
+                return false
+              }
+            })
+
+            if (existingDecl) {
+              // Update existing declaration value
+              existingDecl.value = decl.value
+            } else {
+              // Add new declaration to base rule
+              rules[baseSelector].base.append(decl.clone())
+            }
+          })
         } else {
-          rules[baseSelector].base.append(rule.clone())
+          // First rule for this selector
+          rules[baseSelector].base = rule
         }
         break
       }
