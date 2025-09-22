@@ -225,6 +225,7 @@
       --leo-button-padding: var(--leo-spacing-s);
 
       flex: 0;
+      z-index: 2;
     }
   }
 
