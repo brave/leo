@@ -21,7 +21,7 @@
 
   export interface CloseEventDetail {
     originalEvent: Event
-    reason: 'select' | 'blur' | 'cancel'
+    reason: 'select' | 'blur' | 'cancel' | 'explicit'
   }
 
   export type CloseEvent = (detail: CloseEventDetail) => boolean | undefined | void
