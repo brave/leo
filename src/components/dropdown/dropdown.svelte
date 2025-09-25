@@ -19,7 +19,10 @@
 <script lang="ts">
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
-  import Menu, { type CloseEvent, type SelectItemEventDetail } from '../menu/menu.svelte'
+  import Menu, {
+    type CloseEvent,
+    type SelectItemEventDetail
+  } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
 
   export let placeholder = ''
@@ -37,6 +40,10 @@
   let isOpen = false
   let button: HTMLButtonElement
   let dropdown: HTMLDivElement
+
+  export const close = () => {
+    isOpen = false
+  }
 
   function onClick(e) {
     e.preventDefault()
@@ -89,7 +96,10 @@
       // Note: We cancel the |close| event if it was the dropdown that we
       // clicked on, as that already toggles the dropdown. If we do both, the
       // dropdown will instantly close and reopen.
-      if (e.originalEvent.composedPath().includes(dropdown) || onClose?.(e) === false) {
+      if (
+        e.originalEvent.composedPath().includes(dropdown) ||
+        onClose?.(e) === false
+      ) {
         return false
       } else if ('key' in e) {
         // Focus the button when closing the dropdown via keyboard, so keyboard
