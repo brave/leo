@@ -93,10 +93,7 @@
       // Note: We cancel the |close| event if it was the dropdown that we
       // clicked on, as that already toggles the dropdown. If we do both, the
       // dropdown will instantly close and reopen.
-      if (
-        e.originalEvent.composedPath().includes(dropdown) ||
-        onClose?.(e) === false
-      ) {
+      if (e.originalEvent.composedPath().includes(dropdown) || onClose?.(e) === false) {
         return false
       } else if ('key' in e) {
         // Focus the button when closing the dropdown via keyboard, so keyboard
