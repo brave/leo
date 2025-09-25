@@ -19,10 +19,7 @@
 <script lang="ts">
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
-  import Menu, {
-    type CloseEvent,
-    type SelectItemEventDetail
-  } from '../menu/menu.svelte'
+  import Menu, { type CloseEvent, type SelectItemEventDetail } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
 
   export let placeholder = ''
