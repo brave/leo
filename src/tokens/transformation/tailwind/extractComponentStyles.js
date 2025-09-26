@@ -79,6 +79,20 @@ export default {
             if (!rule.selector) rule.remove()
           })
 
+          // Prevent at-rule merging by making each unique
+          const atRuleCounters = {}
+          root.walkAtRules((atRule) => {
+            const ruleName = atRule.name
+            if (!atRuleCounters[ruleName]) {
+              atRuleCounters[ruleName] = 0
+            }
+            if (atRuleCounters[ruleName] > 0) {
+              atRule.params =
+                atRule.params + ` /* ${atRuleCounters[ruleName]} */`
+            }
+            atRuleCounters[ruleName]++
+          })
+
           const cssAsJs = postcssJs.objectify(root)
           const pluginDir = path.join(config.buildPath, 'plugins/components')
 
