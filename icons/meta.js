@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1757923903751,
+  "updatedAt": 1758960570326,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -429,6 +429,7 @@ export default {
     "code-rust": "code-rust",
     "code": "code",
     "codellama-color": "codellama-color",
+    "cohere-color": "cohere-color",
     "coinbase-color": "coinbase-color",
     "coindesk-color": "coindesk-color",
     "coingecko-color": "coingecko-color",
@@ -1428,6 +1429,7 @@ export default {
     "open-sign": "open-sign",
     "openai-color": "openai-color",
     "opendao-color": "opendao-color",
+    "openrouter-color": "openrouter-color",
     "origin-color": "origin-color",
     "ost-color": "ost-color",
     "outbox": "outbox",
@@ -2092,6 +2094,7 @@ export default {
     "window-tabs-horizontal": "window-tabs-horizontal",
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
     "window-tabs": "window-tabs",
+    "window-task-manager": "window-task-manager",
     "window-urlbar": "window-urlbar",
     "window-user": "window-user",
     "window": "window",
