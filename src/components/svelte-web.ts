@@ -301,34 +301,12 @@ export default function registerWebComponent(
     ) {
       const svelteEvent = events[event]
       if (svelteEvent) {
-        const boundHandler =
+        const callback =
           'handleEvent' in eventHandler
             ? eventHandler.handleEvent.bind(eventHandler)
             : eventHandler
-
-        // This lets us handle events like 'click' properly:
-        // 1. Listeners are attached to the web component
-        // 2. When events fire we stop them from propagating and re-dispatch
-        //    them from the WebComponent.
-        // 3. If the event handler isn't called with an Event we treat it as a
-        //    normal function, and just call it directly.
-        this[svelteEvent] = (...args) => {
-          if (args.length === 1 && args[0] instanceof Event) {
-            // Stop the old event from propagating, so we don't get duplicate
-            // events.
-            const oldEvent = args[0]
-            oldEvent.stopPropagation()
-
-            // Re-dispatch the event from this element, so that it appears to
-            // come from the WebComponent, not the internal Svelte component.
-            this.dispatchEvent(
-              new (oldEvent as any).constructor(oldEvent.type, oldEvent)
-            )
-          } else {
-            // Treat as a normal function call and invoke it directly.
-            ;(boundHandler as any)(...args)
-          }
-        }
+        this[svelteEvent] = callback
+        return
       }
 
       super.addEventListener(event, eventHandler, options)
@@ -342,6 +320,7 @@ export default function registerWebComponent(
       const svelteEvent = events[event]
       if (svelteEvent && this[svelteEvent] === callback) {
         this[svelteEvent] = undefined
+        return
       }
 
       super.removeEventListener(event, callback, options)
