@@ -60,7 +60,7 @@
     "svg2vectordrawable": "2.9.1",
     "svgo": "3.3.2",
     "ts-jest": "29.4.4",
-    "tsx": "4.20.5",
+    "tsx": "4.20.6",
     "undici": "7.16.0"
   },
   "peerDependencies": {
