@@ -65,6 +65,7 @@
       isOpen={isOpenInternal} 
       target={anchor} 
       onClose={close}
+      fullWidth={false}
     >
       <slot />
     </Menu>

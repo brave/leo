@@ -45,6 +45,7 @@
   export let onClose: CloseEvent =
     undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
+  export let fullWidth: boolean = true
 
   function dispatchClose(
     originalEvent: Event,
@@ -97,8 +98,11 @@
 
   // Note: we check isOpen !== undefined here so this is recalculated every time the
   // dropdown is opened/closed.
-  $: minWidth =
-    (isOpen !== undefined && target?.getBoundingClientRect().width) || 0
+  $: minWidth = fullWidth 
+    ? (isOpen !== undefined && target?.getBoundingClientRect().width) || 0
+    : 0
+
+
 
   function selectMenuItem(e: Event) {
     // Find the option which was clicked on, if any.
@@ -176,6 +180,7 @@
 
   function applySizeMiddleware({ rects, availableHeight }) {
     popup.style.maxHeight = `var(--leo-menu-max-height, calc(${availableHeight}px - var(--leo-spacing-xl)))`
+    popup.style.minWidth = `var(--leo-menu-control-width, ${minWidth}px)`
   }
 
   let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
@@ -196,7 +201,6 @@
         id="menu"
         role="menu"
         tabindex="-1"
-        style:--leo-menu-control-width={`${minWidth}px`}
         bind:this={popup}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
@@ -238,7 +242,6 @@
     overflow: auto;
     border: 1px solid var(--leo-color-divider-subtle);
     border-radius: var(--leo-radius-m);
-    min-width: var(--leo-menu-control-width);
     display: flex;
     flex-direction: column;
     gap: var(--leo-spacing-s);
