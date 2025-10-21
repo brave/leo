@@ -406,7 +406,7 @@
       --icon-color: color-mix(
         in srgb,
         var(--primary-color),
-        var(--background) 30%
+        var(--background) 0%
       );
 
       --icon-hover-color: color-mix(
