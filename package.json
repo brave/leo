@@ -99,7 +99,7 @@
   },
   "license": "MIT",
   "overrides": {
-    "esbuild": "0.25.10",
+    "esbuild": "0.25.11",
     "vite": "5.4.21"
   }
 }
