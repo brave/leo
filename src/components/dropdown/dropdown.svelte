@@ -38,6 +38,11 @@
   let button: HTMLButtonElement
   let dropdown: HTMLDivElement
 
+  export const close = () => {
+    isOpen = false
+    onClose?.({ originalEvent: new CustomEvent('explicit-close'), reason: 'explicit' })
+  }
+
   function onClick(e) {
     e.preventDefault()
     isOpen = !isOpen

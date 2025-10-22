@@ -21,7 +21,7 @@
 
   export interface CloseEventDetail {
     originalEvent: Event
-    reason: 'select' | 'blur' | 'cancel'
+    reason: 'select' | 'blur' | 'cancel' | 'explicit'
   }
 
   export type CloseEvent = (detail: CloseEventDetail) => boolean | undefined | void
@@ -41,6 +41,7 @@
   export let currentValue: string | undefined = undefined
   export let positionStrategy: Strategy = 'absolute'
   export let placement: Placement = 'bottom-start'
+  export let flip: boolean = true
   export let onClose: CloseEvent =
     undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
@@ -185,6 +186,7 @@
     <Floating
       {target}
       {placement}
+      {flip}
       autoUpdate
       middleware={floatingMiddleware}
       {positionStrategy}
@@ -256,22 +258,22 @@
   /* custom items can fit in by making optional use of these variables */
   :global(.leo-menu-popup ::slotted(*)),
   :global(.leo-menu-popup > *) {
-    --leo-menu-item-margin: 0 var(--leo-spacing-s);
+    --leo-menu-item-margin: var(--leo-menu-item-margin-top, 0) var(--leo-spacing-s) var(--leo-menu-item-margin-bottom, 0) var(--leo-spacing-s);
     --leo-menu-item-padding:  var(--leo-spacing-m) var(--leo-spacing-xl);
     --leo-menu-item-border-radius: var(--leo-spacing-s);
   }
 
-  :global(.leo-menu-popup ::slotted(leo-option:first-child)),
-  :global(.leo-menu-popup ::slotted(leo-menu-item:first-child)),
+  :global(.leo-menu-popup ::slotted(leo-option:nth-child(1 of :not([slot])))),
+  :global(.leo-menu-popup ::slotted(leo-menu-item:nth-child(1 of :not([slot])))),
   :global(.leo-menu-popup leo-option:first-child),
   :global(.leo-menu-popup leo-menu-item:first-child) {
-    --leo-menu-item-margin: var(--leo-spacing-s) var(--leo-spacing-s) 0 var(--leo-spacing-s);
+    --leo-menu-item-margin-top: var(--leo-spacing-s);
   }
-  :global(.leo-menu-popup ::slotted(leo-option:last-child)),
-  :global(.leo-menu-popup ::slotted(leo-menu-item:last-child)),
+  :global(.leo-menu-popup ::slotted(leo-option:nth-last-child(1 of :not([slot])))),
+  :global(.leo-menu-popup ::slotted(leo-menu-item:nth-last-child(1 of :not([slot])))),
   :global(.leo-menu-popup leo-option:last-child),
   :global(.leo-menu-popup leo-menu-item:last-child) {
-    --leo-menu-item-margin: 0 var(--leo-spacing-s) var(--leo-spacing-s) var(--leo-spacing-s);
+    --leo-menu-item-margin-bottom: var(--leo-spacing-s);
   }
   :global(.leo-menu-popup ::slotted(leo-title)),
   :global(.leo-menu-popup leo-title) {
