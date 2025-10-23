@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1759091899143,
+  "updatedAt": 1761207113428,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -388,6 +388,7 @@ const meta = {
     "close-circle-filled": "close-circle-filled",
     "close-circle": "close-circle",
     "close": "close",
+    "closed-caption-on": "closed-caption-on",
     "closed-caption": "closed-caption",
     "cloud-backup": "cloud-backup",
     "cloud-check": "cloud-check",
@@ -813,6 +814,7 @@ const meta = {
     "dna-color": "dna-color",
     "dnt-color": "dnt-color",
     "dock-color": "dock-color",
+    "dock": "dock",
     "dockdock-color": "dockdock-color",
     "document-envelope-back": "document-envelope-back",
     "document-envelope-front": "document-envelope-front",
@@ -1215,6 +1217,7 @@ const meta = {
     "leo-color": "leo-color",
     "leo-cursor-filled": "leo-cursor-filled",
     "leo-cursor": "leo-cursor",
+    "leo-project-new": "leo-project-new",
     "leo-project": "leo-project",
     "leo-tasks": "leo-tasks",
     "leo-voice-input": "leo-voice-input",
@@ -1353,6 +1356,7 @@ const meta = {
     "ncash-color": "ncash-color",
     "ndz-color": "ndz-color",
     "near-color": "near-color",
+    "nearai-color": "nearai-color",
     "nebl-color": "nebl-color",
     "nem-color": "nem-color",
     "neo-color": "neo-color",
@@ -2077,6 +2081,7 @@ const meta = {
     "window-binary-code": "window-binary-code",
     "window-bookmark": "window-bookmark",
     "window-code": "window-code",
+    "window-compactmode": "window-compactmode",
     "window-console": "window-console",
     "window-content": "window-content",
     "window-crash": "window-crash",
@@ -2089,6 +2094,7 @@ const meta = {
     "window-loading": "window-loading",
     "window-lock": "window-lock",
     "window-refresh": "window-refresh",
+    "window-roundedcorners": "window-roundedcorners",
     "window-sad": "window-sad",
     "window-screwdriver": "window-screwdriver",
     "window-search": "window-search",
