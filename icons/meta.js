@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1761207113428,
+  "updatedAt": 1761984587969,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1839,6 +1839,7 @@ export default {
     "social-medium": "social-medium",
     "social-patreon": "social-patreon",
     "social-paypal-color": "social-paypal-color",
+    "social-pinterest": "social-pinterest",
     "social-reddit-nobackground": "social-reddit-nobackground",
     "social-reddit": "social-reddit",
     "social-signal-color": "social-signal-color",
