@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           # we use version 14.x of node
-          node-version: 22.20.0
+          node-version: 22.21.1
       # We now run npm i to install all dependencies and run the "transfrom" script that is defined in the package.json (change this if you need to)
       - name: Transform design tokens
         run: 'npm i && npm run transform-tokens'
