@@ -168,7 +168,7 @@
     }
 
     :where(&) > :global(.leo-segmented-control-item),
-    :where(&) > :global(::slotted(leo-segmented-controlitem)) {
+    :where(&) > :global(::slotted(leo-segmentedcontrolitem)) {
       --leo-segmented-control-item-icon-color: var(--leo-color-icon-default);
       --leo-segmented-control-item-color: var(--leo-color-text-secondary);
       --leo-segmented-control-item-background: transparent;
@@ -176,26 +176,26 @@
     }
 
     :where(&:not(.transitioning)) > :global(.leo-segmented-control-item:hover),
-    :where(&:not(.transitioning)) > :global(::slotted(leo-segmented-controlitem:hover)) {
+    :where(&:not(.transitioning)) > :global(::slotted(leo-segmentedcontrolitem:hover)) {
       --leo-segmented-control-item-background: var(--leo-color-container-highlight);
       --leo-segmented-control-item-color: var(--leo-color-text-primary);
     }
 
     :where(&) > :global(.leo-segmented-control-item:focus-visible),
-    :where(&) > :global(::slotted(leo-segmented-controlitem:focus-visible)) {
+    :where(&) > :global(::slotted(leo-segmentedcontrolitem:focus-visible)) {
       --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
     }
 
     :where(&) > :global(.leo-segmented-control-item[aria-selected]),
-    :where(&) > :global(::slotted(leo-segmented-controlitem[aria-selected])) {
+    :where(&) > :global(::slotted(leo-segmentedcontrolitem[aria-selected])) {
       --leo-segmented-control-item-color: var(--leo-color-text-interactive);
       --leo-icon-color: var(--leo-color-icon-interactive);
     }
 
     :where(&.transitioning) > :global(.leo-segmented-control-item[aria-selected]),
-    :where(&.transitioning) > :global(::slotted(leo-segmented-controlitem[aria-selected])),
+    :where(&.transitioning) > :global(::slotted(leo-segmentedcontrolitem[aria-selected])),
     :where(&) > :global(.leo-segmented-control-item[aria-selected]:hover),
-    :where(&) > :global(::slotted(leo-segmented-controlitem[aria-selected]:hover)) {
+    :where(&) > :global(::slotted(leo-segmentedcontrolitem[aria-selected]:hover)) {
       --leo-segmented-control-item-icon-color: currentColor;
       --leo-segmented-control-item-background: var(--leo-color-container-background);
     }
