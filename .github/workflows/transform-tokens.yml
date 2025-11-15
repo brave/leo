@@ -6,6 +6,10 @@ on:
     # and the event_type property from the request body is 'update-tokens'
     types: update-tokens
 # the following defines the jon that is run if the above is true
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     # the name for the entire job

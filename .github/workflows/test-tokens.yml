@@ -7,6 +7,9 @@ on:
     workflows: ['Transform tokens send from figma']
     types: [completed]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest

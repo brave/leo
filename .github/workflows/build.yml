@@ -9,6 +9,9 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
