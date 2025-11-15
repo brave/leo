@@ -8,6 +8,9 @@ on:
 env:
   FIGMA_API_TOKEN: ${{ secrets.FIGMA_API_TOKEN }}
 
+permissions:
+  contents: read
+
 jobs:
   update:
     runs-on: ubuntu-latest

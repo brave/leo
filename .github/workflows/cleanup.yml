@@ -5,6 +5,10 @@ on:
     - cron: '30 5 * * 1'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   cleanup:
     uses: brave/devops-github-workflows/.github/workflows/cleanup_buckets.yml@main
