@@ -299,6 +299,9 @@ export default function registerWebComponent(
       eventHandler: EventListenerOrEventListenerObject,
       options?: boolean | AddEventListenerOptions
     ) {
+      // If the event handler is flasey there's nothing to do here.
+      if (!eventHandler) return
+
       const svelteEvent = events[event]
       if (svelteEvent) {
         const callback =
