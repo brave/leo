@@ -17,7 +17,6 @@
   type AnchorProps = CommonNalaLinkProps &
     Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
       href: Href
-      onClick?: never
     }
 
   type $$Props = AnchorProps | ButtonProps
