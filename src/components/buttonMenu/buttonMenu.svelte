@@ -35,9 +35,14 @@
   }
 
   const close: CloseEvent = (e) => {
+    if (e.originalEvent.composedPath().includes(anchor) || onClose?.(e) === false) {
+      return false
+    } else if ('key' in e) {
+      anchor.focus()
+    }
+
     if (isOpen === undefined) isOpenInternal = false
     onChange?.({ isOpen: false })
-    onClose?.(e)
   }
 </script>
 
@@ -49,7 +54,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div 
     bind:this={anchor} 
-    on:click|preventDefault|stopPropagation={toggle}
+    on:click={toggle}
     role="button"
     aria-haspopup="menu"
     aria-expanded={isOpenInternal}
