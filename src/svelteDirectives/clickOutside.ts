@@ -1,4 +1,4 @@
-type Handler = (e: MouseEvent) => void
+type Handler = (e: Event) => void
 
 export default function clickOutside(
   node: HTMLUnknownElement,
@@ -6,9 +6,12 @@ export default function clickOutside(
 ) {
   let lastHandler: Handler
   const attachHandler = (handler: Handler) => {
-    if (lastHandler) document.removeEventListener('click', lastHandler)
+    if (lastHandler) {
+      document.removeEventListener('click', lastHandler)
+      window.removeEventListener('blur', lastHandler)
+    }
 
-    lastHandler = (e: MouseEvent) => {
+    lastHandler = (e: Event) => {
       const path = e.composedPath()
       if (path.includes(node)) return
 
@@ -16,12 +19,14 @@ export default function clickOutside(
     }
 
     document.addEventListener('click', lastHandler)
+    window.addEventListener('blur', lastHandler)
   }
   attachHandler(handler)
 
   return {
     destroy() {
       document.removeEventListener('click', lastHandler)
+      window.removeEventListener('blur', lastHandler)
     },
     update(handler: Handler) {
       attachHandler(handler)
