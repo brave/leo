@@ -170,7 +170,7 @@
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
 
-  function handleBlur(e: MouseEvent) {
+  function handleBlur(e: Event) {
     dispatchClose(e, 'blur')
   }
 
