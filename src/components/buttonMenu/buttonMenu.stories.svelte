@@ -22,6 +22,7 @@
   import Slot from '../../storyHelpers/Slot.svelte'
   import Toggle from '../toggle/toggle.svelte'
   import Checkbox from '../checkbox/checkbox.svelte'
+  import Button from '../button/button.svelte'
 
   let toggleIsChecked = false
   let controlledMenuOpen = false
@@ -144,6 +145,21 @@
   </ButtonMenu>
 </Story>
 
+<Story name="Multiple Menus" let:args>
+  <div class="multi">
+    <ButtonMenu {...args}>
+      <Button slot="anchor-content">Anchor 1</Button>
+      <leo-menu-item>First</leo-menu-item>
+      <leo-menu-item>Second</leo-menu-item>
+    </ButtonMenu>
+    <ButtonMenu {...args}>
+      <Button slot="anchor-content">Anchor 2</Button>
+      <leo-menu-item>Third</leo-menu-item>
+      <leo-menu-item>Fourth</leo-menu-item>
+    </ButtonMenu>
+  </div>
+</Story>
+
 <style>
   .container {
     width: 300px;
@@ -171,5 +187,10 @@
     padding: var(--leo-menu-item-padding);
     font: var(--leo-font-small-regular);
     color: var(--leo-color-text-secondary);
+  }
+
+  .multi {
+    display: flex;
+    gap: 10px;
   }
 </style>
