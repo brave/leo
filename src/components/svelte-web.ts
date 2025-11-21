@@ -1,5 +1,5 @@
 import type { SvelteComponent } from 'svelte'
-import { mount, unmount } from 'svelte';
+import { mount, unmount } from 'svelte'
 
 interface Options {
   mode: 'open' | 'closed'
@@ -72,9 +72,7 @@ export default function registerWebComponent(
   const attributes = Array.from(attributePropMap.keys())
 
   // We need to handle boolean attributes specially, as the presence/absence of the attribute indicates the value.
-  const boolProperties = new Set(
-    props.filter((p) => typeof c[p] === 'boolean')
-  )
+  const boolProperties = new Set(props.filter((p) => typeof c[p] === 'boolean'))
 
   type Callback = (...args: any[]) => void
   class SvelteWrapper extends HTMLElement {
@@ -183,7 +181,7 @@ export default function registerWebComponent(
 
       if (restoreFocus) {
         const restoreTo = this.shadowRoot.querySelector(restoreFocus)
-          ; (restoreTo as HTMLElement)?.focus?.()
+        ;(restoreTo as HTMLElement)?.focus?.()
       }
     }
 
