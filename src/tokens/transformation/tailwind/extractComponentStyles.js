@@ -64,7 +64,7 @@ export default {
         const rawCSS = svelteOutput?.css?.code;
 
         if (rawCSS) {
-          const css = rawCSS.replace(/\.REMOVE_ME/g, '')
+          const css = rawCSS.replace(/:where\(\.REMOVE_ME\)|\.REMOVE_ME/g, '');
           const root = postcss.parse(css)
 
           // Remove disallowed selectors/rules
