@@ -56,15 +56,12 @@ export default {
           }
         )
 
-        // TODO: Beg Jacob for help
-        return;
-
-        const {
-          css: { code: rawCSS }
-        } = svelte.compile(Component, {
+        const svelteOutput = svelte.compile(Component, {
           generate: 'ssr',
           cssHash: () => 'REMOVE_ME'
         })
+
+        const rawCSS = svelteOutput?.css?.code;
 
         if (rawCSS) {
           const css = rawCSS.replace(/\.REMOVE_ME/g, '')
