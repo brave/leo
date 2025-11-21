@@ -69,7 +69,7 @@ export default {
       compilerOptions: {
         customElement: false,
         css: 'injected',
-        accessors: true,
+        accessors: true
       },
       onwarn
     }),
