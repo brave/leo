@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1761207113428,
+  "updatedAt": 1763367187151,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -266,6 +266,7 @@ export default {
     "browser-menu": "browser-menu",
     "browser-mobile-bottom-tab-groups": "browser-mobile-bottom-tab-groups",
     "browser-mobile-bottom-toolbar": "browser-mobile-bottom-toolbar",
+    "browser-mobile-inactive-tabs": "browser-mobile-inactive-tabs",
     "browser-mobile-recent-tabs": "browser-mobile-recent-tabs",
     "browser-mobile-tab-bar": "browser-mobile-tab-bar",
     "browser-mobile-tab-close": "browser-mobile-tab-close",
@@ -1308,6 +1309,7 @@ export default {
     "microphone": "microphone",
     "microsoft-color": "microsoft-color",
     "mina-color": "mina-color",
+    "minimize": "minimize",
     "minus": "minus",
     "miota-color": "miota-color",
     "mir-color": "mir-color",
@@ -1839,6 +1841,7 @@ export default {
     "social-medium": "social-medium",
     "social-patreon": "social-patreon",
     "social-paypal-color": "social-paypal-color",
+    "social-pinterest": "social-pinterest",
     "social-reddit-nobackground": "social-reddit-nobackground",
     "social-reddit": "social-reddit",
     "social-signal-color": "social-signal-color",
