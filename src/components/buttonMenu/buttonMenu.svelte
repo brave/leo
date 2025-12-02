@@ -23,6 +23,7 @@
   export let positionStrategy: Strategy = 'absolute'
   export let placement: Placement = 'bottom-start'
   export let flip: boolean = true
+  export let widthIsMaxWidth: boolean = false
 
   let anchor: HTMLElement
 
@@ -67,6 +68,7 @@
       {placement}
       {positionStrategy}
       {flip}
+      {widthIsMaxWidth}
       isOpen={isOpenInternal} 
       target={anchor} 
       onClose={close}

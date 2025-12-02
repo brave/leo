@@ -42,8 +42,11 @@
   export let positionStrategy: Strategy = 'absolute'
   export let placement: Placement = 'bottom-start'
   export let flip: boolean = true
-  export let onClose: CloseEvent =
-    undefined
+
+  /* If true the popup will be the same width as the control. By default it will grow to fit the menu items */
+  export let widthIsMaxWidth: boolean = false
+
+  export let onClose: CloseEvent = undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
 
   function dispatchClose(
@@ -192,11 +195,12 @@
       {positionStrategy}
     >
       <div
+        style:--leo-menu-control-width={`${minWidth}px`}
         class="leo-menu-popup"
+        class:width-is-max-width={widthIsMaxWidth}
         id="menu"
         role="menu"
         tabindex="-1"
-        style:--leo-menu-control-width={`${minWidth}px`}
         bind:this={popup}
         on:keypress={(e) => {
           if (e.code !== 'Enter' && e.code !== 'Space') return
@@ -242,6 +246,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--leo-spacing-s);
+
+    &.width-is-max-width {
+      width: var(--leo-menu-control-width);
+      overflow: hidden;
+    }
   }
 
   @keyframes menuIn {

@@ -155,7 +155,7 @@
     <ButtonMenu {...args}>
       <Button slot="anchor-content">Anchor 2</Button>
       <leo-menu-item>Third</leo-menu-item>
-      <leo-menu-item>Fourth</leo-menu-item>
+      <leo-menu-item>Fourth Fourth Fourth Fourth Fourth Fourth</leo-menu-item>
     </ButtonMenu>
   </div>
 </Story>
