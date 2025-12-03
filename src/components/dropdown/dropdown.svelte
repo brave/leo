@@ -30,6 +30,7 @@
   export let mode: Mode = 'outline'
   export let showErrors = false
   export let positionStrategy: Strategy = 'absolute'
+  export let widthIsMaxWidth: boolean = false
 
   export let onChange: (detail: SelectItemEventDetail) => void = undefined
   export let onClose: CloseEvent = undefined
@@ -87,6 +88,7 @@
   <Menu
     target={dropdown}
     {positionStrategy}
+    {widthIsMaxWidth}
     bind:isOpen
     bind:currentValue={value}
     onSelectItem={onChange}
