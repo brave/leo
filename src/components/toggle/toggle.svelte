@@ -91,7 +91,7 @@
   <slot {checked} />
 </label>
 
-<style lang="scss">
+<style>
   :global(:root) {
     --leo-direction: 1;
   }
@@ -108,9 +108,6 @@
     --foreground-color: black;
 
     --duration: var(--leo-toggle-transition-duration, 0.12s);
-    @media (prefers-reduced-motion) {
-      --duration: 0;
-    }
 
     --icon-size: var(--leo-icon-size, 20px);
     --width: var(--leo-toggle-width, 52px);
@@ -138,16 +135,24 @@
       --icon-size: var(--leo-icon-size, 12px);
     }
 
-    @theme (dark) {
-      --foreground-color: white;
-    }
-
     display: flex;
     align-items: center;
     flex-direction: var(--label-flex-direction);
     gap: var(--label-gap);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion) {
+    .leo-toggle {
+      --duration: 0;
+    }
+  }
+
+  @theme (dark) {
+    .leo-toggle {
+      --foreground-color: white;
+    }
   }
 
   .leo-toggle button {
@@ -159,13 +164,15 @@
     height: calc(var(--height) - 2 * var(--padding));
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
-    transition: background-color var(--duration) ease-in-out, box-shadow var(--duration) ease-in-out;
+    transition:
+      background-color var(--duration) ease-in-out,
+      box-shadow var(--duration) ease-in-out;
     flex-shrink: 0;
 
     &:disabled {
       opacity: 0.5;
 
-      > .thumb {
+      & > .thumb {
         background: var(--thumb-disabled-color);
       }
     }
@@ -188,7 +195,7 @@
       );
     }
 
-    &[aria-checked="false"] .thumb {
+    &[aria-checked='false'] .thumb {
       --thumb-color: var(--leo-color-white);
     }
 
@@ -204,7 +211,8 @@
               calc(var(--thumb-offset) + var(--drag-offset))
             ),
             var(--unchecked-thumb-offset)
-          ) * var(--leo-direction)
+          ) *
+          var(--leo-direction)
       );
 
       height: 100%;
@@ -228,7 +236,7 @@
       align-items: center;
       justify-content: center;
 
-      .on-icon {
+      & .on-icon {
         transition: opacity var(--duration) ease-in-out;
         display: flex;
         opacity: 0;
@@ -238,12 +246,12 @@
     &[aria-checked='true'] {
       background: var(--checked-color);
 
-      .thumb {
+      & .thumb {
         --thumb-offset: var(--checked-thumb-offset);
-        color: var(--checked-color);
         --thumb-disabled-color: var(--thumb-color);
+        color: var(--checked-color);
 
-        .on-icon {
+        & .on-icon {
           opacity: 1;
         }
       }
