@@ -6,10 +6,15 @@ export default {
   ],
 
   addons: [
-    '@storybook/addon-svelte-csf',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-svelte-csf',
+      options: {
+        legacyTemplate: true
+      }
+    },
     '@storybook/preset-scss',
     '@storybook/addon-storysource',
     '@storybook/addon-themes'
