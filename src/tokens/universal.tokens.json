@@ -66,7 +66,7 @@
             },
             {
               "position": 1,
-              "color": "#271e93ff"
+              "color": "#3126b1ff"
             }
           ]
         },
@@ -134,11 +134,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#066cffff"
+              "color": "#366eb8ff"
             },
             {
               "position": 1,
-              "color": "#488cffff"
+              "color": "#4386e0ff"
             }
           ]
         },
@@ -309,6 +309,64 @@
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:254852c9922f947121ea3178876d4c253d369111,",
+            "exportKey": "gradient"
+          }
+        }
+      }
+    },
+    "braveai": {
+      "gradient-fill": {
+        "description": "",
+        "type": "custom-gradient",
+        "value": {
+          "gradientType": "linear",
+          "rotation": 321.5013256215316,
+          "stops": [
+            {
+              "position": 0.03,
+              "color": "#fa725014"
+            },
+            {
+              "position": 0.4,
+              "color": "#ff189314"
+            },
+            {
+              "position": 0.99,
+              "color": "#a78aff14"
+            }
+          ]
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:81e304a5b404fa26c07f0d5475330eba3d8e97b0,",
+            "exportKey": "gradient"
+          }
+        }
+      },
+      "gradient-stroke": {
+        "description": "",
+        "type": "custom-gradient",
+        "value": {
+          "gradientType": "linear",
+          "rotation": 321.5013256215316,
+          "stops": [
+            {
+              "position": 0.03,
+              "color": "#fa72504d"
+            },
+            {
+              "position": 0.4,
+              "color": "#ff18934d"
+            },
+            {
+              "position": 0.99,
+              "color": "#a78aff4d"
+            }
+          ]
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:3b5471a683bd50ea137824f3fba00536612a82b5,",
             "exportKey": "gradient"
           }
         }
@@ -756,9 +814,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 24,
+            "lineHeight": 19.2,
             "paragraphIndent": 0,
-            "paragraphSpacing": 8,
+            "paragraphSpacing": 0,
             "textCase": "none"
           },
           "extensions": {
@@ -778,9 +836,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 22,
+            "lineHeight": 16.8,
             "paragraphIndent": 0,
-            "paragraphSpacing": 8,
+            "paragraphSpacing": 0,
             "textCase": "none"
           },
           "extensions": {
@@ -800,9 +858,9 @@
             "fontStyle": "normal",
             "fontStretch": "normal",
             "letterSpacing": 0,
-            "lineHeight": 18,
+            "lineHeight": 14.4,
             "paragraphIndent": 0,
-            "paragraphSpacing": 8,
+            "paragraphSpacing": 0,
             "textCase": "none"
           },
           "extensions": {
@@ -1072,7 +1130,7 @@
         "value": {
           "shadowType": "dropShadow",
           "radius": 0,
-          "color": "#edf0f9ff",
+          "color": "#eef2ffff",
           "offsetX": 0,
           "offsetY": 0,
           "spread": 1
@@ -2362,7 +2420,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 24
+            "value": 19.2
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2370,7 +2428,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 8
+            "value": 0
           },
           "textCase": {
             "type": "string",
@@ -2408,7 +2466,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 22
+            "value": 16.8
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2416,7 +2474,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 8
+            "value": 0
           },
           "textCase": {
             "type": "string",
@@ -2454,7 +2512,7 @@
           },
           "lineHeight": {
             "type": "dimension",
-            "value": 18
+            "value": 14.4
           },
           "paragraphIndent": {
             "type": "dimension",
@@ -2462,7 +2520,7 @@
           },
           "paragraphSpacing": {
             "type": "dimension",
-            "value": 8
+            "value": 0
           },
           "textCase": {
             "type": "string",

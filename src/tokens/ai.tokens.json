@@ -1,0 +1,126 @@
+{
+  "color": {
+    "agent-stroke": {
+      "description": "",
+      "type": "color",
+      "value": "#f5259fff",
+      "blendMode": "normal",
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:da58f00a8f2e9f426b120a3b589e7499419b4c8c,",
+          "exportKey": "color"
+        }
+      }
+    }
+  },
+  "gradient": {
+    "using tool text gradient": {
+      "description": "",
+      "type": "custom-gradient",
+      "value": {
+        "gradientType": "linear",
+        "rotation": 89.9999999999975,
+        "stops": [
+          {
+            "position": 0,
+            "color": "#434fcfff"
+          },
+          {
+            "position": 0.5,
+            "color": "#697ee1ff"
+          },
+          {
+            "position": 0.75,
+            "color": "#697ee1ff"
+          },
+          {
+            "position": 1,
+            "color": "#434fcfff"
+          }
+        ]
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:a1900bde12af27be0641679831d2ea78bf8c69dc,",
+          "exportKey": "gradient"
+        }
+      }
+    },
+    "warning background": {
+      "description": "",
+      "type": "custom-gradient",
+      "value": {
+        "gradientType": "linear",
+        "rotation": 321.5013256215316,
+        "stops": [
+          {
+            "position": 0.03,
+            "color": "#fa725014"
+          },
+          {
+            "position": 0.4,
+            "color": "#ff189314"
+          },
+          {
+            "position": 0.99,
+            "color": "#a78aff14"
+          }
+        ]
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:3d0d4f0719e7678252d5b100f025a605d07dd9b9,",
+          "exportKey": "gradient"
+        }
+      }
+    },
+    "warning stroke": {
+      "description": "",
+      "type": "custom-gradient",
+      "value": {
+        "gradientType": "linear",
+        "rotation": 321.5013256215316,
+        "stops": [
+          {
+            "position": 0.03,
+            "color": "#fa72504d"
+          },
+          {
+            "position": 0.4,
+            "color": "#ff18934d"
+          },
+          {
+            "position": 0.99,
+            "color": "#a78aff4d"
+          }
+        ]
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:b9c3c20f1526ecaf1f85afcb69253cedba15f478,",
+          "exportKey": "gradient"
+        }
+      }
+    }
+  },
+  "effect": {
+    "agent-glow": {
+      "description": null,
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "innerShadow",
+        "radius": 24,
+        "color": "#f5259f80",
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 0
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:e51806ba8f948765db1f184f7123acfd0c191428,",
+          "exportKey": "effect"
+        }
+      }
+    }
+  }
+}
