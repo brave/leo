@@ -80,14 +80,14 @@
       {#if $$slots.loading}
         <slot name="loading" />
       {:else if !fab}
-        <slot>Leo Button</slot>
+        <slot/>
       {/if}
     </div>
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
     <div class:content={!fab}>
-      <slot>Leo Button</slot>
+      <slot/>
     </div>
     <slot name="icon-after" />
   {/if}
