@@ -249,7 +249,7 @@
 
     &.width-is-max-width {
       width: var(--leo-menu-control-width);
-      overflow: hidden;
+      overflow-x: hidden;
     }
   }
 
