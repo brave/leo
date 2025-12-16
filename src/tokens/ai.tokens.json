@@ -46,7 +46,7 @@
         }
       }
     },
-    "warning background": {
+    "agent transparent background": {
       "description": "",
       "type": "custom-gradient",
       "value": {
@@ -55,15 +55,15 @@
         "stops": [
           {
             "position": 0.03,
-            "color": "#fa725014"
+            "color": "#fa72501a"
           },
           {
             "position": 0.4,
-            "color": "#ff189314"
+            "color": "#ff18931a"
           },
           {
             "position": 0.99,
-            "color": "#a78aff14"
+            "color": "#a78aff1a"
           }
         ]
       },
@@ -74,7 +74,7 @@
         }
       }
     },
-    "warning stroke": {
+    "agent transparent stroke": {
       "description": "",
       "type": "custom-gradient",
       "value": {
