@@ -122,7 +122,7 @@
         },
         "5": {
           "type": "color",
-          "value": "#210e15"
+          "value": "#081617"
         },
         "10": {
           "type": "color",
@@ -4262,6 +4262,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -4273,11 +4278,6 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -5697,6 +5697,11 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5708,11 +5713,6 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
