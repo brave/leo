@@ -284,7 +284,7 @@
   </SlotInfo>
 </Story>
 
-<Story name="Primary" let:args />
+<Story name="Primary" />
 
 <style lang="scss">
   .container {
