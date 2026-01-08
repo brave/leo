@@ -302,7 +302,10 @@
     font: var(--leo-font-components-label);
     color: var(--leo-color-text-secondary);
   }
-
+  :global(.leo-menu-popup ::slotted(leo-title:not(:first-of-type))),
+  :global(.leo-menu-popup leo-title:not(:first-of-type)) {
+    margin-top:-4px;
+  }
   /* Divider styles for menu sections */
   :global(.leo-menu-popup ::slotted(hr)),
   :global(.leo-menu-popup hr) {

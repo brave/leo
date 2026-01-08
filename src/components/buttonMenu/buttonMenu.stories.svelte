@@ -202,6 +202,9 @@
     <ButtonMenu {...args}>
       <span slot="anchor-content">Scrollable Sections</span>
       <!-- Section 1: Fixed items -->
+      <leo-title> 
+        Section title here 
+      </leo-title>
       <leo-menu-item on:click={handleAction}> New </leo-menu-item>
       <leo-menu-item on:click={handleAction}> Open </leo-menu-item>
       <!-- Divider -->
@@ -220,6 +223,9 @@
       <!-- Divider -->
       <Hr />
       <!-- Section 3: Fixed items -->
+       <leo-title> 
+        Section title here 
+      </leo-title>
       <leo-menu-item on:click={handleAction}>
         <div class="item">
           <div>Settings</div>
