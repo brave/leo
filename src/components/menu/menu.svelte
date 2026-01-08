@@ -15,6 +15,10 @@
           value?: string
           children?: any
         }
+        'leo-menu-section': HTMLAttributes<HTMLElement> & {
+          key?: string | number | null
+          children?: any
+        }
       }
     }
   }
@@ -73,11 +77,18 @@
     // select items that are in complex positions (see an example in the browser app menu zoom controls).
     (popup?.querySelector('.leo-menu-popup slot') as HTMLSlotElement)
       ?.assignedElements()
-      ?.filter((element) =>
-        ['LEO-OPTION', 'LEO-MENU-ITEM'].includes(element.tagName)
-      ) ??
+      ?.flatMap((element) => {
+        if (['LEO-OPTION', 'LEO-MENU-ITEM'].includes(element.tagName)) {
+          return [element]
+        }
+        // Also find menu items inside leo-menu-section elements
+        if (element.tagName === 'LEO-MENU-SECTION') {
+          return Array.from(element.querySelectorAll('leo-menu-item, leo-option'))
+        }
+        return []
+      }) ??
       popup?.querySelectorAll(
-        '.leo-menu-popup > :is(leo-menu-item, leo-option'
+        '.leo-menu-popup :is(leo-menu-item, leo-option)'
       ) ??
       []
   ) as HTMLElement[]
@@ -292,6 +303,28 @@
     color: var(--leo-color-text-secondary);
   }
 
+  /* Divider styles for menu sections */
+  :global(.leo-menu-popup ::slotted(hr)),
+  :global(.leo-menu-popup hr) {
+    all: unset;
+    display: block;
+    border-top: 1px solid var(--leo-color-divider-subtle);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Scrollable menu section container */
+  :global(.leo-menu-popup ::slotted(leo-menu-section)),
+  :global(.leo-menu-popup leo-menu-section) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--leo-spacing-s);
+    max-height: var(--leo-menu-section-max-height, none);
+    overflow-y: auto;
+    padding: 0;
+    margin: -4px 0;
+  }
+
   /**
    * Default Styles for our dropdown options. The selectors are broken up
    * because the :global selector doesn't work with Nesting or combinations (e.g. :is or in ::slotted).
@@ -301,7 +334,9 @@
   :global(:where(.leo-menu-popup) ::slotted(leo-menu-item)),
   :global(:where(.leo-menu-popup) ::slotted(leo-option)),
   :global(:where(.leo-menu-popup) > leo-menu-item),
-  :global(:where(.leo-menu-popup) > leo-option) {
+  :global(:where(.leo-menu-popup) > leo-option),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-option) {
     all: unset;
     cursor: pointer;
     margin: var(--leo-menu-item-margin);
@@ -313,7 +348,9 @@
   :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:hover)),
   :global(:where(.leo-menu-popup) ::slotted(leo-option:hover)),
   :global(:where(.leo-menu-popup) > leo-menu-item:hover),
-  :global(:where(.leo-menu-popup) > leo-option:hover) {
+  :global(:where(.leo-menu-popup) > leo-option:hover),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:hover),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-option:hover) {
     background: var(--leo-color-container-highlight);
   }
 
@@ -324,7 +361,11 @@
   :global(:where(.leo-menu-popup) > leo-option[aria-selected]),
   :global(:where(.leo-menu-popup) > leo-menu-item[aria-selected]),
   :global(:where(.leo-menu-popup) > leo-option:active),
-  :global(:where(.leo-menu-popup) > leo-menu-item:active) {
+  :global(:where(.leo-menu-popup) > leo-menu-item:active),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-option[aria-selected]),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item[aria-selected]),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-option:active),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:active) {
     background: var(--leo-color-container-interactive);
     color: var(--leo-color-text-interactive);
   }
@@ -332,9 +373,17 @@
   :global(:where(.leo-menu-popup) ::slotted(leo-option:focus-visible)),
   :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:focus-visible)),
   :global(:where(.leo-menu-popup) > leo-option:focus-visible),
-  :global(:where(.leo-menu-popup) > leo-menu-item:focus-visible) {
+  :global(:where(.leo-menu-popup) > leo-menu-item:focus-visible),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-option:focus-visible),
+  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:focus-visible) {
     box-shadow:
       0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
+  }
+
+  /* Menu items inside sections - adjusted margins (no top/bottom margin since section has padding) */
+  :global(.leo-menu-popup leo-menu-section leo-menu-item),
+  :global(.leo-menu-popup leo-menu-section leo-option) {
+    --leo-menu-item-margin: 0 var(--leo-spacing-s);
   }
 </style>

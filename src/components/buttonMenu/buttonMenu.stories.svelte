@@ -18,6 +18,7 @@
   import { Story, Template } from '@storybook/addon-svelte-csf'
 
   import Icon from '../icon/icon.svelte'
+  import Hr from '../hr/hr.svelte'
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
   import Toggle from '../toggle/toggle.svelte'
@@ -160,6 +161,75 @@
   </div>
 </Story>
 
+<Story name="With Sections" let:args>
+  <div class="container">
+    <ButtonMenu {...args}>
+      <span slot="anchor-content">Menu with Sections</span>
+      <leo-title> 
+        Section title here 
+      </leo-title>
+      <!-- Section 1 -->
+      <leo-menu-section>
+        <leo-menu-item on:click={handleAction}> Item 1 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 2 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 3 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 4 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 5 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 6 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 7 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 8 </leo-menu-item>
+      </leo-menu-section> 
+      <!-- Divider -->
+      <Hr />
+      <!-- Section 2 -->
+      <leo-menu-item on:click={handleAction}> Select All </leo-menu-item>
+      <leo-menu-item on:click={handleAction}> Find </leo-menu-item>
+      <!-- Divider -->
+      <Hr />
+      <!-- Section 3 -->
+      <leo-menu-item on:click={handleAction}>
+        <div class="item">
+          <div>Settings</div>
+          <Icon name="settings" />
+        </div>
+      </leo-menu-item>
+    </ButtonMenu>
+  </div>
+</Story>
+
+<Story name="With Scrollable Sections" let:args>
+  <div class="container">
+    <ButtonMenu {...args}>
+      <span slot="anchor-content">Scrollable Sections</span>
+      <!-- Section 1: Fixed items -->
+      <leo-menu-item on:click={handleAction}> New </leo-menu-item>
+      <leo-menu-item on:click={handleAction}> Open </leo-menu-item>
+      <!-- Divider -->
+      <Hr />
+      <!-- Section 2: Scrollable list with max-height -->
+      <leo-menu-section style="--leo-menu-section-max-height: 150px;">
+        <leo-menu-item on:click={handleAction}> Item 1 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 2 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 3 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 4 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 5 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 6 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 7 </leo-menu-item>
+        <leo-menu-item on:click={handleAction}> Item 8 </leo-menu-item>
+      </leo-menu-section>
+      <!-- Divider -->
+      <Hr />
+      <!-- Section 3: Fixed items -->
+      <leo-menu-item on:click={handleAction}>
+        <div class="item">
+          <div>Settings</div>
+          <Icon name="settings" />
+        </div>
+      </leo-menu-item>
+    </ButtonMenu>
+  </div>
+</Story>
+
 <style>
   .container {
     width: 300px;
@@ -180,13 +250,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-  }
-
-  .section {
-    margin: var(--leo-menu-item-margin);
-    padding: var(--leo-menu-item-padding);
-    font: var(--leo-font-small-regular);
-    color: var(--leo-color-text-secondary);
   }
 
   .multi {
