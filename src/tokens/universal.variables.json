@@ -1299,6 +1299,80 @@
           "value": "#ffffff"
         }
       },
+      "orange-vibrant": {
+        "0": {
+          "type": "color",
+          "value": "#000000"
+        },
+        "5": {
+          "type": "color",
+          "value": "#280801"
+        },
+        "10": {
+          "type": "color",
+          "value": "#390c00"
+        },
+        "15": {
+          "type": "color",
+          "value": "#4a1300"
+        },
+        "20": {
+          "type": "color",
+          "value": "#5c1900"
+        },
+        "25": {
+          "type": "color",
+          "value": "#6f2000"
+        },
+        "30": {
+          "type": "color",
+          "value": "#822800"
+        },
+        "35": {
+          "type": "color",
+          "value": "#962f00"
+        },
+        "40": {
+          "type": "color",
+          "value": "#aa3600"
+        },
+        "50": {
+          "type": "color",
+          "value": "#d44600"
+        },
+        "60": {
+          "type": "color",
+          "value": "#f45202"
+        },
+        "70": {
+          "type": "color",
+          "value": "#ff8b62"
+        },
+        "80": {
+          "type": "color",
+          "value": "#ffb59c"
+        },
+        "90": {
+          "type": "color",
+          "value": "#ffdbcf"
+        },
+        "95": {
+          "type": "color",
+          "value": "#ffede8"
+        },
+        "98": {
+          "type": "color",
+          "value": "#fff8f6"
+        },
+        "99": {
+          "type": "color",
+          "value": "#fffbff"
+        },
+        "100": {
+          "type": "color",
+          "value": "#ffffff"
+        }
+      },
       "brands": {
         "bat-1": {
           "type": "color",
@@ -2824,6 +2898,80 @@
           "value": "#ffffff"
         }
       },
+      "orange-vibrant": {
+        "0": {
+          "type": "color",
+          "value": "#000000"
+        },
+        "5": {
+          "type": "color",
+          "value": "#280801"
+        },
+        "10": {
+          "type": "color",
+          "value": "#390c00"
+        },
+        "15": {
+          "type": "color",
+          "value": "#4a1300"
+        },
+        "20": {
+          "type": "color",
+          "value": "#5c1900"
+        },
+        "25": {
+          "type": "color",
+          "value": "#6f2000"
+        },
+        "30": {
+          "type": "color",
+          "value": "#822800"
+        },
+        "35": {
+          "type": "color",
+          "value": "#962f00"
+        },
+        "40": {
+          "type": "color",
+          "value": "#aa3600"
+        },
+        "50": {
+          "type": "color",
+          "value": "#d44600"
+        },
+        "60": {
+          "type": "color",
+          "value": "#f45202"
+        },
+        "70": {
+          "type": "color",
+          "value": "#ff8b62"
+        },
+        "80": {
+          "type": "color",
+          "value": "#ffb59c"
+        },
+        "90": {
+          "type": "color",
+          "value": "#ffdbcf"
+        },
+        "95": {
+          "type": "color",
+          "value": "#ffede8"
+        },
+        "98": {
+          "type": "color",
+          "value": "#fff8f6"
+        },
+        "99": {
+          "type": "color",
+          "value": "#fffbff"
+        },
+        "100": {
+          "type": "color",
+          "value": "#ffffff"
+        }
+      },
       "brands": {
         "bat-1": {
           "type": "color",
@@ -3834,6 +3982,48 @@
           "referencedVariable": "$primitive.primary-vibrant.10"
         }
       },
+      "orange-vibrant": {
+        "5": {
+          "type": "color",
+          "value": "#fff8f6",
+          "referencedVariable": "$primitive.orange-vibrant.98"
+        },
+        "10": {
+          "type": "color",
+          "value": "#ffede8",
+          "referencedVariable": "$primitive.orange-vibrant.95"
+        },
+        "20": {
+          "type": "color",
+          "value": "#ffdbcf",
+          "referencedVariable": "$primitive.orange-vibrant.90"
+        },
+        "30": {
+          "type": "color",
+          "value": "#f45202",
+          "referencedVariable": "$primitive.orange-vibrant.60"
+        },
+        "40": {
+          "type": "color",
+          "value": "#d44600",
+          "referencedVariable": "$primitive.orange-vibrant.50"
+        },
+        "50": {
+          "type": "color",
+          "value": "#aa3600",
+          "referencedVariable": "$primitive.orange-vibrant.40"
+        },
+        "60": {
+          "type": "color",
+          "value": "#6f2000",
+          "referencedVariable": "$primitive.orange-vibrant.25"
+        },
+        "70": {
+          "type": "color",
+          "value": "#390c00",
+          "referencedVariable": "$primitive.orange-vibrant.10"
+        }
+      },
       "neutral-variant": {
         "5": {
           "type": "color",
@@ -4262,11 +4452,6 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
-          },
           "button": {
             "hover": {
               "type": "color",
@@ -4278,6 +4463,11 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
+          },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -5269,6 +5459,48 @@
           "referencedVariable": "$primitive.primary-vibrant.95"
         }
       },
+      "orange-vibrant": {
+        "5": {
+          "type": "color",
+          "value": "#280801",
+          "referencedVariable": "$primitive.orange-vibrant.5"
+        },
+        "10": {
+          "type": "color",
+          "value": "#4a1300",
+          "referencedVariable": "$primitive.orange-vibrant.15"
+        },
+        "20": {
+          "type": "color",
+          "value": "#6f2000",
+          "referencedVariable": "$primitive.orange-vibrant.25"
+        },
+        "30": {
+          "type": "color",
+          "value": "#aa3600",
+          "referencedVariable": "$primitive.orange-vibrant.40"
+        },
+        "40": {
+          "type": "color",
+          "value": "#d44600",
+          "referencedVariable": "$primitive.orange-vibrant.50"
+        },
+        "50": {
+          "type": "color",
+          "value": "#f45202",
+          "referencedVariable": "$primitive.orange-vibrant.60"
+        },
+        "60": {
+          "type": "color",
+          "value": "#ffb59c",
+          "referencedVariable": "$primitive.orange-vibrant.80"
+        },
+        "70": {
+          "type": "color",
+          "value": "#ffede8",
+          "referencedVariable": "$primitive.orange-vibrant.95"
+        }
+      },
       "neutral-variant": {
         "5": {
           "type": "color",
@@ -5697,11 +5929,6 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
-          },
           "button": {
             "hover": {
               "type": "color",
@@ -5713,6 +5940,11 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
+          },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
