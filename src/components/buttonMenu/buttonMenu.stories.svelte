@@ -41,6 +41,8 @@
       </leo-title>
       <leo-menu-item on:click={handleAction}> Copy </leo-menu-item>
       <leo-menu-item> Share </leo-menu-item>
+      <!-- Divider -->
+      <Hr />
       <leo-title> 
         Section title here 
       </leo-title>
