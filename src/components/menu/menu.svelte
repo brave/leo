@@ -324,7 +324,7 @@
     gap: var(--leo-spacing-s);
     max-height: var(--leo-menu-section-max-height, none);
     overflow-y: auto;
-    padding: 0;
+    padding: var(--leo-spacing-s) 0;
     margin: -4px 0;
   }
 
