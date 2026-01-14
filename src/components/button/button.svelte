@@ -51,12 +51,22 @@
 
   export let onClick: (e: MouseEvent) => void = undefined
 
+  /**
+   * Exposed so that the button can be clicked programmatically.
+  */
+  export function click() {
+    el?.click()
+  }
+
+  let el: HTMLElement
+
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
   $: disabled = !!(isDisabled || (isDisabled as any) === '')
 </script>
 
 <svelte:element
   this={tag}
+  bind:this={el}
   href={href || undefined}
   class="leoButton"
   class:isFilled={kind === 'filled'}
