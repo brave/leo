@@ -100,6 +100,24 @@
     --leo-direction: -1;
   }
 
+  /**
+   * Unfortunately WebKit doesn't support :host-context selectors which breaks our theme plugin. The solution is to
+   * manually set the light/dark foreground color if the container hasn't defined it.
+  */
+  @container style(--\.leo-toggle_--foreground-color: unset) {
+    :host {
+      --\.leo-toggle_--foreground-color: black;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @container style(--\.leo-toggle_--foreground-color: unset) {
+      :host {
+        --\.leo-toggle_--foreground-color: white;
+      }
+    }
+  }
+
   :host {
     display: inline-block;
   }
@@ -159,7 +177,9 @@
     height: calc(var(--height) - 2 * var(--padding));
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
-    transition: background-color var(--duration) ease-in-out, box-shadow var(--duration) ease-in-out;
+    transition:
+      background-color var(--duration) ease-in-out,
+      box-shadow var(--duration) ease-in-out;
     flex-shrink: 0;
 
     &:disabled {
@@ -188,7 +208,7 @@
       );
     }
 
-    &[aria-checked="false"] .thumb {
+    &[aria-checked='false'] .thumb {
       --thumb-color: var(--leo-color-white);
     }
 
@@ -204,7 +224,8 @@
               calc(var(--thumb-offset) + var(--drag-offset))
             ),
             var(--unchecked-thumb-offset)
-          ) * var(--leo-direction)
+          ) *
+          var(--leo-direction)
       );
 
       height: 100%;
