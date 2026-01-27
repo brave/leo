@@ -103,6 +103,7 @@
   /**
    * Unfortunately WebKit doesn't support :host-context selectors which breaks our theme plugin. The solution is to
    * manually set the light/dark foreground color if the container hasn't defined it.
+   * Once we have a better solution in https://github.com/brave/leo/issues/1296 this can be removed.
   */
   @container style(--\.leo-toggle_--foreground-color: unset) {
     :host {
