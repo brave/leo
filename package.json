@@ -61,7 +61,7 @@
     "svgo": "3.3.2",
     "ts-jest": "29.4.6",
     "tsx": "4.21.0",
-    "undici": "7.16.0"
+    "undici": "7.19.2"
   },
   "peerDependencies": {
     "@material/material-color-utilities": ">= 0.2.7",
