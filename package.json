@@ -38,7 +38,7 @@
     "babel-loader": "9.2.1",
     "css-loader": "6.11.0",
     "css-tree": "2.3.1",
-    "figma-api-exporter": "github:brave/figma-api-exporter#edd8385c12bd9c7bd26fa48b79ca67c3a5b80cce",
+    "figma-api-exporter": "github:brave/figma-api-exporter#141c3eab4643ba9cdcbb23867785aa7df9347eec",
     "jsdom": "21.1.2",
     "lodash.camelcase": "4.3.0",
     "lodash.merge": "4.6.2",
