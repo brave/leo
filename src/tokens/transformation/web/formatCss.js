@@ -30,17 +30,21 @@ export default ({ dictionary, options, file }) => {
     outputReferences
   })
 
-  const lightVars = formattedVariables({
-    format: 'css',
-    dictionary: groupedTokens.light,
-    outputReferences
-  }).replace(/-light-/gm, '-')
+  const lightVars =
+    `  --leo-theme: light;\n` +
+    formattedVariables({
+      format: 'css',
+      dictionary: groupedTokens.light,
+      outputReferences
+    }).replace(/-light-/gm, '-')
 
-  const darkVars = formattedVariables({
-    format: 'css',
-    dictionary: groupedTokens.dark,
-    outputReferences
-  }).replace(/-dark-/gm, '-')
+  const darkVars =
+    `  --leo-theme: dark;\n` +
+    formattedVariables({
+      format: 'css',
+      dictionary: groupedTokens.dark,
+      outputReferences
+    }).replace(/-dark-/gm, '-')
 
   // prettier-ignore
   return (
@@ -53,8 +57,8 @@ export default ({ dictionary, options, file }) => {
       darkVars && varDefFormat`@media (prefers-color-scheme: dark) {
  :root {${darkVars} }
 }`,
-      lightVars && varDefFormat`[data-theme="light"] {${lightVars}}`,
-      lightVars && varDefFormat`[data-theme="dark"] {${darkVars}}`,
+      lightVars && varDefFormat`[data-theme="light"] { container-type: normal; ${lightVars}}`,
+      lightVars && varDefFormat`[data-theme="dark"] { container-type: normal; ${darkVars}}`,
     ]
       .filter((v) => !!v)
       .join('\n\n') +
