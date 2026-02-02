@@ -28,17 +28,25 @@
     reason: 'select' | 'blur' | 'cancel' | 'explicit'
   }
 
-  export type CloseEvent = (detail: CloseEventDetail) => boolean | undefined | void
+  export type CloseEvent = (
+    detail: CloseEventDetail
+  ) => boolean | undefined | void
 
   export interface SelectItemEventDetail {
     value: string | undefined
   }
+
+  export type MenuItem = HTMLElement & { value?: string }
 </script>
 
 <script lang="ts">
   import clickOutside from '../../svelteDirectives/clickOutside'
   import Floating from '../floating/floating.svelte'
-  import { size as sizeMiddleware, type Placement, type Strategy } from '@floating-ui/dom'
+  import {
+    size as sizeMiddleware,
+    type Placement,
+    type Strategy
+  } from '@floating-ui/dom'
 
   export let isOpen = false
   export let target: HTMLElement | undefined = undefined
@@ -53,6 +61,17 @@
   export let onClose: CloseEvent = undefined
   export let onSelectItem: (detail: SelectItemEventDetail) => void = undefined
 
+  // Exported to allow parents to get the value of a menu item.
+  export function getValue(e: Element) {
+    // If the option element doesn't have a value, fallback to using the text
+    // content - this allows writing simplified options:
+    // i.e. <o>1</o>
+    return e.getAttribute('value') ?? e['value'] ?? e.textContent
+  }
+
+  // Exported to allow parents to bind to the menu items array.
+  export let menuItems: MenuItem[] = []
+
   function dispatchClose(
     originalEvent: Event,
     reason: CloseEventDetail['reason']
@@ -65,14 +84,7 @@
 
   let popup: HTMLDivElement
 
-  function getValue(e: Element) {
-    // If the option element doesn't have a value, fallback to using the text
-    // content - this allows writing simplified options:
-    // i.e. <o>1</o>
-    return e.getAttribute('value') ?? e['value'] ?? e.textContent
-  }
-
-  $: menuItems = Array.from(
+  $: menuItemsInternal = Array.from(
     // TODO(petemil): support slot *descendents* that are leo-menu-item or leo-option (or something else unstyled like leo-menu-action?) so that we can
     // select items that are in complex positions (see an example in the browser app menu zoom controls).
     (popup?.querySelector('.leo-menu-popup slot') as HTMLSlotElement)
@@ -83,7 +95,9 @@
         }
         // Also find menu items inside leo-menu-section elements
         if (element.tagName === 'LEO-MENU-SECTION') {
-          return Array.from(element.querySelectorAll('leo-menu-item, leo-option'))
+          return Array.from(
+            element.querySelectorAll('leo-menu-item, leo-option')
+          )
         }
         return []
       }) ??
@@ -91,10 +105,10 @@
         '.leo-menu-popup :is(leo-menu-item, leo-option)'
       ) ??
       []
-  ) as HTMLElement[]
+  ) as MenuItem[]
 
   $: {
-    for (const menuItem of menuItems) {
+    for (const menuItem of menuItemsInternal) {
       menuItem.setAttribute('tabindex', '0')
 
       if (menuItem.tagName === 'LEO-OPTION') {
@@ -106,6 +120,7 @@
       } else {
         menuItem.setAttribute('role', 'menuitem')
       }
+      menuItems = menuItemsInternal
     }
   }
 
@@ -116,7 +131,9 @@
 
   function selectMenuItem(e: Event) {
     // Find the option which was clicked on, if any.
-    const item = menuItems.find((item) => e.composedPath().includes(item))
+    const item = menuItemsInternal.find((item) =>
+      e.composedPath().includes(item)
+    )
 
     // If the event was triggered for something which isn't an option don't fire
     // a change event.
@@ -171,16 +188,18 @@
     // First, find the currently focusedIndex. If no option is selected, we'll
     // select the first option. Otherwise, we select the next/previous item (and
     // wrap around).
-    let focusedIndex = menuItems.findIndex((e) => e.matches(':focus-within'))
+    let focusedIndex = menuItemsInternal.findIndex((e) =>
+      e.matches(':focus-within')
+    )
     if (focusedIndex === -1) {
       focusedIndex = 0
     } else {
       focusedIndex += dir
-      if (focusedIndex < 0) focusedIndex = menuItems.length - 1
-      if (focusedIndex >= menuItems.length) focusedIndex = 0
+      if (focusedIndex < 0) focusedIndex = menuItemsInternal.length - 1
+      if (focusedIndex >= menuItemsInternal.length) focusedIndex = 0
     }
 
-    ;(menuItems[focusedIndex] as any)?.focus()
+    ;(menuItemsInternal[focusedIndex] as any)?.focus()
     e.preventDefault() // preventDefault, so we don't accidentally scroll
   }
 
@@ -195,8 +214,7 @@
   let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
 </script>
 
-<div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
-  {#if isOpen}
+<div class="leo-menu" use:clickOutside={isOpen && handleBlur} hidden={!isOpen}>
     <Floating
       {target}
       {placement}
@@ -222,7 +240,6 @@
         <slot />
       </div>
     </Floating>
-  {/if}
 </div>
 
 <svelte:window on:keydown={changeSelection} />
@@ -278,19 +295,27 @@
   /* custom items can fit in by making optional use of these variables */
   :global(.leo-menu-popup ::slotted(*)),
   :global(.leo-menu-popup > *) {
-    --leo-menu-item-margin: var(--leo-menu-item-margin-top, 0) var(--leo-spacing-s) var(--leo-menu-item-margin-bottom, 0) var(--leo-spacing-s);
-    --leo-menu-item-padding:  var(--leo-spacing-m) var(--leo-spacing-xl);
+    --leo-menu-item-margin: var(--leo-menu-item-margin-top, 0)
+      var(--leo-spacing-s) var(--leo-menu-item-margin-bottom, 0)
+      var(--leo-spacing-s);
+    --leo-menu-item-padding: var(--leo-spacing-m) var(--leo-spacing-xl);
     --leo-menu-item-border-radius: var(--leo-spacing-s);
   }
 
   :global(.leo-menu-popup ::slotted(leo-option:nth-child(1 of :not([slot])))),
-  :global(.leo-menu-popup ::slotted(leo-menu-item:nth-child(1 of :not([slot])))),
+  :global(
+    .leo-menu-popup ::slotted(leo-menu-item:nth-child(1 of :not([slot])))
+  ),
   :global(.leo-menu-popup leo-option:first-child),
   :global(.leo-menu-popup leo-menu-item:first-child) {
     --leo-menu-item-margin-top: var(--leo-spacing-s);
   }
-  :global(.leo-menu-popup ::slotted(leo-option:nth-last-child(1 of :not([slot])))),
-  :global(.leo-menu-popup ::slotted(leo-menu-item:nth-last-child(1 of :not([slot])))),
+  :global(
+    .leo-menu-popup ::slotted(leo-option:nth-last-child(1 of :not([slot])))
+  ),
+  :global(
+    .leo-menu-popup ::slotted(leo-menu-item:nth-last-child(1 of :not([slot])))
+  ),
   :global(.leo-menu-popup leo-option:last-child),
   :global(.leo-menu-popup leo-menu-item:last-child) {
     --leo-menu-item-margin-bottom: var(--leo-spacing-s);
@@ -304,7 +329,7 @@
   }
   :global(.leo-menu-popup ::slotted(leo-title:not(:first-of-type))),
   :global(.leo-menu-popup leo-title:not(:first-of-type)) {
-    margin-top:-4px;
+    margin-top: -4px;
   }
   /* Divider styles for menu sections */
   :global(.leo-menu-popup ::slotted(hr)),
@@ -366,7 +391,9 @@
   :global(:where(.leo-menu-popup) > leo-option:active),
   :global(:where(.leo-menu-popup) > leo-menu-item:active),
   :global(:where(.leo-menu-popup) leo-menu-section leo-option[aria-selected]),
-  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item[aria-selected]),
+  :global(
+    :where(.leo-menu-popup) leo-menu-section leo-menu-item[aria-selected]
+  ),
   :global(:where(.leo-menu-popup) leo-menu-section leo-option:active),
   :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:active) {
     background: var(--leo-color-container-interactive);
@@ -378,7 +405,9 @@
   :global(:where(.leo-menu-popup) > leo-option:focus-visible),
   :global(:where(.leo-menu-popup) > leo-menu-item:focus-visible),
   :global(:where(.leo-menu-popup) leo-menu-section leo-option:focus-visible),
-  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:focus-visible) {
+  :global(
+    :where(.leo-menu-popup) leo-menu-section leo-menu-item:focus-visible
+  ) {
     box-shadow:
       0px 0px 0px 1.5px rgba(255, 255, 255, 0.5),
       0px 0px 4px 2px #423eee;
