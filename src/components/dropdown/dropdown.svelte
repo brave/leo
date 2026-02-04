@@ -19,7 +19,7 @@
 <script lang="ts">
   import FormItem, { type Mode, type Size } from '../formItem/formItem.svelte'
   import Icon from '../icon/icon.svelte'
-  import Menu, { type CloseEvent, type SelectItemEventDetail } from '../menu/menu.svelte'
+  import Menu, { type CloseEvent, type SelectItemEventDetail, type MenuItem } from '../menu/menu.svelte'
   import type { Strategy } from '@floating-ui/dom'
 
   export let placeholder = ''
@@ -34,10 +34,13 @@
 
   export let onChange: (detail: SelectItemEventDetail) => void = undefined
   export let onClose: CloseEvent = undefined
+  export let getMenuItemValue: (item: Element) => string | undefined = undefined
 
   let isOpen = false
   let button: HTMLButtonElement
   let dropdown: HTMLDivElement
+
+  let menuItems: MenuItem[] = []
 
   export const close = () => {
     isOpen = false
@@ -71,7 +74,9 @@
     >
       {#if value !== undefined}
         <slot name="value" {value}>
-          <span class="value">{value}</span>
+          <span class="value">
+            {menuItems.find(item => getMenuItemValue(item) == value)?.textContent ?? value}
+          </span>
         </slot>
       {:else}
         <slot name="placeholder">
@@ -91,6 +96,8 @@
     {widthIsMaxWidth}
     bind:isOpen
     bind:currentValue={value}
+    bind:menuItems
+    bind:getValue={getMenuItemValue}
     onSelectItem={onChange}
     onClose={(e) => {
       // Note: We cancel the |close| event if it was the dropdown that we

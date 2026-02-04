@@ -69,7 +69,7 @@
       </Dropdown>
     </Slot>
     <Slot name="label" explanation="A label for the dropdown">
-      <Dropdown {...args}>
+      <Dropdown {...args} value="1">
         <div slot="label"><i>A custom <b>label</b> I made</i></div>
         <leo-option value="1">Foo</leo-option>
         <leo-option value="2">Bar</leo-option>
