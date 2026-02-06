@@ -166,6 +166,29 @@
   }
 
   /**
+   * On iOS, focusable items in a role="menu" get a two-tap behavior: first tap
+   * focuses the item, second tap activates. We want one tap to select. This
+   * touchend handler runs on first tap, finds the item under the touch, then
+   * preventDefault() + programmatic item.click() so selection happens immediately.
+   * Keyboard is unaffected (touchend only fires for touch).
+   * We find the item from composedPath() and popup (not the menuItems array) so
+   * this works reliably when the menu is reopened and the array may be stale.
+   */
+  function handleTouchEnd(e: TouchEvent) {
+    const path = e.composedPath()
+    const item = path.find(
+      (el): el is MenuItem =>
+        el instanceof HTMLElement &&
+        (el.tagName === 'LEO-MENU-ITEM' || el.tagName === 'LEO-OPTION') &&
+        !!popup?.contains(el)
+    )
+    if (item) {
+      e.preventDefault()
+      item.click()
+    }
+  }
+
+  /**
    * Handles changing the currently focused menu element with the up/down arrow.
    * @param e The KeyboardEvent
    */
@@ -236,6 +259,7 @@
           selectMenuItem(e)
         }}
         on:click={selectMenuItem}
+        on:touchend={handleTouchEnd}
       >
         <slot />
       </div>
