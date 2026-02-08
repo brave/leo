@@ -208,6 +208,7 @@
   }
 
   function applySizeMiddleware({ rects, availableHeight }) {
+    if (!popup?.style) return
     popup.style.maxHeight = `var(--leo-menu-max-height, calc(${availableHeight}px - var(--leo-spacing-xl)))`
   }
 
