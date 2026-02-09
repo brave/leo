@@ -175,11 +175,11 @@
       --leo-segmented-control-item-radius: calc(var(--radius) - var(--control-padding));
     }
 
-    :where(&:not(.transitioning)) > :global(.leo-segmented-control-item:hover),
-    :where(&:not(.transitioning)) > :global(::slotted(leo-segmentedcontrolitem:hover)) {
-      --leo-segmented-control-item-background: var(--leo-color-container-highlight);
-      --leo-segmented-control-item-color: var(--leo-color-text-primary);
-    }
+    // :where(&:not(.transitioning)) > :global(.leo-segmented-control-item:hover),
+    // :where(&:not(.transitioning)) > :global(::slotted(leo-segmentedcontrolitem:hover)) {
+    //   --leo-segmented-control-item-background: var(--leo-color-container-highlight);
+    //   --leo-segmented-control-item-color: var(--leo-color-text-primary);
+    // }
 
     :where(&) > :global(.leo-segmented-control-item:focus-visible),
     :where(&) > :global(::slotted(leo-segmentedcontrolitem:focus-visible)) {
@@ -194,8 +194,9 @@
 
     :where(&.transitioning) > :global(.leo-segmented-control-item[aria-selected]),
     :where(&.transitioning) > :global(::slotted(leo-segmentedcontrolitem[aria-selected])),
-    :where(&) > :global(.leo-segmented-control-item[aria-selected]:hover),
-    :where(&) > :global(::slotted(leo-segmentedcontrolitem[aria-selected]:hover)) {
+    // :where(&) > :global(.leo-segmented-control-item[aria-selected]:hover),
+    // :where(&) > :global(::slotted(leo-segmentedcontrolitem[aria-selected]:hover))
+     {
       --leo-segmented-control-item-icon-color: currentColor;
       --leo-segmented-control-item-background: var(--leo-color-container-background);
     }

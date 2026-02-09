@@ -131,7 +131,7 @@
 
   // Main styles and states
   .leoButton,
-  .leoButton:visited:not(:hover) {
+  .leoButton:visited {
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition:
@@ -192,26 +192,26 @@
   }
 
   .leoButton:not(:disabled) {
-    &:hover,
-    [data-is-button-target]:hover :host .leoButton,
-    [data-is-button-target]:hover .leoButton {
-      --leo-icon-color: var(--icon-hover-color, var(--icon-color));
-      --mixed-primary-color: var(--leo-color-primary-70);
+    // &:hover,
+    // [data-is-button-target]:hover :host .leoButton,
+    // [data-is-button-target]:hover .leoButton {
+    //   --leo-icon-color: var(--icon-hover-color, var(--icon-color));
+    //   --mixed-primary-color: var(--leo-color-primary-70);
 
-      /** If we support the color-mix syntax, infer the hover color */
-      @supports (color: color-mix(in srgb, transparent, transparent)) {
-        --mixed-primary-color: color-mix(
-          in srgb,
-          var(--primary-color),
-          var(--foreground) 20%
-        );
-      }
+    //   /** If we support the color-mix syntax, infer the hover color */
+    //   @supports (color: color-mix(in srgb, transparent, transparent)) {
+    //     --mixed-primary-color: color-mix(
+    //       in srgb,
+    //       var(--primary-color),
+    //       var(--foreground) 20%
+    //     );
+    //   }
 
-      background: var(--bg-hover, var(--bg));
-      color: var(--color-hover, var(--mixed-primary-color));
-      box-shadow: var(--box-shadow-hover);
-      border-color: var(--border-color-hover, var(--border-color));
-    }
+    //   background: var(--bg-hover, var(--bg));
+    //   color: var(--color-hover, var(--mixed-primary-color));
+    //   box-shadow: var(--box-shadow-hover);
+    //   border-color: var(--border-color-hover, var(--border-color));
+    // }
 
     &:active {
       opacity: 0.75;
@@ -449,9 +449,9 @@
         opacity: 0.001;
       }
 
-      &:hover::before {
-        opacity: 1;
-      }
+      // &:hover::before {
+      //   opacity: 1;
+      // }
     }
 
     &.fab {
@@ -507,9 +507,9 @@
       }
     }
 
-    &:hover:not(:disabled) {
-      --default-bg-opacity: 0;
-    }
+    // &:hover:not(:disabled) {
+    //   --default-bg-opacity: 0;
+    // }
   }
 
   .leoButton.fab {

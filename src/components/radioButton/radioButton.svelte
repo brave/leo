@@ -170,11 +170,11 @@
     }
   }
 
-  .leo-radiobutton:hover .check {
-    color: var(--unchecked-color-hover);
+  // .leo-radiobutton:hover .check {
+  //   color: var(--unchecked-color-hover);
 
-    &:has(input:checked) {
-      color: var(--checked-color-hover);
-    }
-  }
+  //   &:has(input:checked) {
+  //     color: var(--checked-color-hover);
+  //   }
+  // }
 </style>

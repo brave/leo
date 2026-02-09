@@ -173,12 +173,12 @@
     }
 
     &:not([aria-disabled='true']) {
-      & .container:hover {
-        color: var(--color-hover);
-        background: var(--background-hover);
-        box-shadow: var(--shadow-hover);
-        border-color: var(--border-color-hover);
-      }
+      // & .container:hover {
+      //   color: var(--color-hover);
+      //   background: var(--background-hover);
+      //   box-shadow: var(--shadow-hover);
+      //   border-color: var(--border-color-hover);
+      // }
 
       & .container:has(*:focus-visible),
       &.isFocused .container {
@@ -194,9 +194,9 @@
         color: var(--leo-color-systemfeedback-error-icon);
       }
 
-      &.error .container:hover:not(:has(*:focus-visible)) {
-        border-color: var(--border-color-error-hover);
-      }
+      // &.error .container:hover:not(:has(*:focus-visible)) {
+      //   border-color: var(--border-color-error-hover);
+      // }
     }
   }
 

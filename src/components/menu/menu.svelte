@@ -373,14 +373,14 @@
     display: revert;
   }
 
-  :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:hover)),
-  :global(:where(.leo-menu-popup) ::slotted(leo-option:hover)),
-  :global(:where(.leo-menu-popup) > leo-menu-item:hover),
-  :global(:where(.leo-menu-popup) > leo-option:hover),
-  :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:hover),
-  :global(:where(.leo-menu-popup) leo-menu-section leo-option:hover) {
-    background: var(--leo-color-container-highlight);
-  }
+  // :global(:where(.leo-menu-popup) ::slotted(leo-menu-item:hover)),
+  // :global(:where(.leo-menu-popup) ::slotted(leo-option:hover)),
+  // :global(:where(.leo-menu-popup) > leo-menu-item:hover),
+  // :global(:where(.leo-menu-popup) > leo-option:hover),
+  // :global(:where(.leo-menu-popup) leo-menu-section leo-menu-item:hover),
+  // :global(:where(.leo-menu-popup) leo-menu-section leo-option:hover) {
+  //   background: var(--leo-color-container-highlight);
+  // }
 
   :global(:where(.leo-menu-popup) ::slotted(leo-option[aria-selected])),
   :global(:where(.leo-menu-popup) ::slotted(leo-menu-item[aria-selected])),

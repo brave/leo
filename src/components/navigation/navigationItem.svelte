@@ -161,9 +161,9 @@
       font: var(--leo-font-components-navbutton);
       color: var(--nav-item-color);
 
-      &:hover {
-        background: var(--leo-color-container-highlight);
-      }
+      // &:hover {
+      //   background: var(--leo-color-container-highlight);
+      // }
 
       &:focus-visible {
         box-shadow: var(--leo-effect-focus-state);

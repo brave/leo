@@ -195,19 +195,19 @@
       box-shadow: var(--leo-effect-focus-state-offset);
     }
 
-    &:hover:not(:disabled) {
-      --hover-bg: var(--unchecked-color);
+    // &:hover:not(:disabled) {
+    //   --hover-bg: var(--unchecked-color);
 
-      &[aria-checked='true'] {
-        --hover-bg: var(--checked-color);
-      }
+    //   &[aria-checked='true'] {
+    //     --hover-bg: var(--checked-color);
+    //   }
 
-      background: color-mix(
-        in srgb,
-        var(--hover-bg) 80%,
-        var(--foreground-color)
-      );
-    }
+    //   background: color-mix(
+    //     in srgb,
+    //     var(--hover-bg) 80%,
+    //     var(--foreground-color)
+    //   );
+    // }
 
     &[aria-checked='false'] .thumb {
       --thumb-color: var(--leo-color-white);

@@ -68,11 +68,11 @@
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
 
-    &:where(:hover) {
-      color: var(--hover-color);
-    }
+    // &:where(:hover) {
+    //   color: var(--hover-color);
+    // }
 
-    &:where(:visited:not(:hover)) {
+    &:where(:visited) {
       color: var(--visited-color);
     }
 

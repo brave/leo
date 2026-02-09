@@ -117,9 +117,9 @@
         background-color var(--transition-duration) var(--transition-easing),
         box-shadow var(--transition-duration) var(--transition-easing);
 
-      &:hover {
-        background-color: var(--dot-color-hover);
-      }
+      // &:hover {
+      //   background-color: var(--dot-color-hover);
+      // }
 
       &:focus-visible:not(.active) {
         box-shadow:
@@ -150,9 +150,9 @@
       border-radius: var(--dot-size);
       background: var(--active-dot-color);
 
-      &:hover {
-        background: var(--active-dot-color-hover);
-      }
+      // &:hover {
+      //   background: var(--active-dot-color-hover);
+      // }
     }
   }
 </style>

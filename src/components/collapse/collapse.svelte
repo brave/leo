@@ -111,17 +111,17 @@
       box-shadow var(--transition-duration) ease-in-out,
       background-color var(--transition-duration) ease-in-out;
 
-    &:has(summary:hover) {
-      border-color: var(--border-color-hover);
-    }
+    // &:has(summary:hover) {
+    //   border-color: var(--border-color-hover);
+    // }
 
-    &:hover {
-      box-shadow: var(--shadow-hover);
+    // &:hover {
+    //   box-shadow: var(--shadow-hover);
 
-      &:not([open]) {
-        --background-color: var(--background-color-hover);
-      }
-    }
+    //   &:not([open]) {
+    //     --background-color: var(--background-color-hover);
+    //   }
+    // }
 
     &:focus-within:has(summary:focus-visible) {
       box-shadow: var(--shadow-focus);

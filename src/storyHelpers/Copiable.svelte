@@ -45,9 +45,9 @@
     transition: opacity 0.13s ease-out;
   }
 
-  button:hover .copy {
+  /* button:hover .copy {
     opacity: 0.25;
-  }
+  } */
 
   .copied {
     position: absolute;

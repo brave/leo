@@ -152,11 +152,11 @@
       --leo-tab-item-background: transparent;
     }
 
-    :where(&:not(.transitioning)) > :global(.leo-tab-item:hover),
-    :where(&:not(.transitioning)) > :global(::slotted(leo-tabitem:hover)) {
-      --leo-tab-item-color: var(--leo-color-text-interactive);
-      --leo-tab-item-icon-color: var(--leo-color-icon-interactive);
-    }
+    // :where(&:not(.transitioning)) > :global(.leo-tab-item:hover),
+    // :where(&:not(.transitioning)) > :global(::slotted(leo-tabitem:hover)) {
+    //   --leo-tab-item-color: var(--leo-color-text-interactive);
+    //   --leo-tab-item-icon-color: var(--leo-color-icon-interactive);
+    // }
 
     :where(&) > :global(.leo-tab-item:focus-visible),
     :where(&) > :global(::slotted(leo-tabitem:focus-visible)) {
@@ -169,10 +169,10 @@
       --leo-tab-item-icon-color: var(--leo-color-icon-interactive);
     }
 
-    :where(&) > :global(.leo-tab-item[aria-selected="true"]:hover),
-    :where(&) > :global(::slotted(leo-tabitem[aria-selected="true"]:hover)) {
-      --leo-tab-item-color: var(--leo-color-blurple-60);
-      --leo-tab-item-icon-color: var(--leo-color-blurple-60);
-    }
+    // :where(&) > :global(.leo-tab-item[aria-selected="true"]:hover),
+    // :where(&) > :global(::slotted(leo-tabitem[aria-selected="true"]:hover)) {
+    //   --leo-tab-item-color: var(--leo-color-blurple-60);
+    //   --leo-tab-item-icon-color: var(--leo-color-blurple-60);
+    // }
   }
 </style>
