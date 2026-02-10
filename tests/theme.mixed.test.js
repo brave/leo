@@ -20,31 +20,35 @@ it('Can mix theme overrides', () =>
     }
   }`,
     `@container style(--leo-theme: light) {
-    :global(.component) {
-      background: white;
-      color: black;
-    }
-  }
+
+        :global(.component) {
+                --\\.component_background: white;
+                --\\.component_color: black;
+        }
+}
 
   @container style(--leo-theme: dark) {
-    :global(.component) {
-      background: black;
-      color: white;
-    }
-  }
+
+        :global(.component) {
+                --\\.component_background: black;
+                --\\.component_color: white;
+        }
+}
 
   :global(.component[data-theme="light"]) {
-    background: white;
-    color: black;
-  }
+        --\\.component_background: white;
+        --\\.component_color: black;
+}
 
   :global(.component[data-theme="dark"]) {
-    background: black;
-    color: white;
-  }
+        --\\.component_background: black;
+        --\\.component_color: white;
+}
 
   .component {
-    padding: 12px;
+        padding: 12px;
+        background: var(--\\.component_background);
+        color: var(--\\.component_color);
   }`,
     {}
   ))
@@ -74,43 +78,50 @@ it('Light & Dark mode can be specified for a property', () =>
     }
     }`,
     `@container style(--leo-theme: light) {
+
       :global(.component) {
-        override-both: light;
-        override-dark: light;
-        new-dark: unset;
-        override-light: light;
-        new-light: light;
+            --\\.component_override-both: light;
+            --\\.component_override-dark: light;
+            --\\.component_new-dark: unset;
+            --\\.component_override-light: light;
+            --\\.component_new-light: light;
       }
-    }
+}
 
     @container style(--leo-theme: dark) {
+
       :global(.component) {
-        override-both: dark;
-        override-dark: dark;
-        new-dark: dark;
-        override-light: dark;
-        new-light: unset;
+            --\\.component_override-both: dark;
+            --\\.component_override-dark: dark;
+            --\\.component_new-dark: dark;
+            --\\.component_override-light: dark;
+            --\\.component_new-light: unset;
       }
-    }
+}
 
     :global(.component[data-theme="light"]) {
-      override-both: light;
-      override-dark: light;
-      new-dark: unset;
-      override-light: light;
-      new-light: light;
-    }
+      --\\.component_override-both: light;
+      --\\.component_override-dark: light;
+      --\\.component_new-dark: unset;
+      --\\.component_override-light: light;
+      --\\.component_new-light: light;
+}
 
     :global(.component[data-theme="dark"]) {
-      override-both: dark;
-      override-dark: dark;
-      new-dark: dark;
-      override-light: dark;
-      new-light: unset;
-    }
+      --\\.component_override-both: dark;
+      --\\.component_override-dark: dark;
+      --\\.component_new-dark: dark;
+      --\\.component_override-light: dark;
+      --\\.component_new-light: unset;
+}
 
     .component {
       no-override: none;
+      override-both: var(--\\.component_override-both);
+      override-dark: var(--\\.component_override-dark);
+      new-dark: var(--\\.component_new-dark);
+      override-light: var(--\\.component_override-light);
+      new-light: var(--\\.component_new-light);
     }`,
     {}
   ))
@@ -137,117 +148,113 @@ it('Light & Dark mode work with weird class overlaps', () =>
     }`,
     `@container style(--leo-theme: light) {
       :global(.dark) {
-        color: unset;
-        dark: unset;
+            --\\.dark_color: unset;
+            --\\.dark_dark: unset;
       }
-    }
-
-    @container style(--leo-theme: dark) {
+}
+@container style(--leo-theme: dark) {
       :global(.dark) {
-        color: white;
-        dark: dark;
+            --\\.dark_color: white;
+            --\\.dark_dark: dark;
       }
-    }
-
-    :global(.dark[data-theme="light"]) {
-      color: unset;
-      dark: unset;
-    }
-
-    :global(.dark[data-theme="dark"]) {
-      color: white;
-      dark: dark;
-    }
-
-    @container style(--leo-theme: light) {
+}
+:global(.dark[data-theme="light"]) {
+      --\\.dark_color: unset;
+      --\\.dark_dark: unset;
+}
+:global(.dark[data-theme="dark"]) {
+      --\\.dark_color: white;
+      --\\.dark_dark: dark;
+}
+.dark {
+      color: var(--\\.dark_color);
+      dark: var(--\\.dark_dark);
+}
+@container style(--leo-theme: light) {
       :global(.light) {
-        color: black;
-        light: light;
+            --\\.light_color: black;
+            --\\.light_light: light;
       }
-    }
-
-    @container style(--leo-theme: dark) {
+}
+@container style(--leo-theme: dark) {
       :global(.light) {
-        color: unset;
-        light: unset;
+            --\\.light_color: unset;
+            --\\.light_light: unset;
       }
-    }
-
-    :global(.light[data-theme="light"]) {
-      color: black;
-      light: light;
-    }
-
-    :global(.light[data-theme="dark"]) {
-      color: unset;
-      light: unset;
-    }
-
-    @container style(--leo-theme: light) {
+}
+:global(.light[data-theme="light"]) {
+      --\\.light_color: black;
+      --\\.light_light: light;
+}
+:global(.light[data-theme="dark"]) {
+      --\\.light_color: unset;
+      --\\.light_light: unset;
+}
+.light {
+      color: var(--\\.light_color);
+      light: var(--\\.light_light);
+}
+@container style(--leo-theme: light) {
       :global(.other) {
-        color: black;
-        dark: unset;
-        light: light;
+            --\\.other_color: black;
+            --\\.other_dark: unset;
+            --\\.other_light: light;
       }
-    }
-
-    @container style(--leo-theme: dark) {
+}
+@container style(--leo-theme: dark) {
       :global(.other) {
-        color: white;
-        dark: dark;
-        light: unset;
+            --\\.other_color: white;
+            --\\.other_dark: dark;
+            --\\.other_light: unset;
       }
-    }
-
-    :global(.other[data-theme="light"]) {
-      color: black;
-      dark: unset;
-      light: light;
-    }
-
-    :global(.other[data-theme="dark"]) {
-      color: white;
-      dark: dark;
-      light: unset;
-    }
-
-    @container style(--leo-theme: light) {
+}
+:global(.other[data-theme="light"]) {
+      --\\.other_color: black;
+      --\\.other_dark: unset;
+      --\\.other_light: light;
+}
+:global(.other[data-theme="dark"]) {
+      --\\.other_color: white;
+      --\\.other_dark: dark;
+      --\\.other_light: unset;
+}
+@container style(--leo-theme: light) {
       :global(.component) {
-        color: black;
-        dark: unset;
-        light: light;
+            --\\.component_color: black;
+            --\\.component_dark: unset;
+            --\\.component_light: light;
       }
-    }
-
-    @container style(--leo-theme: dark) {
+}
+@container style(--leo-theme: dark) {
       :global(.component) {
-        color: white;
-        dark: dark;
-        light: unset;
+            --\\.component_color: white;
+            --\\.component_dark: dark;
+            --\\.component_light: unset;
       }
-    }
-
-    :global(.component[data-theme="light"]) {
-      color: black;
-      dark: unset;
-      light: light;
-    }
-
-    :global(.component[data-theme="dark"]) {
-      color: white;
-      dark: dark;
-      light: unset;
-    }
-
-    .component {
+}
+:global(.component[data-theme="light"]) {
+      --\\.component_color: black;
+      --\\.component_dark: unset;
+      --\\.component_light: light;
+}
+:global(.component[data-theme="dark"]) {
+      --\\.component_color: white;
+      --\\.component_dark: dark;
+      --\\.component_light: unset;
+}
+.component {
       padding: 12px;
+      color: var(--\\.component_color);
+      dark: var(--\\.component_dark);
+      light: var(--\\.component_light);
     }
-
-    .other {
+.other {
       padding: 12px;
+      color: var(--\\.other_color);
+      dark: var(--\\.other_dark);
+      light: var(--\\.other_light);
     }
-
-    .no-override {
+.no-override {
       padding: 12px;
       color: red;
     }`,

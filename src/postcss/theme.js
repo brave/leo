@@ -1,6 +1,13 @@
 const { Declaration, AtRule, Rule } = require('postcss')
 const supportedThemes = ['dark', 'light']
 
+const getPropertyName = (selector, prop) => {
+  const regex = /([^A-Za-z0-9\-_])/g
+  return `--${selector}_${prop}`
+    .replace(/\s+/g, '_')
+    .replace(regex, '\\$1')
+}
+
 const splitRule = (rule, selectorToExtract) => {
   // |cloneAfter|, so in an |each| loop, the new rule will be processed.
   const cloned = rule.cloneAfter()
@@ -126,58 +133,99 @@ module.exports = (options) => {
       properties[decl.prop].base = decl
     })
 
-    const lightRules = Object.entries(properties).map(
+    // Create CSS variable declarations for light and dark modes
+    // Always create scoped variables (even for CSS custom properties)
+    const lightVariables = Object.entries(properties).map(
       ([prop, decl]) =>
         new Declaration({
-          prop,
+          prop: getPropertyName(selector, prop),
           value: decl.light.value || decl.base.value || 'unset'
         })
     )
-    const darkRules = Object.entries(properties).map(
+    const darkVariables = Object.entries(properties).map(
       ([prop, decl]) =>
         new Declaration({
-          prop,
+          prop: getPropertyName(selector, prop),
           value: decl.dark.value || decl.base.value || 'unset'
         })
     )
 
+    // 1. :root with default (light) values
+    const rootLightRule = new Rule({
+      selector: `:global(:root)`,
+      nodes: lightVariables.map((decl) => decl.clone())
+    })
+
+    // 2. @media (prefers-color-scheme: dark) for dark mode default
+    const darkMediaQuery = new AtRule({
+      name: 'media',
+      params: '(prefers-color-scheme: dark)',
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: darkVariables.map((decl) => decl.clone())
+        })
+      ]
+    })
+
+    // 3. [data-theme] fallback rules for explicit theme selection (Firefox)
+    // Use descendant selectors to match when data-theme is on a parent
+    const fallbackLightRule = new Rule({
+      selector: `:global([data-theme="light"])`,
+      nodes: lightVariables.map((decl) => decl.clone())
+    })
+    const fallbackDarkRule = new Rule({
+      selector: `:global([data-theme="dark"])`,
+      nodes: darkVariables.map((decl) => decl.clone())
+    })
+
+    // 4. @container style queries (highest specificity, modern browsers)
     const lightContainer = new AtRule({
       name: 'container',
-      params: `style(${options.themeProperty}: light)`,
-      nodes: [new Rule({ selector: `:global(${selector})`, nodes: lightRules })]
+      params: `style(--leo-theme: light)`,
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: lightVariables.map((decl) => decl.clone())
+        })
+      ]
     })
 
     const darkContainer = new AtRule({
       name: 'container',
-      params: `style(${options.themeProperty}: dark)`,
-      nodes: [new Rule({ selector: `:global(${selector})`, nodes: darkRules })]
+      params: `style(--leo-theme: dark)`,
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: darkVariables.map((decl) => decl.clone())
+        })
+      ]
     })
 
-    // Note: These rules are required because container queries can't query the element itself so without these we wouldn't
-    // be able to put a data-theme attribute on a Leo component.
-    // Note: We need to use :global here because the Svelte compiler doesn't like it when we add an attribute selector to a rule.
-    // Its debatable whether we need this at all because:
-    // 1. In custom elements mode its okay to set this on the element itself.
-    // 2. In Svelte mode you can only set data-theme on the element itself with difficulty (i.e. external JS).
-    // If we remove these rules, we can get rid of the :global() wrapper above - its only used to avoid specificity issues.
-    const onSelfLight = new Rule({
-      selector: `:global(${selector}[data-theme="light"])`,
-      nodes: lightRules
-    })
-    const onSelfDark = new Rule({
-      selector: `:global(${selector}[data-theme="dark"])`,
-      nodes: darkRules
-    })
 
-    // Add the light/dark container queries to the root.
-    root.prepend(lightContainer, darkContainer, onSelfLight, onSelfDark)
+    // Update base rule to use CSS variable references
+    for (const [prop, decl] of Object.entries(properties)) {
+      const varName = getPropertyName(selector, prop)
+      const originalProp = decl.light?.prop || decl.dark?.prop || decl.base?.prop || prop
+      lightAndDark.base.append(
+        new Declaration({ prop: originalProp, value: `var(${varName})` })
+      )
+    }
 
     // Remove all of the overridden light rules.
     for (const decl of Object.values(properties)) {
       if ('remove' in decl.base) nodesToDelete.add(decl.base)
-    }
-  }
+    }    // Add all rules: :root, media query, fallback rules, then container queries last (highest specificity)
 
+    return [
+      rootLightRule,
+      darkMediaQuery,
+      fallbackLightRule,
+      fallbackDarkRule,
+      lightContainer,
+      darkContainer
+    ]
+  }
   return {
     postcssPlugin: 'theme',
     AtRule: {
@@ -185,8 +233,7 @@ module.exports = (options) => {
         const theme = supportedThemes.find((t) => atRule.params.includes(t))
         if (!theme)
           throw new Error(
-            `Encountered unsupported theme ${
-              atRule.params
+            `Encountered unsupported theme ${atRule.params
             }. Allowed themes are ${supportedThemes.join(', ')}`
           )
 
@@ -201,9 +248,12 @@ module.exports = (options) => {
     },
     OnceExit: (root) => {
       findMatchingBaseRules(root)
+      const rulesToAdd = []
       for (const [selector, rule] of Object.entries(rules)) {
-        extractThemedProperties(selector, rule)
+        rulesToAdd.push(...extractThemedProperties(selector, rule))
       }
+
+      root.prepend(...rulesToAdd)
 
       for (const node of nodesToDelete) {
         node.remove()
