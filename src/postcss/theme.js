@@ -3,9 +3,7 @@ const supportedThemes = ['dark', 'light']
 
 const getPropertyName = (selector, prop) => {
   const regex = /([^A-Za-z0-9\-_])/g
-  return `--${selector}_${prop}`
-    .replace(/\s+/g, '_')
-    .replace(regex, '\\$1')
+  return `--${selector}_${prop}`.replace(/\s+/g, '_').replace(regex, '\\$1')
 }
 
 const splitRule = (rule, selectorToExtract) => {
@@ -202,11 +200,11 @@ module.exports = (options) => {
       ]
     })
 
-
     // Update base rule to use CSS variable references
     for (const [prop, decl] of Object.entries(properties)) {
       const varName = getPropertyName(selector, prop)
-      const originalProp = decl.light?.prop || decl.dark?.prop || decl.base?.prop || prop
+      const originalProp =
+        decl.light?.prop || decl.dark?.prop || decl.base?.prop || prop
       lightAndDark.base.append(
         new Declaration({ prop: originalProp, value: `var(${varName})` })
       )
@@ -215,7 +213,7 @@ module.exports = (options) => {
     // Remove all of the overridden light rules.
     for (const decl of Object.values(properties)) {
       if ('remove' in decl.base) nodesToDelete.add(decl.base)
-    }    // Add all rules: :root, media query, fallback rules, then container queries last (highest specificity)
+    } // Add all rules: :root, media query, fallback rules, then container queries last (highest specificity)
 
     return [
       rootLightRule,
@@ -233,7 +231,8 @@ module.exports = (options) => {
         const theme = supportedThemes.find((t) => atRule.params.includes(t))
         if (!theme)
           throw new Error(
-            `Encountered unsupported theme ${atRule.params
+            `Encountered unsupported theme ${
+              atRule.params
             }. Allowed themes are ${supportedThemes.join(', ')}`
           )
 
