@@ -158,7 +158,7 @@
     }
 
     @theme (dark) {
-      --foreground-color: red;
+      --foreground-color: white;
     }
 
     display: flex;

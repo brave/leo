@@ -57,8 +57,8 @@ export default ({ dictionary, options, file }) => {
       darkVars && varDefFormat`@media (prefers-color-scheme: dark) {
  :root {${darkVars} }
 }`,
-      lightVars && varDefFormat`[data-theme="light"] { container-type: normal; ${lightVars}}`,
-      lightVars && varDefFormat`[data-theme="dark"] { container-type: normal; ${darkVars}}`,
+      lightVars && varDefFormat`[data-theme="light"] { ${lightVars}}`,
+      lightVars && varDefFormat`[data-theme="dark"] { ${darkVars}}`,
     ]
       .filter((v) => !!v)
       .join('\n\n') +
