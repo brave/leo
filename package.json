@@ -27,7 +27,6 @@
     "@storybook/addon-storysource": "8.6.14",
     "@storybook/addon-svelte-csf": "4.2.0",
     "@storybook/addon-themes": "8.6.14",
-    "@storybook/preset-scss": "1.0.3",
     "@storybook/svelte": "8.6.14",
     "@storybook/svelte-vite": "8.6.14",
     "@sveltejs/vite-plugin-svelte": "3.1.2",
@@ -35,8 +34,6 @@
     "@types/jest": "29.5.14",
     "@types/jsdom": "21.1.7",
     "@types/react": "18.3.27",
-    "babel-loader": "9.2.1",
-    "css-loader": "6.11.0",
     "css-tree": "2.3.1",
     "figma-api-exporter": "github:brave/figma-api-exporter#141c3eab4643ba9cdcbb23867785aa7df9347eec",
     "jsdom": "21.1.2",
@@ -50,10 +47,8 @@
     "rollup": "3.29.5",
     "rollup-plugin-svelte": "7.2.3",
     "sass": "1.94.2",
-    "sass-loader": "13.3.3",
     "storybook": "8.6.15",
     "style-dictionary": "3.9.2",
-    "style-loader": "3.3.4",
     "svelte-check": "3.8.6",
     "svelte-loader": "3.2.4",
     "svelte2tsx": "0.7.45",
@@ -100,7 +95,7 @@
   "license": "MIT",
   "overrides": {
     "esbuild": "0.27.1",
-    "glob": "11.1.0",
+    "glob": "13.0.3",
     "vite": "5.4.21"
   }
 }
