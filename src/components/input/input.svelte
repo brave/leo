@@ -63,6 +63,12 @@
    */
   export let value: $$Props['value'] = ''
 
+  /**
+   * The maximum string length that the user can enter into the input.
+   * Length is measured in UTF-16 code units (code units != characters).
+   */
+  export let maxlength: number | undefined = undefined
+
   /*
    * Whether the value is required. In addition to showing a required indicator,
    * this performs some basic validation (i.e. is value truthy), and if it fails
@@ -159,6 +165,8 @@
       {...$$restProps}
       class="leo-input"
       {disabled}
+      {maxlength}
+      {required}
       {type}
       {value}
       {placeholder}
