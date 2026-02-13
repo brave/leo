@@ -51,6 +51,11 @@
     e.preventDefault()
     isOpen = !isOpen
   }
+
+  export function click() {
+    isOpen = !isOpen
+  }
+
 </script>
 
 <div class="leo-dropdown">
