@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1769563798830,
+  "updatedAt": 1771005448359,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1205,6 +1205,7 @@ export default {
     "key-lock": "key-lock",
     "key": "key",
     "keyboard": "keyboard",
+    "kimi-color": "kimi-color",
     "kin-color": "kin-color",
     "klown-color": "klown-color",
     "kmd-color": "kmd-color",
@@ -1910,6 +1911,7 @@ export default {
     "stq-color": "stq-color",
     "strat-color": "strat-color",
     "strike": "strike",
+    "stripe-color": "stripe-color",
     "stx-color": "stx-color",
     "sub-color": "sub-color",
     "sumo-color": "sumo-color",
