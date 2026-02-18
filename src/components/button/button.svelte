@@ -49,6 +49,8 @@
   export let href: Href = undefined
   export let fab = false
 
+  export let dataTestId: string | undefined = undefined
+
   export let onClick: (e: MouseEvent) => void = undefined
 
   /**
@@ -83,6 +85,7 @@
   class:isLoading
   on:click={onClick}
   {...$$restProps}
+  data-test-id={dataTestId || undefined}
   disabled={isLoading || disabled || undefined}
 >
   {#if isLoading}
