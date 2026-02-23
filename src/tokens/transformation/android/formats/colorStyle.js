@@ -9,13 +9,12 @@ export default ({ dictionary, platform, options = {}, file }) => {
       const colorCode = new TinyColor(
         compositeToken.original.value
       ).toHexString()
-      return `<color name="${compositeToken.name}">${colorCode}</color>`
+      return `  <color name="${compositeToken.name}" tools:ignore="UnusedResources">${colorCode}</color>`
     })
-  return `
-<?xml version="1.0" encoding="utf-8"?>
+  return `<?xml version="1.0" encoding="utf-8" ?>
 ${fileHeader({ file, commentStyle: 'xml' })}
-<resources>
-  ${colorStyles.join('\n')}
+<resources xmlns:tools="http://schemas.android.com/tools">
+${colorStyles.join('\n')}
 </resources>
 `
 }
