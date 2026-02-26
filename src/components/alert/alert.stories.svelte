@@ -1,5 +1,5 @@
 <script context="module">
-  import Alert, { types } from './alert.svelte'
+  import Alert, { types, sizes } from './alert.svelte'
 
   export const meta = {
     title: "Components/Alert",
@@ -7,6 +7,7 @@
     argTypes: {
       types: { table: { disable: true } },
       type: { control: 'select', options: types },
+      size: { control: 'select', options: sizes },
       hasActions: { control: 'boolean' },
       title: { type: 'string', defaultValue: 'Title' },
       '--leo-alert-center-width': {
@@ -42,6 +43,8 @@
   let title = 'Title'
   let canDismiss = true
   let hasAction = false
+  let isThin = false
+  let isSmall = false
   let duration = 2000
   let customButton = false
 
@@ -51,6 +54,8 @@
         content,
         title: title || undefined,
         type: type ?? 'error',
+        isThin,
+        size: isSmall ? "small" : "default",
         actions: hasAction
           ? [
               {
@@ -113,8 +118,8 @@
     >
       <Alert {...args}>
         <div slot="actions">
-          <Button kind="outline">Don't!</Button>
-          <Button>Do the thing!</Button>
+          <Button size={args.size === "small" ? "tiny" : "medium"} kind="outline">Don't!</Button>
+          <Button size={args.size === "small" ? "tiny" : "medium"}>Do the thing!</Button>
         </div>
         Some content
       </Alert>
@@ -127,25 +132,39 @@
     <div slot="title">{args.title}</div>
     Alert content
     <div slot="actions">
-      <Button kind="filled">Primary</Button>
-      <Button kind="plain-faint">Secondary</Button>
+      <Button size={args.size === "small" ? "tiny" : "medium"} kind="filled">Primary</Button>
+      <Button size={args.size === "small" ? "tiny" : "medium"} kind="plain-faint">Secondary</Button>
     </div>
   </Alert>
 </Template>
 
 <Story name="Default Alert" />
+
 <Story name="All" let:args>
   <div class="container">
     {#each [true, false] as hasTitle}
       {#each types as type}
-        <Alert {type} {...args}>
-          <div slot="title">{#if hasTitle}{args.title}{/if}</div>
-          Alert content
-          <div slot="actions" class="actions">
-            <Button kind="filled">Primary</Button>
-            <Button kind="plain-faint">Secondary</Button>
-          </div>
-        </Alert>
+        <div class="row">
+          {#each sizes as size}
+            {#each [false, true] as isThin}
+              {#each [false, true] as hasContentAfter}
+                <Alert {type} {...args} {size} {isThin} {hasContentAfter}>
+                  <div slot="title">{#if hasTitle}{args.title}{/if}</div>
+                  Alert content
+                  <div slot="actions" class="actions">
+                    <Button size={size === "small" ? "tiny" : "medium"} kind="filled">Primary</Button>
+                    <Button size={size === "small" ? "tiny" : "medium"} kind="plain-faint">Secondary</Button>
+                  </div>
+                  <div slot="content-after">
+                    <Button fab kind="plain-faint">
+                      <Icon name="close" />
+                    </Button>
+                  </div>
+                </Alert>
+              {/each}
+            {/each}
+          {/each}
+        </div>
       {/each}
     {/each}
   </div>
@@ -173,6 +192,14 @@
       Has action
       <input type="checkbox" bind:checked={hasAction} />
     </label>
+    <label>
+      Is "thin"
+      <input type="checkbox" bind:checked={isThin} />
+    </label>
+    <label>
+      Is "small"
+      <input type="checkbox" bind:checked={isSmall} />
+    </label>
     {#if hasAction}
       <label>
         Use custom button
@@ -192,7 +219,14 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    max-width: 500px;
+  }
+
+  .row {
+    display: grid;
+    align-items: start;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 16px;
   }
 
   .options {

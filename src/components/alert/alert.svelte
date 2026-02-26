@@ -4,6 +4,9 @@
   export const types = ['info', 'warning', 'error', 'success', 'notice'] as const
   export type AlertType = (typeof types)[number]
 
+  export const sizes = ['default', 'small'] as const
+  export type Size = (typeof sizes)[number]
+
   const defaultIcons: { [P in AlertType]: IconName } = {
     'info': 'info-filled',
     'error': 'warning-circle-filled',
@@ -18,7 +21,9 @@
 
   export let type: AlertType = 'error'
   export let isToast = false
+  export let isThin = false
   export let hideIcon = false
+  export let size: Size = 'default'
 
   // TODO: Remove when only supporting svelte >5 which can render slotted content conditionally
   export let hasActions = $$slots.actions
@@ -28,8 +33,9 @@
 </script>
 
 <div
-  class="leo-alert {currentType}"
+  class="leo-alert {currentType} size-{size}"
   class:toast={isToast}
+  class:thin={isThin}
 >
   {#if !hideIcon}
   <div class="icon">
@@ -70,21 +76,24 @@
     gap: var(--leo-spacing-m);
   }
   .leo-alert {
+    --padding: var(--leo-spacing-xl);
+    --gap: var(--leo-spacing-xl);
     --leo-icon-color: var(--leo-alert-icon-color, var(--default-icon-color));
     background-color: var(
       --leo-alert-background-color,
       var(--default-background)
     );
     color: var(--default-text-color, var(--leo-color-text-primary));
-    padding: var(--leo-alert-padding, var(--leo-spacing-xl));
+    padding: var(--leo-alert-padding, var(--padding));
     border-radius: var(--leo-radius-l);
     border: var(--leo-alert-border-width, var(--default-border-width)) solid
       var(--leo-alert-border-color, var(--default-border-color));
-    gap: var(--leo-spacing-xl) 0;
+    gap: var(--gap);
     font: var(--leo-font-default-regular);
 
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: [icon-start] min-content [icon-end main-start] 1fr [main-end];
+    grid-template-rows: [main-start] auto [main-end];
 
     &.notice {
       --default-background: transparent;
@@ -114,15 +123,10 @@
       --default-text-color: var(--leo-color-systemfeedback-warning-text);
     }
 
-    &:has(.content-after) {
-      grid-template-columns: min-content 1fr auto;
-    }
-
     & .icon {
       --leo-icon-size: var(--leo-icon-m);
 
       color: var(--leo-icon-color);
-      margin-right: var(--leo-spacing-xl);
     }
 
     & .title {
@@ -130,17 +134,35 @@
     }
 
     & .content {
-      grid-column: 2;
+      grid-column: main;
       align-content: center;
     }
 
-    & .content-after {
-      grid-column: 3;
-      margin-left: var(--leo-spacing-xl);
+    &:has(.content-after) .content-after {
+      grid-row: main;
+      grid-column: -1; // No named track necessary as it should just always be at the end.
     }
 
     & .actions {
-      grid-column: 2;
+      grid-column: main;
+    }
+
+    &.thin {
+      align-items: center;
+
+      .actions {
+        grid-column: main-end; // Actions when `.thin` should always be after the `main` content
+      }
+
+      // If both `actions` and `content-after` exist, we have to add at least an explicit track for content-after since -1 doesn't work for implicit tracks
+      &:has(.content-after):has(.actions) {
+        grid-template-columns: [icon-start] min-content [icon-end main-start] 1fr [main-end content-after] auto [content-end];
+      }
+    }
+
+    &.size-small {
+      --padding: var(--leo-spacing-m) var(--leo-spacing-l);
+      --gap: var(--leo-spacing-m);
     }
   }
 

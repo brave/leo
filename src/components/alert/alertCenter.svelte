@@ -11,9 +11,10 @@
 
   type Action = {
     kind?: ButtonKind
-    isDisabled?: boolean,
-    isLoading?: boolean,
-    component?: ComponentType<SvelteComponent>,
+    size?: ButtonSize
+    isDisabled?: boolean
+    isLoading?: boolean
+    component?: ComponentType<SvelteComponent>
     action: (alert: AlertInfo) => void
   } & ({
     text: string
@@ -25,6 +26,8 @@
 
   export interface AlertOptions {
     type: AlertType
+    size?: Size
+    isThin?: boolean
     content: string
     title?: string
     icon?: IconName
@@ -37,6 +40,8 @@
     id = ++nextId
 
     type: AlertType
+    size?: Size
+    isThin: boolean = false
     content: string
     title?: string
     icon?: IconName
@@ -89,9 +94,9 @@
 </script>
 
 <script lang="ts">
-  import Alert from './alert.svelte'
+  import Alert, { type Size } from './alert.svelte'
   import Button from '../button/button.svelte'
-  import type { ButtonKind } from '../button/props'
+  import type { ButtonKind, ButtonSize } from '../button/props'
   import { fly } from 'svelte/transition'
   import type { ComponentType, SvelteComponent } from 'svelte'
   import type { IconName } from '../../../icons/meta'
@@ -99,20 +104,23 @@
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
     'top-center'
+  export let size: Size = 'default'
+
   $: style = `${position.includes('right') ? 'right' : 'left'}: ${
     position.includes('center') ? 'calc(50% - (var(--width) / 2))' : '0'
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
-<div class="leo-alert-center" {style}>
+<div class="leo-alert-center size-{size}" {style}>
   {#each $alerts as alert (alert.id)}
+    {@const alertSize = alert.size || size}
     <div
       class="alert-container"
       transition:fly={transitionOptions}
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} isToast>
+      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} size={alertSize} isThin={alert.isThin} isToast>
         <div slot="title">
           {alert.title ?? ""}
         </div>
@@ -128,7 +136,7 @@
           {#each alert.actions as action}
             <svelte:component
               this={action.component || ButtonComponent}
-              size="small"
+              size={action.size || alertSize === "small" ? "tiny" : "medium"}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               onClick={() => action.action(alert)}
@@ -152,7 +160,8 @@
 
 <style lang="scss">
   .leo-alert-center {
-    --width: var(--leo-alert-center-width, min(540px, 100vw));
+    --min-width: 540px;
+    --width: var(--leo-alert-center-width, min(var(--min-width), 100vw));
     z-index: var(--leo-alert-center-z-index, 1000);
     position: var(--leo-alert-center-position, fixed);
     width: var(--width);
@@ -162,5 +171,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--leo-spacing-m);
+
+    &.size-small {
+      --min-width: 0;
+    }
   }
 </style>
