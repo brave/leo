@@ -44,7 +44,7 @@
     "postcss-sort-media-queries": "4.4.1",
     "prettier": "3.7.4",
     "prettier-plugin-svelte": "3.4.0",
-    "rollup": "3.29.5",
+    "rollup": "3.30.0",
     "rollup-plugin-svelte": "7.2.3",
     "sass": "1.94.2",
     "storybook": "8.6.15",
