@@ -1,11 +1,9 @@
 const { Declaration, AtRule, Rule } = require('postcss')
 const supportedThemes = ['dark', 'light']
 
-const getPropertyName = (selector, decl) => {
+const getPropertyName = (selector, prop) => {
   const regex = /([^A-Za-z0-9\-_])/g
-  return `--${selector}_${decl.prop}`
-    .replace(/\s+/g, '_')
-    .replace(regex, '\\$1')
+  return `--${selector}_${prop}`.replace(/\s+/g, '_').replace(regex, '\\$1')
 }
 
 const splitRule = (rule, selectorToExtract) => {
@@ -27,20 +25,14 @@ const splitRule = (rule, selectorToExtract) => {
   rule.selector = selectorToExtract
 }
 
-// Note: It's important that these selectors have a better than (0, 1, 0)
-// specificity, or they'll be overridden by the dark mode media query.
 const defaultOptions = {
-  darkSelector: '[data-theme][data-theme=dark]',
-  lightSelector: '[data-theme][data-theme=light]',
-  wrapSelector: (selector) => selector
+  themeProperty: '--leo-theme'
 }
 
 /**
  * @param {{
- *  darkSelector: string,
- *  lightSelector: string,
- *  wrapSelector?: (selector: string) => string,
- * }} options The options for configuring the selectors for darkmode.
+ *  themeProperty?: string,
+ * }} options The options for configuring container style queries for theming.
  */
 module.exports = (options) => {
   options = { ...defaultOptions, ...options }
@@ -96,7 +88,7 @@ module.exports = (options) => {
     })
   }
 
-  const extractDarkProperties = (selector, lightAndDark) => {
+  const extractThemedProperties = (selector, lightAndDark) => {
     const variants = ['base', 'dark', 'light']
 
     // At least one variant should have a value. Take it, and get the root node.
@@ -112,7 +104,6 @@ module.exports = (options) => {
         properties[property] = { base: {}, dark: {}, light: {} }
       return properties[property]
     }
-    const getDeclProp = (decl) => decl.light.prop || decl.dark.prop
 
     if (!lightAndDark.base) {
       lightAndDark.base = new Rule({ selector: selector })
@@ -123,8 +114,7 @@ module.exports = (options) => {
       lightAndDark.dark.each((decl) => {
         if (!decl.prop) return
 
-        const propertyName = getPropertyName(selector, decl)
-        getPropertyVariants([propertyName]).dark = decl
+        getPropertyVariants([decl.prop]).dark = decl
       })
     }
 
@@ -132,50 +122,108 @@ module.exports = (options) => {
       lightAndDark.light.each((decl) => {
         if (!decl.prop) return
 
-        const propertyName = getPropertyName(selector, decl)
-        getPropertyVariants([propertyName]).light = decl
+        getPropertyVariants([decl.prop]).light = decl
       })
     }
 
     lightAndDark.base.each((decl) => {
-      const propertyName = getPropertyName(selector, decl)
-      if (!properties[propertyName]) return
-      properties[propertyName].base = decl
+      if (!properties[decl.prop]) return
+      properties[decl.prop].base = decl
     })
 
-    const darkVariables = Object.entries(properties).map(
-      ([key, decl]) =>
+    // Create CSS variable declarations for light and dark modes
+    // Always create scoped variables (even for CSS custom properties)
+    const lightVariables = Object.entries(properties).map(
+      ([prop, decl]) =>
         new Declaration({
-          prop: key,
+          prop: getPropertyName(selector, prop),
+          value: decl.light.value || decl.base.value || 'unset'
+        })
+    )
+    const darkVariables = Object.entries(properties).map(
+      ([prop, decl]) =>
+        new Declaration({
+          prop: getPropertyName(selector, prop),
           value: decl.dark.value || decl.base.value || 'unset'
         })
     )
 
-    const lightVariables = Object.entries(properties).map(
-      ([key, decl]) =>
-        new Declaration({
-          prop: key,
-          value: decl.light.value || decl.base.value || 'unset'
-        })
-    )
+    // 1. :root with default (light) values
+    const rootLightRule = new Rule({
+      selector: `:global(:root)`,
+      nodes: lightVariables.map((decl) => decl.clone())
+    })
 
-    for (const [property, decls] of Object.entries(properties)) {
-      lightAndDark.base.push(
-        new Declaration({ prop: getDeclProp(decls), value: `var(${property})` })
+    // 2. @media (prefers-color-scheme: dark) for dark mode default
+    const darkMediaQuery = new AtRule({
+      name: 'media',
+      params: '(prefers-color-scheme: dark)',
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: darkVariables.map((decl) => decl.clone())
+        })
+      ]
+    })
+
+    // 3. [data-theme] fallback rules for explicit theme selection (Firefox)
+    // Use descendant selectors to match when data-theme is on a parent
+    const fallbackLightRule = new Rule({
+      selector: `:global([data-theme="light"])`,
+      nodes: lightVariables.map((decl) => decl.clone())
+    })
+    const fallbackDarkRule = new Rule({
+      selector: `:global([data-theme="dark"])`,
+      nodes: darkVariables.map((decl) => decl.clone())
+    })
+
+    // 4. @container style queries (highest specificity, modern browsers)
+    const lightContainer = new AtRule({
+      name: 'container',
+      params: `style(--leo-theme: light)`,
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: lightVariables.map((decl) => decl.clone())
+        })
+      ]
+    })
+
+    const darkContainer = new AtRule({
+      name: 'container',
+      params: `style(--leo-theme: dark)`,
+      nodes: [
+        new Rule({
+          selector: `:global(${selector})`,
+          nodes: darkVariables.map((decl) => decl.clone())
+        })
+      ]
+    })
+
+    // Update base rule to use CSS variable references
+    for (const [prop, decl] of Object.entries(properties)) {
+      const varName = getPropertyName(selector, prop)
+      const originalProp =
+        decl.light?.prop || decl.dark?.prop || decl.base?.prop || prop
+      lightAndDark.base.append(
+        new Declaration({ prop: originalProp, value: `var(${varName})` })
       )
     }
 
     // Remove all of the overridden light rules.
     for (const decl of Object.values(properties)) {
       if ('remove' in decl.base) nodesToDelete.add(decl.base)
-    }
+    } // Add all rules: :root, media query, fallback rules, then container queries last (highest specificity)
 
-    return {
-      dark: darkVariables,
-      light: lightVariables
-    }
+    return [
+      rootLightRule,
+      darkMediaQuery,
+      fallbackLightRule,
+      fallbackDarkRule,
+      lightContainer,
+      darkContainer
+    ]
   }
-
   return {
     postcssPlugin: 'theme',
     AtRule: {
@@ -198,48 +246,13 @@ module.exports = (options) => {
       }
     },
     OnceExit: (root) => {
-      const darkProperties = []
-      const lightProperties = []
-
       findMatchingBaseRules(root)
+      const rulesToAdd = []
       for (const [selector, rule] of Object.entries(rules)) {
-        const { dark, light } = extractDarkProperties(selector, rule)
-        darkProperties.push(...dark)
-        lightProperties.push(...light)
+        rulesToAdd.push(...extractThemedProperties(selector, rule))
       }
 
-      let lightSelectors = [
-        ':root',
-        `:root${options.lightSelector}`,
-        options.lightSelector
-      ]
-      let darkSelectors = [`:root${options.darkSelector}`, options.darkSelector]
-
-      lightSelectors = lightSelectors.map((s) => options.wrapSelector(s))
-      darkSelectors = darkSelectors.map((s) => options.wrapSelector(s))
-
-      const lightRule = new Rule({
-        selectors: lightSelectors,
-        nodes: lightProperties
-      })
-      const darkRule = new Rule({
-        selectors: darkSelectors,
-        nodes: darkProperties
-      })
-      const darkMediaQuery = new AtRule({
-        name: 'media',
-        params: '(prefers-color-scheme: dark)',
-        nodes: darkProperties.length
-          ? [
-              new Rule({
-                selector: options.wrapSelector(':root'),
-                nodes: darkProperties
-              })
-            ]
-          : []
-      })
-
-      root.prepend(lightRule, darkRule, darkMediaQuery)
+      root.prepend(...rulesToAdd)
 
       for (const node of nodesToDelete) {
         node.remove()

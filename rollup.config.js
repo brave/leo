@@ -56,11 +56,7 @@ export default {
       include: 'src/components/**/*.svelte',
       preprocess: sveltePreprocess({
         postcss: {
-          plugins: [
-            themePlugin({
-              wrapSelector: (selector) => `:global(:host-context(${selector}))`
-            })
-          ]
+          plugins: [themePlugin()]
         }
       }),
       // Don't emit CSS - it doesn't work properly with Web Components.
