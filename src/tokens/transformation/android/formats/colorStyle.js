@@ -1,8 +1,12 @@
 import StyleDictionary from 'style-dictionary'
 import { TinyColor } from '@ctrl/tinycolor'
+import { getTokenName } from '../colorName'
 const { fileHeader } = StyleDictionary.formatHelpers
 
 const getTokenValue = (token) => {
+  if (token.referencedVariable) {
+    return `@color/${getTokenName(token.referencedVariable)}`
+  }
   const color = new TinyColor(token.original.value)
   if (color.getAlpha() === 1) {
     return color.toHexString()
