@@ -134,11 +134,11 @@
           "stops": [
             {
               "position": 0,
-              "color": "#366eb8ff"
+              "color": "#066cffff"
             },
             {
               "position": 1,
-              "color": "#4386e0ff"
+              "color": "#488cffff"
             }
           ]
         },
