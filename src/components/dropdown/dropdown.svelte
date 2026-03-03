@@ -47,6 +47,10 @@
     onClose?.({ originalEvent: new CustomEvent('explicit-close'), reason: 'explicit' })
   }
 
+  export function click() {
+    isOpen = !isOpen
+  }
+
   function onClick(e) {
     e.preventDefault()
     isOpen = !isOpen

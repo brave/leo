@@ -44,6 +44,9 @@ export type ReactProps<Props> = Props & {
   // available on all elements. We just want to make sure we have the correct
   // React name/value for them.
   [P in IntrinsicProps]?: Omit<JSX.IntrinsicElements, 'ref'>['div'][P]
+} & {
+  // Allow data-* attributes for test selectors and other uses.
+  [key: `data-${string}`]: string | undefined
 }
 
 const useEventHandlers = (props: any) => {
@@ -147,9 +150,16 @@ export default function SvelteWebComponentToReact<
         }
       }, [props])
 
+      // Forward data-* attributes to the host element so they are
+      // visible outside the shadow DOM (e.g. for test selectors).
+      const dataAttrs = Object.fromEntries(
+        Object.entries(props).filter(([key]) => key.startsWith('data-'))
+      )
+
       return createElement(tag, {
         ref: setRef,
-        children: props.children
+        children: props.children,
+        ...dataAttrs
       })
     }
   )
