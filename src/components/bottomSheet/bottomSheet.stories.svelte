@@ -41,6 +41,9 @@
   let slotsOpen = false
   let sectionsOpen = false
   let scrollableOpen = false
+  let stackedSheet1 = false
+  let stackedSheet2 = false
+  let stackedSheet3 = false
 
   const handleAction = () => console.log('action')
 </script>
@@ -246,6 +249,120 @@
       <div class="item">
         <Icon name="info-outline" />
         <span>Help</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+  </BottomSheet>
+</Story>
+
+<Story name="Stacked" let:args>
+  <Button onClick={() => (stackedSheet1 = true)}>Open Stacked Sheets</Button>
+  <BottomSheet
+    {...args}
+    isOpen={stackedSheet1}
+    onClose={() => (stackedSheet1 = false)}
+  >
+    <leo-title>First Sheet</leo-title>
+    <leo-menu-item
+      on:click={() => {
+        stackedSheet2 = true
+      }}
+      data-is-interactive="true"
+    >
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Open second sheet</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <Hr />
+    <leo-title>Section title</leo-title>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+  </BottomSheet>
+  <BottomSheet
+    {...args}
+    isOpen={stackedSheet2}
+    onClose={() => (stackedSheet2 = false)}
+  >
+    <leo-title>Second Sheet</leo-title>
+    <leo-menu-item
+      on:click={() => {
+        stackedSheet3 = true
+      }}
+      data-is-interactive="true"
+    >
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Open third sheet</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+  </BottomSheet>
+  <BottomSheet
+    {...args}
+    isOpen={stackedSheet3}
+    onClose={() => (stackedSheet3 = false)}
+  >
+    <leo-title>Third Sheet</leo-title>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction}>
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Text</span>
         <Icon name="carat-right" />
       </div>
     </leo-menu-item>
