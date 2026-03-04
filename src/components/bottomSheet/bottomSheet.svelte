@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
   import type { HTMLAttributes } from 'svelte/elements'
+  import { writable } from 'svelte/store'
+
   declare global {
     namespace JSX {
       interface IntrinsicElements {
@@ -9,16 +11,22 @@
       }
     }
   }
+
+  let nextId = 0
+  const sheetStack = writable<number[]>([])
 </script>
 
 <script lang="ts">
   import { fly, fade } from 'svelte/transition'
+  import { onDestroy } from 'svelte'
 
   export let isOpen = false
   export let onClose: () => void = undefined
   export let escapeCloses = true
   export let backdropClickCloses = true
   export let dragToClose = true
+
+  const id = nextId++
 
   let sheetEl: HTMLDivElement
   let dragStartY = 0
@@ -27,17 +35,45 @@
 
   $: dragOffset = isDragging ? Math.max(0, dragCurrentY - dragStartY) : 0
 
+  $: if (isOpen) {
+    openedAt = Date.now()
+    sheetStack.update((s) => (s.includes(id) ? s : [...s, id]))
+  } else {
+    sheetStack.update((s) => (s.includes(id) ? s.filter((sid) => sid !== id) : s))
+  }
+
+  $: document.body.style.overflow = $sheetStack.length > 0 ? 'hidden' : ''
+
+  onDestroy(() => {
+    sheetStack.update((s) => (s.includes(id) ? s.filter((sid) => sid !== id) : s))
+  })
+
+  $: stackIndex = $sheetStack.indexOf(id)
+  $: depthBehind = stackIndex === -1 ? 0 : $sheetStack.length - 1 - stackIndex
+  $: isTopmost = isOpen && depthBehind === 0
+  $: isBottomOfStack = stackIndex === 0
+
   function close() {
     isOpen = false
     onClose?.()
   }
 
   function handleBackdropClick() {
-    if (backdropClickCloses) close()
+    if (backdropClickCloses && isTopmost) close()
+  }
+
+  let openedAt = 0
+
+  function handleWindowClick(e: MouseEvent) {
+    if (!isOpen || !isTopmost || !backdropClickCloses || !sheetEl) return
+    if (Date.now() - openedAt < 100) return
+    if (!sheetEl.contains(e.target as Node)) {
+      close()
+    }
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (!isOpen) return
+    if (!isOpen || !isTopmost) return
 
     if (e.code === 'Escape' && escapeCloses) {
       e.preventDefault()
@@ -45,7 +81,6 @@
       return
     }
 
-    // Arrow key navigation through menu items
     let dir = 0
     if (e.code === 'ArrowUp') dir = -1
     if (e.code === 'ArrowDown') dir = 1
@@ -71,7 +106,7 @@
   }
 
   function handleItemClick(e: MouseEvent) {
-    if (!sheetEl) return
+    if (!sheetEl || !isTopmost) return
     const items = Array.from(
       sheetEl.querySelectorAll('leo-menu-item, leo-option')
     ) as HTMLElement[]
@@ -85,7 +120,7 @@
   }
 
   function handlePointerDown(e: PointerEvent) {
-    if (!dragToClose) return
+    if (!dragToClose || !isTopmost) return
     isDragging = true
     dragStartY = e.clientY
     dragCurrentY = e.clientY
@@ -108,28 +143,36 @@
     dragCurrentY = 0
   }
 
-  $: if (isOpen) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
+  function stackTransform(depth: number): string {
+    if (depth <= 0) return ''
+    const scale = Math.max(0.85, 1 - depth * 0.05)
+    const yOffset = depth * -12
+    return `scale(${scale}) translateY(${yOffset}px)`
   }
 </script>
 
 {#if isOpen}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    class="leo-bottomsheet-backdrop"
-    role="presentation"
-    on:click={handleBackdropClick}
-    transition:fade={{ duration: 200 }}
-  />
+  {#if isBottomOfStack}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div
+      class="leo-bottomsheet-backdrop"
+      role="presentation"
+      on:click={handleBackdropClick}
+      transition:fade={{ duration: 200 }}
+    />
+  {/if}
   <div
     class="leo-bottomsheet"
+    class:is-behind={depthBehind > 0}
     role="dialog"
     aria-modal="true"
     transition:fly={{ y: '100%', duration: 300, opacity: 1 }}
-    style:transform={isDragging ? `translateY(${dragOffset}px)` : undefined}
+    style:transform={isDragging
+      ? `translateY(${dragOffset}px)`
+      : stackTransform(depthBehind) || undefined}
+    style:filter={depthBehind > 0 ? `brightness(${Math.max(0.25, 1 - depthBehind * 0.25)}) blur(${Math.min(depthBehind * 2, 6)}px)` : undefined}
     style:transition={isDragging ? 'none' : undefined}
+    style:z-index={10000 + stackIndex}
     bind:this={sheetEl}
   >
     <div
@@ -148,7 +191,7 @@
   </div>
 {/if}
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={handleKeydown} on:click={handleWindowClick} />
 
 <style lang="scss">
   :host {
@@ -169,7 +212,6 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    z-index: 9999;
 
     width: 100%;
     max-width: var(--leo-bottomsheet-max-width, 480px);
@@ -183,12 +225,23 @@
         var(--leo-radius-xl)
       )
       var(--leo-bottomsheet-border-radius, var(--leo-radius-xl)) 0 0;
-    box-shadow: var(--leo-effect-elevation-05);
+    box-shadow: var(--leo-effect-elevation-02);
 
     display: flex;
     flex-direction: column;
     max-height: var(--leo-bottomsheet-max-height, 85vh);
     overflow: hidden;
+
+    transition: transform 300ms ease, filter 300ms ease, box-shadow 300ms ease;
+  }
+
+  .leo-bottomsheet.is-behind {
+    pointer-events: none;
+    box-shadow: none;
+    border-radius: var(
+      --leo-bottomsheet-border-radius,
+      var(--leo-radius-xl)
+    );
   }
 
   .drag-handle-area {
