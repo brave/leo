@@ -32,10 +32,12 @@
   let dragStartY = 0
   let dragCurrentY = 0
   let isDragging = false
+  let dismissing = false
 
   $: dragOffset = isDragging ? Math.max(0, dragCurrentY - dragStartY) : 0
 
   $: if (isOpen) {
+    dismissing = false
     openedAt = Date.now()
     sheetStack.update((s) => (s.includes(id) ? s : [...s, id]))
   } else {
@@ -53,9 +55,26 @@
   $: isTopmost = isOpen && depthBehind === 0
   $: isBottomOfStack = stackIndex === 0
 
-  function close() {
-    isOpen = false
-    onClose?.()
+  function close(fromY = 0) {
+    if (dismissing) return
+    if (!sheetEl) {
+      isOpen = false
+      onClose?.()
+      return
+    }
+    dismissing = true
+    const target = sheetEl.offsetHeight
+    sheetEl.animate(
+      [
+        { transform: `translateY(${fromY}px)` },
+        { transform: `translateY(${target}px)` }
+      ],
+      { duration: 200, easing: 'ease-out', fill: 'forwards' }
+    ).onfinish = () => {
+      dismissing = false
+      isOpen = false
+      onClose?.()
+    }
   }
 
   function handleBackdropClick() {
@@ -136,7 +155,12 @@
     if (!isDragging) return
     const threshold = sheetEl ? sheetEl.offsetHeight * 0.3 : 100
     if (dragOffset > threshold) {
-      close()
+      const offset = dragOffset
+      isDragging = false
+      dragStartY = 0
+      dragCurrentY = 0
+      close(offset)
+      return
     }
     isDragging = false
     dragStartY = 0
@@ -166,12 +190,12 @@
     class:is-behind={depthBehind > 0}
     role="dialog"
     aria-modal="true"
-    transition:fly={{ y: '100%', duration: 300, opacity: 1 }}
+    in:fly={{ y: '100%', duration: 300, opacity: 1 }}
     style:transform={isDragging
       ? `translateY(${dragOffset}px)`
       : stackTransform(depthBehind) || undefined}
     style:filter={depthBehind > 0 ? `brightness(${Math.max(0.25, 1 - depthBehind * 0.25)}) blur(${Math.min(depthBehind * 2, 6)}px)` : undefined}
-    style:transition={isDragging ? 'none' : undefined}
+    style:transition={isDragging || dismissing ? 'none' : undefined}
     style:z-index={10000 + stackIndex}
     bind:this={sheetEl}
   >
