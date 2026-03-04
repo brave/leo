@@ -146,7 +146,7 @@
   function stackTransform(depth: number): string {
     if (depth <= 0) return ''
     const scale = Math.max(0.85, 1 - depth * 0.05)
-    const yOffset = depth * -12
+    const yOffset = depth * -24
     return `scale(${scale}) translateY(${yOffset}px)`
   }
 </script>
