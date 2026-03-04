@@ -43,7 +43,7 @@
   let title = 'Title'
   let canDismiss = true
   let hasAction = false
-  let isThin = false
+  let isInlineActions = false
   let isSmall = false
   let duration = 2000
   let customButton = false
@@ -54,7 +54,7 @@
         content,
         title: title || undefined,
         type: type ?? 'error',
-        isThin,
+        isInlineActions,
         size: isSmall ? "small" : "default",
         actions: hasAction
           ? [
@@ -146,9 +146,9 @@
       {#each types as type}
         <div class="row">
           {#each sizes as size}
-            {#each [false, true] as isThin}
+            {#each [false, true] as isInlineActions}
               {#each [false, true] as hasContentAfter}
-                <Alert {type} {...args} {size} {isThin} {hasContentAfter}>
+                <Alert {type} {...args} {size} {isInlineActions} {hasContentAfter}>
                   <div slot="title">{#if hasTitle}{args.title}{/if}</div>
                   Alert content
                   <div slot="actions" class="actions">
@@ -194,7 +194,7 @@
     </label>
     <label>
       Is "thin"
-      <input type="checkbox" bind:checked={isThin} />
+      <input type="checkbox" bind:checked={isInlineActions} />
     </label>
     <label>
       Is "small"

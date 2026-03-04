@@ -27,7 +27,7 @@
   export interface AlertOptions {
     type: AlertType
     size?: Size
-    isThin?: boolean
+    isInlineActions?: boolean
     content: string
     title?: string
     icon?: IconName
@@ -41,7 +41,7 @@
 
     type: AlertType
     size?: Size
-    isThin: boolean = false
+    isInlineActions: boolean = false
     content: string
     title?: string
     icon?: IconName
@@ -120,7 +120,7 @@
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >
-      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} size={alertSize} isThin={alert.isThin} isToast>
+      <svelte:component this={alert.component || Alert} {...alert} hasActions={alert.actions.length > 0} hasContentAfter={alert.canDismiss} size={alertSize} isInlineActions={alert.isInlineActions} isToast>
         <div slot="title">
           {alert.title ?? ""}
         </div>

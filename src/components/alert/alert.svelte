@@ -21,7 +21,7 @@
 
   export let type: AlertType = 'error'
   export let isToast = false
-  export let isThin = false
+  export let isInlineActions = false
   export let hideIcon = false
   export let size: Size = 'default'
 
@@ -35,7 +35,7 @@
 <div
   class="leo-alert {currentType} size-{size}"
   class:toast={isToast}
-  class:thin={isThin}
+  class:thin={isInlineActions}
 >
   {#if !hideIcon}
   <div class="icon">
