@@ -136,7 +136,7 @@
           {#each alert.actions as action}
             <svelte:component
               this={action.component || ButtonComponent}
-              size={action.size || alertSize === "small" ? "tiny" : "medium"}
+              size={action.size || (alertSize === "small" ? "tiny" : "medium")}
               fab={action.icon && !action.text}
               kind={action.kind || 'filled'}
               onClick={() => action.action(alert)}
