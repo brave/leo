@@ -27,7 +27,7 @@
           },
           "interactive": {
             "type": "color",
-            "value": "#b2c3ff",
+            "value": "#bcc6f3",
             "referencedVariable": "$divider.interactive"
           },
           "ask-input-field": {
@@ -47,10 +47,17 @@
             "value": "#ffffff",
             "referencedVariable": "$schemes.surface-container-lowest"
           },
-          "container-interactive": {
-            "type": "color",
-            "value": "#eef2ff",
-            "referencedVariable": "$primary.10"
+          "interactive": {
+            "normal": {
+              "type": "color",
+              "value": "#eef2ff",
+              "referencedVariable": "$primary.10"
+            },
+            "pale": {
+              "type": "color",
+              "value": "#f9fafd",
+              "referencedVariable": "$primary.5"
+            }
           },
           "highlight": {
             "type": "color",
@@ -138,7 +145,7 @@
               },
               "hover": {
                 "type": "color",
-                "value": "#d5dcf6",
+                "value": "#dfe4f6",
                 "referencedVariable": "$search.primary.20"
               }
             }
@@ -185,12 +192,12 @@
           },
           "20": {
             "type": "color",
-            "value": "#d5dcf6",
+            "value": "#dfe4f6",
             "referencedVariable": "$primary.20"
           },
           "30": {
             "type": "color",
-            "value": "#697ee1",
+            "value": "#7686ec",
             "referencedVariable": "$primary.30"
           },
           "40": {
@@ -232,17 +239,17 @@
           },
           "30": {
             "type": "color",
-            "value": "#e05f59",
+            "value": "#ff3c36",
             "referencedVariable": "$red.30"
           },
           "40": {
             "type": "color",
-            "value": "#b74d49",
+            "value": "#e20314",
             "referencedVariable": "$red.40"
           },
           "50": {
             "type": "color",
-            "value": "#8c3b38",
+            "value": "#b4020e",
             "referencedVariable": "$red.50"
           },
           "60": {
@@ -274,17 +281,17 @@
           },
           "30": {
             "type": "color",
-            "value": "#d96738",
+            "value": "#f45202",
             "referencedVariable": "$orange.30"
           },
           "40": {
             "type": "color",
-            "value": "#b2542e",
+            "value": "#cd4400",
             "referencedVariable": "$orange.40"
           },
           "50": {
             "type": "color",
-            "value": "#884023",
+            "value": "#a33400",
             "referencedVariable": "$orange.50"
           },
           "60": {
@@ -316,17 +323,17 @@
           },
           "30": {
             "type": "color",
-            "value": "#ad7e08",
+            "value": "#b08c00",
             "referencedVariable": "$yellow.30"
           },
           "40": {
             "type": "color",
-            "value": "#8e6702",
+            "value": "#937502",
             "referencedVariable": "$yellow.40"
           },
           "50": {
             "type": "color",
-            "value": "#6d4f01",
+            "value": "#745c00",
             "referencedVariable": "$yellow.50"
           },
           "60": {
@@ -353,22 +360,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#c3e6cd",
+            "value": "#b0f9c3",
             "referencedVariable": "$green.20"
           },
           "30": {
             "type": "color",
-            "value": "#279a58",
+            "value": "#2fab5f",
             "referencedVariable": "$green.30"
           },
           "40": {
             "type": "color",
-            "value": "#1f7e48",
+            "value": "#268f4f",
             "referencedVariable": "$green.40"
           },
           "50": {
             "type": "color",
-            "value": "#186137",
+            "value": "#1c713d",
             "referencedVariable": "$green.50"
           },
           "60": {
@@ -395,22 +402,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#b3e6ef",
+            "value": "#c1eef8",
             "referencedVariable": "$teal.20"
           },
           "30": {
             "type": "color",
-            "value": "#0096b1",
+            "value": "#35a0b4",
             "referencedVariable": "$teal.30"
           },
           "40": {
             "type": "color",
-            "value": "#007b92",
+            "value": "#2b8697",
             "referencedVariable": "$teal.40"
           },
           "50": {
             "type": "color",
-            "value": "#005f70",
+            "value": "#206a77",
             "referencedVariable": "$teal.50"
           },
           "60": {
@@ -437,22 +444,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#c8dfff",
+            "value": "#d8e5fb",
             "referencedVariable": "$blue.20"
           },
           "30": {
             "type": "color",
-            "value": "#4386e0",
+            "value": "#488cff",
             "referencedVariable": "$blue.30"
           },
           "40": {
             "type": "color",
-            "value": "#366eb8",
+            "value": "#066cff",
             "referencedVariable": "$blue.40"
           },
           "50": {
             "type": "color",
-            "value": "#2a548d",
+            "value": "#0154cc",
             "referencedVariable": "$blue.50"
           },
           "60": {
@@ -479,22 +486,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#e3d7fa",
+            "value": "#e5e1f9",
             "referencedVariable": "$purple.20"
           },
           "30": {
             "type": "color",
-            "value": "#9671d4",
+            "value": "#9973f8",
             "referencedVariable": "$purple.30"
           },
           "40": {
             "type": "color",
-            "value": "#7c5daf",
+            "value": "#8747f7",
             "referencedVariable": "$purple.40"
           },
           "50": {
             "type": "color",
-            "value": "#5f4786",
+            "value": "#6f1bdb",
             "referencedVariable": "$purple.50"
           },
           "60": {
@@ -521,22 +528,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#ffd1df",
+            "value": "#fbdbe5",
             "referencedVariable": "$pink.20"
           },
           "30": {
             "type": "color",
-            "value": "#d85e8a",
+            "value": "#ff1593",
             "referencedVariable": "$pink.30"
           },
           "40": {
             "type": "color",
-            "value": "#b24d71",
+            "value": "#d8027b",
             "referencedVariable": "$pink.40"
           },
           "50": {
             "type": "color",
-            "value": "#873a56",
+            "value": "#ac0261",
             "referencedVariable": "$pink.50"
           },
           "60": {
@@ -563,22 +570,22 @@
           },
           "20": {
             "type": "color",
-            "value": "#ecd6f6",
+            "value": "#ecdff3",
             "referencedVariable": "$tor-window.20"
           },
           "30": {
             "type": "color",
-            "value": "#ab6cc8",
+            "value": "#b46dd8",
             "referencedVariable": "$tor-window.30"
           },
           "40": {
             "type": "color",
-            "value": "#8d58a4",
+            "value": "#9e50c3",
             "referencedVariable": "$tor-window.40"
           },
           "50": {
             "type": "color",
-            "value": "#6c437e",
+            "value": "#7d3e9b",
             "referencedVariable": "$tor-window.50"
           },
           "60": {
@@ -611,8 +618,8 @@
           },
           "strong": {
             "type": "color",
-            "value": "#5e5e62",
-            "referencedVariable": "$neutral.50"
+            "value": "#e4e4e5",
+            "referencedVariable": "$neutral.20"
           },
           "subtle-container": {
             "type": "color",
@@ -640,10 +647,17 @@
             "value": "#f2f2f3",
             "referencedVariable": "$schemes.surface-container"
           },
-          "container-interactive": {
-            "type": "color",
-            "value": "#2e3752",
-            "referencedVariable": "$search.primary.10"
+          "interactive": {
+            "normal": {
+              "type": "color",
+              "value": "#272f55",
+              "referencedVariable": "$primitive.primary.25"
+            },
+            "pale": {
+              "type": "color",
+              "value": "#303a68",
+              "referencedVariable": "$primitive.primary.30"
+            }
           },
           "highlight": {
             "type": "color",
