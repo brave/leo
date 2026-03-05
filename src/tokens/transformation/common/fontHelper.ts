@@ -9,8 +9,7 @@ export const isSFPro = (name: string) =>
     name
   )
 
-export const isSFMono = (name: string) =>
-  /^(SF Mono|SFMono)$/i.test(name)
+export const isSFMono = (name: string) => /^(SF Mono|SFMono)$/i.test(name)
 
 export const fontFamily = (
   { fontFamily },
@@ -22,7 +21,11 @@ export const fontFamily = (
   return resolved
 }
 
-export const androidFontFamily = ({ fontFamily: name }: { fontFamily: string }) => {
+export const androidFontFamily = ({
+  fontFamily: name
+}: {
+  fontFamily: string
+}) => {
   if (isSFPro(name)) return 'Google Sans Flex'
   if (isSFMono(name)) return 'Google Sans Code'
   return name
