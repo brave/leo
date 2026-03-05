@@ -35,7 +35,7 @@
 <div
   class="leo-alert {currentType} size-{size}"
   class:toast={isToast}
-  class:thin={isInlineActions}
+  class:inline-actions={isInlineActions}
 >
   {#if !hideIcon}
   <div class="icon">
@@ -147,11 +147,11 @@
       grid-column: main;
     }
 
-    &.thin {
+    &.inline-actions {
       align-items: center;
 
       .actions {
-        grid-column: main-end; // Actions when `.thin` should always be after the `main` content
+        grid-column: main-end; // Actions for `.inline-actions` should always be after the `main` content
       }
 
       // If both `actions` and `content-after` exist, we have to add at least an explicit track for content-after since -1 doesn't work for implicit tracks

@@ -193,7 +193,7 @@
       <input type="checkbox" bind:checked={hasAction} />
     </label>
     <label>
-      Is "thin"
+      Is "inlineActions"
       <input type="checkbox" bind:checked={isInlineActions} />
     </label>
     <label>
