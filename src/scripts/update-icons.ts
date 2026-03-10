@@ -109,6 +109,7 @@ const mutateIcon = (iconName) => {
     multipass: true,
     plugins: [
       'preset-default',
+      'removeTitle',
       'removeDimensions',
       {
         name: 'banRasterImageElement',
@@ -127,7 +128,7 @@ const mutateIcon = (iconName) => {
         })
       },
       'removeOffCanvasPaths',
-      'removeScriptElement'
+      'removeScripts'
     ]
   })
 
