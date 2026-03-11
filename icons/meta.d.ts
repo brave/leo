@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1769563798830,
+  "updatedAt": 1772957710070,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -244,6 +244,7 @@ const meta = {
     "brave-icon-dev-color": "brave-icon-dev-color",
     "brave-icon-monochrome": "brave-icon-monochrome",
     "brave-icon-nightly-color": "brave-icon-nightly-color",
+    "brave-icon-only-face-disabled": "brave-icon-only-face-disabled",
     "brave-icon-only-face": "brave-icon-only-face",
     "brave-icon-outline": "brave-icon-outline",
     "brave-icon-release-color": "brave-icon-release-color",
@@ -1171,6 +1172,7 @@ const meta = {
     "ins-color": "ins-color",
     "inside": "inside",
     "instacart-color": "instacart-color",
+    "internet-archive": "internet-archive",
     "internet-block": "internet-block",
     "internet-connect": "internet-connect",
     "internet-location": "internet-location",
@@ -1207,6 +1209,7 @@ const meta = {
     "key-lock": "key-lock",
     "key": "key",
     "keyboard": "keyboard",
+    "kimi-color": "kimi-color",
     "kin-color": "kin-color",
     "klown-color": "klown-color",
     "kmd-color": "kmd-color",
@@ -1912,6 +1915,7 @@ const meta = {
     "stq-color": "stq-color",
     "strat-color": "strat-color",
     "strike": "strike",
+    "stripe-color": "stripe-color",
     "stx-color": "stx-color",
     "sub-color": "sub-color",
     "sumo-color": "sumo-color",
