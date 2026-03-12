@@ -17,11 +17,7 @@ export default {
   extensions: ['.svelte'],
   preprocess: sveltePreprocess({
     postcss: {
-      plugins: [
-        themePlugin({
-          wrapSelector: (selector) => `:global(${selector})`
-        })
-      ]
+      plugins: [themePlugin()]
     }
   }),
   onwarn
