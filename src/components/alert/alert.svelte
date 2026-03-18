@@ -69,8 +69,8 @@
     display: block;
   }
 
-  :global(.leo-alert .actions > *),
-  .leo-alert .actions ::slotted(*) {
+  .leo-alert .actions > :global(*),
+  .leo-alert .actions :global(::slotted(*)) {
     display: flex;
     flex-direction: row;
     gap: var(--leo-spacing-m);

@@ -165,12 +165,12 @@
    * however for webcomponents, we don't need to check for this, so we special
    * case the selector with :host. */
   :host .leo-dialog.hasActions,
-  .leo-dialog.hasActions:has([slot='actions']:not(:empty)) {
+  .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
-  .leo-dialog.hasHeader.hasActions:has(.actions [slot='actions']:not(:empty)) {
+  .leo-dialog.hasHeader.hasActions:has(.actions :global([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto auto;
   }
 
@@ -245,12 +245,12 @@
   }
 
   :host .leo-dialog .actions .body,
-  .leo-dialog.hasActions:has([slot='actions']:not(:empty)) .body {
+  .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) .body {
     padding-bottom: 0;
   }
 
   :host .leo-dialog .actions,
-  .leo-dialog .actions:has([slot='actions']:not(:empty)) {
+  .leo-dialog .actions:has(:global([slot=actions]:not(:empty))) {
     background: var(--background);
     padding: var(--padding);
   }
@@ -263,8 +263,8 @@
     *
     * The :global selector doesn't seem to be able to handle nesting, so we have
     * two separate selectors for mobile & non-mobile layouts */
-  :global(.leo-dialog .actions ::slotted(*)),
-  :global(.leo-dialog .actions [slot='actions']:not(:empty)) {
+  .leo-dialog .actions :global(::slotted(*)),
+  .leo-dialog .actions :global([slot='actions']:not(:empty)) {
     display: flex;
     gap: var(--leo-spacing-xl);
     flex-direction: column;
