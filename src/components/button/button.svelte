@@ -27,27 +27,17 @@
     onClick?: (e: MouseEvent) => void;
   }
 
-  type ButtonHTMLAttributes = Pick<
-    SvelteHTMLElements['button'],
-    'id' | 'class' | 'style' | 'disabled' | 'type' | 'aria-label'
-  >;
-
-  type LinkHTMLAttributes = Pick<
-    SvelteHTMLElements['a'],
-    'id' | 'class' | 'style' | 'target' | 'rel' | 'aria-label'
-  >;
-
   type NalaButtonProps = CommonProps & {
     isDisabled?: Disabled
     isLoading?: Loading
     href?: never
-  } & Partial<ButtonHTMLAttributes>;
+  } & Omit<SvelteHTMLElements['button'], 'children'>;
 
   type NalaLinkProps = CommonProps & {
-    href: string | undefined;
+    href: Href;
     isDisabled?: never;
     isLoading?: never;
-  } & Partial<LinkHTMLAttributes>;
+  } & Omit<SvelteHTMLElements['a'], 'children'>;
 
   type $$Props = NalaButtonProps | NalaLinkProps;
 

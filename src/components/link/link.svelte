@@ -2,7 +2,7 @@
   import type { SvelteHTMLElements } from 'svelte/elements'
 
   type Href = $$Generic<string | undefined>
-  type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang'
+  type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang' | 'children'
 
   interface CommonNalaLinkProps {
     isDisabled?: boolean

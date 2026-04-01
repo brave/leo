@@ -16,7 +16,7 @@
   import Icon from '../icon/icon.svelte'
   import  { onMount } from 'svelte'
 
-  type OverrideProps = 'type' | 'value' | 'size' | 'class' | `on:${string}`
+  type OverrideProps = 'type' | 'value' | 'size' | 'class' | 'children' | `on:${string}`
   type LeoInputTypeAttribute =
     | 'color'
     | 'date'

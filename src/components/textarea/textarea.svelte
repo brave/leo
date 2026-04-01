@@ -11,7 +11,7 @@
   import type { SvelteHTMLElements } from 'svelte/elements'
   import FormItem, { type Mode } from '../formItem/formItem.svelte'
 
-  type OverrideProps = 'value' | 'class' | `on:${string}`
+  type OverrideProps = 'value' | 'class' | 'children' | `on:${string}`
 
   /**
    * We probably don't need to provide `size` for the textarea. We aren't

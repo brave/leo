@@ -19,7 +19,7 @@
   // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
-  type ExcludedProps = 'size' | 'href' | 'hreflang'
+  type ExcludedProps = 'size' | 'href' | 'hreflang' | 'children'
 
   type CommonProps = {
     outsideList?: boolean

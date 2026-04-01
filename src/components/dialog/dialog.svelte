@@ -4,7 +4,7 @@
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
 
-  type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open'> & {
+  type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open' | 'children'> & {
     isOpen?: boolean
     modal?: boolean
     showClose?: boolean

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
 
-  type $$Props = SvelteHTMLElements['ul']
+  type $$Props = Omit<SvelteHTMLElements['ul'], 'children'>
 
   let isSubnav = $$props.slot === 'subnav'
 </script>
