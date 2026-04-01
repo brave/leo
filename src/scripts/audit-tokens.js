@@ -3,6 +3,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { parseArgs } from 'util'
 import { walk } from './common.js'
 
 const tokenRegex = /--leo-([a-zA-Z0-9]|-)+/gi
@@ -127,13 +128,14 @@ const getAvailableTokens = async () => {
 /**
  * Checks a folder to see if any files in it reference non-existent Leo tokens
  * @param {string} folder The folder to check for unknown Leo tokens
+ * @param {string[]} extraIgnore Additional path segments to ignore
  */
-const checkFolder = async (folder) => {
+const checkFolder = async (folder, extraIgnore = []) => {
   const availableTokens = await getAvailableTokens()
   const usedTokens = await extractTokensFromFolder(
     folder,
     DEFAULT_EXTENSIONS_TO_CHECK,
-    IGNORE
+    [...IGNORE, ...extraIgnore]
   )
 
   const missingTokens = Object.entries(
@@ -164,4 +166,8 @@ ${usages.map((u) => `    ${u}`).join('\n')}`
   console.log('Success!')
 }
 
-checkFolder(process.cwd())
+const { values } = parseArgs({
+  options: { ignore: { type: 'string', multiple: true, short: 'i' } }
+})
+
+checkFolder(process.cwd(), values.ignore ?? [])
