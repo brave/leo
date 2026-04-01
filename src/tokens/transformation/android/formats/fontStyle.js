@@ -1,5 +1,6 @@
 import StyleDictionary from 'style-dictionary'
 import { pascalCase, snakeCase } from 'change-case'
+import { androidFontFamily } from '../../common/fontHelper'
 const { fileHeader } = StyleDictionary.formatHelpers
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
@@ -21,7 +22,7 @@ export default ({ dictionary, platform, options = {}, file }) => {
         )}">\n` +
         printDescription(compositeToken.description) +
         `    <item name="android:fontFamily">@font/${snakeCase(
-          compositeToken.original.value.fontFamily
+          androidFontFamily(compositeToken.original.value)
         )}</item>\n` +
         `    <item name="android:textSize">@dimen/${snakeCase(
           compositeToken.name.replace('font_android_', '')
