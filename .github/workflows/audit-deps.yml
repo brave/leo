@@ -23,5 +23,4 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
 
       - if: ${{ github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]' }}
-        run: |
-          npm audit
+        run: npm run audit_deps
