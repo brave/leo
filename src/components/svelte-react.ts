@@ -26,17 +26,15 @@ export type SvelteProps<T> =
 
 // We introduce a custom ref type as some of the Svelte type definitions don't
 // play nice with React.ForwardRef.
-type Ref<T> =
-  | ((ref: (Omit<HTMLElement, keyof T> & T) | null) => void)
+// Note: We use the extends { contenteditable?: any } to check whether the component
+// already accepts all the HTMLElement props (as otherwise they can resolve to never
+// when &'d with the props).
+type Ref<T, Props = T extends { contenteditable?: any } ? T : T & HTMLElement> =
+  | ((ref: Props) => void)
   | {
-      current:
-        | HTMLElement
-        | Partial<T>
-        | (Omit<HTMLElement, keyof T> & T)
-        | undefined
-        | null
+      current: Props | null | undefined | Partial<Props>
     }
-export type ReactProps<Props> = Props & {
+export type ReactProps<Props> = Omit<Props, 'children'> & {
   ref?: Ref<Props>
   slot?: string
 } & {
