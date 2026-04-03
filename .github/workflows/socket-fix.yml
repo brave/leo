@@ -49,16 +49,40 @@ jobs:
         run: |
           if ! git diff --quiet; then
             BRANCH="socket-fix/$(echo "$GHSA_IDS" | tr ', ' '-' | tr -s '-' | cut -c1-60)"
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git checkout -b "$BRANCH"
-            git add -A
-            git commit -m "fix: address security advisories"
-            git push origin "$BRANCH"
+            BASE_SHA="$(gh api "/repos/$GITHUB_REPOSITORY/git/refs/heads/main" --jq '.object.sha')"
+            CHANGED_FILES=$(git diff --name-only)
+            NEW_FILES=$(git ls-files --others --exclude-standard)
+            TREE_ITEMS="[]"
+            for FILE in $CHANGED_FILES $NEW_FILES; do
+              if [ -f "$FILE" ]; then
+                BLOB_SHA=$(gh api --method POST "/repos/$GITHUB_REPOSITORY/git/blobs" \
+                  --field content="$(base64 -w0 < "$FILE")" \
+                  --field encoding="base64" \
+                  --jq '.sha')
+                TREE_ITEMS=$(echo "$TREE_ITEMS" | jq --arg path "$FILE" --arg sha "$BLOB_SHA" \
+                  '. + [{"path": $path, "mode": "100644", "type": "blob", "sha": $sha}]')
+              else
+                TREE_ITEMS=$(echo "$TREE_ITEMS" | jq --arg path "$FILE" \
+                  '. + [{"path": $path, "mode": "100644", "type": "blob", "sha": null}]')
+              fi
+            done
+            TREE_SHA=$(jq -n --arg base_tree "$BASE_SHA" --argjson tree "$TREE_ITEMS" \
+              '{base_tree: $base_tree, tree: $tree}' \
+            | gh api --method POST "/repos/$GITHUB_REPOSITORY/git/trees" --input - --jq '.sha')
+            COMMIT_SHA=$(jq -n \
+              --arg message "fix: address security advisories" \
+              --arg tree "$TREE_SHA" \
+              --arg parent "$BASE_SHA" \
+              '{message: $message, tree: $tree, parents: [$parent], author: {name: "brave-builds", email: "devops@brave.com"}}' \
+            | gh api --method POST "/repos/$GITHUB_REPOSITORY/git/commits" --input - --jq '.sha')
+            gh api --method POST "/repos/$GITHUB_REPOSITORY/git/refs" \
+              --field ref="refs/heads/$BRANCH" \
+              --field sha="$COMMIT_SHA"
             gh pr create \
               --title "fix: address security advisories" \
               --body "Addresses: $GHSA_IDS" \
-              --base main
+              --base main \
+              --head "$BRANCH"
           else
             echo "::error::No changes produced by socket fix."
             exit 1
