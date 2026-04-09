@@ -6,7 +6,7 @@
       interface IntrinsicElements {
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
-          children?: string | Element[]
+          children?: string | Element[] | Element
           onClick?: EventListener
         }
       }

@@ -9,7 +9,7 @@
           key?: string | number | null
 
           value?: string
-          children?: string | Element[]
+          children?: string | Element[] | Element
         }
       }
     }

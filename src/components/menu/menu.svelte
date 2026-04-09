@@ -7,13 +7,13 @@
           // Note: This should line up with Reacts key type, but we don't want
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
-          children?: string | Element[]
+          children?: string | Element[] | Element
           onClick?: EventListener
         }
         'leo-option': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           value?: string
-          children?: string | Element[]
+          children?: string | Element[] | Element
         }
         'leo-menu-section': HTMLAttributes<HTMLElement> & {
           key?: string | number | null

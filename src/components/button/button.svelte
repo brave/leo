@@ -3,23 +3,6 @@
   import type * as Props from './props'
   import ProgressRing from '../progress/progressRing.svelte'
 
-  // This black magic comes from this thread:
-  // https://github.com/sveltejs/language-tools/issues/442#issuecomment-1278618531
-  //
-  // To quote that thread - This is "absolute bonkers!"
-  //
-  // It's interesting, minor variations which I would expect to work on don't,
-  // and this is the only combination which seems to do what we want and I'm not
-  // clear on why. You're welcome to try other approaches here.
-  //
-  // Tips, for if things aren't working right:
-  // 1) npm run gen-types
-  // 2) Reload your VSCode Window (sometimes the Svelte Type Checker struggles).
-  // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
-  type Href = $$Generic<string | undefined>
-  type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
-  type Loading = $$Generic<undefined extends Href ? boolean : undefined>
-
   interface CommonProps {
     kind?: Props.ButtonKind;
     size?: Props.ButtonSize;
@@ -28,24 +11,24 @@
   }
 
   type NalaButtonProps = CommonProps & {
-    isDisabled?: Disabled
-    isLoading?: Loading
-    href?: never
-  } & Omit<SvelteHTMLElements['button'], 'children'>;
+    isDisabled?: boolean;
+    isLoading?: boolean;
+    href?: never;
+  } & Omit<JSX.IntrinsicElements['button'], 'children'>;
 
   type NalaLinkProps = CommonProps & {
-    href: Href;
+    href: string;
     isDisabled?: never;
     isLoading?: never;
-  } & Omit<SvelteHTMLElements['a'], 'children'>;
+  } & Omit<JSX.IntrinsicElements['a'], 'children'>;
 
   type $$Props = NalaButtonProps | NalaLinkProps;
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
-  export let isLoading: Loading = undefined
-  export let isDisabled: Disabled = undefined
-  export let href: Href = undefined
+  export let isLoading: boolean | undefined = undefined
+  export let isDisabled: boolean | undefined = undefined
+  export let href: string | undefined = undefined
   export let fab = false
 
   export let onClick: (e: MouseEvent) => void = undefined
