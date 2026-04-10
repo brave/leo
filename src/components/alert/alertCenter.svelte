@@ -107,7 +107,7 @@
   export let size: Size = 'default'
 
   $: style = `${position.includes('right') ? 'right' : 'left'}: ${
-    position.includes('center') ? 'calc(50% - (var(--width) / 2))' : '0'
+    position.includes('center') ? '50%; transform: translateX(-50%)' : '0'
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
 </script>
 
