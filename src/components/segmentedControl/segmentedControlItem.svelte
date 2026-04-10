@@ -56,5 +56,9 @@
     & .content {
       padding: 0 var(--leo-segmented-control-item-icon-gap);
     }
+
+    &:focus-visible {
+      --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
+    }
   }
 </style>
