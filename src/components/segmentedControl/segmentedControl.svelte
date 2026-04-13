@@ -181,11 +181,6 @@
       --leo-segmented-control-item-color: var(--leo-color-text-primary);
     }
 
-    :where(&) > :global(.leo-segmented-control-item:focus-visible),
-    :where(&) > :global(::slotted(leo-segmentedcontrolitem:focus-visible)) {
-      --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
-    }
-
     :where(&) > :global(.leo-segmented-control-item[aria-selected]),
     :where(&) > :global(::slotted(leo-segmentedcontrolitem[aria-selected])) {
       --leo-segmented-control-item-color: var(--leo-color-text-interactive);
