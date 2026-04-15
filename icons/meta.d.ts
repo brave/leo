@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1775671472256,
+  "updatedAt": 1776264873195,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1455,6 +1455,7 @@ const meta = {
     "ont-color": "ont-color",
     "oot-color": "oot-color",
     "op-color": "op-color",
+    "open-in-tab": "open-in-tab",
     "open-sign": "open-sign",
     "openai-color": "openai-color",
     "openai": "openai",
@@ -2133,6 +2134,7 @@ const meta = {
     "window-tab-tor": "window-tab-tor",
     "window-tab": "window-tab",
     "window-tabs-horizontal": "window-tabs-horizontal",
+    "window-tabs-vertical-collapsed": "window-tabs-vertical-collapsed",
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
     "window-tabs": "window-tabs",
     "window-task-manager": "window-task-manager",
