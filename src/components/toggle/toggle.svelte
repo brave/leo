@@ -6,16 +6,20 @@
 </script>
 
 <script lang="ts">
+  import { onDestroy } from 'svelte'
+
   export let checked: boolean = false
   export let disabled: boolean = false
   export let size: Sizes = 'medium'
   export let onChange: (detail: { checked: boolean }) => void = undefined
 
-  let thumb: HTMLElement
+  let buttonEl: HTMLButtonElement
 
   let handledClick = false
   let dragStartX: number | undefined
   let dragOffsetX: number = 0
+  let activePointerId: number | undefined
+  let documentDragListenersActive = false
 
   const change = (newValue?: boolean) => {
     if (newValue === undefined) newValue = !checked
@@ -23,9 +27,88 @@
     onChange?.({ checked: newValue })
   }
 
-  function finishDrag() {
-    // If we didn't receive a mouse down, there's nothing to do.
+  function startDocumentDragListeners() {
+    if (documentDragListenersActive) return
+    documentDragListenersActive = true
+    document.addEventListener('pointermove', handlePointerMoveDuringDrag)
+    document.addEventListener('pointerup', handlePointerUpDuringDrag)
+    document.addEventListener('pointercancel', handlePointerUpDuringDrag)
+  }
+
+  function stopDocumentDragListeners() {
+    if (!documentDragListenersActive) return
+    documentDragListenersActive = false
+    document.removeEventListener('pointermove', handlePointerMoveDuringDrag)
+    document.removeEventListener('pointerup', handlePointerUpDuringDrag)
+    document.removeEventListener('pointercancel', handlePointerUpDuringDrag)
+  }
+
+  function handlePointerMoveDuringDrag(e: PointerEvent) {
     if (dragStartX === undefined) return
+    if (activePointerId !== undefined && e.pointerId !== activePointerId) return
+
+    dragOffsetX = e.clientX - dragStartX
+
+    if (document.documentElement.dir === 'rtl') dragOffsetX = -dragOffsetX
+
+    // The pointer was released but we didn't get pointerup yet
+    if (e.buttons === 0) {
+      finishDrag()
+    }
+  }
+
+  function handlePointerUpDuringDrag(e: PointerEvent) {
+    if (dragStartX === undefined) return
+    if (activePointerId !== undefined && e.pointerId !== activePointerId) return
+    finishDrag()
+  }
+
+  function onPointerDown(e: PointerEvent) {
+    if (disabled || e.button !== 0 || !e.isPrimary) return
+
+    e.stopPropagation()
+
+    handledClick = true
+    dragStartX = e.clientX
+    activePointerId = e.pointerId
+
+    let captureOk = false
+    if (buttonEl?.setPointerCapture) {
+      try {
+        buttonEl.setPointerCapture(e.pointerId)
+        captureOk = true
+      } catch {
+        captureOk = false
+      }
+    }
+    if (!captureOk) {
+      startDocumentDragListeners()
+    }
+  }
+
+  function onMouseDownStop(e: MouseEvent) {
+    if (!disabled && e.button === 0) {
+      e.stopPropagation()
+    }
+  }
+
+  function finishDrag() {
+    // If we didn't receive a pointer down, there's nothing to do.
+    if (dragStartX === undefined) return
+
+    stopDocumentDragListeners()
+
+    const pid = activePointerId
+    if (buttonEl && pid != null) {
+      try {
+        if (buttonEl.hasPointerCapture(pid)) {
+          buttonEl.releasePointerCapture(pid)
+        }
+      } catch {
+        // ignore
+      }
+    }
+    activePointerId = undefined
 
     // If we didn't drag just toggle the state.
     if (dragOffsetX === 0) {
@@ -39,31 +122,33 @@
     dragStartX = undefined
     dragOffsetX = 0
   }
-</script>
 
-<svelte:window
-  on:mouseup={finishDrag}
-  on:mousemove={(e) => {
-    if (dragStartX === undefined) return
-    dragOffsetX = e.clientX - dragStartX
-
-    if (document.documentElement.dir === 'rtl') dragOffsetX = -dragOffsetX
-
-    // The mouse was released but we didn't get a mouseup event
-    if (e.buttons === 0) {
-      finishDrag()
+  onDestroy(() => {
+    stopDocumentDragListeners()
+    const pid = activePointerId
+    if (buttonEl && pid != null) {
+      try {
+        if (buttonEl.hasPointerCapture(pid)) {
+          buttonEl.releasePointerCapture(pid)
+        }
+      } catch {
+        // ignore
+      }
     }
-  }}
-/>
+    dragStartX = undefined
+    dragOffsetX = 0
+    activePointerId = undefined
+  })
+</script>
 
 <label class={`leo-toggle size-${size}`}>
   <button
-    on:mousedown={(e) => {
-      if (disabled || e.button !== 0) return
-
-      handledClick = true
-      dragStartX = e.clientX
-    }}
+    bind:this={buttonEl}
+    on:pointerdown={onPointerDown}
+    on:pointermove={handlePointerMoveDuringDrag}
+    on:pointerup={handlePointerUpDuringDrag}
+    on:pointercancel={handlePointerUpDuringDrag}
+    on:mousedown={onMouseDownStop}
     on:click|stopPropagation={(e) => {
       if (handledClick || disabled) {
         handledClick = false
@@ -77,7 +162,6 @@
     aria-checked={checked}
   >
     <div
-      bind:this={thumb}
       class="thumb"
       class:dragging={!!dragOffsetX}
       aria-hidden="true"
