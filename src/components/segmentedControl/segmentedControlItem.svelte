@@ -35,7 +35,7 @@
     color: var(--leo-segmented-control-item-color);
     font: var(--leo-segmented-control-item-font);
     background: var(--leo-segmented-control-item-background);
-    box-shadow: var(--leo-segmented-control-item-shadow);
+    box-shadow: var(--item-shadow);
     position: relative;
     z-index: 10;
 
@@ -58,7 +58,7 @@
     }
 
     &:focus-visible {
-      --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
+      --item-shadow: var(--leo-segmented-control-item-focus-shadow);
     }
   }
 </style>

@@ -125,6 +125,7 @@
     --leo-segmented-control-item-padding: var(--leo-spacing-l);
     --leo-segmented-control-item-icon-gap: var(--leo-spacing-m);
     --leo-segmented-control-item-font: var(--leo-font-components-button-default);
+    --leo-segmented-control-item-focus-shadow: var(--leo-effect-focus-state);
 
     display: flex;
     min-width: max-content;
