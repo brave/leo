@@ -17,22 +17,44 @@ it('Converts the base case', async () => {
       flex-direction: column;
     }
   }`,
-    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
-  }
-
-  :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-    --\\.component_background: pink;
-    --\\.component_flex-direction: row;
-  }
+}
 
   @media (prefers-color-scheme: dark) {
-    :root {
-      --\\.component_background: pink;
-      --\\.component_flex-direction: row;
+
+    :global(.component) {
+        --\\.component_background: pink;
+        --\\.component_flex-direction: row;
     }
-  }
+}
+
+  :global([data-theme="light"]) {
+    --\\.component_background: red;
+    --\\.component_flex-direction: column;
+}
+
+  :global([data-theme="dark"]) {
+    --\\.component_background: pink;
+    --\\.component_flex-direction: row;
+}
+
+  @container style(--leo-theme: light) {
+
+    :global(.component) {
+        --\\.component_background: red;
+        --\\.component_flex-direction: column;
+    }
+}
+
+  @container style(--leo-theme: dark) {
+
+    :global(.component) {
+        --\\.component_background: pink;
+        --\\.component_flex-direction: row;
+    }
+}
 
   .component {
     padding: 12px;
@@ -59,22 +81,44 @@ it('Selectors can be overridden', async () => {
       flex-direction: column;
     }
   }`,
-    `:root, :root.light, .light {
+    `:global(:root) {
     --\\.component_background: red;
     --\\.component_flex-direction: column;
-  }
-
-  :root.dark, .dark {
-    --\\.component_background: pink;
-    --\\.component_flex-direction: row;
-  }
+}
 
   @media (prefers-color-scheme: dark) {
-    :root {
-      --\\.component_background: pink;
-      --\\.component_flex-direction: row;
+
+    :global(.component) {
+        --\\.component_background: pink;
+        --\\.component_flex-direction: row;
     }
-  }
+}
+
+  :global([data-theme="light"]) {
+    --\\.component_background: red;
+    --\\.component_flex-direction: column;
+}
+
+  :global([data-theme="dark"]) {
+    --\\.component_background: pink;
+    --\\.component_flex-direction: row;
+}
+
+  @container style(--leo-theme: light) {
+
+    :global(.component) {
+        --\\.component_background: red;
+        --\\.component_flex-direction: column;
+    }
+}
+
+  @container style(--leo-theme: dark) {
+
+    :global(.component) {
+        --\\.component_background: pink;
+        --\\.component_flex-direction: row;
+    }
+}
 
   .component {
     padding: 12px;
@@ -82,7 +126,7 @@ it('Selectors can be overridden', async () => {
     background: var(--\\.component_background);
     flex-direction: var(--\\.component_flex-direction);
   }`,
-    { lightSelector: '.light', darkSelector: '.dark' }
+    {}
   )
 })
 
@@ -95,27 +139,40 @@ it('Handles no dark mode', async () => {
       color: white;
     }
   }`,
-    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
     --\\.component_background: red;
-    --\\.component_color: white;
-  }
-
-  :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-    --\\.component_background: unset;
-    --\\.component_color: unset;
-  }
-
-  @media (prefers-color-scheme: dark) {
-      :root {
+    --\\.component_color: white
+}
+@media (prefers-color-scheme: dark) {
+    :global(.component) {
         --\\.component_background: unset;
-        --\\.component_color: unset;
-      }
-  }
-
-  .component {
-      background: var(--\\.component_background);
-      color: var(--\\.component_color);
-  }`,
+        --\\.component_color: unset
+    }
+}
+:global([data-theme="light"]) {
+    --\\.component_background: red;
+    --\\.component_color: white
+}
+:global([data-theme="dark"]) {
+    --\\.component_background: unset;
+    --\\.component_color: unset
+}
+@container style(--leo-theme: light) {
+    :global(.component) {
+        --\\.component_background: red;
+        --\\.component_color: white
+    }
+}
+@container style(--leo-theme: dark) {
+    :global(.component) {
+        --\\.component_background: unset;
+        --\\.component_color: unset
+    }
+}
+.component {
+    background: var(--\\.component_background);
+    color: var(--\\.component_color)
+}`,
     {}
   )
 })
@@ -132,26 +189,48 @@ it('Converts lightmode only properties', async () => {
       color: white;
     }
   }`,
-    `:root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
     --\\.component_background: red;
     --\\.component_color: white;
-  }
-
-  :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-    --\\.component_background: pink;
-    --\\.component_color: unset;
-  }
+}
 
   @media (prefers-color-scheme: dark) {
-      :root {
+
+    :global(.component) {
         --\\.component_background: pink;
         --\\.component_color: unset;
-      }
-  }
+    }
+}
+
+  :global([data-theme="light"]) {
+    --\\.component_background: red;
+    --\\.component_color: white;
+}
+
+  :global([data-theme="dark"]) {
+    --\\.component_background: pink;
+    --\\.component_color: unset;
+}
+
+  @container style(--leo-theme: light) {
+
+    :global(.component) {
+        --\\.component_background: red;
+        --\\.component_color: white;
+    }
+}
+
+  @container style(--leo-theme: dark) {
+
+    :global(.component) {
+        --\\.component_background: pink;
+        --\\.component_color: unset;
+    }
+}
 
   .component {
-      background: var(--\\.component_background);
-      color: var(--\\.component_color);
+    background: var(--\\.component_background);
+    color: var(--\\.component_color);
   }`,
     {}
   )
@@ -169,20 +248,38 @@ it('Converts nested selectors', async () => {
         background: red;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_\\.foo_background: red;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_\\.foo_background: pink;
-    }
-    
+}
+
     @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_\\.foo_background: pink;
+
+      :global(.component .foo) {
+            --\\.component_\\.foo_background: pink;
       }
-    }
+}
+
+    :global([data-theme="light"]) {
+      --\\.component_\\.foo_background: red;
+}
+
+    :global([data-theme="dark"]) {
+      --\\.component_\\.foo_background: pink;
+}
+
+    @container style(--leo-theme: light) {
+
+      :global(.component .foo) {
+            --\\.component_\\.foo_background: red;
+      }
+}
+
+    @container style(--leo-theme: dark) {
+
+      :global(.component .foo) {
+            --\\.component_\\.foo_background: pink;
+      }
+}
 
     .component .foo {
       background: var(--\\.component_\\.foo_background);
@@ -202,20 +299,38 @@ it('Converts sibling selectors', async () => {
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_\\+_\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_\\+_\\.foo_background: red;
-    }
-    
+}
+
     @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_\\+_\\.foo_background: red;
+
+      :global(.component + .foo) {
+            --\\.component_\\+_\\.foo_background: red;
       }
-    }
+}
+
+    :global([data-theme="light"]) {
+      --\\.component_\\+_\\.foo_background: pink;
+}
+
+    :global([data-theme="dark"]) {
+      --\\.component_\\+_\\.foo_background: red;
+}
+
+    @container style(--leo-theme: light) {
+
+      :global(.component + .foo) {
+            --\\.component_\\+_\\.foo_background: pink;
+      }
+}
+
+    @container style(--leo-theme: dark) {
+
+      :global(.component + .foo) {
+            --\\.component_\\+_\\.foo_background: red;
+      }
+}
 
     .component + .foo {
       background: var(--\\.component_\\+_\\.foo_background);
@@ -235,20 +350,38 @@ it('Converts child selectors', async () => {
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_\\>_\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_\\>_\\.foo_background: red;
-    }
-    
+}
+
     @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_\\>_\\.foo_background: red;
+
+      :global(.component > .foo) {
+            --\\.component_\\>_\\.foo_background: red;
       }
-    }
+}
+
+    :global([data-theme="light"]) {
+      --\\.component_\\>_\\.foo_background: pink;
+}
+
+    :global([data-theme="dark"]) {
+      --\\.component_\\>_\\.foo_background: red;
+}
+
+    @container style(--leo-theme: light) {
+
+      :global(.component > .foo) {
+            --\\.component_\\>_\\.foo_background: pink;
+      }
+}
+
+    @container style(--leo-theme: dark) {
+
+      :global(.component > .foo) {
+            --\\.component_\\>_\\.foo_background: red;
+      }
+}
 
     .component > .foo {
       background: var(--\\.component_\\>_\\.foo_background);
@@ -268,20 +401,38 @@ it('Converts general sibling selectors', async () => {
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_\\~_\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_\\~_\\.foo_background: red;
-    }
-    
+}
+
     @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_\\~_\\.foo_background: red;
+
+      :global(.component ~ .foo) {
+            --\\.component_\\~_\\.foo_background: red;
       }
-    }
+}
+
+    :global([data-theme="light"]) {
+      --\\.component_\\~_\\.foo_background: pink;
+}
+
+    :global([data-theme="dark"]) {
+      --\\.component_\\~_\\.foo_background: red;
+}
+
+    @container style(--leo-theme: light) {
+
+      :global(.component ~ .foo) {
+            --\\.component_\\~_\\.foo_background: pink;
+      }
+}
+
+    @container style(--leo-theme: dark) {
+
+      :global(.component ~ .foo) {
+            --\\.component_\\~_\\.foo_background: red;
+      }
+}
 
     .component ~ .foo {
       background: var(--\\.component_\\~_\\.foo_background);
@@ -301,29 +452,58 @@ it('Converts multi selectors (dark and light same)', async () => {
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: pink;
-      --\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: red;
-      --\\.foo_background: red;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: red;
-        --\\.foo_background: red;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
       }
-    }
-
-    .component {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+:global(:root) {
+      --\\.foo_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.foo) {
+            --\\.foo_background: red;
+      }
+}
+:global([data-theme="light"]) {
+      --\\.foo_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.foo_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.foo) {
+            --\\.foo_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.foo) {
+            --\\.foo_background: red;
+      }
+}
+.component {
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       background: var(--\\.foo_background);
     }`
   )
@@ -342,30 +522,59 @@ it('Converts multi selectors (dark and light same, with remainder)', async () =>
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: pink;
-      --\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: red;
-      --\\.foo_background: red;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: red;
-        --\\.foo_background: red;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
       }
-    }
-
-    .component {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+:global(:root) {
+      --\\.foo_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.foo) {
+            --\\.foo_background: red;
+      }
+}
+:global([data-theme="light"]) {
+      --\\.foo_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.foo_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.foo) {
+            --\\.foo_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.foo) {
+            --\\.foo_background: red;
+      }
+}
+.component {
       padding: 12px;
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       padding: 12px;
       background: var(--\\.foo_background);
     }`
@@ -384,29 +593,58 @@ it('Converts multi selectors (light subset of dark)', async () => {
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: pink;
-      --\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: red;
-      --\\.foo_background: unset;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: red;
-        --\\.foo_background: unset;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
       }
-    }
-    
-    .foo {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+:global(:root) {
+      --\\.foo_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.foo) {
+            --\\.foo_background: unset;
+      }
+}
+:global([data-theme="light"]) {
+      --\\.foo_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.foo_background: unset;
+}
+@container style(--leo-theme: light) {
+      :global(.foo) {
+            --\\.foo_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.foo) {
+            --\\.foo_background: unset;
+      }
+}
+.foo {
       background: var(--\\.foo_background);
-    }
-
-    .component {
+}
+.component {
       background: var(--\\.component_background);
     }`
   )
@@ -425,29 +663,58 @@ it('Converts multi selectors (light subset of dark, with remainder)', async () =
         background: pink;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: pink;
-      --\\.foo_background: pink;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: red;
-      --\\.foo_background: unset;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: red;
-        --\\.foo_background: unset;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
       }
-    }
-    
-    .foo {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+:global(:root) {
+      --\\.foo_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.foo) {
+            --\\.foo_background: unset;
+      }
+}
+:global([data-theme="light"]) {
+      --\\.foo_background: pink;
+}
+:global([data-theme="dark"]) {
+      --\\.foo_background: unset;
+}
+@container style(--leo-theme: light) {
+      :global(.foo) {
+            --\\.foo_background: pink;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.foo) {
+            --\\.foo_background: unset;
+      }
+}
+.foo {
       background: var(--\\.foo_background);
-    }
-
-    .component {
+}
+.component {
       padding: 12px;
       background: var(--\\.component_background);
     }`
@@ -466,26 +733,34 @@ it('Converts multi selectors (light subset of dark)', async () => {
         background: white;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: white;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: red;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: red;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
       }
-    }
-
-    .component {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: white;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: red;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: white;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+.component {
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       background: red;
     }`
   )
@@ -504,27 +779,35 @@ it('Converts multi selectors (light subset of base, with remainder)', async () =
         background: red;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_background: red;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_background: pink;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --\\.component_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_background: pink;
       }
-    }
-
-    .component {
+}
+:global([data-theme="light"]) {
+      --\\.component_background: red;
+}
+:global([data-theme="dark"]) {
+      --\\.component_background: pink;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_background: red;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_background: pink;
+      }
+}
+.component {
       padding: 12px;
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       padding: 12px;
       background: pink;
     }`
@@ -537,37 +820,48 @@ it('Converts multi selectors (light subset of dark, with unset)', async () => {
     .component, .foo {
       background: pink;
     }
-    
+
     @theme (light) {
       .component {
         padding: 12px;
         background: red;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_padding: 12px;
       --\\.component_background: red;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_padding: unset;
-      --\\.component_background: pink;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-      --\\.component_padding: unset;
-      --\\.component_background: pink;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_padding: unset;
+            --\\.component_background: pink;
       }
-    }
-
-    .component {
+}
+:global([data-theme="light"]) {
+      --\\.component_padding: 12px;
+      --\\.component_background: red;
+}
+:global([data-theme="dark"]) {
+      --\\.component_padding: unset;
+      --\\.component_background: pink;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_padding: 12px;
+            --\\.component_background: red;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_padding: unset;
+            --\\.component_background: pink;
+      }
+}
+.component {
       padding: var(--\\.component_padding);
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       background: pink;
     }`
   )
@@ -580,49 +874,83 @@ it('Converts multi selectors (weird intersection)', async () => {
       margin: 8px;
       background: pink;
     }
-    
+
     @theme (light) {
       .component, .frob {
         padding: 12px;
         background: red;
       }
     }`,
-    `
-    :root, :root[data-theme][data-theme=light], [data-theme][data-theme=light] {
+    `:global(:root) {
       --\\.component_padding: 12px;
       --\\.component_background: red;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.component) {
+            --\\.component_padding: unset;
+            --\\.component_background: pink;
+      }
+}
+:global([data-theme="light"]) {
+      --\\.component_padding: 12px;
+      --\\.component_background: red;
+}
+:global([data-theme="dark"]) {
+      --\\.component_padding: unset;
+      --\\.component_background: pink;
+}
+@container style(--leo-theme: light) {
+      :global(.component) {
+            --\\.component_padding: 12px;
+            --\\.component_background: red;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.component) {
+            --\\.component_padding: unset;
+            --\\.component_background: pink;
+      }
+}
+:global(:root) {
       --\\.frob_padding: 12px;
       --\\.frob_background: red;
-    }
-    
-    :root[data-theme][data-theme=dark], [data-theme][data-theme=dark] {
-      --\\.component_padding: unset;
-      --\\.component_background: pink;
-      --\\.frob_padding: unset;
-      --\\.frob_background: unset;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-      --\\.component_padding: unset;
-      --\\.component_background: pink;
-      --\\.frob_padding: unset;
-      --\\.frob_background: unset;
+}
+@media (prefers-color-scheme: dark) {
+      :global(.frob) {
+            --\\.frob_padding: unset;
+            --\\.frob_background: unset;
       }
-    }
-
-    .frob {
+}
+:global([data-theme="light"]) {
+      --\\.frob_padding: 12px;
+      --\\.frob_background: red;
+}
+:global([data-theme="dark"]) {
+      --\\.frob_padding: unset;
+      --\\.frob_background: unset;
+}
+@container style(--leo-theme: light) {
+      :global(.frob) {
+            --\\.frob_padding: 12px;
+            --\\.frob_background: red;
+      }
+}
+@container style(--leo-theme: dark) {
+      :global(.frob) {
+            --\\.frob_padding: unset;
+            --\\.frob_background: unset;
+      }
+}
+.frob {
       padding: var(--\\.frob_padding);
       background: var(--\\.frob_background);
-    }
-
-    .component {
+}
+.component {
       margin: 8px;
       padding: var(--\\.component_padding);
       background: var(--\\.component_background);
     }
-    
-    .foo {
+.foo {
       margin: 8px;
       background: pink;
     }`
