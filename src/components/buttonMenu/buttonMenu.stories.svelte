@@ -10,10 +10,15 @@
       },
       '--leo-menu-max-height': {
         description: 'user controlled max height'
+      },
+      '--leo-min-menu-space': {
+        description: 'Minimum space for the popup',
+        type: 'string'
       }
     }
   }
 </script>
+
 <script lang="ts">
   import { Story, Template } from '@storybook/addon-svelte-csf'
 
@@ -29,7 +34,6 @@
   let controlledMenuOpen = false
 
   const handleAction = () => console.log('action')
-
 </script>
 
 <Template let:args>
