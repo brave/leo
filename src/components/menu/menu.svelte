@@ -209,9 +209,10 @@
 
   function applySizeMiddleware({ rects, availableHeight }) {
     if (!popup?.style) return
+    // Note: We need to set this here so we can flip the menu if there isn't enough room.
+    popup.style.minHeight = `min(${popup.scrollHeight}px, var(--leo-min-menu-space, 75px))`
     popup.style.maxHeight = `var(--leo-menu-max-height, calc(${availableHeight}px - var(--leo-spacing-xl)))`
   }
-
   let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
 </script>
 

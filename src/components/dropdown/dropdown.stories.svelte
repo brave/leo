@@ -9,6 +9,10 @@
       '--leo-menu-control-width': {
         description: '(readonly): Computed width of menu control'
       },
+      '--leo-min-menu-space': {
+        description: 'Minimum space for the popup',
+        type: 'string'
+      },
       size: {
         control: 'select',
         options: sizes
