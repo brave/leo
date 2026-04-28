@@ -6,7 +6,7 @@
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           children?: any
-          onClick?: EventListener
+          onClick?: (MouseEvent) => void
         }
       }
     }
@@ -53,8 +53,8 @@
     firing a `click` event. This may be triggered with a keypress or click.
   -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div 
-    bind:this={anchor} 
+  <div
+    bind:this={anchor}
     on:click={toggle}
     role="button"
     aria-haspopup="menu"
@@ -69,8 +69,8 @@
       {positionStrategy}
       {flip}
       {widthIsMaxWidth}
-      isOpen={isOpenInternal} 
-      target={anchor} 
+      isOpen={isOpenInternal}
+      target={anchor}
       onClose={close}
     >
       <slot />

@@ -20,7 +20,9 @@ function App() {
   const [spinning, setSpinning] = React.useState(false)
   const [isThing, setIsThing] = React.useState(false)
 
-  const handleAction = () => console.log('action')
+  const handleAction = (e: MouseEvent) => {
+    console.log('action, with meta key down?', e.metaKey)
+  }
 
   return (
     <>
