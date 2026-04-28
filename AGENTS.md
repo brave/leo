@@ -8,45 +8,45 @@ description: >-
   newtab) are mirrored versions of the same semantic structure and live in
   tokens/css/variables-*.css.
 colors:
-  primary: "#434fcf"
-  primary-container: "#dfe4f6"
-  on-primary: "#ffffff"
-  secondary: "#414379"
-  secondary-container: "#d7dbff"
-  tertiary: "#6c355b"
-  tertiary-container: "#f8d2ea"
-  error: "#9e0009"
-  error-container: "#fbddd8"
-  info: "#0154cc"
-  info-container: "#e9f3ff"
-  success: "#1c713d"
-  success-container: "#e8f6ec"
-  warning: "#745c00"
-  warning-container: "#fcf2d4"
-  surface: "#fafafb"
-  surface-container: "#f2f2f3"
-  surface-container-high: "#e8e8eb"
-  on-surface: "#1c1c1d"
-  on-surface-variant: "#464649"
-  page-background: "#fafafb"
-  container-background: "#ffffff"
-  container-highlight: "#f2f2f3"
-  container-interactive: "#eef2ff"
-  text-primary: "#1c1c1d"
-  text-secondary: "#464649"
-  text-tertiary: "#78787c"
-  text-interactive: "#434fcf"
-  text-disabled: "#21272a80"
-  icon-default: "#464649"
-  icon-interactive: "#434fcf"
-  icon-disabled: "#46464980"
-  divider-subtle: "#e4e4e5"
-  divider-strong: "#c9c9ca"
-  divider-interactive: "#bcc6f3"
-  button-background: "#434fcf"
-  button-disabled: "#46464933"
-  white: "#ffffff"
-  black: "#000000"
+  primary: '#434fcf'
+  primary-container: '#dfe4f6'
+  on-primary: '#ffffff'
+  secondary: '#414379'
+  secondary-container: '#d7dbff'
+  tertiary: '#6c355b'
+  tertiary-container: '#f8d2ea'
+  error: '#9e0009'
+  error-container: '#fbddd8'
+  info: '#0154cc'
+  info-container: '#e9f3ff'
+  success: '#1c713d'
+  success-container: '#e8f6ec'
+  warning: '#745c00'
+  warning-container: '#fcf2d4'
+  surface: '#fafafb'
+  surface-container: '#f2f2f3'
+  surface-container-high: '#e8e8eb'
+  on-surface: '#1c1c1d'
+  on-surface-variant: '#464649'
+  page-background: '#fafafb'
+  container-background: '#ffffff'
+  container-highlight: '#f2f2f3'
+  container-interactive: '#eef2ff'
+  text-primary: '#1c1c1d'
+  text-secondary: '#464649'
+  text-tertiary: '#78787c'
+  text-interactive: '#434fcf'
+  text-disabled: '#21272a80'
+  icon-default: '#464649'
+  icon-interactive: '#434fcf'
+  icon-disabled: '#46464980'
+  divider-subtle: '#e4e4e5'
+  divider-strong: '#c9c9ca'
+  divider-interactive: '#bcc6f3'
+  button-background: '#434fcf'
+  button-disabled: '#46464933'
+  white: '#ffffff'
+  black: '#000000'
 typography:
   display-lg:
     fontFamily: system-ui
@@ -172,88 +172,88 @@ rounded:
   full: 1000px
 components:
   button-filled:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.on-primary}'
+    typography: '{typography.button-md}'
+    rounded: '{rounded.full}'
     height: 44px
     padding: 12px
   button-filled-hover:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.on-primary}'
   button-filled-disabled:
-    backgroundColor: "{colors.button-disabled}"
-    textColor: "{colors.text-disabled}"
+    backgroundColor: '{colors.button-disabled}'
+    textColor: '{colors.text-disabled}'
   button-outline:
-    backgroundColor: "transparent"
-    textColor: "{colors.text-interactive}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
+    backgroundColor: 'transparent'
+    textColor: '{colors.text-interactive}'
+    typography: '{typography.button-md}'
+    rounded: '{rounded.full}'
     height: 44px
     padding: 12px
   button-plain:
-    backgroundColor: "transparent"
-    textColor: "{colors.text-interactive}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
+    backgroundColor: 'transparent'
+    textColor: '{colors.text-interactive}'
+    typography: '{typography.button-md}'
+    rounded: '{rounded.full}'
     padding: 12px
   button-hero:
-    backgroundColor: "transparent"
-    textColor: "{colors.white}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.full}"
+    backgroundColor: 'transparent'
+    textColor: '{colors.white}'
+    typography: '{typography.button-md}'
+    rounded: '{rounded.full}'
     height: 44px
     padding: 12px
   input-default:
-    backgroundColor: "{colors.container-background}"
-    textColor: "{colors.text-primary}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.m}"
+    backgroundColor: '{colors.container-background}'
+    textColor: '{colors.text-primary}'
+    typography: '{typography.body-md}'
+    rounded: '{rounded.m}'
     padding: 8px
     height: 36px
   input-focus:
-    backgroundColor: "{colors.container-background}"
-    textColor: "{colors.text-primary}"
+    backgroundColor: '{colors.container-background}'
+    textColor: '{colors.text-primary}'
   input-error:
-    backgroundColor: "{colors.container-background}"
-    textColor: "{colors.text-primary}"
+    backgroundColor: '{colors.container-background}'
+    textColor: '{colors.text-primary}'
   alert-info:
-    backgroundColor: "{colors.info-container}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.m}"
+    backgroundColor: '{colors.info-container}'
+    textColor: '{colors.text-primary}'
+    rounded: '{rounded.m}'
     padding: 16px
   alert-success:
-    backgroundColor: "{colors.success-container}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.m}"
+    backgroundColor: '{colors.success-container}'
+    textColor: '{colors.text-primary}'
+    rounded: '{rounded.m}'
     padding: 16px
   alert-warning:
-    backgroundColor: "{colors.warning-container}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.m}"
+    backgroundColor: '{colors.warning-container}'
+    textColor: '{colors.text-primary}'
+    rounded: '{rounded.m}'
     padding: 16px
   alert-error:
-    backgroundColor: "{colors.error-container}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.m}"
+    backgroundColor: '{colors.error-container}'
+    textColor: '{colors.text-primary}'
+    rounded: '{rounded.m}'
     padding: 16px
   dialog:
-    backgroundColor: "{colors.container-background}"
-    textColor: "{colors.text-primary}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.xl}"
+    backgroundColor: '{colors.container-background}'
+    textColor: '{colors.text-primary}'
+    typography: '{typography.body-md}'
+    rounded: '{rounded.xl}'
     padding: 24px
   tooltip:
-    backgroundColor: "{colors.on-surface}"
-    textColor: "{colors.surface}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.s}"
+    backgroundColor: '{colors.on-surface}'
+    textColor: '{colors.surface}'
+    typography: '{typography.body-sm}'
+    rounded: '{rounded.s}'
     padding: 8px
   chip:
-    backgroundColor: "{colors.container-highlight}"
-    textColor: "{colors.text-primary}"
-    typography: "{typography.button-sm}"
-    rounded: "{rounded.full}"
+    backgroundColor: '{colors.container-highlight}'
+    textColor: '{colors.text-primary}'
+    typography: '{typography.button-sm}'
+    rounded: '{rounded.full}'
     padding: 4px
 ---
 
@@ -390,7 +390,7 @@ then `surface-container-high` (`#e8e8eb`) for the most prominent surfaces.
 This tonal approach renders correctly in dark mode without inverting
 shadow color.
 
-When a shadow *is* required (popovers, menus, dialogs, raised cards), the
+When a shadow _is_ required (popovers, menus, dialogs, raised cards), the
 system provides five elevation effects, each composed of two layered
 shadows for natural-looking softness:
 
@@ -576,6 +576,7 @@ Governance: [CODEOWNERS](CODEOWNERS), [SECURITY.md](SECURITY.md),
 
   `npm install` triggers `prepare` which runs `npm run build`, so the build
   output is ready immediately.
+
 - **Local Storybook preview:** `npm run storybook` (`:6006`).
 - **Component watch mode:** `npm run dev` (rollup `--watch`). Rebuilds the
   React + Web Component wrappers on every Svelte change.
@@ -590,19 +591,19 @@ format-diff → build → audit-tokens → test → diff-tokens → check
             → example-ui-react build → build-storybook
 ```
 
-| Command | Purpose |
-| --- | --- |
-| `npm run build` | Full build: `transform-tokens` → `skiafy-icons` → `android-icons` → `rollup -c`. |
-| `npm run dev` | Rollup watch for component editing. |
-| `npm run test` | Jest, scoped to `tests/` (`--coverage=false`). |
-| `npm run check` | `svelte-check` + `node ./src/scripts/audit-events.js`. The two a11y warnings `a11y-click-events-have-key-events` and `a11y-no-static-element-interactions` are intentionally ignored. |
-| `npm run format` / `npm run format-diff` | Prettier; CI fails if `format-diff` reports changes. |
-| `npm run transform-tokens` | Regenerate every file under `tokens/` from `src/tokens/*.tokens.json`. |
-| `npm run update-icons` | Pull SVGs from Figma into `icons/` (auth required; usually run by [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml)). |
-| `npm run skiafy-icons` / `npm run android-icons` | Convert raw SVGs to Skia and Android Vector Drawable formats. |
-| `node ./src/scripts/audit-tokens.js` | Fail-fast check that every `--leo-*` token referenced in [src/](src/) is defined in [tokens/css/](tokens/css/). Runs in CI. |
-| `node scripts/audit_deps.js` | Dependency audit. |
-| `npm run build-storybook` | Static Storybook export, deployed by [.github/workflows/deploy.yml](.github/workflows/deploy.yml). |
+| Command                                          | Purpose                                                                                                                                                                               |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run build`                                  | Full build: `transform-tokens` → `skiafy-icons` → `android-icons` → `rollup -c`.                                                                                                      |
+| `npm run dev`                                    | Rollup watch for component editing.                                                                                                                                                   |
+| `npm run test`                                   | Jest, scoped to `tests/` (`--coverage=false`).                                                                                                                                        |
+| `npm run check`                                  | `svelte-check` + `node ./src/scripts/audit-events.js`. The two a11y warnings `a11y-click-events-have-key-events` and `a11y-no-static-element-interactions` are intentionally ignored. |
+| `npm run format` / `npm run format-diff`         | Prettier; CI fails if `format-diff` reports changes.                                                                                                                                  |
+| `npm run transform-tokens`                       | Regenerate every file under `tokens/` from `src/tokens/*.tokens.json`.                                                                                                                |
+| `npm run update-icons`                           | Pull SVGs from Figma into `icons/` (auth required; usually run by [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml)).                                          |
+| `npm run skiafy-icons` / `npm run android-icons` | Convert raw SVGs to Skia and Android Vector Drawable formats.                                                                                                                         |
+| `node ./src/scripts/audit-tokens.js`             | Fail-fast check that every `--leo-*` token referenced in [src/](src/) is defined in [tokens/css/](tokens/css/). Runs in CI.                                                           |
+| `node scripts/audit_deps.js`                     | Dependency audit.                                                                                                                                                                     |
+| `npm run build-storybook`                        | Static Storybook export, deployed by [.github/workflows/deploy.yml](.github/workflows/deploy.yml).                                                                                    |
 
 The package also exposes a `leo-check` bin pointing at
 [src/scripts/audit-tokens.js](src/scripts/audit-tokens.js), so consumers
@@ -690,6 +691,7 @@ Recipe distilled from [src/components/README.md](src/components/README.md):
 
   `name` is typed as `IconName` from `@brave/leo/icons/meta`, so editor
   autocomplete and type-checking enumerate every available icon.
+
 - Consumers point at the icon directory once via `setIconBasePath('/icons')`
   (default is `/icons`); SVGs are fetched lazily, with optional
   `preloadIcon(name)` for above-the-fold use.
@@ -726,12 +728,17 @@ Patterns observed across [src/components/](src/components/):
 
   ```ts
   export const buttonKinds = [
-    'hero', 'filled', 'outline', 'plain', 'plain-faint'
+    'hero',
+    'filled',
+    'outline',
+    'plain',
+    'plain-faint'
   ] as const
   export type ButtonKind = (typeof buttonKinds)[number]
   ```
 
   Common variant prop names: `kind`, `size`, `mode`, `type`.
+
 - **State props** are booleans prefixed `is*`: `isOpen`, `isDisabled`,
   `isLoading`, `isToast`, `isInlineActions`, `isHero`.
 - **Callback props** use `on*`: `onClick`, `onChange`, `onClose`, `onBack`,
