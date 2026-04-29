@@ -286,7 +286,7 @@ The system is built around two non-negotiable principles:
   shape; cards, inputs, and dialogs use moderate radii (8–16px). Sharp
   corners are reserved for primitives and dense data UI.
 
-This `design.md` documents the universal/web tokens in their light-theme
+This `AGENTS.md` documents the universal/web tokens in their light-theme
 resolution. Platform-specific tokens (iOS, Android, desktop browser chrome)
 and product overrides (search, news, marketing, web3, newtab) reuse the same
 semantic names and roles — only the underlying primitive mapping changes.
@@ -534,7 +534,7 @@ leo/
     plain-html/           # web-component consumer
   .storybook/             # Storybook 8 (Svelte + Vite)
   .github/workflows/      # CI: build, deploy, audit-deps, sf-symbols, update-icons, cleanup, socket-fix
-  spec.md                 # DESIGN.md format spec (governs the YAML + sections above)
+  spec.md                 # AGENTS.md format spec (governs the YAML + sections above)
   AGENTS.md               # this file
 ```
 
