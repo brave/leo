@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1776598687104,
+  "updatedAt": 1777453089447,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1034,6 +1034,7 @@ const meta = {
     "forward-filled": "forward-filled",
     "forward-outline": "forward-outline",
     "forward": "forward",
+    "freeze": "freeze",
     "fsn-color": "fsn-color",
     "ftc-color": "ftc-color",
     "ftm-color": "ftm-color",
@@ -1081,6 +1082,7 @@ const meta = {
     "google-docs-color": "google-docs-color",
     "google-play-color": "google-play-color",
     "google-sheets-color": "google-sheets-color",
+    "google-slides-color": "google-slides-color",
     "googledrive-color": "googledrive-color",
     "graph-chart-down": "graph-chart-down",
     "graph-chart-up": "graph-chart-up",
@@ -1435,6 +1437,7 @@ const meta = {
     "notification": "notification",
     "npxs-color": "npxs-color",
     "nuls-color": "nuls-color",
+    "nvidia-color": "nvidia-color",
     "nxs-color": "nxs-color",
     "nxt-color": "nxt-color",
     "nym-color": "nym-color",
@@ -1642,6 +1645,7 @@ const meta = {
     "protondrive-color": "protondrive-color",
     "prq-color": "prq-color",
     "prqboost-color": "prqboost-color",
+    "psst": "psst",
     "pungo-color": "pungo-color",
     "pura-color": "pura-color",
     "pwa-brave-install-color": "pwa-brave-install-color",
