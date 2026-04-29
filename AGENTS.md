@@ -8,6 +8,15 @@ Components are authored in Svelte and shipped to consumers as **React** and
 **Web Component** wrappers. Tokens are authored once and exported to CSS,
 Tailwind, Skia (C++), Java/XML (Android), and Swift (iOS).
 
+See [README.md](README.md) for consumer setup — wiring up `variables.css`,
+the Tailwind plugin, and the `data-theme="dark|light"` theming rule.
+
+> **Generated output, do not hand-edit.** `tokens/`, `react/`,
+> `web-components/`, `shared/`, `build/`, `types/`, `icons-skia/`,
+> `icons-sf/`, and `storybook-static/` are all produced by `npm run build`
+> and listed in [.gitignore](.gitignore). Edit the sources under
+> [src/](src/) (and [icons/](icons/) for raw SVGs) and rebuild.
+
 ## Nala
 
 `nala` is the codename used for Leo on the native side of the stack. The
@@ -86,6 +95,21 @@ consumer formats:
 
 See [src/components/README.md](src/components/README.md) for the
 component authoring recipe and the React / Web Component caveats.
+
+### Icons
+
+Icons live in [icons/](icons/) (~2200 SVGs synced from Figma by
+[.github/workflows/update-icons.yml](.github/workflows/update-icons.yml))
+and are consumed via the typed
+[`<Icon name="..." />`](src/components/icon/icon.svelte) component, with
+autocomplete from `@brave/leo/icons/meta`.
+
+### Storybook
+
+Every component and token group has a `<name>.stories.svelte` file —
+Storybook is the live visual reference for both. Run it locally via
+`npm run storybook` (`:6006`), or browse the per-PR preview at the nala
+URL above.
 
 ## Build / Dev
 
