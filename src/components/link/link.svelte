@@ -57,7 +57,9 @@
     </div>
     <ProgressRing />
   {:else}
+    <slot name="icon-before" />
     <slot />
+    <slot name="icon-after" />
   {/if}
 </svelte:element>
 
@@ -77,11 +79,16 @@
     );
     --focus-color: var(--leo-link-focus-color, var(--color));
     --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
+    --leo-icon-color: var(--leo-link-icon-color, currentColor);
+    --leo-icon-size: var(--leo-link-icon-size, var(--leo-icon-s));
 
     color: var(--color);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--leo-link-icon-gap, var(--leo-spacing-s));
 
     &:where(:hover) {
       color: var(--hover-color);

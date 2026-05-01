@@ -65,6 +65,7 @@
 
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import Icon from '../icon/icon.svelte'
 </script>
 
 <Template let:args>
@@ -73,14 +74,52 @@
 
 <Story name="Slots" let:args>
   <SlotInfo
-    description="The link has a single slot, which works the same as the slot on the anchor tag"
+    description="The link supports icon-before and icon-after slots in addition to the default text slot"
   >
     <Slot name="default" explanation="The text of the link">
       <div>
         <Link {...args} text={null}>{args.text}</Link>
       </div>
     </Slot>
+    <Slot name="icon-before" explanation="An icon displayed before the link text">
+      <div>
+        <Link {...args} text={null}>
+          <Icon name="check-circle-outline" slot="icon-before" />
+          {args.text}
+        </Link>
+      </div>
+    </Slot>
+    <Slot name="icon-after" explanation="An icon displayed after the link text">
+      <div>
+        <Link {...args} text={null}>
+          {args.text}
+          <Icon name="check-circle-outline" slot="icon-after" />
+        </Link>
+      </div>
+    </Slot>
   </SlotInfo>
 </Story>
 
 <Story name="Default" />
+
+<Story name="With icons" let:args>
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <Link {...args} text={null}>
+      <Icon name="check-circle-outline" slot="icon-before" />
+      Icon before
+    </Link>
+    <Link {...args} text={null}>
+      Icon after
+      <Icon name="check-circle-outline" slot="icon-after" />
+    </Link>
+    <Link {...args} text={null}>
+      <Icon name="check-circle-outline" slot="icon-before" />
+      Icon both sides
+      <Icon name="check-circle-outline" slot="icon-after" />
+    </Link>
+    <Link {...args} text={null} isDisabled>
+      <Icon name="check-circle-outline" slot="icon-before" />
+      Disabled with icon
+    </Link>
+  </div>
+</Story>
