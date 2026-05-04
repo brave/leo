@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1777453089447,
+  "updatedAt": 1777885354006,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -475,6 +475,7 @@ const meta = {
     "container-shopping": "container-shopping",
     "container-social": "container-social",
     "container-star": "container-star",
+    "container-temporary": "container-temporary",
     "container-travel": "container-travel",
     "container-work": "container-work",
     "content-big": "content-big",
