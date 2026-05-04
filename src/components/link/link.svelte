@@ -1,11 +1,13 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
+  import ProgressRing from '../progress/progressRing.svelte'
 
   type Href = $$Generic<string | undefined>
   type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang'
 
   interface CommonNalaLinkProps {
     isDisabled?: boolean
+    isLoading?: boolean
   }
 
   type ButtonProps = CommonNalaLinkProps &
@@ -23,6 +25,7 @@
 
   export let href: Href = undefined
   export let isDisabled: boolean = false
+  export let isLoading: boolean = false
   export let onClick: (e: MouseEvent) => void = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
@@ -36,14 +39,26 @@
   href={href || undefined}
   class="leoLink"
   class:disabled
+  class:isLoading
   aria-disabled={disabled || undefined}
   on:click={onClick ||
     ((e) => {
       if (disabled) e.preventDefault()
     })}
-  disabled={disabled || undefined}
+  disabled={isLoading || disabled || undefined}
 >
-  <slot />
+  {#if isLoading}
+    <div class="content">
+      {#if $$slots.loading}
+        <slot name="loading" />
+      {:else}
+        <slot />
+      {/if}
+    </div>
+    <ProgressRing />
+  {:else}
+    <slot />
+  {/if}
 </svelte:element>
 
 <style lang="scss">
@@ -86,6 +101,15 @@
     &:where(.disabled) {
       color: var(--disabled-color);
       pointer-events: none;
+    }
+
+    &:where(.isLoading) {
+      opacity: 0.75;
+      pointer-events: none;
+
+      .content {
+        display: contents;
+      }
     }
   }
 </style>
