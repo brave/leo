@@ -65,6 +65,7 @@
 
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
   import Slot from '../../storyHelpers/Slot.svelte'
+  import Icon from '../icon/icon.svelte'
 </script>
 
 <Template let:args>
@@ -73,11 +74,27 @@
 
 <Story name="Slots" let:args>
   <SlotInfo
-    description="The link has a single slot, which works the same as the slot on the anchor tag"
+    description="The link supports icon-before and icon-after slots in addition to the default text slot"
   >
     <Slot name="default" explanation="The text of the link">
       <div>
-        <Link {...args} text={null}>{args.text}</Link>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit <Link {...args} text={null}>{args.text}</Link>. Voluptatum magni nobis vel architecto tenetur repellendus dicta provident cumque doloribus illum voluptates, accusantium reprehenderit numquam voluptas ad autem neque? Cumque, consectetur.
+      </div>
+    </Slot>
+    <Slot name="icon-before" explanation="An icon displayed before the link text">
+      <div>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit <Link {...args} text={null}>
+          <Icon name="check-circle-outline" slot="icon-before" />
+          {args.text}
+        </Link>. Vitae fuga, voluptate inventore est nesciunt delectus, vel quidem vero minus fugiat totam deleniti? Eveniet quasi iusto maxime rem dicta saepe libero.
+      </div>
+    </Slot>
+    <Slot name="icon-after" explanation="An icon displayed after the link text">
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit <Link {...args} text={null}>
+          {args.text}
+          <Icon name="check-circle-outline" slot="icon-after" />
+        </Link>. Amet, harum nisi. Libero in repudiandae magnam blanditiis deleniti labore ducimus ex quis iste, distinctio nesciunt quibusdam? Consequuntur corrupti magni culpa ea!
       </div>
     </Slot>
   </SlotInfo>
