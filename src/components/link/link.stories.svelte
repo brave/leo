@@ -78,48 +78,26 @@
   >
     <Slot name="default" explanation="The text of the link">
       <div>
-        <Link {...args} text={null}>{args.text}</Link>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit <Link {...args} text={null}>{args.text}</Link>. Voluptatum magni nobis vel architecto tenetur repellendus dicta provident cumque doloribus illum voluptates, accusantium reprehenderit numquam voluptas ad autem neque? Cumque, consectetur.
       </div>
     </Slot>
     <Slot name="icon-before" explanation="An icon displayed before the link text">
       <div>
-        <Link {...args} text={null}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit <Link {...args} text={null}>
           <Icon name="check-circle-outline" slot="icon-before" />
           {args.text}
-        </Link>
+        </Link>. Vitae fuga, voluptate inventore est nesciunt delectus, vel quidem vero minus fugiat totam deleniti? Eveniet quasi iusto maxime rem dicta saepe libero.
       </div>
     </Slot>
     <Slot name="icon-after" explanation="An icon displayed after the link text">
       <div>
-        <Link {...args} text={null}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit <Link {...args} text={null}>
           {args.text}
           <Icon name="check-circle-outline" slot="icon-after" />
-        </Link>
+        </Link>. Amet, harum nisi. Libero in repudiandae magnam blanditiis deleniti labore ducimus ex quis iste, distinctio nesciunt quibusdam? Consequuntur corrupti magni culpa ea!
       </div>
     </Slot>
   </SlotInfo>
 </Story>
 
 <Story name="Default" />
-
-<Story name="With icons" let:args>
-  <div style="display: flex; flex-direction: column; gap: 12px;">
-    <Link {...args} text={null}>
-      <Icon name="check-circle-outline" slot="icon-before" />
-      Icon before
-    </Link>
-    <Link {...args} text={null}>
-      Icon after
-      <Icon name="check-circle-outline" slot="icon-after" />
-    </Link>
-    <Link {...args} text={null}>
-      <Icon name="check-circle-outline" slot="icon-before" />
-      Icon both sides
-      <Icon name="check-circle-outline" slot="icon-after" />
-    </Link>
-    <Link {...args} text={null} isDisabled>
-      <Icon name="check-circle-outline" slot="icon-before" />
-      Disabled with icon
-    </Link>
-  </div>
-</Story>
