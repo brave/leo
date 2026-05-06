@@ -30,6 +30,7 @@
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
   $: disabled = !!(isDisabled || (isDisabled as any) === '')
+  $: loading = !!(isLoading || (isLoading as any) === '')
 </script>
 
 <svelte:element
@@ -39,22 +40,20 @@
   href={href || undefined}
   class="leoLink"
   class:disabled
-  class:isLoading
-  aria-disabled={disabled || undefined}
+  class:loading
+  aria-disabled={loading || disabled || undefined}
   on:click={onClick ||
     ((e) => {
-      if (disabled) e.preventDefault()
+      if (loading || disabled) e.preventDefault()
     })}
-  disabled={isLoading || disabled || undefined}
+  disabled={disabled || undefined}
 >
   {#if isLoading}
-    <div class="content">
-      {#if $$slots.loading}
-        <slot name="loading" />
-      {:else}
-        <slot />
-      {/if}
-    </div>
+    {#if $$slots.loading}
+      <slot name="loading" />
+    {:else}
+      <slot />
+    {/if}
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
@@ -81,6 +80,8 @@
     --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
     --leo-icon-color: var(--leo-link-icon-color, currentColor);
     --leo-icon-size: var(--leo-link-icon-size, 1.3em);
+    --leo-progressring-size: var(--leo-icon-size);
+    --leo-progressring-color: var(--leo-icon-color);
 
     color: var(--color);
     cursor: pointer;
@@ -111,7 +112,7 @@
       pointer-events: none;
     }
 
-    &:where(.isLoading) {
+    &:where(.loading) {
       opacity: 0.75;
       pointer-events: none;
 
