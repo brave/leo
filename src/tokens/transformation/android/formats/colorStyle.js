@@ -7,7 +7,10 @@ const getTokenValue = (token) => {
   if (color.getAlpha() === 1) {
     return color.toHexString()
   }
-  return color.toHex8String()
+
+  const hex8 = color.toHex8();
+  const aarrggbb = `#${hex8.slice(6,8)}${hex8.slice(0,6)}`; // Rearrange to AARRGGBB format
+  return aarrggbb;
 }
 
 export default ({ dictionary, platform, options = {}, file }) => {
