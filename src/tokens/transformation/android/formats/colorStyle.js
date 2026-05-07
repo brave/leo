@@ -8,9 +8,9 @@ const getTokenValue = (token) => {
     return color.toHexString()
   }
 
-  const hex8 = color.toHex8();
-  const aarrggbb = `#${hex8.slice(6,8)}${hex8.slice(0,6)}`; // Rearrange to AARRGGBB format
-  return aarrggbb;
+  const hex8 = color.toHex8()
+  const aarrggbb = `#${hex8.slice(6, 8)}${hex8.slice(0, 6)}` // Rearrange to AARRGGBB format
+  return aarrggbb
 }
 
 export default ({ dictionary, platform, options = {}, file }) => {
