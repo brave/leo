@@ -8,7 +8,7 @@
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
           children?: any
-          onClick?: EventListener
+          onClick?: (MouseEvent) => void
         }
         'leo-option': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
