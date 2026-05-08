@@ -73,7 +73,8 @@ export * from '../web-components/${fileNameWithoutExtension}.js'
 import type * as React from 'react'
 import type { ReactProps } from '../src/components/svelte-react'
 import type { ${componentName}Props as SvelteProps } from '../types/src/components/${containingFolder}/${fileName}';
-export type ${componentName}Props${funcConstraints} = ReactProps<Omit<SvelteProps${propParams}, 'children'>>;
+type DistributiveOmit<T, K extends keyof any> = T extends any ? Omit<T, K> : never;
+export type ${componentName}Props${funcConstraints} = ReactProps<DistributiveOmit<SvelteProps${propParams}, 'children'>>;
 export default function ${componentName}${funcConstraints}(props: React.PropsWithChildren<${componentName}Props${propParams}>): JSX.Element
 
 // As we don't currently have type definitions for the web components, export
