@@ -29,13 +29,18 @@
 
   type ButtonHTMLAttributes = Pick<
     SvelteHTMLElements['button'],
-    'id' | 'class' | 'style' | 'disabled' | 'type' | 'aria-label'
-  >;
-
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'autofocus' | 'name' | 'title' |  'form' | 'formaction' | 'formmethod' | 'formenctype' | 'formtarget' | 'formnovalidate' | 'command' | 'commandfor' | 'popover' | 'popovertarget' | 'popovertargetaction'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
   type LinkHTMLAttributes = Pick<
     SvelteHTMLElements['a'],
-    'id' | 'class' | 'style' | 'target' | 'rel' | 'aria-label'
-  >;
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'autofocus' | 'title'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
 
   type NalaButtonProps = CommonProps & {
     isDisabled?: Disabled
@@ -44,7 +49,7 @@
   } & Partial<ButtonHTMLAttributes>;
 
   type NalaLinkProps = CommonProps & {
-    href: string | undefined;
+    href: Href;
     isDisabled?: never;
     isLoading?: never;
   } & Partial<LinkHTMLAttributes>;
