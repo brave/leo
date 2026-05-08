@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   import type { HTMLAttributes } from '../../types/attributes'
+
   declare global {
     namespace JSX {
       interface IntrinsicElements {
