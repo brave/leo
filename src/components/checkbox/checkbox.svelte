@@ -164,11 +164,13 @@
     color: var(--disabled-color) !important;
   }
 
-  .leo-checkbox:hover .check {
-    color: var(--unchecked-color-hover);
+  @media (hover: hover) {
+    .leo-checkbox:hover .check {
+      color: var(--unchecked-color-hover);
 
-    &:has(input:checked) {
-      color: var(--checked-color-hover);
+      &:has(input:checked) {
+        color: var(--checked-color-hover);
+      }
     }
   }
 </style>
