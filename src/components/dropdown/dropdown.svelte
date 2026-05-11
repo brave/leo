@@ -10,7 +10,7 @@
           key?: string | number | null
 
           value?: string
-          children?: string | Element | Element[] | (string | Element)[]
+          children?: any
         }
       }
     }

@@ -7,7 +7,7 @@
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           /** React/DOM often pass mixed text + element siblings as `(string | Element)[]`. */
-          children?: string | Element | Element[] | (string | Element)[]
+          children?: any
           onClick?: (event: MouseEvent) => void
         }
       }
