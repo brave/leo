@@ -6,8 +6,9 @@
       interface IntrinsicElements {
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
-          children?: string | Element | Element[]
-          onClick?: (MouseEvent) => void
+          /** React/DOM often pass mixed text + element siblings as `(string | Element)[]`. */
+          children?: string | Element | Element[] | (string | Element)[]
+          onClick?: (event: MouseEvent) => void
         }
       }
     }

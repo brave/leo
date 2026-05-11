@@ -8,13 +8,14 @@
           // Note: This should line up with Reacts key type, but we don't want
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
-          children?: string | Element | Element[]
-          onClick?: (MouseEvent) => void
+          /** React/DOM often pass mixed text + element siblings as `(string | Element)[]`. */
+          children?: string | Element | Element[] | (string | Element)[]
+          onClick?: (event: MouseEvent) => void
         }
         'leo-option': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
           value?: string
-          children?: string | Element | Element[]
+          children?: string | Element | Element[] | (string | Element)[]
         }
         'leo-menu-section': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
