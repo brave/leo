@@ -136,7 +136,8 @@
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition:
       box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
-      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
+      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
     --radius: var(--leo-radius-full);
@@ -217,6 +218,7 @@
       opacity: 0.75;
       background: var(--bg-active, var(--bg));
       color: var(--color-active, var(--color-hover, var(--color)));
+      transform: scale(0.97);
     }
 
     &:focus-visible {
