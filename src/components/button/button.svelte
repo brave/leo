@@ -53,7 +53,7 @@
 
   /**
    * Exposed so that the button can be clicked programmatically.
-  */
+   */
   export function click() {
     el?.click()
   }
@@ -90,14 +90,14 @@
       {#if $$slots.loading}
         <slot name="loading" />
       {:else if !fab}
-        <slot/>
+        <slot />
       {/if}
     </div>
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
     <div class:content={!fab}>
-      <slot/>
+      <slot />
     </div>
     <slot name="icon-after" />
   {/if}
@@ -193,25 +193,27 @@
   }
 
   .leoButton:not(:disabled) {
-    &:hover,
-    [data-is-button-target]:hover :host .leoButton,
-    [data-is-button-target]:hover .leoButton {
-      --leo-icon-color: var(--icon-hover-color, var(--icon-color));
-      --mixed-primary-color: var(--leo-color-primary-70);
+    @media (hover: hover) {
+      &:hover,
+      [data-is-button-target]:hover :host .leoButton,
+      [data-is-button-target]:hover .leoButton {
+        --leo-icon-color: var(--icon-hover-color, var(--icon-color));
+        --mixed-primary-color: var(--leo-color-primary-70);
 
-      /** If we support the color-mix syntax, infer the hover color */
-      @supports (color: color-mix(in srgb, transparent, transparent)) {
-        --mixed-primary-color: color-mix(
-          in srgb,
-          var(--primary-color),
-          var(--foreground) 20%
-        );
+        /** If we support the color-mix syntax, infer the hover color */
+        @supports (color: color-mix(in srgb, transparent, transparent)) {
+          --mixed-primary-color: color-mix(
+            in srgb,
+            var(--primary-color),
+            var(--foreground) 20%
+          );
+        }
+
+        background: var(--bg-hover, var(--bg));
+        color: var(--color-hover, var(--mixed-primary-color));
+        box-shadow: var(--box-shadow-hover);
+        border-color: var(--border-color-hover, var(--border-color));
       }
-
-      background: var(--bg-hover, var(--bg));
-      color: var(--color-hover, var(--mixed-primary-color));
-      box-shadow: var(--box-shadow-hover);
-      border-color: var(--border-color-hover, var(--border-color));
     }
 
     &:active {
@@ -451,8 +453,10 @@
         opacity: 0.001;
       }
 
-      &:hover::before {
-        opacity: 1;
+      @media (hover: hover) {
+        &:hover::before {
+          opacity: 1;
+        }
       }
     }
 
@@ -509,8 +513,10 @@
       }
     }
 
-    &:hover:not(:disabled) {
-      --default-bg-opacity: 0;
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        --default-bg-opacity: 0;
+      }
     }
   }
 
