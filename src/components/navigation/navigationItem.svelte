@@ -151,8 +151,8 @@
       box-sizing: border-box;
       gap: var(--leo-spacing-xl);
       align-items: center;
-      height: 48px;
-      padding-left: var(--leo-spacing-2xl);
+      min-height: 44px;
+      padding-left: var(--leo-spacing-xl);
       padding-right: var(--leo-spacing-m);
       border-radius: 0;
       outline: none;
