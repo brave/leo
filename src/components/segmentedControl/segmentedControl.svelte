@@ -125,6 +125,7 @@
     --leo-segmented-control-item-padding: var(--leo-spacing-l);
     --leo-segmented-control-item-icon-gap: var(--leo-spacing-m);
     --leo-segmented-control-item-font: var(--leo-font-components-button-default);
+    --leo-segmented-control-item-focus-shadow: var(--leo-effect-focus-state);
 
     display: flex;
     min-width: max-content;
@@ -179,11 +180,6 @@
     :where(&:not(.transitioning)) > :global(::slotted(leo-segmentedcontrolitem:hover)) {
       --leo-segmented-control-item-background: var(--leo-color-container-highlight);
       --leo-segmented-control-item-color: var(--leo-color-text-primary);
-    }
-
-    :where(&) > :global(.leo-segmented-control-item:focus-visible),
-    :where(&) > :global(::slotted(leo-segmentedcontrolitem:focus-visible)) {
-      --leo-segmented-control-item-shadow: var(--leo-effect-focus-state);
     }
 
     :where(&) > :global(.leo-segmented-control-item[aria-selected]),

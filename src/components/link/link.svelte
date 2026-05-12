@@ -1,11 +1,13 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
+  import ProgressRing from '../progress/progressRing.svelte'
 
   type Href = $$Generic<string | undefined>
   type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang'
 
   interface CommonNalaLinkProps {
     isDisabled?: boolean
+    isLoading?: boolean
   }
 
   type ButtonProps = CommonNalaLinkProps &
@@ -23,10 +25,12 @@
 
   export let href: Href = undefined
   export let isDisabled: boolean = false
+  export let isLoading: boolean = false
   export let onClick: (e: MouseEvent) => void = undefined
 
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
   $: disabled = !!(isDisabled || (isDisabled as any) === '')
+  $: loading = !!(isLoading || (isLoading as any) === '')
 </script>
 
 <svelte:element
@@ -36,14 +40,26 @@
   href={href || undefined}
   class="leoLink"
   class:disabled
-  aria-disabled={disabled || undefined}
+  class:loading
+  aria-disabled={loading || disabled || undefined}
   on:click={onClick ||
     ((e) => {
-      if (disabled) e.preventDefault()
+      if (loading || disabled) e.preventDefault()
     })}
   disabled={disabled || undefined}
 >
-  <slot />
+  {#if isLoading}
+    {#if $$slots.loading}
+      <slot name="loading" />
+    {:else}
+      <slot />
+    {/if}
+    <ProgressRing />
+  {:else}
+    <slot name="icon-before" />
+    <slot />
+    <slot name="icon-after" />
+  {/if}
 </svelte:element>
 
 <style lang="scss">
@@ -62,11 +78,19 @@
     );
     --focus-color: var(--leo-link-focus-color, var(--color));
     --focus-shadow: var(--leo-link-focus-shadow, var(--leo-effect-focus-state));
+    --leo-icon-color: var(--leo-link-icon-color, currentColor);
+    --leo-icon-size: var(--leo-link-icon-size, 1.3em);
+    --leo-progressring-size: var(--leo-icon-size);
+    --leo-progressring-color: var(--leo-icon-color);
 
     color: var(--color);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
+    vertical-align: bottom;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--leo-link-icon-gap, 0.3em);
 
     &:where(:hover) {
       color: var(--hover-color);
@@ -86,6 +110,15 @@
     &:where(.disabled) {
       color: var(--disabled-color);
       pointer-events: none;
+    }
+
+    &:where(.loading) {
+      opacity: 0.75;
+      pointer-events: none;
+
+      .content {
+        display: contents;
+      }
     }
   }
 </style>
