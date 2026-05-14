@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import camelCase from '../common/camelCaseHelper'
+import camelCase from 'lodash/camelCase'
 import fontStyleTemplate from './fontStyleTemplate'
 
 const fontFile = ({ fontFamily, fontWeight }, fontOpts) => {
