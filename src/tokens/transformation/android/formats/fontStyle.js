@@ -1,6 +1,11 @@
+import startCase from 'lodash/startCase'
+import snakeCase from 'lodash/snakeCase'
 import StyleDictionary from 'style-dictionary'
-import { pascalCase, snakeCase } from 'change-case'
 const { fileHeader } = StyleDictionary.formatHelpers
+
+function pascalCase (str) {
+  return startCase(str).replaceAll(" ");
+}
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
   1 + letterSpacing / fontSize

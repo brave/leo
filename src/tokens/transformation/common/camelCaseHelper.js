@@ -1,3 +1,3 @@
-import { camelCase, camelCaseTransformMerge } from 'change-case'
+import camelCase from 'lodash/camelCase'
 
-export default (name) => camelCase(name, { transform: camelCaseTransformMerge })
+export default (name) => camelCase(name)

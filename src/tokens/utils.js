@@ -1,4 +1,4 @@
-import merge from 'lodash.merge'
+import merge from 'lodash/merge'
 
 /**
  * Removes a key and puts the children of that key in the key's parent
