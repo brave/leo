@@ -1,6 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import fs from 'node:fs'
-import { snakeCase } from 'change-case'
+import snakeCase from 'lodash/snakeCase'
 
 const contents = {
   info: {
