@@ -36,7 +36,6 @@
     "@types/react": "18.3.28",
     "css-tree": "2.3.1",
     "figma-api-exporter": "github:brave/figma-api-exporter#141c3eab4643ba9cdcbb23867785aa7df9347eec",
-    "fs-extra": "11.3.5",
     "jsdom": "28.1.0",
     "lodash": "4.18.1",
     "postcss": "8.5.14",

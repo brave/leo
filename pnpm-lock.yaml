@@ -109,9 +109,6 @@ importers:
       figma-api-exporter:
         specifier: github:brave/figma-api-exporter#141c3eab4643ba9cdcbb23867785aa7df9347eec
         version: https://codeload.github.com/brave/figma-api-exporter/tar.gz/141c3eab4643ba9cdcbb23867785aa7df9347eec
-      fs-extra:
-        specifier: 11.3.5
-        version: 11.3.5
       jsdom:
         specifier: 28.1.0
         version: 28.1.0
@@ -2340,10 +2337,6 @@ packages:
   fs-extra@10.1.0:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
     engines: {node: '>=12'}
-
-  fs-extra@11.3.5:
-    resolution: {integrity: sha512-eKpRKAovdpZtR1WopLHxlBWvAgPny3c4gX1G5Jhwmmw4XJj0ifSD5qB5TOo8hmA0wlRKDAOAhEE1yVPgs6Fgcg==}
-    engines: {node: '>=14.14'}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -6309,12 +6302,6 @@ snapshots:
       is-callable: 1.2.7
 
   fs-extra@10.1.0:
-    dependencies:
-      graceful-fs: 4.2.11
-      jsonfile: 6.2.1
-      universalify: 2.0.1
-
-  fs-extra@11.3.5:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.2.1
