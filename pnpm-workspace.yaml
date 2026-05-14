@@ -1,11 +1,11 @@
 minimumReleaseAge: 10080
 
 allowBuilds:
-  '@parcel/watcher': set this to true or false
+  '@parcel/watcher': false
   esbuild: true
   figma-api-exporter: true
-  svelte-preprocess: set this to true or false
-  unrs-resolver: set this to true or false
+  svelte-preprocess: false
+  unrs-resolver: false
 
 overrides:
   esbuild: 0.27.1
