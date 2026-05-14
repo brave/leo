@@ -57,11 +57,7 @@ export default {
       preprocess: vitePreprocess({
         script: true,
         postcss: {
-          plugins: [
-            themePlugin({
-              wrapSelector: (selector) => `:global(:host-context(${selector}))`
-            })
-          ]
+          plugins: [themePlugin()]
         }
       }),
       // Don't emit CSS - it doesn't work properly with Web Components.
