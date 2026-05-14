@@ -1,6 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import fs from 'node:fs'
-import snakeCase from 'lodash/snakeCase'
+import { snakeCaseCustom } from '../../utils'
 
 const contents = {
   info: {
@@ -50,7 +50,7 @@ export default {
           // The system already provides these and will conflict with the names
           return
         }
-        const colorsetPath = `${assetPath}/${snakeCase(
+        const colorsetPath = `${assetPath}/${snakeCaseCustom(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'

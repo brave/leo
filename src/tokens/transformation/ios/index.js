@@ -1,8 +1,8 @@
 import fs from 'fs'
 import camelCase from 'lodash/camelCase'
-import snakeCase from 'lodash/snakeCase'
 import _template from 'lodash/template'
 import StyleDictionary from 'style-dictionary'
+import { snakeCaseCustom } from '../../utils.js'
 import colorsets from './colorsets.js'
 import fontStyles from './fontStyles.js'
 
@@ -58,7 +58,7 @@ StyleDictionary.registerFormat({
           // The system already provides these and will conflict with the names
           return
         }
-        const name = snakeCase(
+        const name = snakeCaseCustom(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'
