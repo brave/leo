@@ -1,3 +1,4 @@
+import defaultTwTheme from 'tailwindcss/defaultTheme'
 import { Formatter } from 'style-dictionary'
 
 export default (({ dictionary }) => {
@@ -16,6 +17,8 @@ export default (({ dictionary }) => {
     if (attributes.state) {
       fontClass += `-${attributes.state}`
     }
+
+    t.value.fontFamily = `${t.value.fontFamily},${defaultTwTheme.fontFamily.sans.join(',')}`
 
     fontClasses.set(fontClass, t.value)
   })
