@@ -1,5 +1,5 @@
-import fs from 'fs-extra'
-import camelCase from '../common/camelCaseHelper'
+import fs from 'node:fs'
+import camelCase from 'lodash/camelCase'
 import fontStyleTemplate from './fontStyleTemplate'
 
 const fontFile = ({ fontFamily, fontWeight }, fontOpts) => {
@@ -17,7 +17,7 @@ export default {
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}`
-    fs.ensureDirSync(assetPath)
+    fs.mkdirSync(assetPath, { recursive: true })
 
     const fontStyles = {
       filename: 'StyleDictionary+Generated.swift',
