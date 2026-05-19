@@ -27,8 +27,10 @@ const getFileContents = async (svelteFilePath) => {
   const elementName = `${COMPONENT_PREFIX}-${fileNameWithoutExtension.toLowerCase()}`
 
   const binding = `
+  // <if expr="!noLeoImports">
 import SvelteWeb from '${SVELTE_WEB_WRAPPER_PATH}'
 import ${componentName} from '../shared/${fileNameWithoutExtension}.js'
+
 export default SvelteWeb(${componentName}, {
     name: '${elementName}',
     mode: 'open'
@@ -37,6 +39,9 @@ export default SvelteWeb(${componentName}, {
 // Reexport everything from our component, so consumers can do anything the base
 // component can do.
 export * from '../shared/${fileNameWithoutExtension}.js'
+// <else>
+export {}
+// </if>
     `.trim()
 
   const typeDefinitions = `
