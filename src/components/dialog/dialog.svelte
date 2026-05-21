@@ -245,7 +245,10 @@
   }
 
   :host .leo-dialog .actions .body,
-  .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) .body {
+  // The `:has()` is moved onto `.body` (rather than `.leo-dialog`) so that no descendant
+  // selector follows the `:has()`. jsdom's nwsapi selector engine fails to parse selectors
+  // of the form `<X>:has(...) <Y>:where(...)` that Svelte 5 generates for scoped CSS.
+  .leo-dialog.hasActions .body:has(~ .actions :global([slot=actions]:not(:empty))) {
     padding-bottom: 0;
   }
 
