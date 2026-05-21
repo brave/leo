@@ -249,7 +249,7 @@ export default function registerWebComponent(
 
     disconnectedCallback() {
       this.#lastSlots = new Set()
-      this.component?.$destroy()
+      if (this.component) unmount(this.component)
       this.#component = null
     }
 

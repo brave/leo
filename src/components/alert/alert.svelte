@@ -138,7 +138,7 @@
       align-content: center;
     }
 
-    &:has(.content-after) .content-after {
+    & .content-after {
       grid-row: main;
       grid-column: -1; // No named track necessary as it should just always be at the end.
     }
@@ -154,8 +154,10 @@
         grid-column: main-end; // Actions for `.inline-actions` should always be after the `main` content
       }
 
-      // If both `actions` and `content-after` exist, we have to add at least an explicit track for content-after since -1 doesn't work for implicit tracks
-      &:has(.content-after):has(.actions) {
+      // If both `actions` and `content-after` exist, we have to add at least an explicit track for content-after since -1 doesn't work for implicit tracks.
+      // The two children are combined into a single `:has()` with a sibling combinator (rather than two chained `:has()`) because jsdom's nwsapi
+      // selector engine fails to parse chained `:has(...:where(...))` selectors that Svelte 5 generates for scoped CSS.
+      &:has(.content-after ~ .actions) {
         grid-template-columns: [icon-start] min-content [icon-end main-start] 1fr [main-end content-after] auto [content-end];
       }
     }
