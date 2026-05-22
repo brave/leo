@@ -1,4 +1,4 @@
-import camelCase from 'lodash/cameCase'
+import camelCase from 'lodash/camelCase'
 import fileHeader from '../web/fileHeader'
 import { createPropertyNameFormatter } from './createPropertyFormatter'
 import { TinyColor } from '@ctrl/tinycolor'
