@@ -63,9 +63,7 @@ export default {
         // times with different configurations. If the colorset already exists we want
         // to modify it rather than writing over it.
         const colorset = fs.existsSync(`${colorsetPath}/Contents.json`)
-          ? JSON.parse(
-              fs.readFileSync(`${colorsetPath}/Contents.json`, 'utf8')
-            )
+          ? JSON.parse(fs.readFileSync(`${colorsetPath}/Contents.json`, 'utf8'))
           : { ...contents, colors: [] }
 
         const color = {
