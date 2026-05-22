@@ -4368,15 +4368,15 @@
       "material": {
         "thick": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.6500)"
+          "value": "rgba(0, 0, 0, 0.7000)"
         },
         "regular": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.4600)"
+          "value": "rgba(0, 0, 0, 0.5000)"
         },
         "thin": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.3800)"
+          "value": "rgba(0, 0, 0, 0.3600)"
         },
         "ultrathin": {
           "type": "color",
