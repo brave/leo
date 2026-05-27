@@ -4077,6 +4077,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -4088,11 +4093,6 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -4368,19 +4368,19 @@
       "material": {
         "thick": {
           "type": "color",
-          "value": "rgba(37, 37, 37, 0.9000)"
+          "value": "rgba(0, 0, 0, 0.7000)"
         },
         "regular": {
           "type": "color",
-          "value": "rgba(37, 37, 37, 0.7500)"
+          "value": "rgba(0, 0, 0, 0.5000)"
         },
         "thin": {
           "type": "color",
-          "value": "rgba(37, 37, 37, 0.5800)"
+          "value": "rgba(0, 0, 0, 0.3600)"
         },
         "ultrathin": {
           "type": "color",
-          "value": "rgba(37, 37, 37, 0.3900)"
+          "value": "rgba(0, 0, 0, 0.2500)"
         },
         "separator": {
           "type": "color",
@@ -5367,8 +5367,8 @@
       "desktopbrowser": {
         "chrome-background-desktop": {
           "type": "color",
-          "value": "#303032",
-          "referencedVariable": "$primitive.neutral.20"
+          "value": "#39393b",
+          "referencedVariable": "$primitive.neutral.25"
         },
         "menu": {
           "background": {
@@ -5390,8 +5390,8 @@
         "tabbar": {
           "background": {
             "type": "color",
-            "value": "#1c1c1d",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "#1f1f23",
+            "referencedVariable": "$primitive.neutral.12"
           },
           "pinned-tab-outline-horizontal": {
             "type": "color",
@@ -5475,6 +5475,11 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5486,11 +5491,6 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
