@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1779369734188,
+  "updatedAt": 1780001258290,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -88,6 +88,7 @@ const meta = {
     "apple-color": "apple-color",
     "appstore-color": "appstore-color",
     "arb-color": "arb-color",
+    "arc-browser-color": "arc-browser-color",
     "ardr-color": "ardr-color",
     "arg-color": "arg-color",
     "ark-color": "ark-color",
@@ -815,6 +816,7 @@ const meta = {
     "dew-color": "dew-color",
     "dgb-color": "dgb-color",
     "dgd-color": "dgd-color",
+    "dia-browser-color": "dia-browser-color",
     "diamond-filled": "diamond-filled",
     "diamond": "diamond",
     "dice": "dice",
@@ -1474,6 +1476,7 @@ const meta = {
     "origin-color": "origin-color",
     "ost-color": "ost-color",
     "outbox": "outbox",
+    "outlook-color": "outlook-color",
     "outside": "outside",
     "ox-color": "ox-color",
     "oxt-color": "oxt-color",
@@ -1648,6 +1651,7 @@ const meta = {
     "protocol-handler-off": "protocol-handler-off",
     "protocol-handler": "protocol-handler",
     "protondrive-color": "protondrive-color",
+    "protonmail-color": "protonmail-color",
     "prq-color": "prq-color",
     "prqboost-color": "prqboost-color",
     "psst": "psst",
