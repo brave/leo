@@ -1,12 +1,14 @@
 <script context="module" lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { HTMLAttributes } from '../../types/attributes'
+
   declare global {
     namespace JSX {
       interface IntrinsicElements {
         'leo-menu-item': HTMLAttributes<HTMLElement> & {
           key?: string | number | null
+          /** React/DOM often pass mixed text + element siblings as `(string | Element)[]`. */
           children?: any
-          onClick?: (MouseEvent) => void
+          onClick?: (event: MouseEvent) => void
         }
       }
     }

@@ -3,23 +3,36 @@
   import ProgressRing from '../progress/progressRing.svelte'
 
   type Href = $$Generic<string | undefined>
-  type ExcludedProps = 'class' | 'aria-disabled' | 'href' | 'hreflang'
 
   interface CommonNalaLinkProps {
     isDisabled?: boolean
     isLoading?: boolean
   }
 
-  type ButtonProps = CommonNalaLinkProps &
-    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
-      href?: never
-      onClick?: (e: MouseEvent) => void
-    }
+  type ButtonHTMLAttributes = Pick<
+    SvelteHTMLElements['button'],
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'autofocus' | 'name' | 'title' |  'form' | 'formaction' | 'formmethod' | 'formenctype' | 'formtarget' | 'formnovalidate' | 'command' | 'commandfor' | 'popover' | 'popovertarget' | 'popovertargetaction'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
+  type LinkHTMLAttributes = Pick<
+    SvelteHTMLElements['a'],
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'autofocus' | 'title'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
 
-  type AnchorProps = CommonNalaLinkProps &
-    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
-      href: Href
-    }
+  type ButtonProps = CommonNalaLinkProps & {
+    href?: never
+  } & Partial<ButtonHTMLAttributes>;
+
+  type AnchorProps = CommonNalaLinkProps & {
+    href: Href;
+    isDisabled?: never;
+    isLoading?: never;
+  } & Partial<LinkHTMLAttributes>;
 
   type $$Props = AnchorProps | ButtonProps
 

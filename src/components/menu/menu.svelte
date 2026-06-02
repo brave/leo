@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
-  import type { HTMLAttributes } from 'svelte/elements'
+  import type { HTMLAttributes } from '../../types/attributes'
+
   declare global {
     namespace JSX {
       interface IntrinsicElements {
@@ -7,8 +8,9 @@
           // Note: This should line up with Reacts key type, but we don't want
           // to depend on React in this layer, so we just define it manually.
           key?: string | number | null
+          /** React/DOM often pass mixed text + element siblings as `(string | Element)[]`. */
           children?: any
-          onClick?: (MouseEvent) => void
+          onClick?: (event: MouseEvent) => void
         }
         'leo-option': HTMLAttributes<HTMLElement> & {
           key?: string | number | null

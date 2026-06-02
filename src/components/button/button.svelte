@@ -19,28 +19,42 @@
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
   type Loading = $$Generic<undefined extends Href ? boolean : undefined>
-  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   interface CommonProps {
-    kind?: Props.ButtonKind
-    size?: Props.ButtonSize
-    fab?: boolean
-    onClick?: (e: MouseEvent) => void
+    kind?: Props.ButtonKind;
+    size?: Props.ButtonSize;
+    fab?: boolean;
+    onClick?: (e: MouseEvent) => void;
   }
 
-  type NalaButtonProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
-      isDisabled?: Disabled
-      isLoading?: Loading
-      href?: never
-    }
+  type ButtonHTMLAttributes = Pick<
+    SvelteHTMLElements['button'],
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'autofocus' | 'name' | 'title' |  'form' | 'formaction' | 'formmethod' | 'formenctype' | 'formtarget' | 'formnovalidate' | 'command' | 'commandfor' | 'popover' | 'popovertarget' | 'popovertargetaction'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
+  type LinkHTMLAttributes = Pick<
+    SvelteHTMLElements['a'],
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'autofocus' | 'title'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
 
-  type NalaLinkProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
-      href: Href
-    }
+  type NalaButtonProps = CommonProps & {
+    isDisabled?: Disabled
+    isLoading?: Loading
+    href?: never
+  } & Partial<ButtonHTMLAttributes>;
 
-  type $$Props = NalaLinkProps | NalaButtonProps
+  type NalaLinkProps = CommonProps & {
+    href: Href;
+    isDisabled?: never;
+    isLoading?: never;
+  } & Partial<LinkHTMLAttributes>;
+
+  type $$Props = NalaButtonProps | NalaLinkProps;
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
