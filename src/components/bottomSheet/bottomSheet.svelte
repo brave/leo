@@ -273,15 +273,17 @@
     style:z-index={10000 + stackIndex}
     bind:this={sheetEl}
   >
-    <div
-      class="drag-handle-area"
-      on:pointerdown={handlePointerDown}
-      on:pointermove={handlePointerMove}
-      on:pointerup={handlePointerUp}
-      on:pointercancel={handlePointerUp}
-    >
-      <div class="drag-handle" />
-    </div>
+    {#if dragToClose}
+      <div
+        class="drag-handle-area"
+        on:pointerdown={handlePointerDown}
+        on:pointermove={handlePointerMove}
+        on:pointerup={handlePointerUp}
+        on:pointercancel={handlePointerUp}
+      >
+        <div class="drag-handle" />
+      </div>
+    {/if}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="leo-bottomsheet-content" role="menu" tabindex="-1" on:click={handleItemClick}>
       <slot />
