@@ -18,6 +18,7 @@
   const dismissingSheetId = writable<number | null>(null)
 
   const DISMISS_DURATION_MS = 200
+  const BACKDROP_DURATION_MS = 200
 </script>
 
 <script lang="ts">
@@ -33,6 +34,9 @@
   const id = nextId++
 
   let sheetEl: HTMLDivElement
+  let backdropEl: HTMLDivElement
+  let showBackdrop = false
+  let backdropClosing = false
   let dragStartY = 0
   let dragCurrentY = 0
   let isDragging = false
@@ -71,6 +75,36 @@
   $: isBottomOfStack = stackIndex === 0
   $: stackAnimating = $dismissingSheetId != null
 
+  $: if (isOpen && isBottomOfStack) {
+    showBackdrop = true
+  }
+
+  $: if (!isOpen && showBackdrop && !dismissing && !backdropClosing) {
+    void fadeBackdropAndHide()
+  }
+
+  function fadeBackdropOut() {
+    if (!backdropEl) return Promise.resolve()
+    return backdropEl
+      .animate(
+        [{ opacity: 1 }, { opacity: 0 }],
+        {
+          duration: BACKDROP_DURATION_MS,
+          easing: 'ease-out',
+          fill: 'forwards'
+        }
+      )
+      .finished.catch(() => undefined)
+  }
+
+  async function fadeBackdropAndHide() {
+    if (backdropClosing) return
+    backdropClosing = true
+    await fadeBackdropOut()
+    showBackdrop = false
+    backdropClosing = false
+  }
+
   function close(fromY = 0) {
     if (dismissing) return
     if (!sheetEl) {
@@ -83,22 +117,33 @@
 
     dismissing = true
     const target = sheetEl.offsetHeight
-    sheetEl.animate(
-      [
-        { transform: `translateY(${fromY}px)` },
-        { transform: `translateY(${target}px)` }
-      ],
-      {
-        duration: DISMISS_DURATION_MS,
-        easing: 'ease-out',
-        fill: 'forwards'
-      }
-    ).onfinish = () => {
+    const fadeBackdrop = isBottomOfStack && showBackdrop
+    const animations: Promise<void>[] = [
+      sheetEl
+        .animate(
+          [
+            { transform: `translateY(${fromY}px)` },
+            { transform: `translateY(${target}px)` }
+          ],
+          {
+            duration: DISMISS_DURATION_MS,
+            easing: 'ease-out',
+            fill: 'forwards'
+          }
+        )
+        .finished.then(() => undefined)
+    ]
+    if (fadeBackdrop) {
+      animations.push(fadeBackdropOut().then(() => undefined))
+    }
+
+    Promise.all(animations).then(() => {
       dismissing = false
       if (compressStack) dismissingSheetId.set(null)
+      if (fadeBackdrop) showBackdrop = false
       isOpen = false
       onClose?.()
-    }
+    })
   }
 
   function handleBackdropClick() {
@@ -199,16 +244,17 @@
   }
 </script>
 
+{#if showBackdrop}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div
+    class="leo-bottomsheet-backdrop"
+    role="presentation"
+    on:click={handleBackdropClick}
+    in:fade={{ duration: BACKDROP_DURATION_MS }}
+    bind:this={backdropEl}
+  />
+{/if}
 {#if isOpen}
-  {#if isBottomOfStack}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="leo-bottomsheet-backdrop"
-      role="presentation"
-      on:click={handleBackdropClick}
-      transition:fade={{ duration: 200 }}
-    />
-  {/if}
   <div
     class="leo-bottomsheet"
     class:is-behind={depthBehind > 0}
