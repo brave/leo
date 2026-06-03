@@ -3009,6 +3009,12 @@
           "value": 30
         }
       },
+      "misc": {
+        "scrollbar-color": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.1000)"
+        }
+      },
       "fixed-foreground": {
         "type": "color",
         "value": "#000000",
@@ -4405,6 +4411,12 @@
         "blur-ultrathin": {
           "type": "number",
           "value": 100
+        }
+      },
+      "misc": {
+        "scrollbar-color": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.1000)"
         }
       },
       "fixed-foreground": {
