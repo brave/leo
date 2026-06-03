@@ -7,7 +7,8 @@ import {
   type ForwardedRef,
   type PropsWithChildren,
   useState,
-  type PropsWithoutRef
+  type PropsWithoutRef,
+  useLayoutEffect
 } from 'react'
 import type { SvelteComponent } from 'svelte'
 
@@ -137,7 +138,7 @@ export default function SvelteWebComponentToReact<
         [setElement]
       )
 
-      useEffect(() => {
+      useLayoutEffect(() => {
         if (!component.current) return
         // Create a dictionary of all our properties without events. If we pass an
         // onClick prop through to Svelte, we could inadvertently set it on the
