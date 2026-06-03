@@ -14,7 +14,6 @@
   ul {
     display: flex;
     flex-direction: var(--nav-direction);
-    gap: var(--leo-spacing-m);
     margin: 0;
     padding: var(--leo-spacing-2xl) 0;
     list-style: none;

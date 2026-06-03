@@ -1,5 +1,5 @@
-import sveltePreprocess from 'svelte-preprocess'
 import themePlugin from './src/postcss/theme.js'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 const IGNORE_WARNINGS = [
   'a11y-no-static-element-interactions',
@@ -15,7 +15,8 @@ export const onwarn = (warning, handler) => {
 // Storybook, as the WebComponents compile is slightly different.
 export default {
   extensions: ['.svelte'],
-  preprocess: sveltePreprocess({
+  preprocess: vitePreprocess({
+    script: true,
     postcss: {
       plugins: [
         themePlugin({

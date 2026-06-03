@@ -19,7 +19,6 @@
   // 3) Make sure any script tags on your component have a `lang="ts"` attribute.
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
-  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   type CommonProps = {
     outsideList?: boolean
@@ -27,18 +26,31 @@
     onClick?: () => void
   }
 
-  type ButtonProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
-      isDisabled?: Disabled
-      isLoading?: boolean
-      href?: never
-    }
+  type ButtonHTMLAttributes = Pick<
+    SvelteHTMLElements['button'],
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'autofocus' | 'name' | 'title' |  'form' | 'formaction' | 'formmethod' | 'formenctype' | 'formtarget' | 'formnovalidate' | 'command' | 'commandfor' | 'popover' | 'popovertarget' | 'popovertargetaction'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
+  type LinkHTMLAttributes = Pick<
+    SvelteHTMLElements['a'],
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'autofocus' | 'title'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
 
-  type LinkProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
-      href: Href
-      isCurrent?: boolean
-    }
+  type ButtonProps = CommonProps & {
+    isDisabled?: Disabled
+    isLoading?: boolean
+    href?: never
+  } & Partial<ButtonHTMLAttributes>;
+
+  type LinkProps = CommonProps & {
+    href: Href;
+    isCurrent?: boolean
+  } & Partial<LinkHTMLAttributes>;
 
   type $$Props = LinkProps | ButtonProps
 
@@ -151,8 +163,8 @@
       box-sizing: border-box;
       gap: var(--leo-spacing-xl);
       align-items: center;
-      height: 48px;
-      padding-left: var(--leo-spacing-2xl);
+      min-height: 44px;
+      padding-left: var(--leo-spacing-xl);
       padding-right: var(--leo-spacing-m);
       border-radius: 0;
       outline: none;

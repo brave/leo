@@ -19,28 +19,42 @@
   type Href = $$Generic<string | undefined>
   type Disabled = $$Generic<undefined extends Href ? boolean : undefined>
   type Loading = $$Generic<undefined extends Href ? boolean : undefined>
-  type ExcludedProps = 'size' | 'href' | 'hreflang'
 
   interface CommonProps {
-    kind?: Props.ButtonKind
-    size?: Props.ButtonSize
-    fab?: boolean
-    onClick?: (e: MouseEvent) => void
+    kind?: Props.ButtonKind;
+    size?: Props.ButtonSize;
+    fab?: boolean;
+    onClick?: (e: MouseEvent) => void;
   }
 
-  type NalaButtonProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['button']>, ExcludedProps> & {
-      isDisabled?: Disabled
-      isLoading?: Loading
-      href?: never
-    }
+  type ButtonHTMLAttributes = Pick<
+    SvelteHTMLElements['button'],
+    'id' | 'class' | 'style' | 'disabled' | 'type' | 'autofocus' | 'name' | 'title' |  'form' | 'formaction' | 'formmethod' | 'formenctype' | 'formtarget' | 'formnovalidate' | 'command' | 'commandfor' | 'popover' | 'popovertarget' | 'popovertargetaction'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
+  type LinkHTMLAttributes = Pick<
+    SvelteHTMLElements['a'],
+    'id' | 'class' | 'style' | 'target' | 'rel' | 'autofocus' | 'title'
+  > & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+    [key: `aria-${string}`]: string | number | boolean | undefined
+  };
 
-  type NalaLinkProps = CommonProps &
-    Omit<Partial<SvelteHTMLElements['a']>, ExcludedProps> & {
-      href: Href
-    }
+  type NalaButtonProps = CommonProps & {
+    isDisabled?: Disabled
+    isLoading?: Loading
+    href?: never
+  } & Partial<ButtonHTMLAttributes>;
 
-  type $$Props = NalaLinkProps | NalaButtonProps
+  type NalaLinkProps = CommonProps & {
+    href: Href;
+    isDisabled?: never;
+    isLoading?: never;
+  } & Partial<LinkHTMLAttributes>;
+
+  type $$Props = NalaButtonProps | NalaLinkProps;
 
   export let kind: Props.ButtonKind = 'filled'
   export let size: Props.ButtonSize = 'medium'
@@ -53,7 +67,7 @@
 
   /**
    * Exposed so that the button can be clicked programmatically.
-  */
+   */
   export function click() {
     el?.click()
   }
@@ -90,14 +104,14 @@
       {#if $$slots.loading}
         <slot name="loading" />
       {:else if !fab}
-        <slot/>
+        <slot />
       {/if}
     </div>
     <ProgressRing />
   {:else}
     <slot name="icon-before" />
     <div class:content={!fab}>
-      <slot/>
+      <slot />
     </div>
     <slot name="icon-after" />
   {/if}
@@ -136,7 +150,8 @@
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition:
       box-shadow 0.12s ease-in-out, color 0.12s ease-in-out,
-      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out;
+      border-color 0.12s ease-in-out, opacity 0.12s ease-in-out,
+      transform 0.12s ease-in-out;
     --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
     --radius: var(--leo-radius-full);
@@ -192,31 +207,34 @@
   }
 
   .leoButton:not(:disabled) {
-    &:hover,
-    [data-is-button-target]:hover :host .leoButton,
-    [data-is-button-target]:hover .leoButton {
-      --leo-icon-color: var(--icon-hover-color, var(--icon-color));
-      --mixed-primary-color: var(--leo-color-primary-70);
+    @media (hover: hover) {
+      &:hover,
+      [data-is-button-target]:hover :host .leoButton,
+      [data-is-button-target]:hover .leoButton {
+        --leo-icon-color: var(--icon-hover-color, var(--icon-color));
+        --mixed-primary-color: var(--leo-color-primary-70);
 
-      /** If we support the color-mix syntax, infer the hover color */
-      @supports (color: color-mix(in srgb, transparent, transparent)) {
-        --mixed-primary-color: color-mix(
-          in srgb,
-          var(--primary-color),
-          var(--foreground) 20%
-        );
+        /** If we support the color-mix syntax, infer the hover color */
+        @supports (color: color-mix(in srgb, transparent, transparent)) {
+          --mixed-primary-color: color-mix(
+            in srgb,
+            var(--primary-color),
+            var(--foreground) 20%
+          );
+        }
+
+        background: var(--bg-hover, var(--bg));
+        color: var(--color-hover, var(--mixed-primary-color));
+        box-shadow: var(--box-shadow-hover);
+        border-color: var(--border-color-hover, var(--border-color));
       }
-
-      background: var(--bg-hover, var(--bg));
-      color: var(--color-hover, var(--mixed-primary-color));
-      box-shadow: var(--box-shadow-hover);
-      border-color: var(--border-color-hover, var(--border-color));
     }
 
     &:active {
       opacity: 0.75;
       background: var(--bg-active, var(--bg));
       color: var(--color-active, var(--color-hover, var(--color)));
+      transform: scale(0.97);
     }
 
     &:focus-visible {
@@ -449,8 +467,10 @@
         opacity: 0.001;
       }
 
-      &:hover::before {
-        opacity: 1;
+      @media (hover: hover) {
+        &:hover::before {
+          opacity: 1;
+        }
       }
     }
 
@@ -507,8 +527,10 @@
       }
     }
 
-    &:hover:not(:disabled) {
-      --default-bg-opacity: 0;
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        --default-bg-opacity: 0;
+      }
     }
   }
 
