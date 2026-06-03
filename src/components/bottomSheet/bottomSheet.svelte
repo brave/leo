@@ -14,6 +14,10 @@
 
   let nextId = 0
   const sheetStack = writable<number[]>([])
+  /** Top sheet id while its dismiss animation runs; stack depth uses a compressed stack. */
+  const dismissingSheetId = writable<number | null>(null)
+
+  const DISMISS_DURATION_MS = 200
 </script>
 
 <script lang="ts">
@@ -48,12 +52,24 @@
 
   onDestroy(() => {
     sheetStack.update((s) => (s.includes(id) ? s.filter((sid) => sid !== id) : s))
+    if ($dismissingSheetId === id) dismissingSheetId.set(null)
   })
 
   $: stackIndex = $sheetStack.indexOf(id)
-  $: depthBehind = stackIndex === -1 ? 0 : $sheetStack.length - 1 - stackIndex
-  $: isTopmost = isOpen && depthBehind === 0
+  $: effectiveStack =
+    $dismissingSheetId != null
+      ? $sheetStack.filter((sid) => sid !== $dismissingSheetId)
+      : $sheetStack
+  $: effectiveIndex = effectiveStack.indexOf(id)
+  $: fullDepthBehind =
+    stackIndex === -1 ? 0 : $sheetStack.length - 1 - stackIndex
+  $: effectiveDepthBehind =
+    effectiveIndex === -1 ? 0 : effectiveStack.length - 1 - effectiveIndex
+  /** Visual stack depth; compresses when a sheet above is dismissing. */
+  $: depthBehind = dismissing ? fullDepthBehind : effectiveDepthBehind
+  $: isTopmost = isOpen && fullDepthBehind === 0
   $: isBottomOfStack = stackIndex === 0
+  $: stackAnimating = $dismissingSheetId != null
 
   function close(fromY = 0) {
     if (dismissing) return
@@ -62,6 +78,9 @@
       onClose?.()
       return
     }
+    const compressStack = isTopmost && $sheetStack.length > 1
+    if (compressStack) dismissingSheetId.set(id)
+
     dismissing = true
     const target = sheetEl.offsetHeight
     sheetEl.animate(
@@ -69,9 +88,14 @@
         { transform: `translateY(${fromY}px)` },
         { transform: `translateY(${target}px)` }
       ],
-      { duration: 200, easing: 'ease-out', fill: 'forwards' }
+      {
+        duration: DISMISS_DURATION_MS,
+        easing: 'ease-out',
+        fill: 'forwards'
+      }
     ).onfinish = () => {
       dismissing = false
+      if (compressStack) dismissingSheetId.set(null)
       isOpen = false
       onClose?.()
     }
@@ -195,7 +219,11 @@
       ? `translateY(${dragOffset}px)`
       : stackTransform(depthBehind) || undefined}
     style:filter={depthBehind > 0 ? `brightness(${Math.max(0.25, 1 - depthBehind * 0.25)}) blur(${Math.min(depthBehind * 2, 6)}px)` : undefined}
-    style:transition={isDragging || dismissing ? 'none' : undefined}
+    style:transition={isDragging || dismissing
+      ? 'none'
+      : stackAnimating
+        ? `transform ${DISMISS_DURATION_MS}ms ease-out, filter ${DISMISS_DURATION_MS}ms ease-out, box-shadow ${DISMISS_DURATION_MS}ms ease-out`
+        : undefined}
     style:z-index={10000 + stackIndex}
     bind:this={sheetEl}
   >
