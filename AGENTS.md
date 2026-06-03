@@ -4,7 +4,7 @@ Leo is Brave's cross-platform design system. It powers the Brave Browser
 (desktop and mobile), the new tab and search experiences, brave.com
 marketing, and the broader privacy-product portfolio.
 
-Components are authored in Svelte and shipped to consumers as **React** and
+Components are authored in Svelte and shipped to consumers as **React**, **Svelte** and
 **Web Component** wrappers. Tokens are authored once and exported to CSS,
 Tailwind, Skia (C++), Java/XML (Android), and Swift (iOS).
 
@@ -120,8 +120,3 @@ npm run dev        # rollup --watch for iterating on a component
 npm run storybook  # Storybook on :6006
 npm run test       # jest
 ```
-
-Node is pinned to `24.11.1` in CI
-([.github/workflows/build.yml](.github/workflows/build.yml)). Use npm —
-the lockfile is `package-lock.json` and CI installs with
-`npm ci --ignore-scripts`.
