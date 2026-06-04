@@ -3012,7 +3012,7 @@
       "misc": {
         "scrollbar-color": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.1000)"
+          "value": "rgba(0, 0, 0, 0.1500)"
         }
       },
       "fixed-foreground": {
@@ -4416,7 +4416,7 @@
       "misc": {
         "scrollbar-color": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.1000)"
+          "value": "rgba(255, 255, 255, 0.1500)"
         }
       },
       "fixed-foreground": {
