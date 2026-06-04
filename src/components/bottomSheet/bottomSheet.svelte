@@ -30,6 +30,8 @@
   export let escapeCloses = true
   export let backdropClickCloses = true
   export let dragToClose = true
+  /** When true, dragging the handle up expands the sheet to full viewport height. */
+  export let dragToExpand = false
 
   const id = nextId++
 
@@ -41,15 +43,50 @@
   let dragCurrentY = 0
   let isDragging = false
   let dismissing = false
+  let isExpanded = false
+  /** Sheet height when open but not expanded; preserved while expanded for collapse. */
+  let collapsedSnapHeight = 0
 
-  $: dragOffset = isDragging ? Math.max(0, dragCurrentY - dragStartY) : 0
+  $: dragDeltaY = isDragging ? dragCurrentY - dragStartY : 0
+  $: expandRange =
+    dragToExpand && collapsedSnapHeight > 0
+      ? Math.max(0, getViewportHeight() - collapsedSnapHeight)
+      : 0
+  $: dismissTranslateY = (() => {
+    if (!isDragging) return 0
+    if (dragToExpand && isExpanded && dragDeltaY > 0) {
+      return Math.max(0, dragDeltaY - expandRange)
+    }
+    return Math.max(0, dragDeltaY)
+  })()
+  $: dragMaxHeight = (() => {
+    if (!isDragging || !dragToExpand || !sheetEl) return undefined
+    const expandedH = getViewportHeight()
+    if (dragDeltaY < 0 && !isExpanded) {
+      return Math.min(expandedH, collapsedSnapHeight + -dragDeltaY)
+    }
+    if (dragDeltaY > 0 && isExpanded) {
+      return Math.max(collapsedSnapHeight, expandedH - dragDeltaY)
+    }
+    return undefined
+  })()
+
+  $: atFullHeight =
+    isExpanded ||
+    (dragMaxHeight != null && dragMaxHeight >= getViewportHeight() - 1)
 
   $: if (isOpen) {
     dismissing = false
     openedAt = Date.now()
     sheetStack.update((s) => (s.includes(id) ? s : [...s, id]))
   } else {
+    isExpanded = false
+    collapsedSnapHeight = 0
     sheetStack.update((s) => (s.includes(id) ? s.filter((sid) => sid !== id) : s))
+  }
+
+  $: if (isOpen && sheetEl && !isExpanded && !isDragging && !dismissing) {
+    collapsedSnapHeight = sheetEl.offsetHeight
   }
 
   $: document.body.style.overflow = $sheetStack.length > 0 ? 'hidden' : ''
@@ -207,11 +244,24 @@
     }
   }
 
+  function getViewportHeight() {
+    return window.visualViewport?.height ?? window.innerHeight
+  }
+
+  function resetDrag() {
+    isDragging = false
+    dragStartY = 0
+    dragCurrentY = 0
+  }
+
   function handlePointerDown(e: PointerEvent) {
-    if (!dragToClose || !isTopmost) return
+    if ((!dragToClose && !dragToExpand) || !isTopmost) return
     isDragging = true
     dragStartY = e.clientY
     dragCurrentY = e.clientY
+    if (!isExpanded && sheetEl) {
+      collapsedSnapHeight = sheetEl.offsetHeight
+    }
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
   }
 
@@ -222,18 +272,39 @@
 
   function handlePointerUp() {
     if (!isDragging) return
-    const threshold = sheetEl ? sheetEl.offsetHeight * 0.3 : 100
-    if (dragOffset > threshold) {
-      const offset = dragOffset
-      isDragging = false
-      dragStartY = 0
-      dragCurrentY = 0
-      close(offset)
+
+    const delta = dragDeltaY
+    const range = expandRange
+
+    if (dragToExpand && !isExpanded && delta < 0 && -delta > range * 0.25) {
+      isExpanded = true
+      resetDrag()
       return
     }
-    isDragging = false
-    dragStartY = 0
-    dragCurrentY = 0
+
+    if (dragToExpand && isExpanded && delta > 0) {
+      const closeThreshold = getViewportHeight() * 0.5
+      if (dragToClose && delta > closeThreshold) {
+        resetDrag()
+        close(dismissTranslateY)
+        return
+      }
+      isExpanded = false
+      resetDrag()
+      return
+    }
+
+    if (dragToClose) {
+      const threshold = sheetEl ? sheetEl.offsetHeight * 0.3 : 100
+      if (dismissTranslateY > threshold) {
+        const offset = dismissTranslateY
+        resetDrag()
+        close(offset)
+        return
+      }
+    }
+
+    resetDrag()
   }
 
   function stackTransform(depth: number): string {
@@ -258,11 +329,13 @@
   <div
     class="leo-bottomsheet"
     class:is-behind={depthBehind > 0}
+    class:is-expanded={atFullHeight}
     role="dialog"
     aria-modal="true"
     in:fly={{ y: '100%', duration: 300, opacity: 1 }}
+    style:max-height={dragMaxHeight ? `${dragMaxHeight}px` : undefined}
     style:transform={isDragging
-      ? `translateY(${dragOffset}px)`
+      ? `translateY(${dismissTranslateY}px)`
       : stackTransform(depthBehind) || undefined}
     style:filter={depthBehind > 0 ? `brightness(${Math.max(0.25, 1 - depthBehind * 0.25)}) blur(${Math.min(depthBehind * 2, 6)}px)` : undefined}
     style:transition={isDragging || dismissing
@@ -273,7 +346,7 @@
     style:z-index={10000 + stackIndex}
     bind:this={sheetEl}
   >
-    {#if dragToClose}
+    {#if dragToClose || dragToExpand}
       <div
         class="drag-handle-area"
         on:pointerdown={handlePointerDown}
@@ -332,7 +405,17 @@
     max-height: var(--leo-bottomsheet-max-height, 85vh);
     overflow: hidden;
 
-    transition: transform 300ms ease, filter 300ms ease, box-shadow 300ms ease;
+    transition:
+      transform 300ms ease,
+      filter 300ms ease,
+      box-shadow 300ms ease,
+      max-height 300ms ease,
+      border-radius 300ms ease;
+  }
+
+  .leo-bottomsheet.is-expanded {
+    max-height: var(--leo-bottomsheet-expanded-max-height, 100dvh);
+    border-radius: 0;
   }
 
   .leo-bottomsheet.is-behind {
