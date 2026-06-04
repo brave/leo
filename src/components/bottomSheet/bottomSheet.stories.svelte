@@ -22,8 +22,18 @@
         type: 'string',
         description: 'Max width of the bottom sheet (default: 480px)'
       },
+      '--leo-bottomsheet-expanded-max-height': {
+        type: 'string',
+        description:
+          'Max height when expanded via drag (default: 100dvh)'
+      },
       isOpen: {
         control: 'none'
+      },
+      dragToExpand: {
+        type: 'boolean',
+        description:
+          'When true, dragging the handle up expands the sheet to full viewport height'
       }
     }
   }
@@ -44,6 +54,7 @@
   let stackedSheet1 = false
   let stackedSheet2 = false
   let stackedSheet3 = false
+  let expandableOpen = false
 
   const handleAction = () => console.log('action')
 </script>
@@ -91,6 +102,50 @@
 </Template>
 
 <Story name="Default" />
+
+<Story name="Expandable" let:args>
+  <Button onClick={() => (expandableOpen = true)}>Open Expandable Sheet</Button>
+  <BottomSheet
+    {...args}
+    dragToExpand
+    isOpen={expandableOpen}
+    onClose={() => (expandableOpen = false)}
+  >
+    <leo-title>Drag up to expand</leo-title>
+    <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Item 1</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Item 2</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <div class="item">
+        <Icon name="info-outline" />
+        <span>Item 3</span>
+        <Icon name="carat-right" />
+      </div>
+    </leo-menu-item>
+    <Hr />
+    <leo-title>More content</leo-title>
+    {#each Array(12) as _, i}
+      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+        <div class="item">
+          <Icon name="info-outline" />
+          <span>Scrollable item {i + 1}</span>
+          <Icon name="carat-right" />
+        </div>
+      </leo-menu-item>
+    {/each}
+  </BottomSheet>
+</Story>
 
 <Story name="With Sections" let:args>
   <Button onClick={() => (sectionsOpen = true)}>Open Sectioned Sheet</Button>
