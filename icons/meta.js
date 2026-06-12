@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1780001258290,
+  "updatedAt": 1781200629616,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -291,6 +291,7 @@ export default {
     "browser-mobile-tabs": "browser-mobile-tabs",
     "browser-notification": "browser-notification",
     "browser-ntp-widget": "browser-ntp-widget",
+    "browser-quick-view": "browser-quick-view",
     "browser-refresh": "browser-refresh",
     "browser-sidebar-off": "browser-sidebar-off",
     "browser-sidebar-right": "browser-sidebar-right",
@@ -1736,6 +1737,7 @@ export default {
     "salt-color": "salt-color",
     "samsung-internet-color": "samsung-internet-color",
     "san-color": "san-color",
+    "save": "save",
     "sbd-color": "sbd-color",
     "sberbank-color": "sberbank-color",
     "sc-color": "sc-color",
