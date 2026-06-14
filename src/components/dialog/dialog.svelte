@@ -293,7 +293,7 @@
 
   @media (min-width: 480px) and (min-height: 480px) {
     .leo-dialog {
-      --padding: var(--leo-dialog-padding, var(--leo-spacing-4xl));
+      --padding: var(--leo-dialog-padding, var(--leo-spacing-3xl));
       max-width: var(--leo-dialog-width, 500px);
     }
 
