@@ -1365,11 +1365,11 @@
     },
     "browserwindow-macos26": {
       "type": "number",
-      "value": 22
+      "value": 16
     },
     "browsercontent-macos26-bigger": {
       "type": "number",
-      "value": 18
+      "value": 12
     },
     "browsercontent-macos26-smaller": {
       "type": "number",
@@ -3010,9 +3010,13 @@
         }
       },
       "misc": {
-        "scrollbar-color": {
+        "scrollbar-thumb-color": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.1500)"
+        },
+        "scrollbar-track-color": {
+          "type": "color",
+          "value": "rgba(0, 0, 0, 0.0000)"
         }
       },
       "fixed-foreground": {
@@ -4083,6 +4087,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -4094,11 +4103,6 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -4414,9 +4418,13 @@
         }
       },
       "misc": {
-        "scrollbar-color": {
+        "scrollbar-thumb-color": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.1500)"
+        },
+        "scrollbar-track-color": {
+          "type": "color",
+          "value": "rgba(255, 255, 255, 0.0000)"
         }
       },
       "fixed-foreground": {
@@ -5487,6 +5495,11 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5498,11 +5511,6 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
