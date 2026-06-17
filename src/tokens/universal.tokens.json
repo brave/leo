@@ -1321,44 +1321,6 @@
         }
       }
     },
-    "hard shadow": {
-      "01": {
-        "description": null,
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#5b67e8ff",
-          "offsetX": 4,
-          "offsetY": 4,
-          "spread": 0
-        },
-        "extensions": {
-          "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:f30f702c98b25bebf389a5b28d08514526f310e0,",
-            "exportKey": "effect"
-          }
-        }
-      },
-      "02": {
-        "description": null,
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#5b67e8ff",
-          "offsetX": 8,
-          "offsetY": 8,
-          "spread": 0
-        },
-        "extensions": {
-          "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:1a69c0c579dd32fc136ad762796993a99bddbbe6,",
-            "exportKey": "effect"
-          }
-        }
-      }
-    },
     "material": {
       "thick": {
         "description": null,
@@ -1476,26 +1438,6 @@
         "extensions": {
           "org.lukasoppermann.figmaDesignTokens": {
             "styleId": "S:91720a8e0b8c7dd27236f6391dcf437679aaa67f,",
-            "exportKey": "effect"
-          }
-        }
-      }
-    },
-    "button": {
-      "inner shadow": {
-        "description": null,
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "innerShadow",
-          "radius": 1,
-          "color": "#ffffff80",
-          "offsetX": 0,
-          "offsetY": 3,
-          "spread": 0
-        },
-        "extensions": {
-          "org.lukasoppermann.figmaDesignTokens": {
-            "styleId": "S:452f4ab8385443bcf755369226d88b292ded1717,",
             "exportKey": "effect"
           }
         }
