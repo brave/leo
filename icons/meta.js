@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1781200629616,
+  "updatedAt": 1781814782214,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -124,6 +124,7 @@ export default {
     "atm-color": "atm-color",
     "atm": "atm",
     "atom-color": "atom-color",
+    "attachment-off": "attachment-off",
     "attachment": "attachment",
     "auction": "auction",
     "aud-color": "aud-color",
@@ -1243,6 +1244,7 @@ export default {
     "leo-color": "leo-color",
     "leo-cursor-filled": "leo-cursor-filled",
     "leo-cursor": "leo-cursor",
+    "leo-local": "leo-local",
     "leo-project-new": "leo-project-new",
     "leo-project": "leo-project",
     "leo-tasks": "leo-tasks",
@@ -1861,6 +1863,7 @@ export default {
     "social-bat-favicon-fullheight-color": "social-bat-favicon-fullheight-color",
     "social-bluesky-color": "social-bluesky-color",
     "social-brave-beta-favicon-fullheight-color": "social-brave-beta-favicon-fullheight-color",
+    "social-brave-carved-favicon-fullheight": "social-brave-carved-favicon-fullheight",
     "social-brave-dev-favicon-fullheight-color": "social-brave-dev-favicon-fullheight-color",
     "social-brave-monochrome-favicon-fullheight-color": "social-brave-monochrome-favicon-fullheight-color",
     "social-brave-newface-favicon-fullheight": "social-brave-newface-favicon-fullheight",
