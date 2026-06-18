@@ -10,6 +10,7 @@
 </script>
 
 <script lang="ts">
+  import { onMount } from 'svelte'
   import Icon from '../icon/icon.svelte'
 
   export let checked: boolean
@@ -17,6 +18,18 @@
   export let size: Sizes = 'normal'
 
   export let onChange: (detail: { checked: boolean }) => void = undefined
+
+  // Don't animate the check-mark when the checkbox first mounts already in a
+  // checked state — only animate genuine toggles. Deferring to the next frame
+  // means a wrapper that assigns `checked` immediately after mount (e.g. our
+  // React bindings set it in a layout effect) is treated as the initial state
+  // rather than an animated change, so the check-mark doesn't fade in on
+  // (re)mount.
+  let animate = false
+  onMount(() => {
+    const handle = requestAnimationFrame(() => (animate = true))
+    return () => cancelAnimationFrame(handle)
+  })
 </script>
 
 <label
@@ -25,6 +38,7 @@
   class:normal={size !== 'small'}
   class:disabled={isDisabled}
   class:isChecked={checked}
+  class:animate
 >
   <div class="check">
     <input
@@ -140,10 +154,6 @@
       right: 0;
     }
 
-    & .check-mark {
-      transition: opacity 120ms ease-in-out;
-    }
-
     & .checked {
       opacity: 0;
     }
@@ -158,6 +168,10 @@
         0px 0px 4px 2px #423eee;
       border-radius: var(--focus-border-radius);
     }
+  }
+
+  .leo-checkbox.animate .check .check-mark {
+    transition: opacity 120ms ease-in-out;
   }
 
   .leo-checkbox.disabled .check {
