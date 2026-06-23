@@ -273,7 +273,7 @@
     // to the border-radius.
     overflow: auto;
     border: 1px solid var(--leo-color-divider-subtle);
-    border-radius: var(--leo-radius-m);
+    border-radius: var(--leo-radius-l);
     min-width: var(--leo-menu-control-width);
     display: flex;
     flex-direction: column;
@@ -303,7 +303,7 @@
       var(--leo-spacing-s) var(--leo-menu-item-margin-bottom, 0)
       var(--leo-spacing-s);
     --leo-menu-item-padding: var(--leo-spacing-m) var(--leo-spacing-xl);
-    --leo-menu-item-border-radius: var(--leo-spacing-s);
+    --leo-menu-item-border-radius: var(--leo-radius-m);
   }
 
   :global(.leo-menu-popup ::slotted(leo-option:nth-child(1 of :not([slot])))),

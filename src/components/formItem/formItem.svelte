@@ -118,7 +118,7 @@
     --base: var(--leo-color-container-background);
     --primary: var(--leo-control-color, var(--base));
 
-    --radius: var(--leo-control-radius, var(--leo-radius-m));
+    --radius: var(--leo-control-radius, var(--leo-radius-l));
     --padding: var(--leo-control-padding, 11px var(--leo-spacing-m));
     --font: var(--leo-control-font, var(--leo-font-default-regular));
     --leo-icon-size: var(--leo-control-icon-size, 20px);
