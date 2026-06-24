@@ -72,6 +72,13 @@
 
   let pill: HTMLDivElement
 
+  // Don't animate the pill when the control first mounts — only animate genuine
+  // value changes. Deferring to the next frame means a wrapper that assigns
+  // `value` immediately after mount (e.g. our React bindings set it in a layout
+  // effect) is treated as the initial state rather than an animated change, so
+  // the pill doesn't slide in on (re)mount.
+  let animate = false
+
   onMount(() => {
     pill.addEventListener('transitionstart', () => {
       segmentedControl.classList.add('transitioning')
@@ -80,12 +87,16 @@
     pill.addEventListener('transitionend', () => {
       segmentedControl.classList.remove('transitioning')
     })
+
+    const handle = requestAnimationFrame(() => (animate = true))
+    return () => cancelAnimationFrame(handle)
   })
 </script>
 
 <div
   bind:this={segmentedControl}
   class="leo-segmented-control size-{size}"
+  class:animate
   role="listbox"
   tabindex="-1"
   on:keypress={(e) => {
@@ -163,6 +174,9 @@
       min-width: var(--control-height);
       border-radius: calc(var(--radius) - var(--control-padding));
       box-shadow: var(--leo-effect-elevation-01);
+    }
+
+    &.animate .pill {
       transition:
         width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
         left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
