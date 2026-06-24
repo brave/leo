@@ -33,12 +33,13 @@
     "@tsconfig/svelte": "5.0.8",
     "@types/jest": "29.5.14",
     "@types/jsdom": "28.0.1",
+    "@types/node": "25.9.1",
     "@types/react": "18.3.28",
     "css-tree": "2.3.1",
     "figma-api-exporter": "github:brave/figma-api-exporter#141c3eab4643ba9cdcbb23867785aa7df9347eec",
+    "jest": "30.4.2",
     "jsdom": "28.1.0",
-    "lodash.camelcase": "4.3.0",
-    "lodash.merge": "4.6.2",
+    "lodash": "4.18.1",
     "postcss": "8.5.14",
     "postcss-js": "4.1.0",
     "postcss-sort-media-queries": "4.4.1",
@@ -79,8 +80,8 @@
   "scripts": {
     "format": "prettier ./ --write",
     "format-diff": "prettier ./ --list-different",
-    "prepare": "npm run build",
-    "build": "npm run transform-tokens && npm run skiafy-icons && npm run android-icons && rollup -c rollup.config.js",
+    "prepare": "pnpm run build",
+    "build": "pnpm run transform-tokens && pnpm run skiafy-icons && pnpm run android-icons && rollup -c rollup.config.js",
     "dev": "rollup -c rollup.config.js --watch",
     "update-icons": "tsx ./src/scripts/update-icons.ts",
     "skiafy-icons": "tsx ./src/scripts/gen-skia-icons.ts",
@@ -96,11 +97,5 @@
     "leo-check": "./src/scripts/audit-tokens.js"
   },
   "license": "MIT",
-  "overrides": {
-    "esbuild": "0.27.1",
-    "glob": "13.0.3",
-    "svgo@<2.8.2": "2.8.2",
-    "uuid": "14.0.0",
-    "vite": "6.4.3"
-  }
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
 }
