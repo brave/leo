@@ -60,7 +60,7 @@ jobs:
         run: |
           for filePath in ./tokens/css/variables*.css; do
             fileName=${filePath/.\/tokens\/css\//}
-            reqStatus=$(curl -sL --write-out "%{http_code}" -o ./tokens/css/${fileName/%.css/.old.css} https://nala.bravesoftware.com/css/$fileName)
+            reqStatus=$(curl -sL --write-out "%{http_code}" -o ./tokens/css/${fileName/%.css/.old.css} https://nala.s.brave.dev/css/$fileName)
             # Note: Diff has exit code 1 for differences, and there are always
             # some differences because the file contains a timestamp.
             if [ -s ./tokens/css/file-sizes.diff ]; then
