@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1781814782214,
+  "updatedAt": 1782897779743,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -2004,6 +2004,7 @@ export default {
     "toggle-on": "toggle-on",
     "toggles": "toggles",
     "tomo-color": "tomo-color",
+    "tool-box": "tool-box",
     "tor-bridge": "tor-bridge",
     "tor-browser-color": "tor-browser-color",
     "tor-color": "tor-color",
@@ -2162,6 +2163,7 @@ export default {
     "windows-open": "windows-open",
     "wings-color": "wings-color",
     "wpr-color": "wpr-color",
+    "wrench": "wrench",
     "write": "write",
     "wtc-color": "wtc-color",
     "x-color": "x-color",
