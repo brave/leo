@@ -8,7 +8,8 @@ import {
   type PropsWithChildren,
   useState,
   type PropsWithoutRef,
-  useLayoutEffect
+  useLayoutEffect,
+  type JSX
 } from 'react'
 import type { SvelteComponent } from 'svelte'
 
@@ -117,7 +118,7 @@ export default function SvelteWebComponentToReact<
       props: PropsWithoutRef<PropsWithChildren<T>>,
       forwardedRef: ForwardedRef<HTMLElement>
     ) => {
-      const component = useRef<HTMLElement>()
+      const component = useRef<HTMLElement>(null)
       const { setElement } = useEventHandlers(props)
 
       const setRef = useCallback(
