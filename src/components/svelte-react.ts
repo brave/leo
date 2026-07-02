@@ -118,7 +118,7 @@ export default function SvelteWebComponentToReact<
       props: PropsWithoutRef<PropsWithChildren<T>>,
       forwardedRef: ForwardedRef<HTMLElement>
     ) => {
-      const component = useRef<HTMLElement>(null)
+      const component = useRef<HTMLElement | null>(null)
       const { setElement } = useEventHandlers(props)
 
       const setRef = useCallback(
