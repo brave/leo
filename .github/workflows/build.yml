@@ -18,32 +18,30 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-        with:
-          run_install: false
-
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         id: setup-node
         with:
-          node-version-file: '.node-version'
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          node-version: '24.11.1'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
         run: |
-          pnpm install --frozen-lockfile
-          # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
-          # Please check with Brave's security team prior to adding any packages to that list.
+          npm ci --ignore-scripts
+          npm explore esbuild -- npm run postinstall
+          # Please check with Brave's security team prior to adding any packages to this list.
+
+      - run: npm rebuild style-dictionary-create-react-app
 
       - name: Format
         id: format
         run: |
-          pnpm run format-diff
+          npm run format-diff
 
       - name: Build nala
         id: build-nala
         run: |
-          pnpm run build
+          npm run build
 
       - name: Audit Tokens
         id: audit-tokens
@@ -53,7 +51,7 @@ jobs:
       - name: Test
         id: test-nala
         run: |
-          pnpm run test
+          npm run test
 
       - name: Diff Tokens
         id: diff-tokens
@@ -79,19 +77,19 @@ jobs:
       - name: Check Types
         id: check-types
         run: |
-          pnpm run check
+          npm run check
 
       - name: Build the React example project
         id: example-react
         working-directory: ./examples/example-ui-react
         run: |
-          pnpm install --frozen-lockfile
-          pnpm run build
+          npm install --no-save
+          npm run build
 
       - name: Build Storybook
         env:
           NODE_OPTIONS: '--max_old_space_size=6144'
-        run: pnpm run build-storybook
+        run: npm run build-storybook
 
       - name: Upload Artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0

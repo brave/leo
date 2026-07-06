@@ -1,6 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import fs from 'node:fs'
-import { snakeCaseCustom } from '../../utils'
+import fs from 'fs-extra'
+import { snakeCase } from 'change-case'
 
 const contents = {
   info: {
@@ -36,8 +36,7 @@ export default {
   // This is going to run once per theme.
   do: (dictionary, platform) => {
     const assetPath = `${platform.buildPath}/Colors.xcassets`
-    fs.rmSync(assetPath, { recursive: true, force: true })
-    fs.mkdirSync(assetPath, { recursive: true })
+    fs.emptyDirSync(assetPath)
     fs.writeFileSync(
       `${assetPath}/Contents.json`,
       JSON.stringify(contents, null, 2)
@@ -50,20 +49,20 @@ export default {
           // The system already provides these and will conflict with the names
           return
         }
-        const colorsetPath = `${assetPath}/${snakeCaseCustom(
+        const colorsetPath = `${assetPath}/${snakeCase(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'
             )
             .join(' ')
         )}.colorset`
-        fs.mkdirSync(colorsetPath, { recursive: true })
+        fs.ensureDirSync(colorsetPath)
 
         // The colorset might already exist because Style Dictionary is run multiple
         // times with different configurations. If the colorset already exists we want
         // to modify it rather than writing over it.
         const colorset = fs.existsSync(`${colorsetPath}/Contents.json`)
-          ? JSON.parse(fs.readFileSync(`${colorsetPath}/Contents.json`, 'utf8'))
+          ? fs.readJsonSync(`${colorsetPath}/Contents.json`)
           : { ...contents, colors: [] }
 
         const color = {

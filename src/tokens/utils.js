@@ -1,5 +1,4 @@
-import words from 'lodash/words'
-import merge from 'lodash/merge'
+import merge from 'lodash.merge'
 
 /**
  * Removes a key and puts the children of that key in the key's parent
@@ -63,15 +62,4 @@ export function applyToTokens(root, type, apply) {
  */
 export function varDefFormat(strings, vars) {
   return [strings[0], vars, strings[1]].join('\n')
-}
-
-/**
- * Unlike _.snakeCase, which splits on letter/digit boundaries (e.g. "background2"
- * becomes "background_2"), this function treats alphanumeric sequences as single
- * words. Only whitespace, hyphens, and underscores are used as word boundaries.
- */
-export function snakeCaseCustom(str) {
-  return words(str, /[^\s_-]+/g)
-    .map((w) => w.toLowerCase())
-    .join('_')
 }
