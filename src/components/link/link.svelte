@@ -54,6 +54,7 @@
   class="leoLink"
   class:disabled
   class:loading
+  class:hasIcon={loading || $$slots['icon-before'] || $$slots['icon-after']}
   aria-disabled={loading || disabled || undefined}
   on:click={onClick ||
     ((e) => {
@@ -100,10 +101,13 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     text-decoration: underline;
-    vertical-align: bottom;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--leo-link-icon-gap, 0.3em);
+
+    &:where(.hasIcon) {
+      vertical-align: bottom;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--leo-link-icon-gap, 0.3em);
+    }
 
     &:where(:hover) {
       color: var(--hover-color);
