@@ -59,15 +59,15 @@
       if (escapeCloses) close()
     }}
   >
-    {#if showClose}
-      <div class="close-button">
-        <Button kind="plain-faint" fab onClick={close}>
-          <Icon name="close" />
-        </Button>
-      </div>
-    {/if}
     {#if hasHeader}
       <header>
+        {#if showClose}
+          <div class="close-button">
+            <Button kind="plain-faint" fab onClick={close}>
+              <Icon name="close" />
+            </Button>
+          </div>
+        {/if}
         {#if showBack || $$slots.title}
           <div class="title-row">
             {#if showBack}
@@ -88,6 +88,12 @@
           </div>
         {/if}
       </header>
+    {:else if showClose}
+      <div class="close-button">
+        <Button kind="plain-faint" fab onClick={close}>
+          <Icon name="close" />
+        </Button>
+      </div>
     {/if}
     <div class="body">
       <slot />
@@ -163,14 +169,18 @@
   /** Since Svelte 4 doesn't support conditional slots in the consumer,
    * we only want to account for actions if there's actually content in the slot
    * however for webcomponents, we don't need to check for this, so we special
-   * case the selector with :host. */
+   * case the selector with :host.
+   *
+   * Use `:global(.foo:has(...))` (not `:has(:global(...))`) so `:global` is
+   * stripped correctly — nested `:global` inside `:has` can leak into the CSS
+   * as an invalid rule and drop background/padding on `.actions`. */
   :host .leo-dialog.hasActions,
-  .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) {
+  :global(.leo-dialog.hasActions:has([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
-  .leo-dialog.hasHeader.hasActions:has(.actions :global([slot=actions]:not(:empty))) {
+  :global(.leo-dialog.hasHeader.hasActions:has(.actions [slot=actions]:not(:empty))) {
     grid-template-rows: auto auto auto;
   }
 
@@ -219,6 +229,16 @@
     top: var(--leo-spacing-xl);
   }
 
+  /* No header: keep the close control pinned while the dialog scrolls. */
+  .leo-dialog > .close-button {
+    position: sticky;
+    z-index: 2;
+    justify-self: end;
+    margin-inline-end: var(--leo-spacing-xl);
+    height: 0;
+    overflow: visible;
+  }
+
   .leo-dialog {
     .close-button,
     .back-button {
@@ -245,17 +265,36 @@
   }
 
   :host .leo-dialog .actions .body,
-  // The `:has()` is moved onto `.body` (rather than `.leo-dialog`) so that no descendant
-  // selector follows the `:has()`. jsdom's nwsapi selector engine fails to parse selectors
-  // of the form `<X>:has(...) <Y>:where(...)` that Svelte 5 generates for scoped CSS.
-  .leo-dialog.hasActions .body:has(~ .actions :global([slot=actions]:not(:empty))) {
+  :global(.leo-dialog.hasActions .body:has(~ .actions [slot=actions]:not(:empty))) {
     padding-bottom: 0;
   }
 
   :host .leo-dialog .actions,
-  .leo-dialog .actions:has(:global([slot=actions]:not(:empty))) {
+  :global(.leo-dialog .actions:has([slot=actions]:not(:empty))) {
     background: var(--background);
     padding: var(--padding);
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+
+    border-top: 1px solid transparent;
+
+    @supports (animation-timeline: scroll()) {
+      animation-timeline: scroll();
+      animation-range: 0% 100%;
+      animation-name: actions-scroll-border;
+      animation-duration: 1ms;
+      animation-fill-mode: none;
+    }
+  }
+
+  @keyframes actions-scroll-border {
+    from {
+      border-top-color: var(--leo-color-divider-subtle);
+    }
+    to {
+      border-top-color: transparent;
+    }
   }
 
   /** The below :global selectors are so that Svelte doesn't remove the classes
@@ -269,7 +308,7 @@
   .leo-dialog .actions :global(::slotted(*)),
   .leo-dialog .actions :global([slot='actions']:not(:empty)) {
     display: flex;
-    gap: var(--leo-spacing-xl);
+    gap: var(--leo-spacing-m);
     flex-direction: column;
     align-items: stretch;
     justify-content: end;
