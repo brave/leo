@@ -40,11 +40,14 @@
     background: var(--leo-tab-item-background);
     box-shadow: var(--leo-tab-item-shadow);
     position: relative;
-    transition: color 0.2s ease-in-out;
+    transition: color var(--leo-duration-m) var(--leo-easing-in-out);
 
     &,
     .item-icon {
-      transition: background 0.12s ease-in-out, color 0.12s ease-in-out, box-shadow 0.12s ease-in-out;
+      transition:
+        background var(--leo-duration-s) var(--leo-easing-in-out),
+        color var(--leo-duration-s) var(--leo-easing-in-out),
+        box-shadow var(--leo-duration-s) var(--leo-easing-in-out);
     }
 
     .item-icon {

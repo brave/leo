@@ -161,7 +161,7 @@
     justify-content: stretch;
     font: var(--font);
     gap: var(--gap);
-    transition: color 0.2s ease-in-out;
+    transition: color var(--leo-duration-m) var(--leo-easing-in-out);
 
     .content {
       flex: 1;
@@ -286,8 +286,8 @@
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
     transition:
-      box-shadow 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+      box-shadow var(--leo-duration-m) var(--leo-easing-in-out),
+      border-color var(--leo-duration-m) var(--leo-easing-in-out);
 
     cursor: pointer;
   }

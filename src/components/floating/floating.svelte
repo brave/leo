@@ -90,6 +90,25 @@
     return (!x && !y) || x <= 1 || y <= 1
   }
 
+  /** Maps floating-ui placement to a CSS transform-origin near the trigger. */
+  function transformOriginForPlacement(placement: Placement): string {
+    const origins: Record<Placement, string> = {
+      top: 'bottom center',
+      'top-start': 'bottom left',
+      'top-end': 'bottom right',
+      bottom: 'top center',
+      'bottom-start': 'top left',
+      'bottom-end': 'top right',
+      left: 'right center',
+      'left-start': 'right top',
+      'left-end': 'right bottom',
+      right: 'left center',
+      'right-start': 'left top',
+      'right-end': 'left bottom'
+    }
+    return origins[placement] ?? 'top left'
+  }
+
   function updatePosition(...args: any[]) {
     if (!floating || !target) return
 
@@ -101,7 +120,9 @@
       if (floating) {
         Object.assign(floating.style, {
           left: `${x}px`,
-          top: `${y}px`
+          top: `${y}px`,
+          '--leo-floating-transform-origin':
+            transformOriginForPlacement(placement)
         })
       }
 

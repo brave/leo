@@ -128,39 +128,38 @@
 </script>
 
 <div class="leo-tooltip">
-  {#key visibleInternal}
-    <Floating
-      target={trigger}
-      {flip}
-      {offset}
-      {placement}
-      {fallbackPlacements}
-      {positionStrategy}
-      {shift}
-      autoUpdate
-      onMouseLeave={handleTooltipMouseleave}
-      onMouseEnter={() => (tooltipHovered = true)}
-      middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
-      onComputedPosition={positionArrow}
-    >
-      {#if $$slots.content || text}
-        <div
-          class="tooltip"
-          class:hero={mode === 'hero'}
-          class:info={mode === 'info'}
-          class:mini={mode === 'mini'}
-          class:default={mode === 'default' || !mode}
-          hidden={!visibleInternal}
-          bind:this={tooltip}
-        >
-          <slot name="content">
-            {text}
-          </slot>
-          <div class={`arrow ${arrowPlacement}`} bind:this={arrow} />
-        </div>
-      {/if}
-    </Floating>
-  {/key}
+  <Floating
+    target={trigger}
+    {flip}
+    {offset}
+    {placement}
+    {fallbackPlacements}
+    {positionStrategy}
+    {shift}
+    autoUpdate
+    onMouseLeave={handleTooltipMouseleave}
+    onMouseEnter={() => (tooltipHovered = true)}
+    middleware={[arrowMiddleware({ padding: 0, element: arrow })]}
+    onComputedPosition={positionArrow}
+  >
+    {#if $$slots.content || text}
+      <div
+        class="tooltip"
+        class:hero={mode === 'hero'}
+        class:info={mode === 'info'}
+        class:mini={mode === 'mini'}
+        class:default={mode === 'default' || !mode}
+        class:visible={visibleInternal}
+        aria-hidden={!visibleInternal}
+        bind:this={tooltip}
+      >
+        <slot name="content">
+          {text}
+        </slot>
+        <div class={`arrow ${arrowPlacement}`} bind:this={arrow} />
+      </div>
+    {/if}
+  </Floating>
 
   <div
     on:focusin={() => setVisible(true)}
@@ -207,6 +206,31 @@
     border-radius: var(--radius);
     border: var(--border-width) solid var(--border-color);
     font: var(--leo-font-default-regular);
+    transform-origin: var(
+      --leo-tooltip-transform-origin,
+      var(--leo-floating-transform-origin, center)
+    );
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
+    transition:
+      opacity var(--leo-duration-m) var(--leo-easing-out),
+      transform var(--leo-duration-m) var(--leo-easing-out);
+
+    &.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+      transition: opacity var(--leo-duration-s) var(--leo-easing-out);
+
+      &.visible {
+        transform: none;
+      }
+    }
   }
 
   .leo-tooltip .tooltip {

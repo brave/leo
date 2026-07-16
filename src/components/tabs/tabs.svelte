@@ -141,8 +141,14 @@
       bottom: 0;
       height: var(--indicator-height);
       background-color: var(--indicator-color);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        left var(--leo-duration-l) var(--leo-easing-in-out),
+        width var(--leo-duration-l) var(--leo-easing-in-out);
       border-radius: 3px 3px 0 0;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     :where(&) > :global(.leo-tab-item),

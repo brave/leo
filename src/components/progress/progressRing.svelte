@@ -33,7 +33,10 @@
   .leo-progressring {
     --size: var(--leo-progressring-size, 48px);
     --spin-rate: var(--leo-progressring-spin-rate, 1s);
-    --transition-duration: var(--leo-progressring-transition-duration, 0.2s);
+    --transition-duration: var(
+      --leo-progressring-transition-duration,
+      var(--leo-duration-m)
+    );
     --stroke-color: var(
       --leo-progressring-color,
       var(--leo-color-button-background)
@@ -65,13 +68,17 @@
       animation-duration: var(--spin-rate);
       animation-name: spin;
       animation-iteration-count: infinite;
-      animation-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+      animation-timing-function: linear;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
     }
 
     circle {
       transform: rotate(270deg);
       transform-origin: 50% 50%;
-      transition: stroke-dashoffset var(--transition-duration);
+      transition: stroke-dashoffset var(--transition-duration) var(--leo-easing-in-out);
       stroke-linecap: round;
       r: var(--normalized-radius);
       cx: var(--radius);
