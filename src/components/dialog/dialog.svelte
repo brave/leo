@@ -171,16 +171,15 @@
    * however for webcomponents, we don't need to check for this, so we special
    * case the selector with :host.
    *
-   * Use `:global(.foo:has(...))` (not `:has(:global(...))`) so `:global` is
-   * stripped correctly — nested `:global` inside `:has` can leak into the CSS
-   * as an invalid rule and drop background/padding on `.actions`. */
+   * Only the slotted `[slot=actions]` content is `:global` (it's projected in
+   * by the parent). `.leo-dialog`/`.actions` stay component-scoped by Svelte. */
   :host .leo-dialog.hasActions,
-  :global(.leo-dialog.hasActions:has([slot=actions]:not(:empty))) {
+  .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto;
   }
 
   :host .leo-dialog.hasHeader.hasActions,
-  :global(.leo-dialog.hasHeader.hasActions:has(.actions [slot=actions]:not(:empty))) {
+  .leo-dialog.hasHeader.hasActions:has(.actions :global([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto auto;
   }
 
@@ -265,12 +264,15 @@
   }
 
   :host .leo-dialog .actions .body,
-  :global(.leo-dialog.hasActions .body:has(~ .actions [slot=actions]:not(:empty))) {
+  // The `:has()` is moved onto `.body` (rather than `.leo-dialog`) so that no descendant
+  // selector follows the `:has()`. jsdom's nwsapi selector engine fails to parse selectors
+  // of the form `<X>:has(...) <Y>:where(...)` that Svelte 5 generates for scoped CSS.
+  .leo-dialog.hasActions .body:has(~ .actions :global([slot=actions]:not(:empty))) {
     padding-bottom: 0;
   }
 
   :host .leo-dialog .actions,
-  :global(.leo-dialog .actions:has([slot=actions]:not(:empty))) {
+  .leo-dialog .actions:has(:global([slot=actions]:not(:empty))) {
     background: var(--background);
     padding: var(--padding);
     position: sticky;
