@@ -178,8 +178,10 @@
 
     &.animate .pill {
       transition:
-        width var(--leo-duration-l) var(--leo-easing-in-out),
-        left var(--leo-duration-l) var(--leo-easing-in-out);
+        width var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+        left var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
 
       @media (prefers-reduced-motion: reduce) {
         transition: none;

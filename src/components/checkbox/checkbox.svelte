@@ -199,5 +199,10 @@
         color: var(--checked-color-hover);
       }
     }
+
+    // .isChecked covers WebKit shadow roots where :has() is unsupported.
+    .leo-checkbox.isChecked:hover .check {
+      color: var(--checked-color-hover);
+    }
   }
 </style>

@@ -196,6 +196,12 @@
     --border-width: 0px;
 
     width: fit-content;
+
+    // Floating stays mounted for enter/exit transitions; never let the
+    // absolute wrapper steal clicks when the tooltip is invisible.
+    :global(.leo-floating) {
+      pointer-events: none;
+    }
   }
 
   .leo-tooltip .tooltip {
@@ -214,8 +220,10 @@
     transform: scale(0.96);
     pointer-events: none;
     transition:
-      opacity var(--leo-duration-m) var(--leo-easing-out),
-      transform var(--leo-duration-m) var(--leo-easing-out);
+      opacity var(--leo-duration-m, 200ms)
+        var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1)),
+      transform var(--leo-duration-m, 200ms)
+        var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
 
     &.visible {
       opacity: 1;
@@ -225,7 +233,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       transform: none;
-      transition: opacity var(--leo-duration-s) var(--leo-easing-out);
+      transition: opacity var(--leo-duration-s, 120ms)
+        var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
 
       &.visible {
         transform: none;

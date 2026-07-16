@@ -142,8 +142,10 @@
       height: var(--indicator-height);
       background-color: var(--indicator-color);
       transition:
-        left var(--leo-duration-l) var(--leo-easing-in-out),
-        width var(--leo-duration-l) var(--leo-easing-in-out);
+        left var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+        width var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
       border-radius: 3px 3px 0 0;
 
       @media (prefers-reduced-motion: reduce) {

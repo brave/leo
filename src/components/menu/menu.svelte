@@ -268,10 +268,12 @@
       --leo-menu-transform-origin,
       var(--leo-floating-transform-origin, top left)
     );
-    animation: menuIn var(--leo-duration-m) var(--leo-easing-out);
+    animation: menuIn var(--leo-duration-m, 200ms)
+      var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
 
     @media (prefers-reduced-motion: reduce) {
-      animation: menuInFade var(--leo-duration-s) var(--leo-easing-out);
+      animation: menuInFade var(--leo-duration-s, 120ms)
+        var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
     }
 
     // TODO(petemill): Make the "floating-ui" element be this popup element,
