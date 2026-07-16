@@ -89,18 +89,18 @@
     alerts.update((a) => [...a, info])
     return info
   }
-
-  const transitionOptions = { y: -64, duration: 120 }
 </script>
 
 <script lang="ts">
   import Alert, { type Size } from './alert.svelte'
   import Button from '../button/button.svelte'
   import type { ButtonKind, ButtonSize } from '../button/props'
-  import { fly } from 'svelte/transition'
+  import type { TransitionConfig } from 'svelte/transition'
   import type { ComponentType, SvelteComponent } from 'svelte'
   import type { IconName } from '../../../icons/meta'
   import Icon from '../icon/icon.svelte'
+  import { prefersReducedMotion } from '../prefersReducedMotion'
+  import { cubicOut } from 'svelte/easing'
 
   export let position: `${'top' | 'bottom'}-${'left' | 'right' | 'center'}` =
     'top-center'
@@ -109,6 +109,28 @@
   $: style = `${position.includes('right') ? 'right' : 'left'}: ${
     position.includes('center') ? '50%; transform: translateX(-50%)' : '0'
   }; ${position.includes('top') ? 'top' : 'bottom'}: 0`
+
+  /** Toast enter/exit: self-relative slide + fade with a strong ease-out. */
+  function toastTransition(
+    _node: Element,
+    { yPercent = -100 }: { yPercent?: number } = {}
+  ): TransitionConfig {
+    if (prefersReducedMotion()) {
+      return {
+        duration: 120,
+        css: (t) => `opacity: ${t}`
+      }
+    }
+
+    return {
+      duration: 200,
+      easing: cubicOut,
+      css: (t) =>
+        `transform: translateY(${(1 - t) * yPercent}%); opacity: ${t}`
+    }
+  }
+
+  $: toastYPercent = position.startsWith('bottom') ? 100 : -100
 </script>
 
 <div class="leo-alert-center size-{size}" {style}>
@@ -116,7 +138,7 @@
     {@const alertSize = alert.size || size}
     <div
       class="alert-container"
-      transition:fly={transitionOptions}
+      transition:toastTransition={{ yPercent: toastYPercent }}
       on:mouseenter={() => alert.pauseDismiss()}
       on:mouseleave={() => alert.resumeDismiss()}
     >

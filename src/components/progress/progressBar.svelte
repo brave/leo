@@ -13,7 +13,10 @@
 
   .leo-progressbar {
     --radius: var(--leo-progressbar-radius, 10px);
-    --transition-duration: var(--leo-progressbar-transition-duration, 0.2s);
+    --transition-duration: var(
+      --leo-progressbar-transition-duration,
+      var(--leo-duration-m)
+    );
     background: var(
       --leo-progressbar-background-color,
       var(--leo-color-primary-20)
@@ -24,7 +27,7 @@
     .progress {
       height: 100%;
       width: 100%;
-      transition: width var(--transition-duration) ease-in-out;
+      transition: width var(--transition-duration) var(--leo-easing-in-out);
       background: var(
         --leo-progressbar-color,
         var(--leo-color-button-background)

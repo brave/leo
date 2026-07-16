@@ -126,9 +126,9 @@
   .leo-toggle {
     --foreground-color: black;
 
-    --duration: var(--leo-toggle-transition-duration, 0.12s);
-    @media (prefers-reduced-motion) {
-      --duration: 0;
+    --duration: var(--leo-toggle-transition-duration, var(--leo-duration-s));
+    @media (prefers-reduced-motion: reduce) {
+      --duration: 0s;
     }
 
     --icon-size: var(--leo-icon-size, 20px);
@@ -179,8 +179,8 @@
     border-radius: var(--leo-radius-full);
     padding: var(--padding);
     transition:
-      background-color var(--duration) ease-in-out,
-      box-shadow var(--duration) ease-in-out;
+      background-color var(--duration) var(--leo-easing-in-out),
+      box-shadow var(--duration) var(--leo-easing-in-out);
     flex-shrink: 0;
 
     &:disabled {
@@ -236,16 +236,16 @@
       background: var(--thumb-color);
       border-radius: var(--leo-radius-full);
       transition:
-        transform var(--duration) ease-in-out,
-        color var(--duration) ease-in-out,
-        opacity var(--duration) ease-in-out;
+        transform var(--duration) var(--leo-easing-in-out),
+        color var(--duration) var(--leo-easing-in-out),
+        opacity var(--duration) var(--leo-easing-in-out);
 
       transform: translate(var(--thumb-position), 0);
 
       &.dragging {
         transition:
-          transform 0s ease-in-out,
-          color var(--duration) ease-in-out;
+          transform 0s var(--leo-easing-in-out),
+          color var(--duration) var(--leo-easing-in-out);
       }
 
       display: flex;
@@ -253,7 +253,7 @@
       justify-content: center;
 
       .on-icon {
-        transition: opacity var(--duration) ease-in-out;
+        transition: opacity var(--duration) var(--leo-easing-in-out);
         display: flex;
         opacity: 0;
       }

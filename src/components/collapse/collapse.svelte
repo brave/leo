@@ -66,7 +66,10 @@
       var(--leo-color-container-interactive)
     );
     --icon-size: var(--leo-collapse-icon-size, 24px);
-    --transition-duration: var(--leo-collapse-transition-duration, 0.12s);
+    --transition-duration: var(
+      --leo-collapse-transition-duration,
+      var(--leo-duration-m)
+    );
     --border-color: var(
       --leo-collapse-border-color,
       var(--leo-color-divider-subtle)
@@ -99,17 +102,20 @@
       var(--summary-color-hover)
     );
 
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       --transition-duration: 0s;
     }
+
+    // Allow animating height to/from auto (Chromium / Brave).
+    interpolate-size: allow-keywords;
 
     background-color: var(--background-color);
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     border: 1px solid var(--border-color);
     transition:
-      box-shadow var(--transition-duration) ease-in-out,
-      background-color var(--transition-duration) ease-in-out;
+      box-shadow var(--transition-duration) var(--leo-easing-in-out),
+      background-color var(--transition-duration) var(--leo-easing-in-out);
 
     &:has(summary:hover) {
       border-color: var(--border-color-hover);
@@ -127,62 +133,73 @@
       box-shadow: var(--shadow-focus);
     }
 
-  summary {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--leo-spacing-m);
+    // Animate the browser's details content box open/closed.
+    &::details-content {
+      height: 0;
+      overflow: clip;
+      transition:
+        height var(--transition-duration) var(--leo-easing-in-out),
+        content-visibility var(--transition-duration) var(--leo-easing-in-out)
+          allow-discrete;
+    }
 
-    padding: var(--summary-padding);
+    &[open]::details-content {
+      height: auto;
+    }
 
-    list-style: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    summary {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--leo-spacing-m);
 
-    color: var(--summary-color);
-    transition: color var(--transition-duration) ease-in-out;
+      padding: var(--summary-padding);
 
-    &:hover {
-      color: var(--summary-color-hover);
+      list-style: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
 
-      & .icon,
-      .arrow {
-        color: var(--icon-color-hover);
+      color: var(--summary-color);
+      transition: color var(--transition-duration) var(--leo-easing-in-out);
+      outline: none;
+
+      &:hover {
+        color: var(--summary-color-hover);
+
+        & .icon,
+        .arrow {
+          color: var(--icon-color-hover);
+        }
       }
     }
-  }
 
-  .icon {
-    transition: color var(--transition-duration) ease-in-out;
-    color: var(--icon-color);
-    width: var(--icon-size);
-    height: var(--icon-size);
-  }
+    .icon {
+      transition: color var(--transition-duration) var(--leo-easing-in-out);
+      color: var(--icon-color);
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
 
-  .title {
-    flex-grow: 1;
-    font: var(--leo-font-heading-h3);
-  }
+    .title {
+      flex-grow: 1;
+      font: var(--leo-font-heading-h3);
+    }
 
-  .content {
-    padding: var(--content-padding);
-    font: var(--leo-font-default-regular);
-  }
+    .content {
+      padding: var(--content-padding);
+      font: var(--leo-font-default-regular);
+    }
 
-  .arrow {
-    color: var(--icon-color);
-    transition:
-      transform var(--transition-duration) ease-in-out,
-      color var(--transition-duration) ease-in-out;
-    transform: rotate(360deg);
-  }
+    .arrow {
+      color: var(--icon-color);
+      transition:
+        transform var(--transition-duration) var(--leo-easing-in-out),
+        color var(--transition-duration) var(--leo-easing-in-out);
+      transform: rotate(360deg);
+    }
 
-  summary {
-    outline: none;
+    &[open] .arrow {
+      transform: rotate(180deg);
+    }
   }
-
-  &[open] .arrow {
-    transform: rotate(180deg);
-  }
-}
 </style>
