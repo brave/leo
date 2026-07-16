@@ -169,10 +169,7 @@
   /** Since Svelte 4 doesn't support conditional slots in the consumer,
    * we only want to account for actions if there's actually content in the slot
    * however for webcomponents, we don't need to check for this, so we special
-   * case the selector with :host.
-   *
-   * Only the slotted `[slot=actions]` content is `:global` (it's projected in
-   * by the parent). `.leo-dialog`/`.actions` stay component-scoped by Svelte. */
+   * case the selector with :host. */
   :host .leo-dialog.hasActions,
   .leo-dialog.hasActions:has(:global([slot=actions]:not(:empty))) {
     grid-template-rows: auto auto;
