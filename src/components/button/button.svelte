@@ -149,11 +149,16 @@
     // Gradients cannot have a transition, so we need to reset `transition`
     // to only apply to `box-shadow` and `border-color` in .isHero
     --default-transition:
-      box-shadow var(--leo-duration-s) var(--leo-easing-in-out),
-      color var(--leo-duration-s) var(--leo-easing-in-out),
-      border-color var(--leo-duration-s) var(--leo-easing-in-out),
-      opacity var(--leo-duration-s) var(--leo-easing-in-out),
-      transform var(--leo-duration-s) var(--leo-easing-in-out);
+      box-shadow var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+      color var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+      border-color var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+      opacity var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+      transform var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
     --box-shadow-hover: var(--leo-effect-elevation-01);
     --box-shadow-focus: var(--leo-effect-focus-state);
     --radius: var(--leo-radius-full);
@@ -170,7 +175,8 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
     transition:
-      background var(--leo-duration-s) var(--leo-easing-in-out),
+      background var(--leo-duration-s, 120ms)
+        var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
       var(--default-transition);
     box-shadow: none;
     border: solid var(--border-width, 1px) var(--border-color, transparent);
