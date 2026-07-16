@@ -59,15 +59,15 @@
       if (escapeCloses) close()
     }}
   >
-    {#if showClose}
-      <div class="close-button">
-        <Button kind="plain-faint" fab onClick={close}>
-          <Icon name="close" />
-        </Button>
-      </div>
-    {/if}
     {#if hasHeader}
       <header>
+        {#if showClose}
+          <div class="close-button">
+            <Button kind="plain-faint" fab onClick={close}>
+              <Icon name="close" />
+            </Button>
+          </div>
+        {/if}
         {#if showBack || $$slots.title}
           <div class="title-row">
             {#if showBack}
@@ -88,6 +88,12 @@
           </div>
         {/if}
       </header>
+    {:else if showClose}
+      <div class="close-button">
+        <Button kind="plain-faint" fab onClick={close}>
+          <Icon name="close" />
+        </Button>
+      </div>
     {/if}
     <div class="body">
       <slot />
@@ -219,6 +225,16 @@
     top: var(--leo-spacing-xl);
   }
 
+  /* No header: keep the close control pinned while the dialog scrolls. */
+  .leo-dialog > .close-button {
+    position: sticky;
+    z-index: 2;
+    justify-self: end;
+    margin-inline-end: var(--leo-spacing-xl);
+    height: 0;
+    overflow: visible;
+  }
+
   .leo-dialog {
     .close-button,
     .back-button {
@@ -256,6 +272,28 @@
   .leo-dialog .actions:has(:global([slot=actions]:not(:empty))) {
     background: var(--background);
     padding: var(--padding);
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+
+    border-top: 1px solid transparent;
+
+    @supports (animation-timeline: scroll()) {
+      animation-timeline: scroll();
+      animation-range: 0% 100%;
+      animation-name: actions-scroll-border;
+      animation-duration: 1ms;
+      animation-fill-mode: none;
+    }
+  }
+
+  @keyframes actions-scroll-border {
+    from {
+      border-top-color: var(--leo-color-divider-subtle);
+    }
+    to {
+      border-top-color: transparent;
+    }
   }
 
   /** The below :global selectors are so that Svelte doesn't remove the classes
@@ -269,7 +307,7 @@
   .leo-dialog .actions :global(::slotted(*)),
   .leo-dialog .actions :global([slot='actions']:not(:empty)) {
     display: flex;
-    gap: var(--leo-spacing-xl);
+    gap: var(--leo-spacing-m);
     flex-direction: column;
     align-items: stretch;
     justify-content: end;

@@ -63,6 +63,10 @@
 
   let openDialog
   let isOpen = false
+  let scrollDialogOpen = false
+
+  const scrollParagraph =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra est et viverra massa enim aliquam. Volutpat tristique id mi blandit interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat. Sit mauris, orci diam in habitasse nec dolor odio pharetra.'
 </script>
 
 <Template let:args>
@@ -77,15 +81,17 @@
       est et viverra massa enim aliquam. Volutpat tristique id mi blandit
       interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat. Sit
       mauris, orci diam in habitasse nec dolor odio pharetra.
-
+      <div class="input-container">
+        <Input placeholder="This is an input field" />
+      </div>
       <div class="alert-container">
         <Alert>
           <div>This is an info box</div>
         </Alert>
       </div>
+      
     </div>
     <div slot="actions">
-      <Input placeholder="This is an input field" />
       <Button kind="outline">Secondary</Button>
       <Button kind="filled">Primary</Button>
     </div>
@@ -149,8 +155,46 @@
 
 <Story name="Show Close" args={{showClose: true}} />
 
+<Story name="Inner Scroll" let:args>
+  <Button isDisabled={scrollDialogOpen} onClick={() => (scrollDialogOpen = true)}
+    >Show Dialog</Button
+  >
+  <Dialog
+    {...args}
+    showClose
+    style="max-height: min(420px, calc(100vh - var(--leo-spacing-m) * 2)); overflow: auto;"
+    bind:isOpen={scrollDialogOpen}
+  >
+    <div slot="title">Scrollable dialog</div>
+    <div slot="subtitle">Scroll to see header and actions dividers</div>
+    <div class="scroll-content">
+      {#each { length: 8 } as _, i}
+        <p>{scrollParagraph} ({i + 1})</p>
+      {/each}
+    </div>
+    <div slot="actions">
+      <Button kind="outline" onClick={() => (scrollDialogOpen = false)}
+        >Cancel</Button
+      >
+      <Button kind="filled" onClick={() => (scrollDialogOpen = false)}
+        >Done</Button
+      >
+    </div>
+  </Dialog>
+</Story>
+
 <style>
   .alert-container {
     margin-top: var(--leo-spacing-xl);
+  }
+
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--leo-spacing-xl);
+  }
+
+  .scroll-content p {
+    margin: 0;
   }
 </style>
