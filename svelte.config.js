@@ -18,11 +18,7 @@ export default {
   preprocess: vitePreprocess({
     script: true,
     postcss: {
-      plugins: [
-        themePlugin({
-          wrapSelector: (selector) => `:global(${selector})`
-        })
-      ]
+      plugins: [themePlugin()]
     }
   }),
   onwarn
