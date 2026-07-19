@@ -1,7 +1,6 @@
 import startCase from 'lodash/startCase'
-import StyleDictionary from 'style-dictionary'
+import fileHeader from '../../web/fileHeader'
 import { snakeCaseCustom } from '../../../utils'
-const { fileHeader } = StyleDictionary.formatHelpers
 
 function pascalCase(str) {
   return startCase(str).replaceAll(' ', '')
