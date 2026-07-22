@@ -43,7 +43,13 @@
 
   // Re-read on each open so OS preference changes mid-session are honored.
   $: dialogTransition = {
-    duration: animate ? (prefersReducedMotion() ? 60 : 120) : 0,
+    duration: animate
+      ? parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            prefersReducedMotion() ? '--leo-duration-xs' : '--leo-duration-s'
+          )
+        ) || (prefersReducedMotion() ? 60 : 120)
+      : 0,
     start: prefersReducedMotion() ? 1 : 0.95,
     opacity: 0
   }
@@ -167,6 +173,8 @@
     &::backdrop {
       background: var(--backdrop-background);
       backdrop-filter: var(--backdrop-filter);
+      transition: opacity var(--leo-duration-xs) var(--leo-easing-out),
+                  backdrop-filter var(--leo-duration-xs) var(--leo-easing-out);
     }
   }
 
