@@ -43,7 +43,7 @@
 
   // Re-read on each open so OS preference changes mid-session are honored.
   $: dialogTransition = {
-    duration: animate ? (prefersReducedMotion() ? 120 : 200) : 0,
+    duration: animate ? (prefersReducedMotion() ? 60 : 120) : 0,
     start: prefersReducedMotion() ? 1 : 0.95,
     opacity: 0
   }
