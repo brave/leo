@@ -12,13 +12,45 @@
 
   onMount(() => scopedApplyLayer("variables-marketing"))
 
-  const { mobile, desktop } = allFonts
+  const { monospace, ...sansMonospace } = allFonts
 </script>
 
-<Story name="Desktop/Tablet">
-  <FontTokenSwatchGroup tokens={desktop} />
+<Story name="All Fonts">
+  <FontTokenSwatchGroup tokens={sansMonospace} />
 </Story>
 
-<Story name="Mobile">
-  <FontTokenSwatchGroup tokens={mobile} />
+<Story name="Display Primary">
+  <FontTokenSwatchGroup tokens={allFonts.displayPrimary} />
+</Story>
+
+<Story name="Display Secondary">
+  <FontTokenSwatchGroup tokens={allFonts.displaySecondary} />
+</Story>
+
+<Story name="Heading">
+  <FontTokenSwatchGroup tokens={allFonts.heading} />
+</Story>
+
+<Story name="Extra Large">
+  <FontTokenSwatchGroup tokens={allFonts.xLarge} />
+</Story>
+
+<Story name="Large">
+  <FontTokenSwatchGroup tokens={allFonts.large} />
+</Story>
+
+<Story name="Default">
+  <FontTokenSwatchGroup tokens={allFonts.default} />
+</Story>
+
+<Story name="Small">
+  <FontTokenSwatchGroup tokens={allFonts.small} />
+</Story>
+
+<Story name="Extra Small">
+  <FontTokenSwatchGroup tokens={allFonts.xSmall} />
+</Story>
+
+<Story name="Monospace">
+  <FontTokenSwatchGroup tokens={allFonts.monospace} />
 </Story>

@@ -83,8 +83,8 @@ jobs:
               repo: context.repo.repo,
               body: `👋 Thanks for Submitting! This PR is available for preview at the link below.
 
-            ✅ PR tip preview: https://${{ github.event.workflow_run.pull_requests[0].number }}.pr.nala.bravesoftware.com/
-            ✅ Commit preview: https://${{ github.event.workflow_run.pull_requests[0].number }}.pr.nala.bravesoftware.com/commit-${{ github.event.workflow_run.head_sha }}/
+            ✅ PR tip preview: https://${{ github.event.workflow_run.pull_requests[0].number }}.pr-nala.s.brave.dev/
+            ✅ Commit preview: https://${{ github.event.workflow_run.pull_requests[0].number }}.pr-nala.s.brave.dev/commit-${{ github.event.workflow_run.head_sha }}/
 
             \`\`\`diff
             ${fileSizes}

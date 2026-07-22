@@ -24,7 +24,7 @@ generated Skia/C++ token files live in the `nala::` namespace
 (see [tokens/skia/](tokens/skia/) and the templates under
 [src/tokens/transformation/skia/templates/](src/tokens/transformation/skia/templates/))
 and per-PR Storybook previews are deployed to
-`https://<pr-number>.pr.nala.bravesoftware.com/` by
+`https://<pr-number>.pr-nala.s.brave.dev/` by
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml). For
 everything in this repo, "Leo" and "nala" refer to the same design system.
 

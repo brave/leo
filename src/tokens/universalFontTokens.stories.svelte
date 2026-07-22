@@ -26,3 +26,19 @@
 <Story name="Components">
   <FontTokenSwatchGroup tokens={allFonts.components} />
 </Story>
+
+<Story name="Large">
+  <FontTokenSwatchGroup tokens={allFonts.large} />
+</Story>
+
+<Story name="Small">
+  <FontTokenSwatchGroup tokens={allFonts.small} />
+</Story>
+
+<Story name="Extra Small">
+  <FontTokenSwatchGroup tokens={allFonts.xSmall} />
+</Story>
+
+<Story name="Monospace">
+  <FontTokenSwatchGroup tokens={allFonts.monospace} />
+</Story>

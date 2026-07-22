@@ -11,8 +11,18 @@
   import { scopedApplyLayer } from '../../.storybook/global.svelte'
 
   onMount(() => scopedApplyLayer("variables-newtab"))
+
+  const { stats, braveRewards } = allFonts
 </script>
 
 <Story name="All Fonts">
   <FontTokenSwatchGroup tokens={allFonts} />
+</Story>
+
+<Story name="Stats">
+  <FontTokenSwatchGroup tokens={stats} />
+</Story>
+
+<Story name="Brave Rewards">
+  <FontTokenSwatchGroup tokens={braveRewards} />
 </Story>
