@@ -1,4 +1,10 @@
 {
+  "android": {
+    "tablet-max-width": {
+      "type": "number",
+      "value": 528
+    }
+  },
   "dynamic": {
     "primitive": {
       "neutral": {
@@ -2886,11 +2892,6 @@
           "value": "#0154cc",
           "referencedVariable": "$primitive.blue.40"
         },
-        "info-vibrant": {
-          "type": "color",
-          "value": "#066cff",
-          "referencedVariable": "$primitive.blue.50"
-        },
         "info-background": {
           "type": "color",
           "value": "#e9f3ff",
@@ -2905,11 +2906,6 @@
           "type": "color",
           "value": "#1c713d",
           "referencedVariable": "$primitive.green.40"
-        },
-        "success-vibrant": {
-          "type": "color",
-          "value": "#268f4f",
-          "referencedVariable": "$primitive.green.50"
         },
         "success-background": {
           "type": "color",
@@ -2926,11 +2922,6 @@
           "value": "#745c00",
           "referencedVariable": "$primitive.yellow.40"
         },
-        "warning-vibrant": {
-          "type": "color",
-          "value": "#f3c305",
-          "referencedVariable": "$primitive.yellow.80"
-        },
         "warning-background": {
           "type": "color",
           "value": "#fcf2d4",
@@ -2945,11 +2936,6 @@
           "type": "color",
           "value": "#b4020e",
           "referencedVariable": "$primitive.red.40"
-        },
-        "error-vibrant": {
-          "type": "color",
-          "value": "#e20314",
-          "referencedVariable": "$primitive.red.50"
         },
         "error-background": {
           "type": "color",
@@ -4087,11 +4073,6 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
-          },
           "button": {
             "hover": {
               "type": "color",
@@ -4103,6 +4084,11 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
+          },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -4294,11 +4280,6 @@
           "value": "#78abff",
           "referencedVariable": "$primitive.blue.70"
         },
-        "info-vibrant": {
-          "type": "color",
-          "value": "#066cff",
-          "referencedVariable": "$primitive.blue.50"
-        },
         "info-background": {
           "type": "color",
           "value": "#112238",
@@ -4313,11 +4294,6 @@
           "type": "color",
           "value": "#38c971",
           "referencedVariable": "$primitive.green.70"
-        },
-        "success-vibrant": {
-          "type": "color",
-          "value": "#268f4f",
-          "referencedVariable": "$primitive.green.50"
         },
         "success-background": {
           "type": "color",
@@ -4334,11 +4310,6 @@
           "value": "#cfa608",
           "referencedVariable": "$primitive.yellow.70"
         },
-        "warning-vibrant": {
-          "type": "color",
-          "value": "#f3c305",
-          "referencedVariable": "$primitive.yellow.80"
-        },
         "warning-background": {
           "type": "color",
           "value": "#2c2000",
@@ -4353,11 +4324,6 @@
           "type": "color",
           "value": "#ff7f72",
           "referencedVariable": "$primitive.red.70"
-        },
-        "error-vibrant": {
-          "type": "color",
-          "value": "#e20314",
-          "referencedVariable": "$primitive.red.50"
         },
         "error-background": {
           "type": "color",
@@ -5450,8 +5416,8 @@
           },
           "split-view-background-horizontal": {
             "type": "color",
-            "value": "#000000",
-            "referencedVariable": "$primitive.neutral.0"
+            "value": "#141415",
+            "referencedVariable": "$primitive.neutral.5"
           },
           "split-view-divider": {
             "type": "color",
@@ -5495,11 +5461,6 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
-          },
           "button": {
             "hover": {
               "type": "color",
@@ -5511,6 +5472,11 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
+          },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
