@@ -1,7 +1,8 @@
-import StyleDictionary from 'style-dictionary'
-import _template from 'lodash/template'
 import fs from 'fs'
-import changeCase from 'change-case'
+import camelCase from 'lodash/camelCase'
+import _template from 'lodash/template'
+import StyleDictionary from 'style-dictionary'
+import { snakeCaseCustom } from '../../utils.js'
 import colorsets from './colorsets.js'
 import fontStyles from './fontStyles.js'
 
@@ -31,7 +32,7 @@ StyleDictionary.registerFormat({
             token.value.gradientType === 'linear'
         )
         .map((token) => {
-          token.name = changeCase.camelCase(token.path.pop())
+          token.name = camelCase(token.path.pop())
           return token
         })
     }
@@ -57,14 +58,14 @@ StyleDictionary.registerFormat({
           // The system already provides these and will conflict with the names
           return
         }
-        const name = changeCase.snakeCase(
+        const name = snakeCaseCustom(
           token.path
             .filter(
               (path) => path !== 'dark' && path !== 'light' && path !== 'color'
             )
             .join(' ')
         )
-        colors[name] = changeCase.camelCase(name).replace('_', '') // Xcode 15 accessors generate without underscores
+        colors[name] = camelCase(name).replace('_', '') // Xcode 15 accessors generate without underscores
       })
     return template({ colors, options, file })
   }

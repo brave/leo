@@ -1,0 +1,15 @@
+minimumReleaseAge: 2880
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+  figma-api-exporter: true
+  svelte-preprocess: false
+  unrs-resolver: false
+
+overrides:
+  esbuild: 0.27.1
+  glob: 13.0.3
+  'svgo@<2.8.2': 2.8.2
+  uuid: 14.0.0
+  vite: 6.4.3

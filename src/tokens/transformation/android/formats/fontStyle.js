@@ -1,6 +1,11 @@
+import startCase from 'lodash/startCase'
 import StyleDictionary from 'style-dictionary'
-import { pascalCase, snakeCase } from 'change-case'
+import { snakeCaseCustom } from '../../../utils'
 const { fileHeader } = StyleDictionary.formatHelpers
+
+function pascalCase(str) {
+  return startCase(str).replaceAll(' ', '')
+}
 
 const letterSpacingToFloat = (letterSpacing, fontSize) =>
   1 + letterSpacing / fontSize
@@ -20,10 +25,10 @@ export default ({ dictionary, platform, options = {}, file }) => {
           compositeToken.name.replace('font_android_', '')
         )}">\n` +
         printDescription(compositeToken.description) +
-        `    <item name="android:fontFamily">@font/${snakeCase(
+        `    <item name="android:fontFamily">@font/${snakeCaseCustom(
           compositeToken.original.value.fontFamily
         )}</item>\n` +
-        `    <item name="android:textSize">@dimen/${snakeCase(
+        `    <item name="android:textSize">@dimen/${snakeCaseCustom(
           compositeToken.name.replace('font_android_', '')
         )}</item>\n` +
         // for android:lineHeight requires API level 28 and current api is 26
