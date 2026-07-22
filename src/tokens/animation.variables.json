@@ -1,5 +1,9 @@
 {
   "duration": {
+    "xs": {
+      "type": "custom-duration",
+      "value": "60ms"
+    },
     "s": {
       "type": "custom-duration",
       "value": "120ms"
