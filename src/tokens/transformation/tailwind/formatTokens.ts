@@ -1,4 +1,4 @@
-import merge from 'lodash.merge'
+import merge from 'lodash/merge'
 import { Formatter } from 'style-dictionary'
 
 const themes = ['light', 'dark']
