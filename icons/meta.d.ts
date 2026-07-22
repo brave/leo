@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1784192117545,
+  "updatedAt": 1784739308840,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -301,6 +301,8 @@ const meta = {
     "browser-sidebar": "browser-sidebar",
     "browser-split-close-left": "browser-split-close-left",
     "browser-split-close-right": "browser-split-close-right",
+    "browser-split-view-horizontal-swap-bottom": "browser-split-view-horizontal-swap-bottom",
+    "browser-split-view-horizontal-swap-top": "browser-split-view-horizontal-swap-top",
     "browser-split-view-horizontal": "browser-split-view-horizontal",
     "browser-split-view-left": "browser-split-view-left",
     "browser-split-view-right": "browser-split-view-right",
@@ -1900,8 +1902,11 @@ const meta = {
     "social-smallplaceholder": "social-smallplaceholder",
     "social-soundcloud-color": "social-soundcloud-color",
     "social-spotify-color": "social-spotify-color",
+    "social-substack": "social-substack",
     "social-telegram-color": "social-telegram-color",
     "social-telegram-nobackground-color": "social-telegram-nobackground-color",
+    "social-telegram-nobackground": "social-telegram-nobackground",
+    "social-telegram": "social-telegram",
     "social-threads-color": "social-threads-color",
     "social-tiktok-color": "social-tiktok-color",
     "social-twitch-color": "social-twitch-color",
