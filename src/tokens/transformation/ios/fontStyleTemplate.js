@@ -1,16 +1,8 @@
-const dateNow = () => {
-  return new Date().toLocaleDateString('de-DE', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  })
-}
-
 export default (style) => `
 //
 //  ${style.filename}
 //
-//  Created by Design Token Generator on ${dateNow()}.
+//  Created by Design Token Generator.
 //
 
 import UIKit

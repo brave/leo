@@ -1,6 +1,5 @@
-import StyleDictionary from 'style-dictionary'
 import { TinyColor } from '@ctrl/tinycolor'
-const { fileHeader } = StyleDictionary.formatHelpers
+import fileHeader from '../../web/fileHeader'
 
 const getTokenValue = (token) => {
   const color = new TinyColor(token.original.value)

@@ -1,5 +1,4 @@
-import StyleDictionary from 'style-dictionary'
-const { fileHeader } = StyleDictionary.formatHelpers
+import fileHeader from '../../web/fileHeader'
 
 export default ({ dictionary, platform, options = {}, file }) => {
   const fontStyles = dictionary.allTokens
