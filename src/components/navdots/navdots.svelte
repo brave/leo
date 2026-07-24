@@ -61,8 +61,11 @@
 
     --dot-spacing: var(--leo-navdots-spacing, 10px);
     --dot-vertical-margin: var(--leo-navdots-vertical-margin, 1px);
-    --transition-duration: var(--leo-navdots-transition-duration, 0.2s);
-    --transition-easing: var(--leo-navdots-easing, ease-in-out);
+    --transition-duration: var(
+      --leo-navdots-transition-duration,
+      var(--leo-duration-m)
+    );
+    --transition-easing: var(--leo-navdots-easing, var(--leo-easing-in-out));
 
     --active-dot-color: var(
       --leo-navdots-active-color,

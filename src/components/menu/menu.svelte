@@ -264,8 +264,17 @@
   .leo-menu .leo-menu-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
-    transform-origin: top left;
-    animation: menuIn 150ms ease-out;
+    transform-origin: var(
+      --leo-menu-transform-origin,
+      var(--leo-floating-transform-origin, top left)
+    );
+    animation: menuIn var(--leo-duration-m, 200ms)
+      var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: menuInFade var(--leo-duration-s, 120ms)
+        var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
+    }
 
     // TODO(petemill): Make the "floating-ui" element be this popup element,
     // so that we get the correct thing scrolling when overflow happens. In the meantime,
@@ -293,6 +302,15 @@
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @keyframes menuInFade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 

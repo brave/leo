@@ -3,6 +3,7 @@
   import { scale } from 'svelte/transition'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
+  import { prefersReducedMotion } from '../prefersReducedMotion'
 
   type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open'> & {
     isOpen?: boolean
@@ -39,11 +40,24 @@
     isOpen = false
     onClose?.()
   }
+
+  // Re-read on each open so OS preference changes mid-session are honored.
+  $: dialogTransition = {
+    duration: animate
+      ? parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            prefersReducedMotion() ? '--leo-duration-xs' : '--leo-duration-s'
+          )
+        ) || (prefersReducedMotion() ? 60 : 120)
+      : 0,
+    start: prefersReducedMotion() ? 1 : 0.95,
+    opacity: 0
+  }
 </script>
 
 {#if isOpen}
   <dialog
-    transition:scale={{ duration: animate ? 60 : 0, start: 0.8 }}
+    transition:scale={dialogTransition}
     {...$$restProps}
     class="leo-dialog"
     class:modal
@@ -159,6 +173,8 @@
     &::backdrop {
       background: var(--backdrop-background);
       backdrop-filter: var(--backdrop-filter);
+      transition: opacity var(--leo-duration-xs) var(--leo-easing-out),
+                  backdrop-filter var(--leo-duration-xs) var(--leo-easing-out);
     }
   }
 

@@ -91,6 +91,8 @@
       var(--leo-color-text-disabled)
     );
     --font: var(--leo-checkbox-font, var(--leo-font-default-regular));
+    --motion-duration: var(--leo-duration-s, 120ms);
+    --motion-easing: var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
 
     display: flex;
     align-items: center;
@@ -113,10 +115,12 @@
 
       & .checked {
         opacity: 1;
+        transform: scale(1);
       }
 
       & .unchecked {
         opacity: 0;
+        transform: scale(0.85);
       }
      } 
     }
@@ -156,10 +160,12 @@
 
     & .checked {
       opacity: 0;
+      transform: scale(0.85);
     }
 
     & .unchecked {
       opacity: 1;
+      transform: scale(1);
     }
 
     &:has(input:focus-visible) {
@@ -171,7 +177,14 @@
   }
 
   .leo-checkbox.animate .check .check-mark {
-    transition: opacity 120ms ease-in-out;
+    transition:
+      opacity var(--motion-duration) var(--motion-easing),
+      transform var(--motion-duration) var(--motion-easing);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: opacity var(--motion-duration) var(--motion-easing);
+      transform: none !important;
+    }
   }
 
   .leo-checkbox.disabled .check {
@@ -185,6 +198,11 @@
       &:has(input:checked) {
         color: var(--checked-color-hover);
       }
+    }
+
+    // .isChecked covers WebKit shadow roots where :has() is unsupported.
+    .leo-checkbox.isChecked:hover .check {
+      color: var(--checked-color-hover);
     }
   }
 </style>

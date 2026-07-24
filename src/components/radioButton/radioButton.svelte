@@ -4,14 +4,12 @@
   export let sizes = ['small', 'normal'] as const
   export type Sizes = (typeof sizes)[number]
 
-  const transition = { duration: 120 }
-
   preloadIcon('radio-checked')
   preloadIcon('radio-unchecked')
 </script>
 
 <script lang="ts">
-  import { fade, scale } from 'svelte/transition'
+  import { onMount } from 'svelte'
   import Icon from '../icon/icon.svelte'
   import type { ChangeEventHandler } from 'svelte/elements'
 
@@ -24,6 +22,13 @@
   export let onChange: (detail: { value: string | number | any }) => void = () => {}
 
   const tagName = 'leo-radiobutton'
+
+  // Skip the enter animation on first paint (same pattern as checkbox).
+  let animate = false
+  onMount(() => {
+    const handle = requestAnimationFrame(() => (animate = true))
+    return () => cancelAnimationFrame(handle)
+  })
 
   const changed: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (isDisabled || !e.currentTarget?.checked) return
@@ -52,6 +57,8 @@
   class="leo-radiobutton"
   class:small={size === 'small'}
   class:disabled={isDisabled}
+  class:isChecked={currentValue === value}
+  class:animate
 >
   <div class="check">
     <input
@@ -60,15 +67,12 @@
       checked={currentValue === value}
       on:change={changed}
     />
-    {#if currentValue === value && currentValue}
-      <div transition:scale={transition}>
-        <Icon name="radio-checked" />
-      </div>
-    {:else}
-      <div out:fade={transition}>
-        <Icon name="radio-unchecked" />
-      </div>
-    {/if}
+    <div class="check-mark checked">
+      <Icon name="radio-checked" />
+    </div>
+    <div class="check-mark unchecked">
+      <Icon name="radio-unchecked" />
+    </div>
   </div>
   <slot>{value}</slot>
 </label>
@@ -108,6 +112,8 @@
     );
     --font: var(--leo-radiobutton-font, var(--leo-font-default-regular));
     --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 20px);
+    --motion-duration: var(--leo-duration-s, 120ms);
+    --motion-easing: var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
 
     display: flex;
     flex-direction: var(--flex-direction);
@@ -120,6 +126,25 @@
 
     &.disabled {
       cursor: not-allowed;
+    }
+
+    // Note: We need both of these because WebKit doesn't support the :has
+    // selector inside a shadowRoot.
+    &.isChecked,
+    &:has(input:checked) {
+      & .check {
+        color: var(--checked-color);
+
+        & .checked {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        & .unchecked {
+          opacity: 0;
+          transform: scale(0.85);
+        }
+      }
     }
   }
 
@@ -144,14 +169,10 @@
     width: var(--radiobutton-size);
     height: var(--radiobutton-size);
 
-    transition: box-shadow 0.12s ease-in-out;
+    transition: box-shadow var(--motion-duration) var(--motion-easing);
     border-radius: var(--leo-radius-full);
 
     color: var(--unchecked-color);
-
-    &:has(input:checked) {
-      color: var(--checked-color);
-    }
 
     > input {
       opacity: 0;
@@ -165,8 +186,29 @@
       right: 0;
     }
 
+    & .checked {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    & .unchecked {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     &:has(input:focus-visible) {
       box-shadow: var(--leo-effect-focus-state);
+    }
+  }
+
+  .leo-radiobutton.animate .check .check-mark {
+    transition:
+      opacity var(--motion-duration) var(--motion-easing),
+      transform var(--motion-duration) var(--motion-easing);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: opacity var(--motion-duration) var(--motion-easing);
+      transform: none !important;
     }
   }
 
@@ -177,6 +219,11 @@
       &:has(input:checked) {
         color: var(--checked-color-hover);
       }
+    }
+
+    // .isChecked covers WebKit shadow roots where :has() is unsupported.
+    .leo-radiobutton.isChecked:hover .check {
+      color: var(--checked-color-hover);
     }
   }
 </style>

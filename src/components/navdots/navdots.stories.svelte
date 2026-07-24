@@ -59,8 +59,8 @@
   import SlotInfo from '../../storyHelpers/SlotInfo.svelte'
 
   let activeDot = 0
-  function handleChange(n: CustomEvent<{ activeDot: number }>) {
-    activeDot = n.detail.activeDot
+  function handleChange(detail: { activeDot: number }) {
+    activeDot = detail.activeDot
   }
 </script>
 

@@ -1,0 +1,30 @@
+{
+  "duration": {
+    "xs": {
+      "type": "custom-duration",
+      "value": "60ms"
+    },
+    "s": {
+      "type": "custom-duration",
+      "value": "120ms"
+    },
+    "m": {
+      "type": "custom-duration",
+      "value": "200ms"
+    },
+    "l": {
+      "type": "custom-duration",
+      "value": "300ms"
+    }
+  },
+  "easing": {
+    "out": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0.23, 1, 0.32, 1)"
+    },
+    "in-out": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0.77, 0, 0.175, 1)"
+    }
+  }
+}

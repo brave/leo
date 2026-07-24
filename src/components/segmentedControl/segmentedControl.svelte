@@ -178,8 +178,14 @@
 
     &.animate .pill {
       transition:
-        width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-        left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        width var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+        left var(--leo-duration-l, 300ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     :where(&) > :global(.leo-segmented-control-item),

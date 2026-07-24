@@ -29,9 +29,12 @@
       position-anchor: --active-indicator;
 
       transition:
-        top 0.12s ease-in-out,
-        bottom 0.12s ease-in-out,
-        left 0.12s ease-in;
+        top var(--leo-duration-s, 120ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+        bottom var(--leo-duration-s, 120ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
+        left var(--leo-duration-s, 120ms)
+          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
 
       content: '';
       width: 4px;
@@ -43,6 +46,10 @@
       top: calc(anchor(top) + var(--anchor-padding));
       bottom: calc(anchor(bottom) + var(--anchor-padding));
       z-index: 1;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 
