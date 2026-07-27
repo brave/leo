@@ -167,8 +167,8 @@ importers:
         specifier: 2.9.1
         version: 2.9.1
       svgo:
-        specifier: 4.0.1
-        version: 4.0.1
+        specifier: 4.0.2
+        version: 4.0.2
       ts-jest:
         specifier: 29.1.2
         version: 29.1.2(@babel/core@7.29.7)(@jest/types@29.6.3)(esbuild@0.27.1)(jest@30.4.2(@types/node@25.9.1)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@6.0.3)
@@ -3706,8 +3706,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  svgo@4.0.1:
-    resolution: {integrity: sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w==}
+  svgo@4.0.2:
+    resolution: {integrity: sha512-ekx94z1rRc5LDi6oSUaeRnYhd0UOJxdtQCL2rF8xpWxD3TPAsISWOrxezqGovqS38GRZOdpDfvQe3ts6F7nsng==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -7938,7 +7938,7 @@ snapshots:
       sax: 1.6.0
       stable: 0.1.8
 
-  svgo@4.0.1:
+  svgo@4.0.2:
     dependencies:
       commander: 11.1.0
       css-select: 5.2.2
