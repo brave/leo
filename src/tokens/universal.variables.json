@@ -4073,6 +4073,11 @@
             "value": "#ffffff",
             "referencedVariable": "$primitive.neutral.100"
           },
+          "divider": {
+            "type": "color",
+            "value": "#f2f2f3",
+            "referencedVariable": "$primitive.neutral.95"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -4084,11 +4089,6 @@
               "value": "#e4e4e5",
               "referencedVariable": "$primitive.neutral.90"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#f2f2f3",
-            "referencedVariable": "$primitive.neutral.95"
           }
         },
         "toolbar": {
@@ -5461,6 +5461,11 @@
             "value": "#525256",
             "referencedVariable": "$primitive.neutral.35"
           },
+          "divider": {
+            "type": "color",
+            "value": "#525256",
+            "referencedVariable": "$primitive.neutral.35"
+          },
           "button": {
             "hover": {
               "type": "color",
@@ -5472,11 +5477,6 @@
               "value": "#464649",
               "referencedVariable": "$primitive.neutral.30"
             }
-          },
-          "divider": {
-            "type": "color",
-            "value": "#525256",
-            "referencedVariable": "$primitive.neutral.35"
           }
         },
         "toolbar": {
@@ -5499,6 +5499,50 @@
           }
         }
       }
+    }
+  },
+  "duration": {
+    "xs": {
+      "type": "custom-duration",
+      "value": "50ms"
+    },
+    "s": {
+      "type": "custom-duration",
+      "value": "100ms"
+    },
+    "m": {
+      "type": "custom-duration",
+      "value": "200ms"
+    },
+    "l": {
+      "type": "custom-duration",
+      "value": "300ms"
+    },
+    "xl": {
+      "type": "custom-duration",
+      "value": "500ms"
+    }
+  },
+  "easing": {
+    "linear": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0, 0, 1, 1)"
+    },
+    "in": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0.42, 0, 1, 1)"
+    },
+    "out": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0, 0, 0.58, 1)"
+    },
+    "in-out": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0.42, 0, 0.58, 1)"
+    },
+    "in-out-back": {
+      "type": "custom-easing",
+      "value": "cubic-bezier(0.7, -0.4, 0.4, 1.4)"
     }
   },
   "typography": {

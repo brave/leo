@@ -48,7 +48,7 @@
           getComputedStyle(document.documentElement).getPropertyValue(
             prefersReducedMotion() ? '--leo-duration-xs' : '--leo-duration-s'
           )
-        ) || (prefersReducedMotion() ? 60 : 120)
+        )
       : 0,
     start: prefersReducedMotion() ? 1 : 0.95,
     opacity: 0

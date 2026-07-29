@@ -112,8 +112,8 @@
     );
     --font: var(--leo-radiobutton-font, var(--leo-font-default-regular));
     --radiobutton-size: var(--leo-radiobutton-radiobutton-size, 20px);
-    --motion-duration: var(--leo-duration-s, 120ms);
-    --motion-easing: var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
+    --motion-duration: var(--leo-duration-s);
+    --motion-easing: var(--leo-easing-out);
 
     display: flex;
     flex-direction: var(--flex-direction);

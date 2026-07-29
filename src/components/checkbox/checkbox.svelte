@@ -91,8 +91,8 @@
       var(--leo-color-text-disabled)
     );
     --font: var(--leo-checkbox-font, var(--leo-font-default-regular));
-    --motion-duration: var(--leo-duration-s, 120ms);
-    --motion-easing: var(--leo-easing-out, cubic-bezier(0.23, 1, 0.32, 1));
+    --motion-duration: var(--leo-duration-s);
+    --motion-easing: var(--leo-easing-out);
 
     display: flex;
     align-items: center;

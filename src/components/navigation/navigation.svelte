@@ -29,12 +29,12 @@
       position-anchor: --active-indicator;
 
       transition:
-        top var(--leo-duration-s, 120ms)
-          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
-        bottom var(--leo-duration-s, 120ms)
-          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1)),
-        left var(--leo-duration-s, 120ms)
-          var(--leo-easing-in-out, cubic-bezier(0.77, 0, 0.175, 1));
+        top var(--leo-duration-s)
+          var(--leo-easing-in-out),
+        bottom var(--leo-duration-s)
+          var(--leo-easing-in-out),
+        left var(--leo-duration-s)
+          var(--leo-easing-in-out);
 
       content: '';
       width: 4px;

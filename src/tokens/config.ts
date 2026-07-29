@@ -12,10 +12,6 @@ function formatLayerPathPart(
 
 export default function getConfig(layers: string[]) {
   const source = layers.map((layer) => `src/tokens/${layer}*.json`)
-  // Animation tokens are shared foundations, loaded with the universal layer.
-  if (layers.includes('universal')) {
-    source.push('src/tokens/animation*.json')
-  }
 
   return {
     source,
