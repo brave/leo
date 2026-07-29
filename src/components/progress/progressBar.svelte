@@ -27,7 +27,7 @@
     .progress {
       height: 100%;
       width: 100%;
-      transition: width var(--transition-duration) var(--leo-easing-in-out);
+      transition: width var(--transition-duration) var(--leo-easing-linear);
       background: var(
         --leo-progressbar-color,
         var(--leo-color-button-background)

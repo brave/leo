@@ -65,7 +65,7 @@
       --leo-navdots-transition-duration,
       var(--leo-duration-m)
     );
-    --transition-easing: var(--leo-navdots-easing, var(--leo-easing-in-out));
+    --transition-easing: var(--leo-navdots-easing, var(--leo-easing-out));
 
     --active-dot-color: var(
       --leo-navdots-active-color,

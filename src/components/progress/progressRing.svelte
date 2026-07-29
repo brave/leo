@@ -78,7 +78,7 @@
     circle {
       transform: rotate(270deg);
       transform-origin: 50% 50%;
-      transition: stroke-dashoffset var(--transition-duration) var(--leo-easing-in-out);
+      transition: stroke-dashoffset var(--transition-duration) var(--leo-easing-linear);
       stroke-linecap: round;
       r: var(--normalized-radius);
       cx: var(--radius);

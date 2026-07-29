@@ -42,9 +42,9 @@
     &,
     .item-icon {
       transition:
-        background var(--leo-duration-s) var(--leo-easing-in-out),
-        color var(--leo-duration-s) var(--leo-easing-in-out),
-        box-shadow var(--leo-duration-s) var(--leo-easing-in-out);
+        background var(--leo-duration-s) var(--leo-easing-out),
+        color var(--leo-duration-s) var(--leo-easing-out),
+        box-shadow var(--leo-duration-s) var(--leo-easing-out);
     }
 
     .item-icon {
