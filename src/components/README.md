@@ -42,12 +42,12 @@ preferred component from `@brave/leo/react/button` instead of `@brave/leo/react/
 
 Now we've finished our super useful component, we should build our component
 
-    npm run build
+    pnpm run build
 
 alternatively, if you're working on a component you can use the `dev` command,
 which will automatically recompile changes:
 
-    npm run dev
+    pnpm run dev
 
 Our new component can now be used from any of our supported platforms:
 

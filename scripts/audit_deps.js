@@ -28,15 +28,15 @@ async function fetchIgnoredAdvisories() {
 function runNpmAudit() {
   let output
   try {
-    output = execSync('npm audit --json', { encoding: 'utf8' })
+    output = execSync('pnpm audit --json', { encoding: 'utf8' })
   } catch (err) {
-    // npm audit exits non-zero when vulnerabilities exist; capture stdout anyway
+    // pnpm audit exits non-zero when vulnerabilities exist; capture stdout anyway
     output = err.stdout
   }
   try {
     return JSON.parse(output)
   } catch {
-    console.error('npm audit did not return valid JSON')
+    console.error('pnpm audit did not return valid JSON')
     process.exit(1)
   }
 }

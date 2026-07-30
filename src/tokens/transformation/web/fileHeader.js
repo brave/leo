@@ -65,10 +65,7 @@ export default function fileHeader({
   }
 
   // default header
-  const defaultHeader = [
-    'Do not edit directly',
-    `Generated on ${new Date().toString()}`
-  ]
+  const defaultHeader = ['Do not edit directly']
 
   let { prefix, lineSeparator, header, footer } = Object.assign(
     {},
