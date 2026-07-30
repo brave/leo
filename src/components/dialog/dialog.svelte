@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SvelteHTMLElements } from 'svelte/elements'
+  import { onMount } from 'svelte'
   import { scale } from 'svelte/transition'
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
@@ -34,14 +35,32 @@
 
   let dialog: HTMLDialogElement
 
+  // Matches the dialog's compact layout breakpoint (below 480×480).
+  const compactViewportQuery = '(max-width: 479px), (max-height: 479px)'
+  let isCompactViewport =
+    typeof window !== 'undefined' &&
+    window.matchMedia(compactViewportQuery).matches
+
+  onMount(() => {
+    const mediaQuery = window.matchMedia(compactViewportQuery)
+    const update = () => {
+      isCompactViewport = mediaQuery.matches
+    }
+    update()
+    mediaQuery.addEventListener('change', update)
+    return () => mediaQuery.removeEventListener('change', update)
+  })
+
   $: {
     if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
   }
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
 
-  $: showCloseInline = showClose && closePosition === 'inline'
-  $: showCloseOutside = showClose && closePosition === 'outside'
+  // Outside close needs space above the dialog; fall back to inline on compact viewports.
+  $: closeIsOutside = closePosition === 'outside' && !isCompactViewport
+  $: showCloseInline = showClose && !closeIsOutside
+  $: showCloseOutside = showClose && closeIsOutside
 
   const close = () => {
     isOpen = false
