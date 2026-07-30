@@ -41,13 +41,20 @@
       'isOpen': {
         'control': 'none'
       },
+      'closePosition': {
+        'control': 'select',
+        'options': ['inline', 'outside'],
+        'description':
+          'Where to place the close button when showClose is enabled'
+      },
       'size': {
         'control': 'select',
         'options': ['mobile', 'normal']
       }
     },
     args: {
-      'isOpen': false
+      'isOpen': false,
+      'closePosition': 'inline'
     }
   }
 </script>
@@ -64,6 +71,8 @@
   let openDialog
   let isOpen = false
   let scrollDialogOpen = false
+  let closeInlineOpen = true
+  let closeOutsideOpen = true
 
   const scrollParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra est et viverra massa enim aliquam. Volutpat tristique id mi blandit interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat. Sit mauris, orci diam in habitasse nec dolor odio pharetra.'
@@ -153,7 +162,59 @@
 
 <Story name="Default" />
 
-<Story name="Show Close" args={{showClose: true}} />
+<Story name="Show Close Inline" let:args>
+  <Button
+    isDisabled={closeInlineOpen}
+    onClick={() => (closeInlineOpen = true)}>Show Dialog</Button
+  >
+  <Dialog
+    {...args}
+    showClose
+    closePosition="inline"
+    bind:isOpen={closeInlineOpen}
+  >
+    <div slot="title">This is the title</div>
+    <div slot="subtitle">This is the subtitle</div>
+    <div>
+      Close control is shown inline in the dialog header.
+    </div>
+    <div slot="actions">
+      <Button kind="outline" onClick={() => (closeInlineOpen = false)}
+        >Secondary</Button
+      >
+      <Button kind="filled" onClick={() => (closeInlineOpen = false)}
+        >Primary</Button
+      >
+    </div>
+  </Dialog>
+</Story>
+
+<Story name="Show Close Outside" let:args>
+  <Button
+    isDisabled={closeOutsideOpen}
+    onClick={() => (closeOutsideOpen = true)}>Show Dialog</Button
+  >
+  <Dialog
+    {...args}
+    showClose
+    closePosition="outside"
+    bind:isOpen={closeOutsideOpen}
+  >
+    <div slot="title">This is the title</div>
+    <div slot="subtitle">This is the subtitle</div>
+    <div>
+      Close control is shown outside the dialog, above the top-right corner.
+    </div>
+    <div slot="actions">
+      <Button kind="outline" onClick={() => (closeOutsideOpen = false)}
+        >Secondary</Button
+      >
+      <Button kind="filled" onClick={() => (closeOutsideOpen = false)}
+        >Primary</Button
+      >
+    </div>
+  </Dialog>
+</Story>
 
 <Story name="Inner Scroll" let:args>
   <Button isDisabled={scrollDialogOpen} onClick={() => (scrollDialogOpen = true)}
@@ -162,6 +223,7 @@
   <Dialog
     {...args}
     showClose
+    closePosition="inline"
     style="max-height: min(420px, calc(100vh - var(--leo-spacing-m) * 2)); overflow: auto;"
     bind:isOpen={scrollDialogOpen}
   >

@@ -4,10 +4,14 @@
   import Button from '../button/button.svelte'
   import Icon from '../icon/icon.svelte'
 
+  type ClosePosition = 'inline' | 'outside'
+
   type $$Props = Omit<Partial<SvelteHTMLElements['dialog']>, 'open'> & {
     isOpen?: boolean
     modal?: boolean
     showClose?: boolean
+    /** Where to place the close button when `showClose` is true. Defaults to `inline`. */
+    closePosition?: ClosePosition
     showBack?: boolean
     escapeCloses?: boolean
     backdropClickCloses?: boolean
@@ -19,6 +23,7 @@
   export let isOpen = false
   export let modal = true
   export let showClose = false
+  export let closePosition: ClosePosition = 'inline'
   export let showBack = false
   export let escapeCloses = true
   export let backdropClickCloses = true
@@ -35,6 +40,9 @@
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
 
+  $: showCloseInline = showClose && closePosition === 'inline'
+  $: showCloseOutside = showClose && closePosition === 'outside'
+
   const close = () => {
     isOpen = false
     onClose?.()
@@ -49,6 +57,7 @@
     class:modal
     class:hasHeader
     class:hasActions={$$slots.actions}
+    class:hasCloseOutside={showCloseOutside}
     bind:this={dialog}
     on:close={close}
     on:cancel={(e) => {
@@ -59,9 +68,16 @@
       if (escapeCloses) close()
     }}
   >
+    {#if showCloseOutside}
+      <div class="close-button outside">
+        <Button kind="plain-faint" fab onClick={close}>
+          <Icon name="close" />
+        </Button>
+      </div>
+    {/if}
     {#if hasHeader}
       <header>
-        {#if showClose}
+        {#if showCloseInline}
           <div class="close-button">
             <Button kind="plain-faint" fab onClick={close}>
               <Icon name="close" />
@@ -88,7 +104,7 @@
           </div>
         {/if}
       </header>
-    {:else if showClose}
+    {:else if showCloseInline}
       <div class="close-button">
         <Button kind="plain-faint" fab onClick={close}>
           <Icon name="close" />
@@ -219,14 +235,50 @@
     font: var(--leo-font-heading-h2);
   }
 
+  /* Keep overflow visible so the outside close isn't clipped, and round the
+   * painted surfaces directly (the dialog background is transparent). */
+  .leo-dialog.hasCloseOutside {
+    overflow: visible;
+
+    &.hasHeader > header {
+      border-start-start-radius: var(--border-radius);
+      border-start-end-radius: var(--border-radius);
+    }
+
+    &:not(.hasHeader) > .body {
+      border-start-start-radius: var(--border-radius);
+      border-start-end-radius: var(--border-radius);
+    }
+
+    &.hasActions > .actions {
+      border-end-start-radius: var(--border-radius);
+      border-end-end-radius: var(--border-radius);
+    }
+
+    &:not(.hasActions) > .body {
+      border-end-start-radius: var(--border-radius);
+      border-end-end-radius: var(--border-radius);
+    }
+  }
+
   .leo-dialog .close-button {
     position: absolute;
     inset-inline-end: var(--leo-spacing-xl);
     top: var(--leo-spacing-xl);
   }
 
+  .leo-dialog .close-button.outside {
+    inset-inline-end: 0;
+    top: auto;
+    bottom: 100%;
+    margin-bottom: var(--leo-spacing-m);
+    --leo-button-color: var(--leo-color-icon-default);
+    --leo-icon-color: var(--leo-color-icon-default);
+    color: var(--leo-color-icon-default);
+  }
+
   /* No header: keep the close control pinned while the dialog scrolls. */
-  .leo-dialog > .close-button {
+  .leo-dialog > .close-button:not(.outside) {
     position: sticky;
     z-index: 2;
     justify-self: end;
