@@ -79,7 +79,17 @@
   </SlotInfo>
 </Story>
 
-<Story name="Default" />
+<Story name="All Modes" let:args>
+  <div class="modes">
+    {#each modes as mode}
+      <Tooltip {...args} {mode} visible>
+        <Button>
+          <span class="capitalize">{mode}</span>
+        </Button>
+      </Tooltip>
+    {/each}
+  </div>
+</Story>
 
 <Story name="Controlled" let:args>
   <Checkbox bind:checked={showTooltip}>Show tooltip</Checkbox>
@@ -107,6 +117,19 @@
 </Story>
 
 <style>
+  .modes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 120px;
+    padding: 80px 24px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }
+
   .title {
     font: var(--leo-font-heading-h4);
     display: flex;

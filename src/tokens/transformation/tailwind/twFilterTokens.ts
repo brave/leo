@@ -7,6 +7,8 @@ const acceptedTypes = [
   'custom-shadow',
   'custom-gradient',
   'custom-spacing',
+  'custom-duration',
+  'custom-easing',
   'number'
 ]
 

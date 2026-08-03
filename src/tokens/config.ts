@@ -11,8 +11,10 @@ function formatLayerPathPart(
 }
 
 export default function getConfig(layers: string[]) {
+  const source = layers.map((layer) => `src/tokens/${layer}*.json`)
+
   return {
-    source: layers.map((layer) => `src/tokens/${layer}*.json`),
+    source,
     parsers: [leoParser],
     platforms: {
       tailwind: {
