@@ -115,15 +115,21 @@
     _node: Element,
     { yPercent = -100 }: { yPercent?: number } = {}
   ): TransitionConfig {
+    const duration = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        prefersReducedMotion() ? '--leo-duration-xs' : '--leo-duration-s'
+      )
+    )
+
     if (prefersReducedMotion()) {
       return {
-        duration: 120,
+        duration,
         css: (t) => `opacity: ${t}`
       }
     }
 
     return {
-      duration: 200,
+      duration,
       easing: cubicOut,
       css: (t) =>
         `transform: translateY(${(1 - t) * yPercent}%); opacity: ${t}`
