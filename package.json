@@ -58,7 +58,7 @@
     "svgo": "4.0.2",
     "ts-jest": "29.1.2",
     "tsx": "4.21.0",
-    "undici": "7.28.0",
+    "undici": "7.29.0",
     "vite": "6.4.3"
   },
   "peerDependencies": {
