@@ -30,7 +30,10 @@ jobs:
           cache-dependency-path: '**/pnpm-lock.yaml'
 
       - name: Install Socket CLI
-        run: pnpm add @socketsecurity/cli@1.1.102
+        run: |
+          echo "${PNPM_HOME}/bin" >> "$GITHUB_PATH"
+          export PATH="${PNPM_HOME}/bin:$PATH"
+          pnpm add -g @socketsecurity/cli@1.1.102
 
       - name: Run Socket Fix
         env:
@@ -39,14 +42,15 @@ jobs:
           SOCKET_CLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: 'true'
         run: |
+          export PATH="${PNPM_HOME}/bin:${PNPM_HOME}:$PATH"
           if ! [[ "$GHSA_IDS" =~ ^GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}(,[[:space:]]?GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4})*$ ]]; then
             echo "::error::GHSA_IDS contains invalid entries. Expected format: GHSA-xxxx-xxxx-xxxx (comma or comma-space separated)"
             exit 1
           fi
           IFS=',' read -ra IDS <<< "$GHSA_IDS"
           for id in "${IDS[@]}"; do FLAGS+=(--id "${id// /}"); done
-          pnpm exec socket config set defaultOrg "brave"
-          pnpm exec socket fix . "${FLAGS[@]}"
+          socket config set defaultOrg "brave"
+          socket fix . "${FLAGS[@]}"
 
       - name: Configure GPG
         uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
