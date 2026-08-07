@@ -30,10 +30,7 @@ jobs:
           cache-dependency-path: '**/pnpm-lock.yaml'
 
       - name: Install Socket CLI
-        run: |
-          echo "${PNPM_HOME}/bin" >> "$GITHUB_PATH"
-          export PATH="${PNPM_HOME}/bin:$PATH"
-          pnpm add -g @socketsecurity/cli@1.1.154
+        run: pnpm add @socketsecurity/cli@1.1.154
 
       - name: Run Socket Fix
         env:
@@ -42,7 +39,6 @@ jobs:
           SOCKET_CLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: 'true'
         run: |
-          export PATH="${PNPM_HOME}/bin:${PNPM_HOME}:$PATH"
           if ! [[ "$GHSA_IDS" =~ ^GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}(,[[:space:]]?GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4})*$ ]]; then
             echo "::error::GHSA_IDS contains invalid entries. Expected format: GHSA-xxxx-xxxx-xxxx (comma or comma-space separated)"
             exit 1
