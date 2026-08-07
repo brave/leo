@@ -30,7 +30,10 @@ jobs:
           cache-dependency-path: '**/pnpm-lock.yaml'
 
       - name: Install Socket CLI
-        run: pnpm add -g @socketsecurity/cli@1.1.154
+        run: |
+          echo "${PNPM_HOME}/bin" >> "$GITHUB_PATH"
+          export PATH="${PNPM_HOME}/bin:$PATH"
+          pnpm add -g @socketsecurity/cli@1.1.154
 
       - name: Run Socket Fix
         env:
