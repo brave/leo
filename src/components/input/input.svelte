@@ -69,6 +69,13 @@
    */
   export let maxlength: number | undefined = undefined
 
+  /**
+   * A regular expression that the value is checked against during validation.
+   * If validation fails (and showErrors is true), the component will be
+   * rendered in its error state.
+   */
+  export let pattern: string | undefined = undefined
+
   /*
    * Whether the value is required. In addition to showing a required indicator,
    * this performs some basic validation (i.e. is value truthy), and if it fails
@@ -166,6 +173,7 @@
       class="leo-input"
       {disabled}
       {maxlength}
+      {pattern}
       {required}
       {type}
       {value}
