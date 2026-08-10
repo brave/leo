@@ -30,7 +30,10 @@ jobs:
           cache-dependency-path: '**/pnpm-lock.yaml'
 
       - name: Install Socket CLI
-        run: pnpm add -g @socketsecurity/cli@1.1.154
+        run: |
+          echo "${PNPM_HOME}/bin" >> "$GITHUB_PATH"
+          export PATH="${PNPM_HOME}/bin:$PATH"
+          pnpm add -g @socketsecurity/cli@1.1.102
 
       - name: Run Socket Fix
         env:
@@ -52,8 +55,8 @@ jobs:
       - name: Configure GPG
         uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg_private_key: ${{ secrets.BRAVE_SUPPORT_ADMIN_COMMIT_SIGNING_KEY }}
+          passphrase: ${{ secrets.BRAVE_SUPPORT_ADMIN_COMMIT_SIGNING_KEY_PASSPHRASE }}
           git_user_signingkey: true
           git_commit_gpgsign: true
 
