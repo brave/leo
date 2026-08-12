@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "${PNPM_HOME}/bin" >> "$GITHUB_PATH"
           export PATH="${PNPM_HOME}/bin:$PATH"
-          pnpm add -g @socketsecurity/cli@1.1.102
+          pnpm add -g @socketsecurity/cli@1.1.156
 
       - name: Configure GPG
         uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
@@ -47,9 +47,6 @@ jobs:
         env:
           GHSA_IDS: ${{ inputs.ghsa_ids }}
           SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
-          SOCKET_CLI_GITHUB_TOKEN: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
-          SOCKET_CLI_GIT_USER_NAME: brave-support-admin
-          SOCKET_CLI_GIT_USER_EMAIL: 138038132+brave-support-admin@users.noreply.github.com
         run: |
           export PATH="${PNPM_HOME}/bin:${PNPM_HOME}:$PATH"
           if ! [[ "$GHSA_IDS" =~ ^GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}(,[[:space:]]?GHSA-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4})*$ ]]; then
@@ -60,3 +57,23 @@ jobs:
           for id in "${IDS[@]}"; do FLAGS+=(--id "${id// /}"); done
           socket config set defaultOrg "brave"
           socket fix . "${FLAGS[@]}"
+
+      - name: Compute branch name
+        id: branch
+        env:
+          GHSA_IDS: ${{ inputs.ghsa_ids }}
+        run: |
+          echo "name=socket-fix/$(echo "$GHSA_IDS" | tr ', ' '-' | tr -s '-' | cut -c1-60)" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+        with:
+          commit-message: 'fix: address security advisories'
+          author: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          committer: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          branch: ${{ steps.branch.outputs.name }}
+          delete-branch: true
+          base: main
+          title: 'fix: address security advisories'
+          body: 'Addresses: ${{ inputs.ghsa_ids }}'
+          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
