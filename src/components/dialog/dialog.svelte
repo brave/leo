@@ -148,7 +148,7 @@
 
     --backdrop-background: var(
       --leo-dialog-backdrop-background,
-      rgba(0, 0, 0, 0.1)
+      var(--leo-color-dialogs-scrim-background)
     );
     --backdrop-filter: var(--leo-dialog-backdrop-filter);
 
