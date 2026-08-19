@@ -1,7 +1,7 @@
 import { StringWithAutoComplete } from '../src/types/string'
 
 const meta = {
-  "updatedAt": 1786523861411,
+  "updatedAt": 1787168367359,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -474,6 +474,7 @@ const meta = {
     "container-events": "container-events",
     "container-leo": "container-leo",
     "container-messaging": "container-messaging",
+    "container-mini-label": "container-mini-label",
     "container-off": "container-off",
     "container-on": "container-on",
     "container-personal": "container-personal",
@@ -1254,9 +1255,15 @@ const meta = {
     "leo-project": "leo-project",
     "leo-tasks": "leo-tasks",
     "leo-voice-input": "leo-voice-input",
+    "letter-spacing-standard": "letter-spacing-standard",
+    "letter-spacing-very-wide": "letter-spacing-very-wide",
+    "letter-spacing-wide": "letter-spacing-wide",
     "letter-spacing": "letter-spacing",
     "letter": "letter",
     "lifi-color": "lifi-color",
+    "line-height-loose": "line-height-loose",
+    "line-height-standard": "line-height-standard",
+    "line-height-very-loose": "line-height-very-loose",
     "line-height": "line-height",
     "link-broken": "link-broken",
     "link-color": "link-color",
@@ -1933,6 +1940,7 @@ const meta = {
     "sort-settings": "sort-settings",
     "sos": "sos",
     "spaces-isolate": "spaces-isolate",
+    "spaces-name": "spaces-name",
     "spaces-off": "spaces-off",
     "spaces": "spaces",
     "spank-color": "spank-color",
@@ -2191,6 +2199,7 @@ const meta = {
     "window-tabs-vertical-expanded": "window-tabs-vertical-expanded",
     "window-tabs": "window-tabs",
     "window-task-manager": "window-task-manager",
+    "window-urlbar-www": "window-urlbar-www",
     "window-urlbar": "window-urlbar",
     "window-user": "window-user",
     "window": "window",
