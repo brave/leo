@@ -3,3 +3,10 @@
 # We don't specify a CODEOWNER for these files, so automerge works for dependabot
 package.json
 package-lock.json
+
+# Dependency files can be approved by the js-deps-reviewers team, so that
+# automated dependency-fix PRs (e.g. from brave-support-admin) are not blocked.
+# NOTE: these lines must come last, as the last matching pattern wins.
+/package.json @brave/js-deps-reviewers
+/pnpm-lock.yaml @brave/js-deps-reviewers
+/pnpm-workspace.yaml @brave/js-deps-reviewers
