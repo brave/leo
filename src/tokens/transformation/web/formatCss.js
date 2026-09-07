@@ -42,6 +42,53 @@ export default ({ dictionary, options, file }) => {
     outputReferences
   }).replace(/-dark-/gm, '-')
 
+  const dynamicVariables = (dictionary) =>
+    formattedVariables({
+      format: 'css',
+      dictionary: filteredTokens(
+        dictionary,
+        (token) =>
+          token.type === 'color' &&
+          token.referencedVariable &&
+          typeof token.opacity === 'number'
+      ),
+      outputReferences,
+      composedColorMode: 'dynamic'
+    })
+
+  const dynamicDefaultVars = dynamicVariables(groupedTokens.rest)
+  const dynamicLightVars = dynamicVariables(groupedTokens.light).replace(
+    /-light-/gm,
+    '-'
+  )
+  const dynamicDarkVars = dynamicVariables(groupedTokens.dark).replace(
+    /-dark-/gm,
+    '-'
+  )
+
+  const dynamicOverrides = [
+    dynamicDefaultVars && varDefFormat`:root {${dynamicDefaultVars}}`,
+    dynamicLightVars &&
+      varDefFormat`@media (prefers-color-scheme: light) {
+ :root {${dynamicLightVars} }
+}`,
+    dynamicDarkVars &&
+      varDefFormat`@media (prefers-color-scheme: dark) {
+ :root {${dynamicDarkVars} }
+}`,
+    dynamicLightVars &&
+      varDefFormat`[data-theme="light"] {${dynamicLightVars}}`,
+    dynamicDarkVars && varDefFormat`[data-theme="dark"] {${dynamicDarkVars}}`
+  ].filter((value) => !!value)
+
+  const colorMixOverrides =
+    dynamicOverrides.length > 0
+      ? varDefFormat`@supports (color: color-mix(in srgb, black, transparent)) {${dynamicOverrides.join(
+          '\n\n'
+        )}
+}`
+      : ''
+
   // prettier-ignore
   return (
     fileHeader({ file }) +
@@ -54,7 +101,8 @@ export default ({ dictionary, options, file }) => {
  :root {${darkVars} }
 }`,
       lightVars && varDefFormat`[data-theme="light"] {${lightVars}}`,
-      lightVars && varDefFormat`[data-theme="dark"] {${darkVars}}`,
+      darkVars && varDefFormat`[data-theme="dark"] {${darkVars}}`,
+      colorMixOverrides,
     ]
       .filter((v) => !!v)
       .join('\n\n') +

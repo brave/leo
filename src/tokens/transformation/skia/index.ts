@@ -100,6 +100,13 @@ const filteredTokens = (
       ...token,
       name: transformName(token),
       value: transformValue(token),
+      composedAlpha:
+        token.referencedVariable && typeof token.opacity === 'number'
+          ? `0x${Math.round(token.opacity * 255)
+              .toString(16)
+              .padStart(2, '0')
+              .toUpperCase()}`
+          : undefined,
       ...maybeMaterialColorProps(token)
     }))
     .sort((a, b) => {

@@ -2753,7 +2753,9 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(33, 39, 42, 0.5000)"
+          "value": "rgba(28, 28, 29, 0.5000)",
+          "referencedVariable": "$text.primary",
+          "opacity": 0.5
         }
       },
       "icon": {
@@ -2774,7 +2776,9 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(70, 70, 74, 0.5000)"
+          "value": "rgba(70, 70, 73, 0.5000)",
+          "referencedVariable": "$icon.default",
+          "opacity": 0.5
         }
       },
       "divider": {
@@ -2836,11 +2840,15 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(70, 70, 74, 0.2000)"
+          "value": "rgba(28, 28, 29, 0.2000)",
+          "referencedVariable": "$schemes.on-surface",
+          "opacity": 0.2
         },
         "hover": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0500)"
+          "value": "rgba(0, 0, 0, 0.0500)",
+          "referencedVariable": "$black",
+          "opacity": 0.05
         },
         "error-text": {
           "type": "color",
@@ -2866,19 +2874,27 @@
       "dialogs": {
         "scrim-background": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.5000)"
+          "value": "rgba(0, 0, 0, 0.5000)",
+          "referencedVariable": "$black",
+          "opacity": 0.5
         },
         "divider": {
           "type": "color",
-          "value": "rgba(33, 39, 42, 0.1000)"
+          "value": "rgba(0, 0, 0, 0.1000)",
+          "referencedVariable": "$black",
+          "opacity": 0.1
         },
         "button-transparent-default": {
           "type": "color",
-          "value": "rgba(13, 18, 20, 0.3500)"
+          "value": "rgba(0, 0, 0, 0.3500)",
+          "referencedVariable": "$black",
+          "opacity": 0.35
         },
         "button-transparent-hover": {
           "type": "color",
-          "value": "rgba(13, 18, 20, 0.5000)"
+          "value": "rgba(0, 0, 0, 0.5000)",
+          "referencedVariable": "$black",
+          "opacity": 0.5
         }
       },
       "systemfeedback": {
@@ -2946,37 +2962,53 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0400)"
+          "value": "rgba(0, 0, 0, 0.0400)",
+          "referencedVariable": "$black",
+          "opacity": 0.04
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0800)"
+          "value": "rgba(0, 0, 0, 0.0800)",
+          "referencedVariable": "$black",
+          "opacity": 0.08
         }
       },
       "material": {
         "thick": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.9100)"
+          "value": "rgba(255, 255, 255, 0.9100)",
+          "referencedVariable": "$white",
+          "opacity": 0.91
         },
         "regular": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.7300)"
+          "value": "rgba(255, 255, 255, 0.7300)",
+          "referencedVariable": "$white",
+          "opacity": 0.73
         },
         "thin": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.5500)"
+          "value": "rgba(255, 255, 255, 0.5500)",
+          "referencedVariable": "$white",
+          "opacity": 0.55
         },
         "ultrathin": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.3200)"
+          "value": "rgba(255, 255, 255, 0.3200)",
+          "referencedVariable": "$white",
+          "opacity": 0.32
         },
         "separator": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0800)"
+          "value": "rgba(0, 0, 0, 0.0800)",
+          "referencedVariable": "$black",
+          "opacity": 0.08
         },
         "divider": {
           "type": "color",
-          "value": "rgba(17, 17, 17, 0.2500)"
+          "value": "rgba(0, 0, 0, 0.2500)",
+          "referencedVariable": "$black",
+          "opacity": 0.25
         },
         "blur-thick": {
           "type": "number",
@@ -2998,11 +3030,15 @@
       "misc": {
         "scrollbar-thumb-color": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.1500)"
+          "value": "rgba(0, 0, 0, 0.1500)",
+          "referencedVariable": "$black",
+          "opacity": 0.15
         },
         "scrollbar-track-color": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.0000)"
+          "value": "rgba(0, 0, 0, 0.0000)",
+          "referencedVariable": "$black",
+          "opacity": 0
         }
       },
       "fixed-foreground": {
@@ -4028,8 +4064,9 @@
           },
           "split-view-background-horizontal": {
             "type": "color",
-            "value": "#c9c9ca",
-            "referencedVariable": "$primitive.neutral.80"
+            "value": "rgba(0, 0, 0, 0.0500)",
+            "referencedVariable": "$black",
+            "opacity": 0.05
           },
           "split-view-divider": {
             "type": "color",
@@ -4038,8 +4075,9 @@
           },
           "split-view-background-vertical": {
             "type": "color",
-            "value": "#e4e4e5",
-            "referencedVariable": "$primitive.neutral.90"
+            "value": "rgba(0, 0, 0, 0.0800)",
+            "referencedVariable": "$black",
+            "opacity": 0.08
           }
         },
         "omnibar": {
@@ -4141,7 +4179,9 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(235, 238, 240, 0.5000)"
+          "value": "rgba(228, 228, 229, 0.5000)",
+          "referencedVariable": "$text.primary",
+          "opacity": 0.5
         }
       },
       "icon": {
@@ -4162,7 +4202,9 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(199, 199, 204, 0.5000)"
+          "value": "rgba(201, 201, 202, 0.5000)",
+          "referencedVariable": "$icon.default",
+          "opacity": 0.5
         }
       },
       "divider": {
@@ -4183,8 +4225,8 @@
         },
         "interactive": {
           "type": "color",
-          "value": "#7686ec",
-          "referencedVariable": "$primitive.primary.60"
+          "value": "#303a68",
+          "referencedVariable": "$primitive.primary.30"
         }
       },
       "container": {
@@ -4224,11 +4266,15 @@
         },
         "disabled": {
           "type": "color",
-          "value": "rgba(235, 238, 240, 0.2000)"
+          "value": "rgba(228, 228, 229, 0.2000)",
+          "referencedVariable": "$schemes.on-surface",
+          "opacity": 0.2
         },
         "hover": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.0500)"
+          "value": "rgba(255, 255, 255, 0.0500)",
+          "referencedVariable": "$white",
+          "opacity": 0.05
         },
         "error-text": {
           "type": "color",
@@ -4254,19 +4300,27 @@
       "dialogs": {
         "scrim-background": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.7500)"
+          "value": "rgba(0, 0, 0, 0.7500)",
+          "referencedVariable": "$black",
+          "opacity": 0.75
         },
         "divider": {
           "type": "color",
-          "value": "rgba(33, 39, 42, 0.6500)"
+          "value": "rgba(0, 0, 0, 0.6500)",
+          "referencedVariable": "$black",
+          "opacity": 0.65
         },
         "button-transparent-default": {
           "type": "color",
-          "value": "rgba(13, 18, 20, 0.3500)"
+          "value": "rgba(0, 0, 0, 0.3500)",
+          "referencedVariable": "$black",
+          "opacity": 0.35
         },
         "button-transparent-hover": {
           "type": "color",
-          "value": "rgba(13, 18, 20, 0.5000)"
+          "value": "rgba(0, 0, 0, 0.5000)",
+          "referencedVariable": "$black",
+          "opacity": 0.5
         }
       },
       "systemfeedback": {
@@ -4334,37 +4388,53 @@
       "elevation": {
         "primary": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.0800)"
+          "value": "rgba(255, 255, 255, 0.0800)",
+          "referencedVariable": "$white",
+          "opacity": 0.08
         },
         "secondary": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.3300)"
+          "value": "rgba(0, 0, 0, 0.3300)",
+          "referencedVariable": "$black",
+          "opacity": 0.33
         }
       },
       "material": {
         "thick": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.7000)"
+          "value": "rgba(0, 0, 0, 0.7000)",
+          "referencedVariable": "$black",
+          "opacity": 0.7
         },
         "regular": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.5000)"
+          "value": "rgba(0, 0, 0, 0.5000)",
+          "referencedVariable": "$black",
+          "opacity": 0.5
         },
         "thin": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.3600)"
+          "value": "rgba(0, 0, 0, 0.3600)",
+          "referencedVariable": "$black",
+          "opacity": 0.36
         },
         "ultrathin": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.2500)"
+          "value": "rgba(0, 0, 0, 0.2500)",
+          "referencedVariable": "$black",
+          "opacity": 0.25
         },
         "separator": {
           "type": "color",
-          "value": "rgba(0, 0, 0, 0.1600)"
+          "value": "rgba(0, 0, 0, 0.1600)",
+          "referencedVariable": "$black",
+          "opacity": 0.16
         },
         "divider": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.2000)"
+          "value": "rgba(255, 255, 255, 0.2000)",
+          "referencedVariable": "$white",
+          "opacity": 0.2
         },
         "blur-thick": {
           "type": "number",
@@ -4386,11 +4456,15 @@
       "misc": {
         "scrollbar-thumb-color": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.1500)"
+          "value": "rgba(255, 255, 255, 0.1500)",
+          "referencedVariable": "$white",
+          "opacity": 0.15
         },
         "scrollbar-track-color": {
           "type": "color",
-          "value": "rgba(255, 255, 255, 0.0000)"
+          "value": "rgba(255, 255, 255, 0.0000)",
+          "referencedVariable": "$white",
+          "opacity": 0
         }
       },
       "fixed-foreground": {
@@ -5416,8 +5490,9 @@
           },
           "split-view-background-horizontal": {
             "type": "color",
-            "value": "#141415",
-            "referencedVariable": "$primitive.neutral.5"
+            "value": "rgba(0, 0, 0, 0.4000)",
+            "referencedVariable": "$black",
+            "opacity": 0.4
           },
           "split-view-divider": {
             "type": "color",
@@ -5426,8 +5501,9 @@
           },
           "split-view-background-vertical": {
             "type": "color",
-            "value": "#1c1c1d",
-            "referencedVariable": "$primitive.neutral.10"
+            "value": "rgba(0, 0, 0, 0.3000)",
+            "referencedVariable": "$black",
+            "opacity": 0.3
           }
         },
         "omnibar": {
@@ -5530,7 +5606,7 @@
     },
     "in": {
       "type": "custom-easing",
-      "value": "cubic-bezier(0.42, 0, 1, 1)"
+      "value": "cubic-bezier(0.5, 0, 0.5, 1)"
     },
     "out": {
       "type": "custom-easing",

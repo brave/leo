@@ -181,7 +181,8 @@ export default function getConfig(layers: string[]) {
             filter: 'android/filterDarkColor',
             format: 'android/formatColorStyle'
           }
-        ]
+        ],
+        actions: ['android/composedColors']
       }
     }
   } as Config

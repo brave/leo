@@ -24,12 +24,12 @@ void AddNalaColorMixer(ui::ColorProvider* provider,
 <%= groupedTokens.rest.allTokens.filter(t => t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {provider->GetColor(ui::${t.dynamicRef})};`).join('\n') %>
 
   // Static primitives (hard coded)
-<%= groupedTokens.rest.allTokens.filter(t => !t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {${t.value}};`).join('\n') %>
+<%= groupedTokens.rest.allTokens.filter(t => !t.dynamicPrimitive).map(t => `  mixer[${t.name}] = {${t.composedAlpha ? `ui::SetAlpha(${t.value}, ${t.composedAlpha})` : t.value}};`).join('\n') %>
 
   if (is_dark) {
-<%= groupedTokens.dark.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
+<%= groupedTokens.dark.allTokens.map(t => `    mixer[${t.name}] = {${t.composedAlpha ? `ui::SetAlpha(${t.value}, ${t.composedAlpha})` : (t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
   } else {
-<%= groupedTokens.light.allTokens.map(t => `    mixer[${t.name}] = {${(t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
+<%= groupedTokens.light.allTokens.map(t => `    mixer[${t.name}] = {${t.composedAlpha ? `ui::SetAlpha(${t.value}, ${t.composedAlpha})` : (t.value.startsWith('SkColor') ? t.value : `provider->GetColor(${t.value})`)}};`).join('\n') %>
   }
 }
 
