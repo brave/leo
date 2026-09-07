@@ -2754,6 +2754,7 @@
         "disabled": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$text.primary",
           "opacity": 0.5
         }
@@ -2777,6 +2778,7 @@
         "disabled": {
           "type": "color",
           "value": "rgba(70, 70, 73, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$icon.default",
           "opacity": 0.5
         }
@@ -2841,12 +2843,14 @@
         "disabled": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.2000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$schemes.on-surface",
           "opacity": 0.2
         },
         "hover": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.0500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.05
         },
@@ -2875,24 +2879,28 @@
         "scrim-background": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.5
         },
         "divider": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.1000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.1
         },
         "button-transparent-default": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.3500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.35
         },
         "button-transparent-hover": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.5
         }
@@ -2963,12 +2971,14 @@
         "primary": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.0400)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.04
         },
         "secondary": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.0800)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.08
         }
@@ -2977,36 +2987,42 @@
         "thick": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.9100)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.91
         },
         "regular": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.7300)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.73
         },
         "thin": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.5500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.55
         },
         "ultrathin": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.3200)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.32
         },
         "separator": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.0800)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.08
         },
         "divider": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.2500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.25
         },
@@ -3031,12 +3047,14 @@
         "scrollbar-thumb-color": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.1500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.15
         },
         "scrollbar-track-color": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.0000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0
         }
@@ -4065,6 +4083,7 @@
           "split-view-background-horizontal": {
             "type": "color",
             "value": "rgba(0, 0, 0, 0.0500)",
+            "expressionFunction": "COMPOSE_COLOR",
             "referencedVariable": "$black",
             "opacity": 0.05
           },
@@ -4076,6 +4095,7 @@
           "split-view-background-vertical": {
             "type": "color",
             "value": "rgba(0, 0, 0, 0.0800)",
+            "expressionFunction": "COMPOSE_COLOR",
             "referencedVariable": "$black",
             "opacity": 0.08
           }
@@ -4180,6 +4200,7 @@
         "disabled": {
           "type": "color",
           "value": "rgba(228, 228, 229, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$text.primary",
           "opacity": 0.5
         }
@@ -4203,6 +4224,7 @@
         "disabled": {
           "type": "color",
           "value": "rgba(201, 201, 202, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$icon.default",
           "opacity": 0.5
         }
@@ -4267,12 +4289,14 @@
         "disabled": {
           "type": "color",
           "value": "rgba(228, 228, 229, 0.2000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$schemes.on-surface",
           "opacity": 0.2
         },
         "hover": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.0500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.05
         },
@@ -4301,24 +4325,28 @@
         "scrim-background": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.7500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.75
         },
         "divider": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.6500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.65
         },
         "button-transparent-default": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.3500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.35
         },
         "button-transparent-hover": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.5
         }
@@ -4389,12 +4417,14 @@
         "primary": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.0800)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.08
         },
         "secondary": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.3300)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.33
         }
@@ -4403,36 +4433,42 @@
         "thick": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.7000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.7
         },
         "regular": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.5
         },
         "thin": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.3600)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.36
         },
         "ultrathin": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.2500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.25
         },
         "separator": {
           "type": "color",
           "value": "rgba(0, 0, 0, 0.1600)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$black",
           "opacity": 0.16
         },
         "divider": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.2000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.2
         },
@@ -4457,12 +4493,14 @@
         "scrollbar-thumb-color": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.1500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.15
         },
         "scrollbar-track-color": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.0000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0
         }
@@ -5491,6 +5529,7 @@
           "split-view-background-horizontal": {
             "type": "color",
             "value": "rgba(0, 0, 0, 0.4000)",
+            "expressionFunction": "COMPOSE_COLOR",
             "referencedVariable": "$black",
             "opacity": 0.4
           },
@@ -5502,6 +5541,7 @@
           "split-view-background-vertical": {
             "type": "color",
             "value": "rgba(0, 0, 0, 0.3000)",
+            "expressionFunction": "COMPOSE_COLOR",
             "referencedVariable": "$black",
             "opacity": 0.3
           }

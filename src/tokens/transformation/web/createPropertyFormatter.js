@@ -12,6 +12,7 @@
  */
 
 import { TinyColor } from '@ctrl/tinycolor'
+import isComposedColor from '../common/composedColor'
 
 const defaultFormatting = {
   prefix: '',
@@ -119,9 +120,7 @@ export default function createPropertyFormatter({
     if (
       format === 'css' &&
       composedColorMode === 'fallback' &&
-      prop.type === 'color' &&
-      prop.referencedVariable &&
-      typeof prop.opacity === 'number'
+      isComposedColor(prop)
     ) {
       const fallbackColor = new TinyColor(prop.original.value)
       value =

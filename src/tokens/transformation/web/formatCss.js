@@ -1,5 +1,6 @@
 import formattedVariables from './formattedVariables'
 import fileHeader from './fileHeader'
+import isComposedColor from '../common/composedColor'
 import {
   filteredTokens,
   matchDarkThemeToken,
@@ -45,13 +46,7 @@ export default ({ dictionary, options, file }) => {
   const dynamicVariables = (dictionary) =>
     formattedVariables({
       format: 'css',
-      dictionary: filteredTokens(
-        dictionary,
-        (token) =>
-          token.type === 'color' &&
-          token.referencedVariable &&
-          typeof token.opacity === 'number'
-      ),
+      dictionary: filteredTokens(dictionary, isComposedColor),
       outputReferences,
       composedColorMode: 'dynamic'
     })

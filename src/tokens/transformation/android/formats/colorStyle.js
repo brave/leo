@@ -1,5 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import fileHeader from '../../web/fileHeader'
+import isComposedColor from '../../common/composedColor'
 import { getTokenName } from '../colorName'
 
 const getTokenValue = (token) => {
@@ -21,11 +22,7 @@ export default ({ dictionary, platform, options = {}, file }) => {
   const colorStyles = dictionary.allTokens
     .filter(
       (compositeToken) =>
-        compositeToken.type === 'color' &&
-        !(
-          compositeToken.referencedVariable &&
-          typeof compositeToken.opacity === 'number'
-        )
+        compositeToken.type === 'color' && !isComposedColor(compositeToken)
     )
     .map((compositeToken) => {
       const colorCode = getTokenValue(compositeToken)

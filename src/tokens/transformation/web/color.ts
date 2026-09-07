@@ -1,4 +1,5 @@
 import { TinyColor } from '@ctrl/tinycolor'
+import isComposedColor from '../common/composedColor'
 import referenceToName from '../common/referenceToName'
 import { Transform } from 'style-dictionary'
 
@@ -7,10 +8,11 @@ export default {
   matcher(token) {
     return token.type === 'color'
   },
-  transformer({ value, referencedVariable, opacity }) {
+  transformer(token) {
+    const { value, referencedVariable, opacity } = token
     if (referencedVariable) {
       const reference = `var(--leo-${referenceToName(referencedVariable)})`
-      if (typeof opacity === 'number') {
+      if (isComposedColor(token)) {
         const percentage = Number((opacity * 100).toFixed(4))
         return `color-mix(in srgb, ${reference} ${percentage}%, transparent)`
       }

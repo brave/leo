@@ -17,30 +17,35 @@
         "5": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.0500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.05
         },
         "10": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.1000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.1
         },
         "25": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.2500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.25
         },
         "50": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.5
         },
         "70": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.7000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.7
         },
@@ -52,6 +57,7 @@
         "container": {
           "type": "color",
           "value": "rgba(28, 28, 29, 0.3000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$primitive.neutral.10",
           "opacity": 0.3
         }
@@ -62,30 +68,35 @@
         "5": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.0500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.05
         },
         "10": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.1000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.1
         },
         "25": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.2500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.25
         },
         "50": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.5000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.5
         },
         "70": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.7000)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.7
         },
@@ -97,6 +108,7 @@
         "container": {
           "type": "color",
           "value": "rgba(255, 255, 255, 0.0500)",
+          "expressionFunction": "COMPOSE_COLOR",
           "referencedVariable": "$white",
           "opacity": 0.05
         }
