@@ -628,7 +628,7 @@
           },
           "interactive": {
             "type": "color",
-            "value": "rgba(124, 145, 255, 0.3000)"
+            "value": "rgba(188, 198, 243, 0.3000)"
           },
           "ask-input-field": {
             "type": "color",
@@ -1130,6 +1130,5 @@
         }
       }
     }
-  },
-  "typography": {}
+  }
 }
