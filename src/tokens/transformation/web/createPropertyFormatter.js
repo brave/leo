@@ -11,6 +11,9 @@
  * and limitations under the License.
  */
 
+import { TinyColor } from '@ctrl/tinycolor'
+import isComposedColor from '../common/composedColor'
+
 const defaultFormatting = {
   prefix: '',
   commentStyle: 'long',
@@ -95,13 +98,15 @@ export function createPropertyNameFormatter(format, formatting = {}) {
  * @param {Dictionary} options.dictionary - The dictionary object sent to the formatter function
  * @param {String} options.format - Available formats are: 'css', 'sass', 'less', and 'stylus'. If you want to customize the format and can't use one of those predefined formats, use the `formatting` option
  * @param {Object} options.formatting - Custom formatting properties that define parts of a declaration line in code. The configurable strings are: prefix, indentation, separator, suffix, and commentStyle. Those are used to generate a line like this: `${indentation}${prefix}${prop.name}${separator} ${prop.value}${suffix}`
+ * @param {'fallback'|'dynamic'} options.composedColorMode - Whether composed colors use their literal fallback or dynamic value.
  * @returns {Function}
  */
 export default function createPropertyFormatter({
   outputReferences,
   dictionary,
   format,
-  formatting = {}
+  formatting = {},
+  composedColorMode = 'fallback'
 }) {
   const { prefix, commentStyle, indentation, separator, suffix, formatName } =
     createPropertyNameFormatter(format, formatting)
@@ -111,6 +116,18 @@ export default function createPropertyFormatter({
     let to_ret_prop = `${indentation}${name}${separator} `
     let value = prop.value
     let drop_shadow_props
+
+    if (
+      format === 'css' &&
+      composedColorMode === 'fallback' &&
+      isComposedColor(prop)
+    ) {
+      const fallbackColor = new TinyColor(prop.original.value)
+      value =
+        fallbackColor.getAlpha() === 1
+          ? fallbackColor.toHexString(true)
+          : fallbackColor.toRgbString()
+    }
 
     if (format === 'tailwind' && prop.type === 'custom-shadow') {
       value = prop.value.boxShadow

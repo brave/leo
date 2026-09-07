@@ -7,6 +7,7 @@ import dimenStyleFormatter from './formats/dimenStyle'
 import fontStyleFilter from './filters/fontStyle'
 import darkColorFilter from './filters/darkColor'
 import lightColorFilter from './filters/lightColor'
+import composedColors from './composedColors'
 
 // Transforms
 StyleDictionary.registerTransform({
@@ -49,6 +50,12 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
   name: 'android/filterLightColor',
   matcher: lightColorFilter
+})
+
+StyleDictionary.registerAction({
+  name: 'android/composedColors',
+  do: composedColors.do,
+  undo: composedColors.undo
 })
 
 // TransformGroup

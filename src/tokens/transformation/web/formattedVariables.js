@@ -42,7 +42,8 @@ export default function formattedVariables({
   format,
   dictionary,
   outputReferences = false,
-  formatting = {}
+  formatting = {},
+  composedColorMode = 'fallback'
 }) {
   let { allTokens } = dictionary
 
@@ -70,7 +71,8 @@ export default function formattedVariables({
         outputReferences,
         dictionary,
         format,
-        formatting
+        formatting,
+        composedColorMode
       })
     )
     .filter(function (strVal) {

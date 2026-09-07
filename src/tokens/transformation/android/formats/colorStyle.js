@@ -1,7 +1,13 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import fileHeader from '../../web/fileHeader'
+import isComposedColor from '../../common/composedColor'
+import { getTokenName } from '../colorName'
 
 const getTokenValue = (token) => {
+  if (token.referencedVariable) {
+    return `@color/${getTokenName(token.referencedVariable)}`
+  }
+
   const color = new TinyColor(token.original.value)
   if (color.getAlpha() === 1) {
     return color.toHexString()
@@ -14,7 +20,10 @@ const getTokenValue = (token) => {
 
 export default ({ dictionary, platform, options = {}, file }) => {
   const colorStyles = dictionary.allTokens
-    .filter((compositeToken) => compositeToken.type === 'color')
+    .filter(
+      (compositeToken) =>
+        compositeToken.type === 'color' && !isComposedColor(compositeToken)
+    )
     .map((compositeToken) => {
       const colorCode = getTokenValue(compositeToken)
       return `  <color name="${compositeToken.name}" tools:ignore="UnusedResources">${colorCode}</color>`

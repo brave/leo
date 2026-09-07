@@ -4,6 +4,7 @@ import path from 'path'
 import StyleDictionary, { Dictionary, TransformedToken } from 'style-dictionary'
 import { fileURLToPath } from 'url'
 import colorToSkiaString from './colorToSkiaString'
+import isComposedColor from '../common/composedColor'
 import { transformName } from './name'
 
 const filename = fileURLToPath(import.meta.url)
@@ -100,6 +101,12 @@ const filteredTokens = (
       ...token,
       name: transformName(token),
       value: transformValue(token),
+      composedAlpha: isComposedColor(token)
+        ? `0x${Math.round(token.opacity * 255)
+            .toString(16)
+            .padStart(2, '0')
+            .toUpperCase()}`
+        : undefined,
       ...maybeMaterialColorProps(token)
     }))
     .sort((a, b) => {

@@ -119,11 +119,17 @@
           },
           "transparent": {
             "type": "color",
-            "value": "rgba(255, 255, 255, 0.0000)"
+            "value": "rgba(255, 255, 255, 0.0000)",
+            "expressionFunction": "COMPOSE_COLOR",
+            "referencedVariable": "$white",
+            "opacity": 0
           },
           "semi-transparent": {
             "type": "color",
-            "value": "rgba(255, 255, 255, 0.8500)"
+            "value": "rgba(255, 255, 255, 0.8500)",
+            "expressionFunction": "COMPOSE_COLOR",
+            "referencedVariable": "$white",
+            "opacity": 0.85
           }
         },
         "button": {
@@ -628,7 +634,10 @@
           },
           "interactive": {
             "type": "color",
-            "value": "rgba(124, 145, 255, 0.3000)"
+            "value": "rgba(188, 198, 243, 0.3000)",
+            "expressionFunction": "COMPOSE_COLOR",
+            "referencedVariable": "$divider.interactive",
+            "opacity": 0.3
           },
           "ask-input-field": {
             "type": "color",
@@ -718,11 +727,17 @@
           },
           "transparent": {
             "type": "color",
-            "value": "rgba(31, 31, 35, 0.0000)"
+            "value": "rgba(31, 31, 35, 0.0000)",
+            "expressionFunction": "COMPOSE_COLOR",
+            "referencedVariable": "$primitive.neutral.12",
+            "opacity": 0
           },
           "semi-transparent": {
             "type": "color",
-            "value": "rgba(31, 31, 35, 0.8500)"
+            "value": "rgba(31, 31, 35, 0.8500)",
+            "expressionFunction": "COMPOSE_COLOR",
+            "referencedVariable": "$primitive.neutral.12",
+            "opacity": 0.85
           }
         },
         "button": {
@@ -1130,6 +1145,5 @@
         }
       }
     }
-  },
-  "typography": {}
+  }
 }
