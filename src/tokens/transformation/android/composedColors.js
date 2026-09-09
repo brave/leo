@@ -5,8 +5,13 @@ import { needsColorSelector } from './colorSelector'
 
 const outputDirectories = ['color', 'color-night']
 
+// Tokens are exported wholesale, so most of them go unreferenced in any given
+// consumer. `tools:ignore="UnusedResources"` keeps Android lint quiet about
+// that, matching what the `<color>` entries in `values*/colors.xml` do.
 const selector = (color, alpha) => `<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedResources">
   <item android:color="${color}" android:alpha="${alpha}" />
 </selector>
 `
