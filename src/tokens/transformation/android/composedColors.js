@@ -1,12 +1,9 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import isComposedColor from '../common/composedColor'
 import { getTokenName } from './colorName'
+import { needsColorSelector } from './colorSelector'
 
 const outputDirectories = ['color', 'color-night']
-
-const needsColorSelector = (token) =>
-  isComposedColor(token) && !token.name.includes('ios_browser')
 
 const selector = (color, alpha) => `<?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
