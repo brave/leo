@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1787168367359,
+  "updatedAt": 1789201498989,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -466,6 +466,7 @@ export default {
     "comet": "comet",
     "comp-color": "comp-color",
     "compound-color": "compound-color",
+    "connection": "connection",
     "consensys-color": "consensys-color",
     "consensyscodefi-color": "consensyscodefi-color",
     "container-banking": "container-banking",
@@ -1734,6 +1735,7 @@ export default {
     "ripio-color": "ripio-color",
     "rise-color": "rise-color",
     "rlc-color": "rlc-color",
+    "robot": "robot",
     "rocket": "rocket",
     "rolodex": "rolodex",
     "rotate-left": "rotate-left",
@@ -2116,6 +2118,7 @@ export default {
     "vivaldi-color": "vivaldi-color",
     "vivo-color": "vivo-color",
     "voice-mail": "voice-mail",
+    "voice-mode-off": "voice-mode-off",
     "voice-mode": "voice-mode",
     "volume-off": "volume-off",
     "volume-on": "volume-on",
