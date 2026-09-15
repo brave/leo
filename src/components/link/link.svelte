@@ -41,6 +41,13 @@
   export let isLoading: boolean = false
   export let onClick: (e: MouseEvent) => void = undefined
 
+  /**
+   * Where to display the linked URL, when rendering as an anchor (i.e. when
+   * href is set). Declared as a prop, rather than being picked up from
+   * $$restProps, so that it is forwarded when used as a web component.
+   */
+  export let target: string | undefined = undefined
+
   $: tag = href ? 'a' : ('button' as 'a' | 'button')
   $: disabled = !!(isDisabled || (isDisabled as any) === '')
   $: loading = !!(isLoading || (isLoading as any) === '')
@@ -51,6 +58,7 @@
   {...$$restProps}
   rel={href && 'noopener'}
   href={href || undefined}
+  target={href ? target : undefined}
   class="leoLink"
   class:disabled
   class:loading
