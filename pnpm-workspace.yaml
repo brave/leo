@@ -3,7 +3,7 @@ minimumReleaseAge: 2880
 allowBuilds:
   '@parcel/watcher': false
   esbuild: true
-  figma-api-exporter: true
+  'figma-api-exporter@https://codeload.github.com/brave/figma-api-exporter/tar.gz/141c3eab4643ba9cdcbb23867785aa7df9347eec': true
   svelte-preprocess: false
   unrs-resolver: false
 
