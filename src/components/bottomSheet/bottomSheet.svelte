@@ -391,7 +391,7 @@
 
     background: var(
       --leo-bottomsheet-background,
-      var(--leo-color-container-background)
+      var(--leo-color-page-background)
     );
     border-radius: var(
         --leo-bottomsheet-border-radius,
@@ -453,53 +453,27 @@
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-s);
     padding-bottom: calc(var(--leo-spacing-xl) + env(safe-area-inset-bottom, 0px));
   }
 
   /*
-   * Replicate menu item styles from menu.svelte so slotted leo-menu-item,
-   * leo-option, leo-title, hr, and leo-menu-section render identically.
+   * Menu items sit in grouped cards (container-background) on the sheet's
+   * page-background, matching the Figma bottom sheet.
    */
 
   :global(.leo-bottomsheet-content ::slotted(*)),
   :global(.leo-bottomsheet-content > *) {
-    --leo-menu-item-margin: var(--leo-menu-item-margin-top, 0)
-      var(--leo-spacing-s) var(--leo-menu-item-margin-bottom, 0)
-      var(--leo-spacing-s);
+    --leo-menu-item-margin: 0;
     --leo-menu-item-padding: var(--leo-spacing-m) var(--leo-spacing-xl);
-    --leo-menu-item-border-radius: var(--leo-spacing-s);
-  }
-
-  :global(
-      .leo-bottomsheet-content
-        ::slotted(leo-option:nth-child(1 of :not([slot])))
-    ),
-  :global(
-      .leo-bottomsheet-content
-        ::slotted(leo-menu-item:nth-child(1 of :not([slot])))
-    ),
-  :global(.leo-bottomsheet-content leo-option:first-child),
-  :global(.leo-bottomsheet-content leo-menu-item:first-child) {
-    --leo-menu-item-margin-top: var(--leo-spacing-s);
-  }
-
-  :global(
-      .leo-bottomsheet-content
-        ::slotted(leo-option:nth-last-child(1 of :not([slot])))
-    ),
-  :global(
-      .leo-bottomsheet-content
-        ::slotted(leo-menu-item:nth-last-child(1 of :not([slot])))
-    ),
-  :global(.leo-bottomsheet-content leo-option:last-child),
-  :global(.leo-bottomsheet-content leo-menu-item:last-child) {
-    --leo-menu-item-margin-bottom: var(--leo-spacing-s);
+    --leo-menu-item-border-radius: var(--leo-radius-m);
   }
 
   :global(.leo-bottomsheet-content ::slotted(leo-title)),
   :global(.leo-bottomsheet-content leo-title) {
-    padding: var(--leo-spacing-l);
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--leo-spacing-l) var(--leo-spacing-xl);
     background: transparent;
     font: var(--leo-font-components-label);
     color: var(--leo-color-text-secondary);
@@ -507,7 +481,7 @@
 
   :global(.leo-bottomsheet-content ::slotted(leo-title:not(:first-of-type))),
   :global(.leo-bottomsheet-content leo-title:not(:first-of-type)) {
-    margin-top: -4px;
+    padding-top: var(--leo-spacing-2xl);
   }
 
   :global(.leo-bottomsheet-content ::slotted(hr)),
@@ -525,9 +499,15 @@
     flex-direction: column;
     gap: var(--leo-spacing-s);
     max-height: var(--leo-menu-section-max-height, none);
+    overflow-x: hidden;
     overflow-y: auto;
-    padding: var(--leo-spacing-s) 0;
-    margin: -4px 0;
+    background: var(
+      --leo-bottomsheet-group-background,
+      var(--leo-color-container-background)
+    );
+    padding: var(--leo-bottomsheet-group-padding, var(--leo-spacing-s));
+    border-radius: var(--leo-bottomsheet-group-radius, var(--leo-radius-l));
+    margin: 0 var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
   }
 
   :global(:where(.leo-bottomsheet-content) ::slotted(leo-menu-item)),
@@ -542,6 +522,19 @@
     border-radius: var(--leo-menu-item-border-radius);
     padding: var(--leo-menu-item-padding);
     display: revert;
+  }
+
+  /* Unwrapped items still sit on a group card. */
+  :global(.leo-bottomsheet-content ::slotted(leo-menu-item)),
+  :global(.leo-bottomsheet-content ::slotted(leo-option)),
+  :global(.leo-bottomsheet-content > leo-menu-item),
+  :global(.leo-bottomsheet-content > leo-option) {
+    background: var(
+      --leo-bottomsheet-group-background,
+      var(--leo-color-container-background)
+    );
+    margin-left: var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
+    margin-right: var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
   }
 
   :global(:where(.leo-bottomsheet-content) ::slotted(leo-menu-item:hover)),
@@ -616,6 +609,6 @@
 
   :global(.leo-bottomsheet-content leo-menu-section leo-menu-item),
   :global(.leo-bottomsheet-content leo-menu-section leo-option) {
-    --leo-menu-item-margin: 0 var(--leo-spacing-s);
+    --leo-menu-item-margin: 0;
   }
 </style>
