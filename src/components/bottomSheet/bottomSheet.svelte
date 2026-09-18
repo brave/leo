@@ -402,6 +402,7 @@
 
     display: flex;
     flex-direction: column;
+    gap: var(--leo-spacing-xl);
     max-height: var(--leo-bottomsheet-max-height, 85vh);
     overflow: hidden;
 
@@ -453,6 +454,7 @@
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
+    gap: var(--leo-spacing-xl);
     padding-bottom: calc(var(--leo-spacing-xl) + env(safe-area-inset-bottom, 0px));
   }
 
@@ -473,15 +475,10 @@
     display: block;
     box-sizing: border-box;
     width: 100%;
-    padding: var(--leo-spacing-l) var(--leo-spacing-xl);
+    padding: 0 var(--leo-spacing-xl);
     background: transparent;
     font: var(--leo-font-components-label);
     color: var(--leo-color-text-secondary);
-  }
-
-  :global(.leo-bottomsheet-content ::slotted(leo-title:not(:first-of-type))),
-  :global(.leo-bottomsheet-content leo-title:not(:first-of-type)) {
-    padding-top: var(--leo-spacing-2xl);
   }
 
   :global(.leo-bottomsheet-content ::slotted(hr)),
