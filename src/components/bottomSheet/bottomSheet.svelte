@@ -16,9 +16,26 @@
   const sheetStack = writable<number[]>([])
   /** Top sheet id while its dismiss animation runs; stack depth uses a compressed stack. */
   const dismissingSheetId = writable<number | null>(null)
+  /** Host overflow captured when the first sheet opens; restored when the stack empties. */
+  let savedBodyOverflow: string | null = null
 
   const DISMISS_DURATION_MS = 200
   const BACKDROP_DURATION_MS = 200
+
+  function syncBodyScrollLock(locked: boolean) {
+    if (typeof document === 'undefined') return
+    if (locked) {
+      if (savedBodyOverflow === null) {
+        savedBodyOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+      }
+      return
+    }
+    if (savedBodyOverflow !== null) {
+      document.body.style.overflow = savedBodyOverflow
+      savedBodyOverflow = null
+    }
+  }
 </script>
 
 <script lang="ts">
@@ -89,10 +106,14 @@
     collapsedSnapHeight = sheetEl.offsetHeight
   }
 
-  $: document.body.style.overflow = $sheetStack.length > 0 ? 'hidden' : ''
+  $: syncBodyScrollLock($sheetStack.length > 0)
 
   onDestroy(() => {
-    sheetStack.update((s) => (s.includes(id) ? s.filter((sid) => sid !== id) : s))
+    sheetStack.update((s) => {
+      const next = s.includes(id) ? s.filter((sid) => sid !== id) : s
+      syncBodyScrollLock(next.length > 0)
+      return next
+    })
     if ($dismissingSheetId === id) dismissingSheetId.set(null)
   })
 
@@ -402,7 +423,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-xl);
+    gap: var(--leo-spacing-l);
     max-height: var(--leo-bottomsheet-max-height, 85vh);
     overflow: hidden;
 
@@ -431,8 +452,10 @@
   .drag-handle-area {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: var(--leo-spacing-m) 0;
+    align-items: flex-end;
+    box-sizing: border-box;
+    height: 24px;
+    padding-bottom: var(--leo-spacing-m);
     cursor: grab;
     touch-action: none;
     flex-shrink: 0;
@@ -443,9 +466,9 @@
   }
 
   .drag-handle {
-    width: 36px;
+    width: 32px;
     height: 4px;
-    border-radius: 2px;
+    border-radius: var(--leo-radius-full, 100px);
     background: var(--leo-color-divider-subtle);
   }
 
@@ -454,8 +477,8 @@
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    gap: var(--leo-spacing-xl);
-    padding-bottom: calc(var(--leo-spacing-xl) + env(safe-area-inset-bottom, 0px));
+    gap: var(--leo-spacing-l);
+    padding-bottom: calc(var(--leo-spacing-l) + env(safe-area-inset-bottom, 0px));
   }
 
   /*
@@ -466,7 +489,7 @@
   :global(.leo-bottomsheet-content ::slotted(*)),
   :global(.leo-bottomsheet-content > *) {
     --leo-menu-item-margin: 0;
-    --leo-menu-item-padding: var(--leo-spacing-m) var(--leo-spacing-xl);
+    --leo-menu-item-padding: var(--leo-spacing-m);
     --leo-menu-item-border-radius: var(--leo-radius-m);
   }
 
@@ -475,7 +498,7 @@
     display: block;
     box-sizing: border-box;
     width: 100%;
-    padding: 0 var(--leo-spacing-xl);
+    padding: var(--leo-spacing-m) var(--leo-spacing-2xl) 0;
     background: transparent;
     font: var(--leo-font-components-label);
     color: var(--leo-color-text-secondary);
@@ -504,7 +527,7 @@
     );
     padding: var(--leo-bottomsheet-group-padding, var(--leo-spacing-s));
     border-radius: var(--leo-bottomsheet-group-radius, var(--leo-radius-l));
-    margin: 0 var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
+    margin: 0 var(--leo-bottomsheet-group-inset, var(--leo-spacing-l));
   }
 
   :global(:where(.leo-bottomsheet-content) ::slotted(leo-menu-item)),
@@ -530,8 +553,8 @@
       --leo-bottomsheet-group-background,
       var(--leo-color-container-background)
     );
-    margin-left: var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
-    margin-right: var(--leo-bottomsheet-group-inset, var(--leo-spacing-xl));
+    margin-left: var(--leo-bottomsheet-group-inset, var(--leo-spacing-l));
+    margin-right: var(--leo-bottomsheet-group-inset, var(--leo-spacing-l));
   }
 
   :global(:where(.leo-bottomsheet-content) ::slotted(leo-menu-item:hover)),
