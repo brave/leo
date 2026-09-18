@@ -29,7 +29,7 @@
       },
       '--leo-bottomsheet-group-inset': {
         type: 'string',
-        description: 'Horizontal inset of item groups (default: spacing-xl)'
+        description: 'Horizontal inset of item groups (default: spacing-l)'
       },
       '--leo-bottomsheet-border-radius': {
         type: 'string',
@@ -500,7 +500,7 @@
     --leo-icon-size: 20px;
     display: flex;
     align-items: center;
-    gap: var(--leo-spacing-l);
+    gap: var(--leo-spacing-m);
     width: 100%;
   }
 
