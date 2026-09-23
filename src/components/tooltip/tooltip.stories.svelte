@@ -116,6 +116,22 @@
   </Tooltip>
 </Story>
 
+<Story name="Inside a container" let:args>
+  <p>
+    The outer box below has <code>container-type: inline-size</code> and
+    <code>overflow: hidden</code> set on it - properties which establish a
+    new containing block for <code>position: fixed</code> descendants and
+    clip anything outside its bounds. Without the tooltip content escaping
+    into the top layer (via the Popover API), the tooltip below would be
+    clipped/mispositioned instead of floating next to the trigger.
+  </p>
+  <div class="clipping-container">
+    <Tooltip {...args}>
+      <Button>Trigger</Button>
+    </Tooltip>
+  </div>
+</Story>
+
 <style>
   .modes {
     display: flex;
@@ -150,5 +166,18 @@
     display: flex;
     flex-direction: column;
     gap: var(--leo-spacing-xl);
+  }
+
+  .clipping-container {
+    container-type: inline-size;
+    overflow: hidden;
+    width: 240px;
+    height: 120px;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px dashed var(--leo-color-divider-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

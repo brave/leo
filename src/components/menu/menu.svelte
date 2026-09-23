@@ -218,7 +218,7 @@
   let floatingMiddleware = [sizeMiddleware({ apply: applySizeMiddleware })]
 </script>
 
-<div class="leo-menu" use:clickOutside={isOpen && handleBlur} hidden={!isOpen}>
+<div class="leo-menu" use:clickOutside={isOpen && handleBlur}>
     <Floating
       {target}
       {placement}
@@ -226,6 +226,7 @@
       autoUpdate
       middleware={floatingMiddleware}
       {positionStrategy}
+      visible={isOpen}
     >
       <div
         style:--leo-menu-control-width={`${minWidth}px`}
@@ -255,6 +256,7 @@
 
   .leo-menu {
     -webkit-tap-highlight-color: transparent;
+    --leo-floating-transform-origin: var(--leo-menu-transform-origin, top left);
 
     button {
       all: unset;
@@ -264,17 +266,8 @@
   .leo-menu .leo-menu-popup {
     background: var(--leo-color-container-background);
     box-shadow: var(--leo-effect-elevation-03);
-    transform-origin: var(
-      --leo-menu-transform-origin,
-      var(--leo-floating-transform-origin, top left)
-    );
-    animation: menuIn var(--leo-duration-m) var(--leo-easing-out);
 
-    @media (prefers-reduced-motion: reduce) {
-      animation: menuInFade var(--leo-duration-s) var(--leo-easing-out);
-    }
-
-    // TODO(petemill): Make the "floating-ui" element be this popup element,
+    // TODO(petemil): Make the "floating-ui" element be this popup element,
     // so that we get the correct thing scrolling when overflow happens. In the meantime,
     // overflow: 'auto' (or anything but 'visible') helps clip the content
     // to the border-radius.
@@ -289,26 +282,6 @@
     &.width-is-max-width {
       width: var(--leo-menu-control-width);
       overflow-x: hidden;
-    }
-  }
-
-  @keyframes menuIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes menuInFade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 

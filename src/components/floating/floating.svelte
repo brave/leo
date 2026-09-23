@@ -58,7 +58,24 @@
   export let onMouseEnter: (e: MouseEvent) => void = undefined
   export let onMouseLeave: (e: MouseEvent) => void = undefined
 
+  /**
+   * When set, the floating element is promoted into the top layer via the
+   * Popover API when |visible| is true, escaping an ancestor's
+   * `contain`/`container-type` (which breaks `position: fixed` too).
+   */
+  export let popover: 'manual' | undefined = undefined
+
+  export let visible: boolean = true
+
   let floating: HTMLElement
+
+  const supportsPopover =
+    typeof HTMLElement !== 'undefined' && 'showPopover' in HTMLElement.prototype
+
+  $: usePopover = Boolean(popover) && supportsPopover
+
+  // position: fixed is required for the top-layer escape to work.
+  $: effectiveStrategy = usePopover ? 'fixed' : positionStrategy
 
   function getMiddlewares(
     flip: boolean,
@@ -114,7 +131,7 @@
 
     computePosition(target, floating, {
       placement: placement,
-      strategy: positionStrategy,
+      strategy: effectiveStrategy,
       middleware: getMiddlewares(flip, shift, offset, middleware)
     }).then(({ x, y, placement, middlewareData }) => {
       if (floating) {
@@ -147,8 +164,52 @@
     if (autoUpdate && target && floating) {
       cleanup = createAutoUpdater(target, floating, updatePosition)
     } else {
-      updatePosition(target, floating, flip, shift, offset, middleware)
+      updatePosition(target, floating, flip, shift, offset, middleware, effectiveStrategy)
     }
+  }
+
+  function showFloating() {
+    if (!floating) return
+
+    if (usePopover) {
+      if (!floating.matches(':popover-open')) {
+        try {
+          floating.showPopover({ source: target })
+        } catch {
+          // Already open, or not showable right now.
+        }
+      }
+    } else {
+      // Set synchronously (rather than relying solely on the template's
+      // `hidden` binding) so updatePosition() below measures accurate,
+      // already-laid-out dimensions. The template binding still exists so
+      // Svelte's dead-CSS check keeps .leo-floating[hidden] in the bundle.
+      floating.hidden = false
+    }
+
+    // Re-measure now that display:none has been removed.
+    updatePosition()
+  }
+
+  function hideFloating() {
+    if (!floating) return
+
+    if (usePopover) {
+      if (floating.matches(':popover-open')) {
+        try {
+          floating.hidePopover()
+        } catch {
+          // Already hidden/removed - nothing to do.
+        }
+      }
+    } else {
+      floating.hidden = true
+    }
+  }
+
+  $: if (floating) {
+    if (visible) showFloating()
+    else hideFloating()
   }
 </script>
 
@@ -157,7 +218,10 @@
   on:mouseleave={onMouseLeave}
   bind:this={floating}
   class="leo-floating"
-  style:position={positionStrategy}
+  class:visible
+  popover={usePopover ? 'manual' : undefined}
+  hidden={!usePopover && !visible ? true : undefined}
+  style:position={effectiveStrategy}
 >
   <slot />
 </div>
@@ -166,5 +230,56 @@
   .leo-floating {
     z-index: 999;
     width: max-content;
+    transform-origin: var(--leo-floating-transform-origin, center);
+
+    opacity: 0;
+    transform: scale(var(--leo-floating-scale-from, 0.96));
+    pointer-events: none;
+    transition:
+      opacity var(--leo-duration-m) var(--leo-easing-out),
+      transform var(--leo-duration-m) var(--leo-easing-out);
+
+    &.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+      transition: opacity var(--leo-duration-s) var(--leo-easing-out);
+
+      &.visible {
+        transform: none;
+      }
+    }
+  }
+
+  // Starting value for the fade-in's first paint after display:none is
+  // removed (either path below) - otherwise the transition can be skipped.
+  @starting-style {
+    .leo-floating.visible {
+      opacity: 0;
+      transform: scale(var(--leo-floating-scale-from, 0.96));
+    }
+  }
+
+  // Popover (top-layer) deferred-hide path.
+  .leo-floating[popover] {
+    inset: unset;
+    margin: 0;
+    border: none;
+    padding: 0;
+    overflow: visible;
+    background: none;
+    color: inherit;
+    transition:
+      overlay var(--leo-duration-m) allow-discrete,
+      display var(--leo-duration-m) allow-discrete;
+  }
+
+  // Plain hidden-attribute deferred-hide path (no top layer involved).
+  .leo-floating[hidden] {
+    transition: display var(--leo-duration-m) allow-discrete;
   }
 </style>
