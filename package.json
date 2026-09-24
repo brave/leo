@@ -122,7 +122,8 @@
     "test": "jest tests --coverage=false",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "audit_deps": "node scripts/audit_deps.js"
+    "audit_deps": "node scripts/audit_deps.js",
+    "changelog": "tsx ./src/scripts/gen-changelog.ts"
   },
   "bin": {
     "leo-check": "./src/scripts/audit-tokens.js"
