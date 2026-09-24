@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import type { IconName } from '@brave/leo/icons/meta'
+  import type { IconName } from '@brave/nala/icons/meta'
 
   export const types = ['info', 'warning', 'error', 'success', 'notice'] as const
   export type AlertType = (typeof types)[number]

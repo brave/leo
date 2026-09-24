@@ -111,9 +111,9 @@ Svelte consumers import the components from source. At build time
 (`pnpm run build`), every component is also emitted in two consumer
 formats:
 
-- **React** — `react/<name>.js`, imported as `@brave/leo/react/<name>`.
+- **React** — `react/<name>.js`, imported as `@brave/nala/react/<name>`.
 - **Web Component** — `web-components/<name>.js`, imported as
-  `@brave/leo/web-components/<name>` and used via `<leo-<name>>` tags.
+  `@brave/nala/web-components/<name>` and used via `<leo-<name>>` tags.
 
 See [src/components/README.md](src/components/README.md) for the
 component authoring recipe and the React / Web Component caveats.
@@ -124,7 +124,7 @@ Icons live in [icons/](icons/) (SVGs synced from Figma by
 [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml))
 and are consumed via the typed
 [`<Icon name="..." />`](src/components/icon/icon.svelte) component, with
-autocomplete from `@brave/leo/icons/meta`. The same set is generated as
+autocomplete from `@brave/nala/icons/meta`. The same set is generated as
 Android vector drawables (`tokens/android/drawable/ic_<name>.xml`, with
 dashes in the name becoming underscores) and as Skia icons (`icons-skia/`).
 

@@ -1,6 +1,6 @@
 {
-  "name": "@brave/leo",
-  "version": "0.0.1",
+  "name": "@brave/nala",
+  "version": "1.0.0",
   "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
   "main": "index.js",
   "type": "module",
