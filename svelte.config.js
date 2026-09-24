@@ -25,5 +25,10 @@ export default {
       ]
     }
   }),
+  kit: {
+    alias: {
+      '@brave/nala/*': './*'
+    }
+  },
   onwarn
 }
