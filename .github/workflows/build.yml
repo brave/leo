@@ -48,7 +48,7 @@ jobs:
       - name: Audit Tokens
         id: audit-tokens
         run: |
-          node ./src/scripts/audit-tokens.js
+          node ./src/scripts/audit-tokens.js --components src/components
 
       - name: Test
         id: test-nala

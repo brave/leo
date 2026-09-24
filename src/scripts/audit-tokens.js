@@ -11,7 +11,9 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const ROOT_FOLDER = path.join(dirname, '..', '..')
 const CSS_VARIABLES_FOLDER = path.join(ROOT_FOLDER, 'tokens', 'css')
-const COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'src', 'components')
+// Defaults to the svelte-package output, which is what ships in the published
+// package. In the repo, pass `--components src/components` to scan the sources.
+const DEFAULT_COMPONENTS_FOLDER = path.join(ROOT_FOLDER, 'svelte', 'components')
 const DEFAULT_EXTENSIONS_TO_CHECK = [
   '.css',
   '.scss',
@@ -84,9 +86,10 @@ const extractTokensFromFolder = async (folder, extensions, ignore = []) => {
 
 /**
  * Returns a set of all available Leo tokens
+ * @param {string} componentsFolder The folder of Svelte components to scan
  * @returns {Promise<Set<string>>}
  */
-const getAvailableTokens = async () => {
+const getAvailableTokens = async (componentsFolder) => {
   const available = new Set()
 
   // Variables which are not defined by components
@@ -105,7 +108,7 @@ const getAvailableTokens = async () => {
     available.add(v.token)
 
   // Include all variables used to customize components
-  for (const v of await extractTokensFromFolder(COMPONENTS_FOLDER, [
+  for (const v of await extractTokensFromFolder(componentsFolder, [
     '.svelte'
   ])) {
     // Variables with these prefixes aren't defined in the components, they're
@@ -128,10 +131,11 @@ const getAvailableTokens = async () => {
 /**
  * Checks a folder to see if any files in it reference non-existent Leo tokens
  * @param {string} folder The folder to check for unknown Leo tokens
+ * @param {string} componentsFolder The folder of Svelte components to scan
  * @param {string[]} extraIgnore Additional path segments to ignore
  */
-const checkFolder = async (folder, extraIgnore = []) => {
-  const availableTokens = await getAvailableTokens()
+const checkFolder = async (folder, componentsFolder, extraIgnore = []) => {
+  const availableTokens = await getAvailableTokens(componentsFolder)
   const usedTokens = await extractTokensFromFolder(
     folder,
     DEFAULT_EXTENSIONS_TO_CHECK,
@@ -167,7 +171,16 @@ ${usages.map((u) => `    ${u}`).join('\n')}`
 }
 
 const { values } = parseArgs({
-  options: { ignore: { type: 'string', multiple: true, short: 'i' } }
+  options: {
+    ignore: { type: 'string', multiple: true, short: 'i' },
+    components: { type: 'string' }
+  }
 })
 
-checkFolder(process.cwd(), values.ignore ?? [])
+checkFolder(
+  process.cwd(),
+  values.components
+    ? path.resolve(values.components)
+    : DEFAULT_COMPONENTS_FOLDER,
+  values.ignore ?? []
+)
