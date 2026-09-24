@@ -1,5 +1,11 @@
 # Leo - Brave's Design System
 
+## Installation
+
+```sh
+npm install @brave/nala
+```
+
 ## Tokens
 
 The tokens part of this package is supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
