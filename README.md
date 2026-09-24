@@ -1,5 +1,11 @@
 # Leo - Brave's Design System
 
+## Installation
+
+```sh
+npm install @brave/nala
+```
+
 **For AI agents:** read [AGENTS.md](AGENTS.md) first. It covers how to use Leo's tokens, components and icons when building a Brave surface, and the rules for changing Leo itself. It links to guides in [docs/](docs/) for motion, desktop and Android browser surfaces, product rules and checks.
 
 ## Tokens

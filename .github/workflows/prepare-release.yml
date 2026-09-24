@@ -1,0 +1,171 @@
+name: Prepare Release
+on:
+  push:
+    branches: [main]
+  # Also dispatched by Publish after it creates a release tag. Pushes that land
+  # while Publish is still tagging are skipped (see "Determine next version"),
+  # so this picks them up without waiting for another push.
+  workflow_dispatch:
+    inputs:
+      version:
+        description: >-
+          Override the release version (e.g. 2.1.0). Leave empty for the
+          default next major. Sticks to the open release PR until it merges
+          or is overridden again.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+# Every run rebuilds the release branch from the latest main, so a newer push
+# makes any in-flight run obsolete.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  BRANCH: release/next
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Determine next version
+        id: version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BEFORE: ${{ github.event.before }}
+          OVERRIDE: ${{ inputs.version }}
+        run: |
+          CURRENT="$(node -p "require('./package.json').version")"
+
+          # True if $1 is a strictly higher version than $2.
+          is_newer() {
+            [ "$1" != "$2" ] && [ "$(printf '%s\n%s\n' "$1" "$2" | sort -V | tail -n1)" = "$1" ]
+          }
+
+          # Version priority:
+          #   1. Explicit override from workflow_dispatch.
+          #   2. Version already on the open release PR, so an earlier
+          #      override survives subsequent pushes to main.
+          #   3. Next major.
+          if [ -n "$OVERRIDE" ]; then
+            if ! [[ "$OVERRIDE" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error::version must be X.Y.Z, e.g. 2.1.0"
+              exit 1
+            fi
+            if ! is_newer "$OVERRIDE" "$CURRENT"; then
+              echo "::error::version $OVERRIDE must be greater than current $CURRENT"
+              exit 1
+            fi
+            NEXT="$OVERRIDE"
+          else
+            NEXT="$((${CURRENT%%.*} + 1)).0.0"
+            git fetch -q origin "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH" 2>/dev/null || true
+            if [ -n "$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')" ] \
+              && git cat-file -e "origin/$BRANCH:package.json" 2>/dev/null; then
+              PR_VERSION="$(git show "origin/$BRANCH:package.json" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf-8')).version")"
+              # The release branch is writable by anyone with push access, so
+              # don't trust its contents any more than a dispatch input.
+              if ! [[ "$PR_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                echo "::warning::Ignoring invalid version '$PR_VERSION' on $BRANCH; using next major."
+              elif is_newer "$PR_VERSION" "$CURRENT"; then
+                NEXT="$PR_VERSION"
+              fi
+            fi
+          fi
+          echo "Next version: $NEXT"
+          echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+
+          # A push that changes the version is the release PR merging. The
+          # Publish workflow handles that; the next push to main opens a fresh
+          # release PR.
+          if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE:package.json" 2>/dev/null; then
+            PREVIOUS="$(git show "$BEFORE:package.json" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf-8')).version")"
+            if [ "$PREVIOUS" != "$CURRENT" ]; then
+              echo "Version changed $PREVIOUS -> $CURRENT; this is a release merge. Skipping."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          # The changelog is generated from commits since the last tag. If the
+          # current version hasn't been tagged yet (Publish still running, or
+          # failed), the diff base would be wrong, so wait for the next push.
+          if ! git rev-parse -q --verify "refs/tags/v$CURRENT" >/dev/null; then
+            echo "::warning::Tag v$CURRENT not found; has $CURRENT been published? Skipping until it exists."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      # This job uses a write-capable PAT, so it must not install or run any
+      # dependencies (compromised package code could push to the repo). The
+      # steps below only use Node, npm, git and pinned actions.
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        if: steps.version.outputs.skip == 'false'
+        with:
+          node-version-file: '.node-version'
+
+      - name: Bump version
+        if: steps.version.outputs.skip == 'false'
+        env:
+          VERSION: ${{ steps.version.outputs.next }}
+        run: npm pkg set version="$VERSION"
+
+      - name: Generate changelog
+        if: steps.version.outputs.skip == 'false'
+        run: node ./src/scripts/gen-changelog.ts
+
+      - name: Check for changelog entries
+        id: changes
+        if: steps.version.outputs.skip == 'false'
+        run: |
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "No changelog entries since the last release; nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # main requires signed commits. Same bot identity and key as
+      # update-icons.yml.
+      - name: Configure GPG
+        if: steps.changes.outputs.changed == 'true'
+        uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      # Rebuilds the branch from main on every run (force-push over any previous
+      # release commit) and creates or updates the PR.
+      - name: Create or update release PR
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+        with:
+          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
+          branch: ${{ env.BRANCH }}
+          base: main
+          add-paths: |
+            package.json
+            CHANGELOG.md
+          author: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          committer: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          commit-message: 'chore: release v${{ steps.version.outputs.next }}'
+          title: 'chore: release v${{ steps.version.outputs.next }}'
+          body: |
+            Version bump and changelog for v${{ steps.version.outputs.next }}. This PR is updated automatically on every push to `main`.
+
+            Merging this **publishes** `@brave/nala@${{ steps.version.outputs.next }}` to npm and creates the `v${{ steps.version.outputs.next }}` tag and GitHub release via the Publish workflow. Review CHANGELOG.md before merging.
+
+            Defaults to the next major. To release a different version, run the Prepare Release workflow manually with a `version` override.
