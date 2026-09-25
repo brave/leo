@@ -77,7 +77,6 @@
     "vite": "6.4.3",
     "@sveltejs/package": "2.5.8",
     "svelte": "5.56.1",
-    "typescript": "6.0.3",
     "@storybook/test": "8.6.15",
     "svelte-preprocess": "6.0.3",
     "tailwindcss": "3.4.19",
