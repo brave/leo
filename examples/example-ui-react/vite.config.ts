@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@brave/leo': path.resolve(__dirname, '../../')
+      '@brave/nala': path.resolve(__dirname, '../../')
     }
   },
   server: {

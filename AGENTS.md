@@ -89,9 +89,9 @@ etc.). Each is authored in Svelte with stories alongside in
 At build time (`npm run build`), every component is emitted in two
 consumer formats:
 
-- **React** — `react/<name>.js`, imported as `@brave/leo/react/<name>`.
+- **React** — `react/<name>.js`, imported as `@brave/nala/react/<name>`.
 - **Web Component** — `web-components/<name>.js`, imported as
-  `@brave/leo/web-components/<name>` and used via `<leo-<name>>` tags.
+  `@brave/nala/web-components/<name>` and used via `<leo-<name>>` tags.
 
 See [src/components/README.md](src/components/README.md) for the
 component authoring recipe and the React / Web Component caveats.
@@ -102,7 +102,7 @@ Icons live in [icons/](icons/) (~2200 SVGs synced from Figma by
 [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml))
 and are consumed via the typed
 [`<Icon name="..." />`](src/components/icon/icon.svelte) component, with
-autocomplete from `@brave/leo/icons/meta`.
+autocomplete from `@brave/nala/icons/meta`.
 
 ### Storybook
 
