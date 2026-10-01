@@ -72,7 +72,11 @@ jobs:
             if [ -n "$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')" ] \
               && git cat-file -e "origin/$BRANCH:package.json" 2>/dev/null; then
               PR_VERSION="$(git show "origin/$BRANCH:package.json" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf-8')).version")"
-              if is_newer "$PR_VERSION" "$CURRENT"; then
+              # The release branch is writable by anyone with push access, so
+              # don't trust its contents any more than a dispatch input.
+              if ! [[ "$PR_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                echo "::warning::Ignoring invalid version '$PR_VERSION' on $BRANCH; using next major."
+              elif is_newer "$PR_VERSION" "$CURRENT"; then
                 NEXT="$PR_VERSION"
               fi
             fi
@@ -121,7 +125,9 @@ jobs:
 
       - name: Bump version
         if: steps.version.outputs.skip == 'false'
-        run: pnpm pkg set version="${{ steps.version.outputs.next }}"
+        env:
+          VERSION: ${{ steps.version.outputs.next }}
+        run: pnpm pkg set version="$VERSION"
 
       - name: Generate changelog
         if: steps.version.outputs.skip == 'false'

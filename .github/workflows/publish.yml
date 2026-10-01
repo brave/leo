@@ -5,48 +5,51 @@ on:
     paths: [package.json]
   workflow_dispatch:
 
-permissions:
-  contents: write # create tag + GitHub release
-  id-token: write # npm trusted publishing (OIDC)
-  actions: write # dispatch Prepare Release after tagging
+# Privileges are granted per job. Dependency install and build run in a job
+# with read-only access; only the final job, which never installs or runs
+# third-party code, can mint an npm OIDC token or write to the repo.
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
-  publish:
+  check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      name: ${{ steps.check.outputs.name }}
+      version: ${{ steps.check.outputs.version }}
+      tag: ${{ steps.check.outputs.tag }}
+      published: ${{ steps.check.outputs.published }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
         with:
-          run_install: false
-
-      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
-        with:
-          node-version-file: '.node-version'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          persist-credentials: false
 
       - name: Check whether version is already published
         id: check
         run: |
           NAME="$(node -p "require('./package.json').name")"
           VERSION="$(node -p "require('./package.json').version")"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::package.json version '$VERSION' is not X.Y.Z"
+            exit 1
+          fi
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
           # Pull this version's section out of CHANGELOG.md for the release notes.
-          NOTES="$RUNNER_TEMP/release-notes.md"
+          mkdir -p "$RUNNER_TEMP/notes"
+          NOTES="$RUNNER_TEMP/notes/release-notes.md"
           awk -v v="$VERSION" '
             $0 == "## " v { found = 1; next }
             found && /^## / { exit }
             found { print }
           ' CHANGELOG.md > "$NOTES"
-          echo "notes=$NOTES" >> "$GITHUB_OUTPUT"
 
           if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
             echo "$NAME@$VERSION is already on npm; skipping publish."
@@ -60,24 +63,139 @@ jobs:
             fi
           fi
 
+      - name: Upload release notes
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}/notes/release-notes.md
+          if-no-files-found: error
+          retention-days: 1
+
+  build:
+    needs: check
+    if: needs.check.outputs.published == 'false'
+    runs-on: ubuntu-latest
+    # Runs dependency lifecycle scripts, so it gets no write or OIDC access.
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+
       - name: Install dependencies
-        if: steps.check.outputs.published == 'false'
         run: |
           pnpm install --frozen-lockfile
           # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
           # Please check with Brave's security team prior to adding any packages to that list.
 
+      - name: Pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/pack"
+          pnpm pack --pack-destination "$RUNNER_TEMP/pack"
+
+      - name: Upload package
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: package
+          path: ${{ runner.temp }}/pack/*.tgz
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: [check, build]
+    # Still run when build was skipped (already published) so a missing tag or
+    # release from a previous failed run gets created.
+    if: >-
+      !cancelled()
+      && needs.check.result == 'success'
+      && (needs.build.result == 'success' || needs.build.result == 'skipped')
+    runs-on: ubuntu-latest
+    # Never installs dependencies or runs repo/package scripts.
+    permissions:
+      contents: write # create tag + GitHub release
+      id-token: write # npm trusted publishing (OIDC)
+      actions: write # dispatch Prepare Release after tagging
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+          # package.json only for pnpm/action-setup's `packageManager` pin.
+          sparse-checkout: |
+            .node-version
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          run_install: false
+
+      # No dependency cache here: restoring a cache into this job would let
+      # anything that can write the cache influence a privileged job.
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Download release notes
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}/notes
+
+      - name: Download package
+        if: needs.check.outputs.published == 'false'
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: package
+          path: ${{ runner.temp }}/pack
+
       - name: Publish
-        if: steps.check.outputs.published == 'false'
-        run: pnpm publish --no-git-checks --access public
+        if: needs.check.outputs.published == 'false'
+        env:
+          NAME: ${{ needs.check.outputs.name }}
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          shopt -s nullglob
+          TARBALLS=("$RUNNER_TEMP"/pack/*.tgz)
+          if [ "${#TARBALLS[@]}" -ne 1 ]; then
+            echo "::error::expected exactly one tarball, found ${#TARBALLS[@]}"
+            exit 1
+          fi
+          TARBALL="${TARBALLS[0]}"
+
+          # Make sure the artifact is the package and version we checked.
+          PKG="$(tar -xOzf "$TARBALL" package/package.json)"
+          GOT_NAME="$(node -p 'JSON.parse(process.argv[1]).name' "$PKG")"
+          GOT_VERSION="$(node -p 'JSON.parse(process.argv[1]).version' "$PKG")"
+          if [ "$GOT_NAME" != "$NAME" ] || [ "$GOT_VERSION" != "$VERSION" ]; then
+            echo "::error::tarball is $GOT_NAME@$GOT_VERSION, expected $NAME@$VERSION"
+            exit 1
+          fi
+
+          # Publishing a prebuilt tarball doesn't rebuild, and the packed
+          # manifest has no publish lifecycle scripts to run.
+          pnpm publish "$TARBALL" --no-git-checks --access public
 
       - name: Create tag and GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.check.outputs.tag }}
-          VERSION: ${{ steps.check.outputs.version }}
-          NOTES: ${{ steps.check.outputs.notes }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.check.outputs.tag }}
+          VERSION: ${{ needs.check.outputs.version }}
         run: |
+          NOTES="$RUNNER_TEMP/notes/release-notes.md"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists; nothing to do."
             exit 0

@@ -15,8 +15,7 @@ try {
     'No previous release tag found - nothing to diff against. This is ' +
       'expected before the first release; write that entry by hand instead.'
   )
-  // @ts-ignore
-  return process.exit(0)
+  process.exit(0)
 }
 
 const subjects = execSync(`git log ${lastTag}..HEAD --format=%s`, {
