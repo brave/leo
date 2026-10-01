@@ -1,7 +1,8 @@
 # Changelog
 
-All notable changes to `@brave/nala` are documented here. Versions are
-major-only (1, 2, 3, ...) — there are no minor or patch releases.
+All notable changes to `@brave/nala` are documented here. Releases are
+normally major-only (1.0.0, 2.0.0, ...); minor or patch releases are rare
+exceptions.
 
 ## 1.0.0
 

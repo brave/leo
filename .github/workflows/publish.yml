@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write # create tag + GitHub release
   id-token: write # npm trusted publishing (OIDC)
+  actions: write # dispatch Prepare Release after tagging
 
 concurrency:
   group: ${{ github.workflow }}
@@ -36,7 +37,7 @@ jobs:
           NAME="$(node -p "require('./package.json').name")"
           VERSION="$(node -p "require('./package.json').version")"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=v${VERSION%%.*}" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
           # Pull this version's section out of CHANGELOG.md for the release notes.
           NOTES="$RUNNER_TEMP/release-notes.md"
@@ -89,3 +90,7 @@ jobs:
             --target "$GITHUB_SHA" \
             --title "$TAG" \
             --notes-file "$NOTES"
+
+          # Commits pushed while this ran were skipped by Prepare Release
+          # (no tag yet); kick it now so the next release PR picks them up.
+          gh workflow run prepare-release.yml --ref main
