@@ -1,12 +1,17 @@
 name: Publish
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+    paths: [package.json]
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write # create tag + GitHub release
+  id-token: write # npm trusted publishing (OIDC)
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -25,20 +30,62 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
 
-      - name: Verify tag matches package.json major version
+      - name: Check whether version is already published
+        id: check
         run: |
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
-          PKG_VERSION="$(node -p "require('./package.json').version.split('.')[0]")"
-          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} doesn't match package.json major version ${PKG_VERSION}"
-            exit 1
+          NAME="$(node -p "require('./package.json').name")"
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v${VERSION%%.*}" >> "$GITHUB_OUTPUT"
+
+          # Pull this version's section out of CHANGELOG.md for the release notes.
+          NOTES="$RUNNER_TEMP/release-notes.md"
+          awk -v v="$VERSION" '
+            $0 == "## " v { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > "$NOTES"
+          echo "notes=$NOTES" >> "$GITHUB_OUTPUT"
+
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is already on npm; skipping publish."
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            # Fail before publishing, while it's still cheap to fix.
+            if ! grep -q '[^[:space:]]' "$NOTES"; then
+              echo "::error::CHANGELOG.md has no entry for $VERSION"
+              exit 1
+            fi
           fi
 
       - name: Install dependencies
+        if: steps.check.outputs.published == 'false'
         run: |
           pnpm install --frozen-lockfile
           # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
           # Please check with Brave's security team prior to adding any packages to that list.
 
       - name: Publish
-        run: pnpm publish
+        if: steps.check.outputs.published == 'false'
+        run: pnpm publish --no-git-checks --access public
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.check.outputs.tag }}
+          VERSION: ${{ steps.check.outputs.version }}
+          NOTES: ${{ steps.check.outputs.notes }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; nothing to do."
+            exit 0
+          fi
+          if ! grep -q '[^[:space:]]' "$NOTES"; then
+            echo "::warning::CHANGELOG.md has no entry for $VERSION; using placeholder release notes."
+            echo "See CHANGELOG.md." > "$NOTES"
+          fi
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --notes-file "$NOTES"

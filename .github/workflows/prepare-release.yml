@@ -62,6 +62,6 @@ jobs:
           git push origin "$BRANCH"
           gh pr create \
             --title "chore: release v${{ inputs.version }}" \
-            --body "Version bump and changelog for v${{ inputs.version }}. Merging this does **not** publish — after merging, push the \`v${{ inputs.version }}\` tag from \`main\` to trigger the Publish workflow." \
+            --body "Version bump and changelog for v${{ inputs.version }}. Merging this **publishes** \`@brave/nala@${{ inputs.version }}.0.0\` to npm and creates the \`v${{ inputs.version }}\` tag and GitHub release via the Publish workflow. Review CHANGELOG.md before merging." \
             --base main \
             --head "$BRANCH"
