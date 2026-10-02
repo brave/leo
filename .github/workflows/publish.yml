@@ -45,25 +45,11 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
-          # Pull this version's section out of CHANGELOG.md for the release notes.
-          mkdir -p "$RUNNER_TEMP/notes"
-          NOTES="$RUNNER_TEMP/notes/release-notes.md"
-          awk -v v="$VERSION" '
-            $0 == "## " v { found = 1; next }
-            found && /^## / { exit }
-            found { print }
-          ' CHANGELOG.md > "$NOTES"
-
           if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
             echo "$NAME@$VERSION is already on npm; skipping publish."
             echo "published=true" >> "$GITHUB_OUTPUT"
           else
             echo "published=false" >> "$GITHUB_OUTPUT"
-            # Fail before publishing, while it's still cheap to fix.
-            if ! grep -q '[^[:space:]]' "$NOTES"; then
-              echo "::error::CHANGELOG.md has no entry for $VERSION"
-              exit 1
-            fi
           fi
 
       # The tag, release and package must all come from the commit that bumped
@@ -73,6 +59,7 @@ jobs:
         id: target
         env:
           VERSION: ${{ steps.check.outputs.version }}
+          PUBLISHED: ${{ steps.check.outputs.published }}
         run: |
           version_at() {
             git show "$1:package.json" 2>/dev/null \
@@ -101,6 +88,23 @@ jobs:
             echo "::notice::Releasing $VERSION from $TARGET (bump commit), not $GITHUB_SHA."
           fi
           echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+
+          # Pull this version's section out of CHANGELOG.md at the release
+          # commit, so the notes match the published package even if a later
+          # commit edited the changelog.
+          mkdir -p "$RUNNER_TEMP/notes"
+          NOTES="$RUNNER_TEMP/notes/release-notes.md"
+          git show "$TARGET:CHANGELOG.md" | awk -v v="$VERSION" '
+            $0 == "## " v { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' > "$NOTES"
+
+          # Fail before publishing, while it's still cheap to fix.
+          if [ "$PUBLISHED" = "false" ] && ! grep -q '[^[:space:]]' "$NOTES"; then
+            echo "::error::CHANGELOG.md has no entry for $VERSION at $TARGET"
+            exit 1
+          fi
 
       - name: Upload release notes
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
@@ -237,25 +241,31 @@ jobs:
           VERSION: ${{ needs.check.outputs.version }}
         run: |
           NOTES="$RUNNER_TEMP/notes/release-notes.md"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists; nothing to do."
-            exit 0
-          fi
+          # Each step below is safe to repeat, so re-running after a partial
+          # failure finishes whatever the previous run didn't.
+
           # gh ignores --target if the tag already exists, so check it ourselves.
           if TAG_SHA="$(gh api "repos/$GH_REPO/commits/$TAG" --jq .sha 2>/dev/null)" \
             && [ "$TAG_SHA" != "$TARGET" ]; then
             echo "::error::Tag $TAG points at $TAG_SHA, expected $TARGET"
             exit 1
           fi
-          if ! grep -q '[^[:space:]]' "$NOTES"; then
-            echo "::warning::CHANGELOG.md has no entry for $VERSION; using placeholder release notes."
-            echo "See CHANGELOG.md." > "$NOTES"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping create."
+          else
+            if ! grep -q '[^[:space:]]' "$NOTES"; then
+              echo "::warning::CHANGELOG.md has no entry for $VERSION; using placeholder release notes."
+              echo "See CHANGELOG.md." > "$NOTES"
+            fi
+            gh release create "$TAG" \
+              --target "$TARGET" \
+              --title "$TAG" \
+              --notes-file "$NOTES"
           fi
-          gh release create "$TAG" \
-            --target "$TARGET" \
-            --title "$TAG" \
-            --notes-file "$NOTES"
 
           # Commits pushed while this ran were skipped by Prepare Release
           # (no tag yet); kick it now so the next release PR picks them up.
+          # Runs even when the release already existed, in case a previous run
+          # failed here.
           gh workflow run prepare-release.yml --ref main
