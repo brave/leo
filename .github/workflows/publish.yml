@@ -24,10 +24,13 @@ jobs:
       version: ${{ steps.check.outputs.version }}
       tag: ${{ steps.check.outputs.tag }}
       published: ${{ steps.check.outputs.published }}
+      target: ${{ steps.target.outputs.target }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
+          # Full history to find the commit that bumped the version.
+          fetch-depth: 0
 
       - name: Check whether version is already published
         id: check
@@ -63,6 +66,42 @@ jobs:
             fi
           fi
 
+      # The tag, release and package must all come from the commit that bumped
+      # package.json to this version, not whatever main is now. They differ on
+      # a workflow_dispatch run after newer commits have landed.
+      - name: Find release commit
+        id: target
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          version_at() {
+            git show "$1:package.json" 2>/dev/null \
+              | node -p 'JSON.parse(require("fs").readFileSync(0, "utf-8")).version' 2>/dev/null \
+              || true
+          }
+
+          # Walk main's first-parent history (merge commits, not PR-branch
+          # commits) back to the oldest commit in the current run of $VERSION.
+          TARGET=""
+          for c in $(git log --first-parent --format=%H HEAD -- package.json); do
+            if [ "$(version_at "$c")" != "$VERSION" ]; then
+              break
+            fi
+            TARGET="$c"
+            if [ "$(version_at "$c^")" != "$VERSION" ]; then
+              break
+            fi
+          done
+
+          if [ -z "$TARGET" ]; then
+            echo "::error::Can't find the commit that bumped package.json to $VERSION. Create the tag and release manually."
+            exit 1
+          fi
+          if [ "$TARGET" != "$GITHUB_SHA" ]; then
+            echo "::notice::Releasing $VERSION from $TARGET (bump commit), not $GITHUB_SHA."
+          fi
+          echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+
       - name: Upload release notes
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
@@ -82,6 +121,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
+          ref: ${{ needs.check.outputs.target }}
 
       - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
         with:
@@ -193,6 +233,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           TAG: ${{ needs.check.outputs.tag }}
+          TARGET: ${{ needs.check.outputs.target }}
           VERSION: ${{ needs.check.outputs.version }}
         run: |
           NOTES="$RUNNER_TEMP/notes/release-notes.md"
@@ -200,12 +241,18 @@ jobs:
             echo "Release $TAG already exists; nothing to do."
             exit 0
           fi
+          # gh ignores --target if the tag already exists, so check it ourselves.
+          if TAG_SHA="$(gh api "repos/$GH_REPO/commits/$TAG" --jq .sha 2>/dev/null)" \
+            && [ "$TAG_SHA" != "$TARGET" ]; then
+            echo "::error::Tag $TAG points at $TAG_SHA, expected $TARGET"
+            exit 1
+          fi
           if ! grep -q '[^[:space:]]' "$NOTES"; then
             echo "::warning::CHANGELOG.md has no entry for $VERSION; using placeholder release notes."
             echo "See CHANGELOG.md." > "$NOTES"
           fi
           gh release create "$TAG" \
-            --target "$GITHUB_SHA" \
+            --target "$TARGET" \
             --title "$TAG" \
             --notes-file "$NOTES"
 
