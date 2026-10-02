@@ -107,31 +107,23 @@ jobs:
 
           echo "skip=false" >> "$GITHUB_OUTPUT"
 
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-        if: steps.version.outputs.skip == 'false'
-        with:
-          run_install: false
-
+      # This job holds a write token, so it must not install or run any
+      # dependencies (compromised package code could push to the repo). The
+      # steps below only use Node, npm, git and gh.
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         if: steps.version.outputs.skip == 'false'
         with:
           node-version-file: '.node-version'
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
-
-      - name: Install dependencies
-        if: steps.version.outputs.skip == 'false'
-        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Bump version
         if: steps.version.outputs.skip == 'false'
         env:
           VERSION: ${{ steps.version.outputs.next }}
-        run: pnpm pkg set version="$VERSION"
+        run: npm pkg set version="$VERSION"
 
       - name: Generate changelog
         if: steps.version.outputs.skip == 'false'
-        run: pnpm run changelog
+        run: node ./src/scripts/gen-changelog.ts
 
       - name: Create or update release PR
         if: steps.version.outputs.skip == 'false'
