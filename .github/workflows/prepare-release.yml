@@ -16,8 +16,8 @@ on:
         type: string
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+  pull-requests: read
 
 # Every run rebuilds the release branch from the latest main, so a newer push
 # makes any in-flight run obsolete.
@@ -107,9 +107,9 @@ jobs:
 
           echo "skip=false" >> "$GITHUB_OUTPUT"
 
-      # This job holds a write token, so it must not install or run any
+      # This job uses a write-capable PAT, so it must not install or run any
       # dependencies (compromised package code could push to the repo). The
-      # steps below only use Node, npm, git and gh.
+      # steps below only use Node, npm, git and pinned actions.
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         if: steps.version.outputs.skip == 'false'
         with:
@@ -125,37 +125,47 @@ jobs:
         if: steps.version.outputs.skip == 'false'
         run: node ./src/scripts/gen-changelog.ts
 
-      - name: Create or update release PR
+      - name: Check for changelog entries
+        id: changes
         if: steps.version.outputs.skip == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ steps.version.outputs.next }}
         run: |
           if git diff --quiet -- CHANGELOG.md; then
             echo "No changelog entries since the last release; nothing to do."
-            exit 0
-          fi
-
-          TITLE="chore: release v$VERSION"
-          BODY="Version bump and changelog for v$VERSION. This PR is updated automatically on every push to \`main\`.
-
-          Merging this **publishes** \`@brave/nala@$VERSION\` to npm and creates the \`v$VERSION\` tag and GitHub release via the Publish workflow. Review CHANGELOG.md before merging.
-
-          Defaults to the next major. To release a different version, run the Prepare Release workflow manually with a \`version\` override."
-
-          git config user.name "brave-builds"
-          git config user.email "devops@brave.com"
-          git checkout -B "$BRANCH"
-          git add package.json CHANGELOG.md
-          git commit -m "$TITLE"
-          # The branch is always rebuilt from main, so force-push over any
-          # previous release commit.
-          git push --force origin "$BRANCH"
-
-          PR="$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')"
-          if [ -n "$PR" ]; then
-            gh pr edit "$PR" --title "$TITLE" --body "$BODY"
-            echo "Updated release PR #$PR"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            gh pr create --title "$TITLE" --body "$BODY" --base main --head "$BRANCH"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      # main requires signed commits. Same bot identity and key as
+      # update-icons.yml.
+      - name: Configure GPG
+        if: steps.changes.outputs.changed == 'true'
+        uses: crazy-max/ghaction-import-gpg@e89d40939c28e39f97cf32126055eeae86ba74ec # v6.3.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      # Rebuilds the branch from main on every run (force-push over any previous
+      # release commit) and creates or updates the PR.
+      - name: Create or update release PR
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+        with:
+          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
+          branch: ${{ env.BRANCH }}
+          base: main
+          add-paths: |
+            package.json
+            CHANGELOG.md
+          author: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          committer: brave-support-admin <138038132+brave-support-admin@users.noreply.github.com>
+          commit-message: 'chore: release v${{ steps.version.outputs.next }}'
+          title: 'chore: release v${{ steps.version.outputs.next }}'
+          body: |
+            Version bump and changelog for v${{ steps.version.outputs.next }}. This PR is updated automatically on every push to `main`.
+
+            Merging this **publishes** `@brave/nala@${{ steps.version.outputs.next }}` to npm and creates the `v${{ steps.version.outputs.next }}` tag and GitHub release via the Publish workflow. Review CHANGELOG.md before merging.
+
+            Defaults to the next major. To release a different version, run the Prepare Release workflow manually with a `version` override.
