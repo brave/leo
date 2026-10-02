@@ -16,12 +16,7 @@ import type { SvelteComponent } from 'svelte'
 const eventRegex = /^on([A-Z]{1,}[a-zA-Z]*)$/
 
 export type IntrinsicProps =
-  | 'className'
-  | 'id'
-  | 'hidden'
-  | 'role'
-  | 'style'
-  | 'tabIndex'
+  'className' | 'id' | 'hidden' | 'role' | 'style' | 'tabIndex'
 
 export type SvelteProps<T> =
   T extends SvelteComponent<infer Props, any, any> ? Props : {}
