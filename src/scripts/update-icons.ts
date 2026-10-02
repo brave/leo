@@ -174,7 +174,9 @@ const generateMeta = () => {
   // Write meta.d.ts
   fs.writeFileSync(
     path.join(FINAL_FOLDER, 'meta.d.ts'),
-    `import { StringWithAutoComplete } from '../src/types/string'
+    `// Inlined (rather than imported from src/types/string) so this file is
+// self-contained in the published package.
+type StringWithAutoComplete<T> = T | (string & Record<never, never>)
 
 const meta = ${stringified} as const
 export type Meta = typeof meta
