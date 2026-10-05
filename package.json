@@ -1,16 +1,30 @@
 {
-  "name": "@brave/leo",
-  "version": "0.0.1",
+  "name": "@brave/nala",
+  "version": "1.0.0",
   "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
-  "main": "index.js",
   "type": "module",
-  "dependencies": {
-    "@storybook/test": "8.6.15",
-    "svelte": "5.57.1",
-    "svelte-preprocess": "6.0.5",
-    "tailwindcss": "3.4.19",
-    "tslib": "2.8.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brave/leo.git"
   },
+  "files": [
+    "shared",
+    "react",
+    "web-components",
+    "tokens",
+    "types",
+    "!types/**/*.stories.*",
+    "icons",
+    "src/scripts/audit-tokens.js",
+    "src/scripts/common.js",
+    "README.md",
+    "LICENSE.md",
+    "CHANGELOG.md",
+    "svelte/components",
+    "svelte/svelteDirectives",
+    "svelte/types",
+    "!svelte/**/*.stories.*"
+  ],
   "devDependencies": {
     "@babel/core": "7.29.7",
     "@ctrl/tinycolor": "3.6.1",
@@ -27,8 +41,10 @@
     "@storybook/addon-storysource": "8.6.14",
     "@storybook/addon-svelte-csf": "5.1.5",
     "@storybook/addon-themes": "8.6.18",
-    "@storybook/svelte": "8.6.18",
     "@storybook/svelte-vite": "8.6.18",
+    "@storybook/svelte": "8.6.18",
+    "@storybook/test": "8.6.15",
+    "@sveltejs/package": "2.5.8",
     "@sveltejs/vite-plugin-svelte": "5.1.1",
     "@tsconfig/svelte": "5.0.8",
     "@types/jest": "29.5.14",
@@ -40,23 +56,27 @@
     "jest": "30.5.2",
     "jsdom": "28.1.0",
     "lodash": "4.18.1",
-    "postcss": "8.5.28",
     "postcss-js": "4.1.0",
     "postcss-sort-media-queries": "4.4.1",
-    "prettier": "3.9.9",
+    "postcss": "8.5.28",
     "prettier-plugin-svelte": "3.5.2",
-    "rollup": "3.30.0",
+    "prettier": "3.9.9",
     "rollup-plugin-svelte": "7.2.3",
+    "rollup": "3.30.0",
     "sass": "1.105.1",
     "storybook": "8.6.18",
     "style-dictionary": "3.9.2",
     "style-loader": "3.3.4",
     "svelte-check": "4.7.6",
     "svelte-loader": "3.2.4",
+    "svelte-preprocess": "6.0.5",
+    "svelte": "5.57.1",
     "svelte2tsx": "0.7.61",
     "svg2vectordrawable": "2.9.1",
     "svgo": "4.1.0",
+    "tailwindcss": "3.4.19",
     "ts-jest": "29.4.14",
+    "tslib": "2.8.1",
     "tsx": "4.23.15",
     "undici": "7.30.0",
     "vite": "6.4.3"
@@ -64,16 +84,24 @@
   "peerDependencies": {
     "@material/material-color-utilities": ">= 0.2.7",
     "react": ">= 16.0.0",
+    "svelte": "^5.0.0",
+    "tailwindcss": "^3.4.19",
     "typescript": ">= 4.7.0 < 7.0.0"
   },
   "peerDependenciesMeta": {
     "@material/material-color-utilities": {
       "optional": true
     },
-    "typescript": {
+    "react": {
       "optional": true
     },
-    "react": {
+    "svelte": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "typescript": {
       "optional": true
     }
   },
@@ -81,7 +109,8 @@
     "format": "prettier ./ --write",
     "format-diff": "prettier ./ --list-different",
     "prepare": "pnpm run build",
-    "build": "pnpm run transform-tokens && pnpm run skiafy-icons && pnpm run android-icons && rollup -c rollup.config.js",
+    "build": "pnpm run transform-tokens && pnpm run skiafy-icons && pnpm run android-icons && pnpm run package-svelte && rollup -c rollup.config.js",
+    "package-svelte": "svelte-package -i ./src -o ./svelte --tsconfig ./tsconfig-svelte-package.json",
     "dev": "rollup -c rollup.config.js --watch",
     "update-icons": "tsx ./src/scripts/update-icons.ts",
     "skiafy-icons": "tsx ./src/scripts/gen-skia-icons.ts",
@@ -91,7 +120,8 @@
     "test": "jest tests --coverage=false",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "audit_deps": "node scripts/audit_deps.js"
+    "audit_deps": "node scripts/audit_deps.js",
+    "changelog": "node ./src/scripts/gen-changelog.ts"
   },
   "bin": {
     "leo-check": "./src/scripts/audit-tokens.js"

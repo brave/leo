@@ -16,7 +16,7 @@ has a `ring` and a `bar` component).
 
 When compiled, all components are lifted up to the same folder, so names should
 be unique between folders. This is to make imports nicer, as you can import your
-preferred component from `@brave/leo/react/button` instead of `@brave/leo/react/button/button`.
+preferred component from `@brave/nala/react/button` instead of `@brave/nala/react/button/button`.
 
 ### Example Component
 
