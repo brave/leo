@@ -156,6 +156,15 @@
     margin: auto;
     border: none;
     display: grid;
+    /* The dialog sets its own width below, so content must never widen it. An
+     * implicit `auto` column can't be narrower than its items' min-content
+     * width, so unbreakable content (`white-space: nowrap` with
+     * `text-overflow: ellipsis`) would push the column past max-width and
+     * scroll the dialog horizontally instead of truncating. `minmax(0, 1fr)`
+     * drops that floor but keeps the growth limit, so an intrinsic
+     * `--leo-dialog-width` (`max-content`, `fit-content`) still hugs its
+     * content. */
+    grid-template-columns: minmax(0, 1fr);
     align-content: start;
 
     width: calc(100% - var(--leo-spacing-m) * 2);
