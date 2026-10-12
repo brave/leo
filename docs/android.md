@@ -112,5 +112,5 @@ Android radii.
 **Check both paths.** Before calling an Android change done, check it in
 light and dark with dynamic colour both enabled and disabled. Check on
 Android 12+ with at least two contrasting wallpapers, and on an older
-Android version where dynamic colour is unavailable. The setting is Settings → Appearance → Dynamic
-colors.
+Android version where dynamic colour is unavailable. The setting is
+Settings → Appearance → Dynamic colors.
