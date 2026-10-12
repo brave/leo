@@ -257,11 +257,7 @@ token its own way, for example `color-text-primary` is:
   effects to a logo. The lion is a logo, not a generic icon.
 - **Gradients are used for what they are named for:** `hero` for hero
   areas, `brave-release`, `brave-beta` and `brave-nightly` for
-  release-channel identity, and `braveai` for AI identity, sparingly.
-  `braveai` is defined in
-  [src/tokens/universal.tokens.json](src/tokens/universal.tokens.json) but
-  is not yet exported to any platform, so raise it with Leo rather than
-  copying the stops by hand. Never put body text on a gradient, and never
+  release-channel identity. Never put body text on a gradient, and never
   invent one.
 - **Brand colour does not follow dynamic colour.** On Android, logos,
   `primitive_brands_*`, gradients, and the `private_window_*` and
@@ -652,8 +648,7 @@ guidelines are more specific, follow the repository.
 
 #### Agent and AI surfaces
 
-- **Label AI content** and say where the model runs. Use the `braveai`
-  gradient for AI identity, sparingly.
+- **Label AI content** and say where the model runs.
 - **Stream in place.** Scroll follows only if the person is at the bottom.
   A visible stop control is always available and keeps what was produced.
 - **Show the work.** Say what the agent is doing in plain words, cite
