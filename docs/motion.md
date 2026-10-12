@@ -1,6 +1,7 @@
 # Motion
 
-Motion rules for Leo and for products built on it. Builds on the rules in [AGENTS.md](../AGENTS.md).
+Motion rules for Leo and for products built on it. Builds on the rules in
+[AGENTS.md](../AGENTS.md).
 
 Motion explains what changed. It is never decoration.
 
@@ -27,6 +28,10 @@ Motion explains what changed. It is never decoration.
 `var(--leo-duration-s)`), and `DurationS`, `EasingOut` and so on in
 [tokens/json/](../tokens/json/). Skia, Android and iOS have none.
 
+`easing-in` is symmetric, so it is closer to an in-out curve than a pure
+accelerate. It is still the token for exits. Do not write your own curve
+in its place; raise it with Leo instead.
+
 ```css
 /* Do */
 .panel {
@@ -43,14 +48,23 @@ Motion explains what changed. It is never decoration.
 
 - **On Android and iOS,** use the platform's system motion (Material
   springs, SwiftUI's standard animations) for platform components. For
-  anything custom, copy the values above and name the token in a comment,
-  as with any other copied value. For example, `// duration-s,
-easing-out` with `PathInterpolator(0f, 0f, 0.58f, 1f)` on Android, or
-  `.timingCurve(0, 0, 0.58, 1, duration: 0.1)` on iOS.
+  anything custom, copy the values above and name the token, as AGENTS.md
+  says for any copied value:
+
+  ```kotlin
+  // duration-s, easing-out
+  PathInterpolator(0f, 0f, 0.58f, 1f)
+  ```
+
+  ```swift
+  // duration-s, easing-out
+  .timingCurve(0, 0, 0.58, 1, duration: 0.1)
+  ```
+
 - **Size the motion to the change.** Hover, press and toggle use `xs` or
   `s`. Tooltips and small menus and popovers use `s`, larger ones use `m`.
-  Panels, sheets and page transitions use `m` or `l`. Leaving is quicker than entering, so give an
-  exit the shorter duration.
+  Panels, sheets and page transitions use `m` or `l`. Leaving is quicker
+  than entering, so give an exit the shorter duration.
 - **Animate opacity and transform,** not width, height, top or left, so
   motion never drops frames or shifts layout.
 - **Never block.** A person can act during an animation, and nothing waits

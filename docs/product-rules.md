@@ -1,6 +1,7 @@
 # Beyond tokens: product rules
 
-Product-level rules for products built on Leo. Builds on [AGENTS.md](../AGENTS.md).
+Product-level rules for products built on Leo. Builds on
+[AGENTS.md](../AGENTS.md).
 
 These are the product-level rules for interaction, writing, privacy and AI
 surfaces. Where a repository's guidelines are more specific, follow the

@@ -1,6 +1,7 @@
 # Desktop browser: Nala tokens and the user's theme
 
-How Nala colours work in the desktop browser. Builds on [AGENTS.md](../AGENTS.md).
+How Nala colours work in the desktop browser. Builds on
+[AGENTS.md](../AGENTS.md).
 
 Desktop colours work differently from Android. On Android the Nala colours
 are fixed resources, so dynamic colour needs theme attributes. On desktop
@@ -75,9 +76,9 @@ colours for the tab strip, toolbar, omnibar and menus. These stay fixed:
   `SchemeVariant::kDarker`, postprocessing mixers push the location bar,
   omnibox and tabs to near black whatever the accent. Check new colours
   there too.
-- **WebUI is different.** WebUI pages use Leo's CSS variables, which switch between light and dark only. They pick up an
-  accent only where they load `chrome://theme/colors.css` (the welcome page
-  preview does).
+- **WebUI is different.** WebUI pages use Leo's CSS variables, which
+  switch between light and dark only. They pick up an accent only where
+  they load `chrome://theme/colors.css` (the welcome page preview does).
 
 **Check before calling a desktop change done.** Check it in light and dark,
 with the default theme, an accent colour theme, grayscale, an installed

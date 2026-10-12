@@ -98,17 +98,19 @@ Do not use the legacy hex names at the top of the file (`background1`,
 NA-009). Nala drawables are filled with a static `@color/icon_default`.
 They follow dynamic colour only when the call site tints them, for
 example with `app:tint="?attr/colorOnSurfaceVariant"`,
-`@color/default_icon_color_tint_list`, or `BraveSettingsIconTintUtils`. Use `nala_icon_overrides` to replace a
-Chromium drawable only when every call site applies its own tint.
+`@color/default_icon_color_tint_list`, or `BraveSettingsIconTintUtils`.
+Use `nala_icon_overrides` to replace a Chromium drawable only when every
+call site applies its own tint.
 
 **Typography and dimensions.** Leo's Android `styles.xml` and
 `dimens.xml` are not used by brave-core. Use the text appearances that
 brave-core and Chromium already define. Use dimensions in `dp` taken from
-the spacing and radius scales in [AGENTS.md](../AGENTS.md#using-leo-in-a-product), plus `radius-android-dialog` (28)
-and `radius-android-list-group` (20).
+the spacing and radius scales in
+[AGENTS.md](../AGENTS.md#using-leo-in-a-product), which include the
+Android radii.
 
 **Check both paths.** Before calling an Android change done, check it in
-light and dark with dynamic colour both enabled and disabled. Check on Android 12+ with at least two
-contrasting wallpapers, and on an older Android version where dynamic
-colour is unavailable. The setting is Settings → Appearance → Dynamic
+light and dark with dynamic colour both enabled and disabled. Check on
+Android 12+ with at least two contrasting wallpapers, and on an older
+Android version where dynamic colour is unavailable. The setting is Settings → Appearance → Dynamic
 colors.

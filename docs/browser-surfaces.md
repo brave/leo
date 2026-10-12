@@ -1,6 +1,7 @@
 # Surfaces inside the Brave browser
 
-Rules for surfaces that ship in the Brave browser. Builds on [AGENTS.md](../AGENTS.md).
+Rules for surfaces that ship in the Brave browser. Builds on
+[AGENTS.md](../AGENTS.md).
 
 A surface that ships in the browser ([brave-core](https://github.com/brave/brave-core))
 looks and behaves like the browser around it. It uses Nala for values and

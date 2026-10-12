@@ -4,9 +4,10 @@ Leo is Brave's cross-platform design system. It powers the Brave Browser
 (desktop and mobile), the new tab and search experiences, brave.com
 marketing, and the broader privacy-product portfolio.
 
-Components are authored in Svelte and shipped to consumers as **React**, **Svelte** and
-**Web Component** wrappers. Tokens are authored once and exported to CSS,
-Tailwind, Skia (C++), Android XML resources, and Swift (iOS).
+Components are authored in Svelte and shipped to consumers as **React**,
+**Svelte** and **Web Component** wrappers. Tokens are authored once and
+exported to CSS, Tailwind, Skia (C++), Android XML resources, and Swift
+(iOS).
 
 See [README.md](README.md) for consumer setup — wiring up `variables.css`,
 the Tailwind plugin, and the `data-theme="dark|light"` theming rule.
@@ -28,18 +29,12 @@ and per-PR Storybook previews are deployed to
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml). For
 everything in this repo, "Leo" and "nala" refer to the same design system.
 
-On Android, the Nala tokens are the XML resources generated into
-[tokens/android/](tokens/android/). brave-core builds them into the
-browser through `android/nala/BUILD.gn`, and remaps Chromium's
-`baseline_*` palette to Nala primitives so Chromium's theme also resolves
-to Nala. Android surfaces use Nala tokens or theme attributes, never
-`@android:color/*` or hex. See
-[Android: Nala tokens and dynamic colour](docs/android.md)
-for how to use them so they work with Material dynamic colour.
-
-On the desktop browser, Nala's colour ids are resolved through Chromium's
-colour provider, so they follow the user's theme without extra work. See
-[Desktop browser: Nala tokens and the user's theme](docs/desktop-browser.md).
+On Android, the Nala tokens are the XML resources in
+[tokens/android/](tokens/android/), and surfaces use them or theme
+attributes, never `@android:color/*` or hex
+([docs/android.md](docs/android.md)). On desktop, Nala's colour ids are
+resolved through Chromium's colour provider, so they follow the user's
+theme ([docs/desktop-browser.md](docs/desktop-browser.md)).
 
 ## Tokens
 
@@ -79,10 +74,8 @@ in [tokens/tailwind/](tokens/tailwind/) and as `variables*.js` /
 ### Other platforms
 
 - **Skia / C++** — [tokens/skia/](tokens/skia/) (the `nala::` color id
-  enum, color mixer, and `radius.h` / `spacing.h` headers). The mixer is
-  what makes desktop colours follow the user's theme; see
-  [Desktop browser: Nala tokens and the user's theme](docs/desktop-browser.md).
-  There are no motion tokens for Skia, Android or iOS.
+  enum, color mixer, and `radius.h` / `spacing.h` headers). There are no
+  motion tokens for Skia, Android or iOS.
 - **Android (Nala)** — [tokens/android/](tokens/android/):
   - `values/colors.xml`: every primitive, plus light values for the
     Material 3 roles and Leo semantics.
@@ -95,8 +88,7 @@ in [tokens/tailwind/](tokens/tailwind/) and as `variables*.js` /
     builds.
   - `drawable/`: `ic_<name>` vector icons.
 
-  Spacing and radius are **not** exported for Android. See
-  [Android: Nala tokens and dynamic colour](docs/android.md).
+  Spacing and radius are **not** exported for Android.
 
 - **iOS / Swift** — [tokens/ios-swift/](tokens/ios-swift/)
   (`Colors.xcassets`, `ColorSetAccessors.swift`, `Gradients.swift`).
@@ -128,7 +120,7 @@ component authoring recipe and the React / Web Component caveats.
 
 ### Icons
 
-Icons live in [icons/](icons/) (~2300 SVGs synced from Figma by
+Icons live in [icons/](icons/) (SVGs synced from Figma by
 [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml))
 and are consumed via the typed
 [`<Icon name="..." />`](src/components/icon/icon.svelte) component, with
@@ -157,6 +149,23 @@ pnpm run format-diff  # list files prettier would change
 pnpm run build-storybook  # static Storybook build
 node src/scripts/audit-tokens.js  # fail on --leo-* variables that do not exist
 ```
+
+## Guides
+
+Read the one that matches the work. Each builds on the rules in this file.
+
+- [docs/motion.md](docs/motion.md): durations, easings, reduced motion and
+  loading indicators.
+- [docs/browser-surfaces.md](docs/browser-surfaces.md): building a surface
+  that ships inside the Brave browser, on desktop, Android and iOS.
+- [docs/desktop-browser.md](docs/desktop-browser.md): how Nala colours follow
+  the user's theme on desktop, and how to use them.
+- [docs/android.md](docs/android.md): Nala tokens and Material dynamic
+  colour in brave-core.
+- [docs/product-rules.md](docs/product-rules.md): interaction, writing,
+  privacy, and agent and AI surfaces.
+- [docs/checks.md](docs/checks.md): greps and accessibility checks to run
+  before calling a change done.
 
 ## Using Leo in a product
 
@@ -190,8 +199,9 @@ token its own way, for example `color-text-primary` is:
     `2xl` 24, `3xl` 32, `4xl` 40, `5xl` 48, `6xl` 64, `7xl` 80, `8xl` 96,
     `9xl` 160
   - radius: `radius-2xs` 1, `xs` 2, `s` 4, `m` 8, `l` 12, `xl` 16,
-    `xxl` 24, `full`, plus the platform radii `radius-android-dialog` 28,
-    `radius-android-list-group` 20, `radius-ios-modals` 38,
+    `xxl` 24 (not `2xl`), `full`, plus the platform radii
+    `radius-android-dialog` 28, `radius-android-list-group` 20,
+    `radius-ios-modals` 38,
     `radius-ios-settings-groups` 26 and the `radius-browserwindow-*` and
     `radius-browsercontent-*` window corners
   - icon size: `icon-xs` 16, `s` 18, `m` 20, `l` 24, `xl` 32
@@ -213,11 +223,9 @@ token its own way, for example `color-text-primary` is:
   `font-large-*`, `font-default-*`, `font-small-*`, `font-x-small-*`,
   `font-monospace-*`) rather than setting size, weight and line height
   separately.
-- **Motion uses Leo's tokens.** Durations are `duration-xs` (50ms) to
-  `duration-l` (300ms), and easings are `easing-out`, `easing-in`,
-  `easing-in-out` and `easing-linear`. Nothing routine is longer than
-  `duration-l`. See [Motion](docs/motion.md) for which to use when, and what to
-  do on platforms that have no motion tokens.
+- **Motion uses Leo's `duration-*` and `easing-*` tokens.** See
+  [docs/motion.md](docs/motion.md) for which to use when, and what to do
+  on platforms that have no motion tokens.
 - **Icons come from Leo**, and the name must exist in the pinned Leo
   version (`@brave/leo/icons/meta`). Do not draw icons, copy SVGs from
   elsewhere, or add another icon set (Lucide, Material Symbols, Font
@@ -275,23 +283,6 @@ token its own way, for example `color-text-primary` is:
 - **Third-party marks** use Leo's `*-color` brand icons where one exists,
   unmodified.
 
-### Guides
-
-Read the one that matches the work. Each builds on the rules above.
-
-- [docs/motion.md](docs/motion.md): durations, easings, reduced motion and
-  loading indicators.
-- [docs/browser-surfaces.md](docs/browser-surfaces.md): building a surface
-  that ships inside the Brave browser, on desktop, Android and iOS.
-- [docs/desktop-browser.md](docs/desktop-browser.md): how Nala colours follow
-  the user's theme on desktop, and how to use them.
-- [docs/android.md](docs/android.md): Nala tokens and Material dynamic
-  colour in brave-core.
-- [docs/product-rules.md](docs/product-rules.md): interaction, writing,
-  privacy, and agent and AI surfaces.
-- [docs/checks.md](docs/checks.md): greps and accessibility checks to run
-  before calling a change done.
-
 ## Changing Leo
 
 These rules are for agents changing tokens, components or icons in this
@@ -303,7 +294,8 @@ repository.
   for rather than how it looks. Android colour names are resource names
   that brave-core references directly, so renaming or removing one is a
   breaking change. An alias to `schemes_*` does not make a colour follow
-  dynamic colour, because only theme attributes do. Check the change in every platform's output, not only CSS.
+  dynamic colour, because only theme attributes do. Check the change in
+  every platform's output, not only CSS.
 - **Icons** are synced from Figma by
   [.github/workflows/update-icons.yml](.github/workflows/update-icons.yml).
   Request a new icon through design rather than hand-adding an SVG to
@@ -321,11 +313,9 @@ repository.
   menu when it opens, stays inside a modal, and returns to the opener on
   close. Nothing is available only on hover. State is never shown by colour
   alone, and the component still reads in forced-colours mode.
-- **Motion** takes every duration and easing from the tokens (see
-  [Motion](docs/motion.md)), animates opacity and transform, not layout
-  properties, never blocks input, and honours reduced motion (see
-  [src/components/prefersReducedMotion.ts](src/components/prefersReducedMotion.ts))
-  by replacing movement with a short fade or an instant change.
+- **Motion** follows [docs/motion.md](docs/motion.md). JS-driven
+  transitions read reduced motion through
+  [src/components/prefersReducedMotion.ts](src/components/prefersReducedMotion.ts).
 - **Right-to-left works.** Use logical properties (start and end, not left
   and right). Directional icons mirror; non-directional ones do not.
 - **No built-in strings.** User-visible text comes from the consumer
@@ -333,4 +323,5 @@ repository.
   translated text 30–40% longer than English.
 - **Before calling a change done,** check it in Storybook in light and
   dark, with keyboard only, with reduced motion and forced colours, and in
-  an RTL direction, and list anything you could not check in the PR.
+  an RTL direction, run the checks in [docs/checks.md](docs/checks.md),
+  and list anything you could not check in the PR.

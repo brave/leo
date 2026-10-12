@@ -1,12 +1,14 @@
 # Checks you can run
 
-Checks to run before calling a change done. Builds on [AGENTS.md](../AGENTS.md).
+Checks to run before calling a change done. Builds on
+[AGENTS.md](../AGENTS.md).
 
 A match is not always wrong (a token file legitimately contains hex
-values), but each one needs a reason. They look only at the lines the
-change adds, printed as `file:line:text`.
+values, and the hex check also matches issue references such as `#1234`),
+but each one needs a reason. They look only at the lines the change adds,
+printed as `file:line:text`, and need bash, not POSIX `sh`.
 
-```sh
+```bash
 BASE=main  # the branch the change will merge into
 added() {
   git diff -U0 --diff-filter=d "$BASE" -- "$@" | awk '
@@ -17,7 +19,8 @@ added() {
 
 # Web: raw colours, off-scale pixels, hand-written shadows and timing.
 WEB=('*.css' '*.scss' '*.ts' '*.tsx' '*.svelte')
-added "${WEB[@]}" | grep -E '#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\('
+added "${WEB[@]}" | grep -E \
+  '(^|[^&[:alnum:]_])#([[:xdigit:]]{3,4}|[[:xdigit:]]{6}|[[:xdigit:]]{8})\b|rgba?\(|hsla?\('
 # 18 and 20 are icon sizes, so they pass here. Radii 26, 28 and 38 are
 # platform radii and need a reason.
 added "${WEB[@]}" | awk -F: '{
@@ -32,8 +35,11 @@ added "${WEB[@]}" | grep -E 'box-shadow:' | grep -v 'var(--leo-effect'
 added "${WEB[@]}" | grep -E '(transition|animation)[^;]*[0-9.]+m?s\b' \
   | grep -v 'var(--leo-duration'
 
-# Web: variables that do not exist in Leo (run from the project root).
+# Web: variables that do not exist in Leo. In a project that depends on
+# @brave/leo, run its leo-check bin from the project root. In this repo,
+# run the script directly.
 npx leo-check
+node src/scripts/audit-tokens.js
 
 # Desktop native views: literal colours instead of nala::kColor* ids.
 added '*.cc' '*.h' | grep -E 'SkColorSetA?RGB|SK_Color[A-Z]'
