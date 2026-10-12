@@ -153,6 +153,9 @@ pnpm run storybook  # Storybook on :6006
 pnpm run test       # jest
 pnpm run check      # svelte-check + event audit
 pnpm run format     # prettier
+pnpm run format-diff  # list files prettier would change
+pnpm run build-storybook  # static Storybook build
+node src/scripts/audit-tokens.js  # fail on --leo-* variables that do not exist
 ```
 
 ## Using Leo in a product
@@ -183,10 +186,14 @@ token its own way, for example `color-text-primary` is:
   code reference Nala tokens directly and do not add aliases.
 - **No raw values.** No hex colours, hand-written shadows or timing, and
   nothing off Leo's scales:
-  - spacing: `spacing-xs` 2, `s` 4, `m` 8, `l` 12, `xl` 16, `2xl` 24,
-    `3xl` 32, `4xl` 40, `5xl` 48, `6xl` 64, `7xl` 80, `8xl` 96, `9xl` 160
+  - spacing: `spacing-none` 0, `xs` 2, `s` 4, `m` 8, `l` 12, `xl` 16,
+    `2xl` 24, `3xl` 32, `4xl` 40, `5xl` 48, `6xl` 64, `7xl` 80, `8xl` 96,
+    `9xl` 160
   - radius: `radius-2xs` 1, `xs` 2, `s` 4, `m` 8, `l` 12, `xl` 16,
-    `xxl` 24, `full`
+    `xxl` 24, `full`, plus the platform radii `radius-android-dialog` 28,
+    `radius-android-list-group` 20, `radius-ios-modals` 38,
+    `radius-ios-settings-groups` 26 and the `radius-browserwindow-*` and
+    `radius-browsercontent-*` window corners
   - icon size: `icon-xs` 16, `s` 18, `m` 20, `l` 24, `xl` 32
 
   A 1px hairline border is the one allowed literal. On platforms where
@@ -273,8 +280,8 @@ Motion explains what changed. It is never decoration.
 | Token         | Value | Use                                                             |
 | ------------- | ----- | --------------------------------------------------------------- |
 | `duration-xs` | 50ms  | Hover, press and toggle. Also the reduced-motion replacement.   |
-| `duration-s`  | 100ms | Small changes, menus, tooltips, popovers.                       |
-| `duration-m`  | 200ms | Menus, popovers, panels.                                        |
+| `duration-s`  | 100ms | Small changes, tooltips, small menus and popovers.              |
+| `duration-m`  | 200ms | Larger menus and popovers, small panels.                        |
 | `duration-l`  | 300ms | Panels, sheets, page transitions. The longest routine duration. |
 | `duration-xl` | 500ms | Not an animation length. The delay before a loading indicator.  |
 
@@ -314,8 +321,8 @@ Motion explains what changed. It is never decoration.
 easing-out` with `PathInterpolator(0f, 0f, 0.58f, 1f)` on Android, or
   `.timingCurve(0, 0, 0.58, 1, duration: 0.1)` on iOS.
 - **Size the motion to the change.** Hover, press and toggle use `xs` or
-  `s`. Menus, tooltips and popovers use `s` or `m`. Panels, sheets and page
-  transitions use `m` or `l`. Leaving is quicker than entering, so give an
+  `s`. Tooltips and small menus and popovers use `s`, larger ones use `m`.
+  Panels, sheets and page transitions use `m` or `l`. Leaving is quicker than entering, so give an
   exit the shorter duration.
 - **Animate opacity and transform,** not width, height, top or left, so
   motion never drops frames or shifts layout.
@@ -408,15 +415,14 @@ This describes [brave-core](https://github.com/brave/brave-core).
   its source is not baseline or grayscale), it generates a Material
   tonal palette from that seed, using the scheme variant and defaulting to
   tonal spot. Otherwise it uses Brave's baseline, a copy of Leo's
-  primitives. I compared the baseline with Leo's primitives and the 100
-  shared tones match. So with the default theme the colours are exactly
-  Leo's, and with an accent theme the same tones come from the user's
-  palette.
+  primitives. The baseline matches Leo's primitives on all 100 shared
+  tones. So with the default theme the colours are exactly Leo's, and with
+  an accent theme the same tones come from the user's palette.
 - Light and dark come from `key.color_mode`, which picks the matching
   branch in the mixer.
 
-**What follows the theme.** I traced every alias in the generated mixer.
-Semantic colours built on dynamic primitives follow the user's theme:
+**What follows the theme.** In the generated mixer, semantic colours built
+on dynamic primitives follow the user's theme:
 `text-*`, `icon-*`, `divider-*`, `container-*`, `page-background`,
 `button-background`, `button-disabled` and all the `desktopbrowser-*`
 colours for the tab strip, toolbar, omnibar and menus. These stay fixed:
@@ -458,8 +464,7 @@ colours for the tab strip, toolbar, omnibar and menus. These stay fixed:
   `SchemeVariant::kDarker`, postprocessing mixers push the location bar,
   omnibox and tabs to near black whatever the accent. Check new colours
   there too.
-- **WebUI is different.** In the code I checked, WebUI pages use Leo's CSS
-  variables, which switch between light and dark only. They pick up an
+- **WebUI is different.** WebUI pages use Leo's CSS variables, which switch between light and dark only. They pick up an
   accent only where they load `chrome://theme/colors.css` (the welcome page
   preview does).
 
@@ -583,10 +588,9 @@ colors.
 
 ### Beyond tokens: product rules
 
-These come from the Brave product design guidelines
-([product-design.md](https://github.com/aguscruiz/brave-design/blob/main/product-design.md)),
-which cover writing, privacy and AI surfaces in full. Where a repository's
-guidelines are more specific, follow the repository.
+These are the product-level rules for interaction, writing, privacy and AI
+surfaces. Where a repository's guidelines are more specific, follow the
+repository.
 
 #### Principles
 
@@ -667,30 +671,46 @@ guidelines are more specific, follow the repository.
 ### Checks you can run
 
 A match is not always wrong (a token file legitimately contains hex
-values), but each one needs a reason. Run them on the files the change
-touches.
+values), but each one needs a reason. They look only at the lines the
+change adds, printed as `file:line:text`.
 
 ```sh
 BASE=main  # the branch the change will merge into
-changed() { git diff --name-only "$BASE" -- "$@"; }
+added() {
+  git diff -U0 --diff-filter=d "$BASE" -- "$@" | awk '
+    /^\+\+\+ b\// { file = substr($0, 7); next }
+    /^@@/ { match($0, /\+[0-9]+/); line = substr($0, RSTART + 1, RLENGTH - 1); next }
+    /^\+/ { print file ":" line ":" substr($0, 2); line++ }'
+}
 
-# Web: raw colours, off-scale pixels, hand-written shadows and timing, foreign icon sets.
+# Web: raw colours, off-scale pixels, hand-written shadows and timing.
 WEB=('*.css' '*.scss' '*.ts' '*.tsx' '*.svelte')
-changed "${WEB[@]}" | xargs grep -nE '#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\('
-changed "${WEB[@]}" | xargs grep -noE '\b[0-9]+px\b' \
-  | grep -vE ':(0|1|2|4|8|12|16|24|32|40|48|64|80|96|160)px$'
-changed "${WEB[@]}" | xargs grep -nE 'box-shadow:' | grep -v 'var(--leo-effect'
-changed "${WEB[@]}" | xargs grep -nE '(transition|animation)[^;]*[0-9.]+m?s\b' \
+added "${WEB[@]}" | grep -E '#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\('
+# 18 and 20 are icon sizes, so they pass here. Radii 26, 28 and 38 are
+# platform radii and need a reason.
+added "${WEB[@]}" | awk -F: '{
+  t = $0; sub(/^[^:]*:[^:]*:/, "", t)
+  while (match(t, /[0-9.]*[0-9]px/)) {
+    v = substr(t, RSTART, RLENGTH - 2); t = substr(t, RSTART + RLENGTH)
+    if (v !~ /^(0|1|2|4|8|12|16|18|20|24|32|40|48|64|80|96|160)$/)
+      print $1 ":" $2 ": " v "px"
+  }
+}'
+added "${WEB[@]}" | grep -E 'box-shadow:' | grep -v 'var(--leo-effect'
+added "${WEB[@]}" | grep -E '(transition|animation)[^;]*[0-9.]+m?s\b' \
   | grep -v 'var(--leo-duration'
 
+# Web: variables that do not exist in Leo (run from the project root).
+npx leo-check
+
 # Desktop native views: literal colours instead of nala::kColor* ids.
-changed '*.cc' '*.h' | xargs grep -nE 'SkColorSetA?RGB|SK_Color[A-Z]'
+added '*.cc' '*.h' | grep -E 'SkColorSetA?RGB|SK_Color[A-Z]'
 
 # Android: literal colours and sizes in resources and layouts.
-changed '*.xml' | xargs grep -nE '"#[0-9a-fA-F]{6,8}"|"[0-9]+(dp|sp)"'
+added '*.xml' | grep -E '"#[0-9a-fA-F]{6,8}"|"[0-9]+(dp|sp)"'
 
 # iOS: literal colours and font sizes.
-changed '*.swift' | xargs grep -nE 'Color\(red:|UIColor\(red:|\.system\(size:'
+added '*.swift' | grep -E 'Color\(red:|UIColor\(red:|\.system\(size:'
 ```
 
 On Android, a `dp` match is fine in the product's one dimens file. For web
