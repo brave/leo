@@ -164,8 +164,6 @@ Read the one that matches the work. Each builds on the rules in this file.
   colour in brave-core.
 - [docs/product-rules.md](docs/product-rules.md): interaction, writing,
   privacy, and agent and AI surfaces.
-- [docs/checks.md](docs/checks.md): greps and accessibility checks to run
-  before calling a change done.
 
 ## Using Leo in a product
 
@@ -323,5 +321,4 @@ repository.
   translated text 30–40% longer than English.
 - **Before calling a change done,** check it in Storybook in light and
   dark, with keyboard only, with reduced motion and forced colours, and in
-  an RTL direction, run the checks in [docs/checks.md](docs/checks.md),
-  and list anything you could not check in the PR.
+  an RTL direction, and list anything you could not check in the PR.
