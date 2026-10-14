@@ -41,8 +41,26 @@
       },
       '--leo-bottomsheet-expanded-max-height': {
         type: 'string',
+        description: 'Height when expanded (default: 100dvh)'
+      },
+      '--leo-bottomsheet-backdrop-background': {
+        type: 'string',
+        control: 'color',
+        description: 'Backdrop colour (default: dialogs-scrim-background)'
+      },
+      '--leo-bottomsheet-stacked-backdrop-filter': {
+        type: 'string',
         description:
-          'Max height when expanded via drag (default: 100dvh)'
+          'Backdrop filter on sheets behind the front one (default: blur(8px))'
+      },
+      label: {
+        type: 'string',
+        description: 'Accessible name for the sheet'
+      },
+      expandLabel: {
+        type: 'string',
+        description:
+          'Accessible name for the handle, which toggles expansion when dragToExpand is set'
       },
       isOpen: {
         control: 'none'
@@ -50,7 +68,7 @@
       dragToExpand: {
         type: 'boolean',
         description:
-          'When true, dragging the handle up expands the sheet to full viewport height'
+          'When true, dragging the handle up, flicking it, or activating it expands the sheet to full viewport height'
       }
     }
   }
@@ -77,7 +95,7 @@
 
 <Template let:args>
   <Button onClick={() => (isOpen = true)}>Open Bottom Sheet</Button>
-  <BottomSheet {...args} bind:isOpen onClose={() => (isOpen = false)}>
+  <BottomSheet {...args} label="Bottom sheet" bind:isOpen onClose={() => (isOpen = false)}>
     <leo-title>Section title</leo-title>
     <leo-menu-section>
       <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
@@ -126,6 +144,8 @@
   <BottomSheet
     {...args}
     dragToExpand
+    label="Expandable sheet"
+    expandLabel="Expand sheet"
     isOpen={expandableOpen}
     onClose={() => (expandableOpen = false)}
   >
@@ -172,6 +192,7 @@
   <Button onClick={() => (sectionsOpen = true)}>Open Sectioned Sheet</Button>
   <BottomSheet
     {...args}
+    label="Sectioned sheet"
     isOpen={sectionsOpen}
     onClose={() => (sectionsOpen = false)}
   >
@@ -244,6 +265,7 @@
   <Button onClick={() => (scrollableOpen = true)}>Open Scrollable Sheet</Button>
   <BottomSheet
     {...args}
+    label="Scrollable sheet"
     isOpen={scrollableOpen}
     onClose={() => (scrollableOpen = false)}
   >
@@ -326,6 +348,7 @@
   <Button onClick={() => (stackedSheet1 = true)}>Open Stacked Sheets</Button>
   <BottomSheet
     {...args}
+    label="First sheet"
     isOpen={stackedSheet1}
     onClose={() => (stackedSheet1 = false)}
   >
@@ -382,6 +405,7 @@
   </BottomSheet>
   <BottomSheet
     {...args}
+    label="Second sheet"
     isOpen={stackedSheet2}
     onClose={() => (stackedSheet2 = false)}
   >
@@ -421,6 +445,7 @@
   </BottomSheet>
   <BottomSheet
     {...args}
+    label="Third sheet"
     isOpen={stackedSheet3}
     onClose={() => (stackedSheet3 = false)}
   >
@@ -460,6 +485,7 @@
       <Button onClick={() => (slotsOpen = true)}>Open Bottom Sheet</Button>
       <BottomSheet
         {...args}
+        label="Bottom sheet"
         isOpen={slotsOpen}
         onClose={() => (slotsOpen = false)}
       >
