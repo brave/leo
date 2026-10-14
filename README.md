@@ -1,5 +1,7 @@
 # Leo - Brave's Design System
 
+**For AI agents:** read [AGENTS.md](AGENTS.md) first. It covers how to use Leo's tokens, components and icons when building a Brave surface, and the rules for changing Leo itself. It links to guides in [docs/](docs/) for motion, desktop and Android browser surfaces, product rules and checks.
+
 ## Tokens
 
 The tokens part of this package is supposed to be used together with the [Design Tokens plugin for Figma](https://github.com/lukasoppermann/design-tokens).
