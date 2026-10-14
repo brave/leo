@@ -1,4 +1,6 @@
-import { StringWithAutoComplete } from '../src/types/string'
+// Inlined (rather than imported from src/types/string) so this file is
+// self-contained in the published package.
+type StringWithAutoComplete<T> = T | (string & Record<never, never>)
 
 declare const meta: {
   "updatedAt": 1790929833184,

@@ -1,0 +1,271 @@
+name: Publish
+on:
+  push:
+    branches: [main]
+    paths: [package.json]
+  workflow_dispatch:
+
+# Privileges are granted per job. Dependency install and build run in a job
+# with read-only access; only the final job, which never installs or runs
+# third-party code, can mint an npm OIDC token or write to the repo.
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      name: ${{ steps.check.outputs.name }}
+      version: ${{ steps.check.outputs.version }}
+      tag: ${{ steps.check.outputs.tag }}
+      published: ${{ steps.check.outputs.published }}
+      target: ${{ steps.target.outputs.target }}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+          # Full history to find the commit that bumped the version.
+          fetch-depth: 0
+
+      - name: Check whether version is already published
+        id: check
+        run: |
+          NAME="$(node -p "require('./package.json').name")"
+          VERSION="$(node -p "require('./package.json').version")"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::package.json version '$VERSION' is not X.Y.Z"
+            exit 1
+          fi
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "$NAME@$VERSION is already on npm; skipping publish."
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # The tag, release and package must all come from the commit that bumped
+      # package.json to this version, not whatever main is now. They differ on
+      # a workflow_dispatch run after newer commits have landed.
+      - name: Find release commit
+        id: target
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+          PUBLISHED: ${{ steps.check.outputs.published }}
+        run: |
+          version_at() {
+            git show "$1:package.json" 2>/dev/null \
+              | node -p 'JSON.parse(require("fs").readFileSync(0, "utf-8")).version' 2>/dev/null \
+              || true
+          }
+
+          # Walk main's first-parent history (merge commits, not PR-branch
+          # commits) back to the oldest commit in the current run of $VERSION.
+          TARGET=""
+          for c in $(git log --first-parent --format=%H HEAD -- package.json); do
+            if [ "$(version_at "$c")" != "$VERSION" ]; then
+              break
+            fi
+            TARGET="$c"
+            if [ "$(version_at "$c^")" != "$VERSION" ]; then
+              break
+            fi
+          done
+
+          if [ -z "$TARGET" ]; then
+            echo "::error::Can't find the commit that bumped package.json to $VERSION. Create the tag and release manually."
+            exit 1
+          fi
+          if [ "$TARGET" != "$GITHUB_SHA" ]; then
+            echo "::notice::Releasing $VERSION from $TARGET (bump commit), not $GITHUB_SHA."
+          fi
+          echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+
+          # Pull this version's section out of CHANGELOG.md at the release
+          # commit, so the notes match the published package even if a later
+          # commit edited the changelog.
+          mkdir -p "$RUNNER_TEMP/notes"
+          NOTES="$RUNNER_TEMP/notes/release-notes.md"
+          git show "$TARGET:CHANGELOG.md" | awk -v v="$VERSION" '
+            $0 == "## " v { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' > "$NOTES"
+
+          # Fail before publishing, while it's still cheap to fix.
+          if [ "$PUBLISHED" = "false" ] && ! grep -q '[^[:space:]]' "$NOTES"; then
+            echo "::error::CHANGELOG.md has no entry for $VERSION at $TARGET"
+            exit 1
+          fi
+
+      - name: Upload release notes
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}/notes/release-notes.md
+          if-no-files-found: error
+          retention-days: 1
+
+  build:
+    needs: check
+    if: needs.check.outputs.published == 'false'
+    runs-on: ubuntu-latest
+    # Runs dependency lifecycle scripts, so it gets no write or OIDC access.
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ needs.check.outputs.target }}
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
+          # Please check with Brave's security team prior to adding any packages to that list.
+
+      - name: Pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/pack"
+          pnpm pack --pack-destination "$RUNNER_TEMP/pack"
+
+      - name: Upload package
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: package
+          path: ${{ runner.temp }}/pack/*.tgz
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: [check, build]
+    # Still run when build was skipped (already published) so a missing tag or
+    # release from a previous failed run gets created.
+    if: >-
+      !cancelled()
+      && needs.check.result == 'success'
+      && (needs.build.result == 'success' || needs.build.result == 'skipped')
+    runs-on: ubuntu-latest
+    # Never installs dependencies or runs repo/package scripts.
+    permissions:
+      contents: write # create tag + GitHub release
+      id-token: write # npm trusted publishing (OIDC)
+      actions: write # dispatch Prepare Release after tagging
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+          # package.json only for pnpm/action-setup's `packageManager` pin.
+          sparse-checkout: |
+            .node-version
+            package.json
+          sparse-checkout-cone-mode: false
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          run_install: false
+
+      # No dependency cache here: restoring a cache into this job would let
+      # anything that can write the cache influence a privileged job.
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Download release notes
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}/notes
+
+      - name: Download package
+        if: needs.check.outputs.published == 'false'
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        with:
+          name: package
+          path: ${{ runner.temp }}/pack
+
+      - name: Publish
+        if: needs.check.outputs.published == 'false'
+        env:
+          NAME: ${{ needs.check.outputs.name }}
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          shopt -s nullglob
+          TARBALLS=("$RUNNER_TEMP"/pack/*.tgz)
+          if [ "${#TARBALLS[@]}" -ne 1 ]; then
+            echo "::error::expected exactly one tarball, found ${#TARBALLS[@]}"
+            exit 1
+          fi
+          TARBALL="${TARBALLS[0]}"
+
+          # Make sure the artifact is the package and version we checked.
+          PKG="$(tar -xOzf "$TARBALL" package/package.json)"
+          GOT_NAME="$(node -p 'JSON.parse(process.argv[1]).name' "$PKG")"
+          GOT_VERSION="$(node -p 'JSON.parse(process.argv[1]).version' "$PKG")"
+          if [ "$GOT_NAME" != "$NAME" ] || [ "$GOT_VERSION" != "$VERSION" ]; then
+            echo "::error::tarball is $GOT_NAME@$GOT_VERSION, expected $NAME@$VERSION"
+            exit 1
+          fi
+
+          # Publishing a prebuilt tarball doesn't rebuild, and the packed
+          # manifest has no publish lifecycle scripts to run.
+          pnpm publish "$TARBALL" --no-git-checks --access public
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.check.outputs.tag }}
+          TARGET: ${{ needs.check.outputs.target }}
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          NOTES="$RUNNER_TEMP/notes/release-notes.md"
+          # Each step below is safe to repeat, so re-running after a partial
+          # failure finishes whatever the previous run didn't.
+
+          # gh ignores --target if the tag already exists, so check it ourselves.
+          if TAG_SHA="$(gh api "repos/$GH_REPO/commits/$TAG" --jq .sha 2>/dev/null)" \
+            && [ "$TAG_SHA" != "$TARGET" ]; then
+            echo "::error::Tag $TAG points at $TAG_SHA, expected $TARGET"
+            exit 1
+          fi
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping create."
+          else
+            if ! grep -q '[^[:space:]]' "$NOTES"; then
+              echo "::warning::CHANGELOG.md has no entry for $VERSION; using placeholder release notes."
+              echo "See CHANGELOG.md." > "$NOTES"
+            fi
+            gh release create "$TAG" \
+              --target "$TARGET" \
+              --title "$TAG" \
+              --notes-file "$NOTES"
+          fi
+
+          # Commits pushed while this ran were skipped by Prepare Release
+          # (no tag yet); kick it now so the next release PR picks them up.
+          # Runs even when the release already existed, in case a previous run
+          # failed here.
+          gh workflow run prepare-release.yml --ref main

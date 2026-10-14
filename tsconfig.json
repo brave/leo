@@ -8,9 +8,9 @@
     "lib": ["ES2022"],
     "types": ["node"],
     "paths": {
-      // Sometimes we want to preserve @brave/leo for complex paths when providing
+      // Sometimes we want to preserve @brave/nala for complex paths when providing
       // typescript types for the consumer.
-      "@brave/leo/*": ["./*"]
+      "@brave/nala/*": ["./*"]
     }
   }
 }

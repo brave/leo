@@ -1,4 +1,3 @@
-.DS_Store
 .vscode
 node_modules/
 /build/
@@ -6,9 +5,25 @@ node_modules/
 /icons-sf
 /icons-skia
 /react/
+/svelte/
 /shared/
 /storybook-static/
 /storyHelpers/
 /tokens/
 /types/
 /web-components/
+
+# Output
+.output
+/.svelte-kit
+/*.tgz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test

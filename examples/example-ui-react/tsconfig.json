@@ -9,7 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "node",
     "paths": {
-      "@brave/leo/*": ["../../*"]
+      "@brave/nala/*": ["../../*"]
     },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
