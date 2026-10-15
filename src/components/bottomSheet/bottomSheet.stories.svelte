@@ -98,35 +98,35 @@
   <BottomSheet {...args} label="Bottom sheet" bind:isOpen onClose={() => (isOpen = false)}>
     <leo-title>Section title</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -151,21 +151,21 @@
   >
     <leo-title>Drag up to expand</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 1</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 2</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 3</span>
@@ -176,7 +176,7 @@
     <leo-title>More content</leo-title>
     <leo-menu-section>
       {#each Array(12) as _, i}
-        <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+        <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
           <div class="item">
             <Icon name="info-outline" />
             <span>Scrollable item {i + 1}</span>
@@ -198,21 +198,21 @@
   >
     <leo-title>Section title</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -222,35 +222,35 @@
     </leo-menu-section>
     <leo-title>Section title</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -271,14 +271,14 @@
   >
     <leo-title>Fixed Section</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Settings</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Account</span>
@@ -288,42 +288,42 @@
     </leo-menu-section>
     <leo-title>Scrollable Section</leo-title>
     <leo-menu-section style="--leo-menu-section-max-height: 200px;">
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 1</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 2</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 3</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 4</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 5</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Item 6</span>
@@ -333,7 +333,7 @@
     </leo-menu-section>
     <leo-title>Another Section</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Help</span>
@@ -358,9 +358,6 @@
         on:click={() => {
           stackedSheet2 = true
         }}
-        on:keydown={() => {
-          stackedSheet2 = true
-        }}
         role="menuitem" tabindex="0"
         data-is-interactive="true"
       >
@@ -370,14 +367,14 @@
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -387,14 +384,14 @@
     </leo-menu-section>
     <leo-title>Section title</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -415,9 +412,6 @@
         on:click={() => {
           stackedSheet3 = true
         }}
-        on:keydown={() => {
-          stackedSheet3 = true
-        }}
         role="menuitem" tabindex="0"
         data-is-interactive="true"
       >
@@ -427,14 +421,14 @@
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -451,21 +445,21 @@
   >
     <leo-title>Third Sheet</leo-title>
     <leo-menu-section>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
           <Icon name="carat-right" />
         </div>
       </leo-menu-item>
-      <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+      <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
         <div class="item">
           <Icon name="info-outline" />
           <span>Text</span>
@@ -491,14 +485,14 @@
       >
         <leo-title>Section title</leo-title>
         <leo-menu-section>
-          <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+          <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
             <div class="item">
               <Icon name="info-outline" />
               <span>Copy</span>
               <Icon name="carat-right" />
             </div>
           </leo-menu-item>
-          <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+          <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
             <div class="item">
               <Icon name="info-outline" />
               <span>Share</span>
@@ -508,7 +502,7 @@
         </leo-menu-section>
         <leo-title>More actions</leo-title>
         <leo-menu-section>
-          <leo-menu-item on:click={handleAction} on:keydown={handleAction} role="menuitem" tabindex="0">
+          <leo-menu-item on:click={handleAction} role="menuitem" tabindex="0">
             <div class="item">
               <Icon name="info-outline" />
               <span>Delete</span>

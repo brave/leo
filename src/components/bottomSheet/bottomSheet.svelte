@@ -15,8 +15,8 @@
 
   let nextId = 0
   const sheetStack = writable<number[]>([])
-  /** Top sheet id while its dismiss animation runs; stack depth uses a compressed stack. */
-  const dismissingSheetId = writable<number | null>(null)
+  /** Sheets running their dismiss animation; stack depth leaves them out. */
+  const dismissingSheetIds = writable<number[]>([])
   const sheetHeights = writable<Record<number, number>>({})
   /** Host overflow captured when the first sheet opens; restored when the stack empties. */
   let savedBodyOverflow: string | null = null
@@ -104,6 +104,8 @@
   let sheetEl: HTMLDivElement
   let contentEl: HTMLDivElement
   let backdropEl: HTMLDivElement
+  /** Stays true after `isOpen` turns false, until the dismiss animation ends. */
+  let rendered = false
   let showBackdrop = false
   let backdropClosing = false
   let dismissing = false
@@ -129,8 +131,12 @@
   $: atFullHeight =
     isExpanded || (dragHeight != null && dragHeight >= getViewportHeight() - 1)
 
-  $: if (isOpen) {
-    dismissing = false
+  $: if (isOpen) rendered = true
+
+  // A parent closing the sheet directly gets the same exit as close().
+  $: if (!isOpen && rendered && !dismissing) void dismiss()
+
+  $: if (rendered) {
     sheetStack.update((s) => (s.includes(id) ? s : [...s, id]))
   } else {
     isExpanded = false
@@ -150,14 +156,13 @@
       syncBodyScrollLock(next.length > 0)
       return next
     })
-    if ($dismissingSheetId === id) dismissingSheetId.set(null)
+    dismissingSheetIds.update((ids) => ids.filter((sid) => sid !== id))
   })
 
   $: stackIndex = $sheetStack.indexOf(id)
-  $: effectiveStack =
-    $dismissingSheetId != null
-      ? $sheetStack.filter((sid) => sid !== $dismissingSheetId)
-      : $sheetStack
+  $: effectiveStack = $sheetStack.filter(
+    (sid) => !$dismissingSheetIds.includes(sid)
+  )
   $: effectiveIndex = effectiveStack.indexOf(id)
   $: fullDepthBehind =
     stackIndex === -1 ? 0 : $sheetStack.length - 1 - stackIndex
@@ -169,19 +174,19 @@
     $sheetHeights[effectiveStack[effectiveStack.length - 1]] ?? 0
   $: ownHeight = $sheetHeights[id] ?? 0
   $: isBottomOfStack = stackIndex === 0
-  $: stackAnimating = $dismissingSheetId != null
+  $: stackAnimating = $dismissingSheetIds.length > 0
 
   // Reads the store directly: when one sheet opens another, the opener's
   // reactive state can lag behind the stack within the same update.
   function isTop() {
-    return isOpen && $sheetStack[$sheetStack.length - 1] === id
+    return rendered && $sheetStack[$sheetStack.length - 1] === id
   }
 
-  $: if (isOpen && isBottomOfStack) {
+  $: if (rendered && isBottomOfStack) {
     showBackdrop = true
   }
 
-  $: if (!isOpen && showBackdrop && !dismissing && !backdropClosing) {
+  $: if (!rendered && showBackdrop && !backdropClosing) {
     void fadeBackdropAndHide()
   }
 
@@ -214,40 +219,56 @@
   }
 
   function close() {
+    void dismiss(false)
+  }
+
+  async function dismiss(fromParent = true) {
     if (dismissing) return
     if (!sheetEl) {
-      isOpen = false
-      onClose?.()
+      rendered = false
+      if (!fromParent) finishClose()
       return
     }
-    const compressStack = isTop() && $sheetStack.length > 1
-    if (compressStack) dismissingSheetId.set(id)
-
     dismissing = true
+    dismissingSheetIds.update((ids) => [...ids, id])
+
     const { reduced, duration, easing } = sheetMotion(
       '--leo-duration-m',
       '--leo-easing-in'
     )
+    // Starts from the current transform, which may be a drag or stack offset.
+    const from = getComputedStyle(sheetEl).transform
     const keyframes = reduced
       ? [{ opacity: 1 }, { opacity: 0 }]
       : [
-          { transform: `translateY(${dragTranslateY}px)` },
+          { transform: from === 'none' ? 'translateY(0)' : from },
           { transform: `translateY(${sheetEl.offsetHeight}px)` }
         ]
     const fadeBackdrop = isBottomOfStack && showBackdrop
-    const animations: Promise<unknown>[] = [
-      sheetEl.animate(keyframes, { duration, easing, fill: 'forwards' })
-        .finished
-    ]
-    if (fadeBackdrop) animations.push(fadeBackdropOut())
+    // A cancelled animation rejects; the sheet still has to finish closing.
+    await Promise.all([
+      sheetEl
+        .animate(keyframes, { duration, easing, fill: 'forwards' })
+        .finished.catch(() => undefined),
+      fadeBackdrop ? fadeBackdropOut() : undefined
+    ])
 
-    Promise.all(animations).then(() => {
-      dismissing = false
-      if (compressStack) dismissingSheetId.set(null)
-      if (fadeBackdrop) showBackdrop = false
-      isOpen = false
-      onClose?.()
-    })
+    dismissing = false
+    dismissingSheetIds.update((ids) => ids.filter((sid) => sid !== id))
+    if (fadeBackdrop) showBackdrop = false
+    rendered = false
+    if (!fromParent) {
+      finishClose()
+      return
+    }
+    // Reopened by the parent while closing.
+    await tick()
+    if (isOpen) rendered = true
+  }
+
+  function finishClose() {
+    isOpen = false
+    onClose?.()
   }
 
   // Only a press that starts outside the open sheet closes it, so the click
@@ -295,6 +316,8 @@
       return
     }
 
+    if (isEditable(e)) return
+
     let dir = 0
     if (e.code === 'ArrowUp') dir = -1
     if (e.code === 'ArrowDown') dir = 1
@@ -314,6 +337,25 @@
 
     items[focusedIndex]?.focus()
     e.preventDefault()
+  }
+
+  function isEditable(e: Event) {
+    const target = e.composedPath()[0] as HTMLElement
+    return (
+      target?.isContentEditable ||
+      !!target?.matches?.('input, textarea, select')
+    )
+  }
+
+  // Menu items are custom elements with no native activation, so Enter and
+  // Space click them, as `menu.svelte` does.
+  function handleItemKeydown(e: KeyboardEvent) {
+    if (e.key !== 'Enter' && e.key !== ' ') return
+    const target = e.composedPath()[0]
+    const item = getItems().find((el) => el === target)
+    if (!item) return
+    e.preventDefault()
+    item.click()
   }
 
   function handleItemClick(e: MouseEvent) {
@@ -542,7 +584,7 @@
     bind:this={backdropEl}
   ></div>
 {/if}
-{#if isOpen}
+{#if rendered}
   <div
     class="leo-bottomsheet"
     class:is-behind={depthBehind > 0}
@@ -602,6 +644,7 @@
       bind:this={contentEl}
       use:trackMenuItems
       on:click={handleItemClick}
+      on:keydown={handleItemKeydown}
     >
       <slot />
     </div>
