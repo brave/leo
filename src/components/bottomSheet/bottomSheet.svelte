@@ -127,6 +127,8 @@
   /** How far the sheet is pulled below its resting position. */
   let dragTranslateY = 0
   let pressStartedOutside = false
+  /** True while a Tab key press is moving focus. */
+  let tabbing = false
 
   $: atFullHeight =
     isExpanded || (dragHeight != null && dragHeight >= getViewportHeight() - 1)
@@ -285,8 +287,10 @@
     if (!e.composedPath().includes(sheetEl)) close()
   }
 
+  // Only Tab is trapped, so code can still move focus to a toast, another
+  // dialog or an extension while the sheet is open.
   function handleWindowFocusIn(e: FocusEvent) {
-    if (!isTop() || !sheetEl || dismissing) return
+    if (!tabbing || !isTop() || !sheetEl || dismissing) return
     if (!e.composedPath().includes(sheetEl)) sheetEl.focus({ preventScroll: true })
   }
 
@@ -310,7 +314,13 @@
   function handleKeydown(e: KeyboardEvent) {
     if (!isTop()) return
 
-    if (e.code === 'Escape' && escapeCloses) {
+    if (e.key === 'Tab') {
+      tabbing = true
+      setTimeout(() => (tabbing = false))
+      return
+    }
+
+    if (e.key === 'Escape' && escapeCloses) {
       e.preventDefault()
       close()
       return
@@ -319,8 +329,8 @@
     if (isEditable(e)) return
 
     let dir = 0
-    if (e.code === 'ArrowUp') dir = -1
-    if (e.code === 'ArrowDown') dir = 1
+    if (e.key === 'ArrowUp') dir = -1
+    if (e.key === 'ArrowDown') dir = 1
     if (dir === 0) return
 
     const items = getItems()
@@ -497,7 +507,8 @@
         { duration, easing, fill: 'forwards' }
       )
       await animation.finished.catch(() => undefined)
-      settle()
+      // A close started during the snap; changing height now would jump.
+      if (!dismissing) settle()
       await tick()
       animation.cancel()
     }
@@ -814,6 +825,7 @@
 
   .leo-bottomsheet-content {
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
@@ -891,6 +903,7 @@
     max-height: var(--leo-menu-section-max-height, none);
     overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(
       --leo-bottomsheet-group-background,
       var(--leo-color-container-background)
