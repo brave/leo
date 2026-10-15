@@ -7,6 +7,12 @@ import '@fontsource/poppins/600.css'
 import '@fontsource-variable/inter'
 
 export const parameters = {
+  options: {
+    storySort: {
+      method: 'alphabetical',
+      order: ['Tokens', 'Components']
+    }
+  },
   controls: {
     expanded: true,
     matchers: {
