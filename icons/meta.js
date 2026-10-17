@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1790929833184,
+  "updatedAt": 1792225359573,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -1258,7 +1258,9 @@ export default {
     "leo-cursor-filled": "leo-cursor-filled",
     "leo-cursor": "leo-cursor",
     "leo-local": "leo-local",
+    "leo-project-move": "leo-project-move",
     "leo-project-new": "leo-project-new",
+    "leo-project-remove": "leo-project-remove",
     "leo-project": "leo-project",
     "leo-tasks": "leo-tasks",
     "leo-voice-input": "leo-voice-input",
@@ -1747,6 +1749,7 @@ export default {
     "ripio-color": "ripio-color",
     "rise-color": "rise-color",
     "rlc-color": "rlc-color",
+    "robot-alternative": "robot-alternative",
     "robot": "robot",
     "rocket": "rocket",
     "rolodex": "rolodex",
