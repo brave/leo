@@ -48,7 +48,7 @@
     "rollup": "3.30.0",
     "rollup-plugin-svelte": "7.2.3",
     "sass": "1.105.1",
-    "storybook": "8.6.18",
+    "storybook": "8.6.19",
     "style-dictionary": "3.9.2",
     "style-loader": "3.3.4",
     "svelte-check": "4.7.6",
@@ -59,7 +59,7 @@
     "ts-jest": "29.4.14",
     "tsx": "4.23.15",
     "undici": "7.30.0",
-    "vite": "6.4.3"
+    "vite": "6.4.4"
   },
   "peerDependencies": {
     "@material/material-color-utilities": ">= 0.2.7",
