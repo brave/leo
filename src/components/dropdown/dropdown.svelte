@@ -72,6 +72,7 @@
     <slot name="label" slot="label" />
     <slot name="left-icon" slot="left-icon" />
     <button
+      type="button"
       bind:this={button}
       class="click-target"
       {disabled}
