@@ -153,7 +153,7 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
-          token: ${{ secrets.LEO_UPDATE_ICONS_PAT }}
+          token: ${{ secrets.BRAVE_WORKFLOWS_AUTHOR_PR_PAT }}
           branch: ${{ env.BRANCH }}
           base: main
           add-paths: |
