@@ -136,6 +136,10 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Format changes
+        if: steps.changes.outputs.changed == 'true'
+        run: pnpm run format
+
       # main requires signed commits. Same bot identity and key as
       # update-icons.yml.
       - name: Configure GPG
