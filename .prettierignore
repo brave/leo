@@ -7,6 +7,7 @@ pnpm-*
 /examples/plain-html/
 /examples/example-ui-react/public/icons/
 /icons/
+/CHANGELOG.md
 
 # The .tokens.json files should be ignored as they're generated from Figma.
 /src/tokens/*.tokens.json
