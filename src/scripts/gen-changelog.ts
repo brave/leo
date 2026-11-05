@@ -40,13 +40,12 @@ if (!body) {
   process.exit(0)
 }
 
-const newEntry = `## ${version}\n\n${body}\n`
+const newEntry = `## ${version}\n\n${body}`
 const existing = await fs.readFile(CHANGELOG_PATH, 'utf-8')
-const [heading, ...rest] = existing.split(/\n+?(?=## )/)
+const [heading, ...rest] = existing.split(/\n+(?=## )/)
 
-await fs.writeFile(
-  CHANGELOG_PATH,
-  [heading.trimEnd(), newEntry, ...rest].join('\n\n')
-)
+const sections = [heading, newEntry, ...rest].map((s: string) => s.trim())
+
+await fs.writeFile(CHANGELOG_PATH, sections.join('\n\n') + '\n')
 
 console.log(`Added changelog entry for ${version}`)
