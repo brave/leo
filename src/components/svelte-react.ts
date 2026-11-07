@@ -1,12 +1,10 @@
 import {
   createElement,
   useRef,
-  useEffect,
   forwardRef,
   useCallback,
   type ForwardedRef,
   type PropsWithChildren,
-  useState,
   type PropsWithoutRef,
   useLayoutEffect,
   type JSX
@@ -47,20 +45,26 @@ export type ReactProps<Props> = Props & {
 }
 
 const useEventHandlers = (props: any) => {
-  const [el, setEl] = useState<HTMLElement>()
+  const elRef = useRef<HTMLElement | undefined>(undefined)
   const lastValue = useRef<{ [key: string]: (...args: any[]) => any }>({})
 
   // Handle updating event listeners when props change
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const el = elRef.current
     if (!el) return
+
+    const currentEvents = new Set<string>()
+
     for (const [key, listener] of Object.entries(props) as [
       string,
       (...args: any[]) => any
     ][]) {
       const match = eventRegex.exec(key)
-      if (!match) continue
+      if (!match || !listener) continue
 
       const event = match[1].toLowerCase()
+      currentEvents.add(event)
+
       const oldListener = lastValue.current[event]
       if (listener === oldListener) continue
 
@@ -72,26 +76,24 @@ const useEventHandlers = (props: any) => {
     }
 
     // Remove any listeners which are no longer present
-    for (const removed of Object.keys(lastValue).filter(
-      (k) => !props[`on${k}`]
-    )) {
-      el.removeEventListener(removed, lastValue.current[removed])
-      delete lastValue.current[removed]
+    for (const [event, listener] of Object.entries(lastValue.current)) {
+      if (!currentEvents.has(event)) {
+        el.removeEventListener(event, listener)
+        delete lastValue.current[event]
+      }
     }
-  }, [props, el])
+  }, [props])
 
   const setElement = useCallback((el: HTMLElement | undefined) => {
-    lastValue.current = {}
-    setEl((oldValue) => {
-      if (oldValue) {
-        // Cleanup
-        for (const [event, listener] of Object.entries(lastValue.current)) {
-          oldValue.removeEventListener(event, listener)
-          delete lastValue.current[event]
-        }
+    if (elRef.current) {
+      // Cleanup
+      for (const [event, listener] of Object.entries(lastValue.current)) {
+        elRef.current.removeEventListener(event, listener)
+        delete lastValue.current[event]
       }
-      return el
-    })
+    }
+    lastValue.current = {}
+    elRef.current = el
   }, [])
 
   return {
