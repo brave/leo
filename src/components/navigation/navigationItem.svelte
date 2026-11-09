@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import type { SvelteHTMLElements } from 'svelte/elements'
-  import type { IconName } from '../../../icons/meta'
+  import type { IconName } from '@brave/nala/icons/meta'
   import Icon from '../icon/icon.svelte'
 
   // This black magic comes from this thread:
