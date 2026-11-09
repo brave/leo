@@ -15,6 +15,7 @@
     "types",
     "!types/**/*.stories.*",
     "icons",
+    "icons-skia",
     "src/scripts/audit-tokens.js",
     "src/scripts/common.js",
     "README.md",
