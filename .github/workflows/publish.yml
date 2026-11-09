@@ -230,7 +230,7 @@ jobs:
 
           # Publishing a prebuilt tarball doesn't rebuild, and the packed
           # manifest has no publish lifecycle scripts to run.
-          npm publish "$TARBALL" --provenance --access public
+          pnpm publish "$TARBALL" --provenance --access public
 
       - name: Create tag and GitHub release
         env:
