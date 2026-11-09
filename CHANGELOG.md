@@ -4,6 +4,10 @@ All notable changes to `@brave/nala` are documented here. Releases are
 normally major-only (1.0.0, 2.0.0, ...); minor or patch releases are rare
 exceptions.
 
+## 3.0.0
+
+- npm publishing uses provenance (#1510)
+
 ## 2.0.0
 
 - React: fix types for package consumers
