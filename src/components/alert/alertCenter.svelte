@@ -97,7 +97,7 @@
   import type { ButtonKind, ButtonSize } from '../button/props'
   import type { TransitionConfig } from 'svelte/transition'
   import type { ComponentType, SvelteComponent } from 'svelte'
-  import type { IconName } from '../../../icons/meta'
+  import type { IconName } from '@brave/nala/icons/meta'
   import Icon from '../icon/icon.svelte'
   import { prefersReducedMotion } from '../prefersReducedMotion'
   import { cubicOut } from 'svelte/easing'
