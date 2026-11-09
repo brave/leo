@@ -71,7 +71,7 @@ export * from '../web-components/${fileNameWithoutExtension}.js'
 
   const typeDef = `
 import type * as React from 'react'
-import type { ReactProps } from '../src/components/svelte-react'
+import type { ReactProps } from '../types/src/components/svelte-react'
 import type { ${componentName}Props as SvelteProps } from '../types/src/components/${containingFolder}/${fileName}';
 type DistributiveOmit<T, K extends keyof any> = T extends any ? Omit<T, K> : never;
 export type ${componentName}Props${funcConstraints} = ReactProps<DistributiveOmit<SvelteProps${propParams}, 'children'>>;
