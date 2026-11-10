@@ -1,10 +1,13 @@
 /**
  * Generates SF Symbols (for iOS) from the icons in /icons, written to
- * /icons-sf as `leo.<name>.svg`. Run as part of `pnpm run build`, and shipped
- * in the published package.
+ * /icons-sf as `leo.<name>.svg`. Run by `prepack`, so the symbols are shipped
+ * in the published package without being part of every `pnpm run build`.
  *
  * paper.js needs the `canvas` native module in Node, which is why this used to
- * live in the separate brave/leo-sf-symbols repository.
+ * live in the separate brave/leo-sf-symbols repository. canvas installs from a
+ * prebuilt binary on macOS, Linux and Windows. If that fails, it falls back to
+ * building from source, which needs Cairo and Pango (see
+ * https://github.com/Automattic/node-canvas#compiling).
  */
 import fs from 'fs/promises'
 import path from 'path'

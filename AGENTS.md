@@ -15,6 +15,7 @@ the Tailwind plugin, and the `data-theme="dark|light"` theming rule.
 > **Generated output, do not hand-edit.** `tokens/`, `react/`,
 > `web-components/`, `shared/`, `build/`, `types/`, `icons-skia/`,
 > `icons-sf/`, and `storybook-static/` are all produced by `pnpm run build`
+> (`icons-sf/` by `pnpm run sf-icons`, which only runs when packaging)
 > and listed in [.gitignore](.gitignore). Edit the sources under
 > [src/](src/) (and [icons/](icons/) for raw SVGs) and rebuild.
 
@@ -129,6 +130,9 @@ Android vector drawables (`tokens/android/drawable/ic_<name>.xml`, with
 dashes in the name becoming underscores), as Skia icons (`icons-skia/`), and
 as iOS SF Symbols (`icons-sf/leo.<name>.svg`, with the first dash becoming a
 dot, e.g. `leo.arrow.small-down.svg`; colour and country icons are skipped).
+The SF Symbols need the `canvas` native module, so they aren't part of
+`pnpm run build`: `prepack` generates them when the package is packed, and
+`pnpm run sf-icons` generates them locally.
 
 ### Storybook
 
@@ -141,7 +145,8 @@ URL above.
 
 ```bash
 pnpm install        # also runs the build via the `prepare` script
-pnpm run build      # transform-tokens → skiafy-icons → android-icons → sf-icons → rollup
+pnpm run build      # transform-tokens → skiafy-icons → android-icons → rollup
+pnpm run sf-icons   # iOS SF Symbols (also run by `prepack` when packaging)
 pnpm run dev        # rollup --watch for iterating on a component
 pnpm run storybook  # Storybook on :6006
 pnpm run test       # jest

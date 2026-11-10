@@ -143,18 +143,8 @@ jobs:
           # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
           # Please check with Brave's security team prior to adding any packages to that list.
 
-      # `pnpm install` runs `prepare`, which builds everything, including the
-      # iOS SF Symbols. Fail here rather than publish a package without them.
-      - name: Check SF Symbols were generated
-        run: |
-          shopt -s nullglob
-          SYMBOLS=(icons-sf/leo.*.svg)
-          if [ "${#SYMBOLS[@]}" -eq 0 ]; then
-            echo "::error::No SF Symbols in icons-sf/; did gen-sf-icons.js run?"
-            exit 1
-          fi
-          echo "Packaging ${#SYMBOLS[@]} SF Symbols."
-
+      # `prepack` generates the iOS SF Symbols (icons-sf/). The publish job
+      # checks they made it into the tarball.
       - name: Pack
         run: |
           mkdir -p "$RUNNER_TEMP/pack"
