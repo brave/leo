@@ -69,9 +69,15 @@ function processIcon(template, svgContents) {
 const template = await fs.readFile(TEMPLATE_PATH, { encoding: 'utf-8' })
 const icons = (await fs.readdir(ICONS_FOLDER)).filter(isSupported).sort()
 
-// Start clean so icons removed from Leo don't linger in the output.
-await fs.rm(OUTPUT_FOLDER, { recursive: true, force: true })
+// Remove previously generated symbols so icons removed from Leo don't linger.
+// Only our own `leo.*.svg` output is removed, so pointing OUTPUT_FOLDER at a
+// shared directory (or at ICONS_FOLDER, whose icons are dash-named) is safe.
 await fs.mkdir(OUTPUT_FOLDER, { recursive: true })
+for (const file of await fs.readdir(OUTPUT_FOLDER)) {
+  if (/^leo\..+\.svg$/.test(file)) {
+    await fs.rm(path.join(OUTPUT_FOLDER, file))
+  }
+}
 
 for (const icon of icons) {
   const svgContent = await fs.readFile(path.join(ICONS_FOLDER, icon), {
