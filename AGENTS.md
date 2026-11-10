@@ -126,7 +126,9 @@ and are consumed via the typed
 [`<Icon name="..." />`](src/components/icon/icon.svelte) component, with
 autocomplete from `@brave/nala/icons/meta`. The same set is generated as
 Android vector drawables (`tokens/android/drawable/ic_<name>.xml`, with
-dashes in the name becoming underscores) and as Skia icons (`icons-skia/`).
+dashes in the name becoming underscores), as Skia icons (`icons-skia/`), and
+as iOS SF Symbols (`icons-sf/leo.<name>.svg`, with the first dash becoming a
+dot, e.g. `leo.arrow.small-down.svg`; colour and country icons are skipped).
 
 ### Storybook
 
@@ -139,7 +141,7 @@ URL above.
 
 ```bash
 pnpm install        # also runs the build via the `prepare` script
-pnpm run build      # transform-tokens → skiafy-icons → android-icons → rollup
+pnpm run build      # transform-tokens → skiafy-icons → android-icons → sf-icons → rollup
 pnpm run dev        # rollup --watch for iterating on a component
 pnpm run storybook  # Storybook on :6006
 pnpm run test       # jest
