@@ -2,23 +2,10 @@ minimumReleaseAge: 2880
 
 allowBuilds:
   '@parcel/watcher': false
-  # Native bindings paper.js needs to generate the SF Symbols (gen-sf-icons.js).
-  canvas: true
   esbuild: true
   'figma-api-exporter@https://codeload.github.com/brave/figma-api-exporter/tar.gz/141c3eab4643ba9cdcbb23867785aa7df9347eec': true
   svelte-preprocess: false
   unrs-resolver: false
-
-# paper.js requires jsdom and canvas in Node without declaring them, so pnpm
-# wouldn't otherwise guarantee they can be resolved from paper. It also reaches
-# into jsdom internals (lib/jsdom/living/generated/utils) that jsdom 28 removed,
-# so it gets its own jsdom 27 rather than the repo's.
-packageExtensions:
-  paper@0.12.18:
-    dependencies:
-      jsdom: 27.4.0
-    peerDependencies:
-      canvas: '*'
 
 # Disable pnpm version management.
 pmOnFail: ignore

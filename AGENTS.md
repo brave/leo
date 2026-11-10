@@ -130,9 +130,8 @@ Android vector drawables (`tokens/android/drawable/ic_<name>.xml`, with
 dashes in the name becoming underscores), as Skia icons (`icons-skia/`), and
 as iOS SF Symbols (`icons-sf/leo.<name>.svg`, with the first dash becoming a
 dot, e.g. `leo.arrow.small-down.svg`; colour and country icons are skipped).
-The SF Symbols need the `canvas` native module, so they aren't part of
-`pnpm run build`: `prepack` generates them when the package is packed, and
-`pnpm run sf-icons` generates them locally.
+The SF Symbols aren't part of `pnpm run build`: `prepack` generates them
+when the package is packed, and `pnpm run sf-icons` generates them locally.
 
 ### Storybook
 

@@ -3,19 +3,31 @@
  * /icons-sf as `leo.<name>.svg`. Run by `prepack`, so the symbols are shipped
  * in the published package without being part of every `pnpm run build`.
  *
- * paper.js needs the `canvas` native module in Node, which is why this used to
- * live in the separate brave/leo-sf-symbols repository. canvas installs from a
- * prebuilt binary on macOS, Linux and Windows. If that fails, it falls back to
- * building from source, which needs Cairo and Pango (see
- * https://github.com/Automattic/node-canvas#compiling).
+ * paper.js normally loads its own jsdom and the `canvas` native module in
+ * Node. We only import, reorient and export paths, which need a DOM but no
+ * canvas, so we hand paper a DOM without a `window`. That's paper's
+ * "worker" mode: it skips everything canvas-backed (views, rasters, blend
+ * mode detection) and never requires jsdom or canvas itself.
  */
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import paper from 'paper'
+import { JSDOM } from 'jsdom'
+
+const { window } = new JSDOM()
+// paper reads `self` when it loads, so it must be set before the import.
+globalThis.self = {
+  document: window.document,
+  navigator: window.navigator,
+  DOMParser: window.DOMParser,
+  XMLSerializer: window.XMLSerializer
+}
+const { default: paper } = await import('paper')
+delete globalThis.self
 
 const { CompoundPath } = paper
-paper.setup()
+// A size rather than a canvas: with no window, paper creates a plain View.
+paper.setup(new paper.Size(1, 1))
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,8 +46,6 @@ const isSupported = (icon) =>
 const outputName = (icon) => `leo.${icon.replace('-', '.')}`
 
 function processIcon(template, svgContents) {
-  // Parse with paper's own DOM: nodes from a different jsdom instance can't be
-  // imported into it.
   const paperSVG = paper.project.importSVG(svgContents)
   for (const path of paperSVG.getItems({ class: CompoundPath })) {
     path.reorient()
