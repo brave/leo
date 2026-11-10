@@ -64,6 +64,10 @@
   let openDialog
   let isOpen = false
   let scrollDialogOpen = false
+  let truncateDialogOpen = false
+
+  const unbreakableText =
+    'A single line of text which cannot wrap, and is far too long to fit inside the dialog'
 
   const scrollParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra est et viverra massa enim aliquam. Volutpat tristique id mi blandit interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat. Sit mauris, orci diam in habitasse nec dolor odio pharetra.'
@@ -183,6 +187,21 @@
   </Dialog>
 </Story>
 
+<Story name="Truncating Content" let:args>
+  <Button
+    isDisabled={truncateDialogOpen}
+    onClick={() => (truncateDialogOpen = true)}>Show Dialog</Button
+  >
+  <Dialog {...args} showClose bind:isOpen={truncateDialogOpen}>
+    <div slot="title">Truncating content</div>
+    <div slot="subtitle">
+      Content which cannot wrap truncates to the dialog's width instead of
+      widening it
+    </div>
+    <div class="truncate">{unbreakableText}</div>
+  </Dialog>
+</Story>
+
 <style>
   .alert-container {
     margin-top: var(--leo-spacing-xl);
@@ -196,5 +215,11 @@
 
   .scroll-content p {
     margin: 0;
+  }
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
