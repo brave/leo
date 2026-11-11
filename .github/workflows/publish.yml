@@ -143,6 +143,8 @@ jobs:
           # Build scripts are gated by `allowBuilds` in pnpm-workspace.yaml.
           # Please check with Brave's security team prior to adding any packages to that list.
 
+      # `prepack` generates the iOS SF Symbols (icons-sf/). The publish job
+      # checks they made it into the tarball.
       - name: Pack
         run: |
           mkdir -p "$RUNNER_TEMP/pack"
@@ -225,6 +227,13 @@ jobs:
           GOT_VERSION="$(node -p 'JSON.parse(process.argv[1]).version' "$PKG")"
           if [ "$GOT_NAME" != "$NAME" ] || [ "$GOT_VERSION" != "$VERSION" ]; then
             echo "::error::tarball is $GOT_NAME@$GOT_VERSION, expected $NAME@$VERSION"
+            exit 1
+          fi
+          # Not `tar | grep -q`: grep exiting early would SIGPIPE tar, and the
+          # default shell has pipefail.
+          SYMBOL_COUNT="$(tar -tzf "$TARBALL" | grep -c '^package/icons-sf/leo\..*\.svg$' || true)"
+          if [ "$SYMBOL_COUNT" -eq 0 ]; then
+            echo "::error::tarball has no SF Symbols in icons-sf/"
             exit 1
           fi
 
