@@ -21,6 +21,7 @@
     "README.md",
     "LICENSE.md",
     "CHANGELOG.md",
+    "AGENTS.md",
     "svelte/components",
     "svelte/svelteDirectives",
     "svelte/types",
