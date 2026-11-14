@@ -1,5 +1,5 @@
 export default {
-  "updatedAt": 1793780357477,
+  "updatedAt": 1794644078084,
   "icons": {
     "-pac-color": "-pac-color",
     "0xbtc-color": "0xbtc-color",
@@ -289,6 +289,7 @@ export default {
     "browser-mobile-tab-close": "browser-mobile-tab-close",
     "browser-mobile-tab-closeall": "browser-mobile-tab-closeall",
     "browser-mobile-tab-closes-app": "browser-mobile-tab-closes-app",
+    "browser-mobile-tab-new-private": "browser-mobile-tab-new-private",
     "browser-mobile-tab-new": "browser-mobile-tab-new",
     "browser-mobile-tab-ntp": "browser-mobile-tab-ntp",
     "browser-mobile-tab": "browser-mobile-tab",
