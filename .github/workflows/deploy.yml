@@ -10,6 +10,10 @@ concurrency:
 
 jobs:
   deploy:
+    # Only deploy builds of this repo's own branches. A fork's build runs the
+    # fork's code, and its run lists no pull request, so without this check it
+    # was deployed to the root.
+    if: github.event.workflow_run.head_repository.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -23,6 +27,7 @@ jobs:
       S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
       PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
       HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+      DEPLOY_ROOT: ${{ github.event.workflow_run.event != 'pull_request' && github.event.workflow_run.head_branch == 'main' }}
 
     steps:
       - name: Download artifact
@@ -53,11 +58,14 @@ jobs:
           cd ./artifact/storybook-static
           aws configure set default.s3.max_concurrent_requests 200
           aws configure set default.s3.max_queue_size 10000
-          if [[ -z ${PR_NUMBER} ]]; then # non PR
+          if [[ ${DEPLOY_ROOT} == true ]]; then
             aws s3 sync . "s3://${S3_BUCKET_NAME}/" --delete --exclude 'pr-*/*' --exclude '*.old.css' --exclude '*.diff'
-          else
+          elif [[ -n ${PR_NUMBER} ]]; then
             aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/commit-${HEAD_SHA}/" --delete --exclude '*.old.css' --exclude '*.diff'
             aws s3 sync . "s3://${S3_BUCKET_NAME}/pr-${PR_NUMBER}/" --delete --exclude 'commit-*/*' --exclude '*.old.css' --exclude '*.diff'
+          else
+            echo "::error::Neither a main build nor a pull request build, so there is nowhere to deploy it"
+            exit 1
           fi
           echo "::endgroup::"
 
