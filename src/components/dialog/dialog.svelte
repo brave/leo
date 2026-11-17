@@ -124,6 +124,11 @@
   on:click|capture={(e) => {
     if (!dialog || !isOpen || !backdropClickCloses || !dialog.checkVisibility()) return
 
+    // Only a pointer can click the backdrop. Keyboard and programmatic clicks
+    // (detail 0) report clientX and clientY as 0, which the bounds check below
+    // would read as outside the dialog.
+    if (e.detail === 0) return
+
     const rect = dialog.getBoundingClientRect()
     const clickedOutside =
       e.clientX < rect.x ||
