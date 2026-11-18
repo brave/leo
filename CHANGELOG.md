@@ -4,6 +4,12 @@ All notable changes to `@brave/nala` are documented here. Releases are
 normally major-only (1.0.0, 2.0.0, ...); minor or patch releases are rare
 exceptions.
 
+## 5.0.0
+
+- fix(ci): Only deploy Storybook builds of this repo's branches (#1520)
+- [Dialog]: Don't close on keyboard clicks (#1519)
+- [misc]: Use @brave/nala-devs team in CODEOWNERS (#1515)
+
 ## 4.0.0
 
 - Include AGENTS.md in package (#1513)
