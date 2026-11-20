@@ -4,6 +4,7 @@ import getConfig from './config'
 // Register transforms
 import './transformation/web'
 import './transformation/tailwind'
+import './transformation/tailwind-email'
 import './transformation/skia'
 import './transformation/ios'
 import './transformation/android'
@@ -54,3 +55,6 @@ for (const layer of layers) {
   StyleDictionaryExtended.buildPlatform('json-flat')
   StyleDictionaryExtended.buildPlatform('tailwind')
 }
+
+const StyleDictionaryExtended = StyleDictionary.extend(getConfig(['universal']))
+StyleDictionaryExtended.buildPlatform('tailwind-email')
