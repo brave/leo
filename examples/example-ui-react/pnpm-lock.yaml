@@ -23,7 +23,7 @@ importers:
         version: 18.2.15
       '@vitejs/plugin-react':
         specifier: 4.5.2
-        version: 4.5.2(vite@7.3.5)
+        version: 4.5.2(vite@7.3.7)
       globals:
         specifier: 16.2.0
         version: 16.2.0
@@ -31,8 +31,8 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
       vite:
-        specifier: 7.3.5
-        version: 7.3.5
+        specifier: 7.3.7
+        version: 7.3.7
 
 packages:
 
@@ -608,8 +608,8 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  vite@7.3.5:
-    resolution: {integrity: sha512-KuOaNhcnGFN2zIPGA7wRmzF+lJA1sea7rHq17aiJ++9lzY1WWG6Jpwqwe1KNbRVPIqHmr8GLYx7jbrQcN/7/ww==}
+  vite@7.3.7:
+    resolution: {integrity: sha512-AHEzTORMbi7/7aXp7w7KZ5+DCUdSeLsJz0grY8xHpc9DHdYb0vQu6DqJfm2tOw3gDExNgPgnJTXxM6syYFHaCA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -976,7 +976,7 @@ snapshots:
 
   '@types/scheduler@0.26.0': {}
 
-  '@vitejs/plugin-react@4.5.2(vite@7.3.5)':
+  '@vitejs/plugin-react@4.5.2(vite@7.3.7)':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.4)
@@ -984,7 +984,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.11
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.3.5
+      vite: 7.3.7
     transitivePeerDependencies:
       - supports-color
 
@@ -1143,7 +1143,7 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  vite@7.3.5:
+  vite@7.3.7:
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.5)
