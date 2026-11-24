@@ -98,13 +98,14 @@ export default function Component() {
   set directly on the customElement, rather than being passed through as a
   prop. Again, this is to try and behave more like a native component.
 - `refs` are supported, if you need a ref to the underlying web component.
-- `autofocus` is lowercase. It's set on the custom element, which reflects it
-  to the `autofocus` attribute, and `Dialog` focuses the first focusable
-  element with that attribute when it opens. React's camelCase `autoFocus`
-  does nothing on a Nala component, and on a plain HTML element React focuses
-  the element on mount without setting the attribute, so `Dialog` doesn't see
-  it. On a plain HTML element, set the attribute through a ref instead:
-  `ref={(el) => el?.setAttribute('autofocus', '')}`.
+- `autofocus` is lowercase, and typed on the components that declare it (such
+  as Button, Link, Input and Textarea). It's set on the custom element, which
+  reflects it to the `autofocus` attribute, and `Dialog` focuses the first
+  focusable element with that attribute (in slot order) when it opens. React's camelCase
+  `autoFocus` does nothing on a Nala component, and on a plain HTML element
+  React focuses the element on mount without setting the attribute, so `Dialog`
+  doesn't see it. On a plain HTML element, set the attribute through a ref
+  instead: `ref={(el) => el?.setAttribute('autofocus', '')}`.
 
 Both web components & react components forward all `<script context="module">`
 exports, so they should be available as non-default imports.

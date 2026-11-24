@@ -156,11 +156,12 @@
 
 <Story name="Show Close" args={{showClose: true}} />
 
-<Story name="Initial Focus" let:args>
+<Story name="Initial Focus" args={{ showClose: true }} let:args>
   <p>
     Give the element that should have focus on open the <code>autofocus</code>
     attribute. Here Cancel starts focused and Delete is one Tab away. In React,
-    write lowercase <code>autofocus</code> on Nala components: camelCase
+    write lowercase <code>autofocus</code> on Nala components that declare it,
+    such as Button: camelCase
     <code>autoFocus</code> does nothing on them, and on plain HTML elements
     React's <code>autoFocus</code> sets no attribute, so Dialog can't see it.
   </p>
@@ -168,7 +169,7 @@
     isDisabled={initialFocusOpen}
     onClick={() => (initialFocusOpen = true)}>Show Dialog</Button
   >
-  <Dialog {...args} showClose bind:isOpen={initialFocusOpen}>
+  <Dialog {...args} bind:isOpen={initialFocusOpen}>
     <div slot="title">Delete this item?</div>
     This can't be undone.
     <div slot="actions">
