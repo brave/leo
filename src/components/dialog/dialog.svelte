@@ -30,8 +30,32 @@
 
   let dialog: HTMLDialogElement
 
+  // showModal() only looks for `autofocus` among the dialog's own descendants,
+  // so in the web component build it never sees the slotted content.
+  const focusSlottedAutofocus = () => {
+    const candidates = Array.from(dialog.querySelectorAll('slot')).flatMap(
+      (slot) =>
+        slot
+          .assignedElements({ flatten: true })
+          .flatMap((element) => [
+            ...(element.matches('[autofocus]') ? [element] : []),
+            ...element.querySelectorAll('[autofocus]')
+          ])
+    ) as HTMLElement[]
+
+    for (const candidate of candidates) {
+      candidate.focus()
+      // Not `:focus`, which matches nothing while the page itself is unfocused.
+      const root = candidate.getRootNode() as Document | ShadowRoot
+      if (root.activeElement === candidate) return
+    }
+  }
+
   $: {
-    if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.isConnected) {
+      dialog.showModal()
+      focusSlottedAutofocus()
+    }
   }
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle

@@ -36,6 +36,9 @@ type Ref<T> =
 export type ReactProps<Props> = Props & {
   ref?: Ref<Props>
   slot?: string
+  // Lowercase, unlike React's `autoFocus`: it's set on the custom element and
+  // reflects to the `autofocus` attribute, which Dialog uses on open.
+  autofocus?: boolean | null
 } & {
   // Note: The div here isn't important because all props in intrinsicProps are
   // available on all elements. We just want to make sure we have the correct

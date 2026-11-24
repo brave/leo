@@ -64,6 +64,7 @@
   let openDialog
   let isOpen = false
   let scrollDialogOpen = false
+  let initialFocusOpen = false
 
   const scrollParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra est et viverra massa enim aliquam. Volutpat tristique id mi blandit interdum elit quam commodo vel. Ac laoreet magna ac sed diam volutpat. Sit mauris, orci diam in habitasse nec dolor odio pharetra.'
@@ -154,6 +155,34 @@
 <Story name="Default" />
 
 <Story name="Show Close" args={{showClose: true}} />
+
+<Story name="Initial Focus" let:args>
+  <p>
+    Give the element that should have focus on open the <code>autofocus</code>
+    attribute. Here Cancel starts focused and Delete is one Tab away. In React,
+    write lowercase <code>autofocus</code> on Nala components: camelCase
+    <code>autoFocus</code> does nothing on them, and on plain HTML elements
+    React's <code>autoFocus</code> sets no attribute, so Dialog can't see it.
+  </p>
+  <Button
+    isDisabled={initialFocusOpen}
+    onClick={() => (initialFocusOpen = true)}>Show Dialog</Button
+  >
+  <Dialog {...args} showClose bind:isOpen={initialFocusOpen}>
+    <div slot="title">Delete this item?</div>
+    This can't be undone.
+    <div slot="actions">
+      <Button
+        kind="plain-faint"
+        autofocus
+        onClick={() => (initialFocusOpen = false)}>Cancel</Button
+      >
+      <Button kind="filled" onClick={() => (initialFocusOpen = false)}
+        >Delete</Button
+      >
+    </div>
+  </Dialog>
+</Story>
 
 <Story name="Inner Scroll" let:args>
   <Button isDisabled={scrollDialogOpen} onClick={() => (scrollDialogOpen = true)}
