@@ -30,8 +30,42 @@
 
   let dialog: HTMLDialogElement
 
+  // In the web component and React builds, `autofocus` on a slotted Nala
+  // component sits on the custom element's host, which isn't focusable itself,
+  // so showModal() skips it and focuses the close button or the first
+  // focusable element instead.
+  const collectAutofocus = (element: Element): Element[] => {
+    if (element instanceof HTMLSlotElement) {
+      const nodes =
+        element.assignedNodes({ flatten: true }).length > 0
+          ? element.assignedElements({ flatten: true })
+          : Array.from(element.children)
+      return nodes.flatMap(collectAutofocus)
+    }
+    return [
+      ...(element.matches('[autofocus]') ? [element] : []),
+      ...Array.from(element.children).flatMap(collectAutofocus)
+    ]
+  }
+
+  const focusSlottedAutofocus = () => {
+    const candidates = Array.from(dialog.querySelectorAll('slot')).flatMap(
+      collectAutofocus
+    )
+
+    for (const candidate of candidates) {
+      ;(candidate as HTMLElement).focus?.()
+      // Not `:focus`, which matches nothing while the page itself is unfocused.
+      const root = candidate.getRootNode() as Document | ShadowRoot
+      if (root.activeElement === candidate) return
+    }
+  }
+
   $: {
-    if (isOpen && !dialog?.open && dialog?.isConnected) dialog?.showModal()
+    if (isOpen && !dialog?.open && dialog?.isConnected) {
+      dialog.showModal()
+      focusSlottedAutofocus()
+    }
   }
 
   const hasHeader = showBack || $$slots.title || $$slots.subtitle
