@@ -4,6 +4,10 @@ All notable changes to `@brave/nala` are documented here. Releases are
 normally major-only (1.0.0, 2.0.0, ...); minor or patch releases are rare
 exceptions.
 
+## 6.0.0
+
+- [Dialog]: Focus the slotted element with autofocus on open (#1523)
+
 ## 5.0.0
 
 - fix(ci): Only deploy Storybook builds of this repo's branches (#1520)
