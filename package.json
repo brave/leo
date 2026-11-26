@@ -3,6 +3,207 @@
   "version": "5.0.0",
   "description": "Base repo to transform json design tokens from the figma design token plugin via amazon style directory.",
   "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./svelte/components/*.svelte": {
+      "types": "./svelte/components/*.svelte.d.ts",
+      "svelte": "./svelte/components/*.svelte",
+      "default": "./svelte/components/*.svelte"
+    },
+    "./svelte/alert.svelte": {
+      "types": "./svelte/components/alert/alert.svelte.d.ts",
+      "svelte": "./svelte/components/alert/alert.svelte",
+      "default": "./svelte/components/alert/alert.svelte"
+    },
+    "./svelte/alertCenter.svelte": {
+      "types": "./svelte/components/alert/alertCenter.svelte.d.ts",
+      "svelte": "./svelte/components/alert/alertCenter.svelte",
+      "default": "./svelte/components/alert/alertCenter.svelte"
+    },
+    "./svelte/button.svelte": {
+      "types": "./svelte/components/button/button.svelte.d.ts",
+      "svelte": "./svelte/components/button/button.svelte",
+      "default": "./svelte/components/button/button.svelte"
+    },
+    "./svelte/buttonMenu.svelte": {
+      "types": "./svelte/components/buttonMenu/buttonMenu.svelte.d.ts",
+      "svelte": "./svelte/components/buttonMenu/buttonMenu.svelte",
+      "default": "./svelte/components/buttonMenu/buttonMenu.svelte"
+    },
+    "./svelte/checkbox.svelte": {
+      "types": "./svelte/components/checkbox/checkbox.svelte.d.ts",
+      "svelte": "./svelte/components/checkbox/checkbox.svelte",
+      "default": "./svelte/components/checkbox/checkbox.svelte"
+    },
+    "./svelte/collapse.svelte": {
+      "types": "./svelte/components/collapse/collapse.svelte.d.ts",
+      "svelte": "./svelte/components/collapse/collapse.svelte",
+      "default": "./svelte/components/collapse/collapse.svelte"
+    },
+    "./svelte/dialog.svelte": {
+      "types": "./svelte/components/dialog/dialog.svelte.d.ts",
+      "svelte": "./svelte/components/dialog/dialog.svelte",
+      "default": "./svelte/components/dialog/dialog.svelte"
+    },
+    "./svelte/dialogsContainer.svelte": {
+      "types": "./svelte/components/dialog/dialogsContainer.svelte.d.ts",
+      "svelte": "./svelte/components/dialog/dialogsContainer.svelte",
+      "default": "./svelte/components/dialog/dialogsContainer.svelte"
+    },
+    "./svelte/dropdown.svelte": {
+      "types": "./svelte/components/dropdown/dropdown.svelte.d.ts",
+      "svelte": "./svelte/components/dropdown/dropdown.svelte",
+      "default": "./svelte/components/dropdown/dropdown.svelte"
+    },
+    "./svelte/floating.svelte": {
+      "types": "./svelte/components/floating/floating.svelte.d.ts",
+      "svelte": "./svelte/components/floating/floating.svelte",
+      "default": "./svelte/components/floating/floating.svelte"
+    },
+    "./svelte/formItem.svelte": {
+      "types": "./svelte/components/formItem/formItem.svelte.d.ts",
+      "svelte": "./svelte/components/formItem/formItem.svelte",
+      "default": "./svelte/components/formItem/formItem.svelte"
+    },
+    "./svelte/hr.svelte": {
+      "types": "./svelte/components/hr/hr.svelte.d.ts",
+      "svelte": "./svelte/components/hr/hr.svelte",
+      "default": "./svelte/components/hr/hr.svelte"
+    },
+    "./svelte/icon.svelte": {
+      "types": "./svelte/components/icon/icon.svelte.d.ts",
+      "svelte": "./svelte/components/icon/icon.svelte",
+      "default": "./svelte/components/icon/icon.svelte"
+    },
+    "./svelte/input.svelte": {
+      "types": "./svelte/components/input/input.svelte.d.ts",
+      "svelte": "./svelte/components/input/input.svelte",
+      "default": "./svelte/components/input/input.svelte"
+    },
+    "./svelte/label.svelte": {
+      "types": "./svelte/components/label/label.svelte.d.ts",
+      "svelte": "./svelte/components/label/label.svelte",
+      "default": "./svelte/components/label/label.svelte"
+    },
+    "./svelte/link.svelte": {
+      "types": "./svelte/components/link/link.svelte.d.ts",
+      "svelte": "./svelte/components/link/link.svelte",
+      "default": "./svelte/components/link/link.svelte"
+    },
+    "./svelte/menu.svelte": {
+      "types": "./svelte/components/menu/menu.svelte.d.ts",
+      "svelte": "./svelte/components/menu/menu.svelte",
+      "default": "./svelte/components/menu/menu.svelte"
+    },
+    "./svelte/navdots.svelte": {
+      "types": "./svelte/components/navdots/navdots.svelte.d.ts",
+      "svelte": "./svelte/components/navdots/navdots.svelte",
+      "default": "./svelte/components/navdots/navdots.svelte"
+    },
+    "./svelte/navigation.svelte": {
+      "types": "./svelte/components/navigation/navigation.svelte.d.ts",
+      "svelte": "./svelte/components/navigation/navigation.svelte",
+      "default": "./svelte/components/navigation/navigation.svelte"
+    },
+    "./svelte/navigationActions.svelte": {
+      "types": "./svelte/components/navigation/navigationActions.svelte.d.ts",
+      "svelte": "./svelte/components/navigation/navigationActions.svelte",
+      "default": "./svelte/components/navigation/navigationActions.svelte"
+    },
+    "./svelte/navigationHeader.svelte": {
+      "types": "./svelte/components/navigation/navigationHeader.svelte.d.ts",
+      "svelte": "./svelte/components/navigation/navigationHeader.svelte",
+      "default": "./svelte/components/navigation/navigationHeader.svelte"
+    },
+    "./svelte/navigationItem.svelte": {
+      "types": "./svelte/components/navigation/navigationItem.svelte.d.ts",
+      "svelte": "./svelte/components/navigation/navigationItem.svelte",
+      "default": "./svelte/components/navigation/navigationItem.svelte"
+    },
+    "./svelte/navigationMenu.svelte": {
+      "types": "./svelte/components/navigation/navigationMenu.svelte.d.ts",
+      "svelte": "./svelte/components/navigation/navigationMenu.svelte",
+      "default": "./svelte/components/navigation/navigationMenu.svelte"
+    },
+    "./svelte/progressBar.svelte": {
+      "types": "./svelte/components/progress/progressBar.svelte.d.ts",
+      "svelte": "./svelte/components/progress/progressBar.svelte",
+      "default": "./svelte/components/progress/progressBar.svelte"
+    },
+    "./svelte/progressRing.svelte": {
+      "types": "./svelte/components/progress/progressRing.svelte.d.ts",
+      "svelte": "./svelte/components/progress/progressRing.svelte",
+      "default": "./svelte/components/progress/progressRing.svelte"
+    },
+    "./svelte/radioButton.svelte": {
+      "types": "./svelte/components/radioButton/radioButton.svelte.d.ts",
+      "svelte": "./svelte/components/radioButton/radioButton.svelte",
+      "default": "./svelte/components/radioButton/radioButton.svelte"
+    },
+    "./svelte/segmentedControl.svelte": {
+      "types": "./svelte/components/segmentedControl/segmentedControl.svelte.d.ts",
+      "svelte": "./svelte/components/segmentedControl/segmentedControl.svelte",
+      "default": "./svelte/components/segmentedControl/segmentedControl.svelte"
+    },
+    "./svelte/segmentedControlItem.svelte": {
+      "types": "./svelte/components/segmentedControl/segmentedControlItem.svelte.d.ts",
+      "svelte": "./svelte/components/segmentedControl/segmentedControlItem.svelte",
+      "default": "./svelte/components/segmentedControl/segmentedControlItem.svelte"
+    },
+    "./svelte/tabItem.svelte": {
+      "types": "./svelte/components/tabs/tabItem.svelte.d.ts",
+      "svelte": "./svelte/components/tabs/tabItem.svelte",
+      "default": "./svelte/components/tabs/tabItem.svelte"
+    },
+    "./svelte/tabs.svelte": {
+      "types": "./svelte/components/tabs/tabs.svelte.d.ts",
+      "svelte": "./svelte/components/tabs/tabs.svelte",
+      "default": "./svelte/components/tabs/tabs.svelte"
+    },
+    "./svelte/textarea.svelte": {
+      "types": "./svelte/components/textarea/textarea.svelte.d.ts",
+      "svelte": "./svelte/components/textarea/textarea.svelte",
+      "default": "./svelte/components/textarea/textarea.svelte"
+    },
+    "./svelte/toggle.svelte": {
+      "types": "./svelte/components/toggle/toggle.svelte.d.ts",
+      "svelte": "./svelte/components/toggle/toggle.svelte",
+      "default": "./svelte/components/toggle/toggle.svelte"
+    },
+    "./svelte/tooltip.svelte": {
+      "types": "./svelte/components/tooltip/tooltip.svelte.d.ts",
+      "svelte": "./svelte/components/tooltip/tooltip.svelte",
+      "default": "./svelte/components/tooltip/tooltip.svelte"
+    },
+    "./svelte/*": "./svelte/*",
+    "./react/*.js": "./react/*.js",
+    "./react/*": {
+      "types": "./react/*.d.ts",
+      "default": "./react/*.js"
+    },
+    "./web-components/*.js": "./web-components/*.js",
+    "./web-components/*": {
+      "types": "./web-components/*.d.ts",
+      "default": "./web-components/*.js"
+    },
+    "./icons/meta": {
+      "types": "./icons/meta.d.ts",
+      "default": "./icons/meta.js"
+    },
+    "./icons/*": "./icons/*",
+    "./icons-skia/*": "./icons-skia/*",
+    "./icons-sf/*": "./icons-sf/*",
+    "./tokens/tailwind": "./tokens/tailwind/index.js",
+    "./tokens/tailwind/android": "./tokens/tailwind/android/index.js",
+    "./tokens/tailwind/browser": "./tokens/tailwind/browser/index.js",
+    "./tokens/tailwind/ios": "./tokens/tailwind/ios/index.js",
+    "./tokens/tailwind/marketing": "./tokens/tailwind/marketing/index.js",
+    "./tokens/tailwind/news": "./tokens/tailwind/news/index.js",
+    "./tokens/tailwind/newtab": "./tokens/tailwind/newtab/index.js",
+    "./tokens/tailwind/search": "./tokens/tailwind/search/index.js",
+    "./tokens/tailwind/web3": "./tokens/tailwind/web3/index.js",
+    "./tokens/*": "./tokens/*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brave/leo.git"
@@ -121,7 +322,8 @@
     "skiafy-icons": "tsx ./src/scripts/gen-skia-icons.ts",
     "android-icons": "tsx ./src/scripts/gen-android-icons.ts",
     "sf-icons": "node ./src/scripts/gen-sf-icons.js",
-    "check": "svelte-check --compiler-warnings a11y-click-events-have-key-events:ignore,a11y-no-static-element-interactions:ignore && node ./src/scripts/audit-events.js",
+    "gen-exports": "node ./src/scripts/gen-exports.js",
+    "check": "svelte-check --compiler-warnings a11y-click-events-have-key-events:ignore,a11y-no-static-element-interactions:ignore && node ./src/scripts/audit-events.js && node ./src/scripts/gen-exports.js --check",
     "transform-tokens": "tsx ./src/tokens/transformTokens.ts && tsc -p ./tsconfig-tokens.json",
     "test": "jest tests --coverage=false",
     "storybook": "storybook dev -p 6006",
